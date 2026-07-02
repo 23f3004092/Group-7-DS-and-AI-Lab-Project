@@ -25,7 +25,6 @@ The team worked in a **fully collaborative, non-siloed manner** for Milestone 1.
 
 - Authored the primary research document (*Farm_assistant_research_doc_Mahesh*), capturing the problem framing, interaction scenarios, design doubts and their resolutions, dataset notes, and literature review — and **shared it with the team** as a common reference.
 
-### 6. Final Report Preparation
 - **Prepared the final Milestone-1 report**, consolidating inputs and research from all team members into a single structured deliverable covering the problem statement, scope, stakeholders, objectives, architecture, scenarios, literature review, comparative analysis, datasets, and evaluation framework.
 
 ---
@@ -45,7 +44,11 @@ The team worked in a **fully collaborative, non-siloed manner** for Milestone 1.
 ---
 
 ## Lokesh — Contributions
-
+- Participated in team discussions to narrow the broad concept into a focused problem statement and technical approach.
+- Authored the comprehensive technical summary (Detailed_Summary_by_Lokesh), synthesizing the full solution into a structured reference — ingestion/intent layer, computer-vision lab-to-field challenges and interventions, context-aware retrieval and sensor integration, the generative layer (fluency vs. faithfulness, RAGAS), multi-turn dialogue and voice interfaces, and baseline comparisons.
+- Researched specialized Indian-language models (MuRIL, IndicBERT) and evaluation methodology (RAGAS metrics, faithfulness).
+- Explored architectural interventions for the disease-detection domain gap (segmentation-first, domain adaptation, YOLOv8, vision-language models).
+- Reviewed and contributed to research documentation and the final Milestone-1 report for technical accuracy and completeness.
 ---
 
 ## Aneeqa — Contributions
