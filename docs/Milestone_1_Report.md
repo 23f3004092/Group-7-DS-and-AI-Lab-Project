@@ -745,22 +745,23 @@ Rather than a wall of numbers, here's the **one headline metric per promise** �
 21. Reimers, N., Gurevych, I. *Sentence-BERT / sentence-transformers.* — [sbert.net](https://www.sbert.net/)
 
 ---
-
-# ✅ 14. Team Approval
-
-The following team members have reviewed this document and approved it for submission.
-
-| Team Member | Date | Approval |
-|-------------|------|----------|
-| Harliv | 2 Jul 2026 | Yes |
-| Aneeqa | 2 Jul 2026 | Yes|
-| Lokesh | 2 Jul 2026 | Yes|
-| Mahesh | 2 Jul 2026 | Yes|
-| Tanmay |  | |
-
-<div align="center">
-
 *Prepared for Milestone 1 · Architecture reflects the team's updated multimodal routing pipeline.*
 **Model choices intentionally kept open — final selection follows comparative evaluation.** 🌱
 
 </div>
+
+---
+
+## ✍️ 14. Team Review & Sign-Off
+
+All team members listed below have **reviewed and approved** this Milestone 1 document. Each confirms that the problem statement, scope, literature review, and analysis accurately reflect the team's collective work and agreed direction.
+
+| # | Team Member | Reviewed & Approved | Date of Approval | Signature |
+|:---:|:---|:---:|:---:|:---|
+| 1 | Mahesh |  ☑ | 2 July 2026 | Mahesh |
+| 2 | Harliv |  ☑ | 2 July 2026 | Harliv |
+| 3 | Lokesh |  ☑ | 2 July 2026 | Lokesh |
+| 4 | Aneeqa | ☑ | 2 July 2026 | Aneeqa |
+| 5 | Tanmay | ☐ | __________ | __________ |
+
+*By signing above, each member confirms they have read the complete document and approve it for submission.*
