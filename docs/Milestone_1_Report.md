@@ -4,6 +4,9 @@
 
 ### A Field-Robust, Confidence-Aware, Faithfulness-Grounded Crop Advisory System
 
+![Milestone](https://img.shields.io/badge/Team_Members-Aneeqa_|_Harliv_|_Lokesh_|_Mahesh_|_Tanmay-2ea44f?style=for-the-badge)   
+
+
 ![Milestone](https://img.shields.io/badge/Milestone-1-2ea44f?style=for-the-badge)
 ![Focus](https://img.shields.io/badge/Focus-Problem_%26_Gap_Analysis-blue?style=for-the-badge)
 ![Domain](https://img.shields.io/badge/Domain-AgriTech_%C3%97_GenAI-f59e0b?style=for-the-badge)
