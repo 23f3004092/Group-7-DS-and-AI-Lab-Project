@@ -34,19 +34,33 @@
 
 ## 📑 Contents
 
-1. [Problem Statement](#-1-problem-statement)
-2. [Scope & Boundaries](#-2-scope--boundaries)
-3. [Stakeholders](#-3-stakeholders)
-4. [Objectives](#-4-objectives-measurable)
-5. [Proposed Solution](#-5-proposed-solution-at-a-glance)
-6. [System Architecture](#-6-system-architecture)
-7. [Disease Detector — Architecture Deep-Dive](#-7-disease-detector--architecture-deep-dive)
-8. [The System in Action — Scenarios](#-8-the-system-in-action--scenarios)
-9. [Literature Review & Existing Solutions](#-9-literature-review--existing-solutions)
-10. [Comparative Analysis](#-10-comparative-analysis)
-11. [Datasets & Evaluation](#-11-datasets--evaluation)
-12. [Milestone 1 Scope Recap](#-12-milestone-1-scope-recap)
-13. [References](#-13-references)
+- [🌾 Milestone 1 — Problem Definition \& Literature Review](#-milestone-1--problem-definition--literature-review)
+    - [A Field-Robust, Confidence-Aware, Faithfulness-Grounded Crop Advisory System](#a-field-robust-confidence-aware-faithfulness-grounded-crop-advisory-system)
+  - [📑 Contents](#-contents)
+  - [🧩 1. Problem Statement](#-1-problem-statement)
+  - [🗺️ 2. Scope \& Boundaries](#️-2-scope--boundaries)
+  - [👥 3. Stakeholders](#-3-stakeholders)
+  - [🎯 4. Objectives (Measurable)](#-4-objectives-measurable)
+  - [🧠 5. Proposed Solution (At a Glance)](#-5-proposed-solution-at-a-glance)
+  - [🏗️ 6. System Architecture](#️-6-system-architecture)
+  - [🧬 7. Disease Detector — Architecture Deep-Dive](#-7-disease-detector--architecture-deep-dive)
+    - [🏛️ Backbone candidates](#️-backbone-candidates)
+    - [🌦️ Field-robust training](#️-field-robust-training)
+    - [🎚️ Confidence \& abstention](#️-confidence--abstention)
+  - [🎬 8. The System in Action — Scenarios](#-8-the-system-in-action--scenarios)
+  - [📚 9. Literature Review \& Existing Solutions](#-9-literature-review--existing-solutions)
+    - [🤖 9.1 AI-Powered Advisory Systems](#-91-ai-powered-advisory-systems)
+    - [👁️ 9.2 Computer Vision for Disease Detection](#️-92-computer-vision-for-disease-detection)
+    - [🗣️ 9.3 Indian-Language NLP](#️-93-indian-language-nlp)
+    - [🛡️ 9.4 Faithfulness, Sensors \& Voice](#️-94-faithfulness-sensors--voice)
+    - [🏭 9.5 Industry Solutions](#-95-industry-solutions)
+  - [⚖️ 10. Comparative Analysis](#️-10-comparative-analysis)
+  - [📊 11. Datasets \& Evaluation](#-11-datasets--evaluation)
+    - [🗃️ Datasets (all public — no scraping, no custom collection needed)](#️-datasets-all-public--no-scraping-no-custom-collection-needed)
+    - [🧮 Evaluation — grouped by our three promises (so it doesn't feel like a metric dump)](#-evaluation--grouped-by-our-three-promises-so-it-doesnt-feel-like-a-metric-dump)
+  - [✅ 12. Milestone 1 Scope Recap](#-12-milestone-1-scope-recap)
+  - [🔗 13. References](#-13-references)
+- [✅ 14. Team Approval](#-14-team-approval)
 
 ---
 
@@ -731,6 +745,18 @@ Rather than a wall of numbers, here's the **one headline metric per promise** �
 21. Reimers, N., Gurevych, I. *Sentence-BERT / sentence-transformers.* — [sbert.net](https://www.sbert.net/)
 
 ---
+
+# ✅ 14. Team Approval
+
+The following team members have reviewed this document and approved it for submission.
+
+| Team Member | Date | Approval |
+|-------------|------|----------|
+| Harliv | 2 Jul 2026 | Yes |
+| Aneeqa | 2 Jul 2026 | Yes|
+| Lokesh | 2 Jul 2026 | Yes|
+| Mahesh | 2 Jul 2026 | Yes|
+| Tanmay |  | |
 
 <div align="center">
 
