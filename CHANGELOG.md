@@ -13,7 +13,9 @@ Format: [Milestone/Version] — Date | What changed and why.
 - Problem statement, scope, and stakeholder definition
 - Literature review (KisanQRS, agentic RAG systems, PlantVillage baselines)
 - Gap analysis and measurable project objectives
-- Milestone 1 report uploaded to docs/
+- Milestone 1 md file uploaded to docs/
+- Milestone 1 ppt uploaded to docs/
+- TEAM_CONTRIBUTIONS.md file uploaded to docs/
 
 ---
 
