@@ -21,7 +21,7 @@
 
 # Harliv
 - Proposed the initial problem statement and preliminary system architecture.
-- Conducted the literature review of KisanQRS, FarmerChat, ReadyTensor, Krishi Sathi, and related work.
+- Conducted the literature review of KisanQRS, ReadyTensor, and related work.
 - Analyzed the strengths and weaknesses of existing solutions with respect to the proposed system.
 - Compiled the evaluation metrics and references used in the report.
 - Assisted in preparing the Milestone 1 presentation slides.
