@@ -232,8 +232,8 @@ The Response Coordinator synthesizes outputs from all activated paths into a sin
 
 This is the heart of the "field-robust" promise, and our strongest computer-vision contribution. Here's the full pipeline:
 
-![alt text](<diease_detector architecture.png>)
-![alt text](alternate_architecture.png)
+![alt text](<assets/diease_detector architecture.png>)
+![alt text](assets/alternate_architecture.png)
 
 <div align="center"><i>Figure 2 & 3 — The disease detector. A VLM gate first asks "is this even a leaf?"; leaves go to the specialized detector, everything else is handled by the VLM's general knowledge. The backbone is chosen from a candidate set, trained under field-realistic augmentation, and wrapped in confidence calibration + abstention.</i></div>
 
@@ -415,7 +415,7 @@ Had they picked *"Chemical,"* the answer would recommend Mancozeb with a differe
 
 This scenario shows the **tiered response strategy** — how the system decides, per query, whether to speak with authority, speak with a disclaimer, or step aside.
 
-![Tiered Response Strategy](three_tier.png)
+![Tiered Response Strategy](assets/three_tier.png)
 
 <div align="center"><i>Figure 3 — After retrieval, a relevance-score gate routes the query to one of three tiers.</i></div>
 
@@ -537,7 +537,7 @@ The most **widely deployed** GenAI advisory: **830k+ users**, 5 countries, 15 la
 > [!CAUTION]
 > **The central CV problem — the lab-to-field cliff.**
 
-![Lab to field domain gap](domain_gap_chart.png)
+![Lab to field domain gap](assets/domain_gap_chart.png)
 
 <div align="center"><i>Figure 4 — The same model that scores ~99% on clean lab images can fall to ~41% on real field photos. Narrowing this gap is our core CV contribution.</i></div>
 
