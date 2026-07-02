@@ -145,25 +145,6 @@ Each objective is measurable, tied to a milestone, and traceable to one of the t
 
 A **multi-source agentic RAG framework** that ingests messy real-world inputs — vernacular voice, code-mixed "Hinglish" text, crop imagery — and routes each to the right specialized backend, then synthesizes one grounded, cited answer.
 
-<div align="center">
-
-```
-        text / image / voice  +  user context
-                     │
-              ┌──────▼──────┐
-              │  LLM Router  │   ← understands intent natively
-              └──────┬──────┘
-      ┌───────┬──────┼───────┬────────────┐
-      ▼       ▼      ▼        ▼            ▼
-  Disease   Tool   RAG     LLM        (context
-  Detector  Calls  Retrieval Knowledge  elicitation)
-      └───────┴──────┴───────┴────────────┘
-                     ▼
-          Response Coordinator  → grounded + cited answer
-```
-
-</div>
-
 <details>
 <summary><b>🔍 Click to expand: the four core components</b></summary>
 
@@ -234,7 +215,7 @@ The Response Coordinator synthesizes outputs from all activated paths into a sin
 
 This is the heart of the "field-robust" promise, and our strongest computer-vision contribution. Here's the full pipeline:
 
-![alt text](<diease_detector architecture-1.png>)
+![alt text](<diease_detector architecture.png>)
 ![alt text](alternate_architecture.png)
 
 <div align="center"><i>Figure 2 & 3 — The disease detector. A VLM gate first asks "is this even a leaf?"; leaves go to the specialized detector, everything else is handled by the VLM's general knowledge. The backbone is chosen from a candidate set, trained under field-realistic augmentation, and wrapped in confidence calibration + abstention.</i></div>
