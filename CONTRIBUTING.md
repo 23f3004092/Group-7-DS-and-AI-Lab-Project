@@ -64,6 +64,9 @@ The team worked in a **fully collaborative, non-siloed manner** for Milestone 1.
 ---
 
 ## Tanmay — Contributions
+ - Participated in team discussions regarding architecture of the product focusing on system design and reliability of API calls, mitigate latency bottlenecks before implementation begins
+ - Proposed and structured the architectural shift from a pure Python setup to a split-responsibility model, introducing a highly concurrent Java (Spring Boot) core for I/O routing and keeping Python strictly sandboxed for ML execution.
+ - Directed the integration of local language components (such as speech streaming and direct multilingual vector mapping via MuRIL) to make the system resilient for rural Indian demographics.
 
 ---
 
