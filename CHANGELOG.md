@@ -8,41 +8,34 @@ Format: [Milestone/Version] — Date | What changed and why.
 ---
 
 ## [Milestone 1] — 2025-07-02
-### Added
-- Initial repository structure and folder setup
-- Problem statement, scope, and stakeholder definition
-- Literature review (KisanQRS, agentic RAG systems, PlantVillage baselines)
-- Gap analysis and measurable project objectives
-- Milestone 1 md file uploaded to docs/
-- Milestone 1 ppt uploaded to docs/
-- TEAM_CONTRIBUTIONS.md file uploaded to docs/
+# Change Log
+
+**Document:** Milestone 1 – Problem Definition & Literature Review  
+**Version:** Revision 2 (Post Review Meeting)  
+**Purpose:** This document records the revisions made following the review meeting and confirms that the reviewers' recommendations have been incorporated into the revised submission.
+
+| # | Reviewer Recommendation | Changes Made |
+|---|-------------------------|--------------|
+| 1 | Reduce the length of the main report by moving detailed scenarios to an appendix. Keep the report simple in language and presentation. | The main report was significantly condensed. All illustrative system scenarios were moved to **Appendix: System Scenarios**, allowing the core report to focus on the proposal, methodology and evaluation. |
+| 2 | Use a more academic writing style and reduce marketing-style language such as "The Three Trust Failures", "attacks all three head-on", "goldmine", and "strongest contribution". | The report was rewritten using a formal academic tone. Promotional headings and persuasive language were removed and replaced with objective technical descriptions throughout the document. |
+| 3 | Reduce the number of badges, emojis and callout boxes to improve professionalism. | Decorative badges, emojis, coloured callout boxes and excessive visual styling were removed. The revised report adopts a cleaner academic format. |
+| 4 | Project scope is still too ambitious; clearly prioritise Must Have, Should Have, and Stretch Goals. | The project scope was restructured into **Must-Have**, **Should-Have**, **Stretch Goals**, and **Out-of-Scope** sections with accompanying justifications to clearly communicate implementation priorities. |
+| 5 | Explain how your approach improves upon each major work reviewed, not just their strengths and weaknesses. | The literature review and comparative analysis were revised to explicitly explain how the proposed architecture addresses the limitations of prior systems and extends existing research. |
+| 6 | Define target values for evaluation metrics instead of only listing the metrics. | Quantitative target values were introduced for the primary evaluation metrics (e.g., Macro F1, Recall@5, RAGAS Faithfulness, False Discovery Rate, RMSE, R²). |
+| 7 | Justify why ResNet, EfficientNet and ViT were shortlisted as candidate models. | The candidate model discussion was revised to explain the architectural rationale behind model selection. The revised proposal narrows the shortlist to lightweight architectures that align with project constraints and deployment feasibility. |
+| 8 | Describe how the confidence threshold (τ) for Abstention will be selected and validated. | A dedicated calibration section now explains the use of **temperature scaling**, validation on a held-out dataset, and optimisation of the abstention threshold based on performance metrics. |
+| 9 | Define the relevance-score thresholds for Tier 1, Tier 2 and Tier 3 responses. | Explicit similarity thresholds were introduced for the three RAG response tiers, together with the behaviour associated with each tier. |
+| 10 | Describe how the RAG knowledge base will handle duplicate, conflicting and outdated advisories. | The RAG implementation was revised to include knowledge-base curation strategies, including filtering outdated KCC entries, prioritising official government documents, and limiting the corpus to verified regional sources. |
+| 11 | Revisit dataset scope not only for training and fine tuning but also RAG implementation. The quantity of data required is not clear and may prove to be overwhelming. | Dataset scope was substantially narrowed. The project now focuses on **Uttar Pradesh**, **Rice**, and **Wheat**, with a clearly defined RAG corpus consisting of filtered KCC data and a manageable number of regional policy documents. |
+| 12 | Add inline citations for all important quantitative claims (such as model performance values). | Quantitative statements throughout the report were revised to include appropriate inline citations to the supporting literature. |
+| 13 | Specify the baseline models against which improvements will be measured. | Baseline datasets, benchmark methods and comparison targets were clarified within the evaluation methodology and literature review to support quantitative performance comparison. |
+| 14 | Include a Risk Assessment section with possible risks and mitigation strategies. | A dedicated **Risk Assessment & Mitigation** section was added, identifying major technical risks together with corresponding mitigation strategies. |
+| 15 | Include a brief section on ethical considerations. | A new **Ethical Considerations** section was introduced covering transparency of AI-generated advice and safeguards against unsafe agronomic recommendations. |
+| 16 | Add a Limitations section describing known constraints of the proposed system. | A dedicated **System Limitations** section was added to explicitly describe the project's intended scope, technical constraints and deployment limitations. |
+| 17 | Include computational requirements such as hardware, training time and deployment feasibility. | A new **Computational Requirements** section was added detailing expected hardware requirements, GPU memory constraints, approximate training time and deployment feasibility using consumer-grade hardware. |
 
 ---
 
-## [Milestone 2] — 2025-07-09
-### Added
-- _To be updated_
+## Summary
 
----
-
-## [Milestone 3] — 2025-07-23
-### Added
-- _To be updated_
-
----
-
-## [Milestone 4] — 2025-07-30
-### Added
-- _To be updated_
-
----
-
-## [Milestone 5] — 2025-08-06
-### Added
-- _To be updated_
-
----
-
-## [Milestone 6] — 2025-08-13
-### Added
-- _To be updated_
+All recommendations discussed during the review meeting have been addressed in the revised report. The updated submission presents a more focused project scope, adopts a formal academic writing style, improves evaluation planning with measurable targets, clarifies architectural decisions, introduces additional sections requested during the review (Risk Assessment, Ethical Considerations, Limitations, and Computational Requirements), and improves the overall professionalism and feasibility of the proposal.

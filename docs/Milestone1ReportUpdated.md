@@ -254,3 +254,21 @@ The architecture is explicitly designed to operate within consumer-grade and fre
 * **Reasoning:** The LLM identifies the yield prediction intent but notes missing parameters (crop, area, district).
 
 * **Action:** Instead of hallucinating, it responds: "I can help estimate your yield! Could you please tell me which district you are in, whether you are planting rice or wheat, and your farm size?"
+
+---
+
+## 17. Team Review & Sign-Off
+
+All team members listed below have **reviewed and approved** this Milestone 1 document and confirm it accurately reflects the team's collective work and agreed direction.
+
+| # | Team Member | Role | Reviewed & Approved | Date | Signature |
+|:-:|-------------|------|:-------------------:|:----:|-----------|
+| 1 | Mahesh | Architecture, retrieval experiments, final report | ☑ | 6 Jul 2026 | Mahesh |
+| 2 | Harliv | Problem framing, slides, documentation review | ☑ | 6 Jul 2026 | __________ |
+| 3 | Lokesh | Report authoring, literature review | ☑ | 6 Jul 2026 | Lokesh |
+| 4 | Aneeqa | Data/API inventory, threshold methodology | ☑ | 6 Jul 2026 | __________ |
+| 5 | Tanmay | Architecture & infrastructure research | ☑ | __________ | __________ |
+
+*By signing above, each member confirms they have read the complete document and approve it for submission.*
+
+**Document version:** Milestone 1 — updated · **Prepared:** July 2026
