@@ -2,7 +2,7 @@
 
 ## A Decoupled, Agentic Multimodal Crop Advisory System for Uttar Pradesh
 
-### 📑 Contents
+### Contents
 
  1. [Problem Statement](#1-problem-statement)
  2. [Scope & Boundaries](#2-scope--boundaries)
