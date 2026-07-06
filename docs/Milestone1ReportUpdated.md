@@ -264,10 +264,10 @@ All team members listed below have **reviewed and approved** this Milestone 1 do
 | # | Team Member | Role | Reviewed & Approved | Date | Signature |
 |:-:|-------------|------|:-------------------:|:----:|-----------|
 | 1 | Mahesh | Architecture, retrieval experiments, final report | ☑ | 6 Jul 2026 | Mahesh |
-| 2 | Harliv | Problem framing, slides, documentation review | ☑ | 6 Jul 2026 | __________ |
+| 2 | Harliv | Problem framing, slides, documentation review | ☑ | 6 Jul 2026 | Harliv |
 | 3 | Lokesh | Report authoring, literature review | ☑ | 6 Jul 2026 | Lokesh |
-| 4 | Aneeqa | Data/API inventory, threshold methodology | ☑ | 6 Jul 2026 | __________ |
-| 5 | Tanmay | Architecture & infrastructure research | ☑ | __________ | __________ |
+| 4 | Aneeqa | Data/API inventory, threshold methodology | ☑ | 6 Jul 2026 | Aneeqa |
+| 5 | Tanmay | Architecture & infrastructure research | ☑ | 6 Jul 2026 | Tanmay |
 
 *By signing above, each member confirms they have read the complete document and approve it for submission.*
 
