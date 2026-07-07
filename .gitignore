@@ -1,0 +1,55 @@
+# =============================================================================
+# AgriAssist — .gitignore
+# =============================================================================
+
+# ----------------------------- Raw Data --------------------------------------
+# Large datasets (PlantVillage ~3GB, KCC dump, etc.) must NOT be committed.
+# See data/README.md for download instructions.
+data/raw/
+
+# ----------------------------- Python ----------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# ----------------------------- Jupyter / IPython -----------------------------
+.ipynb_checkpoints/
+*.ipynb_metadata/
+
+# ----------------------------- IDE / Editors ---------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ----------------------------- OS --------------------------------------------
+desktop.ini
+*.lnk
+
+# ----------------------------- Model Artifacts -------------------------------
+# Large model checkpoints — store on HuggingFace Hub or Google Drive
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.safetensors
+*.bin
+
+# ----------------------------- Misc ------------------------------------------
+*.log
+*.env
+.env.*
