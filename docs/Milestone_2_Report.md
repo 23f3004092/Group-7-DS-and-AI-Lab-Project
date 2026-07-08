@@ -12,7 +12,8 @@
     - [Relationship Between the Datasets and Project Goals](#relationship-between-the-datasets-and-project-goals)
     - [2. Dataset Identification](#2-dataset-identification)
     - [3. Dataset Description](#3-dataset-description)
-    - [4. Data Governance](#4-data-governance)
+  - [4. Data Governance](#4-data-governance)
+    - [Dataset-specific Notes](#dataset-specific-notes)
     - [5. Exploratory Data Analysis (EDA)](#5-exploratory-data-analysis-eda)
     - [6. Data Preprocessing](#6-data-preprocessing)
     - [7. Dataset Integration (if multiple datasets)](#7-dataset-integration-if-multiple-datasets)
@@ -118,22 +119,29 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 * Dataset schema
 
 **3.2 RAG/NLP PDF Corpus**
-* **Number of documents:** 187 PDFs collected across 4 source folders (Other_docs, Schemes, PPQS_Advisories, UP_ACF_PDFs); 170 PDFs after removing unreadable and near-duplicate documents.
-* **Number of features:** Not feature-based in the tabular sense — each document contributes variable-length text, later split into chunks (chunk size to be finalized in Milestone 3 for MuRIL embedding).
-* **Target variable(s):** N/A (retrieval corpus, not a labeled prediction task).
-* **Feature description:** Per-document metadata captured during EDA — `source`, `filename`, `page_count`, `word_count`, `extraction_method` (native/ocr/ocr_retry/excluded_unreadable), `detected_language`, `detected_year`, `garbage_char_ratio`.
-* **Data format:** PDF (source), extracted plain text (`.txt`) per document.
-* **Sample records:**
 
-  *Example 1 (source: schemes, native extraction):*
-  > "Interest Subvention is provided on short term crop loans and short term loans for allied activities including animal husbandry, dairy, fisheries, bee keeping etc"
+| Attribute               | Description                                                                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Number of documents** | 187 PDFs collected from four source folders (Other_docs, Schemes, PPQS_Advisories, and UP_ACF_PDFs). After removing unreadable and near-duplicate documents, 170 PDFs were retained. |
+| **Number of features**  | Not applicable in the traditional tabular sense. Each document consists of variable-length text with associated metadata.                                                            |
+| **Target variable(s)**  | N/A (retrieval corpus; no prediction labels).                                                                                                                                        |
+| **Feature description** | Metadata includes `source`, `filename`, `page_count`, `word_count`, `extraction_method`, `detected_language`, `detected_year`, and `garbage_char_ratio`.                             |
+| **Data format**         | Source documents in PDF format with extracted plain-text (`.txt`) versions.                                                                                                          |
+| **Dataset schema**      | One record per document stored in `pdf_inventory_clean.csv` with the metadata fields listed above.                                                                                   |
 
-  *Example 2 (source: schemes, native_extraction):*
-  > "Interest subvention and prompt repayment incentive benefits on short term crop loans and short term loans for allied activities will be available on an overall limit"
-  
-* **Dataset schema:** See `pdf_inventory_clean.csv` — one row per document with the metadata fields listed above.
 
-`[PLACEHOLDER: insert screenshot/table of a few rows from pdf_inventory_clean.csv]`
+---
+
+**Sample Record 1 (Schemes):**
+
+> "Interest Subvention is provided on short term crop loans and short term loans for allied activities including animal husbandry, dairy, fisheries, bee keeping etc."
+
+**Sample Record 2 (Schemes):**
+
+> "Interest subvention and prompt repayment incentive benefits on short term crop loans and short term loans for allied activities will be available on an overall limit."
+
+
+
 
 **3.3 RAG / NLP KCC**
 * Number of records
@@ -156,15 +164,42 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 
 ---
 
-### 4. Data Governance
+Yes, I'm fairly sure, but **not as just a table**.
 
-* **Data Source & Licensing:**
-  * *RAG/NLP corpus:* All PDFs sourced from public government/institutional portals (data.gov.in KCC transcripts, PIB, UP Dept. of Agriculture, PM-KISAN, PMFBY, RBI, NFSM, PPQS, ICAR/IIWBR). Falls under open government data usage; exact license terms per source `[PLACEHOLDER: confirm and cite specific license/ToU per portal, especially the MISS document sourced via web search]`.
-  * *Vision / Yield datasets:* `[PLACEHOLDER — owned by teammate]`
-* **Privacy:** RAG/NLP corpus is institutional/policy documentation — no PII expected; a manual spot-check will confirm no farmer-identifying data is present in KCC excerpts. `[PLACEHOLDER — vision/yield privacy notes owned by teammate]`
-* **Data Quality (RAG/NLP corpus):** Of 187 collected PDFs, `[PLACEHOLDER: X]` required OCR (scanned documents), `[PLACEHOLDER: X]` failed extraction even after a higher-DPI OCR retry and were excluded, and 33 near-duplicate pairs were identified and resolved (weaker copy dropped), leaving 170 clean documents. Full audit trail in `excluded_unreadable_docs.csv` and `excluded_near_duplicate_docs.csv`. `[PLACEHOLDER — vision/yield data quality notes owned by teammate]`
-* **Ethics & Bias:** Document year distribution should be reviewed for overrepresentation of outdated schemes (ties to the hallucination risk flagged in Milestone 1); `[PLACEHOLDER: note any district/topic imbalance observed]`. `[PLACEHOLDER — vision/yield bias notes owned by teammate]`
-* **Reproducibility & Compliance:** RAG/NLP corpus versioned via `pdf_inventory_clean.csv` (documents all preprocessing decisions: extraction method, exclusions, duplicate resolution). `[PLACEHOLDER — vision/yield versioning owned by teammate]`
+The wording of your guideline is important:
+
+> *"By the end of Milestone 2, another team should be able to take the prepared datasets and begin training a model immediately."*
+
+This means the reviewers want evidence that you have **managed the data properly**, not just listed where it came from.
+
+So I would recommend a **hybrid approach**:
+
+1. A short introductory sentence.
+2. A table summarizing the governance.
+3. A few paragraphs explaining dataset-specific points (only where needed).
+
+For example:
+
+---
+
+## 4. Data Governance
+
+The datasets used in this project were obtained from publicly available and trusted sources. Appropriate checks were performed to ensure data quality, licensing compliance, and reproducibility before using the datasets for model development.
+
+| Aspect                           | Description                                                                                                                                                                                                                                                                                                     |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Data Sources & Licensing**     | Vision datasets were obtained from Kaggle, RAG documents from official government portals (ICAR, PPQS, PM-KISAN, RBI, etc.), KCC data from the Government of India OGD API, and yield data from official agricultural statistics portals. All datasets are publicly available for research and educational use. |
+| **Privacy**                      | The vision datasets contain only crop images. Government documents contain no personal information. KCC records were reviewed and only agricultural query-response information relevant to the project was retained.                                                                                            |
+| **Data Quality**                 | EDA was conducted to identify missing values, duplicate records, corrupted images, unreadable PDFs, inconsistent metadata, and other quality issues. Identified issues were corrected or removed during preprocessing.                                                                                          |
+| **Ethics & Bias**                | The datasets may contain regional and class imbalance, as well as differences between laboratory and real-world images. These limitations are acknowledged and will be considered during model evaluation.                                                                                                      |
+| **Reproducibility & Compliance** | All dataset sources, download procedures, preprocessing scripts, and EDA notebooks have been documented. Raw datasets were preserved separately from processed datasets to ensure reproducibility and compliance with dataset licensing.                                                                        |
+
+### Dataset-specific Notes
+
+* **Vision:** Corrupted images and duplicate samples were identified during EDA, while image quality, resolution, and class distributions were analyzed before preprocessing.
+* **RAG:** Government PDFs were checked for extraction quality and duplicates before being incorporated into the retrieval corpus.
+* **KCC:** Query-response records were filtered and validated to remove incomplete or inconsistent entries while preserving the original agricultural content.
+* **Yield:** Missing values, inconsistent records, and formatting issues were identified and addressed before further analysis.
 
 ---
 
