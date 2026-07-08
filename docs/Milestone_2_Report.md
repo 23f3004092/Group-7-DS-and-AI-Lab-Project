@@ -52,12 +52,15 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 
 **2.1 Vision / Disease Detection Dataset(s)**
 
-* **Dataset name(s):** 
-* **Source(s) and download links:** 
-* **Public/private/licensed status:** 
-* **Purpose:** 
-* **Why each dataset was selected:**
-* **Alternatives considered:** 
+* **Dataset name(s):** Rice Leaf Disease Dataset, Wheat Disease Dataset and PlantDoc Dataset
+* **Source(s) and download links:**  
+  * Rice Leaf Diseases Dataset: Kaggle – https://www.kaggle.com/datasets/vbookshelf/rice-leaf-diseases
+  * Wheat Plant Diseases Dataset: Kaggle – https://www.kaggle.com/datasets/kushagra3204/wheat-plant-diseases
+  * PlantDoc Dataset: Kaggle – https://www.kaggle.com/datasets/andresmgs/plantdec
+* **Public/private/licensed status:** All three datasets are publicly available through Kaggle for research and educational purposes.
+* **Purpose:** The datasets are used to develop the vision subsystem for crop disease detection. The Rice and Wheat datasets provide labelled disease images, while PlantDoc contributes real-world field images for evaluating model robustness.
+* **Why each dataset was selected:**The datasets cover the project's target crops (rice and wheat) and combine controlled images with real-world field conditions, improving the model's ability to generalize.
+* **Alternatives considered:** PlantVillage was considered as an additional dataset but was not used as the primary dataset because it mainly contains laboratory-captured images with limited real-world variability and no rice and wheat related disease are present in them.
 
 **2.2 RAG / NLP PDFs (UP govt PDFs, schemes, Farming Handbooks)**
 
@@ -80,18 +83,19 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
   * Rice-Based Cropping Systems (ICAR) — https://icar.org.in/sites/default/files/inline-files/Rice-based-cropping-systems.pdf
 * **Public/private/licensed status:** Publicly available government/institutional data (Union and UP State government portals, ICAR, RBI); usage falls under open government data licensing, though a couple of sources (e.g. MISS) were located via general web search rather than a single stable government URL and should be re-verified for licensing before final submission.
 * **Purpose:** Forms the localized knowledge base for the MuRIL-embedded RAG pipeline, grounding LLM responses in real agronomic Q&A, scheme eligibility/operational details, and crop-specific advisories rather than parametric (and potentially hallucinated) knowledge.
-* **Why each dataset was selected:** KCC logs are the same source structure the project aims to augment/automate (per the Problem Statement), ensuring domain alignment; scheme PDFs and advisories are the authoritative, up-to-date sources for policy and agronomic guidance, addressing the "outdated scheme" and dosage-hallucination risks flagged in Milestone 1.
+* **Why each dataset was selected:** These pdfs were selected for ensuring domain alignment; scheme PDFs and advisories are authoritative, up-to-date sources for policy and agronomic guidance, addressing the "outdated scheme" and dosage-hallucination risks flagged in Milestone 1.
 * **Alternatives considered:** General-purpose agricultural web-scraped text was considered but rejected due to higher noise and copyright/reliability concerns.
 
 **2.3 RAG / NLP KCC ( Kisan Call Centre (KCC))**
 
 
-* **Dataset name(s):** 
+* **Dataset name(s):** Kisan Call Centre (KCC) Query–Answer Transcripts
 * **Source(s) and download links:** 
-* **Public/private/licensed status:** 
-* **Purpose:** 
-* **Why each dataset was selected:** 
-* **Alternatives considered:** 
+  * Open Government Data (OGD) Platform, Government of India: https://api.data.gov.in/resource/cef25fe2-9231-4128-8aec-2c948fedd43f
+* **Public/private/licensed status:** The dataset is publicly available through the Government of India's Open Government Data (OGD) Platform and is intended for public and research use.
+* **Purpose:** The dataset forms the primary knowledge source for the RAG subsystem by providing real farmer queries and expert responses, enabling context-aware and grounded agricultural recommendations.
+* **Why each dataset was selected:** The KCC dataset contains authentic farmer questions and expert answers related to crops, diseases, pests, cultivation practices, and agricultural schemes. Since the project targets farmers in Uttar Pradesh, the dataset was filtered accordingly to ensure regional relevance.
+* **Alternatives considered:** General agricultural question–answer datasets and web-scraped agricultural content were considered but were not selected due to lower reliability, inconsistent quality, and limited relevance compared to official KCC records.
 
 **2.4 Yield Prediction Dataset (Should-Have)**
 
