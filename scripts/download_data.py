@@ -16,30 +16,75 @@ Downloads and organises all raw datasets into data/raw/:
     - PlantDoc (Kaggle)                 → data/raw/plantdoc/
 
   NLP / RAG:
-    - KCC Q&A Logs (Kaggle)             → data/raw/kcc/
+    - KCC transcripts (data.gov.in API) → data/raw/kcc/
 
   YIELD:
     - District-level yield data         → data/raw/yield/  (manual)
 
 Requirements:
-  pip install kaggle requests tqdm
+  pip install kaggle requests tqdm pandas pyarrow
+  (pandas + pyarrow are only needed for the KCC download)
 
 Kaggle datasets require a valid ~/.kaggle/kaggle.json API token.
 See: https://www.kaggle.com/docs/api
 
+-------------------------------------------------------------------------
+KCC dataset — how to download (data.gov.in GET API)
+-------------------------------------------------------------------------
+The KCC (Kisan Call Centre) query-answer transcripts are fetched directly
+from the official Open Government Data platform API, resource:
+  https://api.data.gov.in/resource/cef25fe2-9231-4128-8aec-2c948fedd43f
+
+1. Get an API key (one time):
+     - Register / log in at https://data.gov.in
+     - Go to "My Account" → "Generate API Key"
+   The sample key shown in the API docs returns at most 10 records —
+   you need your own key for a full download.
+
+2. Run the downloader, passing the API parameters as arguments:
+     python download_data.py --kcc --kcc-api-key YOUR_KEY
+     python download_data.py --kcc --kcc-api-key YOUR_KEY \
+            --kcc-state "UTTAR PRADESH" --kcc-year 2025 --kcc-months 1-12
+
+   Arguments (all optional except the key):
+     --kcc-api-key    your personal data.gov.in API key   (required)
+     --kcc-state      StateName filter (default: UTTAR PRADESH)
+     --kcc-year       year filter      (default: 2025)
+     --kcc-months     months to fetch: "1-12", "1,3,7", "6" (default: 1-12)
+     --kcc-page-size  records per API call (default: 5000)
+
+3. Output (under data/raw/kcc/):
+     - one JSONL file per month  → RAG-ready, one record per line,
+       Hindi text preserved (UTF-8)
+     - one combined Parquet file → for EDA with pandas
+   Months with no data on the server are skipped. The download is
+   resumable: rerunning skips months whose JSONL is already complete.
+
+Notes:
+  - data.gov.in blocks the default python-requests User-Agent, so the
+    script sends a browser-like one. It also retries transient 502s.
+  - Record fields: KCCCallID, CreatedOn, StateName, DistrictName,
+    BlockName, Sector, Category, Crop, Season, QueryType, QueryText,
+    KccAns, day, month, year.
+-------------------------------------------------------------------------
+
 Usage:
-  python scripts/download_data.py --all          # Strategy A + KCC + yield
-  python scripts/download_data.py --rice --wheat  # Vision only (Strategy A)
-  python scripts/download_data.py --expand        # Strategy D extras
-  python scripts/download_data.py --kcc           # KCC only
+  python download_data.py --all --kcc-api-key KEY   # Strategy A + KCC + yield
+  python download_data.py --rice --wheat            # Vision only (Strategy A)
+  python download_data.py --expand                  # Strategy D extras
+  python download_data.py --kcc --kcc-api-key KEY   # KCC only
 """
 
 import argparse
+import json
 import os
 import subprocess
 import sys
+import time
 import zipfile
 from pathlib import Path
+
+import requests
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -49,7 +94,7 @@ if hasattr(sys.stdout, "reconfigure"):
 # Configuration
 # ---------------------------------------------------------------------------
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
 # --- Strategy A: Primary Rice & Wheat datasets ---
@@ -72,9 +117,14 @@ PLANTVILLAGE_SLUG = "abdallahalidev/plantvillage-dataset"
 PLANTDOC_SLUG = "andresmgs/plantdec"
 # PlantDoc field images (30 classes, ~74 MB) — domain gap evaluation
 
-# --- NLP / RAG ---
-KCC_SLUG = "daskoushik/farmers-call-query-data-qa"
-# KCC Q&A pairs (~4.5 MB, ~179K records, 2 columns: questions, answers)
+# --- NLP / RAG: KCC transcripts via data.gov.in GET API ---
+KCC_RESOURCE_ID = "cef25fe2-9231-4128-8aec-2c948fedd43f"
+KCC_BASE_URL = f"https://api.data.gov.in/resource/{KCC_RESOURCE_ID}"
+# Kisan Call Centre transcripts: farmer queries + FTA answers.
+# Filterable by StateName / year / month; paginated via offset + limit.
+KCC_MAX_RETRIES = 8       # data.gov.in intermittently returns 502s
+KCC_TIMEOUT_S = 120
+KCC_REQUEST_DELAY_S = 0.5  # pause between calls to be polite to the server
 
 
 # ---------------------------------------------------------------------------
@@ -221,17 +271,174 @@ def download_plantdoc():
 
 
 # ---------------------------------------------------------------------------
-# NLP / RAG
+# NLP / RAG — KCC transcripts from the data.gov.in GET API
 # ---------------------------------------------------------------------------
 
 
-def download_kcc():
-    """Download KCC Q&A dataset from Kaggle."""
-    return _download_or_manual(
-        KCC_SLUG,
-        RAW_DIR / "kcc",
-        "KCC Q&A Logs (daskoushik)",
+def _parse_months(spec: str) -> list:
+    """Parse a months spec like "1-12", "1,3,7" or "6" into a sorted list."""
+    months = set()
+    for part in spec.split(","):
+        part = part.strip()
+        if "-" in part:
+            start, end = part.split("-", 1)
+            months.update(range(int(start), int(end) + 1))
+        elif part:
+            months.add(int(part))
+    if not months or any(m < 1 or m > 12 for m in months):
+        raise ValueError(f"invalid months spec: {spec!r} (use e.g. '1-12' or '1,3,7')")
+    return sorted(months)
+
+
+def _kcc_fetch_page(session, api_key, state, year, month, offset, limit) -> dict:
+    """Fetch one page of KCC results, retrying on transient failures."""
+    params = {
+        "api-key": api_key,
+        "format": "json",
+        "offset": offset,
+        "limit": limit,
+        "filters[StateName]": state,
+        "filters[year]": year,
+        "filters[month]": month,
+    }
+    last_err = None
+    for attempt in range(1, KCC_MAX_RETRIES + 1):
+        try:
+            resp = session.get(KCC_BASE_URL, params=params, timeout=KCC_TIMEOUT_S)
+            resp.raise_for_status()
+            payload = resp.json()
+            if "records" not in payload or "total" not in payload:
+                raise ValueError(f"unexpected response shape: {list(payload)[:10]}")
+            return payload
+        except (requests.RequestException, ValueError) as err:
+            last_err = err
+            if attempt < KCC_MAX_RETRIES:
+                wait = min(60, 5 * 2 ** (attempt - 1))
+                print(f"    attempt {attempt} failed ({err}); retrying in {wait}s...")
+                time.sleep(wait)
+    raise RuntimeError(
+        f"KCC month {month} offset {offset}: giving up after {KCC_MAX_RETRIES} attempts"
+    ) from last_err
+
+
+def _kcc_download_month(session, api_key, state, year, month, page_size, dest) -> int:
+    """Download one month to JSONL. Returns the number of records on disk."""
+    state_slug = state.lower().replace(" ", "_")
+    out_path = dest / f"kcc_{state_slug}_{year}_month_{month:02d}.jsonl"
+
+    first = _kcc_fetch_page(session, api_key, state, year, month, offset=0, limit=1)
+    total = int(first["total"])
+    if total == 0:
+        print(f"  Month {month:02d}: no data on server, skipping.")
+        return 0
+
+    if out_path.exists():
+        with out_path.open("r", encoding="utf-8") as f:
+            existing = sum(1 for _ in f)
+        if existing == total:
+            print(f"  Month {month:02d}: already complete ({existing} records), skipping.")
+            return existing
+        print(f"  Month {month:02d}: found partial file ({existing}/{total}), re-downloading.")
+
+    print(f"  Month {month:02d}: downloading {total} records...")
+    tmp_path = out_path.with_suffix(".jsonl.part")
+    fetched = 0
+    with tmp_path.open("w", encoding="utf-8") as f:
+        offset = 0
+        while offset < total:
+            payload = _kcc_fetch_page(
+                session, api_key, state, year, month, offset=offset, limit=page_size
+            )
+            records = payload["records"]
+            if not records:
+                break
+            for rec in records:
+                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            fetched += len(records)
+            offset += len(records)
+            print(f"    {fetched}/{total} records")
+            time.sleep(KCC_REQUEST_DELAY_S)
+
+    if fetched != total:
+        print(f"    ⚠️  expected {total} records but got {fetched} "
+              "(server total may have shifted mid-download)")
+    tmp_path.replace(out_path)
+    return fetched
+
+
+def download_kcc(api_key, state, year, months_spec, page_size):
+    """Download KCC transcripts from data.gov.in into data/raw/kcc/.
+
+    Writes one JSONL file per month (RAG-ready) plus a combined Parquet
+    file for EDA. Resumable: complete months are skipped on rerun.
+    """
+    dest = ensure_dir(RAW_DIR / "kcc")
+
+    if not api_key:
+        print(
+            "\n📋 KCC download needs a data.gov.in API key:\n"
+            "   1. Register / log in at https://data.gov.in\n"
+            "   2. Go to 'My Account' → 'Generate API Key'\n"
+            "   3. Rerun with: --kcc --kcc-api-key YOUR_KEY\n"
+        )
+        return False
+
+    try:
+        months = _parse_months(months_spec)
+    except ValueError as err:
+        print(f"❌ {err}")
+        return False
+
+    # data.gov.in rejects the default python-requests User-Agent
+    # (502s / timeouts), so present a browser-like one.
+    session = requests.Session()
+    session.headers["User-Agent"] = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     )
+
+    print(f"📦 KCC transcripts | state={state} year={year} months={months} → {dest}")
+    summary = {}
+    failed = []
+    for month in months:
+        try:
+            summary[month] = _kcc_download_month(
+                session, api_key, state, year, month, page_size, dest
+            )
+        except RuntimeError as err:
+            print(f"  ❌ {err}")
+            failed.append(month)
+
+    print("\n  Records per month:")
+    for month, n in summary.items():
+        print(f"    {year}-{month:02d}: {n}")
+    print(f"    TOTAL: {sum(summary.values())}")
+
+    # Combined Parquet for EDA (pandas + pyarrow only needed here).
+    state_slug = state.lower().replace(" ", "_")
+    month_files = [
+        dest / f"kcc_{state_slug}_{year}_month_{m:02d}.jsonl"
+        for m, n in summary.items() if n > 0
+    ]
+    if month_files:
+        try:
+            import pandas as pd
+
+            df = pd.concat(
+                [pd.read_json(p, lines=True) for p in month_files],
+                ignore_index=True,
+            )
+            parquet_path = dest / f"kcc_{state_slug}_{year}_full.parquet"
+            df.to_parquet(parquet_path, index=False)
+            print(f"  ✅ Combined Parquet: {parquet_path} "
+                  f"({len(df)} rows, {len(df.columns)} columns)")
+        except ImportError:
+            print("  ⚠️  pandas/pyarrow not installed — skipped the combined "
+                  "Parquet (JSONL files are complete). Fix: pip install pandas pyarrow")
+
+    if failed:
+        print(f"  ⚠️  months failed after retries: {failed} — rerun to resume.")
+        return False
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -290,11 +497,16 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Examples:\n"
-            "  python scripts/download_data.py --all            # Strategy A core + KCC + yield\n"
-            "  python scripts/download_data.py --rice --wheat    # Vision only (Strategy A)\n"
-            "  python scripts/download_data.py --expand          # Add Strategy D extras\n"
-            "  python scripts/download_data.py --kcc             # KCC only\n"
-            "  python scripts/download_data.py --everything      # All datasets including expansion\n"
+            "  python download_data.py --all --kcc-api-key KEY   # Strategy A core + KCC + yield\n"
+            "  python download_data.py --rice --wheat            # Vision only (Strategy A)\n"
+            "  python download_data.py --expand                  # Add Strategy D extras\n"
+            "  python download_data.py --kcc --kcc-api-key KEY   # KCC only (all months, UP, 2025)\n"
+            "  python download_data.py --kcc --kcc-api-key KEY --kcc-state RAJASTHAN \\\n"
+            "         --kcc-year 2024 --kcc-months 1,6-9         # KCC with custom filters\n"
+            "  python download_data.py --everything --kcc-api-key KEY\n"
+            "\n"
+            "Get a data.gov.in API key: log in at https://data.gov.in →\n"
+            "'My Account' → 'Generate API Key'.\n"
         ),
     )
 
@@ -316,9 +528,26 @@ def main():
 
     # NLP / Yield
     parser.add_argument("--kcc", action="store_true",
-                        help="Download KCC Q&A dataset")
+                        help="Download KCC transcripts from the data.gov.in API")
     parser.add_argument("--yield-data", action="store_true", dest="yield_data",
                         help="Show yield data download instructions")
+
+    # KCC API parameters (used with --kcc / --all / --everything)
+    kcc_group = parser.add_argument_group(
+        "KCC API options",
+        "Parameters for the data.gov.in KCC transcripts API. "
+        "An API key is required: https://data.gov.in → My Account → Generate API Key.",
+    )
+    kcc_group.add_argument("--kcc-api-key", dest="kcc_api_key", default=None,
+                           help="Your personal data.gov.in API key (required for --kcc)")
+    kcc_group.add_argument("--kcc-state", dest="kcc_state", default="UTTAR PRADESH",
+                           help='StateName filter, e.g. "UTTAR PRADESH" (default: %(default)s)')
+    kcc_group.add_argument("--kcc-year", dest="kcc_year", default="2025",
+                           help="Year filter (default: %(default)s)")
+    kcc_group.add_argument("--kcc-months", dest="kcc_months", default="1-12",
+                           help='Months to fetch: "1-12", "1,3,7" or "6" (default: %(default)s)')
+    kcc_group.add_argument("--kcc-page-size", dest="kcc_page_size", type=int, default=5000,
+                           help="Records per API call (default: %(default)s)")
 
     # Combo flags
     parser.add_argument("--all", action="store_true",
@@ -370,7 +599,13 @@ def main():
 
     # --- NLP / Yield ---
     if args.all or args.everything or args.kcc:
-        results["KCC"] = download_kcc()
+        results["KCC"] = download_kcc(
+            api_key=args.kcc_api_key,
+            state=args.kcc_state,
+            year=args.kcc_year,
+            months_spec=args.kcc_months,
+            page_size=args.kcc_page_size,
+        )
         print()
 
     if args.all or args.everything or args.yield_data:
