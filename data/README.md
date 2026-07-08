@@ -1,8 +1,6 @@
 # Data Directory — AgriAssist
 
-> **Important:** Raw datasets are large (PlantVillage ~3GB, KCC ~500MB+) and are
-> **excluded from Git** via `.gitignore`. Follow the setup instructions below to
-> download them locally.
+> **Important:** Raw datasets are large and are **excluded from Git** via `.gitignore`. Follow the setup instructions below to download them locally.
 
 ---
 
@@ -11,22 +9,25 @@
 ```
 data/
 ├── raw/                    # ⛔ .gitignored — original downloads
-│   ├── plantvillage/       # PlantVillage leaf disease images
-│   ├── plantdoc/           # PlantDoc field leaf disease images
+│   ├── rice_diseases/      # Strategy A: Primary Rice Leaf Diseases dataset
+│   ├── wheat_diseases/     # Strategy A: Primary Wheat Plant Diseases dataset
+│   ├── rice_diseases_extra/# Strategy D: Extra Rice Leaf Disease images
+│   ├── plantvillage/       # Strategy D: Supplementary transfer learning images
+│   ├── plantdoc/           # Field evaluation / domain gap benchmark
 │   ├── kcc/                # Kisan Call Centre Q&A CSV dump
 │   ├── yield/              # District-level crop yield CSVs
 │   └── pdfs/               # UP government advisory PDFs
 │
 ├── processed/              # ✅ Tracked — cleaned & filtered data
-│   ├── vision/             # Filtered Rice/Wheat images only
+│   ├── vision/             # Standardized Rice/Wheat images
 │   ├── kcc/                # Filtered & cleaned KCC text
 │   └── yield/              # Cleaned yield tabular data
 │
 └── final/                  # ✅ Tracked — training-ready splits
     ├── vision/
-    │   ├── train/          # 80% PlantVillage (stratified)
-    │   ├── val/            # 20% PlantVillage (stratified)
-    │   └── test/           # PlantDoc (independent test set)
+    │   ├── train/          # Combined Rice & Wheat train split
+    │   ├── val/            # Validation split
+    │   └── test/           # Held-out evaluation set / PlantDoc test
     ├── kcc/                # Chunked text, ready for MuRIL embedding
     └── yield/              # Train/val/test CSVs (temporal split)
 ```
@@ -35,115 +36,107 @@ data/
 
 ## Dataset Inventory
 
-### 1. Vision — PlantVillage (Training & Validation)
+### 1. Vision — Strategy A Core (Primary Rice & Wheat Datasets)
 
+#### A. Rice Leaf Diseases Dataset
 | Property | Value |
 |---|---|
-| **Purpose** | Lab-baseline image classification for crop disease detection |
-| **Source** | [Kaggle — PlantVillage Dataset](https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset) |
-| **Alt Source** | [Kaggle — New Plant Diseases Dataset](https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset) |
-| **Format** | JPEG images organised in class-labeled subdirectories |
-| **Total Size** | ~3.0 GB (~54,000 images, 38 classes) |
-| **Classes Used** | Rice and Wheat disease classes only (filtered during preprocessing) |
+| **Purpose** | Core training & validation for Rice leaf disease classification |
+| **Source** | [Kaggle — Rice Leaf Diseases (vbookshelf)](https://www.kaggle.com/datasets/vbookshelf/rice-leaf-diseases) |
+| **Classes** | Brown Spot, Blast, Bacterial Blight, Healthy |
+| **Total Size** | ~38 MB (120 images per class, highly curated) |
 | **License** | CC0 1.0 (Public Domain) |
-| **Citation** | Hughes, D., Salathé, M. (2016). *An Open Access Repository of Images on Plant Health.* |
 
-### 2. Vision — PlantDoc (Independent Test Set)
+#### B. Wheat Plant Diseases Dataset
+| Property | Value |
+|---|---|
+| **Purpose** | Core training & validation for Wheat leaf disease classification |
+| **Source** | [Kaggle — Wheat Plant Diseases (kushagra3204)](https://www.kaggle.com/datasets/kushagra3204/wheat-plant-diseases) |
+| **Classes** | Brown Rust, Yellow Rust, Stem Rust, Septoria, Blast, Powdery Mildew, Healthy, etc. |
+| **Total Size** | ~14,000+ high-resolution images |
+| **License** | Open Access / CC BY 4.0 |
+
+---
+
+### 2. Vision — Strategy D Expansion (Supplementary Vision Data)
+
+#### A. Rice Leaf Disease Images (Extra)
+| Property | Value |
+|---|---|
+| **Purpose** | Expansion dataset to enrich Rice disease variety and robustness |
+| **Source** | [Kaggle — Rice Leaf Disease Images (nirmalsankalana)](https://www.kaggle.com/datasets/nirmalsankalana/rice-leaf-disease-image) |
+| **Total Size** | ~205 MB |
+
+#### B. PlantVillage Dataset (Supplementary Pretraining)
+| Property | Value |
+|---|---|
+| **Purpose** | General crop disease pretraining / transfer learning baseline |
+| **Source** | [Kaggle — PlantVillage Dataset](https://www.kaggle.com/datasets/abdallahalidev/plantvillage-dataset) |
+| **Total Size** | ~3.0 GB (~54,000 images, 38 classes across various crops) |
+
+---
+
+### 3. Vision — Field Benchmark (PlantDoc)
 
 | Property | Value |
 |---|---|
 | **Purpose** | In-the-wild / field-condition evaluation (measures lab-to-field domain gap) |
-| **Source** | [GitHub — PlantDoc Dataset](https://github.com/pratikkayal/PlantDoc-Dataset) |
-| **Alt Source** | [Kaggle — PlantDoc](https://www.kaggle.com/datasets/pratikkayal/plantdoc-dataset) |
-| **Format** | JPEG/PNG images in class-labeled subdirectories |
-| **Total Size** | ~300 MB (~2,598 images, 27 classes across 13 plant species) |
-| **Classes Used** | Rice and Wheat classes only (filtered during preprocessing) |
-| **License** | CC BY-SA 4.0 |
-| **Citation** | Singh, D., et al. (2020). *PlantDoc: A Dataset for Visual Plant Disease Detection.* ACM CoDS-COMAD. |
+| **Source** | [Kaggle — PlantDoc Dataset](https://www.kaggle.com/datasets/andresmgs/plantdec) |
+| **Total Size** | ~74 MB (30 classes across multiple crops) |
+| **License** | CC BY 4.0 |
 
-### 3. NLP/RAG — Kisan Call Centre (KCC) Q&A Logs
+---
+
+### 4. NLP / RAG — Kisan Call Centre (KCC) Q&A Logs
 
 | Property | Value |
 |---|---|
 | **Purpose** | Agronomic knowledge base for RAG retrieval |
-| **Source** | [data.gov.in — KCC Dataset](https://data.gov.in) (search "Kisan Call Centre") |
-| **Alt Source** | [Kaggle — Farmers Call Query (KCC) Data](https://www.kaggle.com/datasets) (search "KCC") |
-| **Alt Source** | [AIKosh / IndiaAI](https://www.indiaai.gov.in/) — "Kisan Call Centre Transcripts" |
-| **Format** | CSV |
-| **Total Size** | ~500 MB+ (millions of records across all states) |
-| **Filtering Applied** | State = "Uttar Pradesh", Crops = Rice/Wheat, Category = agronomic only, Date ≥ 2020 |
-| **License** | Government Open Data License — India (OGL-India) |
-| **Privacy Notes** | Contains farmer names/phone numbers in some versions — must be stripped during preprocessing |
+| **Source** | [Kaggle — Farmers Call Query (KCC) Data Q&A](https://www.kaggle.com/datasets/daskoushik/farmers-call-query-data-qa) |
+| **Format** | CSV (`questions`, `answers` columns) |
+| **Total Size** | ~4.5 MB compressed (~178,939 Q&A records) |
+| **Filtering Applied** | Agronomic queries related to Rice/Wheat & crop protection |
+| **License** | CC0 1.0 |
 
-### 4. Yield Prediction — District-Level Crop Data
+---
+
+### 5. Yield Prediction — District-Level Crop Data
 
 | Property | Value |
 |---|---|
-| **Purpose** | Train classical ML model for district-level yield estimation (Should-Have) |
-| **Source** | [UPAg — Unified Portal for Agricultural Statistics](https://upag.gov.in/) |
-| **Alt Source** | [DES — Area, Production, Yield Reports](https://aps.dac.gov.in/APY/Public_Report1.aspx) |
-| **Alt Source** | [ICRISAT District-Level Database](http://data.icrisat.org/dld/src/crops.html) |
-| **Alt Source** | [data.gov.in](https://data.gov.in) — search "crop production statistics" |
+| **Purpose** | Train classical ML model for district-level yield estimation |
+| **Recommended Sources** | [UPAg Portal](https://upag.gov.in/), [DES Reports](https://aps.dac.gov.in/APY/Public_Report1.aspx), [ICRISAT](http://data.icrisat.org/dld/src/crops.html) |
 | **Format** | CSV / Excel |
-| **Features** | District, Year, Season, Crop, Area (ha), Production (tonnes), Yield (tonnes/ha), Rainfall (mm), Fertilizer consumption |
 | **Filtering Applied** | State = Uttar Pradesh, Crops = Rice/Wheat |
-| **License** | NDSAP (National Data Sharing and Accessibility Policy) / OGL-India |
-
-### 5. RAG Corpus — UP Government Policy PDFs (TBD)
-
-| Property | Value |
-|---|---|
-| **Purpose** | Ground LLM responses in official scheme/advisory documents |
-| **Suggested Sources** | UP Agriculture Dept (upagripardarshi.gov.in), ICAR-IIRR, ICAR-IIWBR, KVK advisories, PM-KISAN UP circulars |
-| **Status** | ⚠️ **Not yet sourced** — research in progress |
-| **Target** | 20–100 PDFs covering disease advisories, treatment guidelines, and government schemes |
-| **License** | Government publications (OGL-India) |
 
 ---
 
 ## Quick Setup
 
-### Option A: Automated Download Script
+### Automated Download Script
+
+We provide a script to download datasets via Kaggle API:
 
 ```bash
-# From the project root:
+# Download Strategy A Core + KCC + Yield instructions
 python scripts/download_data.py --all
+
+# Download Strategy A vision datasets only (Rice + Wheat + PlantDoc)
+python scripts/download_data.py --rice --wheat --plantdoc
+
+# Download Strategy D expansion datasets (Rice Extra + PlantVillage)
+python scripts/download_data.py --expand
+
+# Download everything
+python scripts/download_data.py --everything
 ```
 
-See [`scripts/download_data.py`](../scripts/download_data.py) for options:
-- `--plantvillage` — Download PlantVillage only
-- `--plantdoc` — Download PlantDoc only
-- `--kcc` — Download KCC dataset only
-- `--yield` — Download yield dataset only
-- `--all` — Download everything
-
-> **Note:** PlantVillage and KCC downloads from Kaggle require a valid
-> `~/.kaggle/kaggle.json` API token. See
-> [Kaggle API docs](https://www.kaggle.com/docs/api) for setup.
-
-### Option B: Manual Download
-
-1. Download datasets from the links in the inventory table above
-2. Extract them into the corresponding `data/raw/<dataset>/` directories
-3. Run the preprocessing notebooks to generate `data/processed/` and `data/final/`
-
-### Option C: Team Google Drive (Fallback)
-
-If automated download fails, contact the team for the shared Google Drive link
-containing pre-downloaded raw datasets.
-
-> **Google Drive Link:** *TBD — will be added once datasets are uploaded*
+> **Note:** Kaggle downloads require a valid API token placed at `~/.kaggle/kaggle.json`.
 
 ---
 
 ## Data Flow
 
 ```
-raw/ ──[EDA notebooks]──> processed/ ──[Preprocessing notebooks]──> final/
+raw/ ──[EDA Notebooks]──> processed/ ──[Preprocessing Notebooks]──> final/
 ```
-
-| Stage | Description | Notebooks |
-|---|---|---|
-| `raw/` | Original downloads, untouched | — |
-| `processed/` | Filtered to Rice/Wheat, cleaned, deduplicated | `01_vision_eda.ipynb`, `03_kcc_rag_eda.ipynb`, `05_yield_eda.ipynb` |
-| `final/` | Training-ready splits (Train/Val/Test) | `02_vision_preprocessing.ipynb`, `04_kcc_preprocessing.ipynb`, `06_yield_preprocessing.ipynb` |

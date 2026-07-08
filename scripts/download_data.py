@@ -3,10 +3,23 @@
 download_data.py — Automated dataset downloader for AgriAssist (Milestone 2)
 
 Downloads and organises all raw datasets into data/raw/:
-  - PlantVillage (Kaggle)   → data/raw/plantvillage/
-  - PlantDoc (GitHub)        → data/raw/plantdoc/
-  - KCC Q&A Logs (Kaggle)   → data/raw/kcc/
-  - Yield Data (manual)     → data/raw/yield/  (prints instructions)
+
+  VISION (Strategy A — Primary):
+    - Rice Leaf Diseases (Kaggle)       → data/raw/rice_diseases/
+    - Wheat Plant Diseases (Kaggle)     → data/raw/wheat_diseases/
+
+  VISION (Strategy D — Expansion, optional):
+    - Rice Leaf Disease Images (Kaggle) → data/raw/rice_diseases_extra/
+    - PlantVillage (Kaggle)             → data/raw/plantvillage/
+
+  VISION (Field benchmark):
+    - PlantDoc (Kaggle)                 → data/raw/plantdoc/
+
+  NLP / RAG:
+    - KCC Q&A Logs (Kaggle)             → data/raw/kcc/
+
+  YIELD:
+    - District-level yield data         → data/raw/yield/  (manual)
 
 Requirements:
   pip install kaggle requests tqdm
@@ -15,9 +28,10 @@ Kaggle datasets require a valid ~/.kaggle/kaggle.json API token.
 See: https://www.kaggle.com/docs/api
 
 Usage:
-  python scripts/download_data.py --all
-  python scripts/download_data.py --plantvillage --plantdoc
-  python scripts/download_data.py --kcc
+  python scripts/download_data.py --all          # Strategy A + KCC + yield
+  python scripts/download_data.py --rice --wheat  # Vision only (Strategy A)
+  python scripts/download_data.py --expand        # Strategy D extras
+  python scripts/download_data.py --kcc           # KCC only
 """
 
 import argparse
@@ -27,23 +41,41 @@ import sys
 import zipfile
 from pathlib import Path
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
 
-# Project root is one level up from scripts/
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
-# Kaggle dataset slugs
-PLANTVILLAGE_SLUG = "abdallahalidev/plantvillage-dataset"
-PLANTVILLAGE_ALT_SLUG = "vipoooool/new-plant-diseases-dataset"
-KCC_SLUG = "rajanand/kisan-call-center-data"  # Common Kaggle mirror
+# --- Strategy A: Primary Rice & Wheat datasets ---
+RICE_SLUG = "vbookshelf/rice-leaf-diseases"
+# Classes: Brown Spot, Blast (Leaf & Neck), Bacterial Leaf Blight, Healthy
+# ~38 MB, ~28K downloads, widely cited
 
-# PlantDoc GitHub release
-PLANTDOC_GITHUB_URL = (
-    "https://github.com/pratikkayal/PlantDoc-Dataset/archive/refs/heads/master.zip"
-)
+WHEAT_SLUG = "kushagra3204/wheat-plant-diseases"
+# Classes: Brown Rust, Yellow Rust, Stem Rust, Septoria, Blast, Powdery Mildew, etc.
+# ~14K+ images, comprehensive wheat disease coverage
+
+# --- Strategy D: Expansion datasets ---
+RICE_EXTRA_SLUG = "nirmalsankalana/rice-leaf-disease-image"
+# Additional rice disease images (~205 MB) for dataset integration
+
+PLANTVILLAGE_SLUG = "abdallahalidev/plantvillage-dataset"
+# 38 classes, ~54K images — optional supplementary for transfer learning
+
+# --- Field benchmark ---
+PLANTDOC_SLUG = "andresmgs/plantdec"
+# PlantDoc field images (30 classes, ~74 MB) — domain gap evaluation
+
+# --- NLP / RAG ---
+KCC_SLUG = "daskoushik/farmers-call-query-data-qa"
+# KCC Q&A pairs (~4.5 MB, ~179K records, 2 columns: questions, answers)
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -54,6 +86,14 @@ def ensure_dir(path: Path) -> Path:
     """Create directory if it doesn't exist."""
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def _is_already_downloaded(dest: Path) -> bool:
+    """Check if a directory has real content (not just .gitkeep)."""
+    if not dest.exists():
+        return False
+    contents = list(dest.iterdir())
+    return any(f.name != ".gitkeep" for f in contents)
 
 
 def check_kaggle_cli() -> bool:
@@ -67,11 +107,11 @@ def check_kaggle_cli() -> bool:
         )
         if result.returncode != 0:
             return False
-        # Check for credentials
-        kaggle_json = Path.home() / ".kaggle" / "kaggle.json"
-        if not kaggle_json.exists():
+        kaggle_dir = Path.home() / ".kaggle"
+        has_token = (kaggle_dir / "kaggle.json").exists() or (kaggle_dir / "access_token").exists()
+        if not has_token:
             print(
-                "⚠️  Kaggle CLI found but ~/.kaggle/kaggle.json is missing.\n"
+                "⚠️  Kaggle CLI found but ~/.kaggle credentials are missing.\n"
                 "   → Create an API token at https://www.kaggle.com/settings\n"
                 "   → Save it to ~/.kaggle/kaggle.json"
             )
@@ -88,13 +128,9 @@ def download_kaggle_dataset(slug: str, dest: Path) -> bool:
     try:
         subprocess.run(
             [
-                "kaggle",
-                "datasets",
-                "download",
-                "-d",
-                slug,
-                "-p",
-                str(dest),
+                "kaggle", "datasets", "download",
+                "-d", slug,
+                "-p", str(dest),
                 "--unzip",
             ],
             check=True,
@@ -107,127 +143,100 @@ def download_kaggle_dataset(slug: str, dest: Path) -> bool:
         return False
 
 
-def download_url(url: str, dest_path: Path) -> bool:
-    """Download a file from a URL using requests with a progress bar."""
-    try:
-        import requests
-        from tqdm import tqdm
-    except ImportError:
-        print("⚠️  Install requests and tqdm: pip install requests tqdm")
-        return False
-
-    ensure_dir(dest_path.parent)
-    print(f"📦 Downloading {url}")
-    print(f"   → {dest_path}")
-
-    try:
-        response = requests.get(url, stream=True, timeout=60)
-        response.raise_for_status()
-        total = int(response.headers.get("content-length", 0))
-
-        with open(dest_path, "wb") as f, tqdm(
-            total=total, unit="B", unit_scale=True, desc=dest_path.name
-        ) as pbar:
-            for chunk in response.iter_content(chunk_size=8192):
-                f.write(chunk)
-                pbar.update(len(chunk))
-
-        print(f"✅ Downloaded to {dest_path}")
+def _download_or_manual(slug: str, dest: Path, name: str) -> bool:
+    """Attempt Kaggle download, or print manual instructions."""
+    if _is_already_downloaded(dest):
+        print(f"⏭️  {name} already exists at {dest}, skipping.")
         return True
-    except Exception as e:
-        print(f"❌ Download failed: {e}")
+
+    if not check_kaggle_cli():
+        print(
+            f"\n📋 Manual download instructions for {name}:\n"
+            f"   1. Go to: https://www.kaggle.com/datasets/{slug}\n"
+            f"   2. Download and extract to: {dest}\n"
+        )
         return False
 
+    return download_kaggle_dataset(slug, dest)
+
 
 # ---------------------------------------------------------------------------
-# Dataset downloaders
+# Strategy A — Primary Rice & Wheat datasets
 # ---------------------------------------------------------------------------
+
+
+def download_rice():
+    """Download Rice Leaf Diseases dataset (Strategy A primary)."""
+    return _download_or_manual(
+        RICE_SLUG,
+        RAW_DIR / "rice_diseases",
+        "Rice Leaf Diseases (vbookshelf)",
+    )
+
+
+def download_wheat():
+    """Download Wheat Plant Diseases dataset (Strategy A primary)."""
+    return _download_or_manual(
+        WHEAT_SLUG,
+        RAW_DIR / "wheat_diseases",
+        "Wheat Plant Diseases (kushagra3204)",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Strategy D — Expansion datasets
+# ---------------------------------------------------------------------------
+
+
+def download_rice_extra():
+    """Download additional Rice Leaf Disease images (Strategy D expansion)."""
+    return _download_or_manual(
+        RICE_EXTRA_SLUG,
+        RAW_DIR / "rice_diseases_extra",
+        "Rice Leaf Disease Images — extra (nirmalsankalana)",
+    )
 
 
 def download_plantvillage():
-    """Download PlantVillage dataset from Kaggle."""
-    dest = RAW_DIR / "plantvillage"
+    """Download PlantVillage dataset (Strategy D, optional supplementary)."""
+    return _download_or_manual(
+        PLANTVILLAGE_SLUG,
+        RAW_DIR / "plantvillage",
+        "PlantVillage (supplementary)",
+    )
 
-    # Check if already downloaded
-    if any(dest.iterdir()) and not all(
-        f.name == ".gitkeep" for f in dest.iterdir()
-    ):
-        print(f"⏭️  PlantVillage already exists at {dest}, skipping.")
-        return True
 
-    if not check_kaggle_cli():
-        print(
-            "\n📋 Manual download instructions for PlantVillage:\n"
-            f"   1. Go to: https://www.kaggle.com/datasets/{PLANTVILLAGE_SLUG}\n"
-            f"   2. Download and extract to: {dest}\n"
-            f"   Alt: https://www.kaggle.com/datasets/{PLANTVILLAGE_ALT_SLUG}\n"
-        )
-        return False
-
-    return download_kaggle_dataset(PLANTVILLAGE_SLUG, dest)
+# ---------------------------------------------------------------------------
+# Field benchmark
+# ---------------------------------------------------------------------------
 
 
 def download_plantdoc():
-    """Download PlantDoc dataset from GitHub."""
-    dest = RAW_DIR / "plantdoc"
-    zip_path = dest / "plantdoc-master.zip"
+    """Download PlantDoc field images (domain gap benchmark)."""
+    return _download_or_manual(
+        PLANTDOC_SLUG,
+        RAW_DIR / "plantdoc",
+        "PlantDoc (field benchmark)",
+    )
 
-    # Check if already downloaded
-    if any(dest.iterdir()) and not all(
-        f.name == ".gitkeep" for f in dest.iterdir()
-    ):
-        print(f"⏭️  PlantDoc already exists at {dest}, skipping.")
-        return True
 
-    ensure_dir(dest)
-
-    # Try GitHub download
-    success = download_url(PLANTDOC_GITHUB_URL, zip_path)
-
-    if success and zip_path.exists():
-        print(f"📂 Extracting {zip_path.name}...")
-        try:
-            with zipfile.ZipFile(zip_path, "r") as z:
-                z.extractall(dest)
-            zip_path.unlink()  # Remove zip after extraction
-            print("✅ PlantDoc extracted successfully.")
-            return True
-        except zipfile.BadZipFile:
-            print("❌ Corrupt zip file. Try manual download.")
-            zip_path.unlink()
-            return False
-    else:
-        print(
-            "\n📋 Manual download instructions for PlantDoc:\n"
-            "   1. Go to: https://github.com/pratikkayal/PlantDoc-Dataset\n"
-            f"   2. Download ZIP and extract to: {dest}\n"
-            "   Alt: https://www.kaggle.com/datasets/pratikkayal/plantdoc-dataset\n"
-        )
-        return False
+# ---------------------------------------------------------------------------
+# NLP / RAG
+# ---------------------------------------------------------------------------
 
 
 def download_kcc():
-    """Download KCC dataset from Kaggle."""
-    dest = RAW_DIR / "kcc"
+    """Download KCC Q&A dataset from Kaggle."""
+    return _download_or_manual(
+        KCC_SLUG,
+        RAW_DIR / "kcc",
+        "KCC Q&A Logs (daskoushik)",
+    )
 
-    # Check if already downloaded
-    if any(dest.iterdir()) and not all(
-        f.name == ".gitkeep" for f in dest.iterdir()
-    ):
-        print(f"⏭️  KCC dataset already exists at {dest}, skipping.")
-        return True
 
-    if not check_kaggle_cli():
-        print(
-            "\n📋 Manual download instructions for KCC dataset:\n"
-            "   Option 1 (Kaggle): Search 'Kisan Call Centre' on kaggle.com\n"
-            f"   Option 2 (data.gov.in): Search 'Kisan Call Centre' at https://data.gov.in\n"
-            "   Option 3 (AIKosh): https://www.indiaai.gov.in — 'KCC Transcripts'\n"
-            f"   Extract to: {dest}\n"
-        )
-        return False
-
-    return download_kaggle_dataset(KCC_SLUG, dest)
+# ---------------------------------------------------------------------------
+# Yield
+# ---------------------------------------------------------------------------
 
 
 def download_yield():
@@ -281,34 +290,50 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Examples:\n"
-            "  python scripts/download_data.py --all\n"
-            "  python scripts/download_data.py --plantvillage --plantdoc\n"
-            "  python scripts/download_data.py --kcc\n"
+            "  python scripts/download_data.py --all            # Strategy A core + KCC + yield\n"
+            "  python scripts/download_data.py --rice --wheat    # Vision only (Strategy A)\n"
+            "  python scripts/download_data.py --expand          # Add Strategy D extras\n"
+            "  python scripts/download_data.py --kcc             # KCC only\n"
+            "  python scripts/download_data.py --everything      # All datasets including expansion\n"
         ),
     )
-    parser.add_argument(
-        "--plantvillage", action="store_true", help="Download PlantVillage dataset"
-    )
-    parser.add_argument(
-        "--plantdoc", action="store_true", help="Download PlantDoc dataset"
-    )
-    parser.add_argument(
-        "--kcc", action="store_true", help="Download KCC Q&A dataset"
-    )
-    parser.add_argument(
-        "--yield-data",
-        action="store_true",
-        dest="yield_data",
-        help="Show yield data download instructions",
-    )
-    parser.add_argument(
-        "--all", action="store_true", help="Download all datasets"
-    )
+
+    # Strategy A: Primary vision
+    parser.add_argument("--rice", action="store_true",
+                        help="Download Rice Leaf Diseases dataset (Strategy A)")
+    parser.add_argument("--wheat", action="store_true",
+                        help="Download Wheat Plant Diseases dataset (Strategy A)")
+    parser.add_argument("--plantdoc", action="store_true",
+                        help="Download PlantDoc field benchmark")
+
+    # Strategy D: Expansion
+    parser.add_argument("--expand", action="store_true",
+                        help="Download Strategy D expansion datasets (Rice extra + PlantVillage)")
+    parser.add_argument("--rice-extra", action="store_true", dest="rice_extra",
+                        help="Download additional Rice disease images only")
+    parser.add_argument("--plantvillage", action="store_true",
+                        help="Download PlantVillage (supplementary, optional)")
+
+    # NLP / Yield
+    parser.add_argument("--kcc", action="store_true",
+                        help="Download KCC Q&A dataset")
+    parser.add_argument("--yield-data", action="store_true", dest="yield_data",
+                        help="Show yield data download instructions")
+
+    # Combo flags
+    parser.add_argument("--all", action="store_true",
+                        help="Download Strategy A core (Rice + Wheat + PlantDoc + KCC + yield)")
+    parser.add_argument("--everything", action="store_true",
+                        help="Download ALL datasets (Strategy A + D expansion)")
 
     args = parser.parse_args()
 
     # If no flags, show help
-    if not any([args.plantvillage, args.plantdoc, args.kcc, args.yield_data, args.all]):
+    has_any = any([
+        args.rice, args.wheat, args.plantdoc, args.expand, args.rice_extra,
+        args.plantvillage, args.kcc, args.yield_data, args.all, args.everything,
+    ])
+    if not has_any:
         parser.print_help()
         sys.exit(0)
 
@@ -321,19 +346,34 @@ def main():
 
     results = {}
 
-    if args.all or args.plantvillage:
-        results["PlantVillage"] = download_plantvillage()
+    # --- Strategy A core ---
+    if args.all or args.everything or args.rice:
+        results["Rice Diseases"] = download_rice()
         print()
 
-    if args.all or args.plantdoc:
+    if args.all or args.everything or args.wheat:
+        results["Wheat Diseases"] = download_wheat()
+        print()
+
+    if args.all or args.everything or args.plantdoc:
         results["PlantDoc"] = download_plantdoc()
         print()
 
-    if args.all or args.kcc:
+    # --- Strategy D expansion ---
+    if args.everything or args.expand or args.rice_extra:
+        results["Rice Extra"] = download_rice_extra()
+        print()
+
+    if args.everything or args.expand or args.plantvillage:
+        results["PlantVillage"] = download_plantvillage()
+        print()
+
+    # --- NLP / Yield ---
+    if args.all or args.everything or args.kcc:
         results["KCC"] = download_kcc()
         print()
 
-    if args.all or args.yield_data:
+    if args.all or args.everything or args.yield_data:
         results["Yield"] = download_yield()
         print()
 
@@ -346,7 +386,6 @@ def main():
         print(f"  {name:20s} {status}")
     print("=" * 70)
 
-    # Return non-zero if any download failed
     if not all(results.values()):
         sys.exit(1)
 

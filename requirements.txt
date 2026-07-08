@@ -1,0 +1,36 @@
+# ==============================================================================
+# AgriAssist — Decoupled Agentic Multimodal Crop Advisory System
+# Milestone 2 Dependencies
+# ==============================================================================
+
+# Core Data Science & Processing
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+tqdm>=4.65.0
+requests>=2.31.0
+
+# Visualization & Jupyter Notebooks
+matplotlib>=3.7.0
+seaborn>=0.12.0
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Computer Vision & Deep Learning (Vision Stream)
+torch>=2.0.0
+torchvision>=0.15.0
+Pillow>=10.0.0
+opencv-python-headless>=4.8.0
+scikit-learn>=1.3.0
+albumentations>=1.3.0
+
+# NLP, Embeddings & Vector Store (KCC / RAG Stream)
+transformers>=4.35.0
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+pypdf>=3.17.0
+pdfplumber>=0.10.0
+nltk>=3.8.1
+
+# Dataset Acquisition
+kaggle>=1.5.16
