@@ -53,7 +53,7 @@ The four classes are close in size. The counts:
 | Blast | 1,440 | 24.3% |
 | Tungro | 1,308 | 22.0% |
 
-![Class distribution](eda_assets/01_class_distribution.png)
+![alt text](01_class_distribution-1.png)
 
 **Terminology — imbalance ratio.** The *imbalance ratio* is the size of the largest class divided by the smallest. Here it is 1,600 / 1,308 = **1.22 : 1**. A ratio near 1 means the classes are roughly balanced; a "problem" dataset is more like 5:1 or 10:1, where a model can score high just by ignoring the rare class. At 1.22:1 the raw data looks essentially balanced, which *initially* suggested we would not need class-weighting or oversampling, and that plain accuracy would be a meaningful metric.
 
@@ -65,7 +65,7 @@ The four classes are close in size. The counts:
 
 Numbers alone never tell you whether a folder actually contains what its label claims. We sampled five random images per class and looked at them directly.
 
-![Random samples per class](eda_assets/00_samples_per_class.png)
+![alt text](00_samples_per_class-1.png)
 
 **What each disease looks like, and whether the labels are trustworthy:**
 
@@ -97,7 +97,7 @@ Next we read the technical properties of every image (its width, height, and col
 | RGB | 5,776 |
 | RGBA | 156 |
 
-![Color modes](eda_assets/02_color_modes.png)
+![alt text](02_color_modes-1.png)
 
 **Terminology — colour mode / RGBA.** *RGB* means three colour channels (red, green, blue). *RGBA* adds a fourth "alpha" (transparency) channel. Standard JPEGs cannot carry an alpha channel — so the 156 RGBA files are a signal that those files are not really JPEGs despite their `.jpg` name. (Confirmed in Section 6: they are PNGs.) The practical consequence is minor and already handled: every image is passed through a `convert to RGB` step at load time, which flattens the alpha channel away.
 
@@ -119,7 +119,7 @@ Next we read the technical properties of every image (its width, height, and col
 
 In other words, **every 300×300 image belongs to one of the three non-Tungro classes, and not a single Tungro image is 300×300.** The per-class median confirms it from the other side: Tungro's median is **331×331 with aspect 1.33** (native 4:3), while the other three are a clean 300×300 / 1.00.
 
-![Dimension fingerprint](eda_assets/03_dimension_fingerprint.png)
+![alt text](03_dimension_fingerprint-1.png) ![alt text](02_color_modes-2.png)
 
 So Tungro was not only *photographed* differently (zoomed-out, soil background) — it was also *processed* through a different pipeline. The three standard classes were squished to 300×300 squares; Tungro kept its native camera dimensions.
 
@@ -166,7 +166,7 @@ This is the highest-stakes structural check. If near-identical images end up on 
 - **aHash (average hash), 8×8:** a coarse method that shrinks each image to a 64-bit signature. Result: **82.8%** of images sit in a near-duplicate group.
 - **pHash (perceptual hash, DCT-based):** a stricter, less collision-prone method. Result: **79.2%**.
 
-![Near-duplicate analysis](eda_assets/06_near_duplicate_analysis.png)
+![alt text](06_near_duplicate_analysis-1.png)
 
 The two independent methods agreeing at ~80% means the redundancy is **real, not a hashing artifact.** (We deliberately treated the coarse 82.8% with suspicion until the stricter pHash confirmed the same story.)
 
@@ -187,9 +187,9 @@ Once exact copies are removed, the "balanced" picture from Section 3 changes —
 | Brownspot | 1,600 | 1,200 | 25.0% |
 | Blast | 1,440 | 960 | **33.3%** |
 
-![Raw vs unique per class](eda_assets/04_raw_vs_unique.png)
+![alt text](04_raw_vs_unique-1.png)
 
-![Redundancy by class](eda_assets/05_redundancy_by_class.png)
+![alt text](05_redundancy_by_class-1.png)
 
 **The ordering flips.** Tungro has *zero* exact duplicates, while Blast is one-third padding. Strip the copies and Bacterialblight becomes the **largest** real class (1,326) and Blast the **smallest** (960) — a true imbalance ratio of **1.38 : 1** (still manageable). The headline is not the number but the mechanism: **the apparent balance was partly manufactured by duplication.**
 
