@@ -72,7 +72,7 @@ Combine multiple Indian agriculture datasets into a unified production/yield dat
 
 ## Visual Results
 ### Yearly trends
-![Total Production and Average Yield by Year](../assets/milestone-2-assets/yearly_trends.png)
+![Total Production and Average Yield by Year](../assets/milestone-2-assets/Avg_yield.png)
 
 ### Top crops by total production
 ![Top 10 Crops by Total Production](../assets/milestone-2-assets/top_crops_production.png)
