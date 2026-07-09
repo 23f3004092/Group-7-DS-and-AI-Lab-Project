@@ -45,8 +45,6 @@ Building upon this foundation, **Milestone 2 focuses on identifying, understandi
 
 Each dataset directly supports the objectives defined in Milestone 1. The **Rice Leaf Disease**, **Wheat Disease**, and **PlantDoc** datasets enable robust crop disease detection by combining controlled and real-world images. The RAG corpus provides reliable agricultural knowledge for grounded response generation, while the historical yield dataset supports district-level yield prediction. Together, these datasets form the foundation for developing the proposed multimodal crop advisory system.
 
-
-
 ---
 
 ### 2. Dataset Identification
@@ -60,8 +58,8 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
   * PlantDoc Dataset: Kaggle – https://www.kaggle.com/datasets/andresmgs/plantdec
 * **Public/private/licensed status:** All three datasets are publicly available through Kaggle for research and educational purposes.
 * **Purpose:** The datasets are used to develop the vision subsystem for crop disease detection. The Rice and Wheat datasets provide labelled disease images, while PlantDoc contributes real-world field images for evaluating model robustness.
-* **Why each dataset was selected:**The datasets cover the project's target crops (rice and wheat) and combine controlled images with real-world field conditions, improving the model's ability to generalize.
-* **Alternatives considered:** PlantVillage was considered as an additional dataset but was not used as the primary dataset because it mainly contains laboratory-captured images with limited real-world variability and no rice and wheat related disease are present in them.
+* **Why each dataset was selected:** The datasets cover the project's target crops (rice and wheat) and combine controlled images with real-world field conditions, improving the model's ability to generalize.
+* **Alternatives considered:** PlantVillage was considered as an additional dataset but was not used as the primary dataset because it mainly contains laboratory-captured images with limited real-world variability, and no rice/wheat-related disease classes are present in it.
 
 **2.2 RAG / NLP PDFs (UP govt PDFs, schemes, Farming Handbooks)**
 
@@ -84,11 +82,10 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
   * Rice-Based Cropping Systems (ICAR) — https://icar.org.in/sites/default/files/inline-files/Rice-based-cropping-systems.pdf
 * **Public/private/licensed status:** Publicly available government/institutional data (Union and UP State government portals, ICAR, RBI); usage falls under open government data licensing, though a couple of sources (e.g. MISS) were located via general web search rather than a single stable government URL and should be re-verified for licensing before final submission.
 * **Purpose:** Forms the localized knowledge base for the MuRIL-embedded RAG pipeline, grounding LLM responses in real agronomic Q&A, scheme eligibility/operational details, and crop-specific advisories rather than parametric (and potentially hallucinated) knowledge.
-* **Why each dataset was selected:** These pdfs were selected for ensuring domain alignment; scheme PDFs and advisories are authoritative, up-to-date sources for policy and agronomic guidance, addressing the "outdated scheme" and dosage-hallucination risks flagged in Milestone 1.
+* **Why each dataset was selected:** These PDFs were selected to ensure domain alignment; scheme PDFs and advisories are authoritative, up-to-date sources for policy and agronomic guidance, addressing the "outdated scheme" and dosage-hallucination risks flagged in Milestone 1.
 * **Alternatives considered:** General-purpose agricultural web-scraped text was considered but rejected due to higher noise and copyright/reliability concerns.
 
-**2.3 RAG / NLP KCC ( Kisan Call Centre (KCC))**
-
+**2.3 RAG / NLP KCC (Kisan Call Centre)**
 
 * **Dataset name(s):** Kisan Call Centre (KCC) Query–Answer Transcripts
 * **Source(s) and download links:** 
@@ -106,6 +103,7 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 * **Purpose:** 
 * **Why each dataset was selected:** 
 * **Alternatives considered:** 
+
 ---
 
 ### 3. Dataset Description
@@ -129,9 +127,6 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 | **Data format**         | Source documents in PDF format with extracted plain-text (`.txt`) versions.                                                                                                          |
 | **Dataset schema**      | One record per document stored in `pdf_inventory_clean.csv` with the metadata fields listed above.                                                                                   |
 
-
----
-
 **Sample Record 1 (Schemes):**
 
 > "Interest Subvention is provided on short term crop loans and short term loans for allied activities including animal husbandry, dairy, fisheries, bee keeping etc."
@@ -139,9 +134,6 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 **Sample Record 2 (Schemes):**
 
 > "Interest subvention and prompt repayment incentive benefits on short term crop loans and short term loans for allied activities will be available on an overall limit."
-
-
-
 
 **3.3 RAG / NLP KCC**
 * Number of records
@@ -152,7 +144,6 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 * Sample records
 * Dataset schema
 
-
 **3.4 Yield Dataset**
 * Number of records
 * Number of features
@@ -161,24 +152,6 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 * Data format
 * Sample records
 * Dataset schema
-
----
-
-Yes, I'm fairly sure, but **not as just a table**.
-
-The wording of your guideline is important:
-
-> *"By the end of Milestone 2, another team should be able to take the prepared datasets and begin training a model immediately."*
-
-This means the reviewers want evidence that you have **managed the data properly**, not just listed where it came from.
-
-So I would recommend a **hybrid approach**:
-
-1. A short introductory sentence.
-2. A table summarizing the governance.
-3. A few paragraphs explaining dataset-specific points (only where needed).
-
-For example:
 
 ---
 
@@ -223,17 +196,17 @@ The datasets used in this project were obtained from publicly available and trus
 
 <img src="assets/milestone-2-assets/page_word_count_histo.png" width="800" />
 
-* **Missing value analysis:** Documents with failed/near-empty text extraction were retried at higher OCR DPI (300); those still unreadable were excluded (`excluded_unreadable_docs.csv`).14 of 187 PDFs were excluded
+* **Missing value analysis:** Documents with failed/near-empty text extraction were retried at higher OCR DPI (300); those still unreadable were excluded (`excluded_unreadable_docs.csv`) — 14 of 187 PDFs.
 * **Duplicate analysis:** Exact duplicates flagged via file hash; 33 near-duplicate pairs (similarity > 0.90) identified via text similarity and resolved by keeping the higher-word-count copy (`excluded_near_duplicate_docs.csv`), giving a final clean corpus of 170 documents.
-* **Word frequency / domain terms:** Top frequent words (stopwords removed) computed across the clean corpus to sanity-check extraction quality and vocabulary coverage.
-  
-<img src="assets/milestone-2-assets/word_frequency.png" width="800" />  
+* **Word frequency & domain-relevant terms:** Top frequent words (stopwords removed, English + Hindi) computed across the clean corpus to sanity-check extraction quality and vocabulary coverage. A domain-keyword coverage check (rice, wheat, scheme, subsidy, kisan, etc.) confirmed the corpus contains the terms the RAG system needs to retrieve, per the Rice/Wheat/scheme scope defined in Milestone 1.
+
+<img src="assets/milestone-2-assets/word_frequency.png" width="800" />
 
 * **Other Visualizations:**
 
 <img src="assets/milestone-2-assets/word_count.png" width="800" />
 
-<img src="assets/milestone-2-assets/docs_per_source.png" width="800" />  
+<img src="assets/milestone-2-assets/docs_per_source.png" width="800" />
 
 **5.3 RAG / NLP KCC**
 * Summary statistics
