@@ -711,6 +711,9 @@ To prevent temporal autocorrelation leakage across agricultural cycles, the data
 
 ### 12. Deliverables Produced
 
+**System Architecture & Sprint Planning Deliverables (Lokesh's Work):**
+- [`docs/Milestone_2_Implementation_Plan.md`](../docs/Milestone_2_Implementation_Plan.md) — Comprehensive architecture and implementation blueprint establishing the 3-stream data pipeline design (Vision, KCC/RAG, Yield), upfront design decisions, directory structure (`data/raw|processed|final`), sprint work breakdown across all 5 teammates, and automated/manual leakage verification protocols.
+
 **Vision datasets & pipeline deliverables:**
 - **EDA Notebooks & Narratives:**
   - [`rice-leaf-disease-dataset-EDA.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-EDA.ipynb) & [`Rice leaf disease dataset documentation.odt`](../data/Vision_dataset/Rice%20leaf%20disease%20dataset%20documentation.odt) — Full EDA for Rice Set 1 (5,932 images).
@@ -796,7 +799,7 @@ Milestone 2 delivered comprehensive EDA, data cleaning, integration, and preproc
 |:-:|-------------|------|:-------------------:|:----:|-----------|
 | 1 | Mahesh | Comprehensive Vision EDA, Preprocessing, Integration & Training Pipeline Design | ☑ | 2026-07-09 | Signed - Mahesh |
 | 2 | Harliv | Comprehensive RAG PDF Corpus Collection, EDA, Cleaning & Semantic Chunking | ☑ | 2026-07-09 | Signed - Harliv |
-| 3 | Lokesh | Primary Vision EDA, UP Rice/Wheat Yield Subset & Report Authoring | ☑ | 2026-07-09 | Signed - Lokesh |
+| 3 | Lokesh | Milestone 2 Implementation Plan, Identifying Vision Data Sources, Primary Vision EDA, UP Rice/Wheat Yield Subset & Report Authoring | ☑ | 2026-07-09 | Signed - Lokesh |
 | 4 | Aneeqa | Comprehensive KCC Dataset Aggregation (3.12M), EDA & Multilingual RAG Preparation | ☑ | 2026-07-09 | Signed - Aneeqa |
 | 5 | Tanmay | Primary Multi-Crop Yield Dataset Unification, EDA & MissForest Preprocessing | ☑ | 2026-07-09 | Signed - Tanmay |
 
