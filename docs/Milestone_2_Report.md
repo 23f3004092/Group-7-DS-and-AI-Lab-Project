@@ -98,18 +98,17 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 
 **2.4 Yield Prediction Dataset**
 
-* **Dataset name(s):** Uttar Pradesh District-Level Historical Crop APY & Environmental/Agronomic Covariates (1997–2023)
+* **Dataset name(s):**
+  * **Primary Work:** Unified Pan-India Multi-Crop Agricultural Production & Yield Dataset (1997–2024) across 35 States/UTs and 124 crops (`production_unified.csv`).
+  * **Complementary UP Subset:** Uttar Pradesh District-Level Historical Rice & Wheat APY with Environmental/Agronomic Covariates (1997–2023).
 * **Source(s) and download links:**
-  * **Primary Target (APY Statistics):** Unified Portal for Agricultural Statistics (UPAg) / Department of Agriculture & Farmers Welfare (DA&FW): https://upag.gov.in/ and Directorate of Economics & Statistics UP (https://updes.up.nic.in/).
-  * **Climatic Covariates:** India Meteorological Department (IMD) Pune High Spatial Resolution Daily Gridded Rainfall & Temperature: https://imdpune.gov.in/.
-  * **Agronomic Inputs & Harmonization:** ICRISAT District Level Database (DLD): http://data.icrisat.org/dld/ and CEIC / DES NPK Fertilizer Consumption: https://data.desagri.gov.in/.
-* **Public/private/licensed status:** All primary government datasets are published under the **Open Government Data (OGD) License India**, allowing royalty-free academic research and machine learning applications. ICRISAT DLD is Open Access under standard institutional terms.
-* **Purpose:** Provides historical district-level Area, Production, and Yield (APY) statistics alongside meteorological and agronomic covariates to train a machine learning regression model estimating district-wise yield (`Yield_Kg_Ha`) for Kharif Rice and Rabi Wheat across all 75 UP administrative districts.
+  * **Primary Multi-Crop Data Sources:** Official DES/UPAg crop production records unified across `Crop Recommendation dataset.csv`, `crop_yield.csv` (1997–2020 state-level), `crop-wise-area-production-yield.csv` (1997–2015 district-level), and `DES-District-Data-For-2024-25.csv` (https://upag.gov.in/ / https://data.desagri.gov.in/).
+  * **UP Climate & Agronomic Covariates (Subset):** India Meteorological Department (IMD) Pune High Spatial Resolution Gridded Climate Data (https://imdpune.gov.in/) and ICRISAT District Level Database (http://data.icrisat.org/dld/).
+* **Public/private/licensed status:** All primary datasets are published under the **Open Government Data (OGD) License India**, allowing free academic research and machine learning applications.
+* **Purpose:** The primary multi-crop unified dataset (`440,962` records) provides a comprehensive historical production and yield base covering 124 crops across all seasons and regions. The complementary UP-specific subset (`3,996` records) focuses specifically on Uttar Pradesh Rice and Wheat with weather and fertilizer predictors for targeted state-level crop advisory.
 * **Why each dataset was selected:**
-  * **UPAg APY Dashboard:** Represents the official, continuously updated crop production records from the Ministry of Agriculture & Farmers Welfare, preferred over static compilations.
-  * **IMD Gridded Climate Data:** Gold-standard ground-gauge observational dataset capturing localized monsoon precipitation shocks and March terminal heatwaves.
-  * **ICRISAT DLD:** Crucial for historical NPK chemical input trends, tube-well irrigation coverage, and providing apportioned parent-district mappings that resolve district bifurcation discontinuities.
-* **Alternatives considered:** Static Kaggle compilations (*Crop Production Statistics India*) and *Zila Sankhyikiya Patrika* PDF diaries were evaluated but rejected due to lack of dynamic updates, absence of weather/input covariates, and complex unstructured extraction. 
+  * **Unified Multi-Crop Production Dataset:** Integrates granular district and state agricultural records to support pan-Indian crop comparison, seasonal yield analysis, and robust multi-crop imputation.
+  * **UP Rice/Wheat Subset:** Provides localized daily meteorological shocks (monsoon floods, terminal heatwaves) and NPK input data required for UP-focused yield regression modeling.
 
 ---
 
@@ -204,32 +203,29 @@ The vision pipeline draws on **three complementary datasets** covering rice and 
 
 | Attribute               | Description                                                                                                                                                             |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Number of records**   | 3,886 district-year-season records spanning 1997–1998 to 2023–2024 across 74 unique UP districts (164 records absent prior to formation of bifurcated districts).       |
-| **Number of features**  | 15 raw columns across administrative, agricultural output, climatic, and agronomic input categories.                                                                    |
-| **Target variable(s)**  | `Yield_Kg_Ha` (Continuous regression target: crop yield in Kilograms per Hectare sown).                                                                                 |
-| **Feature description** | Combines administrative keys (`State_Name`, `District_Name`, `Agro_Climatic_Zone`, `Crop_Year`, `Season`, `Crop`), production metrics (`Area_Sown`, `Production_Total`), IMD weather stresses (`Precip_Seasonal_mm`, `Rain_Days_Extreme`, `Temp_Max_Avg`, `Heatwave_Days`), and ICRISAT agronomic inputs (`Fertilizer_N/P/K_Tonnes`, `Net_Irrigated_Pct`, `Tubewell_Irrig_Pct`). |
-| **Data format**         | Structured Tabular CSV (`data/raw/yield/up_district_yield_apy_1997_2023.csv`).                                                                                          |
-| **Dataset schema**      | Detailed 15-attribute schema described in the table below.                                                                                                              |
+| **Number of records**   | **Primary Work (`production_unified.csv`):** `440,962` records spanning 1997–2024 across 35 States/UTs and 124 crops.<br>**Complementary UP Subset (`up_district_yield_apy_1997_2023.csv`):** `3,886` records spanning 1997–2023 across 74 unique UP districts. |
+| **Number of features**  | **Primary Work:** 16 columns across location, crop, season, APY metrics, and auxiliary agronomic metadata.<br>**Complementary UP Subset:** 15 columns adding daily IMD weather stress and ICRISAT NPK/irrigation features. |
+| **Target variable(s)**  | `yield` / `Yield_Kg_Ha` (Continuous regression target: crop yield).                                                                                                      |
+| **Feature description** | Combines administrative keys (`state`, `district`, `year`, `season`, `crop`), agricultural production metrics (`area`, `production`, `yield`), and auxiliary/environmental features (`annual_rainfall`, `fertilizer`, `pesticide`). |
+| **Data format**         | Structured Tabular CSV (`production_unified.csv`, `production_unified_imputed.csv`).                                                                                   |
+| **Dataset schema**      | Detailed schema described in the table below.                                                                                                                           |
 
-#### Complete 15-Attribute Schema (`up_district_yield_apy_1997_2023.csv`)
+#### Primary Multi-Crop 16-Attribute Schema (`production_unified.csv` & `production_unified_imputed.csv`)
 
 | Column Name | Data Type | Units / Range | Description |
 | :--- | :--- | :--- | :--- |
-| `State_Name` | String | "Uttar Pradesh" | Administrative state identifier. |
-| `District_Name` | String | 74 Unique Districts | Standardized administrative UP district name (e.g., Agra, Meerut, Varanasi, Jhansi). |
-| `Agro_Climatic_Zone` | Categorical | 4 Zones | Macro-region classification (`Western UP`, `Central UP`, `Eastern UP`, `Bundelkhand`). |
-| `Crop_Year` | String | "1997-98" to "2023-24" | Agricultural calendar year string (`YYYY-YY`). |
-| `Season` | Categorical | `Kharif` or `Rabi` | Cropping season (`Kharif` for Rice, `Rabi` for Wheat). |
-| `Crop` | Categorical | `Rice` or `Wheat` | Target staple commodity. |
-| `Area_Sown` | Float | Hectares (ha) | Gross cropped area sown for the district-crop-year. |
-| `Production_Total` | Float | Tonnes | Total harvested output reported by DA&FW. |
-| `Yield_Kg_Ha` | Float | kg / ha (**Target**) | Calculated productivity target (`Production_Total * 1000 / Area_Sown`). |
-| `Precip_Seasonal_mm` | Float | Millimeters (mm) | Total cumulative seasonal precipitation from IMD Pune daily grids. |
-| `Rain_Days_Extreme` | Integer | Days | Count of extreme rainfall events (> 64.5 mm/day) during flowering/grain filling. |
-| `Temp_Max_Avg` | Float | Celsius (°C) | Seasonal average daily maximum temperature. |
-| `Heatwave_Days` | Integer | Days | Severe terminal heatwave days (> 38°C in March for Wheat; 0 for Rice). |
-| `Fertilizer_N/P/K_Tonnes` | Float | Tonnes | Total Nitrogen (`N`), Phosphate (`P`), and Potash (`K`) consumption. |
-| `Net_Irrigated_Pct` / `Tubewell_Irrig_Pct` | Float | Percentage (%) | Net irrigated area share and proportion serviced by mechanized tubewells. |
+| `state` | String | 35 States/UTs | Administrative state identifier. |
+| `district` | String | Granular Districts | Standardized administrative district name. |
+| `year` | Integer | 1997 to 2024 | Agricultural calendar year. |
+| `season` | Categorical | 6 Seasons | Cropping season (`kharif`, `rabi`, `whole year`, `autumn`, `summer`, `winter`). |
+| `crop` | Categorical | 124 Unique Crops | Agricultural crop commodity (e.g., `sugarcane`, `rice`, `wheat`, `potato`). |
+| `area` | Float | Hectares (ha) | Gross cropped area sown. |
+| `production` | Float | Tonnes | Total harvested output (coconut converted from pieces to tonnes). |
+| `yield` | Float | Tonnes/ha or kg/ha (**Target**) | Calculated productivity target. |
+| `annual_rainfall` | Float | Millimeters (mm) | Annual cumulative precipitation where available. |
+| `fertilizer` / `pesticide` | Float | Tonnes / kg | Total chemical input usage where available. |
+
+*(Note: The complementary UP Rice & Wheat subset additionally tracks daily IMD weather shocks — `Precip_Seasonal_mm`, `Rain_Days_Extreme`, `Heatwave_Days` — and ICRISAT NPK fertilizer splits for state-level modeling).*
 
 ---
 
@@ -416,41 +412,45 @@ Mean brightness ranges from **85.6** (mildew — notably darker) to **138.1** (b
 
 Laplacian variance (sharpness) varies 3–4 orders of magnitude within most classes (log-scale distribution), with blurriest samples in brown_rust, leaf_blight, and black_rust (Laplacian variance < 5). A sharpness threshold filter before training may improve label reliability for these classes.
 
-**5.2 RAG/NLP PDF Corpus EDA**
-* **Summary statistics:** 187 PDFs collected across 4 source folders (Other_docs, Schemes, PPQS_Advisories, UP_ACF_PDFs); per-folder doc count, total pages, and average word count documented in `pdf_inventory_clean.csv`.
+**5.2 RAG/NLP PDF Corpus EDA (Harliv's Work)**
 
-| Source           | Num Docs | Total Pages | Avg Pages | Avg Words | OCR Docs | Failed Docs |
-|------------------|---------:|------------:|----------:|----------:|---------:|------------:|
-| other_docs       |       12 |         189 |      15.8 |    5566.5 |        0 |           5 |
-| ppqs_advisories  |       90 |         444 |       4.9 |    1302.4 |        0 |           9 |
-| schemes          |       11 |         359 |      32.6 |    8956.5 |        0 |           0 |
-| up_acp           |       74 |        1805 |      24.4 |    4579.7 |        0 |           0 |
+Comprehensive PDF Corpus EDA & Chunking Technical Report:
+- **RAG PDF Report:** [`docs/Milestone_2_work/rag_pdf_report.md`](../docs/Milestone_2_work/rag_pdf_report.md)
 
-* **Language:** Language detection (via langdetect, with a Devanagari-ratio fallback) found the corpus to be overwhelmingly English (168/170 documents); 2 documents were misclassified as Welsh/Catalan due to short/noisy text samples — these are detector artifacts, not genuine non-English content, and were manually verified as English.
-* **Document length distribution:** Page count and word count distributions computed and plotted.
+* **Summary statistics:** 187 PDFs collected across 4 authoritative government agricultural folders (`Other_docs`, `Schemes`, `PPQS_Advisories`, `UP_ACP`); per-folder document count, total pages, and average word count documented in `pdf_inventory_clean.csv`.
+
+| Source | Num Docs | Total Pages | Avg Pages | Avg Words | OCR Docs | Failed Docs |
+|---|---:|---:|---:|---:|---:|---:|
+| `other_docs` | 12 | 189 | 15.8 | 5,566.5 | 0 | 5 |
+| `ppqs_advisories` | 90 | 444 | 4.9 | 1,302.4 | 0 | 9 |
+| `schemes` | 11 | 359 | 32.6 | 8,956.5 | 0 | 0 |
+| `up_acp` | 74 | 1,805 | 24.4 | 4,579.7 | 0 | 0 |
+
+* **Language:** Language detection (via `langdetect` with Devanagari-ratio fallback) confirmed the corpus is overwhelmingly English (168/170 documents); 2 documents flagged as Welsh/Catalan due to short/noisy header text were manually verified as clean English.
+* **Document length distribution:** Page count and word count distributions reveal heavy length variation — PPQS advisories average 4.9 pages (concise pest guidelines) while government schemes average 32.6 pages (>8,900 words), with the longest document spanning ~100 pages (>30,000 words). This variance directly justifies semantic chunking over document-level retrieval.
 
 ![Page word count histo and docs per source](<./assets/milestone-2-assets/docspersource_pagewordcount.png>)
 
-
-
-* **Missing value analysis:** Documents with failed/near-empty text extraction were retried at higher OCR DPI (300); those still unreadable were excluded (`excluded_unreadable_docs.csv`) — 14 of 187 PDFs.
-* **Duplicate analysis:** Exact duplicates flagged via file hash; 33 near-duplicate pairs (similarity > 0.90) identified via text similarity and resolved by keeping the higher-word-count copy (`excluded_near_duplicate_docs.csv`), giving a final clean corpus of 170 documents.
-* **Word frequency & domain-relevant terms:** Top frequent words (stopwords removed, English + Hindi) computed across the clean corpus to sanity-check extraction quality and vocabulary coverage. A domain-keyword coverage check (rice, wheat, scheme, subsidy, kisan, etc.) confirmed the corpus contains the terms the RAG system needs to retrieve, per the Rice/Wheat/scheme scope defined in Milestone 1.
+* **Missing value & failure filtering:** Documents with failed/empty native text extraction were retried at 300 DPI OCR; 14 unreadable or corrupted files were excluded (`excluded_unreadable_docs.csv`).
+* **Duplicate analysis:** Exact byte duplicates removed via hash; 33 near-duplicate pairs (>0.90 similarity) resolved by retaining the more complete higher-word-count copy (`excluded_near_duplicate_docs.csv`), yielding a clean corpus of **170 documents**.
+* **Domain Vocabulary Analysis:** Frequency analysis of normalized tokens confirmed heavy agricultural domain concentration (`water`, `rice`, `crop`, `irrigation`, `soils`, `sowing`, `seed`, `drainage`, `fodder`, `management`), confirming excellent domain alignment with the advisory system.
 
 ![Word frequency](<./assets/milestone-2-assets/word_frequency.png>)
 
+**5.3 KCC Advisory Dataset EDA (Aneeqa's Work)**
 
-**5.3 RAG / NLP KCC**
-* **Summary statistics:** 3,123,029 records, 15 columns; per-year breakdown — 2020: 565,719 | 2021: 495,222 | 2022: 620,775 | 2023: 585,633 | 2024: 536,048 | 2025: 319,632.
-* **Crop/category distribution:** 318 unique crops; top crops are "Others" (34.7%), Wheat (16.4%), Paddy/Rice (15.5%), Sugarcane (4.0%), Potato (3.4%). Rice + Wheat combined account for **31.95%** of all queries (997,806 records), directly validating the project's rice/wheat scope. Query categories: Cereals (32.0%) and Others (35.0%) dominate; query types are led by Weather (33.5%) and Government Schemes (25.6%).
-* **Temporal distribution:** Query volume is fairly stable across years (2020–2024 range 495K–621K), with a sharp drop in 2025 (319,632) — likely a partial-year data cutoff rather than a real decline. Q1 (Jan–Mar) is the busiest quarter (33.2% of queries).
+Comprehensive KCC Data Exploration Technical Report:
+- **KCC EDA Report:** [`docs/Milestone_2_work/KCC Data EDA.md`](../docs/Milestone_2_work/KCC%20Data%20EDA.md)
+
+* **Summary statistics:** Combined **3,123,029 records** spanning 6 annual CSVs (2020–2025, Uttar Pradesh). Yearly breakdown — 2020: 565,719 | 2021: 495,222 | 2022: 620,775 | 2023: 585,633 | 2024: 536,048 | 2025: 319,632 (~2.07 GB on disk / ~3.3 GB memory footprint).
+* **Crop & Category Distribution:** **318 unique crops** identified. Top crops: Others (34.74%), Wheat (16.40%), Paddy/Dhan (15.54%). **Rice & Wheat combined account for ~31.95% of all queries (997,806 records)**, directly validating our project's crop scope. Across **40 categories and 83 query types**, Weather (33.47%) and Government Schemes (25.63%) dominate farmer inquiries.
+* **Temporal & Seasonal Patterns:** Query volume peaked in 2022 (620,773). Q1 (Jan–Mar) dominates seasonal activity (33.16% of queries), with monthly highs in January and lows in May.
 
 ![Query month trend](<./assets/milestone-2-assets/query_month_trend.png>)
 
-* **Language distribution:** On a 100,000-record sample — queries are **99.98% English** (farmer questions typed in English/Romanized script), while answers are **98.80% Hindi** (expert responses given in Devanagari). This English-query/Hindi-answer split is an important design signal for the RAG pipeline's embedding and retrieval strategy.
-* **Text length distribution:** Query text averages 54 characters (median 54, 95th pct 85); answers average 209 characters (median 203, 95th pct 392). Combined Q&A length averages 264 characters (95th pct 432) — **98.9% of records fit within a 512-character chunk**, directly supporting a 512-character MuRIL chunking strategy with ~50-character overlap.
-* **Missing value analysis:** `Season` is 100% missing (unusable, to be dropped). Other fields have low missingness: `Crop` (0.20%), `QueryType` (0.16%), `Category` (0.12%), `KccAns` (0.02%), `QueryText` (0.0004%) — negligible and safe to drop/impute row-wise.
-* **Duplicate analysis:** No exact duplicate rows (0.00%), but **68.72% of `QueryText` values are duplicates** (e.g. "Farmer asked query on Weather" appears 781,352 times — largely templated weather queries), 13.15% duplicate `KCCCallID`s, and 26.15% duplicate full Q&A pairs. A sample-based near-duplicate check (1,000 records) found 57 similar query pairs — this high redundancy needs deduplication before MuRIL embedding to avoid over-representing templated/boilerplate queries in the retrieval index.
+* **Language Distribution (Critical RAG Insight):** Queries (`QueryText`) are **~99.98% English/Hinglish** (Romanized script), whereas expert answers (`KccAns`) are **~98.80% Hindi** (Devanagari script). This mandatory cross-lingual bridge dictates the use of a multilingual embedding model (`MuRIL`).
+* **Text Length Analysis:** Query text averages 54 characters (95th pct 85 chars); answers average 209 characters (95th pct 392 chars). Combined Q&A length averages 264 characters (95th pct 432 chars). Crucially, **98.9% of records fit within 512 characters**, confirming that 512-character chunking captures complete Q&A semantic units.
+* **Missingness & Deduplication Requirements:** `Season` is 100% null (dropped). While exact row duplicates are 0%, **68.72% of `QueryText` values are duplicates** (e.g., `"Farmer asked query on Weather"` appears 781,352 times) and **26.15% of full Q&A pairs are exact duplicates**. Deduplication is mandatory prior to vector embedding to prevent retrieval index skew.
 * **Visualizations:**
 
 ![query_length_ans_length_boxplot](<./assets/milestone-2-assets/query_length_ans_length_boxplot.png>)
@@ -458,220 +458,166 @@ Laplacian variance (sharpness) varies 3–4 orders of magnitude within most clas
 
 **5.4 Yield Dataset EDA**
 
-Full executable EDA notebook is available at:
-- [`notebooks/05_yield_eda.ipynb`](../notebooks/05_yield_eda.ipynb)
+Full executable EDA notebooks and documentation are available at:
+- **Primary Work (Multi-Crop Pan-India):** [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../notebooks/07_Yield_EDA+%20preprocessing.ipynb) & [`docs/Milestone_2_work/yield_report.md`](../docs/Milestone_2_work/yield_report.md)
+- **Complementary UP Subset:** [`notebooks/05_yield_eda.ipynb`](../notebooks/05_yield_eda.ipynb)
 
-#### 5.4.1 Dataset Profile & Missingness Audit
-- **Total Records:** Evaluated 3,886 district-year-season records across 74 unique Uttar Pradesh districts spanning agricultural years 1997–1998 to 2023–2024.
-- **Administrative Bifurcations:** Out of 4,050 theoretical district-season slots (75 districts × 27 years × 2 seasons), exactly **164 records (4.0%) are absent** prior to historical district formation dates (Amethi carved out in 2010; Sambhal, Hapur, and Shamli carved out in 2011).
-- **Bureaucratic Reporting Anomalies:** Detected **29 records (0.75%)** with `Production_Total == 0.0` and `Yield_Kg_Ha == 0.0` despite active `Area_Sown`, representing sporadic bureaucratic data-entry omissions requiring regional median imputation.
+#### 5.4.1 Primary Multi-Crop Dataset Profile (`440,962` Records)
+- **Geographic & Temporal Coverage:** Evaluated `440,962` historical district-level and state-level agricultural records spanning 1997–2024 across 35 States/Union Territories and 124 distinct crop commodities.
+- **Top 10 Crops by Cumulative Production:**
+  1. `sugarcane` · 2. `rice` · 3. `wheat` · 4. `potato` · 5. `cotton(lint)` · 6. `maize` · 7. `coconut` · 8. `jute` · 9. `banana` · 10. `soyabean`.
+- **Seasonality Breakdown:**
+  - `whole year`: Highest total production volume and highest average yield per hectare across seasonal labels.
+  - `kharif`: Second-highest total production with strong record representation across cereal crops.
+  - `rabi`: Third-highest total production volume, driven predominantly by wheat and winter pulses.
+  - `winter`, `summer`, and `autumn`: Capture smaller but regionally vital seasonal cropping contributions.
+- **Numeric Feature Correlations:** Evaluated correlations across `area`, `production`, `yield`, `annual_rainfall`, `fertilizer`, and `pesticide` (visualized in `correlation_matrix.png`). Production shows high collinearity with sown area and fertilizer application across major cash crops.
 
-#### 5.4.2 Target Variable Distribution (`Yield_Kg_Ha`)
-
-| Crop | Season | Count | Mean (kg/ha) | Std | Median | IQR (Q1 – Q3) | Min – Max |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Rice** | Kharif | 1,933 | 2,459.9 | 466.5 | 2,447.4 | 628.2 (2,144.7 – 2,772.9) | 1,134.1 – 3,917.4 |
-| **Wheat** | Rabi | 1,924 | 2,786.2 | 750.7 | 2,751.0 | 980.5 (2,302.8 – 3,283.3) | 920.3 – 4,750.0 |
-
-#### 5.4.3 Agro-Climatic Regional Disparity Analysis
-UP exhibits a pronounced agricultural productivity divide between canal/tubewell-intensive Western UP and water-insecure Bundelkhand:
-
-| Agro-Climatic Zone | Mean Rice Yield (kg/ha) | Mean Wheat Yield (kg/ha) | Net Irrigated Area (%) | Tubewell Share (%) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Western UP** | 2,893.8 | 3,551.9 | 94.0% | 86.0% |
-| **Central UP** | 2,403.9 | 2,747.4 | 82.7% | 77.8% |
-| **Eastern UP** | 2,292.3 | 2,444.6 | 74.5% | 72.9% |
-| **Bundelkhand** | 1,719.7 | 1,490.8 | 50.6% | 41.8% |
-
-#### 5.4.4 Key Covariate Correlations (Pearson *r* with `Yield_Kg_Ha`)
-- **Irrigation & Input Technology:** Strong positive correlation with `Net_Irrigated_Pct` (**+0.813** for Rice, **+0.899** for Wheat) and `Fertilizer N Intensity` (**+0.803** for Rice, **+0.864** for Wheat), verifying Green Revolution input sensitivity.
-- **Meteorological Stress Drivers:**
-  - `Rain_Days_Extreme` (>64.5 mm/day) exhibits a significant negative correlation (**-0.223**) with Kharif Rice yield due to monsoon lodging and flower submergence.
-  - `Heatwave_Days` (>38°C in March) exhibits a strong negative correlation (**-0.241**) with Rabi Wheat yield, capturing terminal heat stress during grain filling.
+#### 5.4.2 Complementary UP Rice & Wheat Subset Findings (`3,886` Records)
+- **Regional Disparity within UP:** Canal/tubewell-intensive Western UP achieves significantly higher staple yields (Rice 2,893.8 / Wheat 3,551.9 kg/ha with 94.0% irrigation share) compared to water-insecure Bundelkhand (Rice 1,719.7 / Wheat 1,490.8 kg/ha with 50.6% irrigation).
+- **IMD Climate Shocks:** `Rain_Days_Extreme` (>64.5 mm/day) exhibits a negative correlation (**-0.223**) with Kharif Rice yield due to monsoon lodging, while `Heatwave_Days` (>38°C in March) correlates negatively (**-0.241**) with Rabi Wheat yield during grain filling.
 
 ---
 
 ### 6. Data Preprocessing
 
-**6.1 Vision**
+**6.1 Vision Preprocessing across Source Datasets (Notebooks A, B, C)**
 
-**Label correction (Wheat dataset — critical)**
+Executable preprocessing notebooks and technical documentation:
+- **Wheat (Notebook A):** [`docs/Milestone_2_work/wheat_preprocessing_documentation.md`](../docs/Milestone_2_work/wheat_preprocessing_documentation.md)
+- **Rice Set 1 (Notebook B):** [`docs/Milestone_2_work/rice_set1_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set1_preprocessing_documentation.md)
+- **Rice Set 2 (Notebook C):** [`docs/Milestone_2_work/rice_set2_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set2_preprocessing_documentation.md)
 
-The raw folder scan detected 45 apparent class labels due to the dataset's folder naming convention (e.g., `Aphid`, `aphid_test`, `aphid_valid`). A canonicalization function was applied:
-1. Strip leading/trailing whitespace; lowercase.
-2. Replace spaces and hyphens with underscores.
-3. Iteratively strip `_test`, `_valid`, `_val`, `_train` suffixes.
-4. Collapse repeated underscores.
+#### 6.1.1 Label Canonicalization & Normalization
+- **Wheat Dataset:** Collapsed 45 raw folder labels (e.g., `Aphid`, `aphid_test`, `aphid_valid`) down to **15 canonical disease classes** (`wheat__*`) via programmatic suffix stripping (`_test`, `_valid`, `_val`, `_train`).
+- **Rice Set 1 & Set 2:** Mapped raw class folders to shared canonical crop-prefixed labels (`rice__bacterial_blight`, `rice__blast`, `rice__brown_spot`, `rice__tungro`, and `rice__leaf_smut`). Shared classes (`bacterial_blight` and `brown_spot`) were harmonized across Set 1 and Set 2.
 
-This collapsed 45 raw labels to **15 canonical disease classes**, with the original raw label preserved in a `label_raw` column for audit purposes. Without this step, the dataset would be unusable for classification.
+#### 6.1.2 Deduplication & Burst-Capture Thinning
+- **Rice Set 1 (Burst Thinning):** Evaluated exact MD5 and perceptual hash (`pHash` Hamming distance ≤ 6 bits) clusters via union-find. Identified ~65% of raw images as near-duplicate burst frames of identical leaves. Thinned each cluster down to a single representative frame (highest Laplacian sharpness variance), reducing 5,932 raw images to **2,066 clean unique images** across 4 balanced classes (`bacterial_blight`: 514, `blast`: 477, `brown_spot`: 606, `tungro`: 469).
+- **Rice Set 2:** Confirmed pristine (0 duplicates, 0 corrupt files across 120 images, 40 per class).
+- **Wheat Dataset:** Deduplicated exact and perceptual near-duplicates, cleaning 14,154 raw images down to **10,673 unique groups**.
 
-**Corrupt/missing file handling**
+#### 6.1.3 Aspect-Preserving Letterbox Resizing & Color Normalization
+- **Letterboxing to 256×256 RGB:** All kept images were converted to RGB (flattening 156 RGBA PNGs in Set 1 and 1,662 non-RGB files in Wheat) and **letterboxed to 256×256 px** (padded aspect-preserving resize).
+- **Removing Shortcuts & Lesion Distortion:**
+  - In **Rice Set 1**, letterboxing eliminated the *Tungro dimension shortcut* (Tungro raw photos averaged ~331² 4:3 vs 300² square for others; post-letterbox all are identical 256²).
+  - In **Rice Set 2**, letterboxing prevented lesion geometric distortion across extreme wide panoramas (~3.43:1 aspect ratio, 89% of images).
 
-| Dataset | Corrupt images | RGBA/non-RGB files | Action |
-|---|---|---|---|
-| Rice Set 1 | 0 | 156 RGBA (PNG disguised as .jpg) | Apply `.convert("RGB")` in data loader |
-| Rice Set 2 | 0 | 0 | No action required |
-| Wheat | 0 | RGBA: 1,613 · P: 47 · CMYK: 2 | Apply `.convert("RGB")` in data loader |
+#### 6.1.4 Standardized Manifest Schema
+All three cleaned datasets exported manifests adhering to a uniform 6-column schema: `src_path, filename, label, source_dataset, split, group_id` (`split = unassigned` deferred to centralized integration in Notebook D).
 
-All datasets had **zero corrupt or unreadable images**. A `.convert("RGB")` guard is mandatory in the data loader to handle RGBA, P (palette), and CMYK modes.
+**6.2 RAG/NLP PDF Preprocessing & Chunking (Harliv's Work)**
 
-**Duplicate removal**
+Detailed RAG PDF Preprocessing & Chunking Documentation:
+- **RAG PDF Report:** [`docs/Milestone_2_work/rag_pdf_report.md`](../docs/Milestone_2_work/rag_pdf_report.md)
 
-| Dataset | Exact duplicates | Action |
-|---|---|---|
-| Rice Set 1 | 2,234 byte-identical files (1,096 groups) | Flag with `is_exact_rep` column; train on `is_exact_rep=True` subset only (4,794 unique images) |
-| Rice Set 2 | 0 | No action required |
-| Wheat | ~6,279 near-duplicates (aHash); 646 cross-split leakers | Requires stricter pHash deduplication and clean re-splitting before training |
-
-**Image resizing / normalization**
-
-| Dataset | Issue | Recommended treatment |
-|---|---|---|
-| Rice Set 1 | Mixed sizes; Tungro images not 300×300 | Resize all to 224×224 (or 256×256) using aspect-preserving letterbox then center-crop |
-| Rice Set 2 | Panoramic 3:1 aspect ratio (3,081×897 px) | **Do not use naive square resize.** Use letterbox/pad-to-square, or tile into 224×224 crops, or train at wide resolution (e.g. 448×224) |
-| Wheat | Extreme size variance (44px–6,016px); mixed formats | Resize to 224×224 with aspect-preserving letterbox; decode all formats via PIL then convert to RGB tensor |
-
-All pixel values should be normalized to `[0, 1]` then standardized with ImageNet mean/std `([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])` for transfer-learning backbones (EfficientNet-B0, ViT-Small).
-
-**Standardization (manifests)**
-
-For Rice Set 1, a deduplicated manifest (`rice_leaf_manifest.csv`) was exported with the following key columns:
-- `dup_cluster` — pHash-based group ID; use as the group key for `StratifiedGroupKFold` / `GroupShuffleSplit` to prevent near-duplicate leakage across splits.
-- `is_exact_rep` — `True` for one representative per exact-duplicate group; filter on this column to train on the 4,794 unique images.
-
-For Wheat, metadata is exported to `wheat_image_metadata.csv` with `width`, `height`, `mode`, `format`, `size_kb`, `aspect`, and `ahash` columns.
-
-**6.2 RAG/NLP PDFs**
-* **Text cleaning:** Text extracted per PDF via `pdfplumber` (native) with `pytesseract` OCR fallback (English + Hindi) for scanned documents; garbage-character ratio computed to flag low-quality extractions for review.
-* **De-duplication:** Exact duplicates removed via content hash; 33 near-duplicate document pairs resolved by retaining the more complete (higher word-count / native-extraction) copy.
-* **Standardization:** Consistent per-document metadata schema (`source`, `extraction_method`, `detected_language`, `detected_year`, etc.) recorded for every retained document.
-* **Tokenization/Chunking:** Sentence-aware chunking applied (512-token target, ~50-token overlap), with a hard-split fallback for any single sentence exceeding 512 tokens (fixes rare cases like long unstructured clauses/tables). On the clean 170-document corpus, this produced **1,451 chunks** (avg. 8.5 chunks/doc), with a median chunk size of 481 tokens (mean 433, std 108) and a max of 561 tokens — no chunk exceeds the target by more than the natural overlap margin. Chunk-count distribution is heavily concentrated in the 400–550 token range, confirming the sentence-aware + hard-split approach keeps chunks consistently sized. Output saved to `pdf_chunks.csv` / `pdf_chunks.jsonl`.
-
-
+* **Text extraction & cleaning:** Text extracted per PDF via `pdfplumber` (native) with `pytesseract` OCR fallback (English + Hindi) for scanned documents; garbage-character ratio computed to flag low-quality extractions for exclusion.
+* **Deduplication & filtering:** Exact byte duplicates removed via hash; 33 near-duplicate document pairs (>0.90 similarity) resolved by retaining the more complete copy, leaving 170 clean PDFs.
+* **Metadata extraction:** Standardized per-document metadata (`source`, `extraction_method`, `detected_language`, `detected_year`, `page_count`, `word_count`) recorded for every document.
+* **Tokenization & Semantic Chunking:** Sentence-aware chunking applied (target ~512 tokens, ~50-token overlap), with a hard-split fallback for any single sentence exceeding 512 tokens. On the clean 170-document corpus, this produced **1,451 chunks** (avg. 8.5 chunks/doc), with a median chunk size of 481 tokens (mean 433, std 108) and a max of 561 tokens. Output saved to `pdf_chunks.csv` / `pdf_chunks.jsonl`.
 
 ![Chunking Plots](<./assets/milestone-2-assets/pdf_chunk.png>)
-  
 
+* **Metadata Encoding:** Each chunk carries `chunk_id`, `source`, `filename`, `chunk_index`, `token_count`, `detected_language`, and `detected_year` — enabling retrieval-time filtering alongside vector search.
 
+**6.3 KCC Advisory Dataset Preprocessing (Aneeqa's Work)**
 
-* **Encoding (metadata fields):** Each chunk carries `chunk_id`, `source`, `filename`, `chunk_index`, `token_count`, `detected_language`, and `detected_year` — enabling retrieval-time filtering (e.g. restrict to `source=schemes` or `detected_year >= 2024`) alongside semantic search.
+Detailed KCC EDA & Pipeline Preparation Documentation:
+- **KCC EDA Report:** [`docs/Milestone_2_work/KCC Data EDA.md`](../docs/Milestone_2_work/KCC%20Data%20EDA.md)
 
-**6.3 RAG / NLP KCC**
-* **Missing value treatment:** Drop the `Season` column (100% missing); drop/impute rows with missing `Crop`, `QueryType`, `Category`, `QueryText`, `KccAns` (all under 0.25% missingness each).
-* **De-duplication:** 68.72% of `QueryText` values and 26.15% of full Q&A pairs are duplicates (largely templated Weather/PM-KISAN queries) — deduplicate on the Q&A pair before embedding, to avoid over-representing boilerplate content in the retrieval index.
-* **Standardization:** Normalize crop/category/query-type string casing and whitespace; consolidate near-duplicate `QueryType` labels (e.g. tab-prefixed variants like `"\tPlant Protection\t"`).
-* **Tokenization/chunking:** 512-character chunk size recommended (matches MuRIL's limit), with ~50-character overlap — covers 98.9% of Query+Answer pairs without truncation, based on the text-length distribution analysis.
-* **Language handling:** Queries are treated as English/Romanized input; answers are predominantly Hindi (Devanagari) — no translation step planned, but this asymmetry should be reflected in embedding/retrieval design (MuRIL supports both).
+* **Missing value treatment:** Dropped `Season` column (100% missing); dropped/imputed rows with missing `Crop`, `QueryType`, `Category`, `QueryText`, `KccAns` (all under 0.25% missingness each).
+* **Deduplication:** Given that **68.72% of `QueryText` values and 26.15% of full Q&A pairs are duplicates**, deduplication across Q&A pairs is mandatory prior to vector indexing to prevent index skew toward templated weather/scheme queries.
+* **Standardization:** Normalized crop/category/query-type string casing and whitespace; consolidated near-duplicate `QueryType` labels (e.g., tab-prefixed variants like `"\tPlant Protection\t"`).
+* **Chunking Strategy:** Recommended 512-character chunking (matches `MuRIL` input constraints) with ~50-character overlap — captures **98.9% of Query+Answer pairs** without truncation.
+* **Multilingual Alignment:** Queries are processed as English/Romanized input while answers are predominantly Hindi (Devanagari script), leveraging `MuRIL`'s cross-lingual semantic alignment capabilities.
 
 **6.4 Yield Preprocessing & Feature Engineering**
 
-Full executable preprocessing notebook is available at:
-- [`notebooks/06_yield_preprocessing.ipynb`](../notebooks/06_yield_preprocessing.ipynb)
+Full executable preprocessing pipelines and documentation:
+- **Primary Work (Multi-Crop Pan-India):** [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../notebooks/07_Yield_EDA+%20preprocessing.ipynb) & [`docs/Milestone_2_work/yield_report.md`](../docs/Milestone_2_work/yield_report.md)
+- **Complementary UP Subset:** [`notebooks/06_yield_preprocessing.ipynb`](../notebooks/06_yield_preprocessing.ipynb)
 
-#### 6.4.1 Zero-Production Anomaly Imputation
-Sporadic administrative reporting omissions where `Production_Total == 0.0` and `Yield_Kg_Ha == 0.0` despite non-zero `Area_Sown` (29 records, 0.75% of dataset) were imputed using the robust seasonal median yield of the corresponding agro-climatic zone (`Western UP`, `Central UP`, `Eastern UP`, or `Bundelkhand`).
+#### 6.4.1 Primary Multi-Crop Preprocessing Pipeline (`440,962` Records)
+1. **Multi-Source Schema Harmonization:** Normalized disparate state and district agricultural sources into a standardized tabular schema: `crop`, `year`, `state`, `district`, `season`, `area`, `production`, `yield` along with auxiliary metadata (`annual_rainfall`, `fertilizer`, `pesticide`).
+2. **Standardization & Unit Resolution:** Standardized crop/district text casing and resolved reporting discrepancies, including converting coconut production and yield quantities from raw pieces to metric tonnes.
+3. **Hierarchical Deduplication:** Deduplicated overlapping state-level and district-level records by preferentially retaining more granular district-level entries.
+4. **Machine Learning Imputation (`MissForest`):**
+   - Imputed missing categorical attributes using `SimpleImputer(strategy='most_frequent')`.
+   - Encoded categorical variables using `OrdinalEncoder` and applied non-parametric **Random Forest Imputation (`MissForest`)** to impute missing numeric values across complex inter-crop feature relationships.
+   - Reversed ordinal encodings to preserve readable text labels and exported the final complete dataset to `production_unified_imputed.csv`.
 
-#### 6.4.2 Parent-District Spatial Harmonization (Bifurcation Backcasting)
-To resolve the 164 missing records caused by historical administrative bifurcations without introducing artificial discontinuities:
-- Parent-district historical records (`Sultanpur` for `Amethi`, `Moradabad` for `Sambhal`, `Meerut` for `Hapur`, and `Muzaffarnagar` for `Shamli`) were apportioned proportionally (~28% area share) to backcast pre-formation records.
-- This produced a complete, continuous dataset of **3,996 harmonized records** spanning all 74/75 districts over 27 years (1997–2023).
-
-#### 6.4.3 Agronomic & Meteorological Feature Engineering (5 Engineered Predictors)
-1. `NPK_Total_Intensity_Kg_Ha` (`Float`): Total chemical fertilizer applied per hectare (`(N + P + K) * 1000 / Area_Sown`).
-2. `NPK_Balance_Ratio` (`Float`): Nitrogen-to-Phosphate ratio (`Fertilizer_N / Fertilizer_P`), capturing nutrient imbalance.
-3. `Rainfall_Anomaly_Pct` (`Float`): District seasonal precipitation percentage deviation from its 27-year long-term mean (`(Precip - Mean_Precip) / Mean_Precip * 100`).
-4. `Thermal_Stress_Index` (`Float`): Interaction term combining maximum daily temperature and heatwave days (`Temp_Max_Avg * (1 + 0.05 * Heatwave_Days)`).
-5. `Irrigation_Security_Score` (`Float`): Weighted composite irrigation infrastructure index (`0.4 * Net_Irrigated_Pct + 0.6 * Tubewell_Irrig_Pct`).
+#### 6.4.2 Complementary UP Rice & Wheat Subset Preprocessing (`3,996` Records)
+- **Zero-Production Anomaly Imputation:** Sporadic administrative omissions (`Production_Total == 0.0` despite active `Area_Sown`) were imputed using agro-climatic zone seasonal medians.
+- **Spatial Harmonization (Bifurcation Backcasting):** Missing records caused by post-1997 district bifurcations (Amethi, Sambhal, Hapur, Shamli) were backcasted via parent-district proportional area apportionment (~28% share).
+- **Engineered Domain Predictors:** Computed 5 domain interaction features (`NPK_Total_Intensity_Kg_Ha`, `NPK_Balance_Ratio`, `Rainfall_Anomaly_Pct`, `Thermal_Stress_Index`, `Irrigation_Security_Score`).
 
 ---
 
 ### 7. Dataset Integration (if multiple datasets)
 
-The vision subsystem integrates three datasets for training and evaluation. The approach follows **Strategy D** from the dataset proposal (Rice Set 1 + Rice Set 2 merged, plus Wheat separately), with PlantDoc reserved for field-robustness evaluation.
+Executable integration notebook and documentation:
+- **Notebook D (Merge + Split):** [`docs/Milestone_2_work/notebookD_merge_split_documentation.md`](../docs/Milestone_2_work/notebookD_merge_split_documentation.md)
 
-**Datasets to be combined**
+The vision subsystem integrates three cleaned crop-disease datasets into a unified 20-class training pool, with PlantDoc reserved as a held-out field-robustness evaluation set.
 
-| Role | Datasets |
-|---|---|
-| Rice disease training | Rice Set 1 (5,932 imgs → 4,794 unique) + Rice Set 2 (120 imgs) |
-| Wheat disease training | Wheat Dataset (14,154 imgs, 15 classes) |
-| Field-robustness evaluation (held-out) | PlantDoc (2,598 imgs, real-field photos — not used in training) |
+**7.1 Combined Datasets & Class Harmonization**
 
-**Integration methodology (Rice Set 1 + Set 2)**
+| Source Dataset | Input Cleaned Images | Classes Contributed |
+|---|---|---|
+| **Wheat (Notebook A)** | 10,673 | 15 classes (`wheat__*`) |
+| **Rice Set 1 (Notebook B)** | 2,066 | 4 classes (`rice__bacterial_blight`, `rice__blast`, `rice__brown_spot`, `rice__tungro`) |
+| **Rice Set 2 (Notebook C)** | 120 | 3 classes (`rice__bacterial_blight`, `rice__brown_spot`, `rice__leaf_smut`) |
+| **Merged Unified Pool** | **12,859** | **20 unique canonical disease classes** |
 
-1. **Schema alignment:** Both sets use folder-level disease labels. Canonical label names must be harmonized — Set 1 uses `Bacterialblight` and `Brownspot` while Set 2 uses `Bacterial leaf blight` and `Brown spot`. A mapping table will normalize these to shared canonical names before merging.
-2. **Label scope:** Set 2 contains `Leaf Smut` which is absent from Set 1. Set 1 contains `Blast` and `Tungro` absent from Set 2. The merged dataset will have **5 rice disease classes** total: Bacterial Blight, Brown Spot, Leaf Smut, Blast, Tungro.
-3. **Deduplication after merging:** After concatenation, a cross-dataset pHash check will be run to detect any near-duplicate images present in both sets (unlikely given their different sources but must be verified). Any cross-source duplicates will be flagged and the Set 2 copy retained (as it is the cleaner, non-redundant source).
-4. **Handling conflicting image properties:** Set 2's panoramic 3:1 aspect ratio images require aspect-preserving tiling/letterboxing before merging with Set 1's near-square images. All images will be normalized to a uniform 224×224 input after format-safe loading.
-5. **Handling conflicting attributes:** Set 1 contains RGBA/PNG-disguised-as-JPEG files; Set 2 contains only true RGB JPEGs. Both are handled by `.convert("RGB")` at load time.
+**7.2 Integration Methodology**
+1. **Schema & Label Alignment:** Concatenated the three cleaned dataset manifests sharing an identical 6-column schema (`src_path, filename, label, source_dataset, split, group_id`). Crop prefixes (`wheat__` vs. `rice__`) prevent crop-specific diseases (e.g., wheat blast vs. rice blast) from colliding.
+2. **Shared Class Merging:** Shared rice classes (`rice__bacterial_blight` = 554 images [514 S1 + 40 S2]; `rice__brown_spot` = 646 images [606 S1 + 40 S2]) were merged cleanly across Set 1 and Set 2. Rice Set 2 uniquely contributes `rice__leaf_smut` (40 images).
+3. **Integrity Reconciliation:** Verified 100% manifest-to-disk reconciliation (12,859 files on disk, 0 missing). A total of 11,530 unique perceptual hash `group_id` clusters exist across the 12,859 records.
 
 ---
 
-### 8. Data Augmentation (if applicable)
+### 8. Data Augmentation & Training Pipeline Design
 
-**8.1 Vision — Planned Augmentation Strategy**
+Technical training pipeline design documentation:
+- **Notebook E (Training Pipeline Design):** [`docs/Milestone_2_work/notebook_training_pipeline_design.md`](../docs/Milestone_2_work/notebook_training_pipeline_design.md)
 
-The EDA findings directly drive augmentation choices. Two tiers of augmentation are planned:
+To preserve data integrity, the materialized dataset (`final/`) stores one deterministic 256×256 letterboxed RGB copy per image. Augmentation, normalization, and imbalance handling run **on-the-fly inside the data loader during training (Milestone 3)**.
 
-**Tier 1 — Standard augmentation (all classes)**
+**8.1 Deterministic Resolution & ImageNet Normalization (All Splits)**
+- **Train Split:** Random 224×224 crop from the 256×256 letterboxed frame.
+- **Validation / Test Splits:** Deterministic 224×224 center crop.
+- **Standardization:** All tensors normalized using ImageNet mean (`[0.485, 0.456, 0.406]`) and std (`[0.229, 0.224, 0.225]`), matching our ImageNet-pretrained backbone (`EfficientNet-B0`).
 
-| Technique | Rationale |
-|---|---|
-| Random horizontal/vertical flip | Disease symptoms are orientation-invariant |
-| Random rotation (±30°) | Leaf orientation varies in field photos |
-| Color jitter (brightness ±0.3, contrast ±0.3, saturation ±0.2) | Accounts for the wide brightness variance observed per class (Laplacian/brightness EDA) |
-| Random crop & resize | Simulates zoom-level variation; addresses extreme size variance in wheat dataset |
-| Gaussian blur (σ 0.5–2.0) | Simulates low-sharpness field photos (Laplacian variance outliers in wheat EDA) |
+**8.2 On-The-Fly Data Augmentation Strategy (Train Split Only)**
+- **Standard Tier (All Classes):** Random horizontal/vertical flips, random rotation (±15–20°), and color jitter (brightness/contrast/saturation) to simulate field lighting and camera variance.
+- **Targeted Rare & Risk Class Augmentation:**
+  - `rice__leaf_smut` (40 images / 24 train) and `wheat__stem_fly` (172 images / 138 train) receive aggressive multi-scale transforms to multiply effective sample variety.
+  - `rice__tungro` receives aggressive background-focused random cropping and jitter to disrupt the soil-background artifact identified in EDA.
 
-**Tier 2 — Field-robustness augmentation (targeted at domain gap)**
-
-| Technique | Rationale |
-|---|---|
-| Background randomization (cutout / CopyPaste) | Directly counters the Tungro background-bias shortcut identified in EDA — model must not learn to classify disease by soil background |
-| Random occlusion / leaf overlap synthesis | Simulates overlapping foliage in real-field photos |
-| Lighting variation (random shadow, highlight overlays) | Accounts for harsh sunlight / shade conditions in farmer-captured photos |
-| Motion blur | Simulates camera shake in low-tech devices |
-
-**Minority class targeting (Wheat dataset)**
-
-Given the 5.6:1 train imbalance, the three minority classes (stem_fly: 234, black_rust: 576, blast: 647) will receive **2–3× additional augmented samples** using the Tier 1 + Tier 2 pipeline, targeting a reduced effective imbalance ratio of ≤2.5:1.
-
-> **Note:** Exact augmented sample counts will be reported once augmentation scripts are finalized in Milestone 3.
+**8.3 Class Imbalance & Tungro Robustness Strategy**
+- **Imbalance Handling:** Uses a hybrid recipe combining `WeightedRandomSampler` (oversampling extreme minority classes per batch) with mild class-weighted CrossEntropy loss. Models are evaluated strictly on **macro-F1 score and per-class recall**.
+- **Tungro Robustness Diagnostic:** Post-training Grad-CAM inspection on non-soil Tungro field images confirms whether the classifier attends to leaf lesions or background soil, triggering leaf segmentation masking if background shortcut bias persists.
 
 ---
 
 ### 9. Dataset Splitting
 
-**9.1 Rice Datasets (Set 1 + Set 2 merged)**
+**9.1 Vision Unified Group-Aware Stratified Split (Notebook D)**
 
-Neither rice dataset ships with pre-existing splits. The splitting strategy must account for the high near-duplicate rate in Set 1.
+Rather than splitting Wheat and Rice separately, Notebook D performs a **single centralized group-aware stratified split across all 20 canonical classes (`12,859` total images)**.
 
-| Parameter | Value |
+| Parameter | Execution Value |
 |---|---|
-| **Split ratio** | 70% train / 15% val / 15% test |
-| **Stratification** | Yes — stratified by class label to maintain class proportions across splits |
-| **Leakage prevention** | **Group-aware split using `dup_cluster` as the group key** — `StratifiedGroupKFold` / `GroupShuffleSplit` ensures all near-duplicates of an image land in the same split. This is mandatory given that 79.2% of images have near-duplicates. A naive random split would leak near-identical training images into the validation/test sets, inflating evaluation metrics. |
-| **Training base** | Apply `is_exact_rep=True` filter first, giving 4,794 unique Rice Set 1 images + 120 Rice Set 2 images = ~4,914 unique images before augmentation |
-| **Approximate sizes (post-dedup, pre-augmentation)** | Train: ~3,440 · Val: ~737 · Test: ~737 |
+| **Split Ratio** | 80% Train (`10,275` images) / 10% Validation (`1,292` images) / 10% Test (`1,292` images) |
+| **Stratification & Small-Class Floor** | Stratified across all 20 classes. Enforced an **8-image evaluation floor** protecting small classes (`rice__leaf_smut` split 24 Train / 8 Val / 8 Test = 60/20/20% ratio). |
+| **Leakage Prevention Guarantee** | Whole pHash `group_id` clusters (`11,530` unique groups) were assigned indivisibly to a single split. **Verified `LEAKAGE = 0 groups spanning splits`**. |
+| **Materialized Structure** | ImageFolder-ready directory layout (`final/train`, `final/val`, `final/test`), comprehensive `master_manifest.csv`, and frozen `label_to_idx.json` (273 MB on disk). |
 
-**9.2 Wheat Dataset**
+**9.2 PlantDoc (Field-Evaluation Holdout)**
 
-The Wheat dataset ships with pre-defined train/val/test folders. However the EDA found **646 near-identical images appearing across multiple splits** (aHash leakage), invalidating the existing split.
+PlantDoc (`2,598 images`) is reserved **exclusively as a held-out field-robustness evaluation test set** and is never seen during model training or validation.
 
-| Parameter | Value |
-|---|---|
-| **Current split (raw, do not use)** | Train 13,104 / Val 300 / Test 750 — contaminated by leakage |
-| **Planned action** | Re-split from scratch using pHash-based group-aware splitting, discarding the original folder-based split |
-| **Target split ratio** | 70% train / 15% val / 15% test |
-| **Stratification** | Yes — stratified by canonical class label |
-| **Leakage prevention** | `GroupShuffleSplit` with aHash / pHash cluster as group key; verify no group spans two splits post-split. |
-| **Approximate sizes (post-clean-split)** | Train: ~9,900 · Val: ~2,100 · Test: ~2,100 |
-
-**9.3 PlantDoc (Field-Evaluation Holdout)**
-
-PlantDoc is used **exclusively as a held-out field-robustness test set** and is never seen during training or validation. No splitting is applied to it.
-
-**9.4 Yield Prediction Dataset**
+**9.3 Yield Prediction Dataset**
 
 To prevent temporal autocorrelation leakage across agricultural cycles, the dataset is partitioned **strictly chronologically by agricultural start year**:
 
@@ -687,29 +633,25 @@ To prevent temporal autocorrelation leakage across agricultural cycles, the data
 
 ### 10. Final Prepared Dataset
 
-**10.1 Vision — Rice (merged Set 1 + Set 2)**
+**10.1 Vision — Unified Merged & Split Training Dataset (`12,859` images, 20 classes)**
+
+| Metric | Completed Value |
+|---|---|
+| Total Clean Unique Images | **12,859 images** (10,673 Wheat + 2,066 Rice S1 + 120 Rice S2) |
+| Total Canonical Classes | **20 classes** (15 Wheat + 5 Rice: `bacterial_blight`, `blast`, `brown_spot`, `leaf_smut`, `tungro`) |
+| Image Resolution & Format | All letterboxed 256×256 px RGB JPEGs (`.convert("RGB")` verified) |
+| Split Breakdown | **Train:** 10,275 (79.9%) · **Val:** 1,292 (10.0%) · **Test:** 1,292 (10.0%) |
+| Leakage Proof | **0 groups spanning splits** across 11,530 unique `group_id` clusters |
+| Frozen Index Artifact | `label_to_idx.json` mapping all 20 canonical classes |
+| Readiness for Milestone 3 | ✅ **Complete & Training-Ready (`final/` directory, 273 MB disk footprint)** |
+
+**10.2 Vision — PlantDoc (Field Robustness Holdout Set)**
 
 | Metric | Value |
 |---|---|
-| Raw images | 6,052 (5,932 + 120) |
-| After exact deduplication | ~4,914 unique images |
-| Final classes | 5 (Bacterial Blight, Brown Spot, Leaf Smut, Blast, Tungro) |
-| Deduped imbalance ratio | ~1.40:1 (Bacterial Blight vs Blast after dedup) |
-| Preprocessing completed | Deduplication (MD5 + pHash), RGBA→RGB conversion, label harmonization, manifest export, group-aware split keys assigned |
-| Readiness | ✅ Ready for data loader implementation and augmentation pipeline in Milestone 3 |
-
-**10.2 Vision — Wheat**
-
-| Metric | Value |
-|---|---|
-| Raw images | 14,154 |
-| After deduplication & leakage removal | ~13,000 (estimate pending pHash clean-split) |
-| Final classes | 15 |
-| Train imbalance ratio | 5.6:1 (smut vs stem_fly in raw train set) |
-| Preprocessing completed | Label canonicalization (45→15 classes), mode conversion flag, metadata export (`wheat_image_metadata.csv`), duplicate/leakage detection (646 cross-split hashes flagged) |
-| Remaining before training-ready | ❌ Cross-split leakage must be resolved (clean re-split required) |
-
-**10.3 Vision — PlantDoc (evaluation only)**
+| Images | 2,598 real-field farmer images |
+| Role | Field-robustness evaluation only — never used in training |
+| Preprocessing | None applied; resize + normalize at inference time |
 
 | Metric | Value |
 |---|---|
@@ -736,14 +678,14 @@ To prevent temporal autocorrelation leakage across agricultural cycles, the data
 
 **10.6 Yield Prediction Dataset**
 
-| Metric | Value |
-|---|---|
-| **Raw records** | 3,886 district-year-season records across 74 unique UP districts (1997–2023) |
-| **After spatial harmonization & imputation** | **3,996 harmonized records** (backcasted for bifurcated districts Amethi, Sambhal, Hapur, Shamli) |
-| **Total Features** | **23 features** (15 raw attributes + 5 engineered domain predictors + administrative identifiers) |
-| **Preprocessing completed** | Bureaucratic zero-production imputation, spatial parent backcasting, NPK intensity/ratio engineering, rainfall anomaly & thermal stress engineering, chronological splitting |
-| **Final Exported Splits** | Train: 3,256 records (`train_yield.csv`) · Val: 296 records (`val_yield.csv`) · Test: 444 records (`test_yield.csv`) under `data/final/yield/` |
-| **Readiness** | ✅ **Ready for regression model training & evaluation in Milestone 3** |
+| Metric | Primary Multi-Crop Dataset (Tanmay's Work) | Complementary UP Rice & Wheat Subset (Lokesh's Work) |
+|---|---|---|
+| **Raw / Unified records** | `440,962` records spanning 1997–2024 across 35 States/UTs | `3,886` records spanning 1997–2023 across 74 UP districts |
+| **Processed records** | **`440,962` records** across **124 unique crops** | **`3,996` harmonized records** (backcasted across bifurcated districts) |
+| **Feature space** | 16 core attributes (`state`, `district`, `crop`, `season`, APY, rainfall, fertilizer) | 23 attributes (adding daily IMD weather stress & ICRISAT NPK/irrigation features) |
+| **Preprocessing completed** | Multi-source schema normalization, hierarchical deduplication, coconut unit conversion, `MissForest` + `OrdinalEncoder` imputation | Zero-production median imputation, spatial bifurcation backcasting, 5 engineered domain predictors, chronological out-of-time splitting |
+| **Final Exported Artifacts** | `production_unified.csv`, `production_unified_imputed.csv` | `train_yield.csv` (3,256), `val_yield.csv` (296), `test_yield.csv` (444) |
+| **Readiness** | ✅ **Ready for pan-India benchmarking & multi-crop modeling in Milestone 3** | ✅ **Ready for localized UP state regression modeling in Milestone 3** |
 
 ---
 
@@ -769,27 +711,34 @@ To prevent temporal autocorrelation leakage across agricultural cycles, the data
 
 ### 12. Deliverables Produced
 
-**Vision datasets:**
-- [`rice-leaf-disease-dataset-EDA.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-EDA.ipynb) — Full EDA for Rice Set 1 (5,932 images): class distribution, corruption check, RGBA/PNG mystery resolution, exact + near-duplicate detection (MD5 + aHash + pHash), deduplicated manifest export.
-- [`rice-leaf-disease-dataset-set-2-eda.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-set-2-eda.ipynb) — Full EDA for Rice Set 2 (120 images): confirms pristine, zero-duplicate, perfectly balanced dataset with panoramic aspect-ratio preprocessing note.
-- [`wheat-dataset-EDA.ipynb`](../data/Vision_dataset/wheat-dataset-EDA.ipynb) — Full EDA for Wheat Dataset (14,154 images): label canonicalization (45→15 classes), image properties, duplicate detection with leakage flagging (646 cross-split hashes), color/brightness and sharpness (Laplacian variance) per-class analysis.
-- `rice_leaf_manifest.csv` — Deduplicated manifest for Rice Set 1 with `dup_cluster`, `is_exact_rep`, `md5`, `phash` columns; ready for group-aware splitting in Milestone 3.
-- `wheat_image_metadata.csv` — Enriched metadata for all 14,154 Wheat images including width, height, mode, format, size_kb, aspect, ahash.
-- [`Rice leaf disease dataset documentation.odt`](../data/Vision_dataset/Rice%20leaf%20disease%20dataset%20documentation.odt) — Narrative EDA interpretation for Rice Set 1.
-- [`Rice_leaf_disease_dataset_set2_documentation.odt`](../data/Vision_dataset/Rice_leaf_disease_dataset_set2_documentation.odt) — Narrative EDA interpretation for Rice Set 2.
-- [`Wheat_dataset_Documentation.odt`](../data/Vision_dataset/Wheat_dataset_Documentation.odt) — Narrative EDA interpretation for Wheat dataset.
+**Vision datasets & pipeline deliverables:**
+- **EDA Notebooks & Narratives:**
+  - [`rice-leaf-disease-dataset-EDA.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-EDA.ipynb) & [`Rice leaf disease dataset documentation.odt`](../data/Vision_dataset/Rice%20leaf%20disease%20dataset%20documentation.odt) — Full EDA for Rice Set 1 (5,932 images).
+  - [`rice-leaf-disease-dataset-set-2-eda.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-set-2-eda.ipynb) & [`Rice_leaf_disease_dataset_set2_documentation.odt`](../data/Vision_dataset/Rice_leaf_disease_dataset_set2_documentation.odt) — Full EDA for Rice Set 2 (120 images).
+  - [`wheat-dataset-EDA.ipynb`](../data/Vision_dataset/wheat-dataset-EDA.ipynb) & [`Wheat_dataset_Documentation.odt`](../data/Vision_dataset/Wheat_dataset_Documentation.odt) — Full EDA for Wheat Dataset (14,154 images).
+- **Executable Preprocessing & Dataset Integration Documentation (Mahesh's Work):**
+  - [`docs/Milestone_2_work/wheat_preprocessing_documentation.md`](../docs/Milestone_2_work/wheat_preprocessing_documentation.md) — Technical documentation of Wheat label canonicalization (45→15 classes) and duplicate cleaning (14,154 → 10,673 unique groups).
+  - [`docs/Milestone_2_work/rice_set1_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set1_preprocessing_documentation.md) — Documentation of Rice Set 1 burst-capture thinning (5,932 → 2,066 clean images) and 256×256 RGB letterbox shortcut removal.
+  - [`docs/Milestone_2_work/rice_set2_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set2_preprocessing_documentation.md) — Documentation of Rice Set 2 panoramic aspect-preserving letterbox standardization (120 images, 3 classes).
+  - [`docs/Milestone_2_work/notebookD_merge_split_documentation.md`](../docs/Milestone_2_work/notebookD_merge_split_documentation.md) — Unified integration & centralized group-aware stratified split (80/10/10 across **12,859 images and 20 classes**, 0 leakage, materialized to `final/train|val|test` + `master_manifest.csv` + `label_to_idx.json`).
+  - [`docs/Milestone_2_work/notebook_training_pipeline_design.md`](../docs/Milestone_2_work/notebook_training_pipeline_design.md) — Training-time data loader design: live random/center cropping to 224², ImageNet normalization, rare-class augmentation, hybrid imbalance handling, and Tungro Grad-CAM robustness check.
 
-**RAG/NLP corpus:**
+**RAG/NLP corpus & PDF deliverables (Harliv's Work):**
+- [`docs/Milestone_2_work/rag_pdf_report.md`](../docs/Milestone_2_work/rag_pdf_report.md) — Comprehensive technical report on authoritative agricultural PDF collection (187 documents across 4 folders), cleaning, OCR fallback, deduplication (170 retained docs), and sentence-aware 512-token semantic chunking (**1,451 chunks**).
 - `pdf_inventory_clean.csv` (170 clean documents), extracted `.txt` files per PDF, `excluded_unreadable_docs.csv`, `excluded_near_duplicate_docs.csv`, `PDF_Corpus_EDA.ipynb`, `PDF_Chunking.ipynb`, `pdf_chunks.csv` / `pdf_chunks.jsonl` (1,451 chunks ready for Milestone 3 embedding).
 
-**KCC dataset:**
-- `kcc_combined_2020_2025.csv` (3.12M records), `03_kcc_rag_eda.ipynb`.
+**KCC advisory dataset deliverables (Aneeqa's Work):**
+- [`docs/Milestone_2_work/KCC Data EDA.md`](../docs/Milestone_2_work/KCC%20Data%20EDA.md) — Comprehensive technical report on Kisan Call Center dataset aggregation (**3,123,029 records**, 2020–2025), crop/category profiling (Rice+Wheat = **31.95%**), multilingual query-answer alignment (**99.98% English queries -> 98.80% Hindi answers**), Q&A deduplication requirements (`68.72%` duplicate queries), and 512-character chunking verification (**98.9% compatibility**).
+- `kcc_combined_2020_2025.csv` (3.12M records across 15 attributes) & `03_kcc_rag_eda.ipynb`.
 
 **Yield dataset:**
-- `up_district_yield_apy_1997_2023.csv` — Raw 15-attribute UP district yield dataset (1997–2023).
-- [`notebooks/05_yield_eda.ipynb`](../notebooks/05_yield_eda.ipynb) — Full executable EDA notebook evaluating district bifurcations, target distributions, regional disparities, and input/weather correlations.
-- [`notebooks/06_yield_preprocessing.ipynb`](../notebooks/06_yield_preprocessing.ipynb) — Executable preprocessing notebook implementing zero-reporting imputation, spatial backcasting, 5 engineered features, and temporal splitting.
-- `train_yield.csv`, `val_yield.csv`, `test_yield.csv` — Final leakage-free chronological datasets under `data/final/yield/`.
+- **Primary Work (Pan-India Multi-Crop):**
+  - `production_unified.csv` & `production_unified_imputed.csv` — Full 440,962-record multi-crop production and yield dataset (1997–2024 across 35 States/UTs and 124 crops).
+  - [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../notebooks/07_Yield_EDA+%20preprocessing.ipynb) — Full executable notebook performing multi-source schema unioning, coconut unit conversion, EDA correlation matrix, and `MissForest` imputation.
+  - [`docs/Milestone_2_work/yield_report.md`](../docs/Milestone_2_work/yield_report.md) — Comprehensive technical documentation of the multi-crop pipeline.
+- **Complementary UP Rice & Wheat Subset:**
+  - `up_district_yield_apy_1997_2023.csv` — Focused 15-attribute UP district yield dataset enriched with IMD daily weather and ICRISAT NPK inputs.
+  - [`notebooks/05_yield_eda.ipynb`](../notebooks/05_yield_eda.ipynb) & [`notebooks/06_yield_preprocessing.ipynb`](../notebooks/06_yield_preprocessing.ipynb) — Specialized UP notebooks evaluating district bifurcations, regional disparities, and out-of-time chronological splitting (`train/val/test_yield.csv`).
 
 ---
 
@@ -797,7 +746,7 @@ To prevent temporal autocorrelation leakage across agricultural cycles, the data
 
 **Summary of work completed**
 
-Milestone 2 delivered comprehensive EDA and preprocessing groundwork across all vision, RAG/PDF, KCC, and crop yield prediction datasets. For vision, three datasets were fully analyzed across 19–22 notebook cells each, uncovering critical data quality issues — Tungro background bias, Rice Set 1 duplication (33% of Blast class), Wheat label mislabelling (45→15 classes), and train/test leakage in Wheat (646 cross-split hashes). For the RAG corpus, 170 clean PDF documents were chunked into 1,451 MuRIL-ready chunks. The KCC dataset (3.12M records) was profiled, with crop/category/temporal/language distributions fully mapped. For the Yield Prediction subsystem, 3,886 historical records across 75 UP districts (1997–2023) were compiled, harmonized across district bifurcations (3,996 records), enriched with 5 domain features, and chronologically partitioned into training, validation, and holdout test cohorts.
+Milestone 2 delivered comprehensive EDA, data cleaning, integration, and preprocessing across all vision, RAG/PDF, KCC, and crop yield prediction datasets. For the Vision subsystem, three datasets were thoroughly cleaned and unified: Wheat label canonicalization (45→15 classes), Rice Set 1 burst-capture deduplication and thinning (5,932 → 2,066 clean images), and Rice Set 2 panoramic letterboxing (120 images). These three sources were concatenated into a **unified 20-class dataset of 12,859 images** and partitioned via a centralized group-aware stratified split (80/10/10) with verified zero cross-split leakage (`0 groups spanning splits`). For the RAG corpus, 170 clean PDF documents were chunked into 1,451 MuRIL-ready chunks. The KCC dataset (3.12M records) was profiled, with crop/category/temporal/language distributions fully mapped. For the Yield Prediction subsystem, a primary **unified multi-crop agricultural dataset (`440,962` records spanning 124 crops across India)** was constructed, deduplicated, and preprocessed using non-parametric `MissForest` imputation (`production_unified_imputed.csv`). Complementing this, a specialized **UP Rice/Wheat domain subset (`3,996` records across 75 districts)** was harmonized across administrative bifurcations, enriched with IMD/ICRISAT climate and input covariates, and partitioned chronologically into leak-free training, validation, and holdout test splits.
 
 **Key observations from the data**
 
@@ -813,20 +762,19 @@ Milestone 2 delivered comprehensive EDA and preprocessing groundwork across all 
 | Wheat: Diverse visual targets (pests, foliar, spike) | Backbone must handle multi-scale feature detection |
 | KCC: 68.7% duplicate QueryText values | Deduplication mandatory before embedding to prevent index skew |
 | KCC: English queries / Hindi answers | MuRIL's multilingual alignment is essential for retrieval |
-| Yield: Strong positive correlation (+0.81 to +0.90) with irrigation share | Confirms canal/tubewell density drives Western UP vs Bundelkhand yield disparity |
-| Yield: Negative correlation with extreme rain days and March heatwaves | Validates IMD climate stress predictors for Kharif Rice and Rabi Wheat |
+| Yield (Multi-Crop): `whole year` and `kharif` dominate national production | Validates seasonal stratification across 124 crops in `production_unified.csv` |
+| Yield (UP Subset): Strong correlation (+0.81 to +0.90) with irrigation share | Confirms canal/tubewell density drives Western UP vs Bundelkhand yield disparity |
 
 **Confirmation of dataset readiness**
 
 | Dataset | Readiness for Milestone 3 |
 |---|---|
-| Rice Set 1 (vision) | ✅ Manifest exported; group-aware split keys ready; `.convert("RGB")` guard documented |
-| Rice Set 2 (vision) | ✅ Clean; preprocessing prescription documented (aspect-preserving resize) |
-| Wheat (vision) | ⚠️ Leakage re-split required before training — pHash-group-aware split to be executed |
-| PlantDoc (evaluation) | ✅ Reserved as held-out field-robustness test set; no training use |
-| RAG PDF chunks | ✅ 1,451 chunks ready for MuRIL embedding |
+| Unified Vision Training Dataset (`12,859` images across 20 classes) | ✅ **Complete & Training-Ready; materialized to `final/train|val|test` (80/10/10 split, 0 leakage)** |
+| PlantDoc (Evaluation Holdout Set) | ✅ **Reserved as held-out field-robustness test set (`2,598` images); no training use** |
+| RAG PDF chunks | ✅ **1,451 chunks ready for MuRIL embedding** |
 | KCC dataset | ⚠️ Deduplication script to be executed before embedding |
-| Yield Prediction dataset | ✅ **Complete; 3,996 harmonized records split chronologically into `data/final/yield/`** |
+| Primary Multi-Crop Yield Dataset (`production_unified_imputed.csv`) | ✅ **Complete; 440,962 records across 124 crops ready for pan-India benchmarking** |
+| Complementary UP Yield Subset (`data/final/yield/`) | ✅ **Complete; 3,996 harmonized records split chronologically for localized UP modeling** |
 
 **Planned activities for Milestone 3**
 
@@ -838,7 +786,7 @@ Milestone 2 delivered comprehensive EDA and preprocessing groundwork across all 
 6. Embed 1,451 PDF chunks using MuRIL into ChromaDB/FAISS vector store.
 7. Execute KCC deduplication and embed the deduplicated Q&A pairs using MuRIL.
 8. Benchmark retrieval: Recall@5, MRR, nDCG — generic embeddings vs. MuRIL.
-9. Train district-level crop yield regression models (Random Forest, XGBoost, LightGBM) on `train_yield.csv` and evaluate out-of-time accuracy on `test_yield.csv`.
+9. Train crop yield regression models (Random Forest, XGBoost, LightGBM) utilizing both the multi-crop unified production dataset and the specialized UP Rice/Wheat dataset.
 
 ---
 
@@ -846,10 +794,10 @@ Milestone 2 delivered comprehensive EDA and preprocessing groundwork across all 
 
 | # | Team Member | Role | Reviewed & Approved | Date | Signature |
 |:-:|-------------|------|:-------------------:|:----:|-----------|
-| 1 | Mahesh | Comprehensive Vision EDA and Preprocessing | ☐ | | |
-| 2 | Harliv | RAG corpus, PDF chunking | ☐ | | |
-| 3 | Lokesh | Primary Vision EDA, Crop Yield Dataset Research/EDA/Preprocessing & Report Authoring | ☐ | | |
-| 4 | Aneeqa | Data/API inventory, KCC EDA | ☐ | | |
-| 5 | Tanmay | - | ☐ | | |
+| 1 | Mahesh | Comprehensive Vision EDA, Preprocessing, Integration & Training Pipeline Design | ☐ | | |
+| 2 | Harliv | Comprehensive RAG PDF Corpus Collection, EDA, Cleaning & Semantic Chunking | ☐ | | |
+| 3 | Lokesh | Primary Vision EDA, UP Rice/Wheat Yield Subset & Report Authoring | ☐ | | |
+| 4 | Aneeqa | Comprehensive KCC Dataset Aggregation (3.12M), EDA & Multilingual RAG Preparation | ☐ | | |
+| 5 | Tanmay | Primary Multi-Crop Yield Dataset Unification, EDA & MissForest Preprocessing | ☐ | | |
 
 **Document version:** Milestone 2 — Updated with Vision, RAG, KCC & Crop Yield Subsystem Findings · **Prepared:** July 2026
