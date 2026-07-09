@@ -81,7 +81,7 @@ Combine multiple Indian agriculture datasets into a unified production/yield dat
 ![Season-wise Yield and Production](images/season_summary.png)
 
 ### Numeric feature correlations
-![Correlation Matrix for Numeric Features](images/correlation_matrix.png)
+![Correlation Matrix for Numeric Features](docs/assets/milestone-2-assets/correlation_matrix.png)
 
 ## Notes
 - `crop_reco` remains a standalone reference table and is not merged directly into the time-series production dataset.
