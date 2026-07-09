@@ -14,7 +14,25 @@ The wheat dataset is the largest of our three sources (~14k images, ~7 GB). The 
 
 ---
 
-## 2. Starting Point (Raw Dataset)
+## 2. Before → After (at a glance)
+
+| Property | Before preprocessing | After preprocessing |
+|----------|---------------------|---------------------|
+| Total images | 14,154 | **10,673** |
+| Classes | 45 (corrupted naming) | **15** (canonical) |
+| Class naming | inconsistent across splits (`Black Rust` / `black_rust_test` / `black_rust_valid`) | unified + crop-prefixed (`wheat__black_rust`) |
+| Broken folder | `blast_test_valid` (doubled suffix) | repaired (folded into `blast`) |
+| Exact duplicate files | 3,011 | 0 |
+| Mislabel groups (same image, 2 labels) | 313 (469 images) | 0 |
+| Split leakage | 671 groups leaked across author's split (2,321 images) | author split discarded; re-split deferred, group-aware |
+| Image size / shape | mixed sizes, collages, odd aspect ratios | all 256×256, letterboxed |
+| Color mode | mixed (RGBA / P / CMYK present) | all RGB |
+| Imbalance ratio (train) | 5.6 | 7.9 (widened by dup/mislabel removal) |
+| Split | train / val / test (author's, untrustworthy) | `unassigned` (split deferred to merge notebook) |
+
+---
+
+## 3. Starting Point (Raw Dataset)
 
 ```
 Total wheat images: 14154
@@ -32,7 +50,7 @@ The dataset ships with a train/val/test split already made by the author, and ap
 
 ---
 
-## 3. Step-by-Step Preprocessing
+## 4. Step-by-Step Preprocessing
 
 ### Step 1 — Label repair (45 → 15 classes)
 
@@ -147,7 +165,7 @@ Only 1 near-blank image was found — confirming the dataset is genuinely photo-
 
 ---
 
-## 4. Final Prepared Wheat Dataset
+## 5. Final Prepared Wheat Dataset
 
 **10,673 images, 15 classes, all 256×256 RGB, letterboxed.**
 
@@ -169,7 +187,7 @@ Note: `split` is currently `unassigned` on purpose — see below.
 
 ---
 
-## 5. Issues Faced (Summary)
+## 6. Issues Faced (Summary)
 
 | Issue | Severity | Resolution |
 |-------|----------|------------|
@@ -183,9 +201,7 @@ Note: `split` is currently `unassigned` on purpose — see below.
 
 ---
 
-## new size of dataset after above preprocessing steps ~233 MB reduced from 7GB
-
-## 6. What's Still Remaining for Wheat
+## 7. What's Still Remaining for Wheat
 
 Wheat's **cleaning** is complete, but a few things are deliberately **deferred**, because they must happen on the full merged dataset (wheat + both rice sets), not on wheat alone:
 
@@ -201,6 +217,6 @@ Wheat's **cleaning** is complete, but a few things are deliberately **deferred**
 
 ---
 
-## 7. Next Step
+## 8. Next Step
 
 Publish `prepared/wheat/` as a Kaggle Dataset, then move to **Notebook B — Rice Set 1** (`nirmalsankalana/rice-leaf-disease-image`), which has a different set of problems: heavy near-duplication and a "Tungro" background shortcut flagged in EDA.
