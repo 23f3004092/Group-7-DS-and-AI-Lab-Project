@@ -20,6 +20,7 @@ Combine multiple Indian agriculture datasets into a unified production/yield dat
 6. Deduplicated overlapping rows by prioritizing more granular district-level data over state-level data.
 7. Corrected coconut quantities by converting production/yield from pieces to tonnes.
 8. Performed data quality reporting and exported `production_unified.csv`.
+9. The EDA and data collection is performed covering all states and union teritories, for uttar pradesh necessary filter can be applied and acheived accordingly.
 
 ## Preprocessing
 - Identified categorical and numeric columns in the unified dataset.
