@@ -80,6 +80,7 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
   * Wheat Cultivation in India (ICAR-IIWBR Pocket Guide) — https://iiwbr.org.in/wp-content/uploads/2023/08/EB-52-Wheat-Cultivation-in-India-Pocket-Guide.pdf
   * ICAR Indian Farming Magazine (Nov 2025) — https://icar.org.in/sites/default/files/2025-10/Indian%20Farming%20November%202025.pdf
   * Rice-Based Cropping Systems (ICAR) — https://icar.org.in/sites/default/files/inline-files/Rice-based-cropping-systems.pdf
+* **Drive link** - https://drive.google.com/drive/folders/1zc6mcshvO-_YiL7yjZcbsA8YOBSJslG-
 * **Public/private/licensed status:** Publicly available government/institutional data (Union and UP State government portals, ICAR, RBI); usage falls under open government data licensing, though a couple of sources (e.g. MISS) were located via general web search rather than a single stable government URL and should be re-verified for licensing before final submission.
 * **Purpose:** Forms the localized knowledge base for the MuRIL-embedded RAG pipeline, grounding LLM responses in real agronomic Q&A, scheme eligibility/operational details, and crop-specific advisories rather than parametric (and potentially hallucinated) knowledge.
 * **Why each dataset was selected:** These PDFs were selected to ensure domain alignment; scheme PDFs and advisories are authoritative, up-to-date sources for policy and agronomic guidance, addressing the "outdated scheme" and dosage-hallucination risks flagged in Milestone 1.
@@ -428,7 +429,7 @@ Laplacian variance (sharpness) varies 3–4 orders of magnitude within most clas
 * **Language:** Language detection (via langdetect, with a Devanagari-ratio fallback) found the corpus to be overwhelmingly English (168/170 documents); 2 documents were misclassified as Welsh/Catalan due to short/noisy text samples — these are detector artifacts, not genuine non-English content, and were manually verified as English.
 * **Document length distribution:** Page count and word count distributions computed and plotted.
 
-![Page word count histo](<./assets/milestone-2-assets/page_word_count_histo.png>)
+![Page word count histo and docs per source](<./assets/milestone-2-assets/docspersource_pagewordcount.png>)
 
 
 
@@ -436,30 +437,15 @@ Laplacian variance (sharpness) varies 3–4 orders of magnitude within most clas
 * **Duplicate analysis:** Exact duplicates flagged via file hash; 33 near-duplicate pairs (similarity > 0.90) identified via text similarity and resolved by keeping the higher-word-count copy (`excluded_near_duplicate_docs.csv`), giving a final clean corpus of 170 documents.
 * **Word frequency & domain-relevant terms:** Top frequent words (stopwords removed, English + Hindi) computed across the clean corpus to sanity-check extraction quality and vocabulary coverage. A domain-keyword coverage check (rice, wheat, scheme, subsidy, kisan, etc.) confirmed the corpus contains the terms the RAG system needs to retrieve, per the Rice/Wheat/scheme scope defined in Milestone 1.
 
-
 ![Word frequency](<./assets/milestone-2-assets/word_frequency.png>)
-
-
-* **Other Visualizations:**
-
-![Word count](<./assets/milestone-2-assets/word_count.png>)
-
-
-
-
-![Docs per source](<./assets/milestone-2-assets/docs_per_source.png>)
-
 
 
 **5.3 RAG / NLP KCC**
 * **Summary statistics:** 3,123,029 records, 15 columns; per-year breakdown — 2020: 565,719 | 2021: 495,222 | 2022: 620,775 | 2023: 585,633 | 2024: 536,048 | 2025: 319,632.
 * **Crop/category distribution:** 318 unique crops; top crops are "Others" (34.7%), Wheat (16.4%), Paddy/Rice (15.5%), Sugarcane (4.0%), Potato (3.4%). Rice + Wheat combined account for **31.95%** of all queries (997,806 records), directly validating the project's rice/wheat scope. Query categories: Cereals (32.0%) and Others (35.0%) dominate; query types are led by Weather (33.5%) and Government Schemes (25.6%).
-
-`[PLACEHOLDER: insert crop_distribution.png / category_distribution.png]`
-
 * **Temporal distribution:** Query volume is fairly stable across years (2020–2024 range 495K–621K), with a sharp drop in 2025 (319,632) — likely a partial-year data cutoff rather than a real decline. Q1 (Jan–Mar) is the busiest quarter (33.2% of queries).
 
-`[PLACEHOLDER: insert year_month_trend.png]`
+![Query month trend](<./assets/milestone-2-assets/query_month_trend.png>)
 
 * **Language distribution:** On a 100,000-record sample — queries are **99.98% English** (farmer questions typed in English/Romanized script), while answers are **98.80% Hindi** (expert responses given in Devanagari). This English-query/Hindi-answer split is an important design signal for the RAG pipeline's embedding and retrieval strategy.
 * **Text length distribution:** Query text averages 54 characters (median 54, 95th pct 85); answers average 209 characters (median 203, 95th pct 392). Combined Q&A length averages 264 characters (95th pct 432) — **98.9% of records fit within a 512-character chunk**, directly supporting a 512-character MuRIL chunking strategy with ~50-character overlap.
@@ -467,8 +453,8 @@ Laplacian variance (sharpness) varies 3–4 orders of magnitude within most clas
 * **Duplicate analysis:** No exact duplicate rows (0.00%), but **68.72% of `QueryText` values are duplicates** (e.g. "Farmer asked query on Weather" appears 781,352 times — largely templated weather queries), 13.15% duplicate `KCCCallID`s, and 26.15% duplicate full Q&A pairs. A sample-based near-duplicate check (1,000 records) found 57 similar query pairs — this high redundancy needs deduplication before MuRIL embedding to avoid over-representing templated/boilerplate queries in the retrieval index.
 * **Visualizations:**
 
-`[PLACEHOLDER: insert query_type_distribution.png]`
-`[PLACEHOLDER: insert text_length_boxplot.png]`
+![query_length_ans_length_boxplot](<./assets/milestone-2-assets/query_length_ans_length_boxplot.png>)
+
 
 **5.4 Yield Dataset EDA**
 
