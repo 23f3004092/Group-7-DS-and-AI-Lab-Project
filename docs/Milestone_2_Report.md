@@ -136,13 +136,23 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 > "Interest subvention and prompt repayment incentive benefits on short term crop loans and short term loans for allied activities will be available on an overall limit."
 
 **3.3 RAG / NLP KCC**
-* Number of records
-* Number of features
-* Target variable(s) — yield
-* Feature description
-* Data format
-* Sample records
-* Dataset schema
+
+| Attribute               | Description                                                                                                                                                    |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Number of records**   | 3,123,029 KCC query–answer records for Uttar Pradesh, spanning 2020–2025 (6 yearly CSVs combined); ~3.34 GB in memory.                                        |
+| **Number of features**  | 15 raw columns: `KCCCallID`, `CreatedOn`, `StateName`, `DistrictName`, `BlockName`, `Sector`, `Category`, `Crop`, `Season`, `QueryType`, `QueryText`, `KccAns`, `day`, `month`, `year`. |
+| **Target variable(s)**  | N/A (retrieval corpus of farmer query → expert answer pairs, not a labeled prediction task).                                                                 |
+| **Feature description** | `QueryText`/`KccAns` are the core Q&A text fields (English queries, mostly Hindi answers); `Crop`, `Category`, `QueryType` provide topical metadata; `DistrictName`/`BlockName` give geographic granularity; `day`/`month`/`year` give temporal granularity. `Season` is present in schema but entirely unpopulated (100% missing). |
+| **Data format**          | Tabular CSV (one file per year), combined into a single DataFrame.                                                                                            |
+| **Dataset schema**       | One row per farmer call/query, with the 15 columns above plus derived fields (`QueryText_length`, `KccAns_length`, detected language) added during EDA.       |
+
+**Sample Records:**
+
+> *Query (Category: Cereals, Crop: Paddy):* "Dhaan ki fasal me top dressing ke samay kya prayog kare?"
+> *Answer:* "महोदय, धान में टॉप ड्रेसिंग के समय यूरिया 35 kg और जिंक सल्फेट 10 kg प्रति एकर की दर से नमी की अवस्था में प्रयोग करे।"
+
+> *Query (Category: Others, QueryType: Government Schemes):* "Information about application status of PM Kisan Samman Nidhi scheme?"
+> *Answer:* "श्रीमान जी प्रधानमंत्री किसान सम्मान निधि योजना का आवेदन राज्य/जिला के स्वीकृति के लिए लंबित है..."
 
 **3.4 Yield Dataset**
 * Number of records
@@ -189,32 +199,57 @@ The datasets used in this project were obtained from publicly available and trus
 **5.2 RAG/NLP PDF Corpus EDA**
 * **Summary statistics:** 187 PDFs collected across 4 source folders (Other_docs, Schemes, PPQS_Advisories, UP_ACF_PDFs); per-folder doc count, total pages, and average word count documented in `pdf_inventory_clean.csv`.
 
-<img src="assets/milestone-2-assets/pdf_summary.png" width="800" />
+| Source           | Num Docs | Total Pages | Avg Pages | Avg Words | OCR Docs | Failed Docs |
+|------------------|---------:|------------:|----------:|----------:|---------:|------------:|
+| other_docs       |       12 |         189 |      15.8 |    5566.5 |        0 |           5 |
+| ppqs_advisories  |       90 |         444 |       4.9 |    1302.4 |        0 |           9 |
+| schemes          |       11 |         359 |      32.6 |    8956.5 |        0 |           0 |
+| up_acp           |       74 |        1805 |      24.4 |    4579.7 |        0 |           0 |
 
 * **Language:** Language detection (via langdetect, with a Devanagari-ratio fallback) found the corpus to be overwhelmingly English (168/170 documents); 2 documents were misclassified as Welsh/Catalan due to short/noisy text samples — these are detector artifacts, not genuine non-English content, and were manually verified as English.
 * **Document length distribution:** Page count and word count distributions computed and plotted.
 
-<img src="assets/milestone-2-assets/page_word_count_histo.png" width="800" />
+![Page word count histo](<./assets/milestone-2-assets/page_word_count_histo.png>)
+
+
 
 * **Missing value analysis:** Documents with failed/near-empty text extraction were retried at higher OCR DPI (300); those still unreadable were excluded (`excluded_unreadable_docs.csv`) — 14 of 187 PDFs.
 * **Duplicate analysis:** Exact duplicates flagged via file hash; 33 near-duplicate pairs (similarity > 0.90) identified via text similarity and resolved by keeping the higher-word-count copy (`excluded_near_duplicate_docs.csv`), giving a final clean corpus of 170 documents.
 * **Word frequency & domain-relevant terms:** Top frequent words (stopwords removed, English + Hindi) computed across the clean corpus to sanity-check extraction quality and vocabulary coverage. A domain-keyword coverage check (rice, wheat, scheme, subsidy, kisan, etc.) confirmed the corpus contains the terms the RAG system needs to retrieve, per the Rice/Wheat/scheme scope defined in Milestone 1.
 
-<img src="assets/milestone-2-assets/word_frequency.png" width="800" />
+
+![Word frequency](<./assets/milestone-2-assets/word_frequency.png>)
+
 
 * **Other Visualizations:**
 
-<img src="assets/milestone-2-assets/word_count.png" width="800" />
+![Word count](<./assets/milestone-2-assets/word_count.png>)
 
-<img src="assets/milestone-2-assets/docs_per_source.png" width="800" />
+
+
+
+![Docs per source](<./assets/milestone-2-assets/docs_per_source.png>)
+
+
 
 **5.3 RAG / NLP KCC**
-* Summary statistics
-* Feature distributions
-* Missing value analysis
-* Outlier analysis
-* Correlation analysis
-* Visualizations
+* **Summary statistics:** 3,123,029 records, 15 columns; per-year breakdown — 2020: 565,719 | 2021: 495,222 | 2022: 620,775 | 2023: 585,633 | 2024: 536,048 | 2025: 319,632.
+* **Crop/category distribution:** 318 unique crops; top crops are "Others" (34.7%), Wheat (16.4%), Paddy/Rice (15.5%), Sugarcane (4.0%), Potato (3.4%). Rice + Wheat combined account for **31.95%** of all queries (997,806 records), directly validating the project's rice/wheat scope. Query categories: Cereals (32.0%) and Others (35.0%) dominate; query types are led by Weather (33.5%) and Government Schemes (25.6%).
+
+`[PLACEHOLDER: insert crop_distribution.png / category_distribution.png]`
+
+* **Temporal distribution:** Query volume is fairly stable across years (2020–2024 range 495K–621K), with a sharp drop in 2025 (319,632) — likely a partial-year data cutoff rather than a real decline. Q1 (Jan–Mar) is the busiest quarter (33.2% of queries).
+
+`[PLACEHOLDER: insert year_month_trend.png]`
+
+* **Language distribution:** On a 100,000-record sample — queries are **99.98% English** (farmer questions typed in English/Romanized script), while answers are **98.80% Hindi** (expert responses given in Devanagari). This English-query/Hindi-answer split is an important design signal for the RAG pipeline's embedding and retrieval strategy.
+* **Text length distribution:** Query text averages 54 characters (median 54, 95th pct 85); answers average 209 characters (median 203, 95th pct 392). Combined Q&A length averages 264 characters (95th pct 432) — **98.9% of records fit within a 512-character chunk**, directly supporting a 512-character MuRIL chunking strategy with ~50-character overlap.
+* **Missing value analysis:** `Season` is 100% missing (unusable, to be dropped). Other fields have low missingness: `Crop` (0.20%), `QueryType` (0.16%), `Category` (0.12%), `KccAns` (0.02%), `QueryText` (0.0004%) — negligible and safe to drop/impute row-wise.
+* **Duplicate analysis:** No exact duplicate rows (0.00%), but **68.72% of `QueryText` values are duplicates** (e.g. "Farmer asked query on Weather" appears 781,352 times — largely templated weather queries), 13.15% duplicate `KCCCallID`s, and 26.15% duplicate full Q&A pairs. A sample-based near-duplicate check (1,000 records) found 57 similar query pairs — this high redundancy needs deduplication before MuRIL embedding to avoid over-representing templated/boilerplate queries in the retrieval index.
+* **Visualizations:**
+
+`[PLACEHOLDER: insert query_type_distribution.png]`
+`[PLACEHOLDER: insert text_length_boxplot.png]`
 
 **5.4 Yield Dataset EDA**
 * Summary statistics
@@ -239,15 +274,23 @@ The datasets used in this project were obtained from publicly available and trus
 * **Text cleaning:** Text extracted per PDF via `pdfplumber` (native) with `pytesseract` OCR fallback (English + Hindi) for scanned documents; garbage-character ratio computed to flag low-quality extractions for review.
 * **De-duplication:** Exact duplicates removed via content hash; 33 near-duplicate document pairs resolved by retaining the more complete (higher word-count / native-extraction) copy.
 * **Standardization:** Consistent per-document metadata schema (`source`, `extraction_method`, `detected_language`, `detected_year`, etc.) recorded for every retained document.
-* **Tokenization:** `[PLACEHOLDER: finalize chunk size/strategy for MuRIL embedding in Milestone 3 — e.g. 256/512-token chunks]`
-* **Encoding (metadata fields):** `[PLACEHOLDER: define metadata filters for retrieval, e.g. source-type tag, year, language]`
+* **Tokenization/Chunking:** Sentence-aware chunking applied (512-token target, ~50-token overlap), with a hard-split fallback for any single sentence exceeding 512 tokens (fixes rare cases like long unstructured clauses/tables). On the clean 170-document corpus, this produced **1,451 chunks** (avg. 8.5 chunks/doc), with a median chunk size of 481 tokens (mean 433, std 108) and a max of 561 tokens — no chunk exceeds the target by more than the natural overlap margin. Chunk-count distribution is heavily concentrated in the 400–550 token range, confirming the sentence-aware + hard-split approach keeps chunks consistently sized. Output saved to `pdf_chunks.csv` / `pdf_chunks.jsonl`.
+
+
+
+![Chunking Plots](<./assets/milestone-2-assets/pdf_chunk.png>)
+  
+
+
+
+* **Encoding (metadata fields):** Each chunk carries `chunk_id`, `source`, `filename`, `chunk_index`, `token_count`, `detected_language`, and `detected_year` — enabling retrieval-time filtering (e.g. restrict to `source=schemes` or `detected_year >= 2024`) alongside semantic search.
 
 **6.3 RAG / NLP KCC**
-* Missing value treatment
-* Normalization/scaling
-* Encoding categorical variables
-* Feature engineering
-* Feature selection
+* **Missing value treatment:** Drop the `Season` column (100% missing); drop/impute rows with missing `Crop`, `QueryType`, `Category`, `QueryText`, `KccAns` (all under 0.25% missingness each).
+* **De-duplication:** 68.72% of `QueryText` values and 26.15% of full Q&A pairs are duplicates (largely templated Weather/PM-KISAN queries) — deduplicate on the Q&A pair before embedding, to avoid over-representing boilerplate content in the retrieval index.
+* **Standardization:** Normalize crop/category/query-type string casing and whitespace; consolidate near-duplicate `QueryType` labels (e.g. tab-prefixed variants like `"\tPlant Protection\t"`).
+* **Tokenization/chunking:** 512-character chunk size recommended (matches MuRIL's limit), with ~50-character overlap — covers 98.9% of Query+Answer pairs without truncation, based on the text-length distribution analysis.
+* **Language handling:** Queries are treated as English/Romanized input; answers are predominantly Hindi (Devanagari) — no translation step planned, but this asymmetry should be reflected in embedding/retrieval design (MuRIL supports both).
 
 **6.4 Yield**
 * Missing value treatment
@@ -302,16 +345,17 @@ The datasets used in this project were obtained from publicly available and trus
 * **Data quality problems (RAG/NLP corpus):** A subset of scanned government PDFs failed native text extraction; required OCR, and some remained unreadable even after a higher-DPI retry (14 of them), and were excluded from the corpus.
 * **Duplication (RAG/NLP corpus):** 33 near-duplicate document pairs found (e.g. same circular re-uploaded across portals) — resolved via automated similarity-based comparison, though a few pairs may warrant manual review.
 * **Licensing constraints (RAG/NLP corpus):** `[PLACEHOLDER: confirm exact usage terms per government portal before final submission, particularly for the MISS document sourced via general web search rather than an official stable URL]`
+* **High redundancy (KCC dataset):** 68.72% of query texts are duplicates, dominated by templated Weather and PM-KISAN status queries — requires deduplication before embedding to avoid retrieval-index skew toward boilerplate content.
 * `[PLACEHOLDER — vision/yield challenges owned by teammates]`
 
 ---
 
 ### 12. Deliverables Produced
 
-* **RAG/NLP corpus (this section's contribution):** `pdf_inventory_clean.csv` (cleaned document inventory, 170 documents), extracted `.txt` files per PDF, `excluded_unreadable_docs.csv`, `excluded_near_duplicate_docs.csv`, `PDF_Corpus_EDA.ipynb` (EDA notebook), `corpus_overview.png`, `word_frequency.png`.
+* **RAG/NLP corpus (this section's contribution):** `pdf_inventory_clean.csv` (cleaned document inventory, 170 documents), extracted `.txt` files per PDF, `excluded_unreadable_docs.csv`, `excluded_near_duplicate_docs.csv`, `PDF_Corpus_EDA.ipynb` (EDA notebook), `corpus_overview.png`, `word_frequency.png`, `PDF_Chunking.ipynb` (chunking notebook), `pdf_chunks.csv` / `pdf_chunks.jsonl` (1,451 chunked records ready for Milestone 3 embedding).
+* **KCC dataset (this section's contribution):** `kcc_combined_2020_2025.csv` (combined 6-year raw dataset, 3.12M records), `03_kcc_rag_eda.ipynb` (EDA notebook covering crop/category/temporal/language/text-length/missing-value/duplicate analysis).
 * `[PLACEHOLDER — vision dataset deliverables owned by teammate]`
 * `[PLACEHOLDER — yield dataset deliverables owned by teammate]`
-* `[PLACEHOLDER — kcc dataset deliverables owned by teammate]`
 * `[PLACEHOLDER — Train/Validation/Test splits, once finalized in Section 9]`
 
 ---
