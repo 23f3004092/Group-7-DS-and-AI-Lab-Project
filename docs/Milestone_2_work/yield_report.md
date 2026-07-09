@@ -75,13 +75,13 @@ Combine multiple Indian agriculture datasets into a unified production/yield dat
 ![Total Production and Average Yield by Year](../assets/milestone-2-assets/yearly_trends.png)
 
 ### Top crops by total production
-![Top 10 Crops by Total Production](../docs/assets/milestone-2-assets/top_crops_production.png)
+![Top 10 Crops by Total Production](../assets/milestone-2-assets/top_crops_production.png)
 
 ### Season-wise comparison
-![Season-wise Yield and Production](../docs/assets/milestone-2-assets/season_summary.png)
+![Season-wise Yield and Production](../assets/milestone-2-assets/season_summary.png)
 
 ### Numeric feature correlations
-![Correlation Matrix for Numeric Features](../docs/assets/milestone-2-assets/correlation_matrix.png)
+![Correlation Matrix for Numeric Features](../assets/milestone-2-assets/correlation_matrix.png)
 
 ## Notes
 - `crop_reco` remains a standalone reference table and is not merged directly into the time-series production dataset.
