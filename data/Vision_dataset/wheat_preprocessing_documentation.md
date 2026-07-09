@@ -183,6 +183,8 @@ Note: `split` is currently `unassigned` on purpose — see below.
 
 ---
 
+## new size of dataset after above preprocessing steps ~233 MB reduced from 7GB
+
 ## 6. What's Still Remaining for Wheat
 
 Wheat's **cleaning** is complete, but a few things are deliberately **deferred**, because they must happen on the full merged dataset (wheat + both rice sets), not on wheat alone:
