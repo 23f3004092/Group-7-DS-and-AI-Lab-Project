@@ -848,8 +848,8 @@ Milestone 2 delivered comprehensive EDA and preprocessing groundwork across all 
 |:-:|-------------|------|:-------------------:|:----:|-----------|
 | 1 | Mahesh | Comprehensive Vision EDA and Preprocessing | ☐ | | |
 | 2 | Harliv | RAG corpus, PDF chunking | ☐ | | |
-| 3 | Lokesh | Primary Vision EDA, report authoring | ☐ | | |
+| 3 | Lokesh | Primary Vision EDA, Crop Yield Dataset Research/EDA/Preprocessing & Report Authoring | ☐ | | |
 | 4 | Aneeqa | Data/API inventory, KCC EDA | ☐ | | |
 | 5 | Tanmay | - | ☐ | | |
 
-**Document version:** Milestone 2 — Updated with Vision EDA Findings · **Prepared:** July 2026
+**Document version:** Milestone 2 — Updated with Vision, RAG, KCC & Crop Yield Subsystem Findings · **Prepared:** July 2026
