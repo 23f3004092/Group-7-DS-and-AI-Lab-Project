@@ -26,13 +26,13 @@
 - Compiled the evaluation metrics and references used in the report.
 - Assisted in preparing the Milestone 1 presentation slides.
   
-### Aneeqa
+# Aneeqa
 - Participated in team discussions to narrow the broad "farmer assistant" concept into a focused problem statement.
 - Contributed to defining project boundaries, identifying what is in scope versus explicitly out of scope.
 - Researched existing solutions including DigiGreen, KisanSarathi.
 - Explored government and industry initiatives including India's Digital Agriculture Mission, Kisan e-Mitra and Bharat-VISTAAR.
 - Reviewed and contributed to research documentation and final Milestone-1 report, ensuring technical accuracy and completeness
-### Tanmay
+# Tanmay
 
 -- Participated in team discussions regarding architecture of the product focusing on system design and reliability of API calls, mitigate latency bottlenecks before implementation begins
 -- Proposed and structured the architectural shift from a pure Python setup to a split-responsibility model, introducing a highly concurrent Java (Spring Boot) core for I/O routing and keeping Python strictly sandboxed for ML execution.
