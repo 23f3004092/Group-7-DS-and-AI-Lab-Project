@@ -1,0 +1,2088 @@
+
+INTEGRATED PEST MANAGEMENT PACKAGE
+FOR RICE
+Anand Prakash
+J S Bentur
+M Srinivas Prasad
+R K Tanwar
+O P Sharma
+Someshwar Bhagat
+Mukesh Sehgal
+S P Singh
+Monika Singh
+C Chattopadhyay
+S N Sushil
+A K Sinha
+Ram Asre
+K S Kapoor
+K Satyagopal
+P Jeyakumar
+National Centre for Integrated Pest Management
+LBS Building, IARI Campus, New Delhi – 110 012
+Directorate of Plant Protection, National Institute of Plant Health
+Quarantine & Storage (DPPQ&S) Management (NIPHM)
+CGO Complex, NH IV, Faridabad DAC, Min of Agri., Rajendranagar,
+Haryana- 121001 Hyderabad- 500030
+© 2014 Directorate of Plant Protection, Quarantine & Storage
+CGO Complex, NH IV, Faridabad- 121001
+Citation : Anand Prakash, J S Bentur, M Srinivas Prasad, R K Tanwar, O P Sharma, Someshwar
+Bhagat, Mukesh Sehgal, S P Singh, Monika Singh, C Chattopadhyay, S N Sushil,
+A K Sinha, Ram Asre, K S Kapoor, K Satyagopal, and P Jeyakumar. 2014. Integrated
+Pest Management for Rice. p. 43
+Cover picture : Healthy crop of Rice
+Compiled by : Anand Prakash1, J S Bentur2, M Srinivas2 Prasad, R K Tanwar, O P Sharma, Someshwar
+Bhagat, Mukesh Sehgal, S P Singh, Monika Singh, C Chattopadhyay, S N Sushil3,
+A K Sinha3, Ram Asre3, K S Kapoor3, K Satyagopal4, and P Jeyakumar4.
+National Centre for Integrated Pest Management, LBS Building, IARI Campus, Pusa,
+New Delhi-110 012
+1CRRI, Cuttack 753006
+2DRR, Rajendernagar, Hyderabad 500030
+3Directorate of Plant Protection, Quarantine & Storage, Faridabad 121 001
+4National Institute of Plant Health Management, Rajendranagar, Hyderabad 500030
+Published by : Director
+National Centre for Integrated Pest Management, LBS Building, IARI Campus,
+New Delhi – 110 012 on behalf of Directorate of Plant Protection, Quarantine &
+Storage, CGO Complex, NH IV, Faridabad, Haryana- 121 001
+Year : 2014
+Copies : 500
+Printed by:
+M/s. Royal Offset Printers, A-89/1, Naraina Industrial Area, Phase-I, New Delhi-110028
+ii
+iii
+iv
+PREFACE
+Pests are major biotic constraints to achieve self sufficiency in ensuring food security.
+Losses due to pest vary range 10-30% depending upon the genetic constituent of crop,
+its health and the governing environment. General national estimate of annual crop
+losses due to pest amounts to (cid:0) 260000 million per year. However, negligence of endemic
+areas can result in complete crop failures. In view of inefficacy of chemical pesticides and
+environmental problems thereof, Integrated Pest Management (IPM) has been accepted
+as a cardinal principle of Plant Protection in the overall Crop Protection Programme
+under the National Agricultural Policy of the Govt. of India. IPM being an eco-friendly
+approach, socially acceptable and economically viable has been widely accepted across
+the country. The IPM package encompasses various management strategies for pest and
+disease problems. Pest monitoring is also one of the important components of IPM to take
+proper decision to manage any pest problem. It can be done through Agro-Ecosystem
+Analysis (AESA), field scouting, light, pheromone, sticky/yellow pan traps. The economic
+threshold level (ETL) of important pests and diseases are also given in the package to
+activate appropriate control measures on standing crops.
+The existing package and practices was developed way back in 2001-02 by DPPQ & S,
+Faridabad catering the need of extension personals in extending IPM tactics to farmers.
+Though these were useful, there is a need to update them in view of changing climate and
+its impact on pests and their protection measures.
+A National Workshop on IPM for harmonization of Package of Practices was organized
+th
+at the National Centre for Integrated Pest Management, New Delhi, during 25-26 Feb.,
+2013 with a view to provide technical knowledge to the extension functionaries and
+farmers in the States. The IPM package has been developed with the technical inputs from
+the experts from the PI (AICRIP), Indian Council of Agricultural Research (NCIPM),
+State Agricultural Universities, and DPPQ & S, Faridabad.
+It will also be useful in reducing the pesticide residues in exportable agricultural
+commodities and would also help in the management of pests/diseases/weeds/nematodes,
+which may get inadvertently introduced in the country. These packages will be useful for
+the researchers, extension workers and farmers alike who are engaged in the agricultural
+practices.
+Editors
+v
+vi
+CONTENTS
+Title Page No.
+1. Introduction ................................................................................................................................1
+2. Biotic constraints .........................................................................................................................1
+2.1. Major Insect Pests: National Significance ......................................................................1
+2.2. Major Insect Pests: Regional Significance ......................................................................1
+2.3. Major Diseases of National Significance ........................................................................2
+2.4. Major Diseases of Regional Significance ........................................................................2
+2.5. Major Nematodes of National Significance ...................................................................2
+2.6. Major Nematodes of Regional Significance ...................................................................2
+2.7. Major Weeds of National Significance ...........................................................................3
+2.8. Major Weeds of Regional Significance ...........................................................................3
+2.9. Major Rodents of Regional Significance ........................................................................3
+3. Integrated Pest Management Approach ........................................................................................4
+3.1. Pest Monitoring ................................................................................................................5
+3.1.1. Agro Eco System Analysis (AESA) ..................................................................5
+3.1.2. Economic Threshold Levels (ETL) of major pests of ......................................9
+rice crop stage wise
+3.2. Cultural Practices ............................................................................................................10
+3.3. Genetic Management .......................................................................................................12
+3.4. Mechanical Practices ......................................................................................................14
+3.5. Biological Control Practices ..........................................................................................14
+3.5.1. Augmentation and Conservation .....................................................................14
+3.5.2. Pest Defender Ratio ...........................................................................................17
+3.5.3. Behavioural Control ..........................................................................................17
+3.6. Chemical Control Measures ..........................................................................................17
+Generic IPM module based on Vegetative Stage
+Crop Stage/ Pest vis-a-vis IPM Practices
+3.7. Nematode Management Practices ................................................................................19
+3.8. Rat Management Practices .............................................................................................19
+4. Safety parameters ........................................................................................................................19
+vii
+CONTENTS
+Annexure – I List of recommended pesticides for rice ..............................................................26
+Annexure – II Commonly Available Formulations of Pesticides for Agricultural Use ..........29
+Annexure – III Pesticides and their Mode of Action ....................................................................30
+Annexure – IV Mechanisms of Actions of Major Pesticides .......................................................31
+Annexure – V General Guidelines for Management of Resistance ..........................................32
+Annexure – VI Pesticides / Formulations banned in India .......................................................33
+Annexure – VII Pesticides Restricted for Use in the Country ....................................................34
+Annexure – VIII Basic Precautions in Pesticide Usage .................................................................35
+Annexure – IX Symptoms of Poisoning and the treatment of poisoning for ..........................38
+different pesticides .................................................................................................
+Plates
+Plate – 1: Symptoms of important diseases of rice ........................................................................41
+Plate – 2: Important insect pests of rice .........................................................................................42
+Plate – 3: Key parasitoids and predators of rice insect pests .......................................................43
+viii
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+1. Introduction
+Integral India has the largest area under rice cultivation in the world (44.6 million hectares) and ranks
+second in production (104.31million tonnes in 2011-12). In India, Rice is grown under different agro
+ecological conditions viz., water logged, deep water, hills, high humidity, high temperatures, salinity,
+alkalinity and flood prone areas. The cropping intensity differs from one environment to the other
+with a maximum of three rice growing seasons in a year in the fertile deltaic regions due to availability
+of continuous irrigation. The rice crop is prone to stress throughout the crop growth period due to
+onslaught from different pests such as insects, nematodes, diseases, weeds and rats. Adoption of
+integrated pest management (IPM) strategies is the best solution to tackle the pest problems. Rice IPM
+provides a framework for integrating knowledge, skills and information on rice pest management. An
+IPM practice in rice production initiatives includes regular pest monitoring, research on the optimal use
+of pesticides, complementary weed control strategies, and alternative cultural and biological controls.
+In this regard, several efforts have been made to develop, verify, demonstrate and document location
+specific IPM technologies suited to different ecosystems. Since IPM is a dynamic process, therefore,
+it needs continuous up gradation of the technology as per the changing pest scenario. To achieve the
+target of increasing the productivity levels to meet the future demand, it requires adoption of modern
+and intensive agricultural practices by the farmers. However, concomitant with the practice of intensive
+agriculture, there is aggravation of biotic constraints like insect pests, diseases and weeds. More than
+100 species of insects have been recorded as pest of rice, of which about a dozen are of significance
+in India. The co-ordinated network trials conducted at different centres in India have indicated that
+controlling of insect pests alone increase yield by around 1 ton /ha. The diseases of rice accounts for
+about 10% loss in rice production annually or approximately 2.5 million tons. Even if the average loss
+caused by rice disease in a year were to be only 5% of the total rice production in the country, it would
+amount to a great deal, and prevention of such a loss should constitute one of the important methods
+of augmenting our food security.
+2. BIOTIC CONSTRAINTS
+2.1. Major Insect Pests: National Significance
+1. Yellow stem borer (Scirpophaga incertulas Walker)
+2. Brown plant hopper (Nilaparvata lugens Stal) and White backed plant hopper (Sogatella furcifera
+Horváth)
+3. Leaf folder (Cnaphalocrocis medinalis Guenée)
+4. Gundhi bug (Leptocorisa acuta Thunberg)
+5. Gall midge (Orseolia oryzae Wood-Mason)
+2.2. Major Insect Pests: Regional Significance
+1. Termite (Odontotermes obesus Rambur) - In rainfed upland areas, irrigated rice-wheat system.
+2. Swarming caterpillar (Spodoptera mauritia Boisduval) - Odisha, West Bengal, Jharkhand,
+Chhattisgarh and Punjab.
+1
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+3. Rice Hispa (Dicladispa armigera Oliver) - Bihar, West Bengal, Assam, Odisha, Meghalaya, Mizoram,
+Tripura, Punjab, Himachal Pradesh, Uttar Pradesh and Uttarakhand.
+4. Climbing cutworm/Rice Ear Cutting Caterpillar/ Armyworm (Mythimna separata Walker) - In
+coastal rice growing areas, Haryana, Punjab and Uttar Pradesh.
+5. Caseworm (Nymphula depunctalis Guenée) - In low lying and water logged areas in eastern India.
+6. Thrips (Stenchaetothrips biformis Bagnall) - In upland rice in Odisha, Andhra Pradesh, Madhya
+Pradesh, Punjab, Haryana, Assam and Tamil Nadu.
+7. Mealy bug (Brevennia rehi Lindinger) - In upland rice in Uttar Pradesh, Bihar, West Bengal, Odisha,
+Madhya Pradesh, Tamil Nadu, Kerala, Pondicherry and Karnataka.
+8. Panicle mite (Steneotarsonemus spinki Smiley)-Andhra Pradesh, Odisha, West Bengal, Gujarat
+and Western Uttar Pradesh and Leaf mite (Oligonychus oryzae Hirst) –Eastern India and Andhra
+Pradesh.
+9. Root weevil (Echinochemus oryzae Marshall) - Haryana, Punjab and Tamil Nadu.
+10. White grub (Holotrichia spp.) - Hill rice.
+11. Black bug (Scotinophara coaractata Fabricius) -Andhra Pradesh, Tamil Nadu and Kerala.
+12. Blue beetle (Leptisma pygmaea Baly) - Kerala, Maharashtra and Tamil Nadu.
+2.3. Major Diseases of National Significance
+1. Rice blast (Pyricularia oryzae Cavara)
+2. Bacterial leaf blight (Xanthomonas campestris pv oryzae (Ishiyama Swings et al.))
+3. Sheath blight (Rhizoctonia solani J.G. Kühn)
+4. False smut (Ustilaginoidea virens (Cooke) Takah)
+5. Brown spot (Helminthosporium oryzae Hiroë)
+2.4. Major Diseases of Regional Significance
+1. Sheath rot (Sarocladium oryzae Sawada, W. Gams & D. Hawksw.)
+2. Bakanae (Gibberella fujikuroi Nirenberg )
+3. Stem rot (Sclerotium oryzae Catt., R.A. Krause & R.K. Webster)
+4. Rice Tungro Virus
+2.5. Major Nematodes of National Significance
+1. Root knot nematode (Meloidogyne graminicola Golden & Birchfield)
+2. White tip nematode (Aphelehchoides besseyi Christie)
+2.6. Major Nematodes of Regional Significance
+1. Ufra (Dilylenchus angustus Buther) - West Bengal, Assam and Tripura.
+2. Rice root nematode (Hirschmanniella oryzae van brede de Haan) - Odisha, West Bengal, Bihar and
+Andhra Pradesh.
+2
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+3. Cyst nematode (Heterodera oryzae Luc & Berdon) - in Kerala only.
+4. Root lesion nematode (Pratylenchus indicus Das) - Upland and in SRI system, Odisha and Jharkhand.
+2.7. Major Weeds of National Significance
+1. Echinochloa crusgalli (L.) (Beauv)
+2. Cyperus rotundus (L.)
+3. Weedy rice (Oryzae spp., wild rice)
+2.8. Major Weeds of Regional Significance
+1. Commelina bengalensis (L.)
+2. Eclipta alba (L.)
+3. Ischaemum rugosum (Salisbury)
+4. Eleusine indica L.(Gaertn)
+5. Amaranthus spinosus (L.)
+6. Monochria vaginalis (Burm.f., C.Presl ex Kunth)
+7. Digitaria sanguinalis (Scop)
+8. Fimbristylis littoralis (Vahl)
+9. Leersia hexandra (Sw.)
+10. Leptochloa chinenesis (L.)
+11. Paspalum spp.
+12. Brachiaria spp.
+13. Panicum spp.
+14. Marsilea quadrifoliata (L.)
+15. Oxalis latifolia (Kunth)
+2.9. Major Rodents of Regional Significance
+1. Smaller bandicoot (Bandicota bengalensis Gray)
+2. Soft furred field rat (Millardia meltada Gray)
+3. Indian gerbil (Tatera indica Lataste)
+4. Field mice (Mus spp.)
+3
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+3. IPM Approach
+There are over seventy two (72) definitions of IPM, issued by governments, research organizations,
+NGOs, and universities (Bajwa and Kogan, 2002). Some assume that IPM will eliminate the use of crop
+protection products, specially the chemical pesticides, which is most unlikely. Extreme views equating
+IPM with "pest free" farming will become increasingly marginalised and more balanced views will
+prevail. There is no reason not to support IPM as defined by the FAO International Code of Conduct
+on the Distribution and Use of Pesticides (Article 2): Integrated Pest Management (IPM) means a pest
+management system that, in the context of the associated environment and the population dynamics of the
+pest species, utilizes all suitable techniques and methods in a compatible manner as possible and maintains
+the pest populations at levels below those causing economically unacceptable damage or loss (FAO, 1967).
+Thus, IPM is the best combination of cultural, biological and chemical measures that provides the most
+cost-effective, environmentally sound and socially acceptable method of managing diseases, insects,
+weeds and other pests.
+IPM is a knowledge-intensive sustainable approach for managing pests by combining compatible
+cultural, biological, chemical, and physical tools in a way that minimizes economic, health, and
+environmental risks with the help of pest scouts. IPM relies heavily on knowledge of pests and crop
+interaction to choose the best combination of locally available pest management tools (Fig. 1). Therefore,
+IPM is not a single product that can be stored on shelves like pesticide, and it does not rely on single
+method to solve all our pest problems. Pests also co-evolve and adapt very quickly to single control
+tactics through natural selection, and that multiple methods used simultaneously, or an "integrated"
+approach, is the most effective for long-term, sustainable management programs.
+Fig 1. Diagrammatic representation of IPM components.
+IPM is neither organic nor it relies solely on biological control to achieve the desired sustainable
+outcome. It does often try to assist and augment the efficacy of natural enemies by limiting the impact of
+pesticide on their populations and provide clean and safe niche. It seeks to conserve balance between the
+crop and the natural environment. The World Bank policy (OP 4.04 - Natural Habitats) also promotes
+the conservation of natural habitats, and enhancement of the environment for long-term sustainable
+4
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+development. In the IPM concept, use of pesticides involves a trade-off between pest control and the
+risks of adverse effects on non-target organisms, such as natural enemies, pollinators, wildlife, and
+plants, contamination of soil and water.
+3.1 Pest Monitoring:
+a. Survey/Field Scouting
+The objective through roving surveys is to monitor the initial development of pests in endemic areas.
+Therefore, in the beginning of crop season survey routes based upon the endemic areas are required to be
+identified to undertake roving surveys. Based upon the results of the roving surveys, the state extension
+functionaries have to concentrate for greater efforts at block and village levels as well as through farmers
+to initiate field scouting. Therefore, for field scouting farmers should be mobilised to observe the insect
+pest and disease occurrence at the intervals as stipulated hereunder. The plant protection measures are
+required to be taken only when insect pests and diseases cross Economic Threshold Level (ETL) as per
+results of field scouting.
+1. Roving survey: - Undertake roving survey at every 10 km distance at 7-10 days intervals (depending
+upon pest population). Everyday at least 20 spots should be observed.
+2. Field scouting: - Field scouting for pests and bio-control fauna by extension agencies and farmers
+once in 3-5 days should be undertaken to workout ETL.
+b. Pest monitoring through pheromones/light traps etc.
+Majority of insects population can be monitored by fixing and positioning of pheromones or light
+traps at appropriate stage of crop. The State Department of Agriculture can initiate this action at strategic
+locations at village level as per the following details:
+1. Pheromone trap-monitoring - 5 traps per ha may be used to monitor yellow stem borer and moth
+population.
+2. Light trap - Chinsurah light trap or any other light trap can be operated for two hours in the evening
+to observe photo-tropic insect pests.
+3. Sweep-nets - water pans - Besides visual observations sweep-nets and water pans may also be used
+to assess the population of insect pests, and biocontrol agents to determine the type of pesticides to
+be recommended or used.
+3.1.1. Agro Eco System Analysis (AESA)
+IPM has been evolving over the decades to address the deleterious impacts of synthetic chemical
+pesticides on environment ultimately affecting the interests of the farmers. In modern IPM (FAO,
+2002) emphasis is given to Agro Eco System Analysis (AESA) where farmers take decisions based on
+larger range of field observations. The health of a plant is determined by its environment which includes
+physical factors (i.e. sun, rain, wind and soil nutrients) and biological factors (i.e. pests, diseases and
+weeds). All these factors can play a role in the balance which exists between herbivore insects and their
+natural enemies. Understanding the intricate interactions in an ecosystem can play a critical role in pest
+management.
+It is an approach, which can be gainfully employed by extension functionaries and farmers to analyse
+field situations with regard to pests, defenders, soil conditions, plant health, the influence of climatic
+factors and their interrelationship for growing healthy crop. Such a critical analysis of the field situations
+will help in taking appropriate decision on management practice. The basic components of AESA are
+5
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+1. Plant health at different stages.
+2. Built-in-compensation abilities of the plants.
+3. Pest and defender population dynamics.
+4. Soil conditions.
+5. Climatic factors.
+6. Farmers past experience.
+AESA Methodology
+Field observations on insect pests and diseases are to
+be initiated after 20 days of transplanting. In each field
+select five spots randomly as shown in the figure (four
+in the corner, at least 5 feet inside the border and one in
+the centre). At each spot select four hills randomly for
+recording observations (Total 20 hills/field).
+Data recording
+Farmers should record data in a notebook and drawing on a chart
+(cid:121) Keep records of what has happened
+(cid:121) Help us making an analysis and draw conclusions
+Data to be recorded
+(cid:121) Plant growth (weekly)
+(cid:131) Height of hill
+(cid:131) Number of tiller per hill
+(cid:131) Number of leaves
+(cid:121) Crop situation (e.g. for AESA)
+(cid:131) Plant health: Observe the crop stage and deficiency symptoms etc
+(cid:131) Pests, diseases, weeds: Count insect pests at different places on the plant, and identify any visible
+disease symptoms and severity. Observe weeds in the field and their intensity. For rats, count
+number of plants affected by rats.
+(cid:131) Natural enemies: Count parasitoids and predators
+(cid:131) Soil condition
+(cid:131) Irrigation
+(cid:131) Weather conditions
+(cid:121) Input costs
+(cid:131) Seeds
+(cid:131) Fertilizer
+(cid:131) Pesticides
+(cid:131) Labour
+(cid:121) Harvest
+(cid:131) Yield (kg/ha)
+(cid:131) Price of produce ((cid:0)/kg)
+6
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Important instructions while taking observations
+(cid:121) While walking in the field, manually collect insects in plastic bags. Use a sweep net to collect
+additional insects. Collect plant parts with disease symptoms.
+(cid:121) Find a shady place to sit as a group in a small circle for drawing and discussion.
+(cid:121) If needed, kill the insects with some chloroform (if available) on a piece of cotton.
+(cid:121) Each group will first identify the pests, defenders and diseases collected.
+(cid:121) Each group will then analyze the field situation in detail and present their observations and analysis
+in a drawing (the AESA drawing as shown in MODEL AESA CHART.
+(cid:121) Each drawing will show a plant/hill representing the field situation. The weather condition, water
+level, disease symptoms, etc. will be shown in the drawing. Pest insects will be drawn on one side.
+Defenders (beneficial insects) will be drawn on another side.
+(cid:121) Write the number next to each insect. Indicate the plant part where the pests and defenders were
+found. Try to show the interaction between pests and defenders.
+(cid:121) Each group will discuss the situation and make a crop management recommendation.
+(cid:121) The small groups then join each other and a member of each group will now present their analysis
+in front of all participants.
+(cid:121) The facilitator will facilitate the discussion by asking guiding questions and makes sure that all
+participants (also shy or illiterate persons) are actively involved in this process.
+(cid:121) Formulate a common conclusion. The whole group should support the decision on what field
+management is required in the AESA plot.
+(cid:121) Make sure that the required activities (based on the decision) will be carried out.
+(cid:121) Keep the drawing for comparison purpose in the following weeks.
+Pest: Defender ratio (P: D ratio):
+Identifying the number of pests and beneficial insects helps the farmers to make appropriate pest
+management decisions. Sweep net, visual counts etc. can be adopted to arrive at the numbers of pests
+and defenders. The P: D ratio can vary depending on the feeding potential of natural enemy as well as
+the type of pest. The P: D ratios for yellow stem borer are given below.
+Sr. No. Predator Predator :YSB Ratio
+1. Carabid beetle 5 : 1
+2. Mirid bug 3 : 1
+3. Reduviid bug 6 : 1
+4. Wolf spider 15 : 1
+5. Lynx spider 2 : 1
+6. Jumping spider 8 : 1
+7. Dwarf spider 4 : 1
+8. Long jawed spider 2 : 1
+9. Long horned grass hopper 3 : 1
+10. Ear wig 20 : 1
+11. Wasp 30 : 1
+12. Preying mantid 4 : 1
+7
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Model AESA chart
+Date: .................................... Village: ...................................................... Farmer:..............................................
+Courtsey: NIPHM, Hyderabad
+Soil condition :
+Weather condition :
+No. of insect pests :
+No. of natural enemies :
+Diseases types and severity :
+Weeds types and intensity :
+Rodent damage (if any) :
+8
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+For the success of Integrated Pest Management pest monitoring, prevention (Cultural and genetic)
+and timely intervention (Biological or chemical) are the key components.
+3.1.2. ECONOMIC THRESHOLD LEVEL (ETL) OF MAJOR PESTS OF RICE CROP STAGE
+WISE
+Crop stage Pest/Disease Economic Threshold Level (ETLs)
+Nursery Yellow stem borer 1 egg-mass/m2
+Root-knot nematode 1 nematode/g soil
+BLB: Kresek Phase 2-3 plants/m2
+Early to late Leaf-folder 2 Fully damaged leaves (FDL) with larva/hill
+tillering
+Stem borer 2 egg-mass/m2 or 10% dead heart or 1 moth/m2 or 25 moths/
+trap/week
+Gall midge 1 gall/m2 or 10% Silver shoot
+Brown planthopper/WBPH 10-15 hoppers/hill
+Rice hispa 2 adults or 2 dead leaf /hill
+Rice caseworm 2 FDL/hill
+Swarming caterpillar 1 damaged tiller/hill or 2 larvae/ m2
+Foliar blast 3-5 lesions/leaf
+Brown spot 2-3 spots/leaf & 2-3 infected plants/ m2
+Sheath blight Lesions of 5-6 mm in length & 2-3 infected plants/m2
+Sheath-rot Lesion length 2-3 mm on sheath & 3-5 infected plants/ m2
+BLB 2-3 infected leaves/m2
+Tungro 1 Tungro infected plants/m2 & 2 GLH/hill (in fungus endemic
+areas)
+Panicle initiation Stem borers 2 egg-mass/m2 or 1 moth/m2 or 25 moths / trap / week
+to booting
+Leaf-folders 2 FDL/hill
+BPH/WBPH 15-20 hoppers/hill
+Swarming caterpillar/cut 1 damaged tiller/hill or 2 larvae/ m2
+worm
+Neck blast 2-5 neck infected plants/m2
+Sheath-rot 5 infected plants/m2
+Flowering to Gundhi bug 2 bugs/hill
+milky grain
+Rice panicle mite No ETL1
+1 If mite appeared in previous season, it requires prophylactic control measures in the current season.
+9
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+3.2. Cultural Practices
+a. Raise pre-crop kharif grow Sesbania or sunhemp and incorporate 45 days old crop in soil during
+land preparation wherever possible.
+b. Select suitable resistant or moderately resistant variety.
+c. Use disease and insect free pure seed.
+d. Seed treatment (for diseases) with carbendazim 50% WP @ 2 g/kg seed or Trichoderma/Pseudomonas
+@ 5-10 g/ha of seed for seed or soil borne diseases and carbosulfan 2 g/kg of seed for root nematodes
+or as per local recommendations. In termites endemic areas, seed treatment with chlorpyriphos 20%
+EC @ 10000 ml/ha along with 10% solution of gum arabica or imidacloprid 200 SL (20%) @ 0.25
+litre/100 kg seed along with 10% solution of gum Arabica in 3.75 litre of water just before sowing.
+e. Timely planting/sowing.
+f. Pre-sowing irrigation: Many weeds can be controlled by applying pre-sowing irrigation to area
+where nursery or seedlings are to be transplanted. The emerged weeds can be ploughed under.
+g. Raising of healthy nursery.
+h. As far as possible rice seedling should be free from weed seedlings at the time of transplanting.
+i. Destruction of left over nursery, removal of weeds from field and cleaning of bunds.
+j. Normal spacing with 30-36 hills/ m2 depending on the duration of the variety.
+k. 30 cm alley formations at every 2.5 to 3 m distance in plant hopper and sheath blight endemic areas.
+l. Balanced use of fertilizers and micro-nutrients as per local recommendations. Proper water
+management (alternate wetting and drying to avoid water stagnation) in plant hopper, bacterial
+blight and stem rot endemic areas. Maintain a thin layer of water on soil surface to minimize weed
+growth.
+m. In direct sown rice, the crop should be sown in lines at recommended spacing to facilitate inter-
+weeding operations. Mechanical methods of weed should be practiced after 2-3 weeks and second
+time if necessary after 4-6 weeks of sowing.
+n. Harvest close to ground level to destroy insect pest present in the internodes/stubbles. This will also
+expose the insects to birds thus help in natural biocontrol of insect pests.
+o. After harvest, the fields should be thoroughly flooded with water and ploughed with discs or rotators
+to kill hibernating larvae of stem borer present in the stubbles. Summer ploughing of fields also
+expose larvae and pupae of rice swarming or ear cutting caterpillar (climbing cutworm) hidden in
+the soil to birds and weather factors.
+Important cultural practices reducing insect pests incidence
+S. No. Insect Pest Cultural Practices
+1. Caseworm (cid:121) Rice fields with wider hill spacing (30 x 20 cm) usually suffers less damage
+(Nymphula from caseworm.
+depunctalis) (cid:121) Early planting may escape the peak caseworm moth activity period.
+(cid:121) Draining of fields for 5-7 days kills caseworm larvae.
+(cid:121) Use of older seedlings reduces the duration of the susceptible stage of the crop.
+(cid:121) Nitrogen fertilizer use at optimal dosages and split applications reduce the rice
+caseworm’s abundance.
+10
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+S. No. Insect Pest Cultural Practices
+2. Whorl maggot (cid:121) Adult flies are more attracted to standing water. Therefore, by draining the
+(Hydrellia water at 3-4 days intervals during the first 30 days after transplanting, egg lying
+philippina) is reduced.
+(cid:121) Covering the water surface with Azolla and Salvinia molesta prevents rice
+whorl maggot infestation.
+(cid:121) Direct-seeded rice is not as attractive to adults as a transplanted rice crop is.
+(cid:121) Fields with higher plant density suffers less damage.
+(cid:121) Close planting decreases oviposition and subsequent damage
+3. Gall midge (cid:121) Plowing under the ratoon of previous crops can reduce infestation.
+(Orseolia oryzae) (cid:121) Control of grassy weeds and wild rice (alternate hosts) from surrounding areas
+can reduce gall midge incidence.
+(cid:121) Draining of rice fields for 5-7 days affects midge populations.
+(cid:121) Planting of early and using early maturing varieties may help to avoid high
+infestations.
+(cid:121) Using only moderate amounts of nitrogen and potassium fertilizers and
+adopting split applications to reduce population growth rates.
+(cid:121) Avoiding staggered planting (complete planting in an area within 3 weeks) to
+reduce infestation.
+4. Rice hispa (cid:121) Clipping and destruction of the top three-fourths of the leaves of highly
+(Dicladispa infested crops with eggs and grubs at the early vegetative stage can suppress
+armigera) populations.
+(cid:121) Sustained collection of adults by sweep net and destruction suppress
+populations and reduces damage.
+(cid:121) The removal of rice ratoons and volunteer rice during the crop-free season
+affects the rice hispa’s survival and multiplication of over-wintering populations.
+(cid:121) In situations of high hispa incidence, skip nitrogen fertilizer top-dressing.
+Note that top- dressing after the pest is controlled can enhance recovery.
+5. Rice leaf folders (cid:121) Early planting may help to avoid greater degrees of leaf damage.
+(Cnaphalocrocis (cid:121) Wider spacing (22.5 x 20 cm and 30 x 20 cm) and low usage of nitrogenous
+medinalis) fertilizers decreases leaf damage.
+(cid:121) Highly fertilized plots seem to attract females for oviposition. Therefore, it is
+advisable to avoid over-fertilization.
+(cid:121) Egg predators (crickets) inhabit surrounding grass habitats and move to
+the field at night for predation. Maintenance of non-rice habitats might be
+worthwhile.
+(cid:121) Higher damages will occur in shaded areas. Therefore, remove the causes of
+shading within the field.
+6. Yellow stem borer (cid:121) Clipping the tips of seedlings before transplanting greatly reduces the
+(Scirpophaga carryover of eggs from the seedbed to the transplanted fields
+incertulas) (cid:121) Rice varieties with short stature and shorter growth duration periods suffer
+less damage than long growth duration varieties.
+(cid:121) Rice – rice with shorter growth duration varieties suffer less damage than
+long duration varieties. This may be because of stem-borer mortality due to
+harvests occurring twice in the double cropping system.
+(cid:121) Community-wide destruction of diapausing larvae (in stubble) through tillage
+after harvest, followed by flooding, reduces stem borer populations resulting
+in low incidence in the next crop.
+11
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+S. No. Insect Pest Cultural Practices
+(cid:121) Planting or seeding times may be delayed to avoid the peak emergence of
+moths from the diapausing populations.
+(cid:121) Rice seedbeds may be used as a trap crop for moths emerging from diapause.
+7. Green leafhoppers (cid:121) Reducing the number of rice crops to two per year and synchronized
+(Nephotettix establishment across farms reduces leafhoppers and other insect vectors of rice
+cincticeps) virus or phytoplasma diseases.
+(cid:121) Transplanting older seedlings (>3 weeks) also reduces viral disease
+susceptibility transmitted by leafhoppers.
+(cid:121) Avoid planting at peak activity (shown by historical records) period to avoid
+infestation.
+(cid:121) Early planting within a given planting period, particularly in the dry season,
+reduces the risk of insect-vector disease.
+(cid:121) Nitrogen should be applied at an optimal level to discourage population build-
+up and influence plant recovery.
+(cid:121) Good weed control in the field and on the bunds removes the preferred grassy
+hosts and promotes crop vigor.
+(cid:121) Crop rotation with a non-rice crop during the dry season decreases disease
+reservoirs.
+(cid:121) Upland rice intercropped with soybean reduces the incidence of leafhoppers
+on rice compared to rice alone.
+8. Brown (cid:121) High dosages of nitrogenous fertilizers, close spacing, and high relative
+planthopper humidity increases planthopper populations.
+(Nilaparvata (cid:121) Sensible use of fertilizer by splitting nitrogen applications can also reduce
+lugens) chances of plant hopper outbreaks.
+(cid:121) Draining rice fields can be effective in reducing initial infestation levels. The
+field should be drained for 3 - 4 days when heavy infestations occur.
+(cid:121) Growing no more than two crops per year and using early-maturing varieties
+reduces planthopper abundance and damage.
+(cid:121) Synchronous planting (planting neighboring fields within 3 weeks) and
+maintaining a rice-free period may be effective.
+9. Green stinkbug (cid:121) Early-maturing varieties can be used as trap crops to protect the late maturing
+(Nezara viridula) main crop. However, insecticides need to be applied to the trap crop for the
+stinkbug’s control.
+(cid:121) The green-manuring crop, Sesbania rostrata, can also be used as a trap crop.
+(cid:121) Intercropping of soybean with rice can also be effective.
+(cid:121) Adjusting the planting date allows a degree of manipulation of N. viridula
+numbers
+3.3. Genetic management
+Insect pest and disease resistant/ tolerant varieties mentioned below should be used:
+A. Varieties resistant/tolerant to various insect pests and diseases
+Insect pests Resistant/tolerant varieties
+Stem borer Ratna, Sasyasree, Vikas, HKR 46, NDGR 21, Pantdhan 6, VLK 39, Prahlad, Birsadhan 201,
+Bhudeb Ainesh, Matangini, Radha, Sudha, Amulya, Bhagirathi, Jogan, Mandira, Nalini, Sabita,
+VL16 and VL 206.
+12
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Insect pests Resistant/tolerant varieties
+Gall midge Bhadrakali, Pavitra, Panchami, Triguna, lndursamba, Shiva, Vasundhara, Mahamaya, Ratnagiri
+3, Erra Mallelu, Kavya, Oragallu, Sneha, Bhuban, Shaktiman, Abhaya, Divya, Ruchi, Vibhava,
+Kshira, Lalat, MDU 3, Pothana, Suraksha, Tara, Rashmi, Karna Mahavir, Neela, Rajendradhan
+202, Sarsa, Udaya, Pratap, Daya, Dhanya Lakshmi, Kunti, IR 36, Asha, Samalei, Samariddhi,
+Pusa, Surekha, Phalguna, Vikram, Shakti, Jyoti, Kakatiya, Kanchan and Birsa Dhan 202.
+Brown plant Vijetha, Chaitanay, Krishnaveni, Pratibha, Vajram, Makom, Pavizham, Mansarovar, CO 42,
+hopper Jyoti, Chandana, Nagarjuna, Sonasali, Rasmi, Neela, Annanga, Daya, Bhadra, Karthika, Aruna,
+Remya, Kanakam, Bharathidasan, Remya, Triguna, IET 8116, Rajendra Mahsuri-l, Pant dhan
+11, Rajshree, Bhudeb and Hanseshwari .
+White backed HKR 120, HKR 126, HKR 228, PR 108, Menher, Pant dhan 10, Pant dhan 11, Mahananda and
+plant hopper Hanseshwari.
+Green leaf hopper Vikramarya, Nidhi, IR 24, Radha, Mahananda and Kunti.
+Blast Rasi, Vikas, Krishna Hamsa, Tulasi, IR 64, Aditya, Swarnadhan, Himalaya 1, Himalaya 2,
+Himalaya 2216, Pant dhan 10, HKR 228 and PNR 519.
+BLB Ajaya, IR 36, IR 64, Swarna, Bhumbleshwari, PR 111, PR 113, PR 114, PR 115, PR 116, PR 118,
+Rajendra Basmati, Pant dhan 11, Govind, Radha, Kamini, Pant dhan 10, Jayshree, Kanchan and
+improved sambha masouri.
+RTD Vikramarya, Nidhi, Amulya, Dinesh, Lakshmi and Nalini.
+Sheath blight PR 108, Bhudeb Dinesh, Jogan, Mandira, Nalini, Neeraj and Sabita.
+B. Varieties with resistance to more than one pest or disease
+S. No. Variety Released in Resistant to*
+1. Udaya Odisha BPH, GM, GLH, RTD and RKN
+2. Suraksha Andhra Pradesh, Odisha, and West Bengal GM, BPK, WBPH and BL
+3. Vikramarya Andhra Pradesh GM, GLH and RTD
+4. Shaktiman Odisha, and West Bengal GM, BPH, WBPH and BL
+5. Rasmi Kerala GM, BPH and BL
+6. Daya Odisha GM, BPH, GLH and BLB
+7. Samalei Odisha, and Madhya Pradesh GM, BPH, GLH and BL
+8. Bhuban Odisha GM and BLB
+9. Kunti West Bengal GM and BL
+10. Lalat Odisha GM, BPH, GLH and BL
+11. Sneha Odisha GB and RTD
+*Abbreviations
+GM- Gall midge; BPH- Brown plant hopper; WBPH- White backed plant hopper; GLH- Green
+leafhopper; BL- Blast; RTD- Rice Tungro Disease; RKN- Root-knot nematode; GB-Gundhi bug; BLB-
+Bacterial leaf blight.
+13
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+3.4. Mechanical Practices
+(cid:121) Collection of egg masses and larvae of pest to be placed in bamboo cages for conservation of
+biocontrol agents.
+(cid:121) Removal and destruction (burn) of diseased/pest infested plant parts.
+(cid:121) Clipping of rice seedlings tips at the time of transplanting to minimize carryover of rice hispa, case
+worm and stem borer infestation from seed bed to the transplanted fields.
+(cid:121) Use of coir rope in rice crop for dislodging case worm, cut worm and swarming caterpillar and leaf
+folder larvae etc. on to kerosinized water (1 L of kerosene mixed on 25 kg soil and broadcast in 1ha).
+3.5. Biological Control Practices
+The details of biological control practices are given below
+3.5.1. Augmentation and Conservation
+(cid:121) Trichogramma japonicum and T chilonis may be released @ 1 lakh/ha on appearance of egg masses
+/ moth of yellow stem borer and leaf folder in the field.
+(cid:121) Natural biocontrol agents such as spiders, drynids, water bugs, mirid bugs, damsel flies, dragonflies,
+meadow grasshoppers, staphylinid beetles, carabids, coccinellids, Apanteles, Tetrastichus, Telenomus,
+Trichogramma, Bracon, Platygaster etc. should be conserved.
+(cid:121) Collection of egg masses of borers and putting them in a bamboo cage-cum-percher till flowering
+which will permit the escape of egg parasites and trap and kill the hatching larvae. Besides, these
+would allow perching of predatory birds.
+(cid:121) Habitat management: Protection of natural habitats within the farm boundary may help in
+conserving natural enemies of pests. Management of farmland and rice bunds with planting of
+flowering weeds like marigold, sun hemp increases beneficial natural enemy population and also
+reduce the incidence of root knot nematodes. Provide refuge like straw bundles having charged with
+spiders to help in build up spider population and to provide perch for birds
+14
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Major parasitoids and predators of insect pests of rice
+Natural enemy category Natural enemy Pest attacked and feeding potential
+I. Parasitoids
+1. Egg parasitoids Trichogramma japonicum (cid:121) Egg parasitoid of yellow stem borer (YSB)
+Trichogramma chilonis (cid:121) Egg parasitoid of leaf folder,
+(cid:121) Case worm, YSB etc.
+Tetrastichus schoenobii (cid:121) Egg parasitoid of yellow and white stem borer.
+(cid:121) At least 3 stem borer eggs are needed for development
+of each wasp.
+Telenomus rowani (cid:121) Egg parasitoid of yellow and white stem borer.
+(cid:121) A female parasitizes 20-40 eggs and lives 2-4 days or
+longer if nectar or sugar solution is provided.
+(cid:121) Both Tetrastichus and Telenomus may parasitize the
+same egg mass but not the same egg.
+Gonatocerus spp. (cid:121) Egg parasitoid of leaf and plant hoppers.
+(cid:121) Parasitize on an average 8 eggs per day.
+Anagrus spp. (cid:121) Egg parasitoids of leaf and plant hoppers.
+(cid:121) Parasitizes 15 to 30 eggs/day.
+Oligosita spp. (cid:121) Egg parasitoid of leaf and plant hoppers.
+(cid:121) Consume 2 to 8 eggs per day.
+Copidosomopsis nacoleiae (cid:121) Egg parasitoid of leaf folder.
+(cid:121) 200-300 wasps are produced from a few eggs.
+2. Larval parasitoids Amauromorpha accepta (cid:121) Larval parasitoid of yellow and white stem borer.
+(cid:121) Adults are medium sized red and black in colour with
+white band at the abdominal tip.
+Stenobracon nicevillei (cid:121) Larval parasitoid of leaf folder.
+(cid:121) Adult wasp has orange brown body, black head, 3
+pairs of black spots on forewings.
+(cid:121) Ovipositor is black and double the length of its body.
+Cotesia flavipes (cid:121) Larval parasitoid of stem borer and semi-looper.
+(cid:121) Adult wasps are similar to Cotesia antustibasis except
+the antenna is short and yellow brown to red marking
+at the base of hind legs.
+Elasmus sp. (cid:121) Larval parasite of leaf folder.
+(cid:121) Wasp emerges from larva or pupa.
+(cid:121) Adults are small elongated wasps with pointed
+abdomen.
+(cid:121) Thoracic segment is enlarged and disc shaped.
+They are black with reddish markings/bands on the
+abdomen.
+15
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Natural enemy category Natural enemy Pest attacked and feeding potential
+Haplogonatopus sp (cid:121) Haplogonatopus attack leaf hoppers and
+Pseudogonatopus spp. Pseudogonatopus attack plant hoppers and act as
+parasites and predators.
+(cid:121) Adults of Pseudogonatopus are brown or black in
+colour.
+(cid:121) Females are wingless with pincher like front claws.
+Bracon sp. (cid:121) Larval parsitoid of yellow stem borer and rice hispa.
+3. Larval and pupal Xanthopimpla (cid:121) Larval, pupal parasitoid of stem borer
+parasitoids flavolineata (cid:121) Adult wasp is medium sized yellow orange in colour
+with black ovipositor and transparent wings.
+Brachymeria lasus, B. (cid:121) Larval and pupal parasitoid of Rice skipper, leaf
+excarinata, folder and green horned caterpillar.
+(cid:121) Adults of Brachymeria iasus are black and have a
+triangular cheek and yellow markings on tip of femur
+and ventral half of tibia. Brachymeria excarinata are
+black with yellow markings on both ends of hind tibia
+and no cheek.
+Opius sp. (cid:121) Larval pupal parasitoid of whorl maggot larvae. Wasp
+emerges from whorl maggot pupa.
+(cid:121) Adults are small orange brown in colour with long
+antennae, yellow legs and black ovipositor.
+II. Predators
+4. Coccinellid beetles Micraspis hirashimai, (cid:121) Preying on small hoppers, small larvae and exposed
+Ladybird beetles eggs
+Harmonia octamaculata (cid:121) Preying on small hoppers, small larvae and exposed
+eggs
+5. Carabid beetle Ophionea nigrofasciata, (cid:121) Preying leaf folder larvae and planthoppers
+Ground beetle
+6. Rove beetle Paederus fuscipes (cid:121) Preying leaf and planthoppers, eggs, and small moths
+Rove beetle
+7. Spiders Pardosa psuedoannulata, (cid:121) Prey stem borer and leaf folder moths, leaf-and plant
+Wolf spider hoppers, and whorl maggot flies.
+Oxyopes javanus, (cid:121) Prey moths of rice pests, adults of whorl maggots,
+Lynx spider leafhoppers and plant hoppers
+Tetragnatha maxillosa, (cid:121) Prey stem borer and leaf folder moths, leaf-and plant
+Long-jawed spider hoppers
+Argiope catenulata, (cid:121) Prey moths/adults of rice pests viz. grasshoppers
+Orb spider
+16
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+3.5.2. Pest defender ratio
+Pest defender ratio (P: D) 2:1 may be useful to avoid application of pesticides against plant hoppers.
+3.5.3. Behavioural Control
+Mass trapping of yellow stem borer male moths by installing pheromone traps @ 20 traps/ha with
+lures containing 10-15 mg pheromone at 20 days after transplanting.
+3.6. Chemical Control Measures
+The details of the chemical control measures to be adopted against insect pests and diseases are given
+in Generic IPM module based on vegetative stage. Resort to chemical as the last choice only after the
+regular pest and when pest population cross ETL.
+Generic IPM module based on vegetative stage
+CROP STAGE/ PEST VIS-À-VIS IPM PRACTICES
+PESTS PESTICIDES
+I. INSECTS
+Nursery
+Gall midge Carbofuran 3% CG @ 25000-66600 g/ha or carbosulfan 6% G @ 16700 g/ha or carbosulfan
+25% EC @ 800-1000 ml/ha.
+Stem borer Cartap hydrochloride 4% granules @ 18750 g/ha or cartap hydrochloride 50% SP @ 1000 g/
+ha.
+Vegetative stage
+Stem borer Carbofuran 3% CG @ 25000-66600 g/ha or cartap hydrochloride 4% granules @ 18750 g/ha
+or cartap hydrochloride 50% SP @ 1000 g/ha or monocrotophos 36 % SL @ 625-1250 ml/ha.
+Leaf folder Spray cartap hydrochloride 4% granules @ 18750-25000 g/ha or cartap hydrochloride 50%
+SP @ 1000 g/ha or monocrotophos 36 % SL @ 625-1250 ml/ha or chlorpyrifos 1.5% DP @
+25000 g/ha.
+Brown plant Spray of imidacloprid 70% WG @ 30-35 g/ha or imidacloprid 30.5% m/m SC @ 60-75 ml/ha
+hopper and WBPH or ethofenoprox 10% EC @ 500-750 ml/ha or acephate 75% SP @ 666-1000 g/ha or buprofezin
+25% SC @800 ml/ha.
+Gall midge Application of carbofuran 3% CG @ 25000-66600 g/ha or fipronil 0.3% GR @16670-25000 g/
+ha at 20 days after transplanting.
+Hispa Spray quinalphos 25% gel @ 1000 ml/ha or chlorpyrifos 20% EC @ 1250 ml/ha.
+Caseworm Spray carbaryl 10% DP @ 25000 g/ha.
+Panicle initiation to booting
+Stem borer Carbofuran 3% CG @ 25000-66600 g/ha or cartap hydrochloride 4% granules @ 18750-25000
+g/ha or cartap hydrochloride 50% SP @ 1000g/ha or monocrotophos 36 % SL @ 625-1250 ml/
+ha.
+Leaf folder Spray cartap hydrochloride 4% granules @ 18750-25000 g/ha or cartap hydrochloride 50%
+SP @ 1000 g/ha or monocrotophos 36 % SL @ 625-1250 ml/ha or chlorpyrifos 1.5% DP @
+25000 g/ha.
+17
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+PESTS PESTICIDES
+Brown plant Spray of imidacloprid 70% WG @ 30-35 ml/ha or imidacloprid 30.5% m/m SC @ 60-75 ml/ha
+hopper/White or ethofenoprox 10% EC @ 500-750 ml/ha or acephate 75% SP @ 666-1000 g/ha or buprofezin
+backed plant 25% SC @ 800 ml/ha.
+hopper
+Flowering
+Brown plant Spray of imidacloprid 70% WG @ 30-35 ml/ha or imidacloprid 30.5% m/m SC @ 60-75 ml/ha
+hopper/White or ethofenoprox 10% EC @ 500-750 ml/ha or acephate 75% SP @ 300-500 g/ha or buprofezin
+backed plant 25% SC @ 800 ml/ha.
+hopper
+II. DISEASES
+Nursery
+Blast Spray carbendazim 50% WP @ 250-500 g/ha or isoprothiolan 40% EC @ 750 ml/ha or
+tricyclozole 75% WP @ 300-400 g/ha or tricyclazole 70% WG @ 300 g/ha.
+BLB Spray of streptomycin sulphate 9% + tetracycline hydrochloride 1% SP @ 100-150 ppm.
+Vegetative
+Blast Spray carbendazim 50% WP @ 250-500 g/ha or isoprothiolan 40% EC @ 750 ml/ha or
+tricyclozole 75% WP @ 300-400 g/ha or tricyclazole 70% WG @ 300 g/ha.
+Bacterial leaf blight Spray streptocycline 100 to 150 ppm solution at early root stage. Second spray, if necessary
+before grain set. Reduce nitrogen application and apply if needed only small dose of N in more
+split doses. Chemicals as recommended earlier.
+Sheath blight Apply validamycin 3% L @ 2000 g/ha or hexaconazole 5% EC @ 1000 ml/ha or propiconazole
+25% EC @750 ml/ha or propiconazole 10.7% + tricyclazole 34.2% SE @ 500 ml/ha.
+Panicle initiation to booting
+Blast Spray carbendazim 50% WP @ 250-500 g/ha or isoprothiolan 40% EC @ 750 ml/ha or
+tricyclazole 75% WP @ 300-400 g/ha or tricyclazole 70% WG @ 300 gm/ha.
+Bacterial leaf blight Reduce nitrogen application and apply if needed only small dose of N in more split doses,
+chemicals as recommended earlier.
+Sheath blight Apply validamycin 3% L @ 2000 ml/ha or hexaconazole 5% EC @ 1000 ml/ha or propiconazole
+25% EC @ 750 ml/ha or propiconazole 10.7% + tricyclazole 34.2% SE @ 500 ml/ha.
+Flowering
+Blast Spray ediphenphos 50% EC @ 500-600 ml/ha or isoprothiolan 40% EC @ 750 ml/ha or
+tricyclazole 75% WP @ 300-400 g/ha. Apply nitrogen in small dose, if needed.
+Sheath blight Apply validamycin 3% L @ 200 g/ha or hexaconazole 5% EC @ 1000 ml/ha or propiconazole
+25% EC @750 ml/ha or propiconazole 10.7% + tricyclazole 34.2% SE @ 500 ml/ha.
+Weeds
+1. Apply cyhalofop-butyl 10% EC @ 0.75-0.80 l/ha @ 18-20 days after sowing in grassy weeds in direct
+seeded rice followed by one hand weeding given after 4-6 weeks.
+2. Apply butachlor 50% EC @ 2.5-4 l/ha or pretilachlor 50% EC @ 1.0-1.5 l/ha or oxadiargyl 80% WP @
+0.125 kg/ha or chlorimuron ethyl 25% WP @ 24 g a.i./ha or metsufluran methyl 20% WG @ 20 gm/l
+or anilophos 2% G @ 20-25 kg/ha or ethoxysulfuron 15% WDG @ 83.3-100 g/ha or cinmethalin10%
+EC @ 0.75-1.0 l/ha as pre-emergence within 4-6 days after transplanting.
+18
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+3. Apply metsulfuron methyl 10% + chlorimuron methyl 10% WP @ 20 g/ha or anilophos 24% + 2,
+4-D- ethyl ester 32% EC @ 1-1.5 l/ha at 3-10 days after transplanting.
+3.7. Nematode Management Practices
+Important nematodes and their management approaches are as under:
+1. White tip nematode (Aphalenchoides besseyi)
+1.1 Sun drying of seeds for 6 hours for 4 days.
+1.2 Pre-sowing of nursery bed treatment with carbofuran 3% CG @ 50000 g/ha, if nematode
+population crosses the ETL.
+2. Root knot nematode (Meloidogyne graminicola)
+2.1 Rotation with the crops like sweet potato, sunflower, cowpea, sesamum, and onion.
+2.2 Soil application of carbofuran 3% CG @ 50000 g/ha.
+3.8. Rat Management Practices
+(Working Index (ETL): Fifteen live burrows per hectare)
+1. Rat management need to be adopted on community basis.
+2. Employment of indigenous traps preferably one month after transplantation.
+3. Application of bromodiolone (0.005% a.i) in baits six weeks after transplantation.
+4. The residual live burrows may be treated with second application of bromodiolone (0.005%).
+5. The above control operations with rodenticides except Zinc phosphide (as rodents develop bait
+shyness) may be repeated if the rodent population exceeds working index.
+Important:
+i) Optimum period for undertaking control operation is six weeks after transplantation.
+ii) Zinc phosphide (2.5%) in baits may be applied.
+iii) For getting effective control, it is recommended that Zinc Phosphide with ISI mark in 10 g pouches
+preferably in manufacturers’ package should be procured.
+4. SAFETY PARAMETERS IN PESTICIDES USAGE
+Safety parameters inter alia classification of toxicity as per Insecticides Rules, 1971, WHO
+classification of hazards, colour of toxicity triangle, First aid measures, symptoms of poisoning and
+treatment of poisoning, the extension functionaries of the State Department of Agriculture have to
+make use of this information as under:-
+i) Basic precautions which are required to be taken as per classification of toxicity as well as hazard
+criteria by WHO may be seen as per Annexure – VIII & IX.
+ii) The extension functionaries are to educate the farmers on safety use of pesticides with the help of
+colour toxicity triangle as the farming community can follow the colour and corresponding safety
+precautions.
+19
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+iii) The symptoms of poisoning must be known to the extension functionaries to enable them to
+extend first aid measures to affected persons to the extent possible.
+iv) Basically, the information on first aid measures and treatment of poisoning is required to be passed
+on by the extension functionaries to the doctors at Primary Health Centres as well as to Private
+Doctors in the vicinity of spraying of pesticides.
+v) Extension functionaries must ensure that names of common pesticides during plant protection
+measures along with a copy of the leaflet which is an integral part of a pesticide container must be
+made available to the doctors in the vicinity of plant protection operations.
+vi) Extension functionaries are to request the doctors to intervene in procurement of antidotes for
+different pesticides as cited under “Treatment of poisoning”.
+(cid:51)(cid:85)(cid:82)(cid:87)(cid:82)(cid:70)(cid:82)(cid:79)(cid:3)(cid:73)(cid:82)(cid:85)(cid:3)(cid:51)(cid:72)(cid:86)(cid:87)(cid:76)(cid:70)(cid:76)(cid:71)(cid:72)(cid:3)(cid:68)(cid:83)(cid:83)(cid:79)(cid:76)(cid:70)(cid:68)(cid:87)(cid:76)(cid:82)(cid:81)(cid:3)(cid:87)(cid:72)(cid:70)(cid:75)(cid:81)(cid:76)(cid:84)(cid:88)(cid:72)(cid:86)(cid:15)(cid:3)(cid:72)(cid:84)(cid:88)(cid:76)(cid:83)(cid:80)(cid:72)(cid:81)(cid:87)(cid:86)(cid:3)(cid:68)(cid:81)(cid:71)(cid:3)(cid:81)(cid:82)(cid:93)(cid:93)(cid:79)(cid:72)(cid:3)(cid:86)(cid:83)(cid:72)(cid:70)(cid:76)(cid:191)(cid:70)(cid:68)(cid:87)(cid:76)(cid:82)(cid:81)(cid:86)
+Category A: Stationary, crawling pest/ disease
+Vegetative stage Insecticides and fungicides (cid:121) Lever operated knapsack sprayer (Droplets of big
+size)
+1. For crawling and soil
+(cid:121) Hollow cone nozzle @ 35 to 40 psi
+borne pests
+(cid:121) Lever operating speed = 15 to 20 strokes/min
+2. For small sucking
+Or
+leaf borne pests
+(cid:121) Motorized knapsack sprayer or mist blower
+(Droplets of small size)
+(cid:121) Air blast nozzle
+(cid:121) Operating speed: 2/3rd throttle
+Reproductive stage Insecticides and fungicides (cid:121) Lever operated knapsack sprayer (Droplets of big
+size)
+(cid:121) Hollow cone nozzle @ 35 to 40 psi
+(cid:121) Lever operating speed = 15 to 20 strokes/min
+Category B: Field flying pest/airborne pest
+Vegetative stage Insecticides and fungicides (cid:121) Motorized knapsack sprayer or mist blower (Droplets
+of small size)
+Reproductive stage
+(cid:121) Air blast nozzle
+(Field Pests)
+(cid:121) Operating speed: 2/3rd throttle
+Or
+(cid:121) Battery operated low volume sprayer (Droplets of
+small size) spinning disc nozzle
+Category C: Weeds
+Post-emergence Weedicide (cid:121) Lever operated knapsack sprayer (Droplets of big
+application size)
+(cid:121) Flat fan or flood jet nozzle @ 15 to 20 psi
+(cid:121) Lever operating speed = 7 to 10 strokes/min
+Pre-emergence (cid:121) Trolley mounted low volume sprayer (Droplets of
+small size)
+(cid:121) Battery operated low volume sprayer (Droplets of
+small size)
+20
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Do’s and don’t’s in IPM
+S, No. Do’s Don’ts
+1 Deep ploughing is to be done on bright sunny Do not plant or irrigate the field after ploughing, at least
+days during the months of May and June. The for 2-3 weeks, to allow desiccation of weed’s bulbs and/or
+field should be kept exposed to sun light at rhizomes of perennial weeds
+least for 2-3 weeks
+2 Adopt crop rotation Avoid growing monocrop.
+3 Grow only recommended varieties. Do not grow varieties not suitable for the season or the
+region
+4 Sow early in the season Avoid late sowing as this may lead to reduced yields and
+incidence of white grubs and diseases.
+5 Always treat the seeds with approved Do not use seeds without seed treatment with biocides/
+chemicals/bio products for the control of seed chemicals.
+borne diseases/pests.
+6 Sow in rows at optimum depths under proper Do not sow seeds beyond 5-7 cm depth.
+moisture conditions for better establishment.
+7 Apply only recommended herbicides Pre-emergence as well as soil incorporated herbicides
+at recommended dose, proper time as should not be applied in dry soils. Do not apply herbicides
+appropriate spray solution with standard along with irrigation water or by mixing with soil, sand
+equipment along with flat fan or flat jet or urea.
+nozzles.
+8 Maintain optimum and healthy crop stand Crops should not be exposed to moisture deficit stress at
+which would be capable of competing their critical growth stages.
+with weeds at a critical stage of crop weed
+competition
+9 Use the NPK fertilizers as per the soil test Avoid imbalanced use of fertilizers.
+10 Use micronutrient mixture after sowing based Do not apply any micronutrient mixture after sowing
+on the test recommendations. without test
+11 Conduct AESA weekly in the morning Take any management decision considering AESA and
+preferably before 9 a.m. Take decision on P: D ratio
+management practice based on AESA and P:
+D ratio only.
+12 Install pheromone traps at appropriate Do not store the pheromone lures at normal room
+period. temperature (keep them in refrigerator).
+13 Release egg parasitoids only after noticing Do not apply chemical pesticides within seven days of
+adult moth catches in the pheromone trap or release of parasitoids.
+as pheromone trap or as per field observation
+14 Apply short persistent pesticides to avoid Do not apply pesticides during preceding 7 days before
+pesticide residue in the soil and produce. harvest.
+15 Follow the recommended Do not apply long persistent on trap crop, otherwise it
+procedure of trap crop technology. may not attract the pests and natural
+21
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Operational, calibration and maintenance guidelines in brief
+For application rate and dosage see the label
+1.
+and leaflet of the particular pesticide.
+It is advisable to check the output
+of the sprayer (calibration) before
+2.
+commencement of spraying under
+guidance of trained person.
+Clean and wash the machines and nozzles
+3.
+and store in dry place after use.
+It is advisable to use protective clothing, face
+mask and gloves while preparing and
+applying pesticides.
+4.
+Do not apply pesticides without protective
+clothing and wash clothes immediately after
+spray application.
+5. Do not apply in hot or windy conditions.
+Operator should maintain normal walking
+6.
+speed while undertaking application.
+Do not smoke, chew or eat while
+7.
+undertaking the spraying operation
+Operator should take proper bath with
+8.
+soap after completing spraying
+Do not blow the nozzle with mouth
+9. for any blockages. Clean with water and a
+soft brush.
+22
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Method for calculation of pesticides for application
+(i) Solid formulations such as dust, wettable powder or gr anules, the active ingredient is mixed with
+inert material. The concentration is expressed as -
+Active ingredient (%) in the total weight of commercial product
+Active ingredient (%) in dust, WP. orgranules = Weiqht of a.i. x 100
+Total weight of W P , dust, etc.
+Example. Carbendazim 50% WP means there are 50 g of carbendazim in every 100 g of commercial
+WP (50 % a.i.).
+Calculations when recommendation is in kg a.i. per litre
+For WP, dust, granules, etc.
+Specification required:
+1) Area to be sprayed
+2) Concentration of a.i in formulation
+3) Recommended rate as kg a.i. ha-1.
+Formula: kg of WP/dust/granules = Recommended rate x spray area (sq.m)
+a.i (%) in W P x 100
+Example: If Carbendazim 50% WP is used at the rate of 2 kg a.i ha-1, then amount of Carbendazim
+50% WP required for 1 ha (10000 m2) is:
+kg of Carbendazim 50% WP required = 2 x 10000 = 4 k g/ha
+50 x 100
+(ii) Liquid of formulation Here the a.i. is dissolved in a solvent with an emulsifying agent. It is expressed
+as in emulsifiable concentrate (EC). The concentration can be expressed in two ways.
+a) Active ingredient (%) in EC = Weight of a.i. x 100
+Volume of EC
+b) Grams L-1
+Example: Hexaconazole 5% EC means, 100 mL of commercial product has 5 ml of pure Hexaconazole
+For Emulsiflable Concentrates
+Specification required:
+i) Area to be treated
+ii) Recommended rate as kg a.i. ha–1
+iii) Concentration of commercial EC as a.i (%) or kg ha-1
+When concentration of EC is in a.i. (%)
+Formula:
+kg of EC required = Recommended rate x area (m2) or
+ai (%) in commercial EC x 100
+23
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+= Recommended rate x area (ha)
+a.i. (%) in commercial EC x 100
+Example: Hexaconazole 5% EC to be sprayed at the rate of 2 kg a.i. ha-1 for 10000 m2 and
+Hexaconazole 5% EC has 5 % a.i. How much liters of Hexaconazole is required?
+Liters of 5 % Hexaconazole required = 2 x 10000 = 40 L
+5 x 100
+When concentration expressed is in kg a.t. L-1
+Formula:
+= Recommended rate in kg a.i. ha-1 x area (ha)
+Concentration of a.i. in product (kg ha-1)
+Example: Acetamprid (0.01 kg a.i. L-1 ) is to be applied at t h e rate of 0.05 kg a.i. ha-1
+How much will be required for 3 ha?
+Liters of Acetamprid required = 0.05 x 3.0 = 15 liters
+0.01
+When recommendation is based on a.i (%) in the spray fluid
+i) Wettable powders ( when diluted with water)
+Specifications required:
+1 Spray volume as L ha-1
+2 Concentration desired as a.i. (%) in spray
+3 Concentration of commercial product as a.i. (%)
+Formula :
+WP = a.i. (%) desired x spray volume
+a.i. (%) in commercial WP
+Example: To control stem borer in a plot. 2000 L of 2% Methyl Parathion DP is to be prepared.
+The commercial product to be used is Methyl parathion 50% EC. How much Methyl parathion is
+required?
+Litre of Methyl Parathion required = 2 x 2000 = 80 liters
+50
+ii) Emulsifiable concentrates (EC)
+Specification required:
+1) Spray volume as L ha-1
+2) Concentration as percentage of a.i desired.
+3) Concentration of commercial EC as a.i. (%).
+24
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Formula:
+Liter of EC = a. i. (%) desired x spray volume
+a.i. (%) in commercial EC
+Example : 2000 L of 2 % Methyl Parathion spray is to be prepared. How much commercial 50 % EC
+is required?
+Liters of Methyl Parathion = 2 x 2000 = 80 L
+50
+25
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-I
+LIST OF RECOMMENDED PESTICIDES FOR RICE (As on 15-10-2013)
+Herbicides Insecticides Fungicides
+Anilophos 2 % G Acephate 75% SP Aureofungin 46.15% w/v. SP
+Anilofos 30% EC Acetamiprid 20% SP Carbendazim 50% WP
+Anilofos 18% EC Aluminum Phosphide 56% 3g tab, Captan 75% WP
+10g pouch
+Azimsulfuron 50% DF Aluminum Phosphide 15%, 12g Carpropamid 27.8% SC
+tablet
+Anilophos 24% + 2,4-D- ethyl ester Aluminium Phosphide 77.5% GR Copper Hydroxide 77% WP
+32% EC
+Anilophos 24% + 2, 4-D- ethyl ester Azadirachtin 0.15%W/Wmin. Neem Copper oxychloride 50% WP
+32% EC seed kernel based EC
+Bensulfuron Methyl 60% DF Azadirachtin 0.03% min. Neem oil Difenoconazole 25% EC
+based EC Containing
+Bispyribac Sodium 10% SC Azadirachtin 5%W/W min. Neem Ediphenphos 50% EC
+extract concentrate containing
+Butachlor 50% EC Bacillus thuringiensis var. galleriae Flusilazole 40% EC
+Chlorimuron Ethyl 25% WP Bacillus thuringiensis var. kurstaki, Hexaconazole 5% EC
+serotype H-39, 3B, strain Z-52
+Clomazone 50%EC Buprofezin 25% SC Hexaconazole 5 % SC
+Cyhalofop-butyl 10% EC Bifenthrin 10% EC Iprodione 50% WP
+2,4-D Ethyl Ester 38 % EC (having Bromadiolone 0.25% CB Isoprothiolan 40% EC
+2,4-D acid 34 % w/w)
+2,4-D Ethyl Ester 4.5 % GR (having Bromadiolone 0.005% RB Kasugamycin 3% SL
+2,4-D acid 4 % w/w)
+Ethoxysulfuron 15% WDG Carbaryl 10% DP Kitazin 48% EC
+Fenoxaprop-p-ethyl 9.3% w/w EC Carbaryl 5% DP Kresoxim-methyl 44.3% SC
+(9% w/v)
+Fenoxaprop-p-ethyl 6.7% w/w EC Carbaryl 50% WP Mancozeb 75% WP
+Flufenacet 60% DF Carbaryl 85% WP Pencycuron 22.9% SC
+MCPA, Amine salt 40% WSC Carbofuran 3% CG Propiconazole 10.7% + tricyclazole
+34.2% SE
+Metsufluran methyl 20% WG Cartap hydrochloride 50% SP Propiconazole 25% EC
+Metsulfuron Methyl 20% WP Chlorantraniliprole 18.5% SC Propineb 70% WP
+Metsulfuron methyl 10% + Chlorantraniliprole 0.4% GR Streptomycin sulphate 9% +
+Chlorimuron methyl 10% WP tetracycline hydrochloride 1% SP
+Oxadiargyl 80% WP Chlorpyrifos 10% G Tebuconazole 25.9% m/m EC
+Orthosulfamuron 50% WG Chlorpyrifos 50% EC Thifluzamide 24% SC
+Oxadiargyl 6% EC Chromafenozide 80% WP Thiram 75% WS
+26
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Herbicides Insecticides Fungicides
+Oxadiazon 25% EC Clothianidin 50% WDG Trichoderma viride 1% WP
+Oxyflourfen 0.35% GR Chlorpyrifos 1.5% DP Tricyclazole 70% WG
+Oxyflourfen 23.5% EC Chlorpyrifos 20% EC Tricyclazole 75% WP
+Pendimethalin 30% EC Deltamethrin 11% W/WEC Validamycin 3% L
+Pendimethalin 5 % G Deltamethrin 1.8% EC Zineb 75% WP
+Pretilachlor 37% EW Deltamethrin 2.5% WP Carbendazim 12% + Mancozeb 63%
+WP
+Paraquat dichloride 24% SL Dichlorvos 76% EC Iprodione 25% + Carbendazim 25%
+WP
+Pyrazosulfuron Ethyl 10% WP Dinotefuran 20% SG Propiconazole 13.9% +
+Difenoconazole 13.9% EC
+Pretilachlor 50% EC Endosulfan 35% EC Tebuconazole 50% + Trifloxystrobin
+25% WG
+Bensulfuron methyl 0.6% + Endosulfan 4% DP
+Pretilachlor 6% GR
+Clomazone 20% + 2,4-D EE 30% EC Ethofenoprox 10% EC
+Ethiprole 40 + Imidacloprid 40%
+WG
+Ethylene Dichloride +
+CarbonTetrachloride 3:1
+Fipronil 0.3% GR
+Fenobucarb (BPMC) 50% EC
+Fenpropathrin 30% EC
+Fipronil 5% SC
+Fipronil 80% WG
+Flonicamid 50% WG
+Flubendiamide 20% WG
+Flubendiamide 39.35% m/m SC
+Imidacloprid 30.5% m/m SC
+Imidacloprid 70% WG
+Imidacloprid 17.8% SL
+Imidacloprid 0.3% GR
+Indoxacarb 15.8% EC
+Lambda-cyhalothrin 4.9% CS
+Lambda-cyhalothrin 2.5% EC
+Lambda-cyhalothrin 5% EC
+Malathion 5% DP
+Malathion 50% EC
+27
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Herbicides Insecticides Fungicides
+Metaldehyde
+Methyl Bromide 98% W/W
+Monocrotophos 36 % SL
+Oxydemeton–methyl 25% EC
+Phenthoate 50% EC
+Phorate 10% CG
+Phosalone 35% EC
+Phosphamidon 40% SL
+Quinalphos 5% granule
+Quinalphos 20% AF
+Quinalphos 25% EC
+Quinalphos 1.5% DP
+Quinalphos 25% Gel
+Thiacloprid 21.7% SC
+Thiamethoxam 25% WG
+Triazophos 20% EC
+Triazophos 40% EC
+Chlorpyrifos 50% + Cypermethrin
+5% EC
+Deltamethrin 0.72% W/W+
+Buprofezin 5.65% W/W EC
+Phosphamidon 40% + Imidacloprid
+2% SP
+Acetamiprid 0.4% + Chlorpyriphos
+20% EC
+www.cibrc.nic.in
+28
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-II
+Commonly Available Formulations of Pesticides for Agricultural Use
+Abbre-
+Class Type Description
+viation
+Dry Dust D (cid:121) Ready to use, off shelf available
+(cid:121) Low percentage of active ingredients,
+(cid:121) Very fine dry inert carrier made from tale, chalk, clay, or ash
+(cid:121) Prone to high level of pesticide drift
+(cid:121) Granule particles are larger and heavier
+Granule G (cid:121) Granule particles are larger and heavier
+(cid:121) Used for soil treatment and broadcasting to manage nematodes, weeds
+and insect pests
+Wettable WP (cid:121) Finely grounded power
+Powder W (cid:121) Finely grounded power
+Micro M (cid:121) Mixed with water for spray application
+encapsulated
+Liquid Emulsifiable EC (cid:121) Particles of active ingredients (liquid or dry) surrounded by a plastic
+concentrate coating
+Concentrate C (cid:121) Liquid active ingredients, dissolved in petroleum based solvents
+solution LC (cid:121) Easily absorbed through skin
+ULV (cid:121) Diluted with a liquid solvent before being applied
+F (cid:121) Very high percentage of active ingredient
+L (cid:121) Used before dilution or diluted with small quantities of solvent
+Fumi- Pellets liquids (cid:121) Finely grounded solid active ingredients suspended in the liquid with inert
+gants materials
+(cid:121) Solid or liquid that releases/vaporized into toxic gasses
+29
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-III
+Pesticides and their Mode of Action
+Type of pesticide Mode of action How it works
+Insecticides and Contact Act through cuticle
+nematicides
+Ingestion Act upon digestive track
+Systemic Absorbed and translocated to affected portions
+Fumigants Penetrates as a into cryptic parts
+Herbicide Contact Act through cuticle and translocation
+Systemic Absorbed through soil and translocated to different parts
+Fungicide Superficial Contact pathogen reproductive propagules
+protectants
+Systemic Absorbed through roots from soil, leaf and translocated to
+different parts
+30
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-IV
+Mechanisms of Actions of Major Pesticides
+Type of pesticide Target tissue or organ Mechanism
+Insecticide Central nervous Interfere with electron system of nervous system
+Inhibit acetyl cholinesterase the enzyme responsible for the regu-
+lating biological activity
+Cuticle Inhibit growth and prevent cuticle formulations
+Endocrine system Disrupts hormonal metabolic system
+Herbicide Seed Disrupts protein synthesis and inhibits germination
+Leaf, stem, Prevent photosynthesis
+Leaf, stem, root Interferes with the mitosis process
+Leaf, stem, root Affects cell respiration and ATP synthesis
+Fungicide Seed, leaf, stem Inhibits liquid synthesis affecting cell wall and membrane
+Root Inhibits synthesis of essential ribosomal proteins Inhibits mitosis,
+osmoregulation and mitochondrial respiration
+31
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-V
+General Guidelines for Management of Resistance
+The general guidelines if adopted can prevent development of resistance by various pests in most of
+the agricultural situations. The general approaches to avoid them are as follows:
+Insecticides
+(cid:121) Maintain good plant health,
+(cid:121) Delay the spray of insecticide as far as possible.
+(cid:121) Monitor populations and use economic thresholds
+(cid:121) Use all available tactics for management of a particular arthropod (insect or mite)
+(cid:121) Limit selection pressure throughout the season and remember spraying for one pest may influences
+another
+(cid:121) Limit use of one chemical molecule at a time and rotate chemical molecule and/or modes of action,
+and Use appropriate rates
+Fungicides
+(cid:121) Avoid growing large areas of highly susceptible varieties in endemic areas. Resistant varieties should
+be used to reduce reliance on chemical pesticides.
+(cid:121) Make full use of non-fungicidal control measures e.g., dispose of crop debris and control collateral
+and alternate host, which harbor disease.
+(cid:121) Monitor crops regularly for disease and treat before the infection becomes established.
+(cid:121) Use fungicides only in the unavoidable situations where the risk of disease warrants treatment.
+Make full use of effective fungicides with different modes of action as alternate sprays. Mixtures
+of eradicant fungicides with protectants materials offer the most flexibility as well as reducing
+resistance risk.
+(cid:121) While formulating spray programmes, take into account any earlier use of fungicides groups as seed
+treatment.
+(cid:121) Do not exceed the maximum recommended numbers of applications to each crop for any particular
+fungicide group. Avoid repeated applications of very low doses.
+32
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-VI
+Pesticides / formulations banned in India (As on 1st Jan, 2014)
+A. Pesticides Banned for manufacture, import and use.
+1. Aldicarb
+2. Aldrin
+3. Benzene Hexachloride
+4. Calcium Cyanide
+5. Chlorbenzilate
+6. Chlordane
+7. Chlorofenvinphos
+8. Copper Acetoarsenite
+9. Dibromochloropropane
+10. Dieldrin
+11. Endrin
+12. Ethyl Mercury Chloride
+13. Ethyl Parathion
+14. Ethylene Dibromide
+15. Heptachlor
+16. Lindane (Gamma-HCH)
+(Banned vide Gazette Notification No S.O. 637(E) Dated 25/03/2011)-Banned for Manufecture,Import or Formu-
+late w.e.f. 25th March,2011 and banned for use w.e.f. 25th March,2013.
+17. Maleic Hydrazide
+18. Menazon
+19. Metoxuron
+20. Nitrofen
+21. Paraquat Dimethyl Sulphate
+22. Pentachloro Nitrobenzene
+23. Pentachlorophenol
+24. Phenyl Mercury Acetate
+25. Sodium Methane Arsonate
+26. TCA (Trichloro acetic acid)
+27. Tetradifon
+28. Toxaphene(Camphechlor)
+B. Pesticide formulations banned for import, manufacture and use
+1. Carbofuron 50% SP
+2. Methomyl 12.5% L
+3. Methomyl 24% formulation
+4. Phosphamidon 85% SL
+C. Pesticide / Pesticide formulations banned for use but continued to manufacture for export
+1. Captafol 80% Powder
+2. Nicotin Sulfate
+D. Pesticides Withdrawn
+(Withdrawal may become inoperative as soon as required complete data as per the guidelines is generated and sub-
+mitted by the Pesticides Industry to the Government and accepted by the Registration Committee. (S.O 915(E)
+dated 15th Jun,2006)
+1. Dalapon
+2. Ferbam
+3. Formothion
+4. Nickel Chloride
+5. Paradichlorobenzene (PDCB)
+6. Simazine
+7. Warfarin
+Source: www.cibrc.nic.in
+33
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-VII
+Pesticides Restricted for Use in the Country (As on 1st Jan, 2014)
+S.No. Name of Pesticides Details of Restrictions
+1. Aluminium Phosphide The Pest Control Operations with Aluminium Phosphide may be un-
+dertaken only by Govt./Govt. undertakings / Govt. Organizations / pest
+control operators under the strict supervision of Govt. Experts or experts
+whose expertise is approved by the Plant Protection Advisor to Govt. of
+India except 1. Aluminium Phosphide 15 % 12 g tablet and 2. Aluminum
+Phosphide 6 % tablet.
+2. Captafol The use of Captafol as foliar spray is banned. Captafol shall be used only as
+seed dresser.
+The manufacture of Captafol 80 % powder for dry seed treatment (DS) is
+banned for use in the country except manufacture for export. (S.O.679 (E)
+dated 17thJuly, 2001)
+3. Cypermethrin Cypermethrin 3 % Smoke Generator, is to be used only through Pest Con-
+trol Operators and not allowed to be used by the General Public.
+4. Dazomet The use of Dazomet is not permitted on Tea.
+5. Diazinon Diazinon is banned for use in agriculture except for household use.
+6. Dichloro Diphenyl Trichlo- The use of DDT for the domestic Public Health Programme is restricted
+roethane (DDT) up to 10,000 Metric Tonnes per annum, except in case of any major out-
+break of epidemic. M/s Hindustan Insecticides Ltd., the sole manufacturer
+of DDT in the country may manufacture DDT for export to other countries
+for use in vector control for public health purpose. The export of DDT to
+Parties and State non-Parties shall be strictly in accordance with the para-
+graph 2(b) article 3 of the Stockholm Convention on Persistent Organic
+Pollutants (POPs).
+7. Fenitrothion The use of Fenitrothion is banned in Agriculture except for locust control
+in scheduled desert area and public health.
+8. Fenthion The use of Fenthion is banned in Agriculture except for locust control,
+household and public health.
+9. Methoxy Ethyl Mercuric The use of MEMC is banned completely except for seed treatment of potato
+Chloride (MEMC) and sugarcane.
+10. Methyl Bromide Methyl Bromide may be used only by Govt./Govt. undertakings/Govt. Or-
+ganizations / Pest control operators under the strict supervision of Govt.
+Experts or Experts whose expertise is approved by the Plant Protection Ad-
+visor to Govt. of India.
+11. Methyl Parathion Methyl Parathion 50 % EC and 2% DP formulations are banned for use on
+fruits and vegetables.
+12. Monocrotophos Monocrotophos is banned for use on vegetables.
+13. Sodium Cyanide The use of Sodium Cyanide shall be restricted for Fumigation of Cotton
+bales under expert supervision approved by the Plant Protection Advisor
+to Govt. of India.
+Source: www.cibrc.nic.in
+34
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Annexure-VIII
+Basic Precautions in Pesticide Usage
+A. Purchase
+1. Purchase only JUST required quantity e.g. 100, 250, 500 or 1000 g/ml for single application in
+specified area.
+2. Do not purchase leaking containers, loose, unsealed or torn bags.
+3. Do not purchase pesticides without proper/approved LABELS.
+B. Storage
+1. Avoid storage of pesticides in the house premises.
+2. Keep only in original container with intact seal.
+3. Do not transfer pesticides to other container.
+4. Never keep them together with food or feed/fodder.
+5. Keep away from the reach of children and livestock.
+6. Do not expose to sun-light or rain water.
+7. Do not store weedicides along with other pesticides.
+C. Handling
+1. Never carry/transport pesticides along with food materials.
+2. Avoid carrying bulk - pesticides (dusts / granules) on head, shoulders or on the back.
+D. Precautions for Preparing Spray Solution
+1. Use clean water.
+2. Always protect your NOSE, EYES, MOUTH, EARS and HANDS.
+3. Use hand gloves, face mask and cover your head with cap.
+4. Use polyethylene bags as hand gloves, handkerchiefs or piece of clean cloth as mask and a cap or
+towel to cover the head (Do not use polyethylene bag contaminated with pesticides).
+5. Read the label on the container before preparing spray solution.
+6. Prepare spray solution as per requirement.
+7. Do not mix granules with water.
+8. Concentrated pesticides must not fall on hands etc. while opening sealed containers. Do not smell
+the sprayer tank.
+9. Avoid spilling of pesticide solution while filling the sprayer tank.
+10. Do not eat, drink, smoke or chew while preparing solution.
+11. The operator should protect his bare feet and hands with polyethylene bags.
+35
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+E. Equipment
+1. Select right kind of equipment.
+2. Do not use leaky, defective equipment.
+3. Select right kind of nozzle.
+4. Don’t blow/clean clogged- nozzle with mouth. Use old tooth- brushes tied with the sprayer and
+clean with water.
+5. Do not use same sprayer for weedicide and insecticide.
+F. Precautions for applying pesticides
+1. Apply only at recommended dose and dilution.
+2. Do not apply on hot sunny day or strong windy condition.
+3. Do not apply just before the rains and also after the rains.
+4. Do not apply against the wind direction.
+5. Emulsifiable concentrate formulations should not be used for spraying with battery operated ULV
+sprayer.
+6. Wash the sprayer and bucket etc with soap water after spraying.
+7. Containers, buckets etc. used for mixing pesticides should not be used for domestic purposes.
+8. Avoid entry of animals and workers in the fields immediately after the spraying.
+G. Disposal
+1. Left over spray solution should not be drained in ponds or water lines etc. Throw it in barren isolated
+area, if possible.
+2. The used/empty containers should be crushed with a stone / stick and burned deep into soil away
+from water source.
+3. Never re-use empty pesticide container for any purpose.
+36
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+37
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+38
+XI-eruxennA
+sedicitsep
+tnereffid
+rof gninosiop
+fo
+tnemtaert
+eht
+dna
+gninosiop
+fo
+smotpmyS
+gninosiop fo tnemtaerT
+fo smotpmyS
+serusaem dia tsriF
+OHW
+fo
+ruoloC
+sa
+noitacfiissalC
+edicitsep
+fo
+emaN
+.S
+gninosiop
+yb
+noitacfiissalc
+yticixoT
+sedicitcesnI
+rep
+oN
+drazah
+elgnairT
+1791
+.seluR
+SEDICITCESNI
+SEDICITCESNI
+ETAHPSOHPONAGRO
+htiw
+sisrahtaC .retaw pat .L 4-2 htiw egaval cirtsaG -
+,gnitimov
+,aesuaN
+nosrep eht evomeR
+yletaredoM
+II
+ssalC
+wolleY
+cixot
+ylhgiH
+sohplaniuQ
+.1
+retaw
+fo puc eht ni etahplus muidos )zo 01( mg 03
+,romert
+,ssensseltser
+detanimatnoc
+eht morf
+suodrazaH
+sa
+detaeper
+segasod etairporppa ni setarutibraB -
+,noisneherppa
+tnemnorivne
+ylhgiH
+b I
+ssalC
+der
+thgirB
+cixot
+ylemertxE
+sohpotorconoM
+.2
+.snoisluvnoc ro ssensseltser rof yrassecen
+,amoc
+,snoisluvnoc
+tcatnoc
+nikS )a( fo esac nI
+suodrazah
+ro/dna
+negyxo etaripsa ,ylesolc gnihtaerb hctaW -
+eruliaf
+yrotaripser
+detanimatnoc
+lla evomeR
+.dedeen fi ,noitaripser laicfiitra
+htaed
+dna
+yletaidemmi
+dna sgnihtolc
+ylthgilS
+III
+ssalC
+eulB
+cixot
+yletaredoM
+etahpecA
+.3
+)nilanerdA(
+enirhpenipe dna sevitaxal lio ,slio diovA -
+dna
+retaw fo tol htiw hsaw
+suodrazaH
+.stnalumits evig ton od –
+,aixerona
+–
+dliM
+noitanimatnoc
+eyE )b( .paos
+)selupmA
+lm 01 ni %91( etanoculg muiclac eviG -
+,ssenizzid
+,ehcadaeh
+ytnelp
+htiw seye eht hsaW
+yletaredoM
+II
+ssalC
+wolleY
+cixot
+ylhgiH
+sohpiryprolhC
+.4
+.sruoh ruof yreve ylsuonevartni
+,yteixna
+,ssenkaew
+;retaw
+naelc dna looc fo
+suodrazaH
+eugnot
+fo sromert
+eht
+yrraC – noitalahnI )c(
+ylhgiH-
+b I
+ssalC
+wolleY
+cixot
+ylhgiH
+sohpnehpidE
+.5
+fo
+noitcejni
+,gninosiop P.O fo smotpmys emertxe roF
+,sisoim
+,sdileye
+dna
+hserf
+nepo eht ot nosrep
+suodrazah
+)nerdlihc
+rof gm 0.1-5/0 ,stluda rof ,gm 4-2( eniporta
+lausiv
+fo tnemriapmi
+sgnihtolc
+eht nesool ,ria
+slavretni
+etunim 01-5 ta detaeper ,dednemmocer si
+.ytiuca
+,tsehc
+dna kcen dnuora
+-aI
+ssalC
+deR
+cixot
+ylemertxE
+etarohP
+.6
+.rucco noitaziniporta fo sngis litnu
+eht fI
+– noitsegidnI )d( dna
+ylemertxE
+,aesuan
+-etaredoM
+,suoicsnoc
+ylluf si mitciv
+suodrazah
+evitarepmi si deepS
+,noitavilas
+gnilkcit
+yb gnitimov ecudni
+,gm
+2 taepeR .gm 4 ot 1 – noitcejni eniportA -
+,noitamircal
+ton
+oD .taorht eht fo kcab
+etunim
+61-51( rucer ot nigeb smotpmys cixot nehw
+,pmarc
+lanimodba
+lohocla
+,klim retsinimda
+erom
+,ngis doog noitavilas evissecxE ,)slavretni
+,gnitaews
+,gnitimov
+esac nI
+.secnatsbus yttaf dna
+.dedeen eniporta
+ralucsum
+,eslup
+wols
+suoicsnocnu
+si nosrep eht
+tresni
+,negyxo esu ,etaripsA ,nepo syawria peeK -
+.sisoim ,sromert
+gnihtaerb
+eht erus ekam
+laicfiitra
+evig dna ymotoehcart oD .ebut laehcartodne
+tuohtiw
+raelc tpek si egassap
+.dedeen sa noitaripser
+,aehrraid
+–
+ereveS
+s’mitciV
+.noitcurtsbo yna
+muidos
+%5 htiw hcamots egaval noitsegni roF -
+-non
+dna tniopnip
+elttil eb dluohs daeh
+hsaw
+,tcatnoc niks roF .gnitimov ton fi etanobracib
+,slipup evitcaer
+eb dluohs
+ecaf dna derewol
+.)enilas
+cinotosi htiw hsaw eye( retaw dna paos htiw
+,ytlucffiid
+yrotaripser
+eht
+ni edis eno ot denrut
+.saera tcatnoc gnihsaw elihw sevolg rebbur raeW
+,amede
+yranomlup
+esac nI
+.noitisop nwod gniyl
+enidiryp
+-2( MAP-2 evig eniporta ot noitidda nI
+fo ssol ,sisonayc
+evig
+,ytlucffiid gnihtaerb fo
+stnafni
+rof g 52.0 dna g1 )edidoihtem emixodla
+,lortnoc
+retcnihps
+htuom
+ro htuom ot htuom
+setunim
+5 fo doirep a revo etar wols a ta ylsuonevartni
+amoc
+,snoisluvnoc
+.gnihtaerb eson ot
+eroM
+.detacidni sa yllacidoirep niaga retsinimda dna
+.kcolb traeh
+dna
+eht ekaT :dia lacideM
+.deriuqer eb yam noitcejni eno naht
+/rotcod eht ot tneitap
+,nillyhponima
+,enillyhpoeht ,enihprom diovA
+ertneC
+htlaeH yramirP
+.senizaihtonehprfo setarautibrab
+eht htiw
+gnola yletaidemmi
+eviG
+.stneitap citonayc a ot eniporta evig ton oD
+teflael
+,reniatnoc lanigiro
+.eniporta
+retsinimda neht tsrfi noitaripser laicfiitra
+.lebal dna
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+39
+gninosiop fo tnemtaerT
+fo
+smotpmyS
+serusaem
+dia
+tsriF
+OHW
+fo
+ruoloC
+sa
+noitacfiissalC
+edicitsep
+fo
+emaN
+.S
+gninosiop
+yb
+noitacfiissalc
+yticixoT
+sedicitcesnI
+rep
+oN
+drazah
+elgnairT
+1791
+.seluR
+SETAMABRAC
+4 ot 1 noitcejni eniportA
+-
+fo
+noitcirtsnoC
+ylhgiH
+b I
+ssalC
+deR
+cixot
+ylemertxE
+narufobraC
+.7
+cixot nehw gm 2 taepeR
+,gm
+,noitavilas
+,slipup
+suodrazah
+wolleY
+cixot
+ylhgiH
+lyrabraC
+.8
+rucco ot nigeb smotpmys
+,gnitaews
+esuforp
+yletaredoM
+II
+ssalC
+.)slavretni etunim 06-51(
+elcsum
+,edutissal
+suodrazaH
+wolleY
+cixot
+ylhgiH
+patraC
+.9
+doog noitavilas evissecxE
+,noitanidroocni
+yletaredoM
+II
+ssalC
+.dedeen eniporta erom
+,ngis
+,gnitimov
+,aesuan
+suodrazaH
+.nepo yawria peeK
+-
+cirtsagipe
+,aehrraid
+yletaredoM
+II
+ssalC
+tresni ,negyxo esu etaripsA
+ni
+ssenthgit
+,niap
+suodrazaH
+OD .ebut laehcartodne
+.tsehc
+laicfiitra
+evig dna ymotoehcart .dedeen sa noitaripser eavral ,noitsegni
+roF
+-
+muidos %5 htiw hcamots .gnitimov ton fi ,etanobracib htiw hsaw tcatnoc niks
+roF
+hsaw seye( retaw dna
+paos
+raew ,)enilas cinotosi
+htiw
+gnihsaw elihw sevolg rebbur .saera tcatnoc negyxO
+-
+.dedeen fi ,enihproM
+-
+dna nillyhpoeht diovA
+.setarautibrab
+ro nillyhponima era semixo rehto dna MAP-2
+artnoc
+tcaf ni dna lufmrah
+ton
+.egasu enituor rof detacidni ot eniporta evig ton
+oD
+eviG .tneitap citonayc
+a
+neht tsrfi noitaripser laicfiitra .eniporta retsinimda
+SEDICIGNUF
+,etoditna cfiiceps
+oN
+,ehcadaeH
+ylekilnU
+– 5
+elbaT
+neerG
+cixot
+ylthgilS
+bezocnaM
+.01
+yllaitnesse si tnemtaerT
+,aesuan
+,noitatiplap
+etuca
+tneserp
+ot
+.citamotpmys
+dehsufl
+,gnitimov
+lamron
+ni drazah
+fo
+noitatirri
+,ecaf
+esu
+dna
+seye
+,taorht
+,eson
+ylthgilS
+III
+ssalC
+neerG
+cixot
+ylthgilS
+elozanocaxeH
+.11
+.cte
+niks
+suodrazaH
+ylekilnU
+– 5
+elbaT
+eulB
+cixot
+yletaredoM
+elozanociporP
+.21
+etuca
+tneserp
+ot
+lamron
+ni drazah
+esu
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+40
+gninosiop
+fo
+tnemtaerT
+fo
+smotpmyS
+serusaem
+dia
+tsriF
+OHW
+fo
+ruoloC
+sa
+noitacfiissalC
+edicitsep
+fo
+emaN
+.S
+gninosiop
+yb
+noitacfiissalc
+yticixoT
+sedicitcesnI
+rep
+oN
+drazah
+elgnairT
+1791
+.seluR
+ylekilnU
+– 5
+elbaT
+neerG
+cixot
+ylthgilS
+nicymadilaV
+.31
+etuca
+tneserp
+ot
+lamron
+ni drazah
+esu
+yletaredoM
+II
+ssalC
+wolleY
+cixot
+ylhgiH
+elozalcycirT
+.41
+suodrazaH
+ylthgilS
+III
+ssalC
+eulB
+cixot
+yletaredoM
+sohpneborpI
+.51
+suodrazaH
+ylekilnU
+– 5
+elbaT
+neerG
+cixot
+ylthgilS
+etanahpoiTh
+.61
+etuca
+tneserp
+ot
+lyhtem
+lamron
+ni drazah
+esu
+-od-
+-od-
+-od-
+mizadnebraC
+.71
+-od-
+-od-
+-od-
+nicymagusaK
+.81
+SEDICIBREH
+,etoditna
+cfiiceps
+oN
+,ehcadaeH
+ylekilnU
+– 5
+elbaT
+neerG
+cixot
+ylthgilS
+lytubpofolahyC
+.91
+yllaitnesse
+si
+tnemtaerT
+,aesuan
+,noitatiplap
+etuca
+tneserp
+ot
+.citamotpmys
+dehsufl
+,gnitimov
+lamron
+ni drazah
+fo
+noitatirri
+,ecaf
+esu
+dna
+seye
+,taorht
+,eson
+-od-
+eulB
+cixot
+yletaredoM
+rolhcatuB
+.02
+.cte
+niks
+ylekilnU
+– 5
+elbaT
+neerG
+cixot
+ylthgilS
+rolhcaliterP
+.12
+etuca
+tneserp
+ot
+lamron
+ni drazah
+esu
+-od-
+eulB
+cixot
+yletaredoM
+lyhtemarumyrolhC
+.22
+REHTO
+,etoditna
+cfiiceps
+oN
+,ehcadaeH
+yletaredoM
+II
+ssalC
+wolleY
+cixot
+ylhgiH
+linorpiF
+.32
+yllaitnesse
+si
+tnemtaerT
+,aesuan
+,noitatiplap
+suodrazaH
+.citamotpmys
+dehsufl
+,gnitimov
+-od-
+-od-
+-od-
+dirpolcadimI
+.42
+fo
+noitatirri
+,ecaf
+dna
+seye
+,taorht
+,eson
+.cte
+niks
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Plate-1:
+Symptoms of important diseases of rice
+Courtesy : NCIPM Courtesy : NCIPM Courtesy : CRRI
+Bakanae Bacterial leaf blight Brown spot
+Courtesy : CRRI Courtesy : CRRI Courtesy : CRRI Courtesy : CRRI
+Leaf Blast Nodal Blast Sheath Blight False smut on rice panicles
+41
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Plate 2:
+Important insect pests of rice
+Courtesy : NCIPM Courtesy : NCIPM Courtesy : NCIPM Courtesy : DRR
+YSB Moth White ear head due to YSB Leaf folder moth Folder leaf with larva
+Courtesy : DRR
+Courtesy : DRR
+Courtesy : DRR Courtesy : CRRI
+Courtesy : NCIPM
+BPH adult and nymph (upper) and hopper burn (lower) Gall midge adult (upper) and Thrips damage
+its damage i.e. silver shoot
+Gundhi bug adult
+42
+INTEGRATED PEST MANAGEMENT PACKAGE FOR RICE
+Plate 3:
+Key parasitoids and predators of rice insect pests
+Egg parasitoid emerging from YSB egg mass Egg parasitoid, Trichogramma Cocoons of larval parasitoid,
+chilonis Cotesia flavipes
+Coccinella septumpunctata Micraspis hirashimai Cheilomenes sexmaculatus
+Damselfly Dragonlfly Meadow grasshopper
+(Agriocnemis femina femina ) (Conocephalus longipennis)
+Wolf spider with egg sac Orb spider Oxyopes sp. Wolf Spider
+(Argiope catenulata) (Hogna aspersa)
+43

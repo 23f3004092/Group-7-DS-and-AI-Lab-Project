@@ -1,0 +1,356 @@
+State: Uttar Pradesh
+Agriculture Contingency Plan for District: Lalitpur
+1.0 District Agriculture profile
+1.1 Agro-Climatic/ Ecological Zone
+Agro-Ecological Sub Region(ICAR) Central Plain Zone
+Agro-Climatic Zone (Planning Commission) Central Plateau and Hill Region
+Agro-Climatic Zone (NARP) Bundelkhand zone(U.P-10)
+List all the districts falling the NARP Zone* (^ 50% Lalitpur, Jhanshi, Jalaun, Chitrakut, Mahoba, Banda and Hamirpur
+area falling in the zone)
+Geographical coordinates of district headquarters Latitude Longitude Altitude
+24° 22' N 78° 28' E 1404
+Name and address of the concerned Zonal research Station, Bharari
+ZRS/ZARS/RARS/RRS/RRTTS
+Mention the KVK located in the district with address KVK Govt. Agricultural Farm, Khiria Misra, PO Bamourikala, Devgarh Road, Lalitpur,
+Name and address of the nearest Agromet Field C. S. A Kanpur
+Unit(AMFU,IMD)for agro advisories in the Zone
+1.2 Rainfall Normal RF (mm) Normal Rainy Days Normal Onset Normal Cessation
+(Number) (Specify week and month) (Specify week and month)
+SW monsoon (June-sep) 797.2 45 2nd week of june 3rd week of September
+NE monsoon (Oct-Dec) 41.1 10 3rd week of December 2nd week of January
+Winter (Jan-March) 32.4 - - -
+Summer (Apr-May) 9.4 - - -
+Annual 880.1 55
+1.3 Land use pattern Geographical area Cultivable Forest Land under Permanent Cultivable Land Barren and Current Other
+of the district area area non- pastures wasteland under uncultivable fallows fallows
+(Latest statistics) agricultural Misc.tree land
+use crops and
+groves
+Area 509.8 374.0 76.2 41.6 2.9 47.8 1.2 15.1 11.4 12.5
+1.4 Major Soils Area(‘000 hac) Percent(%) of total
+Rakar Soil 154.0
+Parwa soils 54.6
+Kabar soils 65.9
+Maar soils 95.5
+1.5 Agricultural land use Area(‘000 hac) Cropping intensity (%)
+1
+Net sown area 301.1 130.1
+Area sown more than once -
+Gross cropped area -
+1.6 Irrigation Area(‘000 ha)
+Net irrigation area 301.1
+Gross irrigated area 211.1
+Rain fed area 512.3
+Sources of irrigation Number Area(’000 ha) Percentage of total irrigated area
+Canals 91.8 32.6
+Tanks 42.9 15.3
+Open wells 80.4 28.5
+Bore wells 66.4 23.6
+Lift irrigation schemes -
+Micro-irrigation -
+Other sources 65 0.02
+Total Irrigated Area 281.6
+Pump sets
+No. of Tractors
+Groundwater availability and use* No of blocks- (%)area Quality of water
+(Data source: State/ Central Ground Tehsils-
+water Department/ Board)
+Over exploited
+Critical
+Semi-critical
+Safe
+Waste water availability and use
+Ground water quality
+*over-exploited groundwater utilization> 100%; critical: 90-100%; semicritical:70-90%; safe:<70%
+1.7 Area under major field crops & (As per latest figures 2011-12)
+1.7 Major field crops cultivated Area(‘000 ha)
+Kharif Rabi Summer Total
+Irrigated Rain fed Total Irrigated Rain fed Total
+Rice 0 1.508 1.508 0 0 0 0 1.508
+Wheat 0 0 0 162.644 0.585 163.229 0 163.229
+Pulses 0 157.485 157.485 99.602 5.001 104.603 0.501 262.589
+Oilseeds 0 36.666 36.666 6.356 0.104 6.460 0 43.126
+2
+Millets 0 0.334 0.334 0 0 0 0 0.334
+Total 0 195.993 195.993 268.602 5.690 274.292 0.501 470.786
+1.8 Production and productivity of major crops (Average of last 5 years)
+1.7 Major field crops cultivated Area(‘000 ha)
+Kharif Rabi Summer Total Crop
+Production Productivity Production Productivity Production Productivity Production Productivity residue as
+(‘000 T) (KG/HA) (‘000 T) (KG/HA) (‘000 T) (KG/HA) (‘000 T) (KG/HA) fodder
+(‘000
+tons)
+Rice 1.240 715 0 0 1.240 715
+Wheat 0 0 350.145 2459 0 0 350.145 2459
+Pulses 91.094 605 137.439 1214 0.276 761 236.380 906
+Oilseeds 25.678 741 4.409 670 0.027 1985 29.759 759
+Millets 7.860 729 0 0 0 0 7.860 729
+Foodgrains 134.077 729 544.160 1788 0.276 761 657.086 1462
+1.8 Sowing window for 5 Maize Jowar Bajra Black Green Pigeon Gour Wheat Pea Gram Lentil Mustrued
+major field crops Gram gram Pea
+Kharif –Rainfed July June- June- April, June- July - - - - - -
+July July June- July
+July
+Kharif - Irrigated July June- June- April, June- July July - - - - -
+July July June- July
+July
+Rabi –Rainfed - - - - -- - - October- October- November September
+November November
+Rabi - Irrigated - - - - - - - October- October- November September
+December November November
+1.9 What is the major contingency the district is prone to? Regular Occasional None
+Drought (cid:1) -
+Flood - -
+Cyclone - -
+3
+Hail storm - -
+Heat wave (cid:1) -
+Cold wave - -
+Frost - -
+Sea water intrusion - -
+Sheath Blight, Stemborrer , Pyrilla loos smut, Heliothis, Rust etc white grub. - -
+1.14 Include Digital maps of the district for Location map of district with in State as Annexure I Enclosed : Yes
+Mean annual rainfall as Annexure 2 Enclosed : Yes
+Soil map as Annexure 3 Enclosed : No
+4
+Annexure 01: Location map of the Uttar Pradesh state and district Lalitpur
+5
+Annexure 02: Mean annual rainfall (mm) of district Lalitpur
+6
+2.0 Strategies for weather related contingencies
+2.1 Drought
+2.1.1 Rainfed situation
+Condition Suggested contingency measures
+Early season drought Major farming Normal crop/ Cropping Change in crops/ Agronomic Remark on
+(delayed onset) situation systems Cropping systems measures implementation
+Delay by 2 weeks Deep soil, Rakar, Parwa, Maize- Pea Rice- Short duration Mulching, Line Mixed farming
+4th week of June Kabar, and maar Soil Maize-Gram Maize- Hybrid, HQPM-1 Sowing , Light
+Black Gram- Pea/Gram Pearl Millets- Raj-171 & Irrigation, Weed
+Jowar- Wheat Hybrid, Management and
+Bajra- Wheat Sorghum- Csv-13,15 & thinning,
+Pigeon Pea Hybrid
+Green Gram- Lentil
+Delay by 4 weeks Deep soil, Rakar, Parwa, Maize- Pea Replace rice with Green Sesame on ridges, Inter cropping
+4nd week of July Kabar, and maar Soil Mize-Gram gram, Black Gram & Mulching, Line
+Black Gram- Pea/Gram Sorghum, Sowing , Light
+Jowar- Wheat Green Gram- PM-8, Irrigation, Weed
+Bajra- Wheat PDM-11, Samrat, Jyoti, Management and
+Pigeon Pea Jagriti, Janpriya, thinning,
+Green Gram- Lentil Black Gram- T-9 PU-
+19,PU-40,PU-35 Sekhar-
+1,2&3
+Delay by 6 weeks Deep soil, Rakar, Parwa, Black Gram- Pea/Gram Replace rice with Green Wider spacing 25 Inter cropping
+4th week of July Kabar, and maar Soil Jowar- Wheat gram and pearl millet enhanced nutrients
+Bajra- Wheat Green Gram- PM-8,
+Pigeon Pea PDM-11, Samrat, Jyoti,
+Green Gram- Lentil Jagriti, Janpriya
+Maize- Pea Pearl Millets- Raj-171 &
+Maize-Gram Hybrid,
+Delay by 8weeks Deep soil, Rakar, Parwa, Black Gram- Pea/Gram Plan for toria
+2nd week of August Kabar, and maar Soil Jowar- Wheat
+Bajra- Wheat
+Pigeon Pea
+Green Gram- Lentil
+Maize- Pea
+Maize-Gram
+7
+Condition Suggested contingency measures
+Early season drought Major farming Normal crop/ Cropping Crop management Soil nutrient & moisture Remark on
+(Normal onset) situation systems conservation measures implementation
+Normal onset followed by Irrigated upland Maize- Pea Pigeon Pea- NDR-1, Ridge-furrow sowing,
+15-20 days dry spell after Maize-Gram NDR-2,MA-6, MA-
+sowing leading to poor Pigeon Pea 13
+germination/ op stand
+Irrigated lowland Rice-Wheat Use of drought Use of additional Urea, Zink
+Black Gram- Pea/Gram tolerant rice Sulphate,
+Jowar- Wheat varieties- NDR-97, Mulching,
+Bajra- Wheat Susk Samrat
+Green Gram- Lentil Resowing & Gap
+filling Inter row
+harrowing
+Un Irrigated upland Maize- Pea Til-T-78, Pragti, Ridge-furrow sowing,
+Mize-Gram Sekhar
+Pigeon Pea
+Sesame
+Un Irrigated lowland Black Gram- Pea/Gram Green Gram- PM-8, Ridge-furrow sowing,
+PDM-11, Samrat,
+Jyoti, Jagriti,
+Janpriya,
+Black Gram- T-9
+PU-19,PU-40,PU-35
+Sekhar-1,2&3
+Mid season drought (Long dry spell consecutive 2 weeks rainless( .2.5mm period)
+At vegetative stage Irrigated upland Maize- Pea Pigeon Pea- NDR-1, Life saving Irrigation, straw
+Maize-Gram NDR-2,MA-6, MA- Mulch, Thinning, Inter
+Pigeon Pea 13 cropping
+Irrigated lowland Rice-Wheat Use of drought Life saving Irrigation, straw
+Black Gram- Pea/Gram tolerant rice Mulch, Thining, Inter
+Jowar- Wheat varieties- NDR-97, cropping
+Bajra- Wheat Susk Samrat
+Green Gram- Lentil Resowing & Gap
+filling Inter row
+harrowing
+Un Irrigated upland Maize- Pea Til-T-78, Pragti, Life saving Irrigation, straw
+Maize-Gram Sekhar Mulch, Thinning, Inter
+Pigeon Pea cropping
+Sesame
+Un Irrigated lowland Black Gram- Pea/Gram Green Gram- PM-8, Life saving Irrigation, straw
+8
+PDM-11, Samrat, Mulch, Thinning, Inter
+Jyoti, Jagriti, cropping
+Janpriya,
+Black Gram- T-9
+PU-19,PU-40,PU-35
+Sekhar-1,2&3
+At flowering / fruiting Irrigated upland Maize- Pea Life saving Spraying of 2% urea as foliar
+stage Maize-Gram Irrigation, straw application
+Pigeon Pea Mulch, Thinning, KCI Spray
+Inter cropping
+Irrigated lowland Rice-Wheat Life saving Spraying of 2% urea as foliar
+Black Gram- Pea/Gram Irrigation, straw application
+Jowar- Wheat Mulch, Thinning, KCI Spray
+Bajra- Wheat Inter cropping
+Green Gram- Lentil
+Un Irrigated upland Maize- Pea Life saving Spraying of 2% urea as foliar
+Maize-Gram Irrigation, straw application
+Pigeon Pea Mulch, Thinning, KCI Spray
+Inter cropping
+Un Irrigated lowland Black Gram- Pea/Gram Life saving Spraying of 2% urea as foliar
+Irrigation, straw application
+Mulch, Thinning, KCI Spray
+Inter cropping
+Normal crop/ Cropping Crop management Rabi Crop planning Remark on
+systems implementation
+Thermal drought Irrigated upland Maize- Pea Life saving Toria Early Rabi
+(Early withdrawal of Mazie-Gram Irrigation, straw
+monsoon) Sesame Mulch, Thinning,
+Inter cropping
+Irrigated lowland Jowar- Wheat Life saving Toria Early Rabi
+Bajra- Wheat Irrigation, straw
+Green Gram- Lentil Mulch, Thinning,
+Inter cropping
+Un Irrigated upland Maize- Pea Life saving Toria Early Rabi
+Maize-Gram Irrigation, straw
+Pigeon Pea Mulch, Thinning,
+Inter cropping
+Un Irrigated lowland Black Gram- Pea/Gram Life saving Toria Early Rabi
+Irrigation, straw
+Mulch, Thinning,
+Inter cropping
+9
+2.1.2 Drought –Irrigated situation
+Condition Suggested contingency measures
+Early season drought Major farming Normal crop/ Cropping Change in crops/ Agronomic measures Remark on
+(delayed onset) situation systems Cropping systems implementation
+Delayed release of water Sandy Loam soils Rice- Wheat Rice- Short duration Direct sowing,
+in canals due to low Varieties- NDR-97, UPS- Drum Seeder
+rainfall 212, Susk Smrat, Micro irrigation
+Sahbhagi
+Millets- Mustard No change Micro
+Pigeon Pea irrigation/Thinning,
+Weed control
+Maize- Lentil No change Micro
+Black gram/ Green gram irrigation/Thinning,
+Weed control
+clay /Silt loam soils Soybean-Gram No change Micro
+irrigation/Thinning,
+Weed control
+- - - -
+- - - -
+Limited release of water Sandy Loam soils Rice- Wheat Rice- Short duration Direct sowing,
+in canals due to low Varities- NDR-97, UPS- Drum Seeder
+rainfall 212, Susk Smrat, Micro irrigation
+Sahbhagi
+Millets- Mustard No change Micro
+Pigeon Pea irrigation/Thinning,
+Weed control
+Maize- Lentil No change Micro
+Black gram/ Green gram irrigation/Thinning,
+Weed control
+clay loam soils Soybean-Gram No change Micro
+irrigation/Thinning,
+Weed control
+- - - -
+- - - -
+Non release of water in Sandy Loam soils Rice- Wheat Rice may be replaced Direct seeding in small
+canals under delayed buy Pulses beds, Use of Micro-
+onset of monsoon in Green Gram- Samrat, irrigation/ Sub surface
+10
+catchment Janpriya, Jagriti irrigation
+Black Gram- T-9, PU-
+40, PU-35 Azad-3
+Millets- Mustard No change Sowing of Pigeon pea at
+Pigeon Pea 90 cm+ two rows of inter
+crops on ridges
+Use of Micro- irrigation/
+Sub surface irrigation
+Maize- Lentil No change Direct seeding in small
+Black gram/ Green gram beds, Use of Micro-
+irrigation/ Sub surface
+irrigation
+clay loam soils Soybean-Gram No change Direct seeding in small
+beds, Use of Micro-
+irrigation/ Sub surface
+irrigation
+-
+-
+Insufficient water Upland tube well Rice- Wheat Rice may be replaced Direct seeding in small
+recharge due to low irrigated canal Sandy buy Pulses beds, Use of Micro-
+rainfall Loam soils Green Gram- Samrat, irrigation/ Sub surface
+Janpriya, Jagriti irrigation
+Black Gram- T-9, PU-
+40, PU-35 Azad-3
+Millets- Mustard No change Sowing of Pigeon pea at
+Pigeon Pea 90 cm+ two rows of inter
+crops on ridges
+Use of Micro- irrigation/
+Sub surface irrigation
+Maize- Lentil No change Direct seeding in small
+Black gram/ Green gram beds, Use of Micro-
+irrigation/ Sub surface
+irrigation
+Lowland tube well Soybean-Gram No change Direct seeding in small
+irrigated canal clay loam beds, Use of Micro-
+soils irrigation/ Sub surface
+irrigation
+11
+2.2 Unusual rains –(Untimely, unseasonal etc)
+Condition Suggested contingency measures
+Continuous high rainfall in a short Vegetative stage Flowering stage Crop maturity stage’’’ Post harvest’’
+span leading to water logging
+Soybean Black gram/ Green gram/ Provide Drainage Proper bunding Harvest at physiological maturity Shift to safer side
+Drain out excess
+water
+Maize/ Pigeon pea Provide Drainage Proper bunding Harvest at physiological maturity Shift to safer side
+Drain out excess
+water
+Condition Suggested contingency measures
+Heavy rainfall with high speed Vegetative stage Flowering stage Crop maturity stage’’’ Post harvest’’
+winds in a short span
+Soybean Black gram/ Green gram/ Provide Drainage Proper bunding Harvest at physiological maturity Shift to safer side
+Drain out excess
+water
+Maize/ Pigeon pea Provide Drainage Proper bunding Harvest at physiological maturity Shift to safer side
+Drain out excess
+water
+Condition Suggested contingency measures
+Outbreak of pests and diseases due Vegetative stage Flowering stage Flowering stage Crop maturity stage’’’ Post harvest’’
+to unseasonal rains
+Soybean Black gram/ Green gram/ Bio pesticides Bio pesticides use Bio pesticides use Bio pesticides use Shift to safer place
+use
+Maize/ Pigeon pea Bio pesticides Bio pesticides use Bio pesticides use Bio pesticides use Shift to safer place
+use
+2.3 Floods
+Condition Suggested contingency measures
+Transient water logging/ partial Seedling/Nursery Vegetative stage Reproductive stage At harvest
+inundation stage
+Soybean Black gram/ Green gram/ Provide drainage Provide drainage Provide drainage/ Harvest at physiological maturity
+Prevent premature seed
+Sesame/ Pigeon pea /Maize Provide drainage Provide drainage Provide drainage/ Harvest at physiological maturity
+Prevent premature seed
+Pearl Millets Provide drainage Provide drainage Provide drainage/ Harvest at physiological maturity
+Prevent premature seed
+Sorghum Provide drainage Provide drainage Provide drainage/ Harvest at physiological maturity
+Prevent premature seed
+12
+13

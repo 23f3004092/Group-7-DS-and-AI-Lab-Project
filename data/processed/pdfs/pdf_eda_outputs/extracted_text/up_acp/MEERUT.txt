@@ -1,0 +1,846 @@
+State: Uttar Pradesh
+Agriculture Contingency Plan for District: Meerut
+1.0 District Agriculture profile
+1.1 Agro-Climatic/Ecological Zone
+Agro Ecological Sub Region (ICAR) Northern Plain (And Central Highlands) Including Aravallis, Hot Semi-Arid Eco-Region (4.1)
+Agro-Climatic Zone (Planning Commission) Upper Gangetic Plain Region (V)
+Agro Climatic Zone (NARP) Western Plain Zone (UP-3)
+List all the districts falling under the NARP Zone* Muzaffarnagar, Meerut, Baghpat, Ghaziabad, G.B. Nagar and Bulandshahar.
+(*>50% area falling in the zone)
+Geographic coordinates of district headquarters Latitude Longitude Altitude
+280 98’ 770 07’ 218 Mt
+Name and address of the concerned ZRS/ ZARS/ ZRS, Modipuram, Meerut, S.V.Patel University of Agriculture & Technology, Meerut - 250110
+RARS/ RRS/ RRTTS
+Mention the KVK located in the district with Swami Kalyan Dev Krishi Vigyan Kendra, Hastinapur of S.V.P.U.A. & T, Meerut.
+address
+Name and address of the nearest Agro met Field College of Agricultural sciences, S.V.Patel University of Agriculture & Technology, Meerut -
+Unit (AMFU, IMD) for agro-advisories in the Zone 250110
+1.2 Rainfall Normal RF(mm) Normal Rainy Normal Onset Normal Cessation
+days (number) ( specify week and month) (specify week and month)
+SW monsoon (June-Sep) 598 46 3rd week of July 2nd week of September
+NE / Post Monsoon (Oct-Dec) 31 12 3rd week of December -
+Winter (Jan- March) 66 14 - -
+Summer (Apr-May) 24 07 - -
+1
+Annual 719 79 - -
+1.3 Land use Geographical Cultivable Forest Land under Permanent Cultivable Land under Barren and Current Other
+pattern of the area area area non- pastures wasteland Misc. tree uncultivable fallows fallows
+district (latest agricultural crops and land
+statistics) use groves
+Area (‘000 ha) 273.005 198.941 21.314 39.336 0.376 2.596 2.012 2.859 2.997 2.574
+1. 4 Major Soils Area (‘000 ha) Percent (%) of total
+Very deep Loam soils 69.6 35%
+Very deep Sandy Loam soils 55.7 28%
+Very deep Sandy soils 67.6 34%
+Very deep Silty Loam soils 5.9 3%
+1.5 Agricultural land use Area (‘000 ha) Cropping intensity %
+Net sown area 198.941 152.67%
+Area sown more than once 104.783
+Gross cropped area 303.724
+1.6 Irrigation Area (‘000 ha)
+Net irrigated area 191.827
+Gross irrigated area 303.706
+Rainfed area 7.114
+Sources of Irrigation Number Area (‘000 ha) Percentage of total irrigated area
+Canals - 35.608 18.56%
+Tanks 0.141 0.073%
+2
+Open wells 0 -
+Bore wells 155.949 81.3%
+Lift irrigation schemes -
+Micro-irrigation -
+Other sources (Sewage water/ drains) 0.129 0.067%
+Total Irrigated Area 191.827
+Pump sets
+No. of Tractors
+Groundwater availability and use* (Data No. of blocks/ (%) area Quality of water (specify the problem
+source: State/Central Ground water Tehsils such as high levels of arsenic, fluoride,
+Department /Board) Block-12 saline etc)
+Over exploited 0 - Not reported
+Critical 1 (Kharkhauda) 8.357 do
+Semi- critical 3 - do
+Safe 8 - do
+Wastewater availability and use Daurala, Meerut - do
+Ground water quality Good
+*over-exploited: groundwater utilization > 100%; critical: 90-100%; semi-critical: 70-90%; safe: <70%
+1.7 Area under major field crops & horticulture (as per latest figures of 2008-09)
+1.7 Major field crops Area (‘000 ha)
+cultivated
+Kharif Rabi Summer
+Irrigated Rainfed Total Irrigated Rainfed Total Grand total
+Rice 17.629 - 17.629 - - - - 17.629
+Maize 0.329 - 0.329 - - - - 0.339
+Sugarcane - - - 8.365 - 8.365 121.258 129.623
+Wheat - - - 87.795 - 87.795 - 87.795
+3
+Pulses - 0.253 0.253 0.30 0.446 0.746 0.245 1.244
+Horticulture crops - Area (‘000 ha)
+Fruits
+Total Irrigated Rainfed
+Mango 18 12 6
+Guava 3.5 3.050 0.450
+Other Fruits Crops 3.232 2.262 0.969
+Horticulture crops - Total Irrigated Rainfed
+Vegetables
+Potato 8.768 8.768 -
+Other Vegetable Crops 32.815 32.815 -
+Medicinal and Aromatic Total Irrigated Rainfed
+crops
+Flowers 0.850 0.850 -
+Plantation crops Total Irrigated Rainfed
+Popular 0.456 0.456 -
+Fodder crops Total Irrigated Rainfed
+Sorghum 16.538 11.325 5.213
+Berseem /oat 1.321 1.321 -
+4
+Total fodder crop area 17.859 12.646 5.213
+Grazing land 0.123 - 0.123
+Sericulture etc Nil - -
+1.8 Livestock Male (‘000) Female (‘000) Total (‘000)
+Non descriptive Cattle (local low yielding) 15.126 65.0796 80.205
+Improved cattle 10.084 43.386 53.470
+Crossbred cattle 25.210 108.466 133.676
+Non descriptive Buffaloes (local low yielding) 146.560 610.177 756.737
+Descript Buffaloes 62.811 261.504 324.316
+Goat 16.801 32.243 49.044
+Sheep Indio + Exotic 3.067+.098 3.643+0.173 6.981
+Camel, Pig, Yak etc. -- -- 1115.090
+Commercial dairy farms (Number)
+1.9 Poultry No. of farms Total No. of birds (‘000)
+Commercial 14.806
+Backyard 16.300
+1.10 Fisheries (Data source: Chief Planning Officer)
+A. Capture
+i) Marine (Data Source: Fisheries No. of fishermen Boats Nets Storage
+Department) facilities
+Mechanized Non- Mechanized Non-mechanized (Ice plants
+mechanized (Trawl nets, (Shore Seines, Stake & etc.)
+Gill nets) trap nets)
+Nil - - - - -
+ii) Inland (Data Source: Fisheries No. Farmer owned ponds No. of Reservoirs No. of village tanks
+5
+Department) 06 - 818
+B. Culture
+Water Spread Area (ha) Yield (t/ha) Production (‘000
+tons)
+i) Brackish water (Data Source: MPEDA/ Fisheries Department) - - 215
+ii) Fresh water (Village tanks)(Data Source: Fisheries department) 797.60 - -
+1.11 Production and Productivity of major crops (Average of last 5 years: 2008-09 )
+1.11 Name of crop Kharif Rabi Summer Total Crop
+residue as
+Production Productivity Production Productivity Production Productivity Production Productivity
+fodder
+('000 t) (kg/ha) ('000 t) (kg/ha) ('000 t) (kg/ha) ('000 t) (kg/ha)
+(‘000
+tons)
+Major Field crops (Crops identified based on total acreage)
+Rice 45.113 2559 - - - - 45.113 2559 54.14
+Maize 0.645 1903 - - - - 0.645 1903 0.015
+Pulses 0.120 442 0.234 872 0.118 6.28 0.472 679 0.216
+Wheat - - 314.833 3586 - - 3870
+Sugarcane - - 533.69 63800 - - 533.69 63800 122.7
+Mustard - - 4.105 1105 - - 4.105 1105 -
+Major Horticultural crops (Crops identified based on total acreage)
+All Fruits - - - - - - 220.150 106.19
+All Vegetables - - - - - - 613.449 186.94
+Potato - - - - - - 206.311 235.3
+Flowers - - - - - - 0.900 105.88
+6
+1.12 Sowing window for 5
+Rice Wheat Sugarcane Pulses Potato
+major field crops
+Kharif- Rainfed - - - July – August -
+Kharif-Irrigated June – July - March – May May – June -
+Rabi- Rainfed - - - October – November -
+Rabi-Irrigated - November – October – November November – December October – November
+December
+1.13 What is the major contingency the district is prone to? (Tick mark) Regular Occasional None
+Drought √
+Cyclone √
+Hail storm √
+Heat wave √
+Cold wave √
+Frost √
+Sea water intrusion √
+Sheath blight & Hopper in rice √
+Fog √
+1.14 Include Digital maps of Location map of district within State as Annexure I Enclosed: Yes
+the district for
+Mean annual rainfall as Annexure II Enclosed: Yes
+Soil map as Annexure III Enclosed: Yes
+7
+Annexure I
+8
+Annexure II
+9
+Annexure III
+Alluvial plain (0-1% slope)
+1. Deep, loamy soils and slightly eroded .
+2. Deep, loamy soils and slightly eroded associated with silty soils .
+3. Deep, fine soils moderately saline and sodic associated with loamy
+soils, slightly eroded .
+4. Deep, loamy soils, moderate salinity and sodicity associated with
+loamy soils with moderate salinity and strong sodicity
+5. Deep, silty soils associated with loamy soils slightly eroded .
+Old Alluvial plain with river left out channels/Oxbows/point bars (1-
+3%slope)
+6. Deep, loamy soils and slightly eroded associated with stratified
+loamy soils slightly eroded
+Active Flood Plain (1-3% slope)
+7. Deep, sandy soils with moderate flooding associated with stratified
+loamy soils and slight flooding .
+10
+2.0 Strategies for weather related contingencies
+2.1 Drought
+2.1.1 Rainfed situation (Rainfed area is negligible, so there is no need of contingencies)
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping systemb Change in crop / cropping Agronomic Remarks on
+drought (delayed situationa systemc including variety measuresd Implementatio
+onset) ne
+Delay by 2 weeks
+Not applicable
+Delay by 4 weeks Not applicable
+Delay by 6 weeks Not applicable
+Delay by 8 weeks Not applicable
+Condition Suggested Contingency measures
+Early season drought (Normal Major Farming Normal Crop / Crop management Soil nutrient & Remarks on
+onset) situationa Cropping system moisture Implementatio
+conservation n
+measures
+Normal onset followed by 15-20 days Not applicable
+dry spell after sowing leading to poor
+germination/crop stand etc.
+At vegetative stage Not applicable
+At flowering/ fruiting stage Not applicable
+Terminal drought Not applicable
+11
+2.1.2 Drought- Irrigated situation
+Condition Suggested Contingency measures
+Major Farming Normal Crop/ Change in crop/cropping Agronomic measures Remarks on
+situation cropping system system Implementation
+Delayed Upland sandy loam Rice (Basmati)-Wheat Replace rice with maize or Light irrigation with tube Seed through KSSC and
+release of soils aerobic rice well water, NFSM,
+water in canals Follow alternate wetting and Adequate supply of
+due to low Use short duration varieties drying schedule of irrigation electricity/diesel should be
+rainfall of Rice: PS 4, 5, PB 1, PRH in rice, ensured by the Govt.
+10 Alternate Furrow irrigation, agencies.
+Maize: Kanchan, Sweta, Mulching in sugarcane /
+Navin, Surya maize
+Sorghum Bajra/Greengram/ Blackgram
+(Fodder)/Maize- - Potato/ Wheat
+Potato/ Wheat
+Bajra:Wcc-75,Raj-171,Pusa-
+23,Pusa-322
+Sugarcane +cucurbits No change
+–Ratoon-Wheat
+Lowland clay loam Rice-wheat Basmati rice –Wheat Light irrigation with tube Seed through KSSC and
+soils well water, NFSM,
+Use short duration varieties Follow alternate wetting and Adequate supply of
+of Rice: PS 4, 5, PB 1, PRH drying schedule of irrigation electricity/diesel should be
+10 in rice, ensured by the Govt.
+Sorghum Fodder- Bajra-Wheat Alternate Furrow irrigation, agencies.
+Wheat Bajra:Wcc-75,Raj-171,Pusa- Mulching in sugarcane
+23,Pusa-322
+Sugarcane-Ratoon- No change
+Wheat
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measuresi Remarks on
+situationf systemg crop/cropping Implementationj
+systemh
+Limited release Upland sandy loam soils Rice (Basmati)-Wheat No change Follow alternate wetting and Adequate supply of
+12
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measuresi Remarks on
+situationf systemg crop/cropping Implementationj
+systemh
+of water in Sorghum (Fodder)/Maize- No change drying schedule of irrigation in electricity/diesel
+canals due to Potato/ Wheat rice, should be ensured by
+low rainfall Alternate Furrow irrigation, the Govt. agencies.
+Sugarcane +cucurbits – No change
+Mulching in sugarcane/ maize
+Ratoon-Wheat
+Lowland clay loam soils Rice-wheat No change Follow alternate wetting and Supply of inter cultural
+Sorghum Fodder-Wheat No change drying schedule of irrigation in implements through
+rice, RKV,
+Sugarcane-Ratoon-Wheat No change required
+Alternate Furrow irrigation, Adequate supply of
+Mulching in sugarcane/ maize electricity/diesel
+should be ensured by
+the Govt. agencies.
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measuresi Remarks on
+situationf systemg crop/cropping systemh Implementationj
+Non release of Upland tube well Basmati rice Maize/Arabic Rice Limited irrigation, Seed through KSSC and
+water in canals irrigated canal sandy Sorghum/Maize Sorghum /Bajra Alternate furrow NFSM,
+under delayed loam soil /Pigeonpea/Blackgram irrigation, Supply of inter cultural
+onset of Drip irrigation, implements through
+Sugarcane +cucurbits Sugarcane
+monsoon in Mulching RKVY
+catchment Lowland tube well Rice Bajra/ Limited irrigation, Seed through KSSC and
+irrigated canal clay loam Blackgram/Greengram Alternatefurrow NFSM,
+soil Sorghum Fodder Bajra/Sorghum Fodder irrigation, Harvesting and threshing
+Drip irrigation, implements through
+Sugarcane + cucurbits Sugarcane
+Mulching RKVY
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measuresi Remarks on
+situationf systemg systemh Implementationj
+13
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measuresi Remarks on
+situationf systemg crop/cropping systemh Implementationj
+Lack of Not Applicable
+inflows into
+tanks due to
+insufficient
+/delayed onset
+of monsoon
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic Remarks on
+situationf systemg systemh measuresi Implementationj
+Insufficient Upland tube well Basmati rice Maize/Aerobic Rice Limited irrigation, Seed through KSSC and
+groundwater irrigated canal sandy /Vegetable Alternatefurrow NFSM,
+recharge due loam soil (cucurbits)/Blackgram irrigation, Harvesting and threshing
+to low rainfall Sorghum/Maize Bajra /Pigeonpea/ Blackgram Drip irrigation, implements through
+Mulching RKVY
+Sugarcane +cucurbits Sugarcane
+Lowland tube well Rice Bajra/Greengram/ Blackgram Limited irrigation, Seed through KSSC and
+irrigated canal clay Sorghum Fodder Bajra Fodder Alternatefurrow NFSM,
+loam soil irrigation, Micro/drip/sprinkler
+Sugarcane + cucurbits Sugarcane
+Drip irrigation, irrigation under govt.
+Mulching schemes,
+Supply of inter cultural
+implements through
+RKVY
+2.2 Unusual rains (untimely, unseasonal etc) (for both rainfed and irrigated situations)
+Condition Suggested contingency measure
+Continuous high rainfall in a short Vegetative stagek Flowering stagel Crop maturity stagem Post harvestn
+span leading to water logging
+Maize + Blackgram / Provide drainage Provide drainage Drain out excess water, Shift to safer place & dispose
+Greengram /cucurbits Harvesting at physiological of produce as early as
+maturity stage possible
+14
+Sugarcane Provide drainage Supply to sugar mills
+/crusher as early as possible
+Drain out excess water and or shift to safer place and
+harvest the lodged crop as cover the cane with trash
+early as possible materials
+Blackgram or Greengram Provide drainage Provide drainage Drain out excess water
+Safe storage against storage
+Harvesting at physiological
+maturity stage. pest and disease
+Horticulture
+Okra Provide drainage Provide drainage Shift to safer place & dispose
+of produce as early as
+Picking of vegetables at possible
+physiological maturity stage
+Cucurbits Provide drainage Provide drainage Drain out excess water & Shift to safer place & dispose
+Harvesting at physiological of produce as early as
+maturity stage and picking of possible
+cucurbits crop.
+Brinjal Provide drainage Provide drainage Shift to safer place & dispose
+of produce as early as
+Picking at physiological possible
+maturity stage
+Tomato Provide drainage Shift to safer place & dispose
+of produce as early as
+Picking at physiological possible
+Provide drainage maturity stage
+Mango - Spray of 2% urea + -
+- Carbendazim 0.02% solution
+Guava - Spray of 2% urea +
+- Carbendazim 0.02% solution -
+Heavy rainfall with high speed winds in
+a short span2
+Sugarcane Earthing up,
+Drain out excess water and Supply to sugar mills
+Tying harvest the lodged crop as /crusher as early as possible
+early as possible or shift to safer place and
+15
+cover the cane with trash
+materials
+Maize/Sorghum Provide drainage, Drain out excess water &
+Use Wind breaks Harvesting at physiological Shift to safer place & dispose
+Provide drainage maturity stage of produce as early as
+possible
+Blackgram/ Greengram Provide drainage, Shift to safer place & dispose
+Use Wind breaks Drain out excess water & of produce as early as
+Provide drainage Harvesting at physiological possible
+maturity stage
+Rice (basmati) Provide drainage Drain out excess water & Shift to safer place & dispose
+Provide drainage Harvesting at physiological of produce as early as
+maturity stage possible
+Pigeonpea Provide drainage Drain out excess water & Shift to safer place & dispose
+Provide drainage Harvesting at physiological of produce as early as
+Sowing on raised bed maturity stage possible
+Horticulture
+Okra Provide drainage Drain out excess water, Shift to safer place & dispose
+Provide drainage, Harvesting at physiological of produce as early as
+Sowing on raised bed maturity stage possible
+Brinjal Provide drainage Drain out excess water, Shift to safer place & dispose
+Provide drainage, Harvesting at physio- of produce as early as
+Sowing on raised bed logical maturity stage possible
+Tomato Provide drainage, Drain out excess water, Shift to safer place & dispose
+Provide drainage Use Wind breaks, Harvesting at physio- of produce as early as
+Sowing on raised bed Stacking logical maturity stage possible
+Stacking Stacking
+Cauliflower Provide drainage, Provide drainage Drain out excess water, Shift to safer place & dispose
+Sowing on raised bed Harvesting at physio- of produce as early as
+16
+logical maturity stage possible
+Cucurbits Provide drainage Drain out excess water ,
+Provide drainage, Harvesting at physio-
+Shift to safer place & dispose
+Sowing on raised bed logical maturity stage of produce as early as
+possible
+Mango Use of NAA spray Use of NAA spray
+Use of wind breaks -
+Guava Use of wind breaks Use of NAA spray Use of NAA spray
+Outbreak of pests and diseases due to
+unseasonal rains
+Rice (basmati) Need based plant Shift to safer place & dispose
+Avoid use of pesticide at
+protection IPDM for of produce as early as
+Sugarcane Need based plant
+Rice/pluses maturity stage possible
+protection IPDM for
+Sorghum fodder
+Rice/pluses
+Blackgram/ Greengram
+Pigeonpea
+Horticulture
+Okra Need based plant Avoid use of pesticide at Shift to safer place & dispose
+Brinjal protection IPDM for maturity stage of produce as early as
+Rice/pluses possible
+Tomato
+Need based plant
+Cucurbits protection IPDM for
+Rice/pluses
+Cauliflower
+17
+2.3. Floods
+Condition Suggested contingency measureo
+Transient water logging/ Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+partial inundation1
+Rice (basmati) • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Direct sowing of rice produce as early as possible
+• Sowing of nursery on raised bed
+Sugarcane • Provide drainage Shift to safer place & dispose of
+• Direct sowing • Provide drainage
+produce as early as possible
+Sorghum fodder • Provide drainage Shift to safer place & dispose of
+• Direct sowing • Provide drainage
+produce as early as possible
+Blackgram/ Greengram • Provide drainage Shift to safer place & dispose of
+• Direct sowing • Provide drainage
+produce as early as possible
+Pigeonpea • Provide drainage Shift to safer place & dispose of
+• Direct sowing • Provide drainage
+produce as early as possible
+Horticulture
+Okra • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Sowing of nursery on raised bed produce as early as possible
+• Re transplanting
+Brinjal • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Sowing of nursery on raised bed produce as early as possible
+• Re transplanting
+Tomato • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Sowing of nursery on raised bed produce as early as possible
+• Re transplanting
+Continuous submergence for more than 2 days
+Rice • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+18
+• Direct sowing of rice produce as early as possible
+• Sowing of nursery on raised bed
+Horticulture
+Okra • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Sowing of nursery on raised bed produce as early as possible
+• Re transplanting
+Brinjal • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Sowing of nursery on raised bed produce as early as possible
+• Re transplanting
+Tomato • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Sowing of nursery on raised bed produce as early as possible
+• Re transplanting
+Mango • Re sowing of nursery • Provide drainage • Provide drainage Shift to safer place & dispose of
+• Sowing of nursery on raised bed produce as early as possible
+• Re transplanting
+Sea water intrusion3 Not Applicable
+2.4 Extreme events: Heat wave / Cold wave/Frost/ Hailstorm /Cyclone/Fog
+Extreme event type Suggested contingency measurer
+Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+Heat Wave
+Rice (basmati) • Re sowing of nursery • Irrigation interval should be • Irrigation interval should be Light and frequent
+• Light and frequent irrigation decreased decreased irrigation
+during night
+Sugarcane • Mulching • Irrigation interval should be • Irrigation interval should be Light and frequent
+decreased decreased irrigation
+Sorghum fodder • Re sowing • Irrigation interval should be • Irrigation interval should be Make silage
+decreased decreased
+19
+Blackgram /Greengram • Re sowing • Light irrigation for • Light irrigation for survival • Pod picking
+• Mulching survival
+Pigeonpea • Re sowing • Light irrigation for • Light irrigation for survival • Pod picking
+• Mulching survival
+Horticulture
+Okra • Re sowing of nursery • Light irrigation for • Light irrigation for survival • Harvesting of
+• Re transplanting survival fruits
+• Mulching
+• Light watering during night
+Brinjal • Re sowing of nursery • Light irrigation for • Light irrigation for survival • Harvesting of
+• Re transplanting survival fruits
+• Mulching
+• Light watering during night
+Tomato • Re sowing of nursery • Light irrigation for • Light irrigation for survival • Harvesting of
+• Re transplanting survival fruits
+• Mulching of nursery beds
+• Light irrigation during night
+Mango • Spray of water • Spray of water • Spray of water • -
+Guava • Spray of water • Spray of water • Spray of water • -
+Cold waveq
+Wheat Light irrigation Light irrigation Light irrigation Light irrigation
+Sugarcane • Light irrigation for -- • Harvesting of
+survival cane
+Horticulture
+Tomato • Light Sprinkler irrigation • Light Sprinkler irrigation • Harvesting of
+fruits
+Pea • Light Sprinkler irrigation • Light Sprinkler irrigation • Harvesting of
+fruits
+Potato • Light Sprinkler irrigation -- • Harvesting
+Frost
+Sugarcane • Light irrigation • Light irrigation • Light irrigation • Harvesting of
+cane
+20
+Pigeonpea • Light irrigation • Light irrigation Smoke at night
+• Smoke at night • Smoke at night • Smoke at night
+Horticulture
+Potato • Light irrigation for survival • Light irrigation for survival • Light irrigation for survival • Harvesting
+• Smoke at night • Smoke at night • Smoke at night
+Tomato • Light irrigation for survival • Light irrigation for survival • Light irrigation for survival • De halming
+• Smoke at night • Smoke at night • Smoke at night
+Pea • Light irrigation for survival • Light irrigation for survival • Light irrigation for survival • Harvesting
+• Smoke at night • Smoke at night • Smoke at night
+Mango • Irrigation &Smoking during • Irrigation &Smoking during • Irrigation &Smoking during night --
+night night
+Guava • Irrigation &Smoking during • Irrigation &Smoking during • Irrigation &Smoking during night Harvesting
+night night
+Hailstorm
+All the crops Re sowing Re sowing of Catch crop Harvest for fodder Pre Harvesting
+Horticulture
+All the Vegetable crops Re sowing Re sowing of Catch crop Harvest for fodder Pre Harvesting
+Use anti hail net Use anti hail net Use anti hail net Harvest the damaged
+All the Fruit crops Spray of fungicide with 2% urea Spray of fungicide with 2% Spray of fungicide with 2% urea fruits
+solution urea solution solution Spray of fungicide with
+2% urea solution
+Fog Not applicable
+21
+2.5 Contingent strategies for Livestock, Poultry & Fisheries
+2.5.1 Livestock
+Suggested contingency measures
+Before the events During the event After the event
+Drought
+• Utilizing fodder from perennial
+• Availing crop insurance
+trees/shrubs/fodder bank reserves for
+small ruminant. • Cultivation of fast growing
+• Utilizing stored fodder as silage, hay, green fodder crops.
+feed blocks & mixture etc. • Development of drought
+• Fodder crop Insurance
+• Migration of herd /flock to other resistance fodder.
+• Making of feed blocks
+Feed and fodder places. • Increase the no. of Fodder
+availability • Encourage farmers to allocate some lands for • Establishment of communication and Banks for future use.
+cultivating perennial fodder (Napier grass, Subabul),
+linkage with other state agencies.
+specially on bunds and wasteland
+• Establishing fodder banks, encouraging fodder crops in
+irrigated area
+• Making silage or hay of excess fodder.
+• Statistics regarding feed/fodder availability and
+requirement should be updated by the concerned deptt.
+• Seed production and development of drought resistant
+crops and their varieties of fodder crops.
+• Encourage farmers to adopt sprinkler irrigation system.
+• Training to the farmers and extension functionaries for
+production and long term storage of feed and fodder.
+• Preserving water in the pond/tank for drinking purpose. • Using preserved water in the tanks for
+Drinking water • Excavation of bore well/creation of tanks or ponds. drinking • Recharge of well/ Tanks
+• De-silting of village ponds on regular basis and adopt • Available ground water should be used etc.
+for drinking on priority basis.
+water harvesting techniques through water shed
+22
+approach.
+• Filling of the ponds with canal/tube well water during
+lean period.
+• Conduction mass animal health camp
+• Farmers should be encouraged to avail Livestock and treating the effected animals. • Availing insurance benefits.
+Health and disease insurance • Mass campaigning though different • Followed standard Livestock
+management • Training to livestock owners regarding natural media regarding possible outbreak of management practices.
+calamities. diseases and their management. • Proper health care & treatment.
+• Veterinary preparedness with medicines and vaccines.
+• Vaccination
+Floods
+• Availing crop insurance
+Feed and fodder • Utilizing fodder from perennial • Cultivation of fast growing green
+availability tress/shrubs/fodder bank reserves. fodder crops
+• Fodder crop Insurance • Use of feed mixture/block hay etc
+• Making of feed blocks • Migration of flock /herds
+• Encourage farmers to allocate some lands for • Establishment of communication and
+cultivating perennial fodder (Napier grass, Subabul), linkage with other state agencies
+specially on bunds and wasteland
+• Establishing fodder banks, encouraging fodder crops.
+• Making silage or hay of excess fodder and that should
+be stored on up land.
+• Statistics regarding feed/fodder availability and
+requirement should be updated by the concerned deptt.
+• Seed production and development of crops and their
+varieties () of fodder crops for water logged conditions.
+• Training to the farmers and extension functionaries for
+production and long term storage of feed and fodder.
+23
+• Making suitable provision for safe drinking surface • Open sources of drinking
+Drinking water • Contaminated flood water should not
+water including excavation of bore well/hand pump water (tank/well) should be
+be used for drinking.
+(India mark—II) at community level. further treated with potassium
+• Make farmers aware not to use contaminated/ flood per magnate.
+water for drinking purpose.
+• Conduction mass animal health camp
+and Health disease and treating the effected animals. • Culling sick animals
+management • Live stock Insurance
+• Training to livestock owners regarding • Availing insurance benefits.
+• Training to livestock owners regarding natural natural calamities. • Culling unproductive
+calamities.
+• Establishment of Co-ordination with livestock
+• Veterinary preparedness with medicines and vaccines. other Agencies. • Proper disposal of corpse of
+• Vaccination • Use of mass media to spread expat dead bodies to prevent the
+advice spread of contagious
+diseases.
+Cyclone Not Applicable
+Heat wave and
+cold wave
+• Repair and maintenance
+• Avoid use of GI sheet for roofing in the animal shed • Provide the thatches/ tarpaulins in the
+of additional facilities
+• Create adequate sources for additional supply of animal sheds to protect against direct
+water to protect the animals from heat waves. entry of hot/ cold waves
+• Establishment of modern shelter sheds. • Provide proper bedding to prevent from
+Shelter/environment • As far as possible grow shade trees such as Neem, cold and proper ventilation to prevent
+management from heat.
+Pilkhan, Karanj etc near the animal sheds.
+• Make provision for adequate no. of fans/coolers
+• Provide drinking water to animal
+frequently during heat wave
+/heaters according to the situation, if possible
+• Watch the forecast of weather
+department.
+• As for as possible the animal should be
+allowed to allow in pounds/ canals/
+river or give bath once or twice in a day
+24
+during heat waves
+• Organize village level animal health
+camps • Proper after care of animals.
+Health and disease • Insure the animals • Consult veterinary officer immediately • Availing insurance benefits.
+management if any adverse symptoms are noticed
+• Training to livestock owners/ para-vets regarding • Proper disposal of corpse of
+preventive measure against extreme weather conditions • Use of ITKs for food supplements dead bodies to prevent the
+• Veterinary preparedness with medicines and vaccines spread of contagious diseases.
+etc.
+• Vaccination against FMD &Cold
+s based on forewarning wherever available
+25
+2.5.2 Poultry
+Convergence/linkages
+with ongoing programs,
+Suggested contingency measures if any
+Before the eventa During the event After the event
+Drought
+• Use of feed concentrates/
+Shortage of feed • Making and storage of feed mixture/blocks etc • Availing insurance
+concentrates
+ingredients • Establishment of • Increase the no. of feed
+• Awareness regarding traditional communication with other state
+banks for future use
+feed banks. agencies.
+• Feed requirement data should be • Use of locally available feed
+generated recourses.
+• Prepare the feed requirement data • Import the feed recourse form
+base of poultry farm. other states.
+• Store the feed ingredients
+• Making extra facility for
+Drinking water • Frequent supply of drinking water
+drinking water.
+• Repair & maintenance of water
+resources
+• Culling of flock
+Health and disease • Veterinary preparedness with
+management medicines and vaccines. • Treatment of affected poultry birds • Availing insurance
+benefits
+• Vaccination
+• Proper disposal of
+• Training to poultry
+corpse of dead bodies to
+Growers regarding natural prevent the pared of
+calamities. contagious diseases
+26
+Floods
+Shortage of feed
+ingredients
+• Sufficient quantity • Use of stored feed in • Cleaning of feed store
+of feed ingredients should be balanced form
+& repair if any.
+stored • Prevent the feed from • Moist feed should be
+moisture.
+dried &treated as per
+requirement
+• Repair,
+maintenance and
+cleaning of water
+recourse
+• Make provision of ground water • Use only Ground water obtained • Sanitation of
+Drinking water for drinking from India Mrka II or Tubewell open Wells
+• Availing insurance
+Health and disease • Veterinary preparedness with benefits.
+management medicines and vaccines • Migration of flock if required • Culling of
+• Vaccination • Treatment unproductive flock
+Cyclone Not Applicable
+• Storage and making of feed
+Shortage of feed concentrates • Establishment of communication • Repair and maintenance
+ingredients • Proper feed requirement data with other state agencies of feed store
+base • Use of stored feed ingredient
+• Import of feed from other areas
+Drinking water • Make provision of ground water • Use only Ground water obtained • Repair and maintenance
+for drinking from India Mrka II or Tubewell of water recourse
+Health and disease • Training to poultry growers • Culling of flock
+management • Treatment of injured poultry birds.
+regarding natural calamities. • Availing insurance
+• Veterinary preparedness with benefits.
+medicines and vaccines. • Proper disposal of corpse
+27
+of dead bodies to prevent
+the pared of contagious
+diseases.
+Heat wave and cold
+wave
+• Keep the birds in appropriate shelter
+• Making sufficient provision of • Making of modern shelter
+Shelter/environment shelter to protect live stock from • Provide proper bedding to prevent sheds
+management heat and cold waves from cold and proper ventilated to • Increase the plantation of
+prevent from heat
+• Establishment of alternate trees
+• Provide drinking water to birds
+resource for water supply.
+frequently.
+• Modern shelter sheds.
+• Adopted proper management
+practices.
+• Watch the fore cast of weather
+department.
+• Availing insurance
+benefits
+• Insurance • Provide proper treatment as per • Culling of unproductive
+flock
+requirement
+H m e a a n l a t g h e a m nd en d t i sease • Veterinary preparedness with • Treatment of injured poultry • Proper disposal of corpse
+medicines and vaccines
+of dead bodies to prevent
+• Training to poultry growers the pared of contagious
+regarding natural calamities diseases
+a based on forewarning wherever available
+28
+2.5.3 Fisheries/ Aquaculture
+Suggested contingency measures
+Before the eventa During the event After the event
+1) Drought
+A. Capture
+Marine _ _ _
+Inland
+(i) Shallow water depth due to • Adopt appropriate measures to • Harvest the crop partially • Re stock
+insufficient rains/inflow
+reduce water seepage or infiltration
+(ii) Changes in water quality • Add oxy-flow to improve oxygen
+• Regular observation to check the • Maintain appropriate level of water
+• Churning of pond water
+water quality and remove the if possible
+pollutants if any. • Check the water quality and remove
+the pollutants if any.
+B. Aquaculture
+(i) Shallow water in ponds due to • Ensure the Oxygen availability
+insufficient rains/inflow into ponds for the survival of
+• Adopt appropriate measures to fish
+reduce water seepage or infiltration • Avoid any kind of water • Maintain appropriate level of water
+from ponds pollution in ponds
+• Avoid any kinds of water pollution • Add oxy-flow to improve • Check the water quality and remove
+and maintain water pH oxygen into ponds. the pollutants if any.
+• Churning of pond water
+(ii) Impact of salt load build up in • Add some fresh water from other • Add oxy-flow to improve • Add fresh water into pond for life
+ponds / change in water quality source like cannel etc oxygen into ponds. saving and to reduce salt load
+• Churning of pond water • Maintain appropriate level of
+• Add fresh water into pond for water in ponds
+life saving and to reduce salt • Check the water quality and
+load remove the pollutants if any.
+2) Floods
+29
+A. Capture
+Marine -- -- --
+Inland
+• Close supervision of flood
+(i) No. of boats / nets/damaged • Boats, nets etc should be taken out condition • Damaged boat or nets should be
+from water bodies repaired
+(ii) No. of houses damaged _ _ • Repair the damaged house.
+• Sanitation and proper disposal of
+(iii) Loss of stock _ _
+corpse
+(iv) Changes in water quality • Increase the height of bunds. -- --
+(v) Health and diseases -- • Treatment if possible --
+B. Aquaculture
+• Repair the bunds to prevent the
+inflow of water • Repair the damaged bunds
+• Avoid inflow of flood water
+• If inflow water is not polluted • Check water quality
+from outside.
+then place the net at inlet and
+(i) Inundation with flood water outlet • If inflow water is not polluted • Change the water if it is polluted
+that can be permitted to flow
+• Raise the height of bunds
+through net placed at inlet and
+• Plan a proper drainage system at outlet of pond.
+farm • Fencing of net required in case
+• Plantation of soil binding plants of overflow to avoid the
+at bund migration of fish
+• Maintain appropriate level of
+(ii) Water contamination and • Limeing @300 kg/ha • Stop inflow of contaminated water in ponds
+changes in water quality water • Check the water quality and
+remove the pollutants if any.
+(iii) Health and diseases • Diagnostic measures and provide • Limeing and medication as per
+• Limeing @300 kg/ha appropriate medicines
+requirement
+• Vaccination • Use Cifex to control ulcerative
+30
+syndromes
+• Immediately remove the dead
+(iv) Loss of stock and inputs (feed,
+• Marketable stock should be sold
+fishes from ponds and do
+chemicals etc) sanitation • After sanitation add new stock
+(v) Infrastructure damage (pumps, • Dommageable infrastructures • Do not supplié Electric in flood • Repaire and service the damage
+aerators, huts etc) should be secured éd area infrastructure
+3. Cyclone / Tsunami Not applicable
+4. Heat wave and cold wave
+A. Capture
+Marine -- -- --
+Inland
+B. Aquaculture
+• Maintain appropriate level of • Maintain appropriate level of • Maintain appropriate level of
+water in ponds ie. 1.75m in 2m water in ponds ie. 1.75m in 2m water in ponds ie. 1.75m in 2m
+(i) Changes in pond deep ponds deep ponds deep ponds
+environment (water quality) • Check the water quality and • Check the water quality and • Check the water quality and
+remove the pollutants if any remove the pollutants if any remove the pollutants if any
+i) Health and Disease management • Limeing@300kg/ha • Medication as per requirement
+• Remove the dead fishes from
+ponds and add new stocks to
+compensate the production
+a based on forewarning wherever available
+31

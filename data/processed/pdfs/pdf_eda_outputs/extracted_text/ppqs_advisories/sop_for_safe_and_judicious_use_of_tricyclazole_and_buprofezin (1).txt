@@ -1,0 +1,1780 @@
+
+SOP for Safe and Judicious Use of
+Pesticides Specific to Tricyclazole and
+Buprofezin
+Government of India
+Ministry of Agriculture & Farmers Welfare
+Directorate of Plant Protection, Quarantine & Storage
+N.H.IV., Faridabad-121001
+(May-2021)
+CONTENTS
+Sl. No. Topic Page No.
+1. Introduction 2
+2. Background 2
+3. Role and Responsibilities of Stakeholders 3
+3.1 DAC&FW 3
+3.2 State Department of Agriculture 3
+3.3 ICAR/State Agriculture Universities/ Krishi Vigyan Kendra 4
+3.4 APEDA 5
+3.5 Export Inspection Council (EIC) 5
+3.6 Central Integrated Pest Management Centre (CIPMC) 6
+3.7 All India Rice Exporters Association(AIREA)/Exporters 6
+3.8 Farmers 7
+4. Pests occurrence with Paddy growth stages and recommended control 7
+measures
+5. Use of Tricyclazole and Buprofezin in Agriculture 12
+6. Strategies for safe and judicious use of pesticide 13
+6.1 Implementation of IPM Practices (from seed to harvest) 13
+6.1.1 Cultural practices 13
+6.1.2 Mechanical practices 14
+6.1.3 Biological practices 14
+6.1.4 Weed management practices 14
+6.1.5 Nematode management practices 15
+6.2 Chemical control measures 15
+7. Implementation of Good Agricultural Practices (GAP) 15
+8. Selection of correct pesticide based on field situation 15
+9. Selection of alternate pesticides including combination pesticides 16
+10. Awareness among pesticide dealers and farmers 16
+11. Harmonizing the Package of Practices by all concerned stake holders 16
+specifically w.r.t. application/use of pesticide
+12. Need of pesticide Residue Testing 17
+13. Guidelines for safe use of pesticides 17
+Annexure-I: List of Members of Sub-Committee 20
+Annexure-II A: Disease-wise approved fungicides on rice 21
+Annexure-II B: Pest-wise approved Insecticides on rice 29
+Annexure-III: Economic Threshold Level (ETL) of major pests of rice crop 40
+stage-wise
+Annexure-IV: Approved uses of Tricyclazole and its combinations as per 41
+Major Uses of Pesticides
+Annexure-V: Approved uses of Buprofezin and its combinations as per 42
+Major Uses of Pesticides
+Annexure-VI: Major parasites and predators of insect pests of rice 44
+Glossary 46
+References 47
+1 | P age
+1. Introduction
+Pesticides are essential agricultural inputs for protecting crop plants and
+increasing agricultural production. The average pesticide consumption in India is
+around 0.381 kg a.i./ha as compared to world average of 0.5 kg a.i./ha. Indiscriminate
+use of pesticides poses risk to human health in the form of pesticide residues in food
+produce and also hampers the export of agri-commodities. Therefore, there is need of
+safe and judicious use of pesticides. Need based and judicious use of pesticides would
+result in residue free produce and also improve and expand export potential of
+agricultural produce.
+2. Background
+A Draft Notification (S.O.531(E) was published on 03.02.2020 proposing
+prohibition of Tricyclazole and Buprofezin and inviting objections/suggestions from
+all stakeholders. It was mentioned in draft notification that use of Tricyclazole and
+Buprofezin involves health hazards to human beings, animals and the environment. A
+large number of objections/ suggestions were received from Industry, Associations
+and farmers etc. The objections/suggestions were examined by a sub-committee
+constituted by Registration Committee (RC) under the Chairmanship of Dr. S.K.
+Khurana, Consultant (Toxicology) CIB&RC, Faridabad.
+The sub-committee observed that Buprofezin is approved in various Asian
+Countries including China, Japan and other developed countries like U.S., Australia
+and EU countries. Basmati Rice is grown and exported from Pakistan also where both
+the molecules are registered. Tricyclazole is registered in 14 Asian countries,
+however, the current status in EU is “Not Approved” which is due to insufficient data
+on safety. The sub-committee could not find any issue related to safety of these
+molecules except for change in the value of MRL by European Union.
+The issue was further deliberated in the DAC&FW whereupon it was decided
+that due to non-availability of scientific data to revisit the usefulness, efficacy and
+safety of the Tricyclazole and Buprofezin and before taking a final view on draft
+2 | P age
+Notification, a SOP /Advisory may be developed on safe and judicious use of
+pesticides specific to use of Tricyclazole and Buprofezin, which may be implemented
+effectively so that issue of residue on crops may be addressed.
+In view of the above, DAC&FW has directed DPPQS to constitute a sub-
+committee for preparing a Standard Operating Procedure (SOP) on safe and judicious
+use of pesticides specific to use of Tricyclazole and Buprofezin and suggest course of
+action for effective implementation of the said SOP to minimize the residues on the
+recommended crops.
+Accordingly, a sub-committee was constituted as per the details given in
+Annexure-I under the chairmanship of Plant Protection Adviser, DPPQS, Faridabad.
+Tricyclazole and Buprofezin are mainly used in rice crop and their
+residue in exportable rice consignments is an issue of concern. Accordingly, this
+SOP has been targeted to minimize pesticide residue in rice crop.
+3. Roles and Responsibilities of stakeholders
+3.1 Department of Agriculture, Cooperation & Farmers Welfare (DAC&FW)
+1. To coordinate and monitor with all stake holders for the effective implementation of
+this SOP.
+2. To advise and assist concerned authorities on the availability of the quality pesticides
+and bio-pesticides.
+3. To provide guidance to all stakeholders on safe and judicious use of pesticides as and
+when required.
+3.2 State Department of Agriculture
+1. To create awareness among the farmers regarding implementation of IPM and safe
+and judicious use of pesticides through extension functionaries of the state.
+2. To organize training/demonstration for the farmers on production of residue free
+crops.
+3 | P age
+3. Promotion of line transplanting with maintaining the gaps after 2 to 3 meters and
+green manuring.
+4. To monitor occurrence of pests and diseases in the state.
+5. To advise appropriate plant protection measures for control of pests and diseases
+ensuring non-use of Tricyclazole and Buprofezin in Basmati rice.
+6. To maintain and monitor the records on the management practices of the crop from
+sowing to harvesting.
+7. To ensure availability of certified seeds and IPM/GAP inputs (eg.
+light/sticky/pheromone traps, tricho cards, bio-pesticides, etc.) to the farmers.
+8. To ensure registration of farmers under Basmati.net for receiving latest information
+and traceability.
+9. To prepare and distribute crop wise package of practices in local languages for the
+benefit of the farmers.
+10. To monitor the pesticide dealers for the sale of approved pesticides and to ensure that
+all the pesticides are being sold with label and leaflets.
+11. To ensure the display of crop wise recommended pesticides by the pesticide dealers to
+avoid the usages of non-label claim pesticides by the farmers.
+12. To ensure that banned pesticides are not in circulation.
+3.3 ICAR/State Agriculture Universities/ Krishi Vigyan Kendra
+1. To create awareness among the farmers regarding implementation of IPM and safe
+and judicious use of pesticides.
+2. To organize training/demonstration for the state extension workers and farmers on
+production of residue free crops.
+3. To monitor occurrence of pests and diseases in the fields.
+4. To advise appropriate plant protection measures for control of pests and diseases as
+per the approved label claims.
+5. To assist State Department of Agriculture for harmonizing the package of practice
+w.r.t. application/safe and judicious use of pesticide.
+6. Preparation of literature on identification & management of pests and diseases and
+also on importance of natural enemies.
+4 | P age
+7. Issue advisories to the extension functionaries and farmers.
+8. As a long term measure, ICAR/SAU may lay emphasis on developing rice varieties
+resistant to blast disease.
+3.4 Agricultural & Processed Food Products Export Development Authority (APEDA)
+1. To create awareness among all stakeholders.
+2. Organization of workshops for all stakeholders with coordination of respective State
+Agriculture Department and SAUs.
+3. Facilitate exporters for pesticide residue testing at Basmati Export Development
+Foundation (BEDF) lab.
+4. To coordinate between all rice growing states and SAUs including Basmati.
+5. To encourage the State Department of Agriculture for implementing the registration
+of farmers under Basmati.net for facilitating dissemination of information to all
+stakeholders.
+6. To liaise with State Governments and All India Rice Exporters Association (AIREA)
+for registration of farmers/ farms intended to export rice.
+7. To support capacity building programmes for exporters, farmers and other stake
+holders towards production of residue free crop.
+8. To promote/encourage establishment/recognition of pesticide testing laboratories in
+the main rice growing areas.
+9. To assist/support the researchers for development of modules/ technology to resolve
+the concern issues.
+3.5 Export Inspection Council (EIC)
+The Export Inspection Council (EIC) is the official export –certification body of India
+which ensures quality and safety of products exported from India. EIC was set up by the
+Government of India under Section 3 of the Export (Quality Control and Inspection) Act,
+1963 to ensure sound development of export trade of India through quality control and
+inspection and matters connected therewith. The role of EIC is to ensure that products
+notified under the Export (Quality Control and Inspection) Act 1963 are meeting the
+requirements of the importing countries in respect of their quality and safety.
+5 | P age
+“Basmati Rice is a notified commodity and subject to quality control and inspection
+prior to export in accordance with Export of Basmati Rice (Quality Control and Inspection)
+Rules, 2003”. Recently Department of Commerce has entrusted EIC to carry out Quality
+control for Non-basmati rice exports to EU.
+1. To ensures residue free export through pre-shipment testing.
+2. To create awareness among the exporters regarding country specific maximum
+residue limits (MRLs) of pesticides.
+3. To ensure that products intended for export are meeting the requirements of the
+importing countries in respect of their quality and safety.
+3.6 Central Integrated Pest Management Centre (CIPMC)
+1. To create awareness among the farmers regarding implementation of IPM, safe and
+judicious use of pesticides through organizing Farmers Field Schools (FFS).
+2. To organize training/demonstration for the state extension functionaries and farmers
+on production of residue free crops.
+3. To monitor occurrence of pests and diseases in the fields.
+4. To advise appropriate plant protection measures for control of pests and diseases as
+per the approved label claims.
+5. To organize trainings on production of bio-pesticides at village/ district level by the
+farmers/ FPOs etc.
+3.7 All India Rice Exporters Association (AIREA)/ Exporters
+1. AIREA should create awareness among rice exporters regarding residue free export.
+2. AIREA may coordinate to conduct the training programs on safe and judicious use of
+pesticides with farmers in conjunction with other agencies like Basmati Export
+Development Foundation (BEDF), State Department of Agriculture, SAUs/KVKs and
+CIPMCs etc.
+3. Exporters may be encouraged to procure the rice for export from the farmers
+registered under Basmati.net
+4. To provide technical support to the registered farmers so as to ensure pest and residue
+free produce for export.
+6 | P age
+5. Exporters may employ agriculture graduates for extension services with the guidance
+of KVK / SAU/ BEDF to train farmers for judicious use of pesticides and fertilizers.
+6. Rice producers, traders and exporters may give enough time for rice ageing (1-2
+years) and export of such rice to ensure sufficient degradation of the pesticides
+including Tricyclazole residue during storage.
+7. The encouragement to the progressive farmers in terms of bonus for residue free
+production.
+3.8 Farmers
+1. To approach State Department of Agriculture for registration of their farms under
+Basmati.net
+2. To maintain status of pests and diseases in the registered farms on fortnightly basis
+along with the record of the control measures/ plant protection measures undertaken
+from sowing to harvesting.
+3. To follow the advice from State Department of Agriculture, SAUs/KVKs, CIPMCs
+or technical support from exporter on pest management practices, approved pesticides
+along with waiting period etc.
+4. To adopt integrated pest management practices and use only recommended pesticides
+when necessary.
+5. Farmers should purchase the pesticides from Licensed Pesticide dealers after the
+advice from extension functionaries and insist for cash memo with details of batch
+No. of the pesticide.
+4. Pests occurrence with Paddy growth stages and recommended
+control measures
+Pest IPM practices
+Nursery stage
+Gall midge  Ploughing under the ratoon of previous crops can reduce infestation.
+ Control of grassy weeds and wild rice (alternate hosts) from
+surrounding areas can reduce gall midge incidence.
+7 | P age
+ Draining of rice fields for 5-7 days reduces midge populations.
+ Planting of early and using early maturing varieties may help to avoid
+high infestations.
+ Use moderate amounts of nitrogen and potassium fertilizers and adopt
+split applications to reduce population growth rates.
+ Avoiding staggered planting (complete planting in an area within 3
+weeks) to reduce infestation.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Stem Borer  Clipping the tips of seedlings before transplanting greatly reduces the
+carryover of eggs from the seedbed to the transplanted fields
+ Rice varieties with short stature and shorter growth duration periods
+suffer less damage than long growth duration varieties.
+ Community-wide destruction of diapausing larvae (in stubble) through
+tillage after harvest, followed by flooding, reduces stem borer
+populations resulting in low incidence in the next crop.
+Blast  Use certified seed and follow seed treatment.
+Bacterial leaf  Use certified seed and follow seed treatment. Avoid early transplanting.
+blight (BLB) Avoid excessive use of nitrogenous fertilizer. Avoid passage of water
+from diseased to healthy field and select resistant varieties for sowing.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Vegetative stage
+Stem borer  Mass trapping of male moth by installing pheromone traps @20
+traps/ha at 10 days after transplanting (Lures should be replaced 3
+times after 20 days interval).
+ Augmentative release of eggs parasitoid Trichogramma
+japonicum@50,000-100,000/ha/week for 5-6 times starting from 30
+days after transplanting.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+8 | P age
+Leaf folder  Early planting may help to avoid greater degrees of leaf damage.
+ Wider spacing (22.5 x 20 cm and 30 x 20 cm) and low usage of
+nitrogenous fertilizers decreases leaf damage.
+ Highly fertilized plots seem to attract females for oviposition.
+Therefore, it is advisable to avoid over-fertilization.
+ Higher damages will occur in shaded areas. Therefore, remove the
+causes of shading within the field.
+ Use of rope for dislodging the larvae of leaf folder before panicle
+initiation stage
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Brown Plant  High dosages of nitrogenous fertilizers close spacing, and high relative
+Hopper
+humidity increases plant hopper populations.
+(BPH) and
+White  Balanced use of fertilizer by splitting nitrogen applications can also
+Backed Plant
+reduce chances of plant hopper outbreaks.
+Hopper
+(WBPH)  Draining rice fields can be effective in reducing initial infestation
+levels. The field should be drained for 3 - 4 days when heavy
+infestations occur.
+ Synchronous planting (planting neighboring fields within 3 weeks) and
+maintaining a rice-free period may be effective.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Gall midge  Control of grassy weeds and wild rice (alternate hosts) from
+surrounding area can reduce gall midge incidence.
+ Draining of rice fields for 5-7 days affects midge populations.
+ Planting of early and using early maturing varieties may help to avoid
+high infestations.
+ Use moderate amounts of nitrogen and potassium fertilizers and adopt
+split applications to reduce population growth rates.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+9 | P age
+Hispa  Clipping and destruction of the top three-fourths of the leaves of highly
+infested crops with eggs and grubs at the early vegetative stage can
+suppress populations.
+ Regular collection of adults by sweep net and destruction suppresses
+population and reduces damage.
+ The removal of rice ratoons and volunteer rice during the crop-free
+season affects the rice hispa’s survival and multiplication of over-
+wintering populations.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Caseworm  Rice fields with wider hill spacing (30 x 20 cm) usually suffer less
+damage from caseworm.
+ Draining of fields for 5-7 days’ kills caseworm larvae.
+ Nitrogen fertilizer use at optimal dosages and split applications reduce
+the rice caseworm’s population.
+Foot rot and  Clean seeds should be used to minimize the occurrence of the diseases.
+Bakane  Salt water can be used to separate light weight, infected seeds from seed
+lots and thereby reduce seed borne inoculums.
+ Seed treatment using recommended fungicides or bio fungicide
+(Annexure-II).
+ Diseased plants should be uprooted and burnt.
+Blast  In case of Basmati, sowing should be completed in the first fortnight of
+July.
+ Avoid excessive use of nitrogenous fertilizers as it increases the intensity
+of the disease.
+ Destruction of collateral host around the field
+ Proper moisture should be maintained during flowering period.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+10 | P age
+Bacterial leaf  Follow the management practices given above for BLB.
+blight  Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Sheath blight  For management keep the bunds weed free. Avoid excessive use of
+nitrogenous fertilizers.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Panicle initiation to booting
+Stem borer, As mentioned above
+Leaf folder,
+BPH/WBPH
+Blast  Follow the management practices given above for blast
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Bacterial leaf  Reduce nitrogen application and apply if needed only small dose of N in
+blight more split doses.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Sheath blight  Follow the management practices given above for sheath blight.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Flowering
+BPH/WBPH As mentioned above
+Blast  Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+ Use alternate of Tricyclazole at this stage.
+False smut  Select disease free seed for sowing.
+ Avoid excessive dose of nitrogen fertilizer and its late application.
+11 | P age
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Sheath blight  Follow the management practices given above for sheath blight.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Brown leaf  As disease is seed borne, Use disease free seeds.
+spot  Removal of alternate & collateral hosts.
+ Growing resistant varieties
+ Providing proper nutrition for optimum plant growth and prevention of
+water stress seem to be the most important factors in controlling brown
+spot.
+ Use of recommended pesticide if needed, as per the details given in
+Annexure-II.
+Economic Threshold Level (ETL) of major pests of Rice: The use of chemical pesticide
+must be avoided until the pest/disease is above ETL. The ETL of major pests of rice crop is
+given in Annexure-III.
+5. Use of Tricyclazole and Buprofezin in Agriculture
+Tricyclazole fungicide is cost effective and widely used in several rice growing countries
+including India for control of rice blast (Pyricularia oryzea). It has been observed that
+sometimes farmers use this fungicide very late (after the grain formation stage) in the rice
+crop. It leads to the residues of pesticide beyond the permissible Maximum Residue Limit
+(MRL) in the grains after harvesting of the crop. The harvesting of early varieties of Basmati
+and non-Basmati crops starts in late September and early October, respectively. The farmers
+are required to stop spraying this pesticide at least 40 days before the harvesting to
+avoid its residue. Approved uses of Tricyclazole is given at Annexure-IV.
+Buprofezin is an Insect Growth Regulator (IGR) registered for the control of pests of rice,
+cotton, and other crops/edible commodities in India and several other countries. Buprofezin
+12 | P age
+acts by inhibiting chitin synthesis, suppressing oviposition of adults, and reducing egg-laying,
+egg hatching, and inhibits insect growth & development during larval moulting, and
+suppresses the population density of hoppers even in the progeny of the treated generation in
+the paddy field. Approved uses of Buprofezin are given at Annexure-V.
+6. Strategies for safe and judicious use of pesticide
+6.1 Implementation of IPM Practices (from seed to harvest)
+6.1.1 Cultural practices
+Pre-Sowing
+1. Field selection
+2. Soil testing
+3. Deep summer ploughing
+4. Destruction of crop residues, weeds and trimming of bunds
+5. Seed-bed preparation
+6. Selection of healthy, resistant/tolerant, short duration and high yielding variety seeds
+7. Seed/Seedling treatment: Brine solution (15%) by mixing 1.5 kg salt (NaCl) in 10
+litres of water for soaking and treatment of seeds. Seed treatment (for diseases) with
+Carbendazim 50% WP @ 2 g/kg seed or Trichoderma/Pseudomonas @ 5-10 g/kg of
+seed and seedling treatment for seed or soil borne diseases.
+8. Timely and synchronous sowing/transplanting operation.
+9. Raising of healthy nursery.
+10. Optimum plant spacing (20cm x 10cm with 2-3 seedlings per hill)
+11. In BPH prone area follow skip row method of transplantation.
+12. Leave 40 centimeter space after each 10 rows.
+Post sowing
+1. Balanced use of fertilizers
+2. Proper water management
+3. Timely weed control
+4. Pest scouting/monitoring
+5. Harvest close to ground level
+13 | P age
+6.1.2 Mechanical practices
+1. Collection and destruction of eggs, egg masses, larvae and pupae of insect pests. Stem
+borer egg masses to be placed in the bamboo cage-cum-percher for trapping the
+young un-parasitized caterpillars and for encouraging egg parasites.
+2. Mass trapping of pest adults through light/Sex pheromone traps
+3. Removal and destruction of leaf portion infested with insect pest/diseases.
+4. Use of rope for dislodging leaf feeders (Larvae of leaf folders, caseworm etc).
+6.1.3 Biological practices
+1. Conservation of egg, larval, nymphal and pupal parasites and predators in the
+field.
+2. Release of laboratory/commercially produced parasites and predators.
+3. Transfer of natural enemies of pests from high population fields to infested fields.
+4. Pest-defender ratio of (2:1) may be useful to avoid application of pesticides.
+5. List of parasite and predators is available at Annexure-VI.
+6.1.4 Weeds management practices
+1. Apply cyhalofop-butyl 10% EC @ 0.75-0.80 l/ha @ 18-20 days after sowing in
+grassy weeds in direct seeded rice followed by one hand weeding given after 4-6
+weeks.
+2. Apply butachlor 50% EC @ 2.5-4 l/ha or pretilachlor 50% EC @ 1.0-1.5 l/ha or
+oxadiargyl 80% WP @ 0.125 kg/ha or chlorimuron ethyl 25% WP @ 24 g a.i./ha
+or metsufluron methyl 20% WG @ 20 gm/l or anilophos 2% G @ 20-25 kg/ha or
+ethoxysulfuron 15% WDG @ 83.3-100 g/ha or Cinmethylin 10% EC @ 0.75-1.0
+l/ha as pre-emergence within 4-6 days after transplanting.
+3. Apply metsulfuron methyl 10% + chlorimuron ethyl 10% WP @ 20 g/ha or
+anilophos 24% + 2, 4-D- ethyl ester 32% EC @ 1-1.5 l/ha at 3-10 days after
+transplanting.
+14 | P age
+6.1.5 Nematode management practices
+A. White tip nematode (Aphalenchoides besseyi)
+1. Sun drying of seeds for 6 hours for 4 days.
+2. Pre-sowing of nursery bed treatment with carbofuran 3% CG @ 50000 g/ha, if
+nematode population is above ETL.
+B. Root knot nematode (Meloidogyne graminicola)
+1. Rotation with the crops like sweet potato, sunflower, cowpea, sesamum and onion.
+2. Soil application of carbofuran 3% CG @ 50000 g/ha, if nematode population is
+above ETL.
+6.2 Chemical control measures
+Need based, judicious and safe application of pesticides are the most vital segments of
+chemical control measures under the ambit of IPM. It involves developing IPM skills to play
+safe with environment by proper crop health monitoring, observing ETL and conserving
+natural bio-control potential before deciding in favour of use of chemical pesticides as a last
+resort. The pesticides recommended for control of insect pests and diseases are given in the
+Annexure II.
+7. Implementation of Good Agricultural Practices (GAP)
+All stakeholders specifically the extension functionaries have to ensure implementation of
+GAP with special reference to cultivation of rice including IPM, integrated crop management,
+awareness among farmers on safe use of Tricyclazole and Buprofezin and alternatives.
+8. Selection of correct pesticide based on field situation
+Before application of any pesticide, ensure that the damage to the crop is done by insect-
+pests, diseases or by other abiotic factors. Damage can also be the result of other factors such
+as incorrect irrigation, nutrient deficiency, poor drainage, herbicide toxicity or physical
+disorder. Identify the pest and its level of infestation to select the correct control measures.
+Integrated pest management practices should be used to keep the pest population below
+15 | P age
+Economic Threshold Level (ETL). Use of pesticide should be recommended only if the pest
+population is above ETL. It should be ensured that only recommended/ label claim pesticides
+are used in rice in correct dose and time. Farmers must be encouraged to take expert advice
+for selection of recommended pesticide.
+9. Selection of alternate pesticides including combination pesticides
+The farmers may be advised to use pesticides available as an alternate to Tricyclazole and
+Buprofezin specifically in the later stage of rice cultivation. The details of all approved
+pesticides including combination products on rice crop against various pests and diseases are
+given at Annexure -II.
+10. Awareness among pesticide dealers and farmers
+The pesticide dealers play major role in judicious use of pesticides by the farmers, as the
+farmers at times receive guidance from pesticide dealers. Therefore, the pesticide dealers and
+farmers may be advised to use pesticides as per label claim (recommended dose/dilutions,
+crop stage, spray intervals, maximum no. of sprays and waiting period/Pre Harvest
+Interval).The recommended waiting period/pre harvest interval as mentioned in pesticide
+label/leaflets should be strictly followed to minimize the pesticide residue.
+11. Harmonizing the Package of Practices by all concerned stake holders
+specifically w.r.t. application/use of pesticides
+Rice is cultivated across various agro-climatic zones/states in India. As a result, various State
+Govt./SAUs have developed their own Package of Practices for rice in their states. This has
+been observed that different pesticides are recommended by different authorities depending
+upon major pests and diseases in their area. However, it is important to ensure that the
+pesticides recommended must have been approved by CIB&RC. The Package of Practices
+should have recommended pesticides, their dose/dilutions, crop stage, spray intervals and Pre
+Harvest Interval (waiting period). Hence, there is a need to use harmonized package of
+practice by all concerned stakeholders.
+16 | P age
+12. Need of Pesticide Residue Testing
+Worldwide, people are exposed to pesticide residues through food intake. With a view to safe
+guard the consumer from such residues, pesticide maximum residues in food are approved as
+legal Maximum Residue Limits (MRLs) by the Codex Alimentarius Commission (Codex).
+Besides, a country can have their own MRL w.r.t. different food commodities, if technically
+justified. The pesticide residue is a matter of concern and important factor affecting export of
+agri commodities including rice. Various countries have identified pesticides to be tested for
+their residues and consignments having pesticide residue within the MRL are permitted for
+import. The residue testing for specified pesticides w.r.t. different countries are mandatory
+requirement for export. There is a need to strengthen the awareness among the farmers to
+grow residue free crop and also a mechanism wherein the exporters can get the rice tested for
+residues just before or immediately after harvest. Such mechanism will be beneficial for both,
+the farmers (for better remuneration) and exporters (assurance for residue free consignment).
+Paddy samples from different mandies/ areas may be collected for residue testing to identify
+the use trend of pesticides/ residue in respective areas. This database can be used to procure
+the paddy for export from safe/ low risk areas by the exporters. It will also be helpful for
+planning of area specific strategies.
+13. Guidelines for safe use of pesticides
+There is a need to train all stakeholders such as farmers, traders, field workers for strictly
+adhering to the label claim of pesticides and to educate them for safe and judicious use of
+pesticides. The issue of spurious pesticides also needs to be looked into so that unwanted
+chemicals do not enter rice fields.In order that the residues remain within the permissible
+level, farmers must be educated and trained to adopt GAP (Good Agriculture Practices) and
+use right dose, at the right time using right equipment and give enough time (PHI) allowing
+pesticide to dissipate by the time of harvest.
+While purchasing
+1. Purchase pesticides only from registered pesticide dealers having valid License.
+2. Purchase only required quantity of pesticides for single operation in a specified area.
+3. See approved labels on the containers/packets of pesticides.
+17 | P age
+4. See Batch No., Registration Number, Date of Manufacture/Expiry on the labels.
+5. Purchase pesticides well packed in containers.
+6. Do not purchase pesticide in bulk for whole season.
+7. Never purchase expired pesticide.
+8. Do not purchase pesticides whose containers are leaking/loose/ unsealed.
+Storage
+1. Avoid storage of pesticides in the house premises and store under lock and key.
+2. Keep only in original container with intact seal.
+3. Do not transfer pesticides to other container.
+4. Never keep them together with food or feed/fodder.
+5. Keep away from the reach of children and livestock.
+6. Do not expose to sun-light or rain water.
+Handling
+1. Never carry/transport pesticides along with food materials. Keep pesticides separate
+during transportation.
+2. Avoid carrying bulk - pesticides (dusts / granules) on head, shoulders or on the back.
+3. Bulk pesticides should be carried carefully to the site of application.
+Precautions for Preparing Spray Solution
+1. Always use clean water.
+2. Use protective clothing viz., hand gloves, face masks, cap, apron, full trouser, shoes
+etc. to cover whole body.
+3. Always protect your nose, eyes, ears, hands, etc. from spill of spray solution.
+4. Read instructions on pesticide container label carefully before use and follow the
+instructions.
+5. Prepare the solution as per requirement.
+6. Granular pesticides should be used as such.
+7. Avoid spilling of pesticides solutions while filling the spray tank.
+8. Always use recommended dosage of pesticide.
+9. Do not allow the pesticide/its solution to fall on any body parts.
+10. Do not smell the spray tank.
+11. Do not use overdose which may affect plant health and environment.
+12. Do not eat, drink, smoke or chew during whole operation of pesticides.
+18 | P age
+Selection of equipment
+1. Select right kind of equipment.
+2. Select right sized nozzles.
+3. Use separate sprayer for insecticides and weedicides.
+4. Do not use leaky or defective equipment.
+5. Do not blow/clean clogged nozzles with mouth. Instead use tooth brush tied with
+sprayer.
+Precautions for applying pesticides
+1. Never apply over-dose and high concentrations than recommended.
+2. Spray operation should not be conducted on hot sunny days or strong windy
+condition.
+3. Spray operation should be conducted in the wind direction.
+4. After spray operation, sprayer and buckets should be washed with clean water using
+detergent/soap.
+5. Avoid the entry of animals/workers in the field immediately after spray.
+6. Do not spray just before rains and immediately after the rains.
+7. Emulsifiable concentrate (EC) formulations should not be used for spraying with
+battery operated ULV sprayer.
+8. Containers and buckets used for mixing pesticides should never be used for domestic
+purpose even after thorough washing.
+After Spray Operation
+1. Left over spray solutions should be disposed of at safer place viz. barren isolated area.
+2. Empty containers of pesticides should not be re-used and must be crushed and be
+disposed off as per guidelines.
+3. Wash hands and face with clean water and soap before eating/smoking.
+4. On observing poisoning symptoms give the first aid and show the patient to doctor.
+Also show the empty container to doctor.
+5. Left over spray solution should not be drained in or near ponds or water lines etc.
+*****
+19 | P age
+Annexure-I
+List of Members of Sub-Committee to Prepare SOP for Safe and Judicious Use of
+Pesticides Specific to Use of Tricyclazole and Buprofezin.
+S. Name, Designation & Role in Sub- Email & Contact Number
+No. Organization committee
+1. Dr. Ravi Prakash, Chairman ppa@nic.in
+Plant Protection Adviser, 98102 50206
+Directorate of Plant Protection
+Quarantine & Storage
+(DPPQ&S), Faridabad
+2. Dr. Jasvir Singh, Member- singh.jasvir@nic.in
+Joint Director, Secretary 90135 71032
+Regional Central Integrated
+Pest Management Centre
+(RCIPMC), Faridabad
+3. Sh. Sukhdev Singh, Member directoragriculturepunjab@gmail.com
+Director, 98558 04444
+Directorate of Agriculture &
+Farmers Welfare, Near Dara
+Studio, Phase-6, SAS Nagar
+(Mohali), Punjab
+4. Sh. R.P. Sihag, Member jdapp2019@gmail.com
+Joint Director (PP), 94163 07523
+Agriculture & Farmers
+Welfare Department,
+Panchkula, Haryana
+5. Dr. N.A. Shakil, Member najam.shakil@icar.gov.in
+Principal Scientist, Div. of 98181 96164
+Agri-Chemicals, IARI,
+New Delhi
+6. Dr. D.D.K. Sharma, Member directorbedf@apeda.gov.in
+Director (BEDF), 9999769677
+APEDA, New Delhi
+7. Mrs. Vinita Sudhanshu, DGM Member vinitas@apeda.gov.in
+APEDA, New Delhi 9167887633
+8. Sh. Kiran W. Deshkar Member kiran.deshkar@gov.in
+Dy Director (Ent.) 99991 29820
+CIB&RC, DPPQS, Faridabad
+9. Sh. Vijay Setia Member setiavijay1234@gmail.com
+All India Rice Exporters 8295977665
+Association, New Delhi
+10. Sh. Anoop A. Krishnan, Member eia-kochilab@eicindia.gov.in
+Assistant Director (Technical) 9920914669
+Export Inspection Council
+Kochi
+20 | P age
+Annexure-II A
+Disease wise Approved Fungicides on Rice
+S. Name of Name of registered Waiting
+No. disease/pathogen fungicide Dosage/ha period (in
+a.i. (g) Formulation Dilution in days)
+(g/ml/%) water (L)
+1. Brown Leaf Spot Ediphenphos 50% EC 250-300 500-600 750-1000 21
+(Helminthosporium Aureofungin 46.15% w/v 0.005% 500 30
+oryzae) SP
+Propineb70%WP 1050to 1400 g 1500to2000 g 500 Litre/ -
+hectare
+Hexaconzole 4% + Zineb 720-900 1000-1250 500 34
+68% WP
+Captan 75% WP 750gm 1000gm 750 -
+Carbendazim 5% GR 0.62kg 12.5 kg - -
+Carbendazim 25%+ (7.5+15) to 30-35 0.1 -
+Mancozeb 50% WS (8.75+17.5)
+Azoxystrobin 16.7% + 83.5 + 166.5 500 500 24
+Tricyclazole 33.30% SC
+2. Blast Carpropamid27.8%SC 0.03% 0.1% 300-500 -
+(Magnaporthe depending
+oryzae) upon crop
+stage
+Aureofungin 46.15% w/v 0.005% 500 30
+SP
+Ediphenphos 50% EC 250-300 500-600 750-1000 21
+Kasugamycin 3% SL 30-50 gm 1000-1500 ml 750-1000 30
+Kitazin 48% EC 0.10% or100 0.20% or As required 15
+gram in 100ltr. Of 200ml in depending
+water 200lit.of upon crop
+water stage and
+plant
+protection
+equipment
+used
+Hexaconazole 5% EC 50gm 1000 m l 500 40
+Kresoxim-methyl 44.3% 250gm 500 ml 500 30
+SC
+Mancozeb 75% WP 1.125-1.5 kg 1.5-2kg 750Ltr. -
+Picoxystrobin 22.52% 150 600 500 12
+w/w SC
+Pyraclostrobin 100g/l CS 100 1000 500 18
+Zineb 75% WP 1.125- 1.5KG 1.5-2KG 750-1000 Lt
+Azoxystrobin 16.7% + 83.5 + 166.5 500 500 24
+Tricyclazole 33.30% SC
+21 | P age
+Azoxystrobin 18.2% w/w 0.03% or 0.3 g/l 0.1% or 1 ml 500 31
++ Difenoconazole 11.4% / Litre water
+w/w SC
+Hexaconazole 5.00% + 50+25 1000 500 22
+Validamycin 2.50% SC
+Hexaconazole 4% + 720-900 1000-1250 500 34
+Zineb 68% WP
+Flubendiamide 7.5% + 50 + 250 667 500 30
+Kresoxim-Methyl 37.5%
+SC
+Kasugamycin 5% + 350 700 375 26
+copper oxychloride 45%
+WP
+Kresoxim-methyl 40% + Kresoxim-methyl 500 500 22
+Hexaconazole 8% WG 200 &
+Hexaconazole -
+40
+Carbendazim 50%WP 125-250 gm 250-500gm 750 (wet
+slurry
+treatment)
+Carbendazim 1.92% + 240+1260 12.5 Broadcasting 46
+Mancozeb 10.08% GR
+Carbendazim12%+ 563gm 750gm 750lt. 57
+Mancozeb63%WP
+Carbendazim 25%+ (7.5+15) to 30-35 0.1 -
+Mancozeb 50% WS (8.75+17.5)
+Hexaconazole 4% + (30+120) 750 400 - 500 40
+Carbendazim 16% SC
+Iprodione25%+ 250gm 500gm 500lt. 30
+Carbendazim25%WP
+Isoprothiolane 40% EC 300 750 500- 1000 60
+Propiconazole 10.7%+ 262.5 to 393.75 500-700 500 46
+Tricyclazole 34.2% SE
+Tebuconazole25.9%m/m 0.1875 kg 0.750 lit 500 10
+EC
+Tebuconazole25% WG 0.1875 750 500 10
+Tricyclazole 18.0% w/w 360 (200+160) 1000 ml/ha -- 44
++ Tebuconazole 14.4%
+w/w SC
+Tricyclazole 45% + 225+50 500 500 23
+Hexaconazole 10% WG
+Tricyclazole 20.4% w/w 300 (225+75) 1000 500 10
++ Azoxystrobin 6.8%
+w/w SC
+Picoxystrobin 6.78% + 300 1000 500 29
+Tricyclazole 20.33
+%w/w SC
+Tricyclazole 75% WP 225- 300 gm 300- 400gm 500 30
+Tebuconazole 50% + 100 + 50 200 375-500 21
+Trifloxystrobin 25% WG
+22 | P age
+3. Sheath Blight Carbendazim 50%WP 1gm/ kg seed 2 gm/ kg seed 1Lit./10 kg (wet
+(Rhizoctonia seed slurry
+solani) treatment)
+Aerial phase 125-250 gm 250-500gm 750 (wet
+slurry
+treatment)
+Difenoconazole25% EC 0.0125% 0.05%or50 500 25
+or12.5g/100 L ml/100 L
+water water
+Flusilazole 40% EC 120g a.i./ha 300ml/ha 500 24
+Hexaconazole 5% EC 50gm 1000 ml 500 40
+Hexaconazole 5 % SC 0.01% (10 g/100 0.2% or As required 40
+L water ) (200ml/100 depending on
+L water) size of tree
+and plant
+protection
+equipment
+used
+Pencycuron 22.9% SC 150-187.5gm 600-750ml 500 69
+Thifluzamide24%SC 90gm 375 gm 500 28
+Validamycin3%L 60gm 2000gm 750 There
+should be
+no
+residues
+on grains
+and straw
+of paddy
+14 days
+before
+harvest
+Fluxapyroxad 62.5g/l 78.12-93.75 625-750 500 33
+FS + Epoxiconazole 62.5
+g/L EC
+Kitazin 48% EC 0.10% or100 0.20% or As required 15
+gram in 100ltr. Of 200ml in depending
+water 200lit.of upon crop
+water stage and
+plant
+protection
+equipment
+used
+Iprodione 50% WP 1.125kg 2.25kg 750 35
+Propiconazole 25% EC 125gm 500gm 750 30
+Tebuconazole25.9%m/m 0.1875 kg 0.750 lit 500 10
+EC
+Azoxystrobin 18.2% w/w 0.03% or 0.3 g/l 0.1% or 1 ml 500 31
++ Difenoconazole 11.4% / Litre water
+w/w SC
+23 | P age
+Azoxystrobin 7.1% + 37.5+62.5 500 500 43
+Propiconazole 11.9%
+w/w SE
+Azoxystrobin 11% + 82.5+137.25 750 800 -
+Tebuconazole 18.3%
+w/w SC
+Azoxystrobin 16.7% + 83.5 + 166.5 500 500 24
+Tricyclazole 33.30% SC
+Hexaconazole 5.00% + 50+25 1000 500 22
+Validamycin 2.50% SC
+Hexaconazole 75 % WG 50 66.7 500 30
+Kresoxim-methyl 44.3% 250gm 500 ml 500 30
+SC
+Iprodione25%+ 250gm 500gm 500lt. 30
+Carbendazim25%WP
+Hexaconazole 4% + 720-900 1000-1250 500 34
+Zineb 68% WP
+Hexaconazole 4% + (30+120) 750 400 - 500 40
+Carbendazim 16% SC
+Flubendiamide 3.5% + Flubendiamide35 1000 500 30
+Hexaconazole 5% WG &
+Hexaconazole50
+Flubendiamide 7.5% + 50 + 250 667 500 30
+Kresoxim-Methyl 37.5%
+SC
+Kresoxim-methyl 40% + Kresoxim-methyl 500 500 22
+Hexaconazole 8% WG 200 &
+Hexaconazole -
+40
+Picoxystrobin 7.05% + 200 1000 500 24
+Propiconazole 11.7% SC
+Propiconazole 13.9% + 0.02% - 0.03% (0.07-0.1%) 500 46
+Difenoconazole 13.9% 0.7-1.0ml/L
+EC
+Tebuconazole 50% + 100 + 50 200 375-500 21
+Trifloxystrobin 25% WG
+Carbendazim 1.92% + 240+1260 12.5 Broadcasting 46
+Mancozeb 10.08% GR
+Propiconazole 10.7%+ 262.5 to 393.75 500-700 500 46
+Tricyclazole 34.2% SE
+Carbendazim 25%+ (7.5+15) to 30-35 0.1 -
+Mancozeb 50% WS (8.75+17.5)
+Tricyclazole 20.4% w/w 300 (225+75) 1000 500 10
++ Azoxystrobin 6.8%
+w/w SC
+Tricyclazole 45% + 225+50 500 500 23
+Hexaconazole 10% WG
+Tricyclazole 18.0% w/w 360 (200+160) 1000 ml/ha -- 44
++ Tebuconazole 14.4%
+w/w SC
+24 | P age
+Carbendazim 25 %+ 300-360 800- 960 500 54
+Flusilazole 12.5% SE
+4. False Smut Copper Hydroxide 525 1500 500 10
+(Ustilaginoidea 53.8% DF
+virens) Copper Hydroxide 77% 1000gm 2000gm 750
+WP
+Fluopyram 17.7% w/w + Fluopyram110 550 g/ha 500 22
+Tebuconazole 17.7% +Tebconazole110
+w/w SC
+Tricyclazole 20.4% w/w 300 (225+75) 1000 500 10
++ Azoxystrobin 6.8%
+w/w SC
+Tricyclazole 18.0% w/w 360 (200+160) 1000 ml/ha -- 44
++ Tebuconazole 14.4%
+w/w SC
+Picoxystrobin 7.05% + 200 1000 500 24
+Propiconazole 11.7% SC
+5. Dirty Panicle Hexaconzole 4% + Zineb 720-900 1000-1250 500 34
+(Curvularia sp.) 68% WP
+Propiconazole 13.9% + 0.02% - 0.03% (0.07-0.1%) 500 46
+Difenoconazole 13.9% 0.7-1.0ml/L
+EC
+Fluopyram 17.7% w/w + Fluopyram110 550 g/ha 500 22
+Tebuconazole 17.7% +Tebconazole110
+w/w SC
+Tebuconazole 50% + 100 + 50 200 375-500 21
+Trifloxystrobin 25% WG
+Tricyclazole 20.4% w/w 300 (225+75) 1000 500 10
++ Azoxystrobin 6.8%
+w/w SC
+Tricyclazole 18.0% w/w 360 (200+160) 1000 ml/ha -- 44
++ Tebuconazole 14.4%
+w/w SC
+Picoxystrobin 7.05% + 200 1000 500 24
+Propiconazole 11.7% SC
+Bacterial Leaf Streptomycin Sulphate
+6. Blight 90% + Tetracylin
+(Xanthomonas Hydrocloride 10% SP
+oryzae ) Copper Hydroxide 525 1500 500 10
+53.8% DF
+Source: CIB&RC
+Note: Fungicides registered other than Tricyclazole and its combination may be considered as
+alternatives against blast, false smut, sheath blight, brown spot and grain discoloration (Dirty
+Panicle) diseases of rice.
+25 | P age
+Disease wise Approved Bio-Fungicides on Rice
+S. No. Name of Name of Dose/ Dilution Waiting
+disease/pathogens registered bio- Formulation period
+fungicide (in days)
+1. Brown Leaf Spot Trichoderma 500 liter/ha Foliar spray -
+(Helminthosporium viride 5.0%
+oryzae) Liquid
+Formulation
+(Accession no.
+NAIMCC-F-
+03034)
+Pseudomonas 5 gm/kg of seed Seed Treatment: Make a thin paste
+fluorescens of required quantity of
+1.5% WP (BIL- Pseudomonas fluorescens 1.5% WP
+331 Accession with min. volume of water and coat
+No. the seed uniformly, shades dry the
+MTCC5866) seeds just before showing.
+2.5 kg /ha Soil Treatment: Mix 2.5 kg of
+Pseudomonas fluorescens 1.5% WP
+with 50 kg FYM or and broadcast
+uniformly over hectare of land
+30days after planting.
+2. Blast Pseudomonas 10 g/kg seed Seed Treatment: Mix the required -
+(Magnaporthe fluorescens quantity of seeds with the required
+oryzae) 0.5% WP quantity of Pseudomonas
+(TNAU Strain fluorescens 0.5% WP.
+Accession No.
+ITCC BE 0005)
+1 kg/ha Soil Treatment: Broadcast1 kg of
+Pseudomonas fluorescens 0.5% WP
+by mixing with 2.5 kg organic
+manure in one ha area.
+1 kg/ha Foliar spray: Spray 0.5% WP @ 1
+kg/ha.
+Pseudomonas 5 gm/kg of seed Seed Treatment: Make a thin paste
+fluorescens of required quantity of
+1.5% WP (BIL- Pseudomonas fluorescens 1.5% WP
+331 Accession with min. volume of water and coat
+No. the seed uniformly, shades dry the
+MTCC5866) seeds just before showing.
+2.5 kg /ha Soil Treatment: Mix 2.5 kg of
+Pseudomonas fluorescens 1.5% WP
+with 50 kg FYM or and broadcast
+uniformly over hectare of land
+30days after planting.
+Pseudomonas 4.5 ml per kg Seed Treatment: Mix the required
+fluorescens1.5 seed quantity of seeds with the required
+% LF (MTCC of Pseudomonas fluorescens 1.5%
+no. 5671, Strain Liquid formulation ensure uniform
+26 | P age
+designation Pf- coating, shade dry and sow.
+1)
+6.0 litre per ha Foliar spray: Spray Pseudomonas
+fluorescens 1.5% Liquid formulation
+uniformly on the crop.
+3. Sheath Blight Trichoderma 5-10 gm/litre of Foliar spray: Mix 2.5 kg of -
+(Rhizoctonia solani) viride 1.0% WP water Trichoderma viride 1.0% WP in 500
+(Strain T-14 in litres of water. Spray three times at
+house isolate of 15 days interval uniformly over one
+M/s Indore hectare land 30 days after planting
+Biotech Inputs
+& Research (P)
+Ltd., Indore)
+4. Bacterial Leaf Blight Pseudomonas 10 ml/litre of Seedling Root Dip Treatment: -
+(Xanthomonas fluorescens water Mix 10 ml of Pseudomonas
+oryzae ) 2.0% AS fluorescens 2.0% AS in one litre of
+(Strain No. water and dip the paddy seedling
+IPL/PS-01, root for 30 minutes before
+Accession No. transplanting followed by foliar
+MTCC 5727) application after 40- 45 days of
+transplantation
+1.87-2.50 Foliar Spray: Suspend 1.87 to 2.50
+litre/ha litre of Pseudomonas
+fluorescens2.0% AS in 500 litre of
+water and spray uniformly after 40-
+45 days of transplantation over one
+hectare land. 2-3 spray are required
+depending upon the disease
+incidence at interval of 10-12 days
+using a hand operated Knapsack
+sprayer or power sprayer fitted with
+a hollow cone nozzle.
+Pseudomonas 5 gm/kg of seed Seed Treatment: Make a thin paste
+fluorescens of required quantity of
+1.5% WP (BIL- Pseudomonas fluorescens1.5% WP
+331 Accession with min. volume of water and coat
+No. the seed uniformly; shades dry the
+MTCC5866) seeds just before showing.
+2.5 kg /ha Soil Treatment: Mix 2.5 kg of
+Pseudomonas fluorescens 1.5% WP
+with 50 kg FYM or and broadcast
+uniformly over hectare of land
+30days after planting.
+Bacillus subtilis 10 ml/litre of Seedling Root Dip Treatment: mix
+2.0% AS water 10ml of Bacillus subtilis 2.0% AS in
+(Strain No. one litre of water and dip the paddy
+IPL/BS-09, seedling root for 30 minutes before
+Accession No. transplanting followed by foliar
+MTCC 5728) application.
+27 | P age
+1.87-2.50 Foliar Spray: Suspend 1.87 to 2.50
+litre/ha litre of Bacillus subtilis 2.0% AS in
+500 litre of water and spray
+uniformly after 40-45 days of
+transplantation over one hectare land
+2-3 spray are required depending
+upon the disease incidence at
+interval of 10-12 days using a hand
+operated Knapsack sprayer or power
+sprayer fitted with a hollow cone
+nozzle.
+5. Bakane /Foot rot Trichoderma 30 ml/litre of Seedling Root Dip Treatment: Mix
+(Fusarium harzianum water 30 ml of Trichoderma harzianum
+moniliforme) 2.0% AS 2.0% AS in one litre of water and
+(Strain No. dip the paddy seedling root for 30
+IPL/VT/102, minutes before transplanting
+Accession No. followed by Soil treatment
+ITCC 6893) 2.5 litre/ha Soil Treatment: Mix 2.5 litre of
+Trichoderma harzianum2.0% AS
+with 100 kg of properly decomposed
+FYM and broadcast uniformly over
+a hectare of land prior to
+transplanting.
+Source: CIB&RC
+28 | P age
+Annexure-II B
+Pest wise Approved Insecticides on Rice
+Sr. Name of Name of insecticide Dose Dilution Waiting
+No. pest registered a.i.(g) Formulatio (Litres) Period (in
+n (g/ml)/ha days)
+01 Stem borer Acephate 75% SP 500.0-750.0 666 - 1000 300-500 15
+Acephate 97% DF 727.5 750 500 21
+Acephate 95% SG 562.5 592 500 30
+Benfuracarb 3% GR 1000 33000 - 20
+Bifenthrin 8.8% CS 44 500 500 21
+Bifenthrin 10% EC 50 500 500 21
+Carbofuran 3% CG 750 25000 - -
+Carbosulfan 6% GR 1000 16700 - 37
+Carbosulfan 25% EC 200 – 250 800 – 1000 500 – 1000 14
+Cartap hydrochloride 750 18750 - -
+4% GR
+Cartap hydrochloride 500 1000 500 - 1000 -
+50% SP
+Cartap hydrochloride 318.75 - 375 425 - 500 250 - 500 35 - 89
+75% SG
+Chlorantraniliprole 30 150 500 47
+18.5% SC
+Chlorantraniliprole 40 10000 - 53
+0.4% GR
+Chlorpyrifos 10% GR 1000 10000 - 30
+Chlorpyriphos 75% 375 - 400 500 - 533 500 - 1000 15
+WG
+Chlorpyrifos 20% EC 250 1250 500 - 1000 -
+Chlorpyrifos 50% EC 375 - 400 750 - 800 500 - 1000 15
+Chlorpyrifos 1.5% DP 375 25000 - 07
+Chromafenozide 80% 75 - 100 94 - 125 500 32
+WP
+Deltamethrin 11% EC 15 150 500 13
+Deltamethrin 1.8% EC 10 – 12.5 625 - 780 500 07
+Ethofenoprox 10% EC 50 - 75 500 - 750 500 15
+Fenpropathrin 30% EC 100 333 500 30
+Fipronil 5% SC 50 - 75 1000 - 1500 500 32
+Fipronil 0.3% GR 50 - 75 16670 - - 32
+25000
+Fipronil 0.6% GR 60 10 65 -
+Fipronil 80% WG 40 - 50 50 – 62.50 375 - 500 19
+Flubendiamide 20% 25 125 500 30
+WG
+29 | P age
+Flubendiamide 39.35% 24 50 375 - 500 40
+SC
+Flubendiamide 0.7% 85 - 100 12.14 – - 25
+GR 14.28
+Imidacloprid 0.3% GR 0.045 15.0 kg - 26
+Lambda-cyhalothrin 12.5 250 500 15
+4.9% CS
+Lambda-cyhalothrin 12.5 500 400 - 600 15
+2.5% EC
+Lambda-cyhalothrin 12.5 250 400 - 600 15
+5% EC
+Monocrotophos 36% 500 1250 500 - 1000 -
+SL
+Quinalphos 25% Gel 250 1000 500 - 1000 -
+Quinalphos 5% GR 250 5000 - -
+Quinalphos 20% AF 250 - 300 1250 - 1500 750 - 1000 40
+Quinalphos 25% EC 325 1300 500 - 1000 40
+Thiacloprid 21.7% SC 120 500 500 30
+Thiacyclam Hydrogen 500 1000 500 30
+Oxylate
+Thiamethoxam 25% 25 100 500 - 750 14
+WG
+Acephate 50% + 518 1000 500 -
+Imidacloprid 1.8% SP
+Acetamiprid 0.4% + 10 + 500 2.5 500 - 800 10
+Chlorpyriphos 20% EC
+Bifenthrin 3% + 24 + 240 – 800 – 1000 500 21
+Chlorpyriphos 30% EC 30 + 300
+Bufrofezin 20% + 200 + 500 1000 500 20
+Acephate 50% WP
+Cartap Hydrochloride 480 800 500 20
+50% + Buprofezin
+10% WP
+Cartap Hydrochloride 675 - 900 15 - 20 - 27
+4% + Fipronil 0.5%
+CG
+Chlorpyriphos 50% + 312 + 32 – 625 - 750 500 - 700 15
+Cypermethrin 5% EC 375 + 38
+Flubendiamide 4% + 35 + 175 175 + 750 500 30
+Buprofezin 20% SC
+Flubendiamide 3.5% + 35 + 50 1000 500 20
+Hexaconazole 5% WG
+Flubendiamide 7.5% + 50 + 250 667 500 30
+Kresoxim methyl
+37.5% SC
+Imidacloprid 6% + 18 + 12 300 500 10
+30 | P age
+Lambda-cyhalothrin
+4% SL
+Chlorantraniliprole 30 + 60 6Kg/ha. - 60
+0.5% + Thiamethoxam
+1% GR
+02 Leaf folder Acephate 75% SP 500.0-750.0 666 - 1000 300-500 15
+Acephate 97% DF 727.5 750 500 21
+Acephate 95% SG 562.5 592 500 30
+Benfuracarb 3% GR 1000 33000 - 20
+Bifenthrin 8.8% CS 44 500 500 21
+Bifenthrin 10% EC 50 500 500 21
+Carbosulfan 6% GR 1000 16700 - 37
+Cartap hydrochloride 750-1000 18750- - -
+4% GR 25000
+Cartap hydrochloride 500 1000 500 - 1000 -
+50% SP
+Cartap hydrochloride 318.75 - 375 425 - 500 250 - 500 35 - 89
+75% SG
+Chlorantraniliprole 30 150 500 47
+18.5% SC
+Chlorantraniliprole 40 10000 - 53
+0.4% GR
+Chlorpyrifos 10% GR 1000 10000 - 30
+Chlorpyrifos 20% EC 375 1875 500 - 1000 -
+Chlorpyrifos 50% EC 375 - 400 750 - 800 500 - 1000 15
+Chlorpyrifos 1.5% DP 375 25000 - 07
+Chromafenozide 80% 75 - 100 94 - 125 500 32
+WP
+Deltamethrin 11% EC 15 – 18.75 150 – 187.5 500 13
+Deltamethrin 1.8% EC 10 – 12.5 625 - 780 500 07
+Emamectin 8.08 425 500 48
+benzoate1.90% EC
+Ethofenoprox 10% EC 50 - 75 500 - 750 500 15
+Fenpropathrin 30% EC 100 333 500 30
+Fipronil 0.6% GR 60 10 65 -
+Fipronil 80% WG 40 - 50 50 – 62.50 375 - 500 19
+Flubendiamide 20% 25 125 500 30
+WG
+Flubendiamide 39.35% 24 50 375 - 500 40
+SC
+Indoxacarb 15.8% EC 30 200 500 14
+Lambda-cyhalothrin 12.5 250 500 15
+4.9% CS
+Lambda-cyhalothrin 12.5 500 400 - 600 15
+2.5% EC
+Lambda-cyhalothrin 12.5 250 400 - 600 15
+31 | P age
+5% EC
+Monocrotophos 36% 250 625 500 - 100 -
+SL
+Quinalphos 25% Gel 250 1000 500 - 1000 -
+Quinalphos 20% AF 250 - 300 1250 - 1500 750 - 1000 40
+Quinalphos 25% EC 250 1000 500 - 1000 40
+Thiocyclam hydrogen 500 1000 500 30
+Oxalate
+Thiamethoxam 25% 25 100 500 - 750 14
+WG
+Acephate 50% + 518 1000 500 -
+Imidacloprid 1.8% SP
+Bifenthrin 3% + 24 + 240 – 800 – 1000 500 21
+Chlorpyriphos 30% EC 30 + 300
+Bufrofezin 20% + 200 + 500 1000 500 20
+Acephate 50% WP
+Cartap Hydrochloride 480 800 500 20
+50% + Buprofezin
+10% WP
+Cartap Hydrochloride 675 - 900 15 - 20 - 27
+4% + Fipronil 0.5%
+CG
+Chlorpyriphos 50% + 312 + 32 – 625 - 750 500 - 700 15
+Cypermethrin 5% EC 375 + 38
+Deltamethrin 0.72% + 0.78 + 62.5 – 1250 + 1500 500 30
+Buprofezin 5.65% EC 0.94 + 75
+Flubendiamide 4% + 35 + 175 175 + 700 500 30
+Buprofezin 20% SC
+Flubendiamide 3.5% + 35 + 50 1000 500 20
+Hexaconazole 5% WG
+Flubendiamide 7.5% + 50 + 250 667 500 30
+Kresoxim methyl
+37.5% SC
+Novaluron 5.25 + 22.97 + 437.5 500 40
+Indoxacarb 4.5% SC 19.69
+Chlorantraniliprole 30 + 60 6Kg/ha. - 60
+0.5% + Thiamethoxam
+1% GR
+03 Plant Acephate 75% SP 500.0-750.0 666 - 1000 300-500 15
+hoppers Acephate 97% DF 727.5 750 500 21
+Imidacloprid 6% + 18 + 12 300 500 10
+Lambda-cyhalothrin
+4% SL
+04 Green leaf Acephate 75% SP 500.0-750.0 666 - 1000 300-500 15
+hoppers Acephate 97% DF 727.5 750 500 21
+Bifenthrin 10% EC 50 500 500 21
+32 | P age
+Buprofezin 25% SC 200 800 400-500 05
+Carbofuran 3% CG 750 25000 - -
+Carbosulfan 6% GR 1000 16700 - 37
+Carbosulfan 25% EC 200 – 250 800 – 1000 500 – 1000 14
+Chlorpyrifos 1.5% DP 375 25000 - 07
+Deltamethrin 11% EC 15 150 500 13
+Ethofenoprox 10% EC 50 - 75 500 - 750 500 15
+Fenobucarb (BPMC) 250 - 750 500 - 1500 500 30
+50% EC
+Fipronil 5% SC 50 - 75 1000 - 1500 500 32
+Fipronil 0.3% GR 50 - 75 16670 - - 32
+25000
+Flonicamid 50% WG 75 150 500 36
+Imidacloprid 17.8% SL 20 - 25 100 - 125 500 - 700 40
+Lambda-cyhalothrin 12.5 500 400 - 600 15
+2.5% EC
+Lambda-cyhalothrin 12.5 250 400 - 600 15
+5% EC
+Monocrotophos 36% 250 625 500 - 100 -
+SL
+Quinalphos 20% AF 250-300 1250-1500 750-1000 40
+Thiamethoxam 70% 105 150 Seed
+WS dresser at
+the time of
+sowing
+Thiamethoxam 75% 113 150 Dissolve in 60
+SG 500 ml
+water and
+mix with
+20 Kg.
+sand/ha.
+Thiamethoxam 25% 25 100 500 - 750 14
+WG
+Thiamethoxam 25% 500 2000 250 86
+WG ml/sq.mts.
+(for nursery level – soil
+drenching)
+Acephate 50% + 518 1000 500 -
+Imidacloprid 1.8% SP
+Cartap Hydrochloride 480 800 500 20
+50% + Buprofezin
+10% WP
+Fenobucarb 20% + 400 + 100 2000 500 30
+Buprofezin 5% SE
+Fipronil 4% + 44 + 44 1100 500 45
+Thiamethoxam 4% SC
+33 | P age
+Chlorantraniliprole 30 + 60 6Kg/ha. - 60
+0.5% + Thiamethoxam
+1% GR
+05 Brown Acephate 95% SG 562.5 592 500 30
+Plant Acetamiprid 20% SP 10 – 20 50 – 100 500 – 600 07
+Hopper Benfuracarb 3% GR 1000 33000 - 20
+(BPH) Buprofezin 25% SC 200 800 400-500 20
+Buprofezin 70% DF 175 250 500 24
+Carbofuran 3% CG 750 25000 - -
+Carbosulfan 25% EC 200 – 250 800 – 1000 500 – 1000 14
+Chlorpyrifos 1.5% DP 375 25000 - 07
+Clothianidin 50% 10 - 12 20 - 24 500 12
+WDG
+Dinotefuran 20% SG 30 - 40 150 - 200 500 21
+Ethofenoprox 10% EC 50 - 75 500 - 750 500 15
+Fenobucarb (BPMC) 250 - 750 500 - 1500 500 30
+50% EC
+Fipronil 5% SC 50 - 75 1000 - 1500 500 32
+Fipronil 0.3% GR 50 - 75 16670 - - 32
+25000
+Flonicamid 50% WG 75 150 500 36
+Imidacloprid 70% WG 21 – 24.5 30 - 35 300 - 375 07
+Imidacloprid 30.5% 21 – 26.25 60 - 75 500 - 750 37
+SC
+Imidacloprid 17.8% SL 20 - 25 100 - 125 500 - 700 40
+Monocrotophos 36% 500 1250 500 - 1000 -
+SL
+Pymetrozine 50% WG 150 300 500 19
+Quinalphos 25% Gel 250 1000 500 - 1000 -
+Quinalphos 20% AF 250 - 300 1250 - 1500 750 - 1000 40
+Quinalphos 25% EC 375 1500 500 - 1000 40
+Quinalphos 1.5% DP 300 20000 - 40
+Thiamethoxam 75% 113 150 Dissolve in 60
+SG 500 ml
+water and
+mix with
+20 Kg.
+sand/ha.
+Thiamethoxam 25% 25 100 500 - 750 14
+WG
+Acephate 50% + 518 1000 500 -
+Imidacloprid 1.8% SP
+Acetamiprid 0.4% + 10 + 500 2.5 500 - 800 10
+Chlorpyriphos 20% EC
+Buprofezin 9% + 54 + 144 600 500 20
+Acephate 24% WP
+34 | P age
+Buprofezin 15% + 187.5 + 1250 500 20
+Acephate 35% WP 437.5
+Buprofezin 20% + 200 + 500 1000 500 20
+Acephate 50% WP
+Buprofezin 22% + 110 + 15 500 400 - 500 32
+Fipronil 3% SC
+Buprofezin 23.1% + 173.25 + 750 500 30
+Fipronil 3.85% SC 28.88
+Cartap Hydrochloride 480 800 500 20
+50% + Buprofezin
+10% WP
+Deltamethrin 0.72% + 0.78 + 62.5 – 1250 + 1500 500 30
+Buprofezin 5.65% EC 0.94 + 75
+Ethiprol 40% + 37.5 + 37.5 93.75 375 15
+Imidacloprid 40% WG
+Fenobucarb 20% + 400 + 100 2000 500 30
+Buprofezin 5% SE
+Flubendiamide 4% + 35 + 175 175 + 750 500 30
+Buprofezin 20% SC
+Fipronil 4% + 44 + 44 1100 500 45
+Thiamethoxam 4% SC
+Chlorantraniliprole 30 + 60 6Kg/ha. - 60
+0.5% + Thiamethoxam
+1% GR
+06 White Buprofezin 25% SC 200 800 400-500 20
+Backed Carbosulfan 25% EC 200 – 250 800 – 1000 500 – 1000 14
+Plant Ethofenoprox 10% EC 50 - 75 500 - 750 500 15
+Hopper Fipronil 5% SC 50 - 75 1000 - 1500 500 32
+(WBPH) Fipronil 0.3% GR 50 - 75 16670 - - 32
+25000
+Flonicamid 50% WG 75 150 500 36
+Imidacloprid 70% WG 21 – 24.5 30 - 35 300 - 375 07
+Imidacloprid 30.5% 21 – 26.25 60 - 75 500 - 750 37
+SC
+Imidacloprid 17.8% SL 20 - 25 100 - 125 500 - 700 40
+Thiamethoxam 25% 25 100 500 - 750 14
+WG
+Acetamiprid 0.4% + 10 + 500 2.5 500 - 800 10
+Chlorpyriphos 20% EC
+Bufrofezin 15% + 187.5 + 1250 500 20
+Acephate 35% WP 437.5
+Cartap Hydrochloride 480 800 500 20
+50% + Buprofezin
+10% WP
+Ethiprol 40% + 50 + 50 125 375 15
+Imidacloprid 40% WG
+35 | P age
+Fipronil 4% + 44 + 44 1100 500 45
+Thiamethoxam 4% SC
+07 Field Rat, Bromadiolone 0.25% 0.005 - - -
+Large CB
+Bandicota Bromadiolone 0.005% 0.005 - - -
+Indian RB
+house rat,
+Indian
+field mouse
+08 Gall midge Carbofuran 3% CG 750 25000 - -
+Carbosulfan 6% GR 1000 16700 - 37
+Carbosulfan 25% EC 200 – 250 800 – 1000 500 – 1000 14
+Chlorpyrifos 10% GR 1000 10000 - 30
+Chlorpyrifos 20% EC 250 1250 500 - 1000 -
+Chlorpyrifos 1.5% DP 375 25000 - 07
+Ethofenoprox 10% EC 50 - 75 500 - 750 500 15
+Fipronil 5% SC 50 - 75 1000 - 1500 500 32
+Fipronil 0.3% GR 50 - 75 16670 - - 32
+25000
+Lambda-cyhalothrin 12.5 500 400 - 600 15
+2.5% EC
+Lambda-cyhalothrin 12.5 250 400 - 600 15
+5% EC
+Quinalphos 5% GR 250 5000 - -
+Thiamethoxam 25% 25 100 500 - 750 14
+WG
+09 Hispa Carbofuran 3% CG 750 25000 - -
+Chlorpyrifos 20% EC 250 1250 500 - 1000 -
+Emamectin benzoate 8.08 425 500 48
+1.90% EC
+Lambda-cyhalothrin 12.5 500 400 - 600 15
+2.5% EC
+Lambda-cyhalothrin 12.5 250 400 - 600 15
+5% EC
+Malathion 5% DP 1250 25000 - -
+Malathion 50% EC 575 1150 500 - 1000 -
+Quinalphos 25% Gel 250 1000 500 - 1000 -
+Quinalphos 25% EC 500 2000 500 - 1000 40
+Imidacloprid 6% + 18 + 12 300 500 10
+Lambda-cyhalothrin
+4% SL
+10 Whorl Cartap hydrochloride 750-1000 18750- - -
+maggot 4% GR 25000
+Chlorpyrifos 20% EC 250 1250 500 - 1000 -
+Deltamethrin 11% EC 15 150 500 13
+Ethofenoprox 10% EC 50 - 75 500 - 750 500 15
+36 | P age
+Fipronil 5% SC 50 - 75 1000 - 1500 500 32
+Fipronil 0.3% GR 50 - 75 16670 - - 32
+25000
+Thiamethoxam 25% 500 2000 250 86
+WG ml/sq.mts.
+(for nursery level – soil
+drenching)
+11 Thrips Imidacloprid 48% FS 0.15 0.25 - -
+Lambda-cyhalothrin 12.5 500 400 - 600 15
+2.5% EC
+Lambda-cyhalothrin 12.5 250 400 - 600 15
+5% EC
+Thiamethoxam 70% 105 150 - Seed
+WS dresser at
+the time of
+sowing
+Thiamethoxam 25% 25 100 500 - 750 14
+WG
+Thiamethoxam 25% 500 2000 250 86
+WG ml/sq.mts.
+(for nursery level – soil
+drenching)
+12 Nematode Carbofuran 3% CG 1500 50000 - -
+13 Grasshopper Chlorpyrifos 1.5% DP 375 25000 - 07
+14 Green Indoxacarb 15.8% EC 30 200 500 14
+semilooper
+15 Blue leaf Oxydemeton methyl 125 500 500 - 1000 -
+hopper 25% EC
+16 White leaf Oxydemeton methyl 250 1000 500 - 1000 -
+hopper 25% EC
+17 Rice case Phenthoate 50% EC 500 1000 500 - 1000 -
+worm
+18 Gundhi Imidacloprid 6% + 18 + 12 300 500 10
+bug Lambda-cyhalothrin
+4% SL
+Source: CIB&RC
+Note: Insecticides registered other than Buprofezin and its combination may be
+considered as alternatives against Brown plant hopper, Green leaf hopper, White Back
+Plant Hopper pests of rice.
+37 | P age
+Pest wise Approved Bio-pesticides on Rice
+S. Name of Name of insecticide Dose Dilution Waiting
+No. pest registered a.i. Formulatio (lts/ha) Period (in
+(g) n (g/ml) % days)
+01 Stem Azadirachtin 0.15% EC - 1500 - 2500 500 05
+borer w/w Min. Neem Seed
+Kernel Based
+Azadirachtin 00.03% EC - 2000 1000 05
+Min. Neem Oil Based
+Azadirachtin 05.00% - 200 400 05
+w/w Min. Neem Extract
+Concentrates
+Bacillus thuringiensis 1.5 500 - 750 - -
+var. kurstaki, serotype H-
+39, 3B, Strain Z-52
+Bacillus thuringiensis - 1.5 kg 500 - 750 -
+var. kurstaki 2.5% AS
+(Spicbio-BTK AS)
+02 Leaf Azadirachtin 0.15% EC - 1500 - 2500 500 05
+folder w/w Min. Neem Seed
+Kernel Based
+Azadirachtin 05.00% - 200 400 05
+w/w Min. Neem Extract
+Concentrates
+Bacillus thuringiensis - 1 - 3 1000 -
+var. galleriae 1593 M
+sero type H 59 5b, 1.3%
+flowable concentrate
+Potency 1500
+IU/mg
+Bacillus thuringiensis 1.5 500 - 750 - -
+var. kurstaki, serotype H-
+39, 3B, Strain Z-52
+Bacillus thuringiensis - 1.5 kg 500 - 750 -
+var. kurstaki 2.5% AS
+(Spicbio-BTK AS)
+Beauveria bassiana - 2.5kg/ha. 750 - 850 -
+01.15% WP
+Beauveria bassiana - 2.5kg 750 - 850 -
+1.15% WP. (1x108 /gm
+min) Strain BB-ICAR-
+RJP, Accession No –
+MCC 1022
+Beauveria bassiana - 2.5kg 600 - 750 -
+1.15% WP (Strain : BB –
+38 | P age
+5372, own R & D
+Isolate)
+Beauveria bassiana - 2.5kg 750 - 850 -
+1.15% WP (1x108 /gm
+min) Strain ICAR,
+Research Complex,
+Umiam, Meghalaya,
+Accession No –
+NAIMCC-F-03045
+Beauveria bassiana - 2.5kg 750
+1.15% WP (1x108 /gm
+min) Accession No –
+NAIMCC-F-03045,
+Strain No. NBAIM,
+MAU.
+03 BPH Azadirachtin 0.15% EC - 1500 - 2500 500 05
+w/w Min. Neem Seed
+Kernel Based
+Azadirachtin 00.03% EC - 2000 1000 05
+Min. Neem Oil Based
+Azadirachtin 05.00% - 200 400 05
+w/w Min. Neem Extract
+Concentrates
+Metarhizium anisopliae - 2.5kg 500 -
+1.15% WP (1x108
+CFU/gm min) Accession
+No. MTCC – 5173
+04 WBPH Verticillium lecanii 5.0% - 3.125kg 600 -
+SC, (1x108 CFU/gm
+Min.) Strain – Own Red
+Isolate, Strain No. VI-
+17874,
+MTCC No.5716
+05 Thrips Azadirachtin 0.15% EC - 1500 - 2500 500 05
+w/w Min. Neem Seed
+Kernel Based
+06 Leaf Azadirachtin 00.03% EC - 2000 1000 05
+roller Min. Neem Oil Based
+Source: CIB&RC
+39 | P age
+Annexure-III
+Economic Threshold Level (ETL) of Major Pests of Rice Crop Stage Wise
+Crop stage Pest/Disease Economic Threshold Level (ETLs)
+Nursery Yellow stem borer 1 egg-mass/m2
+Root-knot nematode 1 nematode/g soil
+BLB: Kresek Phase 2-3 plants/m2
+Early to late Leaf-folder 2 Fully damaged leaves (FDL) with larva/hill
+tillering Stem borer 2 egg-mass/m2 or 10% dead heart or 1
+moth/m2 or 25 moths/ trap/week
+Gall midge 1 gall/m2 or 10% Silver shoot
+Brown plant hopper/ 10-15 hoppers/hill
+WBPH
+Rice hispa 2 adults or 2 dead leaf /hill
+Rice caseworm 2 FDL/hill
+Swarming caterpillar 1 damaged tiller/hill or 2 larvae/ m2
+Foliar blast 3-5 lesions/leaf
+Brown spot 2-3 spots/leaf & 2-3 infected plants/ m2
+Sheath blight Lesions of 5-6 mm in length & 2-3 infected
+plants/m2
+Sheath-rot Lesion length 2-3 mm on sheath & 3-5
+infected plants/ m2
+BLB 2-3 infected leaves/m2
+Tungro 1 Tungro infected plants/m2& 2 GLH/hill (in
+fungus endemic areas)
+Panicle initiation to Stem borers 2 egg-mass/m2 or 1 moth/m2 or 25 moths /
+booting trap / week
+Leaf-folders 2 FDL/hill
+BPH/WBPH 15-20 hoppers/hill
+Swarming 1 damaged tiller/hill or 2 larvae/ m2
+caterpillar/cut worm
+Neck blast 2-5 neck infected plants/m2
+Sheath-rot 5 infected plants/m2
+Flowering to milky Gundhi bug 2 bugs/hill
+grain
+Source: Integrated Pest Management Package for Rice, DPPQ&S, Faridabad-2014
+40 | P age
+Annexure-IV
+Approved Uses of Tricyclazole and its Combinations as per Major Uses of Pesticides
+Crop Common name of Dosage per ha Waiting period
+the disease from last
+a. i. (g) Formulation Dilution
+application to
+(g/ml) in
+harvest(in days)
+water(L)
+Tricyclazole 75% WP
+Paddy Blast 225-300 300- 400gm 500 30
+(Rice) gm
+Azoxystrobin 16.7% + Tricyclazole 33.30% SC
+Rice Sheath blight and 83.5 + 500 500 24
+Blast, and brown 166.5
+spot
+Propiconazole 10.7% w/w + Tricyclazole 34.2% w/w SE
+Paddy Sheath blight, Blast 262.5 to 500-700 500 46
+(Rice) 393.75
+Tricyclazole 20.4% w/w + Azoxystrobin 6.8% w/w SC
+Rice Blast, False smut, 300 1000 500 10
+(Paddy) Sheath blight and (225+75)
+Grain discoloration
+(Dirty Panicle)
+Tricyclazole 45% + Hexaconazole 10% WG
+Paddy Blast and Sheath 225+50 500 500 23
+(Rice) blight
+Tricyclazole 18.0% w/w + Tebuconazole 14.4% w/w SC
+Rice Sheath blight, Blast, 360 1000 ml/ha -- 44
+(Paddy) false smut and grain (200+160)
+Discoloration
+Picoxystrobin 6.78% + Tricyclazole 20.33 %w/w SC
+Paddy Leaf Blast & Neck 300 1000 500 29
+(Rice) Blast
+Chilli Anthracnose, Wet 300 1000 500 3
+rot, Powdery
+mildew
+Source: CIB&RC
+41 | P age
+Annexure-V
+Approved Uses of Buprofezin and its Combinations as per Major Uses of Pesticides
+Crop Common name Dosage per ha Waiting period
+of the pest from last
+a. i. (g) Formulation Dilution
+application to
+(g/ml) in
+harvest(in
+water(L)
+days)
+Buprofezin 25.00% SC
+Cotton Whitefly Aphids, 250.0 1000 500-750 20
+Jassids, Thrips
+Chilies Yellow Mite 75.0-150.0 300-600 500-750 05
+Mango Hoppers 0.025%- 1-2 ml/liter of 5-15 liter 20
+0.05% water per tree
+Grapes Mealy bugs 250.0-375.0 1000-1500 500-1000 07
+Rice Brown plant 200.0 800 400-500 20
+hopper, Green
+leaf hopper,
+White Back Plant
+Hopper
+Buprofezin 70.00% DF
+Okra Jassids 200.0 286 500 05
+(Bhindi)
+Cotton Jassids, Whitefly 250-300 357-429 500 20
+Rice Brown plant 175 250 500 24
+hopper
+Buprofezin 09.00%+Acephate 24.00% w/w WP
+Paddy Brown plant 54.0+144.0 600 500 20
+(Rice) hopper
+Buprofezin 15.00%+Acephate 35.00% w/w WP
+Cotton Jassids, Thrips& 187.5 + 437.5 1250 500 --
+White fly
+Okra Jassids & White 112.5 + 262.5 750 500 07
+fly
+Paddy Brown plant 187.5 + 437.5 1250 500 20
+(Rice) hopper, White
+backed plant
+hopper
+Buprofezin 20.00%+Acephate 50.00% w/w WP
+Paddy Stem Borer, Leaf 200.0+500.0 1000 500 20
+(Rice) folder, Brown
+plant hopper
+42 | P age
+Cotton Thrips, Jassids, 250+625 1250 500 15
+Mealy bug
+Buprofezin 22.00%+Fipronil 3.00% SC
+Rice Brown plant 110.0+15.0 500 400 – 500 32
+(Paddy) hopper
+Buprofezin 23.10%+Fipronil 03.85% w/w SC
+Paddy Brown plant 173.25+28.88 750 500 30
+(Rice) hopper
+Cartap Hydrochloride 50.00%+Buprofezin 10.00% w/w WP
+Rice Yellow stem 480.0 800 500 20
+borer, Brown
+plant hopper,
+Leaf folder,
+Green leaf
+hopper, White
+backed plant
+hopper
+Deltamethrin 00.72%+Buprofezin 05.65% w/w EC
+Rice Brown plant 0.78+62.50- 1250+1500 500 30
+(Paddy) hopper, Leaf 0.94+75.00
+folder
+Fenobucarb 20.00%+Buprofezin 05.00% w/w SE
+Paddy Brown plant 400.0+100.0 2000 500 30
+(Rice) hopper, Green
+leaf hopper
+Flubendiamide 04.00%+Buprofezin 20.00% w/w SC
+Paddy Yellow stem 35.0+175.0 175+700 500 30
+(Rice) borer, Leaf
+folder, Brown
+plant hopper
+Source: CIB&RC
+43 | P age
+Annexure-VI
+Major Parasites and Predators of Insect Pests of Rice
+Natural enemy Natural enemy Pest attacked and feeding potential
+category
+I. Parasitoids
+1. Egg Trichogramma  Egg parasitoid of yellow stem
+parasitoids japonicum borer (YSB)
+Trichogramma chilonis  Egg parasitoid of leaf folder, Case
+worm, YSB etc.
+Tetrastichus schoenobii  Egg parasitoid of yellow and white
+stem borer.
+ At least 3 stem borer eggs are
+needed for development of each
+wasp.
+Telenomus rowani  Egg parasitoid of yellow and white
+stem borer.
+ A female parasitizes 20-40 eggs
+and lives 2-4 days or longer if
+nectar or sugar solution is
+provided.
+ Both Tetrastichus and Telenomus
+may parasitize the same egg mass
+but not the same egg.
+Gonatocerus spp.  Egg parasitoid of leaf and plant
+hoppers.
+ Parasitize on an average 8 eggs per
+day.
+Anagrus spp.  Egg parasitoids of leaf and plant
+hoppers.
+ Parasitizes 15 to 30 eggs/day.
+Oligosita spp.  Egg parasitoid of leaf and plant
+hoppers.
+ Consume 2 to 8 eggs per day.
+Copidosomopsis  Egg parasitoid of leaf folder.
+nacoleiae  200-300 wasps are produced from
+a few eggs.
+2. Larval Amauromorpha accepta  Larval parasitoid of yellow and
+parasitoids white stem borer.
+Stenobracon nicevillei  Larval parasitoid of leaf folder.
+Cotesia flavipes  Larval parasitoid of leaf folder.
+Elasmus sp.  Larval parasite of leaf folder.
+ Wasp emerges from larva or pupa.
+44 | P age
+Haplogonatopus sp  Larval parasite of leaf folder.
+Pseudogonatopus spp.  Wasp emerges from larva or pupa.
+Bracon sp.  Larval parasite of leaf folder.
+ Wasp emerges from larva or pupa.
+3. Larval and Xanthopimpla  Larval, pupal parasitoid of stem
+pupal parasitoids flavolineata borer
+Brachymeria lasus, B.  Larval and pupal parasitoid of
+excarinata Rice skipper, leaf folder and green
+horned caterpillar.
+Opius sp.  Larval pupal parasitoid of whorl
+maggot
+II. Predators
+4. Coccinellid Micraspis hirashimai  Preying on small hoppers, small
+beetles larvae and exposed eggs
+Harmonia octamaculata  Preying on small hoppers, small
+larvae and exposed eggs
+5. Carabid beetle Ophionea nigrofasciata  Preying leaf folder larvae and
+plant hoppers
+6. Rove beetle Paederus fuscipes  Preying leaf and plant hoppers,
+eggs, and small moths
+7. Spiders Pardosa  Prey stem borer and leaf folder
+psuedoannulata, moths, leaf-and plant hoppers, and
+Wolf spider whorl maggot flies.
+Oxyopes javanus,  Prey moths of rice pests, adults of
+Lynx spider whorl maggots, leafhoppers and
+plant hoppers
+Tetragnatha maxillosa,  Prey stem borer and leaf folder
+Long-jawed spider moths, leaf-and plant hoppers
+Argiope catenulata,  Prey moths/adults of rice pests viz.
+Orb spider grasshoppers
+Source: Integrated Pest Management Package for Rice, DPPQ&S, Faridabad-2014
+45 | P age
+Glossary
+1. AIREA: The All India Rice Exporters’ Association (AIREA) is the Apex body of Indian
+Rice Exporters established in 1989.
+2. APEDA: Agricultural and Processed Food Products Export Development Authority.
+3. BEDF: Basmati Export Development Foundation. BEDF has been founded by Agricultural
+and Processed Food Products Export Development Authority (APEDA).
+4. CIB&RC: Central Insecticides Board & Registration Committee (CIBRC) under the
+Directorate of Plant Protection, Quarantine & Storage, Department of Agriculture,
+Cooperation& Farmers Welfare.
+5. CIPMC: Central Integrated Pest Management Center.
+6. Codex: Codex Alimentarius collection of food standards.
+7. EIC: Export Inspection Council (EIC) is the official export –certification body of India
+which ensures quality and safety of products exported from India.
+8. ETL: The pest density at which some control should be exerted to prevent a pest population
+from increasing further and causing economic loss.
+9. Farmers Field School (FFS): FFS is a season long programme which is organized in
+farmer’s field by conducting IPM field exercise once in a week. It is an effective tool to
+transfer IPM technology to farmers.
+10. FPO: Farmers Producer Organization.
+11. GAP: Good Agricultural Practices-According to FAO GAP is defined as “collection of
+principles to apply for on- farm production and post production processes resulting in safe
+and healthy food and non-food agricultural products while taking into account economic,
+social and environmental sustainability”
+12. ICAR: The Indian Council of Agricultural Research (ICAR) is the apex body for
+coordinating, guiding, and managing research and education in agriculture in the entire
+country.
+13. IPM: Integrated Pest Management (IPM) combines the use of biological, cultural and
+chemical practices to control insect pests in agricultural production. IPM aims to suppress
+pest populations below the Economic Injury Level (EIL).
+14. KVK: Krishi Vigyan Kendra
+15. MRL: Maximum Residues Limits
+16. Pre-Harvest Interval (PHI)/Waiting period: Waiting period refers to the time gap to
+observe between the last application of pesticide and the harvesting for consumption. It may
+be varying from pesticide to pesticide, crop to crop and place to place dependingupon the
+residual toxicity of pesticide and environmental conditions. The leaflets supplied along with
+pesticides normally contain this information about different crops.
+17. SAU: State Agricultural University
+18. SOP:Standard Operating Procedure
+46 | P age
+References
+1. Integrated Pest Management Package for Rice: DPPQ&S, Faridabad-2014
+2. Basmati Dhan Utpadan ki vaigyanik taknique- Basmati Export Development
+Foundation, APEDA
+3. Crop Protection-TNAU Agritech Portal:
+https://agritech.tnau.ac.in/crop_protection/crop_prot_crop%20diseases_cereals_rice_
+main.html
+4. Rice Knowledge Bank: IRRI- http://www.knowledgebank.irri.org/step-by-step-
+production/growth/pests-and-diseases/diseases
+5. Major uses of pesticides, CIB&RC, DPPQ&S Faridabad-
+http://ppqs.gov.in/divisions/cib-rc/major-uses-of-pesticides
+*****
+47 | P age

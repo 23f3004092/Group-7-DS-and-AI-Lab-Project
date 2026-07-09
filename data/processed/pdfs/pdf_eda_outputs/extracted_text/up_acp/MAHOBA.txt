@@ -1,0 +1,744 @@
+State: Uttar Pradesh
+Agriculture Contingency Plan for District: MAHOBA
+1.0 District Agriculture profile
+1.1 Agro-Climatic/ Ecological Zone
+Agro-Ecological Sub Region(ICAR) Central Plain Zone
+Agro-Climatic Zone (Planning Commission) Central Plateau and Hills Region.
+Agro-Climatic Zone (NARP) Bundelkhand zone(U.P-10)
+List all the districts falling the NARP Zone* (^ 50% area falling in the zone) Lalitpur, Jhanshi, Jallaun, Chitrakut, Mahoba, Banda and Hamirpur
+Geographical coordinates of district headquarters Latitude Longitude Altitude(mt)
+25° 18' N 79° 55' E
+Name and address of the concerned ZRS/ZARS/RARS/RRS/RRTTS
+Mention the KVK located in the district with address Krishi Vigyan Kendra, Zonal Agricultural Research Station, Belatal,
+PO.Jaitpur, Mahoba
+Name and address of the nearest Agromet Field Unit(AMFU,IMD)for agro Bharari Jhansi, C. S. A Kanpur
+advisories in the Zone
+1.2 Rainfall Normal RF (mm) Normal Rainy Normal Onset N ormal Cessation
+Days (Number) (Specify week and month) (Specify week and month)
+SW monsoon (June-sep) 768.7 45 3rd week of June 3rd week of September
+Post monsoon (Oct-Dec) 38.2 6
+Winter (Jan-March) 33.4 2 - -
+Pre monsoon (Apr-May) 10.4 1 - -
+Annual 850.7 54
+1.3 Land use pattern Geographical Cultivable Forest Land under Permanent Cultivable Land Barren and Current Other
+of the district area area area non- pastures wasteland under uncultivable fallows fallows
+(Latest agricultural Misc.tree land
+statistics) use crops and
+groves
+Area in (000 ha) 327.4 264.1 16.2 38.8 0.5 10.3 0.7 7.8 11.6 6.0
+1.4 Major Soils Area(‘000 ha) Percent(%) of total
+Rakar Soil
+Parwa soils
+Kabar soils
+Maar soils
+1.5 Agricultural land use Area(‘000 ha) Cropping intensity (%)
+Net sown area 235.7 121 %
+Area sown more than once 84.0
+Gross cropped area 319.7
+1.6 Irrigation Area(‘000 ha)
+Net irrigation area 100.8
+Gross irrigated area 101.6
+Rain fed area 134.9
+Sources of irrigation (Gross Irr. Number Area(’000 ha) Percentage of total irrigated area
+Area)
+Canals - 26.2 25.8
+Tanks - 16.7 16.4
+Open wells - 53.7 52.9
+Bore wells(Tube wells) - 4.8 4.8
+Lift irrigation schemes - NA
+Micro-irrigation - NA
+Other sources - 0.1 0.1
+Total Irrigated Area - 101.6
+No. of Pump sets (2011-12) 1338
+No. of Tractors 7034
+Groundwater availability and use* No of blocks- (%)area Quality of water
+(Data source: State/ Central Ground Tehsils-
+water Department/ Board)
+Over exploited 2
+Critical 1
+Semi-critical 1
+Safe
+Waste water availability and use
+Ground water quality
+*over-exploited groundwater utilization> 100%; critical: 90-100%; semicritical:70-90%; safe:<70%
+2
+1.7 Area under major field crops & (As per latest figures 2011-12)
+1.7 Major field crops cultivated Area(‘000 ha)
+Kharif Rabi Summer Total
+Irrigated Rain fed Total Irrigated Rain fed Total
+Wheat - - - 55.2 16.7 71.9 - 71.9
+Gram - - - 18.9 46.5 65.4 - 65.4
+Sesame 0 30.6 30.6 - - - - 30.6
+Masoor - - - 0.1 28.5 28.6 - 28.6
+Pea - - - 17.3 7.9 25.2 - 25.2
+Jowar 0 4.2 4.2 - - - - 4.2
+Horticulture crops -Fruits Area (‘000 ha)
+Total Irrigated Rainfed
+Mango 0.002 0.002 -
+Guava 0.003 0.003 -
+Horticulture crops - Total Irrigated Rainfed
+Vegetables
+Potato 0.2 0.2 -
+Onion 0.03 0.03 -
+Pea 10.6 10.6 -
+1.7 Major Area in Fodder crops Area(ha) Total
+Kharif 93 93
+Rabi 58 58
+Summer 0 0
+Total 151 151
+3
+1.8 Production and productivity of major crops (Average of last 5 years)
+1.7 Major field crops Area(‘000 ha)
+cultivated
+Kharif Rabi Summer Total Crop
+Production Productivity Production Productivity Production Productivity Production Productivity residue as
+(‘000 T) (KG/HA) (‘000 T) (KG/HA) (‘000 T) (KG/HA) (‘000 T) (KG/HA) fodder
+(‘000
+tons)
+Juar 3.5 620 - - - - 3.5 620 NA
+Wheat - - 97.7 1573 - - 97.7 1573 NA
+Gram - - 57.0 922 - - 57.0 922 NA
+Pea - - 18.9 829 - - 18.9 829 NA
+Masoor - - 14.0 540 - - 14.0 540 NA
+Sesame 2.4 98 - - - - 2.4 98 NA
+1.9 Live stock
+Livestock(year 2007) Male(000) Female(000) Totat(000)
+Non descriptive Cattle (local low yielding) 96.963 109.804 206.767
+Improved cattle 0.011 0.012 0.023
+Crossbred Cattle 0.056 0.243 0.299
+Non descriptive Buffaloes (local low yielding) 14.353 54.943 69.296
+Descript Buffaloes 14.007 53.577 67.584
+Goat 71.615 113.653 185.268
+Sheep 22.793
+Other (Camel,Pig, Yak etc) 31.890
+Commerical dairy farms (number) 0.000
+4
+1.12 Sowing Bajra Til Rice Urd Jowar Moong Wheat Barley Gram/Pea Mustard
+window for 5
+major field
+crops
+Kharif –Rainfed 2nd 2nd - 2nd Last week 2nd week - - - -
+week of week week of June to of July to
+July to of July of July 2nd week First week
+last to last to First of July of August
+week of week week
+July of July of
+August
+Kharif - - - Last - - - - - - -
+Irrigated week of
+June 2nd
+week of
+August
+Rabi –Rainfed Last week of first week of 2nd week of
+Oct to last Oct last week Sep to first
+week of Nov of Oct week of Oct
+Rabi - Irrigated first week of - - -
+Nov last
+week of Nov
+1.13 What is the major contingency the district is prone to? Regular Occasional None
+Drought √
+Flood √
+Cyclone √
+Hail storm √
+Heat wave √
+Cold wave √
+Frost √
+Sea water intrusion √
+Sheath Blight, Stemborer , Pyrilla loose smut, Heliothis, Rust etc white √
+grub.
+5
+Annexure I
+Location map of Mahoba district
+6
+1.14. Soil map of Mahoba district
+Granite/Gneissic landscape, Hills, Dome/Tors (10-15%slope)
+1. Rock outcrops associated with shallow loamy skeletal soils, severely eroded and
+moderate stoniness
+Undulating Upland/Plateau (3-5% slopes)
+2. Moderately shallow, loamy soils severely eroded associated with deep, fine smectitc
+soils and moderately eroded
+3. Deep, loamy-skeletal soils and moderately eroded and slight stoniness associated
+with moderately shallow loamy skeletal soils and severely eroded
+Very gentle sloping uplands
+4. Deep, fine, smectitic soils and moderately eroded associated with loamy soils and
+moderately eroded
+5. Deep, fine, smectitic soils and slightly eroded associated with fine soils and
+moderately eroded
+River valley (1-3% slope)
+6. Deep, fine smectitic soils and slightly eroded associated with fine smectitic soils and
+moderately eroded
+Alluvial plain,
+Isolated Hillocks (15-30% slopes)
+7. Rock outcrops; associated with shallow loamy-skeletal soils, severely eroded and
+moderately stoniness .
+Undulating upland (3-5% slope)
+8. Deep, loamy soils, moderately eroded associated with fine smectitic soils and
+slightly eroded
+Very gently sloping uplands with hummocks (1-3%slope)
+9. Deep, loamy soils, slightly eroded associated with fine, smectite soils slightly
+eroded.
+10. Deep, fine smectitc soils, slightly eroded associated with loamy soils and slightly
+eroded
+11. Deep, loamy soils, slightly eroded associated with silty soils, slightly eroded
+12. Deep, fine soils, slightly eroded associated with fine smectitic soils and slightly
+eroded.
+13. Deep, fine smectitic soils, slightly eroded
+14. Deep, loamy soils, moderately eroded associated with fine smectitic soils and
+moderately eroded
+Ravinous Land (5-10% slope)
+15. Deep, loamy soils and severely eroded associated with loamy soils and moderately
+eroded
+16. Deep, fine smectitic soils and are moderately eroded associated with fine soils
+moderately eroded.
+17. Deep, loamy soils and moderately eroded
+7
+2.0 Strategies for weather related contingencies
+2.1 Drought
+2.1.1 Rainfed situation Normal onset of monsoon 20 June
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / Agronomic measures Remarks on
+drought (delayed situation system cropping system Implementation
+onset) including variety
+Deep black soil Sorghum (Varsha,CSV 13,15 No Change Intercropping of Sorghum (Varsha,
+Delay by 2 weeks (Mar and Kabar) SPV 1616 Bundella, CSH 16 CSV 13, SPB 1388, Bundella,
+(First week of CSH 16 and 13)+ Pigeon pea (Ajad
+and 13)+ Pigeon pea (Ajad ,
+July) , Pusa 9, PDA 11, Narendra Arhar
+Pusa 9, PDA 11, Narendra
+2) with ratio of 2:1 on raised bed
+Arhar 2)
+Parwa (Loamy Sorghum+ pigeon pea+ Urd/ No Change Intercropping of Sorghum (Varsha,
+Sand) moong CSV 13, SPB 1388, Bundella,
+CSH 16 and 13)+ Pigeon pea (Ajad
+Sesame- T-78, Pragti, Sekhar
+, Pusa 9, PDA 11, Narendra Arhar
+2) + Urd (Ajad 1 and Ajad 3,
+Narendra Urd 1) with ratio of 2:1:1
+on raised bed
+Rakar (Shallow Sorghum+ pigeon pea+ Urd/ No Change Intercropping of Sorghum (Varsha,
+sandy loam) moong CSV 13, SPB 1388, Bundella,
+CSH 16 and 13)+ Pigeon pea (Ajad
+Sesame- T-78, Pragti, Sekhar
+, Pusa 9, PDA 11, Narendra Arhar
+2) + Urd (Ajad 1 and Ajad 3,
+Narendra Urd 1) with ratio of 2:1:1
+on raised bed
+8
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+drought (delayed situation system system Implementation
+onset)
+Deep black soil Sorghum (CSB 13 CSH 9 14, No Change Intercropping of Sorghum
+Delay by 4 weeks (Mar and Kabar) 16, 18)+ Pigeon pea (Ajad , (Varsha, CSV 13, SPB
+(3rd week of July) 1388, Bundella, CSH 16
+Pusa 9, PDA 11, Narendra
+and 13)+ Pigeon pea (Ajad ,
+Arhar 2)
+Pusa 9, PDA 11, Narendra
+Arhar 2) with ratio of 2:1
+on raised bed
+Sesame (Type 4, No Change Line sowing
+Type12,Type13, Sekhar,
+Pragati and Tarun)
+Parwa (Loamy Sorghum+ pigeon pea+ Black No Change Intercropping of Sorghum
+Sand) gram/ Green gram (Varsha, CSV 13, SPB
+1388, Bundella, CSH 16
+and 13)+ Pigeon pea (Ajad ,
+Pusa 9, PDA 11, Narendra
+Arhar 2) + Urd (Ajad 1
+and Ajad 3, Narendra Urd
+1) with ratio of 2:1:1 on
+raised bed
+Sesame (Type 4, Type 12, No Change Line sowing with seed dril
+Sekhar, Pragati, Type 13,
+Tarun)
+Rakar (Shallow Sorghum+ pigeon pea+ Black No Change Intercropping of Sorghum
+sandy loam) gram/ Green gram (Varsha, CSV 13, SPB
+1388, Bundella, CSH 16
+and 13)+ Pigeon pea (Ajad ,
+Pusa 9, PDA 11, Narendra
+Arhar 2) + Urd (Ajad 1
+and Ajad 3, Narendra Urd
+1) with ratio of 2:1:1 on
+raised bed
+9
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+drought (delayed situation system system Implementation
+onset)
+Deep black soil Sorghum (CSB 13 CSH 9 14, No Change Intercropping of Sorghum
+Delay by 6 weeks (Mar and Kabar) 16, 18)+ Pigeon pea (Ajad , (Varsha, CSV 13, SPB 1388,
+(1st week of Bundella, CSH 16 and 13)+
+Pusa 9, PDA 11, Narendra
+August) Pigeon pea (Ajad , Pusa 9,
+Arhar 2)
+PDA 11, Narendra Arhar 2)
+with ratio of 2:1 on raised bed
+Sesame (Type 4, No Change Line sowing
+Type12,Type13, Sekhar,
+Pragati and Tarun)
+Parwa (Loamy Sorghum+ pigeon pea+ Black No Change Intercropping of Sorghum
+Sand) gram/ Green gram (Varsha, CSV 13, SPB 1388,
+Bundella, CSH 16 and 13)+
+Pigeon pea (Ajad , Pusa 9,
+PDA 11, Narendra Arhar 2)
++ Urd (Ajad 1 and Ajad 3,
+Narendra Urd 1) with ratio of
+2:1:1 on raised bed
+Sesame (Type 4, Type 12, No Change Line sowing with seed drill
+Sekhar, Pragati, Type 13,
+Tarun)
+Rakar (Shallow Sorghum+ pigeon pea+ Black No Change Intercropping of Sorghum
+sandy loam) gram/ Green gram Prefer pigeon pea cultivars (Varsha, CSV 13, SPB 1388,
+such as Narendra Arhar 1, Bundella, CSH 16 and 13)+
+Ajad, PDA 11 Pigeon pea (Ajad , Pusa 9,
+PDA 11, Narendra Arhar 2)
++ Urd (Ajad 1 and Ajad 3,
+Narendra Urd 1) with ratio of
+2:1:1 on raised bed
+10
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+drought (delayed situation system system Implementation
+onset)
+Deep black soil Sorghum (CSB 13 CSH 9 14, Fodder Sorghum (hybrid 5, 10%higher seed rate for
+Delay by 8 weeks (Mar and Kabar) 16, 18)+ Pigeon pea (Ajad , MFSH3A) fodder sorghum
+(3rd week of Pigeon pea( PDA 11, Narendra
+Pusa 9, PDA 11, Narendra
+August) Arhar 1) /Urd (Pant U 35,
+Arhar 1)
+Narendra Urd 1, Ajad urd 2,
+Sekhar 1, Sekhar 2 and Sekhar
+3))
+Sesame (Type 4, Fodder Sorghum (hybrid 5,
+Type12,Type13, Sekhar, MFSH3A)
+Pigeon pea( PDA 11, Narendra
+Pragati and Tarun)
+Arhar 1) /Urd (Pant U 35,
+Narendra Urd 1, Ajad urd 2,
+Sekhar 1, Sekhar 2 and Sekhar
+3)
+Parwa (Loamy Sorghum+ pigeon pea Black Fodder Sorghum (hybrid 5,
+Sand) gram/ Green gram MFSH3A)
+Pigeon pea( PDA 11, Narendra
+Arhar 1) /Urd (Pant U 35,
+Narendra Urd 1, Ajad urd 2,
+Sekhar 1, Sekhar 2 and Sekhar
+3)
+Sesame (Type 4, Type 12, Fodder Sorghum (hybrid 5,
+Sekhar, Pragati, Type 13, MFSH3A)
+Pigeon pea( PDA 11, Narendra
+Tarun)
+Arhar 1) /Urd (Pant U 35,
+Narendra Urd 1, Ajad urd 2,
+Sekhar 1, Sekhar 2 and Sekhar
+3)
+Rakar (Shallow Sorghum+ pigeon pea+ Black • Prefer pigeon pea
+sandy loam) gram/ Green gram cultivars such as
+Narendra Arhar 1,
+Ajad, PDA 11
+• Fodder Sorghum
+11
+(hybrid 5, MFSH3A)
+Pigeon pea( PDA 11,
+Narendra Arhar 1)
+/Urd (Pant U 35,
+Narendra Urd 1, Ajad
+urd 2, Sekhar 1,
+Sekhar 2 and Sekhar
+3)
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (Normal situation system moisture conservation Implementation
+onset) measures
+Deep black soil Sorghum (Varsha, CSV 13, • Weeding
+Normal onset (Mar and Kabar) SPB 1388, Bundella, CSH 16 • Resowing of the crops
+followed by 15-20 under less than 30%
+and 13)+ Pigeon pea (Ajad ,
+days dry spell after plant population
+Pusa 9, PDA 11, Narendra
+sowing leading to situation with
+poor Arhar 2) sufficient soil
+germination/crop moisture
+stand etc. Parwa (Loamy Sorghum+ pigeon pea+ Black • Weeding
+Sand) gram/ Green gram Resowing of the crops under
+less than 30% plant population
+situation with sufficient soil
+moisture
+Rakar (Shallow Sorghum+ pigeon pea+ Black • Weeding
+sandy loam) gram/ Green gram Resowing of the crops under
+less than 30% plant population
+situation with sufficient soil
+moisture
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (long dry situation system moisture conservation Implementation
+spell, consecutive 2 measures
+weeks rainless
+(>2.5 mm) period)
+12
+Deep black soil Sorghum (Varsha, CSV 13, • Interculture Foliar spray with 1%
+At vegetative stage (Mar and Kabar) SPB 1388, Bundella, CSH 16 • KCl
+and 13)+ Pigeon pea (Ajad ,
+Pusa 9, PDA 11, Narendra
+Arhar 2)
+Parwa (Loamy Sorghum+ pigeon pea+ Urd/ • Interculture Foliar spray with 1%
+Sand) moong • KCl
+Rakar (Shallow Sorghum+ pigeon pea+ Urd/ • Interculture Foliar spray with 1%
+sandy loam) moong • KCl
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping system Crop management Soil nutrient & Remarks on
+drought (long dry situation moisture conservation Implementation
+spell) measues
+Deep black soil Sorghum (Varsha, CSV 13, SPB Mulching with local
+At flowering/ (Mar and Kabar) 1388, Bundella, CSH 16 and 13)+ available materials
+fruiting stage
+Pigeon pea (Ajad , Pusa 9, PDA
+11, Narendra Arhar 2)
+Parwa (Loamy Sorghum+ pigeon pea+ Urd/ Mulching with local
+Sand) moong available materials
+Rakar (Shallow Sorghum+ pigeon pea+ Urd/ Mulching with local
+sandy loam) moong available materials
+Condition Suggested Contingency measures
+Terminal drought Major Farming Normal Crop/cropping system Crop management Rabi Crop planning Remarks on
+(Early withdrawal situation Implementation
+of monsoon)
+Deep black soil Sorghum (Varsha, CSV 13, SPB Harvest at maturity
+(Mar and Kabar) 1388, Bundella, CSH 16 and 13)+
+Pigeon pea (Ajad , Pusa 9, PDA
+11, Narendra Arhar 2)
+Parwa (Loamy Sorghum+ pigeon pea+ Urd/ Harvest at maturity
+Sand) moong
+13
+Rakar (Shallow Sorghum+ pigeon pea+ Urd/ Harvest at maturity
+sandy loam) moong
+2.1.2 Drought - Irrigated situation
+Condition Suggested Contingency measures
+Major Farming Normal Change in Agronomic measures Remarks on
+situation Crop/cropping crop/cropping Implementation
+system system
+Delayed release of Deep black soil Rice No change • Drum seeding under puddle field Linked with UP
+water in canals due (Mar and Kabar) • Alternate wet and dry irrigation Agro
+to low rainfall Wheat Prefer varieties such • Provide irrigation at critical stage as Seed available
+as Raj 337, PBW per availability of irrigation water from SDC, NSC
+502, K0307, Halna • Ensure K application as RDF and SAU, kanpur
+• Chemical Control of Phalaris minor
+Rice No change • Drum seeding under puddle field
+Parwa (Loamy • Alternate wet and dry irrigation
+Sand) Wheat Prefer varieties such • Provide irrigation at critical stage as
+as Raj 337, PBW per availability of irrigation water
+502, K0307, Halna • Ensure K application as RDF
+• Chemical Control of weeds
+Condition Suggested Contingency measures
+Major Farming Normal Change in Agronomic measures Remarks on
+situation Crop/cropping crop/cropping Implementation
+system system
+Limited release of Deep black soil Rice No change • Drum seeding under puddle field
+water in canals due (Mar and Kabar) • Alternate wet and dry irrigation
+to low rainfall
+Wheat Prefer varieties such • Provide irrigation at critical stage as
+as Raj 337, PBW per availability of irrigation water
+502, K0307, Halna • Ensure K application as RDF
+Chemical Control of Phalaris minor
+Parwa (Loamy Rice No change • Drum seeding under puddle field
+Sand) Alternate wet and dry irrigation
+14
+Condition Suggested Contingency measures
+Major Farming Normal Change in Agronomic measures Remarks on
+situation Crop/cropping crop/cropping Implementation
+system system
+Wheat Prefer varieties such • Provide irrigation at critical stage as
+as Raj 337, PBW per availability of irrigation water
+502, K0307, Halna • Ensure K application as RDF
+• Chemical Control of weeds
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measures Remarks on
+situation system crop/cropping Implementation
+system
+Non release of Deep black soil Sorghum (CSB 13 CSH 9 14, No Change Intercropping of Sorghum (Varsha,
+water in canals (Mar and Kabar) 16, 18)+ Pigeon pea (Ajad , CSV 13, SPB 1388, Bundella, CSH
+under delayed 16 and 13)+ Pigeon pea (Ajad , Pusa
+Pusa 9, PDA 11, Narendra
+onset of monsoon 9, PDA 11, Narendra Arhar 2) with
+Arhar 2)
+in catchment ratio of 2:1 on raised bed
+Sesame (Type 4, No Change Line sowing
+Type12,Type13, Sekhar,
+Pragati and Tarun)
+Parwa (Loamy Sorghum+ pigeon pea+ Urd/ No Change Intercropping of Sorghum (Varsha,
+Sand) moong CSV 13, SPB 1388, Bundella, CSH
+16 and 13)+ Pigeon pea (Ajad , Pusa
+9, PDA 11, Narendra Arhar 2) +
+Urd (Ajad 1 and Ajad 3, Narendra
+Urd 1) with ratio of 2:1:1 on raised
+bed
+Sesame (Type 4, Type 12, No Change Line sowing with seed dril
+Rakar (Shallow Sekhar, Pragati, Type 13,
+sandy loam)
+Tarun)
+Sorghum+ pigeon pea+ Urd/ No Change Intercropping of Sorghum (Varsha,
+moong CSV 13, SPB 1388, Bundella, CSH
+16 and 13)+ Pigeon pea (Ajad , Pusa
+9, PDA 11, Narendra Arhar 2) +
+Urd (Ajad 1 and Ajad 3, Narendra
+15
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measures Remarks on
+situation system crop/cropping Implementation
+system
+Urd 1) with ratio of 2:1:1 on raised
+bed
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Lack of inflows NOT APPLICABLE
+into tanks due to
+insufficient
+/delayed onset of
+monsoon
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Insufficient Deep black soil Pigeon pea • No change Raised bed planting
+groundwater (Mar and Kabar) • Prefer varieties such
+recharge due to as UPAS 120
+low rainfall Sorghum • No change
+Wheat Prefer varieties such as K8027, Foliar spray with 2%
+K9351, K9644, Lok 1 Urea +2% MOP
+Apply irrigation at CRI
+stage
+Chick pea Prefer varieties such as Radhe,
+Pusa 256, JG 16
+Parwa (Loamy Rice Prefer Varieties such as
+Sand) Gobind, Pant 10 and Pant 12
+Wheat Prefer varieties such as K8027, Foliar spray with 2%
+K9351, K9644, Lok 1 Urea +2% MOP
+Apply irrigation at CRI
+stage
+Sorghum • No change
+Rakar (Shallow Black gram •
+16
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+sandy loam) Green gram • Narendra moong 1,
+PDM 54, Pant moong
+1, PDM 11
+Wheat • Prefer varieties such Foliar spray with 2%
+as K8027, K9351, Urea +2% MOP
+K9644, Lok 1 Apply irrigation at CRI
+stage
+Chick pea • Prefer varieties such
+as Radhe, Pusa 256,
+JG 16
+2.2 Unusual rains (untimely, unseasonal etc) (for both rainfed and irrigated situations)
+Condition Suggested contingency measure
+Continuous high rainfall in a short span leading to water logging Vegetative stage Flowering stage Crop maturity stage Post
+harvest
+Outbreak of pests and diseases due to unseasonal rains Not applicable
+2.3 Floods - NOT APPLICABLE
+Condition Suggested contingency measure
+Transient water logging/ partial inundation1 Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+Horticulture
+Continuous submergence
+for more than 2 days Not applicable
+Sea water intrusion Not applicable
+2.4 Extreme events: Heat wave / Cold wave/Frost/ Hailstorm /Cyclone
+Extreme event Suggested contingency measurer
+type
+Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+Heat Wave
+Horticulture
+17
+Kinnow Use agronet 50% or thatching with • Provide mulching Provide mulching with 100 micron plastic or
+local material with 100micron locally available materials
+plastic or with local Spray of micronutrients
+available materials
+Plant protection measures
+• Spray of water
+• Frequent irrigation
+Guava Use agronet 50% or thatching with
+local material
+Custard apple Use agronet 50% or thatching with
+local material
+Aonla Use agronet 50% or thatching with
+local material
+Cold waveq
+Wheat Spray 2% urea and 2% MOP Apply light irrigation
+Mustard Apply light irrigation
+Chickpea
+Lentil
+Horticulture
+Kinnow Apply Light irrigation
+Guava
+Custard apple
+Aonla
+Horticulture
+Kinnow In case of low intensity take up appropriate plant protection measures
+Guava
+Custard apple
+18
+2.5 Contingent strategies for Livestock, Poultry & Fisheries
+2.5.1 Livestock
+Suggested contingency measures
+Before the event During the event After the event
+Drought
+Feed and Top dressing of N in 2-3 split doses @ 20-25 Harvest and use biomass of dried up crops (Sorghum, Green and concentrates
+kg N/ha in common property resources (CPRs) Bajra, Maize, Rice, Wheat, pea, chick pea etc) supplementation should be
+Fodder
+or private property resources (PPRs) like material as fodder. provided to all the animals.
+availability
+waste and degraded lands with the monsoon
+Harvest the tree fodder (Neem, Subabul, Acasia, Pipal Short duration fodder crops of
+pattern for higher biomass production etc) and unconventional feeds resources available and should be sown in unsown and
+crop failed areas where no further
+Promote cultivation of short duration fodder use as fodder for livestock (LS).
+routine crop sowing is not
+crops of sorghum/bajra/maize suitable to the
+Available feed and fodder should be cut from CPRs possible
+district
+and stall fed in order to reduce the energy requirements
+Promote cultivation of fodder
+Sowing of fodder crops like Stylo and of the animals
+crops during Rabi season
+Cenchrus on bunds so as to provide fodder and
+In case of mild drought, the available dry fodder may
+strengthening of bunds
+be enriched with urea and molasses and the productive
+Avoid burning of wheat and paddy straw and livestock should be supplemented with vitamin &
+storing as dry fodder for future use minerals mixture.
+Proper drying, bailing and densification of The available silage may be used as green fodder
+harvested dry fodder for transport to the needy supplement for high yielders and pregnant animals
+villages
+In case of severe drought, UMMB, hay, concentrates
+Complete feed preparation using red gram and vitamin & mineral mixture should be transported
+stalks may be exploited to the needy areas from the reserves at the district level
+initially and latter stages from the near by districts. All
+Preserving maize fodder as silage for future
+the hay should be enriched with 2% Urea molasses
+use
+solution or 1% common salt solution and fed to LS
+Establishment of silvi-pastoral system in CPRs
+Herd should be split and supplementation should be
+with Stylosanthus hamata and Cenchrus
+ciliaris as grass with Leucaena leucocephala
+given only to the highly productive and breeding
+19
+as tree component animals
+Provision of emergency grazing/feeding (Cow-calf
+camps or other special arrangements to protect high
+Creation of permanent fodder, feed and fodder
+productive & breeding stock)
+seed banks in all drought prone villages
+Available kitchen waste should be mixed with dry
+fodder while feeding
+Arrangements should be made for mobilization of
+small ruminants across the districts where no drought
+exits with subsidized road/rail transportation and
+temporary shelter provision for the shepherds
+Unproductive livestock should to be culled during
+severe drought
+Create transportation and marketing facilities for the
+culled and unproductive animals (10000-20000
+animals) in case of severe drought
+Subsidized loans (5-10 crores) should be provided to
+the livestock keepers for purchase of supplements,
+concentrate feed ingredients etc., in case of severe
+drought
+Cyclone & NA
+Floods
+Heat & Cold In villages which are chronically prone to heat Allow the animals preferably early in the morning or Green and concentrates
+wave waves the following permanent measures are late in the evening for grazing during heat waves supplementation should be
+suggested provided to all the animals.
+Allow for grazing between 10AM to 3PM during cold
+i) Plantation of trees like Neem, Pipal, waves Allow the animals for grazing
+Subabul around the shed (normal timings)
+Feed green fodder/silage / concentrates during day
+ii) Spreading of husk/straw/coconut
+time and roughages / hay during night time in case of
+leaves on the roof of the shed
+heat waves
+iii) Water sprinklers / foggers in the
+Add 25-50 ml of edible oil in concentrates per kg and
+animal shed
+fed to the animal during cold waves
+iv) Application of white reflector paint
+on the roof to reduce thermal Apply / sprinkle lime powder (5-10g per square feet) in
+20
+radiation effect the animal shed during cold waves to neutralize
+Cold wave : Covering all the wire meshed ammonia accumulation
+walls / open area with gunny bags/ Put on the foggers / sprinklers during heat weaves and
+polyethylene sheets with a mechanism for heaters during cold waves in case of high productive
+lifting during the day time and closing during animals
+night
+In severe cases, vitamin ‘C’ (5-10ml per litre) and
+electrolytes (Electral powder @ 20g per litre) should
+be added in water during severe heat waves.
+Health and List out the endemic diseases (species wise) in Constitution of Rapid Action Veterinary Force Conducting mass animal health
+that district and store vaccines for those camps
+Disease Procurement of emergency medicines and medical kits
+diseases
+Conducting fertility camps
+management Performing ring vaccination (8 km radius) in case of
+Timely vaccination (as per enclosed
+any outbreak Mass deworming camps
+vaccination schedule) against all endemic
+Restricting movement of livestock in case of any
+diseases
+epidemic
+Surveillance and disease monitoring network
+Rescue of sick and injured animals and their treatment
+to be established at Joint Director (Animal
+Husbandry) office in the district
+Insurance Insurance policy for loss of production due to Listing out the details of the dead animals and loss of Submission for insurance claim
+drought may be developed production in high yielders and availing insurance benefit
+Encouraging insurance of livestock Purchase of new productive
+animals
+Drinking water Identification of water resources Restrict wallowing of animals in water Bleach (0.1%) drinking water /
+bodies/resources water sources
+Rain water harvesting and create water
+bodies/watering points (when water is scarce Provision of wholesome clean drinking water at least 3 Provide clean drinking water
+use only as drinking water for animals) times in a day
+21
+2.5.2 Poultry
+Suggested contingency measures
+Before the eventa During the event After the event
+Drought
+Shortage of feed Storing of house hold grain like Supplementation only for productive birds with Supplementation to all survived birds
+ingredients maize, broken rice, bajra etc, in to house hold grain
+use as feed in case of severe
+Supplementation of shell grit (calcium) for laying
+drought
+birds
+Culling of weak birds
+Drinking water Rain water harvesting Sanitation of drinking water Give sufficient water as per the bird’s
+requirement
+Mixing of Vit. A,D,E, K and B-complex including
+Health and disease Culling of sick birds. Hygienic and sanitation of poultry house
+vit C in drinking water (5ml in one litre water)
+management
+Deworming and vaccination against Disposal of dead birds by burning / burying
+RD and fowl pox with lime powder in pit
+Heat wave
+Shelter/environmen Provision of proper shelter with In severe cases, foggers/water sprinklers/wetting of Routine practices are followed
+t management good ventilation hanged gunny bags should be arranged
+Don’t allow for scavenging during mid day
+Health and disease Deworming and vaccination against Supplementation of house hold grain Routine practices are followed
+management RD and fowl pox
+Provide cool and clean drinking water with
+electrolytes and vit. C (5-10 ml per litre)
+In hot summer, add anti-stress probiotics in drinking
+water or feed (Reestobal etc., 10-20ml per litre)
+22
+Cold wave
+Shelter/environmen Provision of proper shelter Close all openings with polythene sheets Routine practices are followed
+t management
+Arrangement for brooding In severe cases, arrange heaters
+Assure supply of continuous Don’t allow for scavenging during early morning and
+electricity late evening
+Health and disease Arrangement for protection from Supplementation of grains Routine practices are followed
+management chilled air
+Antibiotics (Ampicilline/ Ampiclox etc., 10g in one
+litre) in drinking water to protect birds from
+pneumonia
+23

@@ -1,0 +1,2414 @@
+AESA BASED IPM PACKAGE
+SORGHUM
+4243
+0332-040
+:
+leT
+,.dtL
+.tvP
+nacS
+ijalaB
+, ,
+Important Natural Enemies of Sorghum Insect Pests
+Plants Suitable for Ecological Engineering in
+Parasitoids
+Sorghum Field
+Trichogramma spp. Chelonus spp. Cotesia spp.
+Dill Sunflower Ocimum spp.
+Aprostocetus spp. Meterorus spp. Campoletis spp.
+Cosmos Spearmint Mustard
+Predators
+Marigold Carrot Coreopsis spp.
+Ground beetle Hover fly Ladybird beetle
+Cowpea Buckwheat Maize
+Red ant Spider Preying mantis
+The AESA based IPM - Sorghum, was compiled by the NIPHM working group under the Chairmanship of Dr. Satyagopal
+Korlapati, IAS, DG, NIPHM, and guidance of Shri. Utpal Kumar Singh, IAS, JS (PP). The package was developed taking into account
+the advice of experts listed below on various occasions before finalization.
+NIPHM Working Group:
+Chairman : Dr. Satyagopal Korlapati, IAS, Director General
+Vice-Chairmen : Dr. S.N. Sushil, Plant Protection Advisor
+: Dr. P. Jeyakumar, Director (PHM)
+Core Members:
+1. Er. G. Shankar, Joint Director (PHE), Pesticide Application Techniques Expertise.
+2. Dr. O. P. Sharma, Joint Director (A & AM), Agronomy Expertise.
+3. Dr. Satish Kumar Sain, Assistant Director (PHM), Pathology Expertise.
+4. Dr. Dhana Raj Boina, Assistant Director (PHM), Entomology Expertise.
+5. Mrs. N. Lavanya, Scientific Officer (BP & BC), Entomology Expertise.
+Other Member:
+1. Dr. B.S. Sunanda, Assistant Scientific Officer (PHM), Nematology Expertise.
+Contributions by DPPQ & S Experts:
+1. Shri. Ram Asre, Additional Plant Protection Advisor (IPM)
+2. Shri R. Murali, Deputy Director (Entomology)
+3. Dr. Sanjay Arya, Deputy Director (Plant Pathology)
+4. Dr. Subhash Kumar, Deputy Director (Weed Science)
+Contributions by External Experts:
+1. Directorate of Research, Dr. Balasheb Sawant Konkan Krishi Vidyapeeth, Dapoli, Ratnagiri.
+2. Directorate of Research, Mahatma Phule Krishi Vidyapeeth, Rahuri-413722
+3. Directorate of Research, Bihar Agricultural College, Sabour, Bihar.
+4. Directorate of Research, College of Agriculture, Odisha Univ. of Agriculture & Technology, Bhubaneshwar-751003,
+Orissa.
+5. Directorate of Research, CCS Haryana Agricultural University, Hisar.
+6. Dr. H.S. Yadava, Director of Research Services, Rajmata Vijayaraje Scindia Krishi Vishwa Vidyalaya,
+Gwalior – 474002,M.P.
+7. Dr. S. Lingaraju, University of Agriculture Sciences, Dharwad
+8. Dr. R.N. Ganguli, Professor, Dept. of Entomology, College of Agriculture, Krishak Nagar, Raipur, CG
+9. Dr. M.P. Thakur, Dean, College of Agriculture, Rajnandgaon, CG
+10. Dr. A.S. Kotasthane, Professor & Head, Dept. of Plant Pathology, College of Agriculture, Krishak Nagar, Raipur, CG.
+11. Directorate of Research, Punjab Agriculture University, Ludhiana
+12. Dr. J.S. Mishra, Pr. Scientist (Agronomy), Directorate of Sorghum Research, Rajendranagar, Hyderabad.
+13. Directorate of Research, Navasari Agricultural University, Navasari.
+14. Directorate of Research, Sardarkrushinagar Dantiwada Agricultural University, Sardarkrushinagar.
+15. Dr. V.K. Koshta, Professor & Head, Dept of Entomology, College of Agriculture, Krishak Nager, Raipur (CG)
+16. Dr. A.K. Awasthi, Professor, TCB College of Agriculture and Research Station, Sarkanda, Bilaspur (CG).
+17. Dr. H. Ravindra, Professor of Nematology, ZAHRS, Shimoga.
+18. Dr. B.K. Shivanna, Associate Professor, ZAHRS, Shimoga.
+19. Dr. S. Gangopadhyay, Head, Department of Plant Pathology & Dean, PGS, S.K. Rajasthan Agricultural University,
+Bikaner-334006, Rajasthan.
+20. Dr. V.R. Bhagwat, Pr. Scientist (Entomolgy), Directorate of Sorghum Research, Rajendranagar, Hyderabad.
+21. Dr. I.K. Das, Pr. Scientist (Pathology), Directorate of Sorghum Research, Rajendranagar, Hyderabad.
+22. Dr. S. T. Kajjidoni, Principal Scientist, AICRP on Sorghum, MARS, Dharwad.
+23. Dr. B. R. Patel, Prof. & Head (Ento), C.P. College of Agriculture, S.D. Agriculture University, Sardarkrushinagar-385506.
+24. Dr. L.V. Ghetiya, Dept. of Ento, N.M. college of Agriculture, NAU, Navsari-396450.
+Information on Region-wise Distribution of Pests Provided by:
+1. Dr. N. Sathyanarayana, Director, Plant Biosecurity Division, NIPHM
+2. Mrs. S. Latha, Scientific Officer, Plant Biosecurity Division, NIPHM
+Citation Satyagopal, K., S.N. Sushil, P. Jeyakumar, G. Shankar, O.P. Sharma,
+S.K. Sain, D.R. Boina, N. Lavanya, B.S. Sunanda, Ram Asre, R. Murali,
+Sanjay Arya, Subhash Kumar, H.S. Yadava, S. Lingaraju, R.N. Ganguli,
+M.P. Thakur, A.S. Kotasthane J.S. Mishra, V.K. Koshta, A.K. Awasthi,
+H. Ravindra, B.K. Shivanna, S. Gangopadhyay, V.R. Bhagwat, I.K.
+Das, S.T. Kajjidoni, B.R. Patel, L.V. Ghetiya, N. Sathyanarayana and S.
+Latha 2014. AESA based IPM package for Sorghum pp 44.
+Front cover picture Model AESA chart for Sorghum
+Back cover picture Sorghum field
+Published by National Institute of Plant Health Management, Rajendranagar,
+Hyderabad – 500 030
+Copies: 1,000; November, 2014
+For internal circulation only. Not for sale.
+Contact APPA - IPM, Directorate of Plant Protection, Quarantine & Storage,
+CGO Complex, NH IV, Faridabad, Haryana - 121 001.
+Tel : 0129 2413020, e-mail: ppa@nic.in
+Printed at Balaji Scan Pvt. Ltd.,
+A.C. Guards, Hyderabad.
+Tel : 040-23303424
+e-mail: bsplpress@gmail.com
+www.balajiscan.com
+Avinash K Srivastava
+अपर सचिव
+Additional Secretary
+भारत सरकार
+Government of India
+कृषि मंत्ालय Ministry of Agriculture
+(कृषि एवं सहकािरता षवभाग) (Department of Agriculture & Cooperation)
+कृषि भवन, नई िदल्ली - 110001 Krishi Bhawan, New Delhi - 110 001
+FOREWORD
+Intensive agricultural practices relying heavily on chemical pesticides are a major cause of wide spread ecological
+imbalances resulting in serious problems of insecticide resistance, pest resurgence and pesticide residues. There
+is a growing awareness world over on the need for promoting environmentally sustainable agriculture practices.
+Integrated Pest Management (IPM) is a globally accepted strategy for promoting sustainable agriculture. During last
+century, IPM relied substantially on economic threshold level and chemical pesticides driven approaches. However,
+since the late 1990s there is conscious shift to more ecologically sustainable Agro-Eco System Analysis (AESA)
+based IPM strategies. The AESA based IPM focuses on the relationship among various components of an agro-
+ecosystem with special focus on pest-defender dynamics, innate abilities of plant to compensate for the damages
+caused by the pests and the influence of abiotic factors on pest buildup. In addition, Ecological Engineering for pest
+management - a new paradigm to enhance the natural enemies of pests in an agro-ecosystem is being considered
+as an important strategy. The ecological approach stresses the need for relying on bio intensive strategies prior to
+use of chemical pesticides.
+Sincere efforts have been made by resource personnel to incorporate ecologically based principles and field
+proven technologies for guidance of the extension officers to educate, motivate and guide the farmers to adopt
+AESA based IPM strategies, which are environmentally sustainable. I hope that the AESA based IPM packages
+will be relied upon by various stakeholders relating to Central and State government functionaries involved in
+extension and Scientists of SAUs and ICAR institutions in their endeavour to promote environmentally sustainable
+agriculture practices.
+Date : 6.3.2014 (Avinash K. Srivastava)
+
+संयक्तु सचिव
+Joint Secretary
+भारत सरकार
+Government of India
+कृषि मंत्ालय Ministry of Agriculture
+(कृषि एवं सहकािरता षवभाग) (Department of Agriculture & Cooperation)
+कृषि भवन, नई िदल्ली - 110001 Krishi Bhawan, New Delhi - 110001
+FOREWORD
+IPM as a holistic approach of crop protection based on the integration of multiple strategies viz., cultural, physical,
+mechanical, biological, botanical and chemical. Over the years IPM underwent several changes, shifting its focus
+from damage boundary, economic injury to economic threshold. Currently most stake holders rely upon economic
+threshold levels (ETL) and tend to apply chemical pesticides at the first instance in the event of a pest attack,
+through Government of India has advocated need based and judicious application of chemicals. This approach
+is likely to cause adverse effects on agro-ecosystems and increase the cost of agricultural production due to
+problems of pest resurgence, insecticide resistance and sustainability.
+During the late 90s FAO started advocating Agro-Ecosystem Analysis (AESA) based IPM. Experience in
+different countries have sine show that AESA, which takes into account ecological principles and relies on the
+balance that is maintained by biotic factors in an ecosystem has also resulted in reduction in cost of production
+and increase in yields. AESA based IPM also takes into account the need for active participation of farmers and
+promotes experiential learning and discovery based decision making by farmers. AESA based IPM in conjunction
+with ecological engineering for pest management promotes bio-intensive strategies as against current chemical
+intensive approaches, while retaining the option to apply chemical pesticides judiciously as a measure of last
+resort.
+The resource persons of NIPHM and DPPQ&S have made sincere efforts in revising IPM packages
+for different crops by incorporating agro-ecosystem analysis, ecological engineering, pesticide application
+techniques and other IPM options with the active cooperation of crop based plant protection scientists working
+in state Agricultural Universities and ICAR institutions. I hope this IPM package will serve as a ready reference for
+extension functionaries of Central / State Governments, NGOs and progressive farmers in adopting sustainable
+plant protection strategies by minimizing the dependence on chemical pesticides.
+(Utpal Kumar Singh)
+
+National Institute of Plant Health Management
+Department of Agriculture & Cooperation
+Ministry of Agriculture
+Government of India
+Dr. K. SATYAGOPAL, IAS
+Rajendranagar
+Director General
+Hyderabad-500030
+Telephone : +91-40-24015346,
+http://niphm.gov.in
+E-mail : dgniphm@nic.in
+Tele-Fax : +91-40-24015346
+PREFACE
+Need for environmentally sustainable agricultural practices is recognised worldwide in view of the wide spread
+ecological imbalances caused by highly intensive agricultural systems. In order to address the adverse impacts
+of chemical pesticides on agro-ecosystems, Integrated Pest Management has evolved further from ETL based
+approach to Agro-ecosystem Analysis based Integrated Pest Management (IPM).
+In AESA based IPM the whole agro-ecosystem, plant health at different stages, built-in-compensation
+abilities of the plant, pest and defender population dynamics, soil conditions, climatic factors and farmers’
+past experience are considered. In AESA, informed decisions are taken by farmers after field observation , AESA
+chart preparation followed by group discussion and decision making. Insect zoo is created to enable the farmer
+understand predation of pests by Natural Enemies. AESA based PHM also results in reduction of chemical pesticide
+usage and conserves the agro-ecosystems.
+Ecological Engineering for Pest Management, a new paradigm, is gaining acceptance as a strategy for
+promoting Biointensive Integrated Pest Management. Ecological Engineering for Pest Management relies on
+cultural practices to effect habitat manipulation and enhance biological control. The strategies focus on pest
+management both below ground and above ground. There is growing need to integrate AESA based IPM and
+principles of ecological engineering for pest management.
+There is a rising public concern about the potential adverse effects of chemical pesticides on the human
+health, environment and biodiversity. The intensity of these negative externalities, through cannot be eliminated
+altogether, can be minimized through development, dissemination and promotion of sustainable biointensive
+approaches.
+Directorate of Plant Protection Quarantine and Storage (DPPQS), has developed IPM package of practices
+during 2001 and 2002. These packages are currently providing guidance to the Extension Officers in transferring
+IPM strategies to farmers. These IPM package of practices, have been revised incorporating the principles of AESA
+based IPM in detail and also the concept of Ecological Engineering for Pest Management. It is hoped that the
+suggested practices, which aim at enhancing biodiversity, biointensive strategies for pest management and
+promotion of plant health, will enable the farmers to take informed decisions based on experiential learning and
+it will also result in use of chemical pesticides only as a last resort & in a safe and judicious manner.
+(K. SATYAGOPAL)
+
+CONTENTS
+Sorghum-Plant description
+I. Pests .................................................................................................................................................... 1
+A. Pests of National Significance ......................................................................................................... 2
+1. Insect pests ................................................................................................................................ 2
+2. Diseases ..................................................................................................................................... 2
+3. Weeds ......................................................................................................................................... 2
+4. Nematodes ................................................................................................................................. 3
+B. Pests of Regional Significance ......................................................................................................... 3
+1. Insect and mite pests ................................................................................................................ 3
+2. Diseases ..................................................................................................................................... 3
+II. Agro-Ecosystem Analysis (AESA) based Integrated Pest Management (IPM) .................................... 4
+A. AESA .................................................................................................................................................. 4
+B. Field scouting ................................................................................................................................... 8
+C. Surveillance through pheromone trap catches ............................................................................. 9
+D. Yellow pan water/sticky traps ......................................................................................................... 9
+E. Light trap .......................................................................................................................................... 9
+F. Nematode extraction ....................................................................................................................... 9
+III. Ecological engineering for pest management...................................................................................... 10
+IV. Resistant/tolerant varieties .................................................................................................................... 14
+V. Crop stage-wise IPM ............................................................................................................................... 14
+VI. Insecticide resistance and its management .......................................................................................... 19
+VII. Nutritional deficiencies .......................................................................................................................... 20
+VIII. Common weeds ....................................................................................................................................... 20
+IX. Description of insect pests ..................................................................................................................... 22
+X. Description of diseases ........................................................................................................................... 29
+XI. Safety measures ...................................................................................................................................... 34
+A. At the time of harvest ...................................................................................................................... 34
+B. Duirng post-harvest storage ........................................................................................................... 34
+XII. Do’s and Don’ts in IPM ............................................................................................................................ 35
+XIII. Safety parameters in pesticide usage ................................................................................................... 36
+XIV. Basic precautions in pesticide usage ..................................................................................................... 40
+XV. Pesticide application techniques ........................................................................................................... 41
+XVI. Operational, calibration and maintenance guidelines in brief ........................................................... 42
+XVII. References ............................................................................................................................................... 43
+
+AESA based IPM – Sorghum
+AESA BASED IPM PACKAGE FOR SORGHUM
+Sorghum-Plant description:
+Sorghum [Sorghum bicolor (L.) Moench; Family: Poaceae] is a genus of grasses with about 30 species, one of which
+is raised for grain and many of which are used as fodder plants, either cultivated or as part of pasture. The plants
+are cultivated in warm climates worldwide. It is native to Africa with many cultivated forms now, and an important
+crop worldwide, used for food (as grain and in sorghum syrup or "sorghum molasses"), fodder, the production
+of alcoholic beverages, and biofuels. Most varieties are drought- and heat-tolerant, and are especially important
+in arid regions, where the grain is one of the staples for poor and rural people. This is a cane like grass, up to 6m
+tall with large branched clusters of grains. The individual grains are small- about 3-4 mm in diameter. They vary
+in colour from pale yellow through reddish brown to dark brown depending on the cultivar. Most cultivars are
+annuals, few are perennials. Cultivated and most weedy sorghum are non-rhizomatous, culms nodes are either
+glabrous or shortly tomentose. The inflorescence is contracted. The branches of the inflorescence alternate. Wild
+species are characterized by distinct ring of long hairs at the nodes, they have loose inflorescence with spreading
+branches. The branches of the inflorescence are whorled. The leaves look much like those of maize, they sometimes
+roll over. A single plant may have more than two leaves. The flower head carries two types of flowers, one type has
+no stalk and has both male and female parts, and the other flower is stalked and is usually male.
+1
+AESA based IPM – Sorghum
+I. PESTS
+A. Pests of National Significance
+1. Insect pests
+1.1 Shoot fly: Atherigona soccata Rondani (Diptera: Muscidae)
+1.2 Stem borer: Chilo partellus Swinhoe (Lepidoptera: Pyralidae)
+1.3 Midge: Stenodiplosis sorghicola Coquillett (Diptera: Cecidomyiidae)
+1.4 White grub: Holotrichia consanguinea Hope (Coleoptera: Scarabaeidae)
+2. Diseases
+2.1 Grain mold: Fusarium spp., Phoma spp., Curvularia spp.
+2.2 Charcoal rot: Macrophomina phaseolina Tassi (Goid)
+3. Weeds
+Broad leaf
+3.1 Cock'scomb: Celosia argentea L. (Amaranthaceae)
+3.2 Common purselane: Portulaca oleracea L.(Portulacaceae)
+3.3 False amaranth: Digera arvensis Forssk (Amaranthaceae)
+3.4 Horse purslane: Trianthema portulacastrum L. (Aizoaceae)
+3.5 Pigweed: Amaranthus viridis Hook. F. (Amaranthaceae)
+3.6 Swinecress: Coronopus didymus L. Sm. (Brassicaceae)
+3.7 Black nightshade: Solanum nigrum L. (Solanaceae)
+3.8 Sessilis joywood: Alternanthera sessilis L. (DC) (Amaranthaceae)
+3.9 Punarnava: Boerhavia diffusa L. (Nyctaginaceae)
+3.10 Tropical spiderwort: Commelina benghalensis L. (Commelinaceae)
+3.11 Whitetop weed: Parthenium hysterophorus L. (Asteraceae)
+3.12 Bullhead: Tribulus terrestris L. (Zygophyllaceae)
+3.13 Coat button: Tridax procumbens L. (Asteraceae)
+Grasses
+3.14 Rabbit/crow foot grass: Dactyloctenium aegyptium Willd (Poaceae)
+3.15 Goose grass: Eleusine indica L.(Gaertner) (Poaceae)
+3.16 Barnyard grass: Echinochloa crusgalli L. (Scop) (Poaceae)
+3.17 Crabgrass: Digiteria sanguinalis L. (Scop) (Poaceae)
+3.18 Burmuda grass: Cynodon dactylon L. (Poaceae)
+3.19 Johnson grass: Sorghum halepense L. (Pers) (Poaceae)
+3.20 Gamba grass: Brachiaria ramose L. (Poaceae)
+3.21 Finger grass: Chloris barbata Sw. (Poaceae)
+Sedges
+3.22 Purple nutsedge: Cyperus rotundus L. (Cyperaceae)
+3.23 Flat sedge: Cyperus iria L. (Cyperaceae)
+Parasitic
+3.24 Witch weed: Striga asiatica L. (Kuntze) (Orobanchaceae)
+2
+AESA based IPM – Sorghum
+4. Nematodes
+4.1 Lesion nematode: Pratylenchus spp. (Tylenchida: Pratylenchidae)
+4.2 Cyst nematode: Heterodora sorghii (Tylenchida: Heteroderinae)
+B. Pests of Regional Significance
+1. Insect and mite pests
+1.1 Armyworm: Mythimna separata Walker (Lepidoptera: Noctuidae) (Karnataka,
+Maharashtra)
+1.2 Cutworm: Agrotis ipsilon Ochsenheimer (Lepidoptera: Noctuidae)
+1.3 Grasshopper: Hieroglyphus sp (Orthoptera: Acrididae) (Karnataka, Rajasthan, Tamil
+Nadu, Madhya Pradesh, Uttar Pradesh, Haryana, Delhi)
+1.4 Pyrilla: Pyrilla perpusilla Linnaeus (Hemiptera: Lophopidae) (Maharashtra, Madhya
+Pradesh)
+1.5 Shoot bug: Peregrinus maidis Ashmead (Hemiptera: Delphacidae) (Andhra Pradesh,
+Madhya Pradesh, Karnataka, South India, Tamil Nadu, Bihar, Maharashtra)
+1.6 Earhead caterpillars: Helicoverpa armigera Hubner (Lepidoptera: Noctuidae), Eublemma
+spp. (Lepidoptera: Noctuidae), Crytoblabes spp. (Lepidoptera: Pyralidae) (Gujarat, Andhra
+Pradesh, Tamil Nadu, Haryana, Madhya Pradesh, Delhi, Maharashtra)
+1.7 Earhead bug: Calocoris angustatus (Hemiptera: Miridae) (Karnataka, Andhra Pradesh,
+Tamil Nadu, Uttar Pradesh)
+1.8 Sugar cane aphid: Rhophalosiphum maidis Koch (Hemiptera: Aphididae) (Andhra
+Pradesh, Delhi, Gujarat, Maharashtra)
+1.9 Spider mite: Oligonychus indicus Hirst (Acarina: Tetranychidae) (Karnataka, Punjab,
+Maharashtra, Tamil Nadu)
+2. Diseases
+2.1 Downy mildew: Peronosclerospora sorghi Weston & Uppal, C.G. Shaw (Rajasthan, Tamil
+Nadu, Karnataka, Andhra Pradesh, Maharashtra, Haryana)
+2.2 Anthracnose: Colletotrichum graminicola D.J. Politis
+2.3 Loose smut: Sporisorium cruenta de Bary
+2.4 Ergot: Clavicep sorghi B.G.P. Kulk (Tamil Nadu, Karnataka, Andhra Pradesh, Maharashtra)
+2.5 Grain smut: Sporisorium sorghi Ehrenb ex. Link
+2.6 Red leaf spot: Helminthosporium turcicum (Madhya Pradesh, Bihar, Maharashtra)
+2.7 Rust: Puccinia purpurea Cooke (Karnataka, Madhya Pradesh, Tamil Nadu, Uttar Pradesh,
+Maharashtra, Andhra Pradesh, Bihar, Central Provinces)
+3
+AESA based IPM – Sorghum
+II. AGRO-ECOSYSTEM ANALYSIS (AESA) BASED INTEGRATED PEST MANAGEMENT (IPM)
+A. AESA:
+The IPM has been evolving over the decades to address the deleterious impacts of synthetic chemical pesticides
+on environment ultimately affecting the interests of the farmers. The economic threshold level (ETL) was the basis
+for several decades but in modern IPM (FAO 2002) emphasis is given to AESA where farmers take decisions based
+on larger range of field observations. The health of a plant is determined by its environment which includes
+physical factors (i.e. soil, rain, sunshine hours, wind etc.) and biological factors (i.e. pests, diseases and weeds). All
+these factors can play a role in the balance which exists between herbivore insects and their natural enemies.
+Understanding the intricate interactions in an ecosystem can play a critical role in pest management.
+Decision making in pest management requires a thorough analysis of the agro-ecosystem. Farmer has to
+learn how to observe the crop, how to analyze the field situation and how to make proper decisions for their crop
+management. This process is called the AESA. Participants of AESA will have to make a drawing on a large piece
+of paper (60 x 80 cm), to include all their observations. The advantage of using a drawing is that it requires the
+participants/farmers to observe closely and intensively. It is a focal point for the analysis and for the discussions
+that follow, and the drawing can be kept as a record.
+AESA is an approach, which can be gainfully employed by extension functionaries and farmers to analyze the field
+situations with regards to pests, defenders, soil conditions, plant health and the influence of climatic factors and
+their relationship for growing a healthy crop. The basic components of AESA are:
+• Plant health at different stages
+• Built-in compensation abilities of plants
+• Pest and defender population dynamics
+• Soil conditions
+• Climatic factors
+• Farmers past experience
+Principles of AESA based IPM:
+Grow a healthy crop:
+• Select a variety resistant/tolerant to major pests
+• Select healthy seeds/seedlings/ planting materials
+• Treat the seeds/seedlings/planting materials with recommended pesticides especially biopesticides
+• Follow proper spacing
+• Soil health improvement (mulching and green manuring whenever applicable)
+• Nutrient management especially organic manures and biofertilizers based on the soil test results. If the
+dosage of nitrogenous fertilizers is too high the crop becomes too succulent and therefore susceptible to
+insects and diseases. If the dosage is too low, the crop growth is retarded. So, the farmers should apply an
+adequate for best results. The phosphatic fertilizers should not be applied each and every season as the
+residual phosphate of the previous season will be available for the current season also.
+• Proper irrigation
+• Crop rotation
+Observe the field regularly (climatic factors, soil and biotic factors):
+Farmers should:
+• Monitor the field situations at least once a week (soil, water, plants, pests, natural enemies, weather factors
+etc.)
+• Make decisions based on the field situations and Pest: Defender ratio (P: D ratio)
+• Take direct action when needed (e.g. collect egg masses, remove infested plants etc.)
+4
+AESA based IPM – Sorghum
+Plant compensation ability:
+Compensation is defined as the replacement of plant biomass lost to herbivores and has been associated with
+increased photosynthetic rates and mobilization of stored resources from source organs to sinks (e.g., from roots
+and remaining leaves to new leaves) during active vegetative growth period. Plant tolerance to herbivory can
+arise from the interaction of a variety of plant traits and external environmental factors. Several studies have
+documented such compensation through increased growth and photosynthetic rate.
+Understand and conserve defenders:
+• Know defenders/natural enemies to understand their role through regular observations of the agro-
+ecosystem
+• Avoid the use of chemical pesticides especially with broad-spectrum activity
+Insect zoo:
+In field various types of insects are present. Some are beneficial and some may be harmful. Generally farmers
+are not aware about it. Predators (friends of the farmers) which feed on pests are not easy to observe in crop
+field. Insect zoo concept can be helpful to enhance farmers’ skill to identify beneficial and harmful insects. In this
+method, unfamiliar/unknown insects are collected in plastic containers with brush from the field and brought to a
+place for study. Each insect is placed inside a plastic bottle together with parts of the plant and some known insect
+pests. Insects in the bottle are observed for certain time and determined whether the test insect is a pest (feeds on
+plant) or a predator (feeds on other insects).
+Pest: Defender ratio (P: D ratio):
+Identifying the number of pests and beneficial insects helps the farmers to make appropriate pest management
+decisions. Sweep net, visual counts etc. can be adopted to arrive at the numbers of pests and defenders. The P:
+D ratio can vary depending on the feeding potential of natural enemy as well as the type of pest. The natural
+enemies of Sorghum insect pests can be divided into 3 categories 1. parasitoids; 2. predators; and 3. pathogens.
+5
+AESA based IPM – Sorghum
+Model Agro-Ecosystem Analysis Chart
+Date:
+Village:
+Farmer:
+Decision taken based on the analysis of field situations
+Soil conditions :
+Weather conditions :
+Diseases types and severity :
+Weeds types and intensity :
+Rodent damage (if any) :
+No. of insect pests :
+No. of natural enemies :
+P: D ratio :
+The general rule to be adopted for management decisions relying on the P: D ratio is 2: 1. However, some
+of the parasitoids and predators will be able to control more than 2 pests. Wherever specific P: D ratios are not
+found, it is safer to adopt the 2: 1, as P: D ratio. Whenever the P: D ratio is found to be favourable, there is no need for
+adoption of other management strategies. In cases where the P: D ratio is found to be unfavourable, the farmers
+can be advised to resort to inundative release of parasitoids/predators depending upon the type of pest. In
+addition to inundative release of parasitoids and predators, the usage of microbial biopesticides and biochemical
+biopesticides such as insect growth regulators, botanicals etc. can be relied upon before resorting to synthetic
+chemical pesticides.
+Decision making:
+Farmers become experts in crop management:
+Farmers have to make timely decisions about the management of their crops. AESA farmers have learned to make
+these decisions based on observations and analysis viz., abiotic and biotic factors of the crop ecosystem. The past
+experience of the farmers should also be considered for decision making. However, as field conditions continue to
+change and new technologies become available, farmers need to continue improving their skills and knowledge.
+• Farmers are capable of improving farming practices by experimentation
+• Farmers can share their knowledge with other farmers
+6
+AESA based IPM – Sorghum
+AESA methodology:
+• Go to the field in groups (about 5 farmers per group). Walk across the field and choose 20 plants/ acre
+randomly. Observe keenly each of these plants and record your observations:
+• Plant: Observe the plant health, crop stage, deficiency symptoms etc.
+• Insect pests: Observe and count insect pests at different places on the plant.
+• Defenders (natural enemies): Observe and count parasitoids and predators.
+• Diseases: Observe leaves and stems and identify any visible disease symptoms and severity.
+• Weeds: Observe weeds in the field and their intensity.
+• Water: Observe the water situation of the field.
+• Weather: Observe the weather conditions.
+• While walking in the field, manually collect insects in plastic bags. Use a sweep net to collect additional
+insects. Collect plant parts with disease symptoms.
+• Find a shady place to sit as a group in a small circle for drawing and discussion.
+• If needed, kill the insects with some chloroform (if available) on a piece of cotton.
+• Each group will first identify the pests, defenders and diseases collected.
+• Each group will then analyze the field situation in detail and present their observations
+and analysis in a drawing (the AESA drawing).
+• Each drawing will show a plant representing the field situation. The weather conditions, water level,
+disease symptoms, etc. will be shown in the drawing. Insect pests will be drawn on one side. Defenders
+(beneficial insects) will be drawn on another side. Write the number next to each insect. Indicate the plant
+part where the pests and defenders were found. Try to show the interaction between pests and defenders.
+• Each group will discuss the situation and make a crop management recommendation.
+• The small groups then join each other and a member of each group will now present their analysis in front
+of all participants.
+• The facilitator will facilitate the discussion by asking guiding questions and makes sure that all participants
+(also shy or illiterate persons) are actively involved in this process.
+• Formulate a common conclusion. The whole group should support the decision on what
+field management is required in the AESA plot.
+• Make sure that the required activities (based on the decision) will be carried out.
+• Keep the drawing for comparison purpose in the following weeks.
+Data recording:
+Farmers should record data in a notebook and drawing on a chart:
+• Keep records of what has happened help us making an analysis and draw conclusions
+Data to be recorded:
+• Plant growth (weekly): Length of the plant, number of leaves.
+• Crop situation (e.g. for AESA): Plant health; pests, diseases, weeds; natural enemies; soil conditions;
+irrigation; weather conditions
+• Input costs: Seeds; fertilizer; pesticides; labour
+• Harvest: Yield (Kg/acre); price of produce (Rs./Kg)
+Some questions that can be used during the discussion:
+• Summarize the present situation of the field.
+• What crop management aspect is most important at this moment?
+• Is there a big change in crop situation compared to last visit? What kind of change?
+• Is there any serious pest or disease outbreak?
+• What is the situation of the beneficial insects?
+• Is there a balance in the field between pests and defenders?
+• Were you able to identify all pests and diseases?
+• Do you think the crop is healthy?
+• What management practices are needed at this moment?
+7
+AESA based IPM – Sorghum
+• When will it be done? Who will do it? Make sure that responsibilities for all activities are being discussed.
+• Are you expecting any problems to emerge during the coming week such as congenial weather conditions
+for pest buildup?
+• What are the problems? How can we avoid it? How can we be prepared?
+• Summarize the actions to be taken.
+Advantages of AESA over ETL:
+One of the problems of the ETL is that it is based on parameters that are changing
+all the time, and that are often not known. The damage or losses caused by a certain
+density of insects cannot be predicted at all. In ETL the due recognition of the role
+of natural enemies in decreasing pest population is ignored. Farmers cannot base
+their decisions on just a simple count of pests. They will have to consider many
+other aspects of the crop (crop ecology, growth stage, natural enemies, weather
+condition, etc.) and their own economic and social situation before they can make
+the right crop management decisions. In ETL based IPM, natural enemies, plant
+compensation ability and abiotic factors are not considered. In AESA based IPM
+emphasis is given to natural enemies, plant compensation ability, abiotic factors
+and P: D ratio.
+AESA and farmer field school (FFS):
+AESA is a season-long training activity that takes place in the farmer field. It is
+season-long so that it covers all the different developmental stages of the crop
+and their related management practices. The process is always learner-centered,
+participatory and relying on an experiential learning approach and therefore it
+has become an integral part of FFS.
+Farmers can learn from AESA:
+• Identification of pests and their nature of
+damage
+• Identification of natural enemies
+• Management of pests
+• Water and nutrient management
+• Influence of weather factors on pest buildup
+• Role of natural enemies in pest management
+FFS to teach AESA based IPM skills:
+B. Field scouting:
+AESA requires skill, so only the trained farmers can undertake this exercise. However, other farmers also can do field
+scouting in their own fields at regular intervals to monitor the major pest situation.
+Surveillance on pest occurrence at the main field should commence soon after crop establishment and at weekly
+intervals thereafter. In each field, select five spots randomly. Select five random plants at each spot for recording
+counts of insects as per procedure finalized for individual insects.
+8
+AESA based IPM – Sorghum
+For insect pests:
+Shoot fly and stem borer: Count and record the number of both larva and adults on five randomly selected leaves
+per plant count and record the no. of shoot fly and stem borer damages
+Midge, shoot fly, shoot bug, pyrilla and grasshopper: Count and record the number of nymphs and adults
+present per plant
+Ear head bug: Count and record the number of nymphs and adults present in ear heads on five plants.
+White grub, army worm, cut worm: Count and record the number of grubs and adults present in ear heads on
+five plants
+Ear head caterpillar: Count and record the number of larva present in five ear heads.
+For diseases:
+Whenever scouting, be aware that symptoms of plant disease problems may be caused by any biotic factors such as
+fungal, bacterial, viral pathogens or abiotic factors such as weather, fertilizers, nutrient deficiencies, pesticides and
+abiotic soil problems. In many cases, the cause of the symptom is not obvious. Close examination, and laboratory
+culture and analysis are required for proper diagnosis of the causal agent of disease. Generally fungal diseases
+cause the obvious symptoms with irregular growth, pattern & colour (except viruses), however abioticproblems
+cause regular, uniform symptoms. Pathogen presence (signs) on the symptoms can also be observed like fungal
+growth, bacterial ooze etc. Specific and characteristic symptoms of the important plant diseases are given in
+description of diseases section.
+Root sampling: Always check plants that appear unhealthy. If there are no obvious symptoms on plants, examine
+plants randomly and look for lesions or rots on roots and stems. Observe the signs of the causal organism (fungal
+growth Or ooze). Always check plants that appear unhealthy. It is often necessary to wash the roots with water to
+examine them properly. If the roots are well developed, cut into them to examine the roots for internal infections
+(discolouration & signs). Count the total number of root damaged/infested/infected due to rot should be counted
+and incidence should be recorded.
+Leaf sampling: Examine all leaves on each plant for lesions and determine the amount area of leaf infection. Leaf
+diseases cause most damage during the seedling and flowering stages of plant growth. Observe for the symptoms
+and signs on the infected plant parts. Count thenumber of leaves (leaf area diameter)/plant infected due to disease
+and incidence should be recorded.
+Stem and ear-head sampling: Carefully examine the stems and ear-heads of plants for signs of fungal material
+diseases or lesions. The stems and ear-heads should be split or taken apart and examined for discoloration caused
+by fungi and bacteria. Count then number of plant, ear-head infected due to disease and incidence should be
+recorded.
+C. Surveillance through pheromone trap catches:
+Pheromone traps for Lepidopteron @ 4-5/acre have to be installed, if available. Install the traps for each species
+separated by a distance of >75 feet in the vicinity of the selected field. Fix the traps to the supporting pole at a
+height of one foot above the plant canopy. Change of lures should be made at 2-3 week interval (regular interval).
+During each week of surveillance, the number of moths/trap should be counted and recorded. The trapped moths
+should be removed and destroyed after each recording.
+D. Yellow pan water/sticky traps:
+Set up yellow pan water/sticky traps 15 cm above the canopy for monitoring aphids @ 4-5 traps (15 X 7.5 cm)/acre.
+Locally available empty tins can be painted yellow and coated with grease/ Vaseline/castor oil on outer surface
+may also be used as yellow sticky trap. Count the number of aphids on the traps daily and take the appropriate
+decision regarding management practices.
+E. Light trap:
+Set up light traps @ 1 trap/acre 15 cm above the crop canopy for monitoring and mass trapping of nocturnal
+insects. Light traps with exit option for natural enemies of smaller size should be installed and operate around the
+dusk time (6 pm to 10 pm).
+F. Nematode extraction:
+Collect 100 to 300 cm3 (200-300 g) representative soil sample. Mix soil sample and pass through a coarse sieve
+to remove rocks, roots, etc. Take a 600 cc subsample of soil, pack lightly into a beaker uniformly. Place soil in one
+9
+AESA based IPM – Sorghum
+of the buckets or pans half filled with water. Mix soil and water by stirring with paddle; allow to stand until water
+almost stops swirling. Pour all but heavy sediment through 20-mesh sieve into second bucket; discard residue
+in first bucket; discard material caught on sieve. Stir material in second bucket; allow to stand until water almost
+stops swirling. Pour all but heavy sediment through 60 mesh sieve to collect cysts into first bucket; discard residue
+in second bucket. Stir material in first bucket; allow to stand until water almost stops swirling. Pour all but heavy
+sediment through 325-mesh sieve into second bucket; discard residue in first bucket. Backwash material caught
+on 325-mesh sieve (which includes small to mid-sized nematodes and silty material) into 250-ml beaker. More
+than 90% of the live nematodes are recovered in the first 5-8 mm of water drawn from the rubber tubing and the
+sample is placed in a shallow dish for examination.
+III. ECOLOGICAL ENGINEERING FOR PEST MANAGEMENT
+Ecological engineering for pest management has recently emerged as a paradigm for considering pest management
+approaches that rely on the use of cultural techniques to effect habitat manipulation and to enhance biological
+control. Ecological engineering for pest management is based on informed ecological knowledge rather than high
+technology approaches such as synthetic pesticides and genetically engineered crops (Gurr et al. 2004 a, b).
+Ecological Engineering for Pest Management – Below Ground:
+There is a growing realization that the soil borne, seed and seedling borne diseases can be managed with microbial
+interventions, besides choosing appropriate plant varieties. The following activities increase the beneficial
+microbial population and enhance soil fertility.
+• Crop rotations with leguminous plants which enhance nitrogen content.
+• Keep soils covered year-round with living vegetation and/or crop residue.
+• Add organic matter in the form of farm yard manure (FYM), vermicompost, crop residue which enhance
+below ground biodiversity of beneficial microbes and insects.
+• Application of balanced dose of nutrients using biofertilizers based on soil test report.
+• Application of biofertilizers with special focus on mycorrhiza and plant growth promoting rhizobia (PGPR)
+• Application of Trichoderma harzianum/viride and Pseudomonas fluorescens for treatment of seeds/seedlings/
+planting materials in the nurseries and field (if commercial products are used, check for label claim. However,
+biopesticides produced by farmers for own consumption in their fields, registration is not required).
+Ecological Engineering for Pest Management – Above Ground:
+Natural enemies play a very significant role in control of foliar insect pests. Natural enemy diversity contributes
+significantly to management of insect pests both below and above ground.
+Natural enemies may require:
+1. Food in the form of pollen and nectar.
+2. Shelter, overwintering sites and moderate microclimate, etc.
+3. Alternate hosts when primary hosts are not present.
+In order to attract natural enemies following activities should be practiced:
+• Raise the flowering plants / compatible cash crops along the field border by arranging shorter plants
+towards main crop and taller plants towards the border to attract natural enemies as well as to avoid
+immigrating pest population
+• Grow flowering plants on the internal bunds inside the field
+• Not to uproot weed plants those are growing naturally such as Tridax procumbens, Ageratum sp,
+Alternanthera sp etc. which act as nectar source for natural enemies
+• Not to apply broad spectrum chemical pesticides, when the P: D ratio is favourable. The plant compensation
+ability should also be considered before applying chemical pesticides.
+• Reduce tillage intensity so that hibernating natural enemies can be saved.
+• Select and plant appropriate companion plants which could be trap crops and pest repellent crops. The
+trap crops and pest repellent crops will also recruit natural enemies as their flowers provide nectar and
+the plants provide suitable microclimate.
+Due to enhancement of biodiversity by the flowering plants, parasitoids and predators (natural enemies) number
+also will increase due to availability of nectar, pollen and insects etc. The major predators are a wide variety of
+spiders, ladybird beetles, long horned grasshoppers, lacewing, earwigs, etc.
+10
+AESA based IPM – Sorghum
+Plants Suitable for Ecological Engineering for Pest Management
+Attractant plants
+Coriander Carrot Sunflower
+Buckwheat Jatropha Chrysanthemum
+Mustard Parsley Anise
+Caraway Dill Alfalfa
+Coreopsis spp. Cosmos Dandelion
+11
+AESA based IPM – Sorghum
+Marigold
+Repellant plants Border plants
+Ocimum spp. Peppermint Maize Bajra
+Intercrops
+Maize Groundnut
+The flowering plants suggested under Ecological Engineering for pest management strategy are known as attractant
+plants to the natural enemies of the selected pests. The information is based on published literature, however, the
+actual selection of flowering plants could be based on availability, agro-climatic conditions and soil types.
+12
+AESA based IPM – Sorghum
+Biodiversity of natural enemies observed in Ecological Engineering field at NIPHM
+Biodiversity of natural enemies: Parasitoids
+Biodiversity of natural enemies: Predators
+Biodiversity of natural enemies: Spiders
+13
+AESA based IPM – Sorghum
+IV. RESISTANT/TOLERANT VARIETIES
+Pest/disease Tolerant/ resistant variety*
+Moderately resistant to shoot fly and stem borer. Sorghum Coimbatore 30
+Resistant to downy mildew
+Resistant to shoot fly IS-2205,IS- 3962,I-5469, IS-1054,S-386,SPV-102.
+Resistant to Striga weed Gobiye, Abshir and Birhan
+*For detailed information and further updates nearest KVK, state departments, SAU / ICAR Institute may be
+contacted
+V. CROP STAGE-WISE IPM
+Management Activity
+Pre-planting*
+Common cultural practices:
+• Deep summer ploughing
+• Use resistant/tolerant varieties
+• Follow crop rotation with non-host crops
+• Destroy the alternate host plants
+• Sow the ecological engineering plants
+• Sow maize/bajra in 4 rows all around the main crop as guard/barrier crop
+• Soil solarization to prevent soil borne pathogens.
+• Timely sowing should be done.
+• Field sanitation
+• Destroy the alternate host plants
+• Apply manures and fertilizers as per soil test recommendations
+Common mechanical practices:
+• Uproot and burn infected plants parts early to avoid spread of the disease.
+• Collection and destruction of larvae.
+Nutrients • Apply FYM @5 t/acre and incorporate in the soil 2 to 3 weeks before sowing.
+Weeds • At the time of field preparation, adopt stale seed bed technique.
+• In Striga affected fields, do not grow sorghum continuously and follow crop rotation with
+legumes.
+Soil borne • Follow common cultural practices as mentioned above.
+pathogens, Cultural control:
+nematode, resting • Effective weed control.
+stages of insects
+• Trimming of bunds
+Biological control:
+• Application of neem cake @ 80 Kg/acre for nematode control.
+• Controlling root grub adult beetles feeding on neem.
+14
+AESA based IPM – Sorghum
+Sowing*
+Common cultural practices:
+• Use healthy, certified and weed seed free seeds.
+• Follow proper spacing
+• Crop rotation with pulses or oilseed crops.
+• Early planting minimizes shoot fly, midge and ear head bug damage.
+Common mechanical practices:
+• After harvest, plough to remove and destroy the stubbles.
+• Collection and destruction of white grub larvae.
+Nutrients • Apply NPK fertilizers as per soil test recommendations as far as possible. If soil test
+recommendations are not available, adopt a blanket recommendation of 30 N, 18 PO and
+2 5
+18 K per acre.
+• Application of bio-fertilizers: When Azospirillum is used apply only 75% of recommended N for
+irrigated sorghum.
+• Mix 12.5 Kg of micronutrient mixture formulated with enough sand to make a total quantity of
+50 Kg.
+• Basal application of 10 Kg ZnSO/acre-1 for the deficient soils or 5 Kg Zn SO acre -1 + FYM for
+4 4
+the Zn deficient soils
+• Basal application of FeSO 20 Kg/acre along with 5 t/acre FYM for iron deficient soils.
+4
+Weeds Cultural control:
+• Plant population should be maintained to its optimum numbers from beginning to minimize
+the crop weed competition.
+• Inter cropping with short duration pulse crops like moong bean should be done to suppress
+weeds between rows.
+• Inter cropping with pigeon pea in 2:1 ratio is also recommended for weed suppressing.
+Chemical control:
+• Weed species: Cyperus iria, Digera arvensis, Convolvulus arvensis, Trianthema sp., Tridax procumbens,
+Euphorbia hirta, Phyllanthus niruri are controlled by 2,4-D dimethyl amine salt 58% SL @ 612 ml
+in 200-240 l of water/acre and 2,4-D ethyl ester 38 % EC (having 2,4-D acid 34 % w/w) @ 400 ml
+in 170 l of water/acre.
+Grain smut, loose • For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+smut Chemical control:
+• Seed treatment with sulphur 80% WP for smut @ 3-4 g in 1 l of water per 10 Kg seeds or by thiram
+75% WS @ 25-30 g in 1 l of water/Kg seeds for loose smut.
+Shoot fly • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+Cultural control:
+• Early sowing to avoid the active period of shoot fly population.
+• Planting date in Kharif 7-10 days on set of monsoon and in Rabi end of September to 1st week of
+October is ideal to escape the shoot fly
+• High seed rate 1.6 – 2.0 Kg/acre.
+• Tall variety with yellow glossy stem less attacked.
+Mechanical control:
+• Removal of the seedlings with dead hearts.
+• Set up the low cost fish meal traps @ 4/acre till the crop is 30 days old.
+15
+AESA based IPM – Sorghum
+Chemical control:
+• Seed treatment with imidacloprid 48% FS @ 12 ml/Kg seeds or imidacloprid 70% WS @ 10g/Kg
+seeds or thiamethoxam 30% FS @ 10 ml/Kg seeds or spray carbaryl 50% WP @ 600g/acre in 200-
+400 l of water or soil application of carbofuran 3% CG @13320 g/acre or spraying oxydemeton-
+methyl 25% EC @ 400 ml/acre in 200-400 l of water or soil application phorate 10% CG @ 7500g/
+acre or spray quinalphos 25% EC @ 600 ml/acre in 200-400 l of water.
+White grub • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+Chemical control:
+• Apply phorate 10% @ CG 10 Kg/acre.
+Biological control:
+• Entomopathogenic nematodes (EPNs) can be sprayed at the rate of 100 million
+nematodes per acre, in white grub infested fields.
+Downy mildew** • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+• For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+Cultural control:
+• Grow moderately resistant varieties.
+Chemical control:
+• Seed treatment with metalaxyl 35% WS @ 6-7 g/Kg or metalaxyl-M 31.8% ES @ 2.0 ml/Kg seed.
+*Apply Trichoderma spp. and Pseudomonas fluorescens as seeds/seedlings/planting materials treatment and soil application
+(if commercial products are used, check for label claim. However, biopesticides produced by farmers for own consumption in
+their fields, registration is not required).
+Vegetative stage
+Common cultural practices:
+• Collect and destroy crop debris
+• Provide irrigation at the critical stages of the crop
+• Avoid water logging
+• Avoid water stress during flowering stage
+• Follow judicious use of fertilizers
+• Sow the lab lab or cowpea as an intercrop (sorghum: lab lab 4:1) or groundnut and maize.
+Common mechanical practices:
+• Collect and destroy disease infected and insect infested plant parts.
+• Collect and destroy eggs and early stage larvae
+• Handpick the older larvae during early stages of the crop
+• Hand pick the gregarious caterpillars and cocoons which are found on stem/branches and
+destroy them in kerosene mixed water.
+• Use yellow sticky traps @ 4-5 traps/acre
+• Use light trap @ 1/acre and operate between 6 pm and 10 pm
+• Install pheromone traps @ 4-5/acre for monitoring adult moths activity (replace the lures with
+fresh lures after every 2-3 weeks)
+• Set up bonfire during evening hours at 7-8 pm.
+Common biological practices:
+• Enhance parasitic activity by avoiding chemical pesticide spray, when 1-2 larval parasitoids are
+observed in the crops field.
+• Conserve natural enemies through ecological engineering
+• Augmentative release of natural enemies.
+16
+AESA based IPM – Sorghum
+Nutrients • Apply N @ 50:25:25 % at 0, 15 and 30 DAS and full dose of PO and KO basally before sowing
+2 5 2
+and if basal application is not possible the same could be top dressed within 24 hours.
+Weeds • Apply 2, 4-D @ 400 g/acre on 20-25 DAS on the plants surface, using Backpack/Knapsack/Rocker
+sprayer fitted with a flat fan nozzle using 80 l of water/acre (or) if herbicides are not used, hand
+weeding twice on 10-15 DAS and 30-35 DAS.
+Stem borer • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+Cultural control:
+• Select and grow varieties resistant to spotted stem borer. Sow the lablab or cowpea or pigeon
+pea as an intercrop (Sorghum: Lablab 4:1) to reduce the damage by stem borers.
+Biological control:
+• Release Trichogramma chilonis @30,000/acre/week
+Chemical control:
+• Spray carbaryl 50% WP @ 800g in 200-400 l of water/acre or application of carbofuran 3% CG @
+13320 g/acre or apply quinalphos 5% G @ 6000 g/acre.
+Mite • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+Chemical control:
+• Quinalphos 25% EC @ 600 g in 200-400 l of water/acre or sulphur 40% WP @ 0.8-1 Kg in 300-400
+l of water/acre or phenthoate 2% DP @ 8000 g/acre
+Aphid • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+Chemical control:
+• Phorate 10% CG @ 7500 g/acre or carbaryl 10% DP @ 10000 g/acre or carbaryl 50% WP @ 800 g
+in 200-400 l of water/acre
+Hopper • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+Chemical control:
+• Carbaryl 50% WP @ 800 g in 200-400 l of water/acre
+Downy mildew • As mentioned above in the sowing stage
+Flowering stage
+Midge • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+Cultural control:
+• Removal of Johnson grass weed
+Biological control:
+• Spray 5% Neem seed kernel extract (NSKE)
+Chemical control:
+• Spray quinalphos 1.5% DP @ 10640 g/acre or phosalone 4% DP @ 10000g/acre or phosalone
+35% EC @ 457.2 ml in 200-400 l of water/acre or malathion 50% EC @ 400 ml in 200-400 l of
+water/acre or malathion 5% DP@ 8000 g/acre or dimethoate 30% EC @ 660 ml in 200-400 l of
+water/acre or carbaryl 5% DP @ 8000 g/acre.
+Earhead • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+caterpillar** Chemical control:
+• Carbaryl 10% DP @ 8000 g/acre
+17
+AESA based IPM – Sorghum
+Earhead bug** • Follow common cultural, mechanical and biological practices (See page no. 14, 15,16).
+Biological control:
+• Spray 5% Neem seed kernel extract
+Chemical control:
+• Quinalphos 1.5% DP 10 Kg/acre.
+Grain mould • Follow common cultural, mechanical and biological practices (See page no. 14, 15,16).
+• For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+Charcoal rot • Follow common cultural, mechanical and biological practices (See page no. 14, 15,16).
+• For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+Cultural control:
+• Plant varieties with good stalk strength
+• Plant in fertile soil.
+• Avoid high plant populations unless irrigated.
+• Rotate with cotton.
+Loose smut**, Grain • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+smut** • For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+Cultural control:
+• Collect smutted ear-heads in cloth bags and destroy by dipping in boiling water or bury in soil.
+• Avoid ratooning.
+Chemical control:
+• Spray thiram 75% WS @ 10-12 g/acre in 400 ml of water for loose smut.
+Anthracnose** • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+• For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+Cultural control:
+• Eliminate other susceptible plants such as Johnson grass.
+• In poorly rotated fields, plough under infested residue where erosion is not a problem.
+Rust** • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+• For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+Cultural control:
+• Remove the alternate weed host Oxalis comiculata.
+Ergot** • Follow common cultural, mechanical and biological practices (See page no. 14, 15, 16).
+• For resistant / tolerant varieties consult ICAR Institute / KVK’s / SAU’s.
+Note: The pesticides dosages and spray fluid volumes are based on high volume sprayer. The recommended
+pesticides are as per CIBRC list updated on 31.10.2014.
+** Pests of regional significance
+18
+AESA based IPM – Sorghum
+VI. INSECTICIDE RESISTANCE AND ITS MANAGEMENT
+Insecticide resistance: Resistance to insecticides may be defined as ‘a heritable change in the sensitivity of a pest
+population that is reflected in the repeated failure of a product to achieve the expected level of control when used
+according to the label recommendation for that pest species’ (IRAC). Cross-resistance occurs when resistance to
+one insecticide confers resistance to another insecticide, even where the insect has not been exposed to the latter
+product.
+Causes of resistance development: The causes and rate at which insecticide resistance develops depend on
+several factors, including the initial frequency of resistance alleles present in the population, how rapidly the
+insects reproduce, the insects’ level of resistance, the migration and host range of the insects, the insecticide's
+persistence and specificity, and the rate, timing and number of applications of insecticide made. For instance,
+insect pests that survive in large populations and breed quickly are at greater advantage of evolving insecticide,
+especially when insecticides are misused or over-used.
+General strategy for insecticide resistance management: The best strategy to avoid insecticide resistance
+is prevention and including insecticide resistance management tactics as part of a larger integrated pest
+management (IPM) approach.
+1) Monitor pests: Monitor insect population development in fields to determine if and when control measures
+are warranted. Monitor and consider natural enemies when making control decisions. After treatment, continue
+monitoring to assess pest populations and their control.
+2) Focus on AESA. Insecticides should be used only as a last resort when all other non-chemical management
+options are exhausted and P: D ratio is above 2: 1. Apply biopesticides/chemical insecticides judiciously after
+observing unfavourable P: D ratio and when the pests are in most vulnerable life stage. Use application rates and
+intervals as per label claim.
+3) Ecological engineering for pest management: Flowering plants that attract natural enemies as well as plants
+that repel pests can be grown as border/intercrop.
+4) Take an integrated approach to managing pests. Use as many different control measures as possible viz.,
+cultural, mechanical, physical, biological etc. Select insecticides with care and consider the impact on future pest
+populations and the environment. Avoid broad-spectrum insecticides when a narrow-spectrum or more specific
+insecticide will work. More preference should be given to green labeled insecticides.
+5) Mix and apply carefully. While applying insecticides care should be taken for proper application of insecticides
+in terms of dose, volume, timing, coverage, application techniques as per label claim.
+6) Alternate different insecticide classes. Avoid the repeated use of the same insecticide, insecticides in the
+same chemical class, or insecticides in different classes with same mode of action and rotate/alternate insecticide
+classes and modes of action.
+7) Preserve susceptible genes. Preserve susceptible individuals within the target population by providing
+unsprayed areas within treated fields, adjacent "refuge" fields, or habitat attractions within a treated field that
+facilitate immigration. These susceptible individuals may outcompete and interbreed with resistant individuals,
+diluting the resistant genes and therefore the impact of resistance.
+19
+AESA based IPM – Sorghum
+VII. NUTRITIONAL DEFICIENCIES
+Nitrogen: Little new growth, yellow leaves, this being more pronounced in
+older leaves and leaf drop. Plants stunted, spindly pale yellow or deep yellow
+color near the tips and margins progresses toward the base heads small seed
+numbers reduced
+Correction measure: Apply 8-10 Kg N / acre as top dressing or foliar spray of
+urea @ 2-3 percent.
+Phosphorous: Small root systems; grain filling inhibited. Growth stunted,
+spindly, dark green leaves with dark red coloration. Leaf sheaths bend upward
+with red coloration leaf. Leave appear to be erect and leathery. Roots turn dark
+brown purple or black.
+Correction measure: Foliar spray of 2% DAP @ 2-3 sprays at an interval of 15
+days.
+Potassium: Deficiency first seen on older leaves. Irregular necrotic patterns
+intermingled with red pigmentation. Streaked patterns on the interveinal
+tissue symptoms at tips and margins move towards the base.
+Correction measure: Foliar spray of KCl @ 1%.
+Sulphur: Deficiency appears first on younger leaves. New growth is pale
+yellow.
+Correction measure: Foliar spray of CaSO @ 2%
+4
+VIII. COMMON WEEDS
+1. Crab grass: 2. Barnyard grass: Echinocloa 3. Goose grass: Eleusine indica (L.)
+Digiteria sanguinalis (L.) crusgalli (L.) Beauv. Gaertner (Poaceae)
+Scop. (Poaceae) (Poaceae)
+20
+AESA based IPM – Sorghum
+4. Bermuda grass: 5. Rabbit/crow foot grass: 6. Horse purslane:
+Cynodon dactylon (L.) Dactyloctenium aegyptium L. Trianthema portulacastrum L.
+Pers. (Poaceae) Willd. (Poaceae) (Aizoaceae)
+7. Swine cress: 8. Coat buttons: 9. Pigweed: Amaranthus viridis
+Coronopus didymus (L.) Sm. Tridax procumbens L. Hook. F. (Amaranthaceae)
+(Brassicaceae) (Asteraceae)
+10. False amaranth: Digera 11. Black nightshade: 12.Common purselane: Portulaca
+arvensis Forsk. (Amaranthaceae) Solanum nigrum L. (Solanaceae) oleracea L. (Portulacaceae)
+13. Purple nutsedge: Cyperus 14. Flat sedge: Cyperus iria L. 15. Witch weed: Striga asiatica L.
+rotundus L. (Cyperaceae) (Cyperaceae) Kuntze (Orobanchaceae)
+21
+AESA based IPM – Sorghum
+IX. DESCRIPTION OF INSECT PESTS
+1) Shoot fly:
+Biology:
+Egg: Eggs are cigarette shape, white coloured laid generally singly parallel to the midrib on the under surface of the 3rd to
+5th leaf. Under high shoot-fly pressure, there may be several eggs on the same leaf. Sometimes, as many as 25 eggs may be
+laid on the same seedling. They hatch in 2-5 days.
+Maggot: Yellow in colour migrate to the dorsal surface of the leaf, enter the space between the leaf sheath and the axis and
+make a clean cut at the base of the leaf. The larval period lasts for 6 - 10 days.
+Pupa: Pupation takes place inside the stem and the adults emerge in about a week.
+Adult: The adults are dark brown and similar to domestic housefly, but nearly half the size with the males smaller than the
+females. The adults usually live for 10 to 20 days.
+Favourable conditions:
+• The late sown crops generally suffer greater shoot fly damage because of high humidity and moderate temperature.
+• Infestation is normally high in the post rainy season crop, which is sown in September- October temperature above 35
+oC and below 18 oC reduces shoot fly survival.
+Life cycle: Damage symptoms:
+• Damage at the seedling stage (5 to 30 days after seedling
+emergence) will lead to the typical dead heart symptoms.
+• The larva migrates to the upper side of the leaf, and moves along
+the leaf whorl until it reaches the growing point where the larvae
+cut the growing point. As a result the central leaf dries up forming
+a dead heart, which can be pulled out easily and produces a
+rotting smell.
+• Normally the damage occurs 1 to 4 weeks after seedling
+emergence. Seedlings of 5 to 30 days old are generally susceptible
+to shoot fly damage.
+• Older plants (>30 days after seedling emergence) are not usually
+damaged by A. soccata however, under conditions of high humidity
+during the rainy season, infestation may occur.
+1. http://www.nbaii.res.in/insectpests/images/Atherigona-soccata1.jpg • Under these conditions the infested plants do not produce the
+2. http://www.nbaii.res.in/insectpests/images/Atherigona-soccata2.jpg
+3. www.nbaii.res.in/insectpests/images/Atherigona-soccata3.jpg typical dead heart symptoms. In this instance, the damaged leaf
+4. http://www.nbaii.res.in/insectpests/images/Atherigona-soccata4.jpg
+becomes thin and papery, wrapping around the other leaves. The
+plants may fail to grow normally.
+• Late infestations may also damage the panicle in the formative stage, resulting in rotting or drying up of a portion of
+the panicle affected by shoot fly damage.
+• The damage plants produce side tillers
+• Infestation is especially high when sorghum planting is staggered due to erractic rainfall.
+Damage symptoms –deadheart
+http://www.takingroots.in/sites/default/files/Sorghum_Shoot_Fly_02.jpg
+22
+AESA based IPM – Sorghum
+Natural enemies of shoot fly:
+Parasitoids: Trichogramma toideasimmonalsi, Trichogramma chilonis, Neotrichoporoides nyemitawus etc.
+Predators: Spiders, Coccinellids, lacewings etc.
+*For the management refer page no 15.
+2) Stem borer:
+Biology:
+Egg: The eggs are laid on the underside of a leaf near the midrib in 3-5 rows, in groups of 10-100. They are flattened, oval, and
+about 0.8 mm long. Hatching takes place after 7-10 days.
+Larva: The young caterpillars produce characteristic leaf windowing. Sometimes the early stages mine in the leaves, causing
+yellow streaks. After a few days they bore down inside the tunnel. They also may move down outside the stem and then bore
+into it just above an internode. In older plants the caterpillars sometimes live in the developed heads. In general appearance
+the larvae look like Busseola fusca larvae (= Maize Stalk Borer). They are creamy pink with groups of dark spots along the back.
+The head capsule is brown. When mature they are about 25 mm long. The caterpillars can be distinguished from B. fusca and
+from Sesamia calamistis (= Pink Stalk Borer) by the hooks on its prolegs. In C. partellus these hooks are arranged in a complete
+circle. In B. fusca and S. calamistis they are arranged in a crescent. The larval period takes 28-35 days.
+Pupa: Pupation takes place in a small chamber in the stem. The pupal period takes 7 10 days.
+Adult: Adult moths have a wingspan of 20-30 mm. Males are smaller and darker than females. The forewings of males are
+pale brown. The forewings of the females are much paler and the hind wings are almost white.
+Life cycle: Damage symptoms:
+• Damage occurs as a series of small holes in lines (pin
+holes) in younger leaves and/or patches of transparent
+leaf epidermis (window panes) in older leaves.
+• Holes in stem caused by larvae tunnelling into the
+stem can result in broken stems or drying and eventual
+death of the growing point (deadheart).
+1. http://www.infonet-biovision.org/default/ct/92/pests
+2. http://www.nbaii.res.in/insectpests/images/Chilo-partellus6.jpg
+3. http://push-pull.net/striga/stem borer.html
+4. http://www.nbaii.res.in/insectpests/images/Chilo-partellus15.jpg
+1. Dead plant 2 Leaf damage at early stage
+1. http://ethiopia.ipm-info.org/insect_pests_ethiopia/Chilo_partellus.htm
+2. http://keys.lucidcentral.org/keys/v3/eafrinet/maize_pests/key/maize_pests/Media/
+Html/Chilo_partellus_(Swinhoe_1885)_-_Spotted_Stemborer.htm
+Natural enemies of stem borer:
+Parasitoids: Cotesia sesamiae, Cotesia chilonis etc.
+Predators: Chrysoperla zastrowi sillemi, ladybird beetle, reduviid bug, spider, fire ant, robber fly, black drongo (King crow),
+common mynah, big-eyed bug (Geocoris sp), earwig, ground beetle, pentatomid bug (Eocanthecona furcellata), preying
+mantis, Dicyphus hesperus etc.
+*For the management refer page no 17.
+23
+AESA based IPM – Sorghum
+3) Midge:
+Biology:
+Eggs: Each white, cylindrical egg, 0.3 x 0.6 mm, is attached to the host spikelet by a slender, tapering stalk.
+Maggot: The newly hatched larva is colorless. As it feeds on the developing grain, it gradually becomes pale pink to a deeper
+pink, then orange, and finally a darker orange or red-orange. The full-grown larva, 1.5 to 2.0 mm long, is slightly flattened and
+spindle-shaped, tapering to a point at the head.
+Pupa: At first, the pupa is uniformly dark orange, but after a few hours the head, antennae, legs and thorax darken until they
+become black. Only the abdomen retains the orange color.
+Adult: The sorghum midge is an orange fly, the male measuring approximately 1.3 mm in length and the female 1.6 mm.
+Life cycle: Damage symptoms:
+• Maggot feed on the developing
+ovary inside the glumes: this results
+in empty or chaffy spikelets as
+shrivelled grains fail to develop.
+• During the grain filling or milk
+stage, if damaged spikelets are
+Midge, pressed between the finger and
+Stendiplosis sorghicila
+thumb or between a pair of forceps,
+they produce a red ooze: the body
+contents of the midge larva or pupa.
+• In the mature crop, damaged
+spikelets become empty or chaffy,
+and the sorghum panicles present a
+blasted appearance.
+1. & 2. http://hal.archives-ouvertes.fr/docs/00/52/09/81/PDF/Stenodiplosis-vercambreVF20100924.pdf • Damaged panicles have small,
+3. http://www.cabi.org/cpc/bigimage.aspx?imageURL=portfolio/compendia/Normal/contpup1.img&captiondesc
+=Pupa&captioncap=Pupa%20in%20sorghum%20seed%20head.%20Before%20adult%20emergence%20the%20 transparent midge pupal cases
+pupa%20wriggles%20its%20way%20to%20the%20tip%20of%20the%20spikelet.&captioncopy=H.C.%20Sharma/
+A.B.%20Chitnis/ICRISAT attached to the tip of the damaged
+4 http://www.daff.qld.gov.au/plants/field-crops-and-pastures/broadacre-field-crops/integrated-pest-management/ spikelets.
+a-z-insect-pest-list/sorghum-midge
+1. Damaged grains 2. Infested panicles
+1 http://www.daff.qld.gov.au/plants/field-crops-and-pastures/broadacre-field-crops/integrated-pest-management/a-z-insect-pest-list/sorghum-midge
+2 http://www.cabi.org/cpc/bigimage.aspx?imageURL=portfolio/compendia/Normal/contdam.img
+&captiondesc=Symptoms&captioncap=Infested%20spikelets.&captioncopy=Keith%20M.%20Harris
+Natural enemies of midge:
+Parasitoid: Aprostocetus spp. etc.
+*For the management refer page no 17.
+24
+AESA based IPM – Sorghum
+4) Cutworm:
+Biology:
+Egg: The egg is white in color initially, but turns brown with age. It measures 0.43 to 0.50 mm high and 0.51 to 0.58 mm wide
+and is nearly spherical in shape, with a slightly flattened base. The egg bears 35 to 40 ribs that radiate from the apex; the ribs
+are alternately long and short. The eggs normally are deposited in clusters on foliage. Females may deposit 1200 to 1900
+eggs. Duration of the egg stage is three to six days.
+Larva: There are five to nine instars, with a total of six to seven instars most common. The larva is rather uniformly colored on
+the dorsal and lateral surfaces, ranging from light gray or gray-brown to nearly black. The head is brownish with numerous
+dark spots. Larvae usually remain on the plant until the fourth instar, when they become photo-negative and hide in the soil
+during the daylight hours. In these latter instars they also tend to severe plants at the soil surface, pulling the plant tissue
+belowground. Larvae tend to be cannibalistic.
+Pupa: The pupa is 17 to 22 mm long and 5 to 6 mm wide and dark brown. Duration of the pupal stage is normally 12 to 20
+days. Pupation occurs belowground at a depth of 3 to 12 cm.
+Adult: The adult is fairly large in size, with a wingspan of 40 to 55 mm. The forewing, especially the proximal two-thirds, is
+uniformly dark brown. The distal area is marked with a lighter irregular band, and a small but distinct black dash extends
+distally from the bean-shaped wing spot. The hind wings are whitish to gray, and the veins marked with darker scales.
+Life cycle: Damage symptoms:
+• Cutworms usually feed at night or during overcast
+days. Newly hatched larvae feed on weeds, and/or
+young maize plants if present, leaving small irregular
+holes in the leaves. Such early feeding is of little
+significance to plants.
+• Larger larvae may completely cut through stalks,
+which can cause plants to wilt and die. Severe stand
+reductions can result. They sometimes drag cut
+plants under soil clods or into small holes in the soil
+to continue their feeding during the daylight hours.
+• In other crops like potatoes and root vegetables,
+damage can take the form of unsightly holes in the
+subterranean tubers, which may allow the penetration
+of secondary fungi.
+1,3&4. https://extension.umd.edu/news/photos/cutworm
+• When numerous, cutworms can destroy as much as
+2. http://entnemdept.ufl.edu/creatures/veg/black_cutworm.htm
+75% of a crop.
+Natural enemies of cutworm:
+Parasitoids: Cotesia spp., Meterorus spp., Campoletis spp. etc.
+Predators: Chrysoperla zastrowi sillemi, ladybird beetle,
+reduviid bug, spider, fire ant, robber fly, black drongo (King
+crow), common mynah, big-eyed bug (Geocoris sp), earwig,
+ground beetle, pentatomid bug (Eocanthecona furcellata),
+preying mantis etc.
+Damage symptom
+1 http://ppp.missouri.edu/pestmonitoring/bcw/images/black-cutworm-JAK270.jpg
+25
+AESA based IPM – Sorghum
+5) White grub:
+Biology:
+Egg: A female lays on an average of 27 eggs in the soil, which are pear like white enclosed in earthen cells.
+Grub: Fleshy ‘C’ shaped, whitish yellow in colour found close to the base of the clump.
+Pupa: Pupae are tan to brown, and occur deeper in the soil in earthen chambers.
+Adult: Adult beetles are a rusty-red color just after emerging from the pupal stage, but turn nearly black.
+Life cycle: Damage symptoms:
+• Yellowing and wilting of leaves.
+• Drying of entire crown.
+• Affected stem come off easily when
+pulled.
+• Cause extensive damage to roots and
+base of shoot.
+Natural enemies of white grub:
+Parasitoid: Typhia (parasitic wasp) etc.
+Predators: Ground beetle, red ant etc.
+https://www.google.co.in/search?q=white+grub+life+cycle&espv=210&es_sm=93&source=lnms&tbm=isch&sa
+Biological control of white grubs through EPNs:
+EPNs seek out and kill all stages of harmful soil-dwelling insects. They can be used to control a broad range of
+soil-inhabiting insects and above-ground insects in their soil-inhabiting stage of life. The IJs emerge from ca-
+daver, search for root grubs, infect, kill and again multiply and remain in the moist soil. White grubs which are
+major pests in sorghum can be managed by using EPNs effectively. EPNs can be produced even at farmer level
+using either Galleria or Corcyra as a host.
+• Entomopathogenic nematodes (EPNs) can be sprayed at the rate of 100 million nematodes per acre, in
+white grub infested sorghum field or
+• EPN infected cadavers of Galleria/Corcyra larvae containing live infective juveniles (IJs) are implanted in
+soil at plant bases at the rate of four cadavers per plant during May/June and/or September for white grub
+control.
+Mass multiplication Emergence of EPNs Infected white grub
+of EPNs with EPNs
+*For management refer to page number 16.
+26
+AESA based IPM – Sorghum
+Natural Enemies of Sorghum Insect and Mite Pests
+Parasitoids
+Egg parasitoids Egg-larval parasitoid
+1. Trichogramma spp. 2. Chelonus spp.
+Larval parasitoids
+3. Cotesia sesamiae 4. Cotesia chilonis
+5. Aprostocetus spp. 6. Campoletis spp.
+Nymphal/larval and adult parasitoids
+7. Cotesia spp. 8. Meterorus spp. 9. Campoletis spp.
+1. http://www.nbaii.res.in/Featured_insects/Trichogrammatids.php; 2. http://www.nbaii.res.in/Featured%20insects/chelonus.htm; 3. http://www.sharkeylab.org/cotesia/display_morph.cg
+i?Species=sesamiae&part=lateralHabitus&Author=Cameron; 4. http://www.nbaii.res.in/Introductions/images/apanteles-chilonis.jpg; 5. http://www.nbaii.res.in/Featured_insects/images/
+aprostocetus-gala3.jpg; 6. http://www.nbaii.res.in/Featured%20insects/Campoletis.htm; 7. http://www.nbaii.res.in/Featured_insects/images/cotesia-flavipes7.jpg; 8. http://micropics.org.
+uk/Braconidae/Meteorus/1/meteorus%201.htm; 9. http://www.nbaii.res.in/Featured_insects/images/campoletis-chlorideae4.jpg
+27
+AESA based IPM – Sorghum
+Predators
+1. Lacewing 2. Ladybird beetle 3. Reduviid bug
+4. Spider 5. Robber fly 6. Red ant
+7. Black drongo 8. Common mynah 9. Big-eyed bug
+10. Earwig 11. Ground beetle 12. Pentatomid bug
+13. Preying mantis 14. Dicyphus hesperus 15. Predatory mite
+28
+AESA based IPM – Sorghum
+16. Predatory thrips 17. Oligota spp. 18. Orius spp.
+19. Hover fly 20. Mirid bug
+5. http://nathistoc.bio.uci.edu/hemipt/Dicyphus.htm; 6. http://www.google.co.in/imgres; 7. http://ugly-animals.blogspot.in/2011/07/damselfly.html; 9. http://www.warpedphotosblog.
+com/robber-fly-and-prey; 10. http://spirit-animals.com/praying-mantis/; 12. http://www.macro-world.cz/image.php?id foto=514&gal=29; 13. http://www.guaminsects.net/uogces/
+kbwiki/index.php?title=File:Rhyzobius_lophanthae_adult.jpg; 14. http://keys.lucidcentral.org keys/phoenix/ChilocorusSpeciesOfIndia/Chilocorus%20key/html/chilocorus_infernalis.
+htm; 15. http://bugguide.net/node/view/784367; 16. http://bugguide.net/images/raw; 17. http://www.dongbufarmceres.com/main/mboard.asp?strBoardID=c_product01_en; 18. http://
+en.wikipedia.org/wiki/Orius_insidiosus; 20. http://bugguide.net/images/raw
+X. DESCRIPTION OF DISEASES
+1) Grain mould:
+Disease symptom:
+• If rains occur during the flowering and grain filling stages, severe grain moulding occurs. The most frequently occurring
+genera are Fusarium, Curvularia, Alternaria, Aspergillus and Phoma.
+• Fusarium semitectum and F. moniliforme develop a fluffy white or pinkish coloration. C. lunatacolours the grain black.
+Symptom varies depending upon the organism involved and the degree of infection.
+Survival and spread:
+• The fungi mainly spread through air-borne conidia.
+• The fungi survive as parasites as well as saprophytes
+in the infected plant debris.
+Favourable conditions:
+• Wet weather following the flowering favors grain
+mould development.
+• The longer the wet period the greater the mould
+development.
+• Compact ear heads are highly susceptible.
+*For the management refer page no 18. Disease symptom
+http://plantpath.caes.uga.edu/extension/plants/fieldcrops/sorghumheadmold.html
+29
+AESA based IPM – Sorghum
+2) Charcoal rot:
+Disease symptom:
+• The disease is particularly destructive on high yielding sorghum that mature during hot and dry weather if the
+vigorously growing crop is subjected to moisture stress during the pre-flowering period. Infected stalks show an internal
+shredding at and above the ground line.
+• The shredding can be observed by splitting the stalk and molting the deteriorated soft pith tissue leaving the tougher
+vascular strands.
+Survival and spread:
+• Survival of microsclerotia is
+several years in dry soil but only
+a few weeks in wet, saturated
+soils.
+Favourable conditions:
+• Charcoal rot is caused by
+Macrophomina phaseolina, a
+disease that appears in hot and
+dry weather.
+• When soil temperatures are 27- Disease symptoms
+35°C for 2 - 3 weeks. http://www.soilcropandmore.info/crops/sorghum/sorghum5.jpeg; http://extension.missouri.edu/p/G4356
+*For the management refer page no 18.
+3) Downy mildew:
+Disease symptom:
+• The fungus causes systemic downy mildew of sorghum. It invades the growing points of young plants, either through
+oospore or conidial infection. As the leaves unfold they exhibit green or yellow colouration.
+• Abundant downy white growth is produced on the lower surface of the leaves, which consists of sporangiophores and
+sporangia. Normally three or four leaves develop the chlorotic downy growth.
+• Subsequent leaves show progressively more of a complete bleaching of the leaf tissue in streaks or stripes.
+• As the infected bleached leaves mature they become necrotic and the interveinal tissues disintegrate, releasing the
+resting spores (oospores) and leaving the vascular bundles loosely connected to give the typical shredded leaf symptom.
+Survival and spread:
+• The primary infection is by means of oospores
+present in the soil which germinate and initiate
+the systemic infection.
+• Secondary spread is by air-borne sporangia
+Favourable conditions:
+• Maximum sporulation takes place at 100 per cent
+relative humidity.
+• Optimum temperature for sporulation is 21-23˚C Disease symptoms
+http://tnau.ac.in/eagri/eagri50/PATH272/lecture02/001.html
+during night.
+http://cropdisease.cropsci.illinois.edu/corn/sorghumdownymildew.html
+• Light drizzling accompanied by cool weather is
+highly favourable.
+*For the management refer page nos 16, 17.
+30
+AESA based IPM – Sorghum
+4) Anthracnose:
+Disease symptom:
+• The fungus causes both leaf spot (anthracnose) and stalk rot (redrot). The disease appears as small red coloured spots
+on both surfaces of the leaf.
+• The centre of the spot is white in colour encircled by red, purple or brown margin. Numerous small black dots like
+acervuli are seen on the white surface of the lesions.
+• Red rot can be characterized externally by the development of circular cankers, particularly in the inflorescence. Infected
+stem when split open shows discoloration, which may be continuous over a large area or more generally discontinuous
+giving the stem a marbeled appearance.
+Survival and spread:
+• The disease spread by means of
+seed-borne and air-borne conidia
+and also through the infected
+plant debris.
+Favourable conditions:
+• Continuous rain coupled with
+28-30˚C temperature and high
+Disease symptoms
+humidity.
+http://tnau.ac.in/eagri/eagri50/PATH272/lecture02/004.html
+http://plantpath.caes.uga.edu/extension/plants/fieldcrops/images/image002.jpg
+*For the management refer page no 18.
+5) Loose smut:
+Disease symptom:
+• The affected plants can be detected before the ears come out. They are shorter than the healthy plants with thinner
+stalks and marked tillering.
+• The ears come out much earlier than the healthy. The glumes are hypertrophied and the earhead gives a loose
+appearance than healthy.
+• The sorus is covered by a thin membrane which ruptures very early, exposing the spores even as the head emerges from
+the sheath.
+Survival and spread:
+• The pathogen is externally seed borne.
+Favourable conditions:
+• Optimum environmental conditions for maximum
+infection include: temperatures between 20 and
+25 °C and slightly acidic soils favour the disease
+developments.
+Disease symptoms
+http://tnau.ac.in/eagri/eagri50/PATH272/lecture02/006.html
+http://www.infonet-biovision.org/res/res/files/1162.280x185.clip.jpeg
+*For the management refer page nos 15, 18.
+31
+AESA based IPM – Sorghum
+6) Rust:
+Disease symptom:
+• The fungus affects the crop at all stages of growth.
+• The first symptoms are small flecks on the lower leaves (purple, tan or red depending upon the cultivar).
+• Pustules (uredosori) appear on both surfaces of leaf as purplish spots which rupture to release reddish powdery masses
+of uredospores.
+• Teliopores develop later sometimes in the old uredosori or in telisori, which are darker and longer than the uredosori.
+• The pustules may also occur on the leaf sheaths and on the stalks of inflorescence.
+Survival and spread:
+• The uredospores survive for a short time in soil and
+infected debris. Presence of alternate host helps in
+perpetuation of the fungus.
+Favourable conditions:
+• Low temperature of 10 to 12˚C coupled with rainy
+weather favours teliospore germination.
+Disease symptoms
+http://agropedia.iitk.ac.in/sites/default/files/Rust%20affected%20leaf.JPG
+http://planecreeksustainablefarmers.com/wp-content/uploads/2011/04/Figure-6.jpg
+*For the management refer page no 18.
+7) Ergot:
+Disease symptom:
+• The disease is confined to individual spikelets.
+• The first symptom is the secretion of honey dew from infected florets.
+• Under favourable conditions, long, straight or curved, cream to light brown, hard sclerotia develop.
+• Often the honey dew is colonised by Crerebella sorghi vulgaris which gives the head a blackened appearance.
+Survival and spread:
+• The primary source of infection is through the
+germination of sclerotia which release ascospores
+that infect the ovary.
+• The secondary spread takes place through air and
+insect-borne conidia. Rain splashes also help in
+spreading the disease.
+Favourable conditions:
+• A period of high rainfall and high humidity during
+flowering season. Disease symptoms
+http://www.daff.qld.gov.au/__data/assets/image/0007/65914/Sorghum-ergot-250_rdax_90.jpg
+• Cool night temperature and cloudy weather http://www.daff.qld.gov.au/__data/assets/image/0011/54479/sorghum-ergot_rdax_90.jpg
+aggravate the disease.
+*For the management refer page no 18.
+32
+AESA based IPM – Sorghum
+Disease cycles:
+1. Grain mould: 2. Charcoal rot:
+3. Downy mildew: 4. Anthracnose:
+5. Loose smut: 6. Rust:
+33
+AESA based IPM – Sorghum
+7. Ergot:
+XI. SAFETY MEASURES
+A. At the time of harvest:
+Harvesting should be done by adopting proper method. Jowar grown for grain should be harvested when it attains
+physiological maturity. Dry the earheads promptly as moisture content influence the keeping quality. Avoid pest
+infestation during drying and threshing etc. Grain sorghum kernels are highly exposed to the elements of nature
+(like wheat). Consequently, it is highly susceptible to pre-harvest losses from birds, insects, molds, and unfavorable
+weather. Unlike wheat or corn, milo does not normally dry in the field to a moisture level that is suitable for direct
+marketing (14.0%) or safe storage (13.5% or lower) until after a killing frost or the application of a desiccant
+chemical. Consequently, artificial drying is usually required unless dry weather prevails for several days after the
+crop reaches physiological maturity (moisture content of ~30%). Like corn and wheat, milo can be harvested at
+moderately high grain moistures (between 18 to 22%) if sufficient drying capacity is available
+B. During post-harvest storage:
+The grain should be cleaned and dried to bring the moisture content below 9 per cent. Dry the sorghum grains
+sufficiently (below 9 percent) prior to packing and storing. Sorghum seeds should be dried in diffused sunlight in
+sun. Pack the sorghum in jute bags free from infestation and obnoxious smell. Avoid harvesting during adverse
+weather conditions i.e. rains and overcast weather. Use strong and free from infestation packaging material for
+storage and transport. Use proper scientific technique in storage. Use pest control measures (fumigation) before
+storage. Provide aeration to stored grain and stir grain bulk occasionally. Seed should not be exposed to direct
+sunlight. Seed should be inspected at fortnightly interval. Use proper techniques while handling (loading &
+unloading), good and fast transport to avoid losses during transport.
+34
+AESA based IPM – Sorghum
+XII. DO’S AND DON’TS IN IPM
+S. No. Do’s Don’ts
+1 Deep ploughing is to be done on bright sunny days Do not plant or irrigate the field after ploughing, at least
+during the months of May and June. The field should for 2-3 weeks, to allow desiccation of weed’s bulbs and/or
+be kept exposed to sun light at least for 2-3 weeks. rhizomes of perennial weeds.
+2 Adopt crop rotation. Avoid monocropping
+3 Grow only recommended varieties. Do not grow varieties not suitable for the season or the
+region.
+4 Sow early in the season Avoid late sowing as this may lead to reduced yields and
+incidence of white grubs and diseases.
+5 Always treat the suckers/planting material with Do not use suckers/planting material without seed
+approved chemicals/biopesticides for the control of treatment with biopesticide/ chemicals.
+seed borne diseases/pests.
+6 Sow in rows at optimum depths under proper Do not sow suckers/planting material beyond 5-7 cm
+moisture conditions for better establishment. depth.
+7 Apply only recommended herbicides at Pre-emergent as well as soil incorporated herbicides
+recommended dose, proper time, as appropriate should not be applied in dry soils. Do not apply herbicides
+spray solution with standard equipment along with along with irrigation water or by mixing with soil, sand or
+flat fan or flat jet nozzles. urea.
+8 Maintain optimum and healthy crop stand which Crops should not be exposed to moisture deficit stress at
+would be capable of competing with weeds at a their critical growth stages.
+critical stage of crop weed competition.
+9 Use NPK fertilizers as per the soil test recommendation. Avoid imbalanced use of fertilizers.
+10 Use micronutrient mixture after sowing based on soil Do not apply any micronutrient mixture after sowing
+test recommendations. without soil test recommendations.
+11 Conduct weekely AESA in the morning preferably Do not take any management decision without
+before 9 a.m. Take decision on management practice considering AESA and P: D ratio
+based on AESA and P: D ratio only.
+12 Release parasitoids only after noticing adult moth as Do not apply chemical pesticides within seven days of
+per field observation release of parasitoids.
+13 In case of pests which are active during night spray Do not spray pesticides at midday since, most of the
+recommended biopesticides/ chemicals at the time of insects are not active during this period.
+their appearance in the evening.
+14 Spray pesticides thoroughly to treat the undersurface Do not spray pesticides only on the upper surface of
+of the leaves, particularly for mites, mealybugs etc. leaves.
+15 Apply short persistent pesticides to avoid pesticide Do not apply pesticides during preceding 10 days before
+residue in the soil and produce. harvest.
+16 Follow the recommended procedure of trap crop Do not apply long persistent pesticides on trap crop,
+technology. otherwise it may not attract the pests and natural enemies.
+35
+AESA based IPM – Sorghum
+36
+EGASU
+EDICITSEP
+NI
+SRETEMARAP
+YTEFAS
+.IIIX
+edicitseP
+gnitsevraH
+OHW
+rep
+sa
+noitacfiissalC
+.S
+slavretni
+gninosiop
+fo
+tnemtaert
+dna serusaem
+dia tsriF
+gninosiop
+fo
+smotpmyS
+noitacfiissalc
+selur
+edicitcesni
+.oN
+)syad(
+drazah
+fo
+yticixot
+fo
+ruoloC
+elgnairt
+sedicitcesnI
+–
+.gm
+4-1-noitcejni
+eniportA
+:gninosiop
+fo tnemtaerT
+,noitavilas
+,slipup
+fo
+noitcirtsnoC
+b
+I
+ssalC
+narufobraC
+1
+61-51(
+rucer
+ot
+nigeb smotpmys
+nehw
+gm
+2 taeper
+elcsum
+,gnitaews
+esuforp
+ylhgiH
+cixot
+ylemertxE
+erom
+,ngis
+doog
+-noitavilas
+evissecxe
+)lavretni
+nim
+,gnitimov
+,aesuan
+,noitanidrocni
+suodrazah
+dedeen
+eniporta
+ni
+ssenthgit
+,niap
+cirtsagipe
+,aehrraid
+tsehc
+eht
+morf
+nosrep
+eht evomeR
+:serusaem
+diA tsriF
+,ssensseltser
+,gnitimov
+,aesuaN
+-aI
+ssalC
+etarohP
+2
+tnemnorivne
+detanimatnoc
+,snoisluvnoc
+,noisneherppa
+,romert
+ylemertxE
+cixot
+ylemertxE
+htaed
+dna
+eruliaf
+yrotaripser
+,amoc
+suodrazah
+oD
+detanimatnoc
+lla
+evomeR
+:tcatnoc nikS
+)a(
+fo esac
+nI
+dna
+retaw
+fo
+tol
+htiw hsaw
+yletaidemmi
+dna
+sgnihtolc
+,ssenizzid
+,ehcadaeh
+,aixerona
+–
+dliM
+fo
+ytnelp
+htiw
+seye
+eht hsaW
+:noitanimatnoc
+eyE
+)b( .paos
+eugnot
+fo
+sromert
+,yteixna
+,ssenkaew
+ot
+nosrep
+eht
+yrraC
+– noitalahnI
+)c( ;retaw
+naelc
+dna looc
+fo
+tnemriapmi
+,sisoim
+,sdileye
+dna
+dna
+kcen
+dnuora
+sgnihtolc
+eht nesool
+,ria
+hserf
+nepo
+eht
+.ytiuca
+lausiv
+,suoicsnoc
+ylluf
+si
+mitciv eht
+fI – noitsegidnI
+)d(
+dna ,tsehc
+,noitavilas
+,aesuan
+-etaredoM
+ton
+oD
+.taorht
+eht
+fo kcab
+gnilkcit yb
+gnitimov
+ecudni
+,pmarc
+lanimodba
+,noitamircal
+eht
+esac
+nI .secnatsbus
+yttaf
+dna lohocla
+,klim
+retsinimda
+,eslup
+wols
+,gnitaews
+,gnitimov
+si
+egassap
+gnihtaerb
+eht erus
+ekam suoicsnocnu
+si nosrep
+.sisoim
+,sromert
+ralucsum
+dluohs
+daeh
+s’mitciV
+.noitcurtsbo
+yna
+tuohtiw
+raelc tpek
+ni
+edis
+eno
+ot
+denrut
+eb dluohs
+ecaf dna
+derewol
+elttil
+eb
+evig
+,ytlucfifid
+gnihtaerb
+fo
+esac
+nI .noitisop
+nwod
+gniyl
+eht
+.gnihtaerb
+eson
+ot htuom
+ro
+htuom
+ot htuom
+htlaeH
+yramirP/rotcod
+eht
+ot
+tneitap eht
+ekaT :dia
+lacideM
+,reniatnoc
+lanigiro
+eht htiw
+gnola yletaidemmi
+ertneC
+lebal
+dna teflael
+AESA based IPM – Sorghum
+37
+—
+4-2
+htiw
+egaval
+cirtsaG :gninosiop
+fo tnemtaerT
+-non
+dna
+tniopnip
+,aehrraid
+–
+ereveS
+muidos
+)zo
+01(
+mg 03 htiw
+sisrahtaC
+.retaw
+pat
+.L
+,ytlucfifid
+yrotaripser
+,slipup
+evitcaer
+retaw
+fo
+puc
+eht ni etahplus
+fo
+ssol
+,sisonayc
+,amede
+yranomlup
+amoc
+,snoisluvnoc
+,lortnoc
+retcnihps
+sa
+detaeper
+segasod
+etairporppa
+ni
+setarutibraB
+-
+.kcolb
+traeh
+dna
+.snoisluvnoc
+ro ssensseltser
+rof yrassecen
+ro/dna
+negyxo
+etaripsa ,ylesolc
+gnihtaerb
+hctaW
+-
+.dedeen
+fi
+,noitaripser
+laicfiitra
+)nilanerdA(
+enirhpenipe
+dna
+sevitaxal
+lio ,slio
+diovA
+-
+.stnalumits
+evig ton
+od
+–
+)selupmA
+lm
+01
+ni %91( etanoculg
+muiclac
+eviG
+-
+.sruoh ruof
+yreve
+ylsuonevartni
+fo
+noitcejni
+,gninosiop
+P.O fo
+smotpmys
+emertxe
+roF
+)nerdlihc
+rof
+gm
+0.1-5/0 ,stluda
+rof
+,gm
+4-2( eniporta
+slavretni
+etunim
+01-5 ta detaeper
+,dednemmocer
+si
+.rucco noitaziniporta
+fo sngis
+litnu
+evitarepmi
+si
+deepS
+nehw
+,gm 2
+taepeR
+.gm 4 ot
+1 –
+noitcejni
+eniportA
+-
+etunim
+61-51(
+rucer ot nigeb
+smotpmys
+cixot
+erom
+,ngis
+doog
+noitavilas
+evissecxE
+,)slavretni
+.dedeen
+eniporta
+tresni
+,negyxo
+esu ,etaripsA
+,nepo
+syawria
+peeK
+-
+laicfiitra
+evig
+dna
+ymotoehcart
+oD
+.ebut
+laehcartodne
+.dedeen
+sa noitaripser
+muidos
+%5
+htiw
+hcamots egaval
+noitsegni
+roF
+-
+hsaw
+,tcatnoc
+niks
+roF .gnitimov
+ton
+fi etanobracib
+.)enilas
+cinotosi
+htiw hsaw eye(
+retaw
+dna paos
+htiw
+.saera
+tcatnoc
+gnihsaw elihw
+sevolg
+rebbur
+raeW
+enidiryp
+-2(
+MAP-2
+evig eniporta
+ot noitidda
+nI
+stnafni
+rof
+g
+52.0 dna g1
+)edidoihtememixodla
+setunim
+5 fo
+doirep
+a revo etar
+wols
+a
+ta ylsuonevartni
+eroM
+.detacidni
+sa yllacidoirep
+niaga
+retsinimda
+dna
+.deriuqer eb
+yam
+noitcejni
+eno
+naht
+AESA based IPM – Sorghum
+38
+,nillyhponima
+,enillyhpoeht
+,enihprom
+diovA
+.senizaihtonehprfosetarautibrab
+eviG
+.stneitap
+citonayc
+a
+ot
+eniporta
+evig
+ton
+oD
+eniporta
+retsinimda
+neht
+tsrfi
+noitaripser
+laicfiitra
+—
+od
+od
+II
+ssalC
+sohplaniuQ
+3
+yletaredoM
+cixot
+ylhgiH
+suodrazaH
+fo
+smotpmys
+emertxe
+roF
+:gninosiop
+fo
+tnemtaerT
+,ssenizzid
+,ehcadaeh
+,aixerona-dliM
+II
+ssalC
+etaohtemiD
+4
+,stluda
+rof
+gm
+4-2(
+eniporta
+fo
+noitcejni
+,gninosiop
+PO
+eugnot
+fo
+sromert
+,yteixna
+,ssenkaew
+yletaredoM
+cixot
+ylhgiH
+detaepeR
+.dednemmocer
+si
+)nerdlihc
+rof
+gm
+0.1-5.0
+fo
+tnemriapmi
+,sisoim
+,sdileye
+dna
+suodrazah
+noitaziniporta
+fo
+sngis
+litnu
+slavretni
+etunim
+01-5
+ta
+ytiuca
+lausiv
+.rucco
+syad
+3
+retaw
+fo
+ssalg
+a pis
+nosrep
+evaH
+:serusaem
+diA
+tsriF
+debrosba
+,dewollaws
+fi
+lufmraH
+dirpolcadimI
+5
+.wollaws
+ot elba
+fi
+diovA
+.delahni
+ro
+niks
+hguorht
+cixot
+ylhgiH
+sesuaC
+.tsim
+yarps
+ro
+ropav
+gnihtaerb
+yb
+os
+od
+ot
+dlot
+sselnu
+gnitimov
+ecudni
+ton
+oD
+.noitatirri
+eye
+etaredom
+na
+ot
+htuom
+yb
+gnihtyna
+evig
+ton
+od
+,rotcod
+a
+nosrep
+suoicsnocnu
+.etoditna
+cfiiceps
+oN
+:gninosiop
+fo
+tnemtaerT
+.citamotpmys
+yllaitnesse
+si
+tnemtaerT
+AESA based IPM – Sorghum
+39
+syad
+7
+etahplus
+enihportA
+:serusaem
+diA
+tsriF
+non
+dna
+tniopnip
+,aeohrraid
+–
+ereveS
+bI
+ssalC
+lyhtem-notemedyxO
+6
+,ytlucfifid
+yrotaripser
+,slipup
+evitcaer
+-
+yletaredoM
+cixot
+ylhgiH
+egaval
+noitsegni
+roF
+:gninosiop
+fo
+tnemtaerT
+fo
+ssol
+,sisonayc
+,amede
+yranomlup
+suodrazaH
+ton
+fi
+,etanobracib
+muidos
+%
+5 htiw
+hcamots
+amoc
+,snoisluvnoc
+,lortnoc
+retcnihps
+retaw
+dna
+paos
+htiw
+hsaw
+,tcatnoc
+niks roF
+.gnitimov
+.kcolb
+traeh
+dna
+sevolg
+rebbur
+raeW
+.)enilas
+cinotosi
+htiw hsaw
+– seye(
+.saera
+tcatnoc
+gnihsaw
+elihw
+enidiryp
+–
+2(
+MAP
+– 2
+evig
+eniporta
+ot
+noitidda
+nI
+stnafni
+rof
+g52.0
+dna
+g
+1
+.)edidoihtememixodla
+setunim
+5
+fo
+doirep
+a revo
+etar
+wols
+ta ylsuonevartni
+eroM
+.detacidni
+sa
+yllacidoirep
+niaga
+retsinimda
+dna
+.deriuqer
+eb
+yam
+noitcejni
+eno
+naht
+,nllyhponima
+,enillyhpoeht
+,enihprom
+diovA
+setarutibrab seninzaihtonehP
+syad
+5
+retaw
+fo
+ssalg
+a
+pis
+nosrep
+evaH
+:serusaem
+diA
+tsriF
+maxohtemaihT
+7
+sselnu
+gnitimov
+ecudni
+ton
+oD
+.wollaws
+ot
+elba
+fi
+oD
+.rotcod
+ro
+retnec
+lortnoc
+nosiop
+a yb os
+od
+ot dlot
+suoicsnocnu
+na ot
+htuom
+yb
+gnihtyna
+evig
+ton
+.etoditna
+cfiiceps
+oN
+:gninosiop
+fo
+tnemtaerT
+.citamotpmys
+yllaitnesse
+si
+tnemtaerT
+AESA based IPM – Sorghum
+XIV. BASIC PRECAUTIONS IN PESTICIDE USAGE
+A. Purchase
+1. Purchase only just required quantity e.g. 100, 250, 500, 1000 g/ml for single application in specified area.
+2. Do not purchase leaking containers, loose, unsealed or torn bags; Do not purchase pesticides without
+proper/approved labels.
+3. While purchasing insist for invoice/bill/cash memo
+B. Storage
+1. Avoid storage of pesticides in house premises.
+2. Keep only in original container with intact seal.
+3. Do not transfer pesticides to other containers; Do not store expose to sunlight or rain water; Do not
+weedicides along with other pesticides
+4. Never keep them together with food or feed/fodder.
+5. Keep away from reach of children and livestock.
+C. Handling
+1. Never carry/ transport pesticides along with food materials.
+2. Avoid carrying bulk pesticides (dust/granules) on head shoulders or on the back.
+D. Precautions for preparing spray solution
+1. Use clean water.
+2. Always protect your nose, eyes, mouth, ears and hands.
+3. Use hand gloves, face mask and cover your head with cap.
+4. Use polythene bags as hand gloves, handkerchiefs or piece of clean cloth as mask and a cap or towel to
+cover the head (Do not use polythene bag contaminated with pesticides).
+5. Read the label on the container before preparing spray solution.
+6. Prepare the spray solution as per requirement
+7. Do not mix granules with water; Do not eat, drink, smoke or chew while preparing solution
+8. Concentrated pesticides must not fall on hands etc while opening sealed container. Do not smell
+pesticides.
+9. Avoid spilling of pesticides while filling the sprayer tank.
+10. The operator should protect his bare feet and hands with polythene bags
+E. Equipments
+1. Select right kind of equipment.
+2. Do not use leaky and defective equipments
+3. Select right kind of nozzles
+4. Don’t blow/clean clogged nozzle with mouth. Use old tooth brush tied with the sprayer and clean with
+water.
+5. Do not use same sprayer for weedicide and insecticide.
+F. Precautions for applying pesticides
+1. Apply only at recommended dose and dilution
+2. Do not apply on hot sunny day or strong windy condition; Do not apply just before the rains and after
+the rains; Do not apply against the windy direction
+3. Emulsifiable concentrate formulations should not be used for spraying with battery operated ULV
+sprayer
+4. Wash the sprayer and buckets etc with soap water after spraying
+5. Containers buckets etc used for mixing pesticides should not be used for domestic purpose
+6. Avoid entry of animals and workers in the field immediately after spraying
+7. Avoid tank mixing of different pesticides
+G. Disposal
+1. Left over spray solution should not be drained in ponds or water lines etc. throw it in barren isolated area
+if possible
+2. The used/empty containers should be crushed with a stone/stick and buried deep into soil away from
+water source.
+3. Never reuse empty pesticides container for any other purpose.
+40
+AESA based IPM – Sorghum
+XV. PESTICIDE APPLICATION TECHNIQUES
+Equipments
+Category A: Stationary, crawling pests/diseases
+Vegetative stage Insecticides and • Lever operated knapsack sprayer (droplets of
+i) For crawling and fungicides big size)
+soil borne pests • Hollow cone nozzle @ 35 to 40 psi
+• Lever operating speed = 15 to 20 strokes/min
+or
+• Motorized knapsack sprayer or mist blower
+ii) For small sucking
+(droplets of small size)
+leaf borne pests
+• Airblast nozzle
+• Operating speed: 2/3rd throttle
+Reproductive stage Insecticides and • Lever operated knapsack sprayer (droplets of
+fungicides big size)
+• Hollow cone nozzle @ 35 to 40 psi
+• Lever operating speed = 15 to 20 strokes/min
+Category B: Field flying pests/airborne pests
+Vegetative stage Insecticides and • Motorized knapsack sprayer or mist blower
+fungicides (droplets of small size)
+Reproductive stage
+(Field Pests) • Airblast nozzle
+• Operating speed: 2/3rd throttle
+Or
+• Battery operated low volume sprayer (droplets
+of small size)
+• Spinning disc nozzle
+Mosquito/ locust Insecticides and • Fogging machine and ENV (exhaust nozzle
+and spatial fungicides vehicle) (droplets of very small size)
+application • Hot tube nozzle
+(migratory Pests)
+Category C: Weeds
+Post-emergence Weedicide • Lever operated knapsack sprayer (droplets of
+application big size)
+• Flat fan or floodjet nozzle @ 15 to 20 psi
+• Lever operating speed = 7 to 10 strokes/min
+Pre-emergence Weedicide • Trolley mounted low volume sprayer (droplets
+application of small size)
+• Battery operated low volume sprayer (droplets
+of small size)
+41
+AESA based IPM – Sorghum
+XVI. OPERATIONAL, CALIBRATION AND MAINTENANCE GUIDELINES IN BRIEF
+1. For application rate and dosage see the label and leaflet of the
+particular pesticide.
+2. It is advisable to check the output of the sprayer (calibration) before
+commencement of spraying under guidance of trained person.
+3. Clean and wash the machines and nozzles and store in dry place
+after use.
+4. It is advisable to use protective clothing, face mask and gloves while
+preparing and applying pesticides.
+Do not apply pesticides without protective clothing and wash
+clothes immediately after spray application.
+5. Do not apply in hot or windy conditions.
+6. Operator should maintain normal walking speed while undertaking
+application.
+7. Do not smoke, chew or eat while undertaking the spraying operation
+8. Operator should take proper bath with soap after completing
+spraying
+9. Do not blow the nozzle with mouth for any blockages. Clean with
+water and a soft brush.
+42
+AESA based IPM – Sorghum
+XVII. REFERENCES
+• www.carabids.org/
+• en.wikipedia.org/wiki/Ground_beetle
+• www.biocontrol.entomology.cornell.edu/parasitoids/eriborus.html
+• http://www.ghananewsagency.org/science/-sweet-sorghum-is-best-option-for-alternative-energy--34065.
+• http://www2.ca.uky.edu/agc/pubs/aen/aen17/aen17.htm.
+• http://agmarknet.nic.in/profile-jowar.pdf
+• http://plantpath.caes.uga.edu/extension/plants/fieldcrops/sorghumheadmold.html
+• http://www.icrisat.org/what-we-do/satrends/mar2002.htm
+• http://tnau.ac.in/eagri/eagri50/PATH272/lecture02/008.html
+• http://www.soilcropandmore.info/crops/sorghum/sorghum5.jpeg
+• http://extension.missouri.edu/p/G4356
+• http://eplantdisease.blogspot.in/2013/10/corn_27.html
+• http://www.google.co.in/imgres?sa=X&biw=1366&bih=583&tbm=isch&tbnid=fv9lcYz3ZhXwbM%3A&imgre
+furl=http%3A%2F%2Fwww.soilcropandmore.info%2Fcrops%2Fsorghum%2Fgsdis.htm
+• http://tnau.ac.in/eagri/eagri50/PATH272/lecture02/001.html
+• http://cropdisease.cropsci.illinois.edu/corn/sorghumdownymildew.html
+• http://kucosmap.project.ku.ac.th/Downy%20mildew.JPG
+• http://mpkrishi.org/krishinet/hindisite/krishi_pranaliya_kharif_Jawar_rog.asp
+• http://agropedia.iitk.ac.in/content/charcoal-rot-sorghum
+• http://agropedia.iitk.ac.in/content/charcoal-rot-sorghum
+• http://tnau.ac.in/eagri/eagri50/PATH272/lecture02/004.html
+• http://plantpath.caes.uga.edu/extension/plants/fieldcrops/images/image002.jpg
+• http://utahpests.usu.edu/plugins/work/tour/48/anthracnose-sorghum.jpg
+• http://www.forestryimages.org/images/768x512/1235209.jpg
+• http://coursewares.mju.ac.th:81/elearning47/PP300/0016sugarteam1014/5606fungi/anthracnose/
+m450825d094308_001.jpg
+• http://tnau.ac.in/eagri/eagri50/PATH272/lecture02/006.html
+• http://www.infonet-biovision.org/res/res/files/1162.280x185.clip.jpeg
+• http://www.infonet-biovision.org/res/res/files/3437.280x185.clip.jpeg
+• http://coursewares.mju.ac.th:81/elearning47/PP300/0016sugarteam1014/5606fungi/smut/
+m450808d222940_014.jpg
+• http://www.plantwise.org/Uploads/CompendiaImages/Normal/Spath_c1.jpg
+• http://agropedia.iitk.ac.in/sites/default/files/Rust%20affected%20leaf.JPG
+• http://planecreeksustainablefarmers.com/wp-content/uploads/2011/04/Figure-6.jpg
+• http://planecreeksustainablefarmers.com/wp-content/uploads/2011/04/Figure-6.jpg
+• http://www.shouragroup.com/Images/gallery/Field/rust-1.jpg
+• http://www.infonet-biovision.org/res/res/files/706.280x185.clip.jpeg
+• http://coursewares.mju.ac.th:81/elearning47/PP300/0016sugarteam1014/5606fungi/rust/
+m450825d094308_024.jpg
+• http://agropedia.iitk.ac.in/sites/default/files/Pustules%20on%20inflorescence%20stalks.JPG
+• http://www.daff.qld.gov.au/__data/assets/image/0007/65914/Sorghum-ergot-250_rdax_90.jpg
+• http://www.daff.qld.gov.au/__data/assets/image/0011/54479/sorghum-ergot_rdax_90.jpg
+• http://www.daff.qld.gov.au/__data/assets/image/0005/76820/FutureGrain-Sep08-ImmatureSclerotes-250.
+jpg
+• http://www.apsnet.org/publications/apsnetfeatures/Article%20Images/ergot10.JPG
+• http://www2.biomed.cas.cz/~pazouto/images/afrconidia.gif
+• https://www.apsnet.org/edcenter/K12/NewsViews/Article%20Images/2004_10_views.jpg
+43
+AESA based IPM – Sorghum
+• http://agritech.tnau.ac.in/agriculture/plant_nutri/Sorghum.
+• https://www.integratedbreeding.net/sites/default/files/uploads/sorghum_plant_icrisat.jpg.
+• http://mediad.publicbroadcasting.net/p/wkms/files/styles/card_280/public/201212/sorghum2.jpg.
+• http://www.tandfonline.com/doi/abs/10.1080/02571862.1992.10634608#.Ux2ZsfmSygc.
+• http://www.tandfonline.com/doi/abs/10.1080/02571862.1993.10634666#.Ux2d3fmSygc.
+• http://www.publish.csiro.au/?paper=EA9930193.
+• http://oar.icrisat.org/1492/
+• http://upload.wikimedia.org/wikipedia/commons/e/ec/Cynodon_dactylon_(2).JPG
+• http://www.nbaii.res.in/insectpests/images/Atherigona-soccata1.jpg
+• http://www.nbaii.res.in/insectpests/images/Atherigona-soccata2.jpg
+• www.nbaii.res.in/insectpests/images/Atherigona-soccata3.jpg
+• http://www.nbaii.res.in/insectpests/images/Atherigona-soccata4.jpg
+• http://www.infonet-biovision.org/default/ct/92/pests
+• http://www.nbaii.res.in/insectpests/images/Chilo-partellus6.jpg
+• http://push-pull.net/striga/stemborer.html
+• http://www.nbaii.res.in/insectpests/images/Chilo-partellus15.jpg hhttp://ethiopia.ipm-info.org/insect_
+pests_ethiopia/Chilo_partellus.htm
+• http://keys.lucidcentral.org/keys/v3/eafrinet/maize_pests/key/maize_pests/Media/Html/Chilo_partellus_
+(Swinhoe_1885)_-_Spotted_Stemborer.htm
+• ttp://www.takingroots.in/sites/default/files/Sorghum_Shoot_Fly_02.jpg
+• http://www.sharkeylab.org/cotesia/display_morph.cgi?Species=sesamiae&part=lateralHabitus&Author=Ca
+meron
+• http://www.nbaii.res.in/Introductions/images/apanteles-chilonis.jpg
+• http://hal.archives-ouvertes.fr/docs/00/52/09/81/PDF/Stenodiplosis-vercambreVF20100924.pdf
+• http://www.cabi.org/cpc/bigimage.aspx?imageURL=portfolio/compendia/Normal/contpup1.img&c
+aptiondesc=Pupa&captioncap=Pupa%20in%20sorghum%20seed%20head.%20Before%20adult%20
+emergence%20the%20pupa%20wriggles%20its%20way%20to%20the%20tip%20of%20the%20
+spikelet.&captioncopy=H.C.%20Sharma/A.B.%20Chitnis/ICRISAT
+• http://www.daff.qld.gov.au/plants/field-crops-and-pastures/broadacre-field-crops/integrated-pest-
+management/a-z-insect-pest-list/sorghum-midge
+• http://www.daff.qld.gov.au/plants/field-crops-and-pastures/broadacre-field-crops/integrated-pest-
+management/a-z-insect-pest-list/sorghum-midge
+• http://www.cabi.org/cpc/bigimage.aspx?imageURL=portfolio/compendia/Normal/contdam.img&captionde
+sc=Symptoms&captioncap=Infested%20spikelets.&captioncopy=Keith%20M.%20Harris
+• http://www.nbaii.res.in/Featured_insects/images/aprostocetus-gala3.jpg
+• https://extension.umd.edu/news/photos/cutworm
+• http://entnemdept.ufl.edu/creatures/veg/black_cutworm.htm
+• http://ppp.missouri.edu/pestmonitoring/bcw/images/black-cutworm-JAK270.jpg
+• http://www.nbaii.res.in/Featured_insects/images/cotesia-flavipes7.jpg
+• http://micropics.org.uk/Braconidae/Meteorus/1/meteorus%201.htm
+• http://www.nbaii.res.in/Featured_insects/images/campoletis-chlorideae4.jpg
+• http://www.ipm.iastate.edu/ipm/icm/node/440
+• https://www.google.co.in/search?q=white+grub+life+cycle&espv=210&es_
+sm=93&source=lnms&tbm=isch&sa
+• Gurr GM, Wratten SD and Altieri MA (2004a) Ecological Engineering for Pest Management in Advances in
+Habitat Manipulation for Arthopods. CSIRO PUBLISHING, Collingwood, Australia.
+• Gurr GM, Wratten SD and Altieri MA (2004b) Ecological Engineering: a new direction for pest management.
+AFBM Journal 1: 28-35.
+44
+Important Natural Enemies of Sorghum Insect Pests
+Plants Suitable for Ecological Engineering in
+Parasitoids
+Sorghum Field
+Trichogramma spp. Chelonus spp. Cotesia spp.
+Dill Sunflower Ocimum spp.
+Aprostocetus spp. Meterorus spp. Campoletis spp.
+Cosmos Spearmint Mustard
+Predators
+Marigold Carrot Coreopsis spp.
+Ground beetle Hover fly Ladybird beetle
+Cowpea Buckwheat Maize
+Red ant Spider Preying mantis
+AESA BASED IPM PACKAGE
+SORGHUM
+4243
+0332-040
+:
+leT
+,.dtL
+.tvP
+nacS
+ijalaB
+, ,

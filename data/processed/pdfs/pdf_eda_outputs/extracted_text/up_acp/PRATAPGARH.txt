@@ -1,0 +1,611 @@
+State: Uttar Pradesh
+Agriculture Contingency Plan for District: Pratapgarh
+1.0 District Agriculture profile
+1.1 Agro-Climatic/ Ecological Zone
+Agro-Ecological Sub Region(ICAR) Central Plain Zone
+Agro-Climatic Zone (Planning Commission) Upper Gangetic Plain Region
+Agro-Climatic Zone (NARP) UP-4 Central Plain Zone
+List all the districts falling the NARP Zone* (^ 50% area falling in the zone) Lakhimpur, Kheri, Sitapur, Hardoi, Farrukhabad, Etawah, Kanpur,
+Kanpur Dehat, Unnao, Lucknow, Rae Bareilly, Fatehpur and
+Allahabad.
+Geographical coordinates of district headquarters Latitude Longitude Altitude (mt)
+2737N 79.63.E
+.
+Name and address of the concerned ZRS/ZARS/RARS/RRS/RRTTS
+Mention the KVK located in the district with address Krishi Vigyan Kendra, Krishi Bhawan, Lakula Farm, Farrukhabad,
+Name and address of the nearest Agromet Field Unit(AMFU,IMD)for agro CSA Kanpur
+advisories in the Zone
+1.2 Rainfall Normal RF (mm) Normal Rainy Normal Onset Normal Cessation
+Days (Number) (Specify week and month) (Specify week and month)
+SW monsoon (June-sep) 705.0 45 3nd week of June 4rd week of September
+Post monsoon (Oct-Dec) 36.6 10
+Winter (Jan-March) 38.3 10 - -
+Pre monsoon (Apr-May) 15.5 2 - -
+Annual 795.4 67 - -
+1.3 Land use Geographical Cultivable Forest Land under Permanent Cultivable Land Barren and Current Other
+pattern of area area area non- pastures wasteland under uncultivable fallows fallows
+the district agricultural Misc.tree land
+(Latest use crops and
+statistics) groves
+Area in 219.9 182.4 0.3 29.1 0.6 3.7 3.3 7.5 21.3 5.1
+(000 ha)
+1.4 Major Soils Area(‘000 ha) Percent(%) of total
+Deep loamy 102.0 56 %
+Partial sodic, and slightlysilty 80.0 44%
+1.5 Agricultural land use Area(‘000 ha.) Cropping intensity (%)
+Net sown area 149.0 116 %
+Area sown more than once 61.9
+Gross cropped area 210.9
+1.6 Irrigation Area(‘000 ha)
+Net irrigation area 138.9
+Gross irrigated area 180.2
+Rain fed area 10.2
+Sources of irrigation (Gross Irrigated Number Area(’000 ha) Percentage of total irrigated area
+Area)
+Canals -- 3.9 2.2
+Tanks - 0
+Open wells - 0
+Bore wells(Tube Wells) - 176.2 97.8
+Lift irrigation schemes - NA
+Micro-irrigation - NA
+Other sources - 0
+Total Irrigated Area - 180.2
+No. of Pump sets (2011-12) 33117
+No. of Tractors 5471
+Groundwater availability and use* No of blocks- (%)area Quality of water
+(Data source: State/ Central Ground Tehsils-
+water Department/ Board)
+Over exploited
+Critical
+Semi-critical
+Safe
+Waste water availability and use
+Ground water quality
+*over-exploited groundwater utilization> 100%; critical: 90-100%; semicritical:70-90%; safe:<70%
+1.7 Area under major field crops & (As per latest figures 2013-14)
+1.7 Major field crops cultivated Area(‘000 ha)
+Kharif Rabi Summer Total
+Irrigated Rain fed Total Irrigated Rain fed Total
+Rice 13.2 0.3 13.5 - - - - 13.5
+Wheat - - - 73.7 0.2 73.9 - 73.9
+Maize 14.9 16.3 31.2 - - - - 31.2
+Pearl millet 0.6 3.3 3.8 - - - - 3.8
+Lentil - - - 0.9 0.2 1.1 - 1.1
+Potato - - - 33.1 - 33.1 - 33.1
+1.8 Sowing Pearl Maize Rice Urd Sorghum Moong Wheat Pea Gram Mustard
+window millet
+for 5
+major
+field crops
+Kharif – 2nd week of 2nd week of - 2nd week of First week First week - - - -
+Rainfed July to last June to July to of July to of July to
+week of First week First week 2nd week 2nd week
+July of July of August of July of July
+Kharif - - - 3rd week 2nd week of First week - - - - -
+Irrigated of June to July to of July to
+Last week First week 2nd week
+of July of August of July
+Rabi – First week First week First week First week
+Rainfed of Nov to of Oct to of Oct to of Sep to
+3rd week first week first week 2nd week
+of Dec of Nov of Nov of Oct
+Rabi - 2nd week - - -
+Irrigated of Nov to
+2th week
+of Dec
+1.9 What is the major contingency the district is prone to? Regular Occasional None
+Drought - (cid:1)
+Flood - -
+Cyclone - -
+Hail storm - -
+Heat wave - (cid:1)
+Cold wave - -
+Frost - (cid:1)
+Sea water intrusion - -
+Sheath Blight, Stemborer , Pyrilla loose smut, Heliothis, Rust etc white - -
+grub.
+Include Digital maps of the district for Location map of district with in State as Annexure I Enclosed : Yes
+Mean annual rainfall as Annexure 2 Enclosed : Yes
+Soil map as Annexure 3 Enclosed : Yes
+Annexure I
+Location map of Pratapgarh district
+Annexure 2
+Average Month-wise rainfall (mm) in Pratapgarh District
+1.10 Soil Map
+Alluvial plain (0-1% slope)
+1. Deep, loamy soils and slightly eroded .
+2. Deep, silty soils, slightly saline and strongly sodic associated with loamy soils.
+3. Deep, loamy soils and slightly eroded associated with silty soils .
+4. Deep, fine soils moderately saline and sodic associated with loamy soils, slightly eroded.
+5. Deep, fine soils and slightly eroded associated with loamy soils slightly saline and moderately sodic .
+6. Deep, silty soils with moderately salinity and sodicity associated with loamy soils with moderate salinity
+and sodicity and water logging .
+7. Deep, loamy soils with moderately water logging associated with loamy soils with slight salinity/sodicty
+8. Deep, silty soils and slightly eroded associated with loamy soils slightly saline and slightly sodic .
+9. Deep, loamy soils, moderate salinity and sodicity associated with loamy soils with moderate salinity and
+strong sodicity
+10. Deep, loamy soils and slightly eroded associated with loamy soils with moderate salinity and sodicity and
+moderate water logging.
+11. Deep, silty soils associated with loamy soils slightly eroded .
+12. Deep, silty soils and slightly saline/ sodic .
+13. Deep, silty soils with moderate salinity/sodicity associated with loamy soils slightly eroded .
+Active Flood Plain (1-3% slope)
+14. Deep, sandy soils with moderate flooding associated with stratified loamy soils and slight flooding .
+15. Deep, sandy soils with slight flooding associated with stratified loamy soils and slight flooding
+2.0 Strategies for weather related contingencies
+2.1 Drought
+2.1.1 Rainfed situation
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / cropping Agronomic measures Remarks on
+drought (delayed situation system system including variety Implementation
+onset)
+Rice No change Green manuring +DSR, Linked with UP
+Delay by 2 weeks Normal rainfall transplanting, weed Agro, SAU,s and
+(July 1st week) Deep loamy soils, ICAR (CSSRI,
+management
+deep silty and RRS, Lucknow)
+slightly eroded
+Maize No change Line sowing, earthing Use disease free
+up, weed management, certified seed from
+NSC, DMR, New
+medium maturing
+Delhi
+varieties and hybrids
+Pigeon pea No change Line sowing with seed Linked with UP
+drill, intercropping with Agro, SAU,s and
+ICAR (IIPR,
+urd dhal
+Kanpur)
+Rice No change Green manuring +DSR, Linked with ICAR
+transplanting with salt (CSSRI, RRS,
+Deep loamy, Lucknow), SAU,s
+tolerant varities like
+partial sodic, sodic
+CSR-36, CSR-43 and
+and slightly sodic
+CSR-30 (Basmati), ND-
+359, Narendra Usar
+Dhan-3 weed
+management
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / cropping Agronomic measures Remarks on
+drought (delayed situation system system including variety Implementation
+onset)
+Rice No change Green manuring +DSR, Linked with UP
+Delay by 4 weeks Deep loamy soils, transplanting, weed Agro, SAU,s and
+(July 3rd week) deep silty and ICAR (CSSRI,
+management
+slightly eroded RRS, Lucknow)
+Maize No change Line sowing, earthing Use disease free
+up, weed management, certified seed from
+NSC, DMR, New
+medium maturing
+Delhi
+varieties and hybrids
+Pigeon pea No change Line sowing with seed Linked with UP
+drill, intercropping with Agro, SAU,s and
+ICAR (IIPR,
+urd dhal
+Kanpur)
+Deep loamy, Rice No change Green manuring +DSR, Linked with ICAR
+partial sodic, sodic transplanting with salt (CSSRI, RRS,
+and slightly sodic Lucknow), SAU,s
+tolerant varities like
+CSR-36, CSR-43 and
+CSR-30 (Basmati), ND-
+359, Narendra Usar
+Dhan-3 weed
+management
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / cropping Agronomic measures Remarks on
+drought (delayed situation system system including variety Implementation
+onset)
+Delay by 6 weeks Deep loamy soils, Rice Change with Sorghum, Urd, Line sowing, weeding, Linked with NSC,
+( Aug. 1st week) deep silty and Pearl millet, Til Seed treatment with bio- UPSDC, ICAR
+slightly eroded (CSSRI, RRS,
+growth regulators and
+Lucknow, IIPR,
+bio-fertilizers Kanpur, IGFRI,
+Jhansi)
+Maize No change Line sowing, earthing Use disease free
+up, weed management, certified seed from
+NSC, DMR, New
+medium maturing
+Delhi
+varieties and hybrids
+Pigeon pea No change Line sowing with seed Linked with UP
+drill, intercropping with Agro, SAU,s and
+ICAR (IIPR,
+urd dhal
+Kanpur)
+Rice Sorghum, Pearl millet, Maize Seed treatment and soil Linked with ICAR
+Deep loamy, application of bio- (CSSRI, RRS,
+partial sodic, sodic Lucknow), SAU,s
+fertilizers and bio-
+and slightly sodic
+growth enhancers.
+Higher dose of organic
+manures
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / cropping Agronomic measures Remarks on
+drought (delayed situation system system including variety Implementation
+onset)
+Deep loamy soils, Rice Fallow Moisture conservation, ------
+Delay by 8 weeks deep silty and
+( Aug. 3rd week) slightly eroded Maize Short duration vegetables like Moisture conservation, ICAR (IIVR,
+spinach, guar, radhish and use of biofertilizers Varanasi), SAU’s
+amaranthus.
+Pigeon pea Short duration vegetables like Moisture conservation, ICAR (IIVR,
+Spinach, guar, radhish and use of biofertilizers Varanasi), SAU’s
+amaranthus
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / cropping Agronomic measures Remarks on
+drought (delayed situation system system including variety Implementation
+onset)
+Delay by 6 weeks Deep loamy, Rice Fallow Moisture conservation, ------
+(August 3rd week) partial sodic, sodic
+and slightly sodic
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (Normal situation system moisture conservation Implementation
+onset) measures
+Normal onset Deep loamy soils, Rice No change Mulching, 2% MOP KVK, State Ag.
+followed by 15-20 deep silty and foliar application Dept.
+days dry spell after slightly eroded
+sowing leading to Maize No change Mulching, earthing up KVK, State Ag.
+poor Dept.
+germination/crop Pigeon pea No change -------- --------
+stand etc.
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (Normal situation system moisture conservation Implementation
+onset) measures
+Normal onset Deep loamy, Rice No change Mulching, 2% MOP KVK, State Ag.
+followed by 15-20 partial sodic, sodic foliar application Dept.
+days dry spell after and slightly sodic
+sowing leading to
+poor
+germination/crop
+stand etc.
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (long dry situation system moisture conservation Implementation
+spell, consecutive 2 measures
+weeks rainless
+(>2.5 mm) period)
+At vegetative stage Deep loamy soils, Rice No change Mulching, 2% MOP KVK, State Ag.
+deep silty and foliar application Dept.
+slightly eroded
+Maize No change Mulching, earthing up KVK, State Ag.
+Dept.
+Pigeon pea No change -------- --------
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (long dry situation system moisture conservation Implementation
+spell, consecutive 2 measures
+weeks rainless
+(>2.5 mm) period)
+Rice No change Mulching, 2 % MOP KVK, State Ag.
+At vegetative stage Deep loamy, partial foliar application Dept.
+sodic, sodic and
+slightly sodic
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (long dry situation system moisture conservation Implementation
+spell) measures
+At flowering/ Deep loamy soils, Rice No change Mulching, 2 % MOP ICAR (CSSRI,
+fruiting stage deep silty and foliar application, Use RRS, Lucknow,
+slightly eroded KVK, State Ag.
+of bio-growth regulators Dept.
+Maize No change Mulching, earthing up ICAR (CSSRI,
+RRS, Lucknow,
+KVK, State Ag.
+Dept.
+Pigeon pea No change -------- --------
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (long dry situation system moisture conservation Implementation
+spell, consecutive 2 measures
+weeks rainless
+(>2.5 mm) period)
+Rice No change Mulching, 2 % MOP ICAR (CSSRI,
+At vegetative stage Deep loamy, partial foliar application, Use RRS, Lucknow,
+sodic, sodic and KVK, State Ag.
+of bio-growth regulators
+slightly sodic Dept.
+Condition Suggested Contingency measures
+Terminal drought Major Farming Normal Crop/cropping Crop management Rabi Crop planning Remarks on
+(Early withdrawal situation system Implementation
+of monsoon)
+Deep loamy soils, Rice No change Relay cropping of Toria, ICAR (CSSRI,
+deep silty and lentil RRS, Lucknow,
+slightly eroded KVK, State Ag.
+Dept.
+Maize No change -------- ------
+Pigeon pea No change -------- --------
+2.1.2 Drought - Irrigated situation
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Delayed release of Normal rainfall Rice: Saket-4, Ratna, Pant-12, Direct seeded Rice Limited irrigation, weed Linked with
+water in canals due Deep loamy soils, Narendra-80, 2026, Sarjoo-52, Saket-4, Ratna, Pant-12, management SDC/SAUs
+to low rainfall deep silty and Narendra-80, 2026
+Pant-4, Narendra-359,
+slightly eroded
+2026,2064, Type-3, PB-1,
+Kashturi, Narendra lalmati and
+Malvya sugandh
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Delayed release of Normal rainfall Rice No change Linked with ICAR
+water in canals due Deep loamy, (CSSRI, RRS,
+to low rainfall partial sodic, sodic Lucknow), SAU,s
+and slightly sodic --- ----- ----- ------
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Non release of Deep loamy soils, Rice: Saket-4, Ratna, Pant-12, Direct seeded Rice Limited irrigation, weed Linked with
+water in canals deep silty and Narendra-80, 2026, Sarjoo-52, Saket-4, Ratna, Pant-12, management. SDC/SAUs.
+under delayed slightly eroded Narendra-80, 2026, CSR-43 Sprinkler irrigation
+Pant-4, Narendra-359,
+onset of monsoon
+2026,2064, Type-3, PB-1,
+in catchment
+Kashturi, Narendra lalmati and
+Malvya sugandh
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Non release of Deep loamy, Rice No change Life saving irrigation, Linked with ICAR
+water in canals partial sodic, sodic surface irrigation with (CSSRI, RRS,
+under delayed and slightly sodic Lucknow), SAU,s
+small plots, Sprinkler
+onset of monsoon
+irrigation
+in catchment
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Lack of inflows Deep loamy soils, Rice: Saket-4, Ratna, Pant-12, Direct seeded Rice Limited irrigation, weed Linked with
+into tanks due to deep silty and Narendra-80, 2026, Sarjoo-52, Saket-4, Ratna, Pant-12, management. SDC/SAUs.
+insufficient slightly eroded Narendra-80, 2026, CSR-43 Sprinkler irrigation
+Pant-4, Narendra-359,
+/delayed onset of
+2026,2064, Type-3, PB-1,
+monsoon
+Kashturi, Narendra lalmati and
+Malvya sugandh
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Lack of inflows Deep loamy, Rice No change Life saving irrigation, Linked with ICAR
+into tanks due to Partial sodic, sodic surface irrigation with (CSSRI, RRS,
+insufficient and slightly sodic Lucknow), SAU,s
+small plots, Sprinkler
+/delayed onset of
+irrigation
+monsoon
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Insufficient Deep loamy soils, Rice Catch crop Toria Limited irrigation, Seed supply
+groundwater deep silty and T-9, T-36, PT-30 and PT-303 Weeding and through Govt.
+recharge due to slightly eroded as per situation Management of Pest and approved seed
+low rainfall Disease centers
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Insufficient Deep loamy, Rice Catch crop Toria Limited irrigation, Seed supply
+groundwater partial sodic, sodic T-9, T-36, PT-30 and PT-303 Weeding and through Govt.
+recharge due to and slightly sodic as per situation Management of Pest and approved seed
+low rainfall Disease centers
+2.2 Unusual rains (untimely, un seasonal etc)
+Condition Suggested contingency measure
+Continuous high rainfall in a Vegetative stage Flowering stage Crop maturity stage Post harvest
+short span leading to water
+logging
+Rice Bunding around the field Drainage Early harvest Store in dry place
+Maize Drainage Drainage Drainage Store in dry place
+Pearl millet Drainage Drainage Drainage Store in dry place
+Sorghum Drainage Drainage Drainage Store in dry place
+Pigeon pea Drainage Drainage Drainage Store in dry place
+Outbreak of pests and diseases due to un seasonal rains
+Maize Need based pant protection Need based pant protection Safe Storage
+Measures Measures
+Rice Need based pant protection Control of blight and Rice false Control of blight and Rice Safe Storage
+Measures smut using appropriate seed false smut using
+treatment, soil drenching and appropriate seed treatment,
+foliar application of Dithane M soil drenching and foliar
+45 and Bavistin respectively. application of Dithane M
+45 and Bavistin
+respectively.
+Pearl millet Need based pant protection Need based pant protection Safe Storage
+Measures Measures
+Sorghum Need based pant protection Need based pant protection Safe Storage
+Measures Measures
+Sugarcane Need based pant protection Need based pant protection Safe Storage
+Measures Measures
+2.3 Floods : Occasional events; Not Applicable
+Condition Suggested contingency measure
+Transient water logging/ partial Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+inundation
+Horticulture Not applicable
+Continuous submergence
+for more than 2 days
+Horticulture
+Sea water intrusion
+2.4 Extreme events: Heat wave / Cold wave/Frost/ Hailstorm /Cyclone: Not Applicable
+Extreme event type Suggested contingency measurer
+Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+Heat Wave Not applicable
+Cold wave
+Frost
+Hailstorm
+Cyclone
+2.5 Contingent strategies for Livestock, Poultry & Fisheries
+2.5.1 Livestock
+Suggested contingency measures
+Before the event During the event After the event
+Drought
+Feed and Top dressing of N in 2-3 split doses @ Harvest and use biomass of dried up crops (Sorghum, Bajra, Maize, Green and concentrates
+20-25 kg N/ha in common property Rice, Urd, etc) material as fodder. supplementation should be
+Fodder
+resources (CPRs) or private property provided to all the animals.
+Harvest the tree fodder (Neem, Subabul, Acasia, Pipal etc) and
+availabilit
+resources (PPRs) like waste and
+unconventional feeds resources available and use as fodder for Short duration fodder crops
+y
+degraded lands with the monsoon livestock (LS). of should be sown in unsown
+pattern for higher biomass production and crop failed areas where
+Available feed and fodder should be cut from CPRs and stall fed in
+no further routine crop
+Promote cultivation of short duration
+order to reduce the energy requirements of the animals sowing is not possible
+fodder crops of sorghum/bajra/maize
+In case of mild drought, the available dry fodder may be enriched with Promote cultivation of
+suitable to the district
+urea and molasses and the productive livestock should be supplemented fodder crops during Rabi
+Sowing of fodder crops like Stylo and
+with vitamin & minerals mixture. season
+Cenchrus on bunds so as to provide
+The available silage may be used as green fodder supplement for high
+fodder and strengthening of bunds
+yielders and pregnant animals
+Avoid burning of wheat and paddy straw In case of severe drought, UMMB, hay, concentrates and vitamin &
+and storing as dry fodder for future use mineral mixture should be transported to the needy areas from the
+reserves at the district level initially and latter stages from the near by
+Proper drying, bailing and densification
+districts. All the hay should be enriched with 2% Urea molasses
+of harvested dry fodder for transport to
+solution or 1% common salt solution and fed to LS
+the needy villages
+Herd should be split and supplementation should be given only to the
+Complete feed preparation using red
+highly productive and breeding animals
+gram stalks may be exploited
+Provision of emergency grazing/feeding (Cow-calf camps or other
+Preserving maize fodder as silage for
+special arrangements to protect high productive & breeding stock)
+future use
+Available kitchen waste should be mixed with dry fodder while feeding
+Establishment of silvi-pastoral system in
+CPRs with Stylosanthus hamata and Arrangements should be made for mobilization of small ruminants
+Cenchrus ciliaris as grass with across the districts where no drought exits with subsidized road/rail
+Leucaena leucocephala as tree transportation and temporary shelter provision for the shepherds
+component
+Unproductive livestock should to be culled during severe drought
+Create transportation and marketing facilities for the culled and
+Creation of permanent fodder, feed and unproductive animals (10000-20000 animals) in case of severe drought
+fodder seed banks in all drought prone
+Subsidized loans (5-10 crores) should be provided to the livestock
+villages
+keepers for purchase of supplements, concentrate feed ingredients etc.,
+in case of severe drought
+Heat & In villages which are chronically prone Allow the animals preferably early in the morning or late in the evening Green and concentrates
+Cold to heat waves the following permanent for grazing during heat waves supplementation should be
+wave measures are suggested provided to all the animals.
+Allow for grazing between 10AM to 3PM during cold waves
+i) Plantation of trees like Neem, Allow the animals for
+Feed green fodder/silage / concentrates during day time and roughages /
+Pipal, Subabul around the grazing (normal timings)
+hay during night time in case of heat waves
+shed
+ii) Spreading of
+Add 25-50 ml of edible oil in concentrates per kg and fed to the animal
+husk/straw/coconut leaves during cold waves
+on the roof of the shed
+Apply / sprinkle lime powder (5-10g per square feet) in the animal shed
+iii) Water sprinklers / foggers in during cold waves to neutralize ammonia accumulation
+the animal shed
+Put on the foggers / sprinklers during heat weaves and heaters during
+iv) Application of white reflector
+cold waves in case of high productive animals
+paint on the roof to reduce
+thermal radiation effect In severe cases, vitamin ‘C’ (5-10ml per litre) and electrolytes (Electral
+Cold wave : Covering all the wire powder @ 20g per litre) should be added in water during severe heat
+meshed walls / open area with gunny waves.
+bags/ polyethylene sheets with a
+mechanism for lifting during the day
+time and closing during night
+Health List out the endemic diseases (species Constitution of Rapid Action Veterinary Force Conducting mass animal
+and wise) in that district and store vaccines health camps
+Procurement of emergency medicines and medical kits
+for those diseases
+Disease Conducting fertility camps
+Performing ring vaccination (8 km radius) in case of any outbreak
+Timely vaccination (as per enclosed
+managem Mass deworming camps
+Restricting movement of livestock in case of any epidemic
+vaccination schedule) against all
+ent
+endemic diseases Rescue of sick and injured animals and their treatment
+Surveillance and disease monitoring
+network to be established at Joint
+Director (Animal Husbandry) office in
+the district
+Insurance Insurance policy for loss of production Listing out the details of the dead animals and loss of production in Submission for insurance
+due to drought may be developed high yielders claim and availing insurance
+benefit
+Encouraging insurance of livestock
+Purchase of new productive
+animals
+Drinking Identification of water resources Restrict wallowing of animals in water bodies/resources Bleach (0.1%) drinking
+water water / water sources
+Rain water harvesting and create water Provision of wholesome clean drinking water at least 3 times in a day
+bodies/watering points (when water is Provide clean drinking water
+scarce use only as drinking water for
+animals)
+2.5.2 Poultry
+Suggested contingency measures
+Before the eventa During the event After the event
+Drought
+Shortage of feed ingredients Storing of house hold grain like Supplementation only for Supplementation to all survived birds
+maize, broken rice, bajra etc, in to productive birds with house hold
+use as feed in case of severe grain
+drought
+Supplementation of shell grit
+(calcium) for laying birds
+Culling of weak birds
+Drinking water Rain water harvesting Sanitation of drinking water Give sufficient water as per the
+bird’s requirement
+Mixing of Vit. A,D,E, K and B-
+Health and disease Culling of sick birds. Hygienic and sanitation of poultry
+complex including vit C in
+management house
+Deworming and vaccination
+drinking water (5ml in one litre
+against RD and fowl pox Disposal of dead birds by burning /
+water)
+burying with lime powder in pit
+Heat wave
+Shelter/environment Provision of proper shelter with In severe cases, foggers/water Routine practices are followed
+management good ventilation sprinklers/wetting of hanged
+gunny bags should be arranged
+Don’t allow for scavenging
+during mid day
+Health and disease Deworming and vaccination Supplementation of house hold Routine practices are followed
+management against RD and fowl pox grain
+Provide cool and clean drinking
+water with electrolytes and vit. C
+(5-10 ml per litre)
+In hot summer, add anti-stress
+probiotics in drinking water or
+feed (Reestobal etc., 10-20ml per
+litre)
+Cold wave
+Shelter/environment Provision of proper shelter Close all openings with polythene Routine practices are followed
+management sheets
+Arrangement for brooding
+In severe cases, arrange heaters
+Assure supply of continuous
+electricity Don’t allow for scavenging
+during early morning and late
+evening
+Health and disease Arrangement for protection from Supplementation of grains Routine practices are followed
+management chilled air
+Antibiotics (Ampicilline/
+Ampiclox etc., 10g in one litre)
+in drinking water to protect birds
+from pneumonia

@@ -1,0 +1,659 @@
+State: UTTAR PRADESH
+Agriculture Contingency Plan for District: Sant Ravidas Nagar
+1.0 District Agriculture profile
+1.1 Agro-Climatic/Ecological Zone
+Agro Ecological Sub Region (ICAR) Northern Plain (And Central Highlands) Including Aravallis, Hot Semi-Arid Eco-Region (4.3)
+Agro-Climatic Zone (Planning Commission) Middle Gangetic Plain Region (IV)
+Agro Climatic Zone (NARP) Vidhyan Zone (UP-10)
+List all the districts falling under the NARP Allahabad, Ballia , Chandauli, Ghazipur, Jaunpur , Mirzapur , Sant Ravidas Nagar , Sonbhadra , Varanasi
+Zone* (*>50% area falling in the zone)
+Geographic coordinates of district Latitude Longitude Altitude
+headquarters
+25°22’N 82°28’E 70 m
+Name and address of the concerned ZRS/ Institute of Agricultural Sciences,
+ZARS/ RARS/ RRS/ RRTTS Banaras Hindu University, Varanasi.
+Mention the KVK located in the district with KVK, Bejwan, P.O. Ugapur, Aurai, Sant Ravidas Nagar.
+address
+Name and address of the nearest Agromet
+Field Unit (AMFU, IMD) for agro-advisories
+in the Zone
+1.2 Rainfall Normal RF(mm) Normal Rainy days (number) Normal Onset Normal Cessation
+SW monsoon (June-Sep) 926.4 35 3rd week of June 1st week of October
+NE Monsoon(Oct-Dec) 60.2 5 - -
+Winter (Jan- March) 48.2 4 - -
+Summer (Apr-May) 17.5 3 - -
+1
+Annual 1052.3 47 - -
+1.3 Land use Geographical Cultivable Forest Land under Permanent Cultivable Land under Barren and Current Other
+pattern of the area area area non- pastures wasteland Misc. tree uncultivable fallows fallows
+district (latest agricultural use crops and land
+statistics) groves
+Area (‘000 ha) 103.045 67.533 0.056 17.118 0.285 0.434 0.656 2.542 9.643 4.778
+1. 4 Major Soils Area (‘000 ha) Percent (%) of total geographical area
+Sandy loam Soils - -
+Loam Soils - -
+Clay loam Soils - -
+Sandy Soils - -
+Clay Soils - -
+Rocky track Soils - -
+1.5 Agricultural land use Area (‘000 ha) Cropping intensity %
+Net sown area 67.533 142.5%
+Area sown more than once 28.707
+Gross cropped area 96.240
+1.6 Irrigation Area (‘000 ha)
+Net irrigated area 54.463
+Gross irrigated area 76.479
+Rainfed area 13.07
+Sources of Irrigation Number Area (‘000 ha) Percentage of total irrigated area
+Canals - 7.941 -
+Tanks - 0 -
+Open wells - 0.793 -
+Bore wells - Govt. 16.776 + -
+Pvt. 28.953
+= 45.729
+Lift irrigation schemes - - -
+2
+Micro-irrigation - - -
+Total Irrigated Area - 54.463
+Pump sets - -
+No. of Tractors - -
+Groundwater availability No. of (%) area Quality of water
+and use* (Data source: blocks – 7
+State/Central Ground
+water Department
+/Board)
+Over exploited - - No problem of arsenic & fluoride however, low amount of salinity is reported.
+Critical - -
+Semi- critical - -
+Safe Safe -
+Wastewater availability and - -
+use
+Ground water quality -
+1.7 Area under major field crops & horticulture
+1.7 Major field Area (‘000 ha)
+crops cultivated
+Kharif Rabi Summer
+Grand
+Irrigated Rainfed Total Irrigated Rainfed Total
+total
+Rice 26.252 0.077 26.329 26.329
+Pearl millet 0.0 8.558 8.558 8.558
+Pigeonpea 0.0 4.135 4.135 4.135
+Sorghum 0.0 1.445 1.445 1.445
+Wheat 46.599 0.023 46.622 46.622
+Pea 0.986 0.009 0.995 0.995
+Chickpea 0.026 0.809 0.835 0.835
+3
+Horticultural Crops(Fruit Total (‘000 ha) Irrigated (‘000 ha) Rainfed (‘000 ha)
+Crop) (2009-10)
+Mango 3.106 - -
+Guava 1.533 - -
+Horticulture crops - - - -
+Vegetables
+Tomato 1.565 - -
+Radish 1.287 - -
+Pumpkin 1.083 - -
+Potato 1.078 1.078 0.0
+Onion 0.040 0.040 0.0
+Medicinal and Aromatic crops - - -
+Plantation crops - - -
+Total fodder crop area 1.926 0.721 1.205
+Grazing land - - -
+Sericulture etc - - -
+1.8 Livestock ( 2003 Censuss) Male (‘000) Female (‘000) Male + Female (<3 Yrs) Total (‘000)
+(‘000)
+Non descriptive Cattle (local low yielding) 15.222 32.057 37.420 84.697
+Improved cattle - - - -
+Crossbred cattle 0.863 8.648 10.050 19.561
+Non descriptive Buffaloes (local low 2.152 46.515 42.549 91.216
+yielding)
+Descript Buffaloes - - -
+Goat - - - 33.584
+Sheep - - - 32.980
+4
+Pig - - - 8.464
+Commercial dairy farms (Number) - - - 0.043
+1.9 Poultry No. of farms Total No. of birds (‘000)
+Commercial - 79.085
+Backyard - 1.910
+1.10 Fisheries (Data source: Chief Planning Officer)
+A. Capture
+i) Marine (Data Source: Fisheries No. of fishermen Boats Nets Storage facilites
+Department) (Ice plants etc.)
+Mechanized Non-mechanized Mechanized Non-mechanized (Shore
+(Trawl nets, Gill Seines, Stake & trap nets)
+nets)
+ii) Inland (Data Source: Fisheries No. Farmer owned ponds No. of Reservoirs No. of village tanks
+Department)
+00(Govt.) + 437(Private)
+B. Culture
+Water Spread Area (ha) Yield (t/ha) Production (No.)
+i) Brackish water (Data Source: MPEDA/ Fisheries Department) - - -
+ii) Fresh water (Data Source: Fisheries Department) 0.0(Govt.) + 383.00(Private) 5592.0(Govt.) +
+0.0(Private) Angulikao
+1.11 Production and Productivity of major crops
+1.11 Name of crop Kharif Rabi Summer Total Crop
+residue
+Production Productivity Production Productivity Production Productivity Production Productivity
+as fodder
+('000 t) (kg/ha) ('000 t) (kg/ha) ('000 t) (kg/ha) ('000 t) (kg/
+(‘000
+ha)
+5
+tons)
+Major Field crops (Crops identified based on total acreage)
+Rice 71.437 1648 - - - - 71.437 1648
+Pearl millet 8.345 959 - - - - 8.345 959
+Pigeonpea 3.565 894 - - - - 3.565 894
+Sorghum 1.313 944 - - - - 1.313 944
+Wheat - - 71.446 2094 - - 71.446 2094
+Pea - - 1.059 1040 - - 1.059 1040
+Chickpea - - 0.802 855 - - 0.802 855
+Major crops (Friuts) (Crops identified based on total acreage) (2009-10)
+Mango - - - - - - 4.308 1387
+Guava - - - - - - 2.108 1375
+Vegetable Crop - - - - - -
+Tomato - - - - - - 4.373 2795
+Radish - - - - - - 3.298 2563
+Pumpkin - - - - - - 2.376 2195
+Potato - - - - - - 22.271 2055
+1.12 Sowing window for 5 Chickpea
+Rice Pearl millet Pigeonpea Sorghum Wheat Pea
+major field crops
+Kharif- Rainfed 4th week of June 1st week of August 4th week of June 4th week of - - -
+to 1st week of July to 2nd week of to 1st week of July June to 1st
+August week of July
+Kharif-Irrigated June - - - - - -
+(nursery)
+Rabi- Rainfed - - - - 3rd week of 3rd week of 3rd week of
+October to 4th October to 4th October to
+6
+week of October week of October 4th week of
+October
+Rabi-Irrigated - - - - 3rd week of 3rd week of 3rd week of
+November to 4th October to 3rd October to
+week of week of 3rd week of
+November November November
+1.13 What is the major contingency the district is prone to? (Tick mark) Regular Occasional None
+Drought √
+Flood √
+Cyclone √
+Hail storm √
+Heat wave √
+Cold wave √
+Frost √
+Pests and disease outbreak √
+Fog √
+1.14 Include Digital maps of Location map of district within State as Annexure 1 Enclosed: Yes
+the district for
+Mean annual rainfall as Annexure II Enclosed: Yes
+Soil map as Annexure III Enclosed: Yes
+7
+Annexure I
+8
+Annexure -II: Mean Monthly Rainfall(mm)
+9
+Annexure -III
+Alluvial plain (0-1% slope)
+1. Deep, loamy soils and slightly eroded .
+2. Deep, fine soils moderately saline and sodic associated with loamy soils, slightly
+eroded .
+3. Deep, fine soils and slightly eroded associated with loamy soils slightly saline and
+moderately sodic .
+4. Deep, silty soils with moderately salinity and sodicity associated with loamy soils
+with moderate salinity and sodicity and water logging .
+5. Deep, silty soils with moderate salinity/sodicity associated with loamy soils slightly
+eroded .
+Active Flood Plain (1-3% slope)
+6. Deep, sandy soils with moderate flooding associated with stratified loamy soils and
+slight flooding .
+7. Deep, stratified loamy soils, with severe flooding associated with loamy soils with
+moderate flooding .
+8. Deep, sandy soils with slight flooding associated with stratified loamy soils and slight
+flooding
+Plateau (Sandstone on 1-3% slope)
+9. Moderately shallow, loamy soils and moderately eroded
+10. Deep, fine smectitic soils and moderately eroded associated with moderately shallow
+loamy soils and moderately eroded
+10
+2.0 Strategies for weather related contingencies
+2.1 Drought
+2.1.1 Rainfed situation
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / cropping Agronomic measures Remarks on
+drought (delayed situation system system including variety Implementation
+onset)
+Delay by 2 weeks Deep alluvial soils Sequence cropping: Pearl millet/ Sorghum/ Maize Sowing with seed cum Breeder seed may be
+Sorghum – Chickpea Blackgram ferti drills across the slope obtained from the
+1st week of July Upland situation Re sowing if no proper University (NDUAT)
+Blackgram-Barley
+Pearl millet: WCC 75, Raj 171, germination.
+Maize- Chickpea
+Seed drills under RKVY
+Pusa 23
+Weed management
+through dry land weeder & Supply of seeds through
+Sorghum: CSH-16, CHS-9, CHS- also through weedicides. NFSM
+14, CSV-13 & CSV-15
+Thinning of population
+Conservation furrows
+Blackgram : Type 9, Pant U 19,
+Intercultivation
+Pant U 35, Narendra Urd 1 & Azad
+Urd-3 Surface water management
+Maize: Malviya hybrid Makka-2,
+Naveen , Jaunpur
+Inter cropping: Pigeonpea+Sorghum/ Sowing of Pigeonpea +
+Pigeonpea + Sorghum Pigeonpea+ Sesame Sesame on ridges
+Pigeonpea+ Sesame
+Pigeonpea: Bahar, Narendra Wider spacing of
+pigeonpea 90cm
+Arahar-1, Malviya Vakas(MA6) &
+and normal spacing of
+Malviya Chamtkar (MA13)
+sesame i. e. 30 cm for
+mono culmed and 45 cm
+Sesame: T-4, T-12, T-13 & for branched genotypes.
+Shekhar
+11
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping system Change in crop/cropping Agronomic measures Remarks on
+drought (delayed situation system Implementation
+onset)
+Delay by 4 weeks Deep alluvial soils Sequence cropping: Pearl millet/ Sorghum/ Maize Resowing of crops to Seed drills under RKVY
+Pearl millet- Chickpea Blackgram have proper germination
+3rd week of July Upland situation Supply of seeds through
+Sorghum – Chickpea
+Pearl millet: WCC 75, Raj Intercultivation NFSM
+Blackgram-Barley
+Thinning
+171, Pusa 23
+Maize- Chickpea Conservation furrow Breeder seed of pigeon
+pea can be obtained
+Sorghum: CSH-16, CHS-9, Sowing the crops from the University
+CHS-14, CSV-13 & CSV-15 through seed cum ferti (NDUAT)
+drill
+Blackgram : Type 9, Pant U
+Split application of
+19, Pant U 35, Narendra Urd 1
+nutrients wherever
+& Azad Urd-3 necessary
+Maize: Malviya hybrid Makka-
+2, Naveen , Jaunpur
+Inter cropping: Pigeonpea+Sorghum/
+Pigeonpea+ Sorghum/ Pigeonpea+Sesame
+Pigeonpea+Sesame
+Pigeonpea : Bahar, Narendra
+Arahar-1, Malviya Vakas(MA6)
+,Malviya Chamtkar (MA13)
+Sesame: T-4, T-12, T-13 &
+Shekhar
+12
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping system Change in crop/cropping Agronomic measures Remarks on
+drought (delayed situation system Implementation
+onset)
+Delay by 6 weeks Deep alluvial soils Sequence cropping: Pearl millet + Blackgram. Sowing through seed Seed drills under RKVY
+Pearl millet- Chickpea cum ferti drills
+1st week of August Upland situation Blackgram-Barley Pearl millet: WCC 75, Raj 171, Supply of seeds through
+Wider spacing NFSM
+Pusa 23
+Blackgram :Type 9, Pant U 19,
+25% enhanced nutrients Breeder seed of
+Pant U 35, Narendra Urd 1 &
+Pigeonpea can be
+Azad Urd-3 Inter cultivation
+obtained from the
+University (B.H.U.)
+Inter cropping: Pigeonpea+Pearl millet
+Pigeonpea+ Pearl millet
+Pigeonpea : Bahar, Narendra
+Arahar-1, Malviya Vakas(MA6)
+,Malviya Chamtkar (MA13)
+Pearl millet: WCC 75, Raj 171,
+Pusa 23
+Delay by 8 weeks Deep alluvial soils Sequence cropping: Maize, Sorghum and Black gram Wider spacing of 45cm Seed drills under RKVY
+Pearl millet - Chickpea may be replaced by Green gram
+3rd week of August Upland situation and Pearl millet. However Maintain normal Supply of seeds through
+sorghum may be grown for population NFSM
+fodder purpose.
+Ridge- furrow sowing Breeder seed of pigeon
+Pearl millet: WCC 75, Raj 171, pea can be obtained
+Pusa 23 from the University
+(B.H.U.)
+Sorghum: CSH-16, CHS-9,
+CHS-14, CSV-13 & CSV-15
+Inter cropping: Pigeonpea+Pearl millet
+Pigeonpea+Pearl millet
+Pigeonpea : Bahar, Narendra
+Arahar-1, Malviya Vakas(MA6),
+13
+Malviya Chamtkar (MA13)
+Pearl millet: WCC -75, Raj-
+171, Pusa-23
+Condition Suggested Contingency measures
+Early season drought Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+(Normal onset) situation system moisture conservation Implementation
+measures
+Normal onset followed Deep alluvial soils Sequence cropping: Use of dust mulch/ straw Use of additional N
+by 15-20 days dry spell Pearl millet- Chickpea mulch (4 t/ha) @10kg/ha
+after sowing leading to Upland situation
+Sorghum – Chickpea
+poor germination/crop Inter cultivation Conservation furrow
+Blackgram-Barley
+stand etc.
+Maize- Chickpea Spray of 2% urea as
+foliar application
+Inter cropping: Earthting up to maincrops, Conservation tillage
+Pigeonpea+Pearl millet
+Thinning to maintain with Spray 2% urea as foliar
+Pigeonpea+Sorghum
+proper distance between the application
+Pigeonpea+Sesame
+plants
+Condition Suggested Contingency measures
+Mid season drought Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+(long dry spell, situation system moisture conservation Implementation
+consecutive 2 weeks measures
+rainless (>2.5 mm)
+period)
+At vegetative stage Deep alluvial soils Sequence cropping: Life saving irrigation(5 cm) if Use of additional N
+Pearl millet- Chickpea possible, @10kg/ha
+Upland situation Dust/ straw mulch (4 t/ha),
+Sorghum – Chickpea
+Thinning, Spray of 2% urea as
+Blackgram-Barley
+Inter cultivation with dryland foliar application
+Maize- Chickpea weeder
+Conservation furrow
+Sequence cropping: Earthing up of intercrops Conservation tillage
+Pigeonpea- Pearl millet
+Thinning to maintain proper Spray 2% urea as foliar
+14
+Pigeonpea- Sorghum distance between the plants application
+Pigeonpea- Sesame
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping system Crop management Soil nutrient & Remarks on
+drought (long dry situation moisture conservation Implementation
+spell) measures
+At flowering/ Deep alluvial soils Sequence cropping: Life saving irrigation (5 cm) if 1) Spraying 2% urea as
+fruiting stage Pearl millet- Chickpea possible foliar application.
+Upland situation
+Sorghum – Chickpea
+2) KCl Spray
+Blackgram-Barley
+Maize- Chickpea
+Sequence cropping: Dust/ Straw mulch
+Pigeonpea- Pearl millet Inter cultivation
+Defoliate older leaves
+Pigeonpea- Sorghum
+Harvesting at physiological
+Pigeonpea- Sesame
+maturity
+Condition Suggested Contingency measures
+Terminal drought Major Farming Normal Crop/cropping system Crop management Rabi Crop planning Remarks on
+(Early withdrawal situation Implementation
+of monsoon)
+Deep alluvial soils Sequence cropping: Life saving irrigation (5 cm) if Sowing of toria in the .
+Pearl millet- Chickpea possible month of September
+Upland situation Dust/ straw mulch (Type 9 & Bhavani)
+Sorghum – Chickpea
+Inter cultivation
+Blackgram-Barley
+Defoliate older leaves Conservation tillage
+Maize- Chickpea Harvesting of Pearl millet and
+sorghum for fodder purpose Deep ploughing with
+Harvesting at physiological rotavater
+maturity.
+Sequence cropping: Harvesting of intercrop at
+Pigeon pea- Pearl millet physiological maturity.
+Pigeonpea- Sorghum
+Earthing up of main crop
+Pigeonpea- Sesame
+15
+2.1.2 Drought - Irrigated situation
+Condition Major Farming Normal Crop/cropping Suggested Contingency measures
+situation system Change in crop/cropping Agronomic measures Remarks on
+system Implementation
+Delayed release of Deep alluvial soils Sequence cropping: Rice/Blackgram Community nursery Breeder seed will be
+water in canals due Rice – Wheat supplied by BHU and
+to low rainfall Medium land situation- Rice : NDR 97, Ratna, Direct seeding in small NDAUT, Faizabad.
+Rice – Pea
+tube well Narendra 118, Narendra 97, beds.
+Rice – Chickpea
+Pant Dhan, IR 50, HUR 105, Seed drills under
+Rice – Mustard Induri Sambha, HUR 2-1 Use of micro-irrigation RKVY and supply of
+Maize – Potato systems viz. sprinkler & seeds through NFSM
+Blackgram-Wheat Blackgram: Type 9, Pant U 19, sub-surface irrigation.
+Pant U 35, Narendra Urd 1 &
+Azad Urd-3 Use of dust/ straw
+mulches (4 t/ha)
+Limited release of Deep alluvial soils Sequence cropping: Rice/ Maize Community nursery
+water in canals due Rice – Wheat
+to low rainfall Medium land situation- Rice: NDR 97, NDR 118 Direct seeding in small
+Rice – Pea
+tube well Govind, Vandana, Varanideep, beds.
+Rice – Chickpea
+Shusk Samrat, HUR 105
+Rice – Mustard Use of micro-irrigation
+Maize – Potato Maize: Desi & Composite systems viz. sprinkler &
+Blackgram-Wheat varieties sub-surface irrigation.
+Wheat may be replaced with
+Chickpea & Mustard in rabi
+season
+Condition Major Farming Normal Crop/cropping Suggested Contingency measures
+situation system Change in crop/cropping system Agronomic measures Remarks on
+Implementation
+Non release of Deep alluvial soils Sequence cropping: Rice may be replaced by pulses Direct seeding in small Breeder seed will be
+water in canals Rice – Wheat (Green gram, Blackgram), Oil beds. supplied by BHU and
+under delayed Medium land situation- seeds (sesame), Vegetables Use of micro-irrigation NDAUT, Faizabad.
+Rice – Pea
+onset of monsoon tube well (Lobiya, Lady’s finger, brinjal, systems viz. sprinkler
+Rice – Chickpea
+in catchment chillies) & sub-surface Seed drills under
+Rice – Mustard Intercropping of Pigeonpea + Pearl irrigation. RKVY and supply of
+Maize – Potato millet may also be a good seeds through NFSM
+Blackgram-Wheat substitute. Use of dust/straw
+Wheat may be replaced by mulches (4 t/ha)
+16
+Condition Major Farming Normal Crop/cropping Suggested Contingency measures
+situation system Change in crop/cropping system Agronomic measures Remarks on
+Implementation
+Chickpea & mustard in rabi.
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Lack of inflows Deep alluvial soils Sequence cropping: Grow fodder crops such as Conservation tillage Breeder seed will be
+into tanks due to Rice – Wheat Sorghum and pearl millet supplied by BHU and
+insufficient Medium land situation- Additional N (10 kg/ha) NDAUT, Faizabad.
+Rice – Pea
+/delayed onset of tube well Grow pearl millet for grain
+Rice – Chickpea
+monsoon purpose. Sowing of Pearl millet Seed drills under
+Rice – Mustard Wheat may be replaced by on ridges (45 cm apart) RKVY and supply of
+Maize – Potato Chickpea & mustard in rabi. seeds through NFSM
+Black gram-Wheat Pigeonpea + Pearl millet Conservation tillage-
+ridge and furrows.
+Use of mulches (straw &
+dust both).
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Insufficient Deep alluvial soils Sequence cropping: Shift to pulses (greengram, Direct seeding in small Breeder seed will be
+groundwater Rice – Wheat blackgram), Oilseeds (Sesame) beds. supplied by BHU and
+recharge due to low Medium land situation- in kharif and Chickpea+ Use of micro-irrigation NDAUT, Faizabad.
+Rice – Pea
+rainfall tube well Mustard in rabi. systems viz. sprinkler &
+Rice – Chickpea
+Intercropping of pigeonpea + sub-surface irrigation. Seed drills under
+Rice – Mustard Pearl millet may also be a good RKVY and supply of
+Maize – Potato substitute. seeds through NFSM
+Blackgram-Wheat
+17
+2.2: Unusual rains (untimely, unseasonal etc) (for both rainfed and irrigated situations)
+Condition Suggested contingency measure
+Continuous high rainfall in Vegetative stage Flowering stage Crop maturity stage Post harvest
+a short span leading to
+water logging
+Wheat Provide drainage Drain out excess water Harvesting at physiological maturity Shift to safer place
+Rice Provide drainage Proper bunding, drain out excess Harvesting at physiological maturity Shift to safer place
+water
+Pearl millet Provide drainage Drain out excess water Harvesting for fodder purposes or Shift to safer place
+harvest at physiological maturity
+Pigeonpea Provide drainage Drain out excess water Harvesting at physiological maturity Shift to safer place
+Sorghum Provide drainage Drain out excess water Harvesting for fodder purposes or Shift to safer place
+harvest at physiological maturity
+Pea Provide drainage Drain out excess water Harvesting of green pods Shift to safer place
+Chickpea Provide drainage Drain out excess water Harvesting of green pods Shift to safer place
+Horticulture (vegetables)
+Tomato Provide drainage, use the ridge Provide drainage, use the ridge and Pluck the fruits at physiological Immediate marketing
+and furrow method of sowing furrow method of sowing maturity
+Radish Provide drainage, use the ridge Provide drainage, use the ridge and Take out at pre mature stage Immediate marketing
+and furrow method of sowing furrow method of sowing
+Pumpkin Provide drainage, use the ridge Provide drainage, use the ridge and Take out at pre mature stage Immediate marketing
+and furrow method of sowing furrow method of sowing
+Potato Provide drainage, use the ridge Provide drainage, use the ridge and Digging at physiological maturity Immediate marketing
+and furrow method of sowing furrow method of sowing
+Heavy rainfall with high
+speed Winds in short span
+Wheat Drain out excess water Drain out excess water, protected Drain out excess water and protect Keep the grains at safer place
+with vegetable barriers with vegetable barriers from wind
+Rice Drain out excess water Drain out excess water and speed Drain out excess water and protect Keep the grains at safer place
+18
+of wind may be protected with with vegetable barriers from wind
+vegetable barriers
+Pearl millet Drain out excess water, sowing Drain out excess water, Earthing Drain out excess water. Harvesting at Keep the grains at safer place
+on ridges and furrow up, physiological maturity
+Harvest for fodder purpose
+Pigeonpea Drain out excess water, Drain out excess water Drain out excess water Keep the grains at safer place
+Earthing up
+Sorghum Drain out excess water, sowing Drain out excess water, Drain out excess water, Keep the grains at safer place
+on ridges and furrow Earthing up, Harvesting at physiological maturity
+Harvest for fodder purpose
+Pea Drain out excess water Drain out excess water Green pods should be plucked Keep the grains at safer place
+Chickpea Drain out excess water Drain out excess water Green pods should be plucked Keep the grains at safer place
+Horticulture (vegetable)
+Tomato Drain out excess water, sowing Drain out excess water, sowing on Pluck the fruits at physiological Immediate marketing
+on ridges and furrow. ridges and furrow maturity
+Radish Drain out excess water, sowing Drain out excess water, sowing on Take out at premature stage Immediate marketing
+on ridges and furrow. ridges and furrow.
+Pumpkin Drain out excess water, sowing Drain out excess water, sowing on Take out at premature stage Immediate marketing
+on ridges and furrow. ridges and furrow.
+Potato Drain out excess water, sowing Drain out excess water, sowing on Digging at physiological maturity Immediate marketing
+on ridges and furrow. ridges and furrow.
+Outbreak of pests and diseases due to unseasonal rains : Need based crop protection especially against diseases in millets and vegetable crops
+2.3 Floods
+Condition Suggested contingency measure
+Transient water logging/ partial Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+inundation
+Rice Re sowing with short duration Provide drainage Prevent premature seed Harvesting at
+varities germination physiological maturity
+Shift to safer place
+Continuous submergence for more
+than 2 days
+Rice Re transplanting after cessation Prevent premature seed Harvesting at
+Varieties having submergence
+of flood from community germination physiological maturity
+tolerance should be grown viz.
+nursery.
+Swarana sub-1, IR-64 sub-1
+Community nursery
+19
+Sea water intrusion Not Applicable
+2.4 Extreme events: Heat wave / Cold wave/Frost/ Hailstorm /Cyclone/Fog
+Extreme event type Suggested contingency measure
+Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+Heat Wave
+Rice - - Provide Light irrigation to reduce Harvesting at
+temperature physiological maturity
+Pigeonpea - - Provide Light irrigation Harvesting at
+physiological maturity
+Wheat Provide irrigation Provide Light irrigation Provide Light irrigation
+Lentil Pre irrigation before sowing Provide Light irrigation Provide Light irrigation to reduce
+temperature
+Pea Pre irrigation before sowing Provide Light irrigation Provide Light irrigation
+Horticulture
+Potato Provide Light irrigation Provide Light irrigation Provide Light irrigation
+Vegetable pea Provide Light irrigation Provide Light irrigation Provide Light irrigation
+Cauliflower Provide Light irrigation Provide Light irrigation Provide Light irrigation
+Tomato Provide Light irrigation Provide Light irrigation Provide Light irrigation
+Chilli Provide Light irrigation Provide Light irrigation Provide Light irrigation
+Cold wave
+Wheat - Provide irrigation to provide relief -
+from cold wave
+Lentil - Provide irrigation to provide relief -
+from cold wave
+20
+Pigeonpea - Provide irrigation to provide relief -
+from cold wave
+Horticulture
+Mango - - Smoking by burning waste -
+material to increase temperature
+Frost
+Wheat - - Provide Light irrigation
+Pulse crops - - Provide light irrigation
+Horticulture
+Mango - Provide light irrigation Smoking in orchards to increase
+temperature by burning waste
+material
+Not Applicable
+Hailstorm
+Cyclone Not Applicable
+2.5 Contingent strategies for Livestock, Poultry & Fisheries
+2.5.1 Livestock
+Suggested contingency measures
+Before the events During the event After the event
+Drought
+Feed and fodder Insurance Utilizing fodder from perennial trees and Fodder Availing insurance
+availability bank reserves.
+Encourage perennial fodder on bunds and
+waste land on community basis Utilizing fodder stored in silage.
+Establishing fodder banks, encouraging Transporting excess fodder from adjoining
+fodder crops in irrigated area districts
+Silage – using excess fodder for silage Use of feed mixtures.
+21
+Allow the cattle for grazing at barren lands.
+Drinking water Preserving water in the tank for drinking Using preserved water in the tanks for drinking.
+purpose
+Wherever ground water resources are available
+Excavation of Bore wells priority for drinking purpose.
+Health and disease Veterinary preparedness with medicines and Conducting mass animal Health Camps and
+management vaccines treating the affected ones
+Floods
+Feed and fodder Grow the fodder crops at safer places (non- Utilizing fodder from perennial trees and Fodder Availing insurance
+availability flood prone area) bank reserves.
+Utilizing fodder stored in silage.
+Transporting excess fodder from adjoining
+districts
+Use of feed mixtures.
+Shift the live stocks at safer place.
+Shift the live stocks at safer place where drinking
+Drinking water
+water is available.
+Health and disease Veterinary preparedness with medicines and Conducting mass animal Health Camps and
+management vaccines treating the affected ones
+Cyclone Not Applicable
+Heat wave and cold wave Not Applicable
+2.5.2 Poultry
+Suggested contingency measures Convergence/linkages with
+ongoing programs, if any
+Before the event During the event After the event -
+Drought Insurance & Integration Utilizing from feed reserve Availing insurance, -
+banks Strengthening feed Reserve
+Establishing feed reserve Bank
+Banks
+Shortage of feed ingredients -
+22
+Drinking water -
+Health and disease Emergency Veterinary Campaign and Mass Culling affected birds -
+management preparedness with medicines Vaccination
+vaccination to birds
+Heat wave and cold wave Not Applicable
+2.5.3 Fisheries/Aquaculture
+Suggested contingency measures
+Before the event During the event After the event
+1. Drought Not Applicable
+2. Floods Not Applicable
+3. Cyclone / Tsunami Not Applicable
+4. Heat wave and cold wave Not Applicable
+23

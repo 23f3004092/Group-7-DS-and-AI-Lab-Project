@@ -1,0 +1,2789 @@
+
+
+Extension Bulletin : 52
+Wheat
+Cultivation in India
+Pocket Guide
+Anuj Kumar, Randhir Singh, Gyanendra Singh,
+R.K. Sharma, M.S. Saharan, R.S. Chhokar, B.S. Tyagi,
+Sendhil, R., Ramesh Chand and Indu Sharma
+ICAR - Directorate of Wheat Research
+Karnal-132 001, Haryana
+Contents
+General information 1
+Wheat production technology 2
+Choice of variety 3
+Agronomic practices 6
+Application of micronutrients 9
+Crop protection 13
+New production technologies
+for resource conservation 21
+Laser land levelling 21
+Zero tillage 22
+Rotary tillage 23
+Bed planting 24
+Seeding into loose residues 26
+Turbo happy seeder 26
+Rotary disc drill (RDD) 26
+Harvesting, threshing and storage 27
+Costs and returns 28
+4 W and 1 H of wheat cultivation 30
+Wheat Cultivation in India
+General information
+Wheat (Triticum aestivum L.) is the second most
+important cereal crop of India and plays a vital role
+in food and nutritional security of the country. Nearly
+55 per cent of the world population depends on wheat
+for about 20 per cent of calories intake. It is one of the
+major food grains of the country and a staple food of the
+people of North India, where people have preference
+for chapatti. The diverse environmental conditions
+and food habits of people in India supports the
+cultivation of three types of wheat (bread, durum and
+dicoccum). Among these, bread wheat is contributing
+approximately 95 per cent to total production while
+another 04 per cent comes from durum wheat and
+close to one per cent from Dicoccum. Wheat crop in
+India is grown under six diverse agro-climatic zones
+(Table 1), wherein Indo-
+Gangetic Plains (IGPs)
+comprising the two
+zones namely; North
+Western Plains Zone
+(NWPZ) and the North
+Eastern Plains Zone
+(NEPZ) form the major wheat tract followed by the
+Central Zone (CZ) and the Peninsular Zone (PZ).
+Table 1. Classification of wheat growing zones in
+India
+Zone Region/State Area
+(m. ha)
+Northern Hills Western Himalayan regions of J&K (except 0.9
+Zone (NHZ) Jammu and Kathua distt.); H.P. (except Una
+and Paonta Valley); Uttaranchal (except Tarai
+area); Sikkim and hills of West Bengal and
+N.E. States
+1
+Wheat Cultivation in India
+North Punjab, Haryana, Delhi, Rajasthan (except Kota 11.5
+Western and Udaipur divisions) and Western UP (except
+Plains Zone Jhansi division), parts of J&K (Jammu and Kathua
+(NWPZ) distt.) and parts of HP (Una distt. and Paonta
+valley) and Uttarakhand (Tarai region)
+North Eastern Eastern UP, Bihar, Jharkhand, Odisha, West 11.9
+Plains Zone Bengal, Assam and plains of NE States
+(NEPZ)
+Central Zone Madhya Pradesh, Chhattisgarh, Gujarat, 5.0
+(CZ) Kota and Udaipur divisions of Rajasthan and
+Jhansi division of Uttar Pradesh
+Peninsular Maharashtra, Karnataka, Andhra Pradesh, 1.8
+Zone (PZ) Goa and plains of Tamil Nadu
+Southern Hills Hilly areas of Tamil Nadu and Kerala comprising 0.1
+Zone (SHZ) the Nilgiri and Palni hills of southern plateau
+Total 31.2
+This classification of zones has been based on climatic
+conditions, soil types and growing duration of wheat.
+During wheat growing season, the expected changes in
+climatic factors viz; precipitation/winter rains, minimum
+and maximum temperature, wind velocity and its
+direction, sunshine hours etc. need to be considered in
+choosing modern varieties and matching production and
+protection technologies that are developed specifically to
+mitigate the possible anticipated effects of climate change.
+Wheat production technology
+This small pocket guide has collection of required
+information about the choice of wheat varieties,
+matching agronomic practices to be followed by the
+farmers and also some of the common problems
+related to crop protection issues that could limit wheat
+production and productivity at regional or farm level.
+Besides, the wheat growers are advised to keep track
+of the latest technologies on wheat and adopt these
+to enhance wheat productivity, and reduce cost of
+production so as to increase profit on sustainable basis.
+2
+yteirav
+fo
+eciohC
+.snoitidnoc
+noitcudorp
+tnereffid
+rednu
+gniworg
+rof
+sremraf
+ot
+elbaliava
+si
+seiteirav
+devorpmi
+fo
+eciohc
+doog
+,tneserp
+tA
+aidnI
+ni
+snoitidnoc
+noitcudorp
+dna
+senoz
+tnereffid
+rof
+seiteirav
+taehw
+fo
+eciohC
+.2
+elbaT
+)ah/q(
+dleiY
+seiteiraV
+noitidnoc
+noitcudorP
+enoZ
+egarevA
+egnaR
+5.04
+5.24-5.73
+*837
+LV
+,408
+LV
+,709
+LV
+,705
+SH
+,943
+WPH
+ytilitref
+hgih-RI-ST
+enoZ
+slliH
+nrehtroN
+)ZHN(
+3.92
+4.13-5.72
+,*837
+LV
+,408
+LV
+,*691
+WKS
+,709
+LV
+,705
+SH
+,943
+WPH
+ytilitref
+wol-FR-ST
+)tirt(
+2492
+LT
+,)tirt(
+9692
+LT
+5.53
+5.04-7.72
+928
+LV
+,152
+WPH
+,245
+SH
+ytilitref
+wol-FR-SE
+7.03
+1.43-1.62
+024
+SH
+,094
+SH
+,298
+LV
+ytilitref
+muidem-IR-SL
+7.31
+1.51-6.21
+573
+SH
+,238
+LV
+saera
+edutitla
+hgiH
+Wheat Cultivation in India
+3
+7.15
+9.35-9.74
+,05-126
+WPD
+,7692
+DH ,5011
+HW ,6803
+DH
+,88
+WBD
+ytilitref
+hgih-RI-ST
+snialP
+nretseW
+htroN
+)d(
+192
+WDP
+,)d(
+413
+WDP
+,)d(349
+DHW
+,*71 WBD
+,*055
+WBP
+)ZPWN(
+enoZ
+8.14
+5.44-9.83
+,1201
+HW
+,095
+WBP
+,9503
+DH ,17
+WBD ,4211
+HW
+,09
+WBD
+ytilitref
+muidem-RI-SL
+*5673
+JAR
+,)SLV( 445
+RW
+,61
+WBD
+7.33
+)FR(
+9.63-3.62
+693
+WBP
+,3403
+DH ,0801
+HW
+,446
+WBP
+ytilitref
+wol-IR/FR-ST
+6.44
+)IR(
+8.05-0.53
+5.54
+7.74-8.04
+,703
+K
+,0214
+jaR
+,83
+WBC ,93
+WBD ,6001
+K
+,4505
+WN
+ytilitref
+hgih-RI-ST
+snialP
+nretsaE
+htroN
+2101
+WN
+,864
+WUH
+,344
+WBP ,3372
+DH
+,4282
+DH
+)ZPEN(
+enoZ
+8.93
+7.14-0.83
+,4101
+WN
+,41
+WBD
+,5402
+WH ,6302
+WN ,3651
+IH
+,5892
+DH
+ytilitref
+muidem-RI-SL
+3462
+DH
+7.42
+5.72-4.32
+5416 SCAM
+,8882
+DH
+ytilitref
+wol-FR-ST
+1.35
+5.45-0.15
+,)d(
+3178
+IH
+,372
+WG
+,223
+WG ,663
+WG ,4451
+IH
+,8823
+PM
+ytilitref
+hgih-RI-ST
+)ZC(
+enoZ
+lartneC
+)d(
+8948 IH
+,)d(
+5121
+OPM
+2.74
+6.84-3.64
+0104
+PM
+,4682
+DH
+,2392
+DH ,3021
+PM ,8324
+jaR
+,6333
+PM
+ytilitref
+muidem-RI-SL
+0.22
+)FR(
+6.32-8.91
+,)d(
+2764
+DH
+,0051
+IH
+,)d(
+7268
+IH ,1351
+IH ,3713
+PM
+,8823
+PM
+IR/ytilitref
+wol-FR-ST
+6.63
+)IR(
+0.04-4.03
+)ramA(
+4002
+WH
+Wheat Cultivation in India
+4
+3.24
+7.54-0.04
+,7304
+jaR
+,719
+WAIN
+,2226
+SCAM
+,403
+SAU
+,8746
+SCAM
+ytilitref
+hgih-RI-ST
+)ZP(
+enoZ
+ralusnineP
+,)cid(
+1792
+SCAM
+,)d(
+514
+SAU
+,)d(
+824
+SAU
+,015
+WUH
+,223
+WG
+)cid(
+5201
+KDD
+,)cid(
+9201
+KDD
+,)d(3668
+IH
+4.53
+4.83-1.33
+3382
+DH
+,335
+WBP
+,3804
+jaR
+,2392
+DH
+,7264
+WAKA
+,0903
+DH
+ytilitref
+muidem-RI-SL
+4.41
+)FR(
+5.61-3.21
+,4469
+K
+,1872
+DH
+,695
+WBP
+,7892
+DH
+,5141
+WAIN
+IR/ytilitref
+wol-FR-ST
+2.32
+)IR(0.72-3.02
+)d(
+61-7992
+WDKA
+0.73
+9.04-7.13
+1-
+)W(
+WOC
+,5801
+WH
+,)cid(
+8901
+WH
+,4402
+WH
+,6125
+WH
+ytilitref
+muidem-IR-ST
+senoZ
+slliH
+nrehtuoS
+)ZHS(
+0.23
+0.63-3.72
+91
+LRK
+,312
+LRK
+,012
+LRK
+noitidnoc
+ytinilakla-ytinilaS
+saera
+lanigraM
+,noitagirrI
+detcirtseR=IR
+,defniaR=FR
+,detagirrI=RI
+,nwoS
+ylraE=SE
+,nwoS
+etaL
+yreV
+=SLV,nwoS
+etaL=SL
+,nwoS
+ylemiT=ST
+,erehW
+.elacitirT
+=
+tirt
+dna
+muccociD=.cid
+,muruD
+=
+)d(
+.saera
+enorp
+ni
+dediova
+eb
+tsum
+suht
+dna
+ytilibitpecsus
+tsur
+epirts
+setacidni*
+Wheat Cultivation in India
+5
+Wheat Cultivation in India
+Besides, the information on soil health for individual
+farm(s) needs to be generated for minimizing input
+costs and maximizing yields. The stakeholder can
+follow latest technologies in order to mitigate local
+problems and thus fulfill their dreams of enhancing
+farm profitability in a cost effective and environment
+friendly manner. The information provided would
+be as useful tips that could be suitably applied to all
+the given situations across zones and production
+conditions. In addition, the planners, managers and
+carriers of technology (extension workers) at every
+level can also update themselves with the latest know-
+how and play their role in enhancing wheat production
+in the country.
+Agronomic practices
+In addition to the varietal improvement, adoption of
+appropriate crop management practices of fertilization,
+irrigation; weed management, crop geometry and crop
+residue management in wheat based crop sequences
+in various wheat growing zones have significantly
+contributed in harnessing the yield potential of new
+varieties. To cut down the cost of wheat production
+without compromising on yield, the zero-tillage
+technology has been perfected for wheat cultivation.
+Other forms of resource conservation technologies
+(RCTs) which are also gaining momentum include
+rotary-tillage and furrow
+irrigated raised beds
+(FIRBs) technology. The
+rotary tillage technology
+saves about 80 per cent
+diesel but has given
+6
+Wheat Cultivation in India
+higher yields over zero tillage as well as conventional
+tillage. Recently, new machines (Turbo seeder &
+Rotary disc drill) have been fabricated to seed into
+surface retained crop residues which is otherwise
+being burnt causing environmental pollution and loss
+of essential plant nutrients.
+Sowing time, seed rate and fertilizer application: The
+wheat crop in India is grown across six agro-climatic
+zones and production conditions. The time of sowing
+has slight variation from zone to zone and under
+varying production conditions. To realize best yields
+under any situation, timely sowing and following
+recommended agronomy is the most important key
+factor to make best use of
+inputs and technology.
+The information for the
+commercial cultivation
+of wheat crop under
+different systems is given
+in Table 3.
+Approaches for improving soil health: The intensive
+tillage coupled with crop residue burning and
+continuous mining of soil has led to the depletion of
+soil organic matter as well as essential plant nutrients.
+The situation is further complicated by imbalanced
+fertilization leading to expression of multiple nutrient
+deficiencies. The Zn is already recommended and
+there are more frequent occurrence of deficiencies of
+Mn, Fe, Cu, Mo and B in the rice-wheat system. More
+than 35% soils are also deficient in sulphur and the K
+status has also reached a threshold in many soils since
+farmers are mainly applying nitrogen and phosphorus
+7
+porc
+taehw
+rof
+esod
+rezilitref
+dna
+etar
+dees
+,emit
+gniwos
+esiw-enoZ
+.3
+elbaT
+noitacilppa
+fo emit
+dna
+sesod
+rezilitreF
+etar
+deeS
+snoitidnoc
+gniwoS
+enoZ
+owt
+ni
+N
+gniniamer
+dna
+gniwos
+ta
+lasab
+sa
+K&P
+lluf
+dna
+N 3/1(
+ah/
+KPN
+gk
+04:06:021
+ah/gk
+001
+nwos
+ylemit
+,detagirrI
+ZHN
+)noitagirri
+dnoces
+dna
+tsrfi
+ta
+stilps
+lauqe
+).voN
+51-1(
+owt
+ni
+N
+gniniamer
+dna
+gniwos
+ta
+lasab
+sa
+K&P
+lluf
+dna
+N 3/1(
+ah/
+KPN
+gk
+04:06:09
+ah/gk
+521
+nwos
+etal
+,detagirrI
+)noitagirri
+dnoces
+dna
+tsrfi
+ta
+stilps
+lauqe
+).voN
+ht52
+retfA(
+gniwos
+fo
+emit
+eht
+ta
+deilppa
+eb
+ot ah/KPN
+gk
+02:03:06
+ah/gk
+521
+defniaR
+owt
+ni
+N
+gniniamer
+dna
+gniwos
+ta
+lasab
+sa
+K&P
+lluf
+dna
+N 3/1(
+ah/
+KPN
+gk
+04:06:051
+ah/gk
+001
+nwos
+ylemit
+,detagirrI
+ZPEN
+dna
+ZPWN
+)noitagirri
+dnoces
+dna
+tsrfi
+ta
+stilps
+lauqe
+.voN
+51-1
+:ZPWN
+.voN
+02-01
+:ZPEN
+owt
+ni
+N
+gniniamer
+dna
+gniwos
+ta
+lasab
+sa
+K&P
+lluf
+dna
+N 3/1(
+ah/
+KPN
+gk
+04:06:021
+ah/gk
+521
+nwos
+etal
+,detagirrI
+)noitagirri
+dnoces
+dna
+tsrfi
+ta
+stilps
+lauqe
+).voN
+ht52
+retfA(
+gniwos
+fo
+emit
+eht
+ta
+deilppa
+eb
+ot ah/KPN
+gk
+02:03:06
+ah/gk
+521
+defniaR
+owt
+ni
+N
+gniniamer
+dna
+gniwos
+ta
+lasab
+sa
+K&P
+lluf
+dna
+N 3/1(
+ah/
+KPN
+gk
+04:06:021
+ah/gk
+001
+nwos
+ylemit
+,detagirrI
+ZHS
+dna
+ZP
+,ZC
+)noitagirri
+dnoces
+dna
+tsrfi
+ta
+stilps
+lauqe
+.voN
+51-1
+:ZP
+,.voN
+02-01
+:ZC
+.voN
+diM
+:ZHS
+owt
+ni
+N
+gniniamer
+dna
+gniwos
+ta
+lasab
+sa
+K&P
+lluf
+dna
+N 3/1(
+ah/
+KPN
+gk
+04:06:09
+ah/gk
+521
+nwos
+etal
+,detagirrI
+)noitagirri
+dnoces
+dna
+tsrfi
+ta
+stilps
+lauqe
+.ceD
+51-1
+:ZHS
+&
+ZC
+.ceD
+fo
+keew
+ts1-.voN
+fo
+keew
+tsaL
+:ZP
+gniwos
+fo
+emit
+eht
+ta
+deilppa
+eb
+ot ah/KPN
+gk
+02:03:06
+ah/gk
+521
+defniaR
+Wheat Cultivation in India
+8
+Wheat Cultivation in India
+to the crops. Following strategies may help in reversing
+the adverse effects on soil;
+• Adoption of resource conservation technologies
+like zero tillage and conservation agriculture
+- Minimum soil disturbance to conserve soil
+organic matter.
+• Residue management - Incorporation or surface
+residue retention to enhance the soil organic
+matter.
+• Developing new and improving the available
+machinery for residue management and
+conservation agriculture.
+• Introduction of leguminous crops like moong
+bean to regain & build up the soil health.
+• Green manuring to increase soil organic matter.
+• Balanced use of fertilizers-Application of NPK
+in proper proportion along with FYM and need
+based application of Zn, Mn, Fe, Cu, Mo and B
+as micro-nutrients for optimum yields.
+Application of micronutrients
+Zinc sulphate at the rate of 25 kg/ha once in a year or
+10 kg/ha to each crop during rabi and kharif season
+should be applied in areas where its deficiency is
+prevalent. If zinc deficiency symptoms are visible in the
+crop then spray 0.5 % zinc sulphate solution. For this,
+dissolve 2.5 kg zinc sulphate and 1.25 kg unslaked lime
+or 12.5 kg urea in 500 litres of water for one hectare
+and spray it 2-3 times at 15 days interval.
+In areas having manganese deficiency, spray 0.5%
+solution of MnSO. Dissolve 2.5 kg MnSO in 500 liter
+4 4
+of water. First spray should be done 2-5 days before first
+9
+Wheat Cultivation in India
+irrigation and remaining 2-3 sprays at one week internal.
+Spray should be done during clear and bright sunny day.
+In case of sulphur deficiency, soil application of sulphur
+or spray application can be resorted for correcting
+deficiency. When zinc sulphate or gypsum is applied,
+sulphur deficiency is taken care off. Where only sulphur
+deficiency is prevailing apply Cosavet 80WDG @ 8-10
+kg/ha at the time of sowing or just before first irrigation.
+Weed management: Wheat is infested with both
+grasses and broad-leaved weeds. For realizing full
+yield potential of wheat crop the proper weed control
+is essential. Among
+various methods of
+weed control chemical
+method is most effective.
+Based on weed flora
+following herbicides can
+be applied.
+• In areas having the problem of Isoproturon
+resistant P. minor use Sulfosulfuron, or Clodinafop
+or Fenoxaprop or Pendimethalin or Pinoxaden.
+Sulfosulfuron and Pendimethalin are effective
+against both grassy and non-grassy weeds
+whereas, Clodinafop, Fenoxaprop, and Pinoxaden
+are specific to grasses. Whereas, areas infested with
+multiple herbicide resistant P. minor (resistant to
+Isoproturon, Clodinafop and Sulfosulfuron) use
+pre-emergence Pendimethalin.
+• For the control of complex weed flora combination
+of herbicides should be applied. Sulfosulfuron
++ Metsulfuron and Isoproturon with 2,4-D
+or Metsulfuron can be used as tank mixture.
+10
+sdeew
+fo
+sepyt
+tnereffid
+lortnoc
+ot
+sedicibreh
+rof
+snoitpO
+.4 elbaT
+SAD
+noitacilppa
+fo
+emiT
+)ah/
+.i.a
+mg(
+esoD
+sedicibreH
+arofl deeW
+)ah/lm
+ro
+g(
+esod
+tcudorP
+SAD
+53-03
+ecnegreme
+tsoP
+)004(
+06
+)PW51
+kipoT(
+pofanidolC
+;)iaJ
+ilagnaJ/tao
+dliW(
+anaicivodul
+anevA
+:sessarG
+SAD
+53-03
+ecnegreme
+tsoP
+)0021-0001(
+021-001
+)CE01
+repuS
+amuP(
+lyhte-porpaxoneF
+;)iknaK/isudnaM(
+ronim
+siralahP
+)sahg
+ramoL(
+sisnelpsnom
+nogopyloP
+SAD
+53-03
+ecnegreme
+tsoP
+)0001-008(
+05-04
+)CE
+5
+laixA(
+nedaxoniP
+)ssarg
+aoP(
+aunna
+aoP
+SAD
+53-03
+ecnegreme
+tsoP
+)3.33(
+52
+)GW
+57
+redaeL(
+noruflusofluS
+SAD
+53-03
+ecnegreme
+tsoP
+)3331(
+0001
+)PW
+57
+nolerA(
+norutorposI
+SAD
+3-1
+ecnegreme-erP
+)0594-3333(
+0051-0001
+)CE03
+pmotS(
+nilahtemidneP
+SAD
+53-03
+ecnegreme
+tsoP
+)5131(
+005
+)CE
+83
+raM
+deeW(
+E-D-4,2
+;)auhtab(
+mubla
+muidoponehC
+:sdeew
+devael-daorB
+;)kalap
+ilagnaJ(
+sutatned
+xemuR
+;)uhtabrahK(
+elarum
+muidoponehC
+SAD
+53-03
+ecnegreme
+tsoP
+)02(
+4
+)PW
+02
+pirglA(
+noruflusteM
+avlaM
+;)ahteM/ijneS(
+acidni
+sutolileM
+;)aniaM(
+atalucitned
+ogacideM
+SAD
+53-03
+ecnegreme
+tsoP
+)05(
+02
+)GDW
+05
+ytinfifA(
+enozartnefraC
+suluvlovnoC
+;)ioakaM(
+murgin
+munaloS
+;)lahcnoS/avlaM(
+aroflivrap
+SAD
+3-1
+ecnegreme-erP
+)0594-3333(
+0051-0001
+)CE03
+pmotS(
+nilahtemidneP
+avitas
+aiciV
+;)ijayP(
+suilofiunet
+suledohpsA
+;)iruhknariH(
+sisnevra
+;)leenanhsirK(
+sisnevra
+sillaganA
+;)irtaM(
+acahpa
+suryhtaL
+;)irtahC(
+)iadnaK(
+esnevra
+muicriC
+;)arpaptiP(
+sumydid
+suponoroC
+SAD
+53-03
+ecnegreme
+tsoP
+)3.33(
+52
+)GW
+57
+redaeL(
+noruflusofluS
+sdeew
+devael-daorb
+dna
+yssarg
+htoB
+SAD
+3-1
+ecnegreme-erP
+)0594-3333(
+0051-0001
+)CE03
+pmotS(
+nilahtemidneP
+SAD
+53-03
+ecnegreme
+tsoP
+)5131+0001(
+005
++ 057
+E
+D-4,2+)PW57
+nolerA(
+norutorposI
+SAD
+53-03
+ecnegreme
+tsoP
+)04(
+2 +
+03
+)GW08
+latoT(
+noruflusteM
++noruflusofluS
+Wheat Cultivation in India
+11
+Wheat Cultivation in India
+Grass herbicides (Clodinafop, Fenoxaprop and
+Pinoxaden) should not be tank mixed with either
+2,4-D or Metsulfuron and to avoid antagonism
+the grass and broad-leaved herbicides should be
+applied sequentially.
+Water management: Water is becoming a limiting
+factor in wheat production all over the country and
+irrigation scheduling is followed depending on the
+availability of water.
+Excess utilization of
+ground water in dry areas
+has led to depletion of
+underground water and
+farmers are expecting
+to get reasonable grain
+yield with sub optimal
+irrigation. Through restricted irrigation (a single post
+sown irrigation under rainfed condition), can double
+the grain yield of many of the wheat genotypes.
+The normal practice of applying four to six irrigations
+(28-42 cm-ha water) are enough for wheat crop.
+However, crown root initiation and flowering stages
+are the most critical to moisture stress. Depending
+upon the water availability, irrigation should be applied
+as per the schedule.
+In case of very light soil as well as area having
+undulating topography, sprinkler method of irrigation
+should be used. Also in light soil and in area having
+water scarcity, bed planting techniques can be adopted
+as it saves 30% water. Further, Laser land leveling
+must be popularized on large scale as it will help in
+12
+Table 5. Irrigation scheduling (number and stage)
+depending on amount of water availability
+improving the input use efficiency particularly of water
+and nitrogen.
+The injudicious use of fertilizers and water has led to
+numerous problems such as deteriorating soil health
+and receding water table. Therefore use of NDVI sensors
+and micro-irrigation for efficient nitrogen and irrigation
+water management, respectively coupled with adoption
+of conservation agriculture practices can help increase
+the crop productivity as well as improvement of natural
+resource base for long term sustainability.
+Crop protection
+The host resistance is the cheapest, effective and
+environmental friendly means of management of
+diseases and pests. The disease scenario of different
+zones varies but the problem of yellow rust disease
+which is prevalent in northern and southern hills,
+north western and north eastern plains of the country
+is a major cause of concern.
+ytilibaliavA
+retaW
+noitaitini
+toor nworC
+)SAD
+12(
+)SAD
+54(
+edon
+tsriF
+)SAD
+56(
+gnitnioJ
+)SAD
+58( tooB
+)SAD
+501(
+egats
+kliM
+)SAD
+021(
+hguoD
+Wheat Cultivation in India
+1 Irrigation √
+2 Irrigations √ √
+3 Irrigations √ √ √
+4 Irrigations √ √ √ √
+5 Irrigations √ √ √ √ √
+6 Irrigations √ √ √ √ √ √
+13
+Wheat Cultivation in India
+Rust: In NWPZ and NHZ,
+stripe rust (yellow rust) is
+very important. For avoiding
+the losses due to stripe rust of
+wheat in NWPZ, varieties like
+DBW 88, WH 1105, HD 2967,
+DPW 621-50, WH 542, PBW 550,
+PDW 314 (d) and WHD 943 (d)
+for timely sown and DBW 16, Yellow rust (Stripe rust)
+DBW 90, DBW 71, PBW 590, WH 1021 and HD 3059
+for late sown conditions may be preferred. In NHZ,
+varieties like HPW 349, HS 507, HS 365, HS 375,
+VL 616, VL 907, VL 829, VL 832, VL 892, HPW 155,
+SKW 196 etc. should be grown.
+Usually, it is observed that the early infection of stripe
+rust starts in wheat fields under the poplar trees
+wherever these are grown having early sown crop (i.e.
+October). Hence, strict watch is needed by the farmers
+in such fields.
+Since most of the varieties recommended for NWPZ
+and NHZ do not carry high level of resistance,
+hence, chemical sprays are needed. Spray the crop
+with Propiconazole (Tilt 25 EC @ 0.1 per cent), or
+Tebuconazole (Folicur 250EC @
+0.1%) or Triademefon (Bayleton
+25WP @ 0.1%) at stripe rust
+initiation using 200 litre of
+water/ha. Usually, it is required
+in the first half of February.
+Stem and leaf rusts are the major
+diseases of wheat in CZ, PZ and
+SHZ. From rust epidemiology Black rust (Stem rust)
+14
+Wheat Cultivation in India
+point of view, for disrupting the
+Puccinia path, following rust
+resistant varieties are required
+to be grown in respective zone.
+Brown rust (Leaf rust)
+Central Zone (Madhya Pradesh, Chhattisgarh,
+Gujarat)
+Timely sowing: HI 1544, GW 322, DL 803-3, MP
+3288, HI 8498 (durum) and HD 4672 (durum)
+Late sowing: MP 1203, HD 2864, HD 2932 and Raj
+4083
+Peninsular Zone (Maharashtra, Karnataka)
+Timely sowing: MACS 6222, Raj 4037, GW 322,
+HUW 510, HD 2189, MACS 2971 (dicoccum) and
+HD 8663 (durum).
+Late sowing: AKAW 4627, HD 2932, HD 2833,
+Raj 4083 and PBW 533.
+Southern Hills Zone (Tamil Nadu)
+HW 2044, HW 1085, Co(W)-1.
+In the same way, loose smut and powdery mildew
+disease of wheat is very well managed through seed
+treatment and spray of recommended fungicides,
+respectively. Nevertheless, in view of decreasing water
+table and increasing temperature, both termites and
+aphids may become prominent threats to wheat crop
+in future.
+15
+Wheat Cultivation in India
+Loose smut: Loose smut is a
+seed borne disease. In view
+of the horizontal distribution
+of the seed material among
+the farmers and the use of
+the carry over seed, effective
+control measures for lose
+smut should be undertaken.
+For this, seed treatment with
+Carboxin (75 WP @ 2.5 gm/kg seed) or Carbendazim
+(50 WP @ 2.5 gm/kg seed) or Tebuconazole (2DS
+@ 1.25 gm/kg seed) or a combination of a reduced
+dosage of Carboxin (75 WP @ 1.25 gm/kg seed) and a
+bioagent fungus Trichoderma viride (@ 4 gm/kg seed)
+is recommended.
+Integrated management of loose smut involving
+reduced dosage of chemical fungicide and bioagent
+fungus is more eco-friendly and equally effective as
+the chemical control measures and thus should be
+preferred. Use of bioagents also helps in improving the
+initial vigour of the crop. Seed treatment with fungicide
+should be done one or two days before sowing. In case
+of integrated management, the treatment with T.viride
+should be done 72 hours before sowing, followed by
+the fungicide, 24 hours before sowing.
+Karnal bunt:
+Karnal bunt (KB)
+control is required
+for seed crop
+and the produce
+grown for export
+purposes. For producing KB free wheat, farmers are
+16
+Wheat Cultivation in India
+advised to grow KB resistant varieties recommended
+for the respective area.
+• In NWPZ, PBW 502, PDW 233 and WH 896
+should be grown.
+• In areas where Karnal bunt incidence is low, by
+growing durum wheat for 2-3 years, fields can
+become free from Karnal bunt pathogen, Tilletia
+indica.
+• Zero tillage helps in reducing Karnal bunt
+incidence.
+• Avoid irrigation at heading time.
+• One spray of Propiconazole 25EC (Tilt 25 EC) @
+0.1 per cent using 200 litre of water be given at
+50% flowering. If conditions are favourable for
+the disease then repeat at an interval of 15 days to
+control the disease.
+• In KB prone areas, the seed crop can be given one
+spray of Propiconazole or two sprays of T.viride at
+tillering and ear head emergence stage.
+Powdery mildew: For the
+control of powdery mildew
+in disease prone areas,
+one need-based spray of
+Propiconazole (Tilt 25
+EC @ 0.1%) can be given
+at ear head emergence or
+appearance of disease on
+flag leaf, whichever is earlier.
+Foliar blight: Foliar blight is the main crop health problem
+in NEPZ. For effective management of the diseases,
+cultivation of recommended (resistant) varieties, like
+HD 2985, HI 1563, DBW 39, CBW 38, NW 1014,
+17
+Wheat Cultivation in India
+NW 2036, K 9107, HD 2733
+(resistant to LB), DBW 14,
+HD 2888, K0307, DBW39
+and HUW 468 should be
+encouraged.
+Flag smut: Flag smut disease also poses problems in
+isolated fields in Punjab, Haryana, Rajasthan and some
+other parts of NWPZ. Disease management measures
+taken for the control of loose smut disease (as discussed
+above), proved to be effective
+against flag smut too.
+Hence, seed treatment with
+Carboxin or Tebuconazole
+may be followed in fields
+with flag smut history.
+Termite: In the termite prone areas, seed treatment
+with Chlorpyriphos @ 0.9g a.i /kg seed (4.5 ml product
+dose / kg seed), be taken up for their management. Seed
+treatment with Thiamethoxam 70WS (Cruiser 70WS)
+@ 0.7 g a.i./kg seed (4.5 ml product dose/kg seed) or
+Fipronil (Regent 5FS @ 0.3 g a.i./kg seed or 4.5 ml product
+dose /kg seed) is also very effective. In the standing crop,
+the broadcasting of the
+insecticide treated soil 15
+DAS be practiced. For this,
+Chloropyriphos 20EC @ 3 l
+mixed in 50 kg soil be used
+for one hectare field. Crop
+planted under raised beds is more prone to termite attack
+in the termite-prone areas, while zero tillage shows less
+termite damage. Hence, proper attention should be given
+in crop planted on raised beds.
+18
+Wheat Cultivation in India
+Aphids: For the management of aphids, foliar spray
+of Imidacloprid 200SL @20g a.i./ha on border
+rows at the start of the
+aphid colonization be
+given. This will help in
+protection of the bioagent
+insect, the lady bird beetle
+inside the field which
+feeds on aphids.
+Pink stem borer: The
+incidence of pink stem
+borer is observed more
+in fields of rice-wheat
+cropping system where
+wheat is sown in zero
+tillage fields. For its
+management, foliar spray of Quinalphos (Ecalux) 2000
+ml/ha as soon as pink stem borer is seen. Irrigation
+also helps in reducing the pink stem borer damage.
+Ear cockle: Ear cockle
+is an important disease
+in eastern parts of India,
+hence proper precautions
+be taken, especially
+in eastern U.P., Bihar
+and Jharkhand. Wider publicity should be given by
+extension agencies on the use of gall-free seed, well
+before the sowings. Farmers should adopt floatation
+technique for the separation of galls from the infested
+seed lots. The infested seed lot should be floated in
+2 percent brine solution for this purpose. The galls
+will float on the surface. These should be separated
+19
+Wheat Cultivation in India
+and destroyed away from the field by burning. The
+seed should be thoroughly washed to remove the salt
+solution before sowing.
+IPM module: The IPM module developed and validated
+in NWPZ can be adopted in parts of north-west plains
+zone. This involves the seed treatment with T.viride (@4g/
+kg seed) + Carboxin (Vitavax75WP @1.25g/kg seed) or
+Tebuconazole (@ 1.0g/kg seed) for the control of loose
+smut, followed by broadcast of insecticide treated soil
+(with Chloropyriphos @ 3l/ha) at 15 DAS for termites.
+General tips
+• Choose the best suitable variety for
+your area and condition.
+• Follow timely planting and avoid delay
+in sowing of wheat crop to avoid yield
+losses due to adverse effects of heat
+around maturity.
+• Do not grow varieties from other zones
+to avoid risk of disease susceptibility.
+• Manage your crop with optimum
+inputs (fertilizer, irrigation water,
+herbicides, fungicides) for maximum
+yield.
+• Timely and judiciously irrigate fields
+to save water and cut costs.
+• Harvest crop at proper maturity to
+minimize risk due to shattering,
+threshing etc.
+• Follow proper storage practices for
+wheat produce to avoid post-harvest
+losses.
+20
+Wheat Cultivation in India
+New production technologies for resource
+conservation
+Laser land levelling
+Generally, fields are not properly levelled leading to
+poor performance of the crop, because part of area
+suffers due to water stress and the other parts due
+to excess of water. Laser land levelling is the fore
+most requirements for the adoption of any of the
+resource conservation technologies. It is a process of
+smoothening the
+field within ± 2 cm
+from the average
+elevation of the
+field using laser
+equipped bucket,
+which scraps from
+higher places and
+spread onto the low lying areas. After laser levelling
+the field, yield increase has been observed. The higher
+yields are due to proper crop stand, uniform fertilizer
+and water distribution, crop growth, uniform maturity
+and increased cultivable area by 3 to 6 per cent due
+to reduction in area under bunds and channels. In
+addition to higher yield, the savings of water is 35-
+45 per cent due to higher application as well as use
+efficiencies and increased nutrient use efficiency by
+15-25 per cent. In recent years, the adoption of laser
+levelling by the farmers has gained momentum due
+to evident benefits of this technology right in the first
+crop. The price of this machine is around ` 3.5 lakhs
+which is not within the reach of every farmer and
+hence has to be used on custom hire basis.
+21
+Wheat Cultivation in India
+Zero tillage
+Zero tillage (ZT) sowing of wheat is a profitable resource
+conservation technique. In this technology, wheat
+seed and fertilizers are directly placed at proper depth
+into the undisturbed soil after rice harvesting using
+a specially designed machine which creates narrow
+slits by the knife type
+furrow openers of
+zero tillage ferti-seed
+drill instead of shovel
+type furrow opener
+in conventional ferti
+seed drill. The money
+and time to be spent in field preparation are saved by
+using this machine. Both timely and late sowing of
+wheat is possible by this method and in case of late
+sown even sowing can be advanced by 7-10 days. Seed
+rate, fertilizer doses and other package of practices in
+ZT should be the same as in conventional method to
+get good yield. Apply ⅓ or even lesser N, full P & K at
+sowing and the remaining nitrogen in two equal splits
+at first and second irrigation. Avoid planking after
+sowing of wheat by this machine. The cost effectiveness
+and development of resistance against ‘isoproturon’ in
+Phalaris minor was also responsible for ZT adoption in
+rice-wheat system due to lower incidence of this weed
+under ZT. Incidence of Karnal bunt and termite has
+also been reported to be less in ZT. This machine can
+sow about two acres of wheat in one hour. The carbon
+dioxide emission due to burning of fuel (assuming 2.6
+kg CO production/ litre of diesel burnt) during field
+2
+preparation is about 208 kg/ha in conventional tillage
+where as in zero tillage it is only around 16 kg/ha.
+22
+Wheat Cultivation in India
+Advantages
+• Saving of time, drudgery, water, labour, money and
+energy as well as less wear and tear of machinery.
+• Helps in advancing the sowing of wheat by 7 to
+10 days which is very useful especially under
+late sown conditions where basmati rice/ cotton/
+sugarcane harvesting is delayed beyond 25th
+November.
+• This technology provides an opportunity to save
+more than ` 3000 per hectare in cost of cultivation
+thereby increasing the profit margin of the farmers
+• Very less chances of lodging, less diseases
+especially Karnal bunt and powdery mildew as
+well as lower infestation of weeds like phalari
+minor.
+• Yield is either same or higher (5-10%) than
+conventional method especially in sodic soils
+where water logging is a problem as well as areas
+where sowing of wheat is late.
+Rotary tillage
+Rotary tillage is an important resource conservation
+technology which facilitates field preparation and
+placing of seed and
+fertilizer in a single pass.
+The rotary till drill has six
+L-shaped blades on each
+gang which completely
+pulverises soil. Seed rate
+and fertilizers doses are
+similar to conventional method. This machine is also
+very effective for incorporation of dhaincha into soil as
+green manuring crop. It can also be used for single pass
+23
+Wheat Cultivation in India
+puddling of paddy field after removing the drilling
+mechanism. This machine can cover about one acre
+area in one hour.
+Advantages
+• Rotary tillage also saves time, labour and energy
+and reduces drudgery in field preparation
+compared to conventional method.
+• There is a saving of more than ` 2500/- per hectare
+in field preparation.
+• If drilled, rotary tillage always gives yield
+advantage of 5 to 10 per cent than conventional
+and zero tillage technologies.
+• Advances sowing of wheat by 3 to 5 days.
+Bed planting
+Levelling of field is a pre condition for the success of
+this technology. The field preparations, bed formation,
+placement of fertilizer and sowing of seed is completed
+in one go by bed
+planter. Furrows are
+used for irrigation as
+well as for drainage of
+excess water, if there is
+heavy rain, during crop
+season. Generally 2-3
+rows of wheat can be planted on the top of each bed. The
+top width of each bed is 40-45cm for a bed of 70-75cm
+with furrow of 30-35 cm. Inter cropping of sugarcane can
+be taken up with wheat by this technique. Crop cultivars
+are known to vary significantly in their performance
+on raised beds. The direction of sowing should be
+North-South so that every plant gets equal sun shine. In
+situations where sowing is expected to be delayed due to
+24
+Wheat Cultivation in India
+pre-sowing irrigation, dry seeding can be done on raised
+beds followed by irrigation immediately after seeding.
+Light irrigation can also be given at grain filling stage,
+which is generally avoided by the farmers for fear of crop
+lodging. Growing crops on raised beds can also help
+in diversification of the rice-wheat system. Raised bed
+system also provides an option for growing intercrops
+like sugarcane in furrows and wheat, gram, lentil, peas,
+mustard and various vegetable crops on beds. Since only
+⅓rd area is irrigated i.e. irrigation is applied in furrows,
+there is substantial saving of irrigation water.
+Advantages
+• Saves 20-25 percent seed i.e. 30 to 32 kg/acre seed
+is sufficient for sowing.
+• Although there is no saving on the cost of land
+preparation or time but if same beds are used for
+seeding next crop; the saving similar to rotary
+tillage can be made as seeding & shaping of beds
+can be done in a single operation.
+• Suitable for seed production because of production
+of bold grain and easy rouging by moving in
+furrows to uproot unwanted plants.
+• It reduces the herbicide dependence due to
+possibility of mechanical weed control with the
+same bed planter fitted with inter culture tynes
+with simultaneous placement of fertiliser.
+• Nitrogen use efficiency is higher because of light
+irrigation and top dressing or placement on beds
+leading to fertilizer nitrogen saving by about 25%.
+• Similar yield as in conventional tillage with
+substantial saving of seed, fertilizer nitrogen and
+irrigation water.
+25
+Wheat Cultivation in India
+Seeding into loose residues
+In NWPZ, farmers generally burn the paddy straw which
+causes air pollution, reduces soil biodiversity, lowers
+fertility, loss of precious organic carbon and nutrients.
+The retention of residue on soil surface has many benefits
+as it reduces weeds, conserves moisture, moderates soil
+temperature and improves soil health. Keeping the above
+facts in view, two machines were developed to discourage
+burning namely; Rotary Disc Drill and Turbo Happy
+Seeder which are discussed below.
+Turbo happy seeder
+The turbo happy seeder
+was developed at
+PAU Ludhiana under
+ACIAR-PAU project.
+This machine works
+on rotary mechanism
+and cuts the residue in
+front of the tynes, places seed and fertiliser using zero
+till machine and push the chopped straw through the
+tynes on to the seeded area. This machine is capable
+of seeding into the loose residue load of up to 10 t/ha.
+This machine can cover an area of one acre per hour. It
+requires a tractor of more than 50 HP with a dual clutch.
+Rotary disc drill (RDD)
+The rotary disc drill was developed at DWR, Karnal
+under NATP project on mechanization of rice-wheat
+system, for sowing of wheat into loose straw. It has
+been found effective for seeding into loose crop
+residues. This machine is also based on the rotary till
+mechanism. The rotor is a horizontal transverse shaft
+26
+Wheat Cultivation in India
+having flanges fitted with straight discs for cutting effect
+similar to the wooden saw while rotating. The rotary
+disc drill is mounted
+on the three point
+linkage system and is
+powered through the
+power take-off (PTO)
+shaft of tractor. The
+rotating discs cut the
+residue and simultaneously make a narrow slit into the
+soil to facilitate placement of seed and fertilizer using
+an offset double disc assembly. Rotary disc drill is more
+versatile and works under almost all the situations like
+paddy, cotton, bajra, arhar, sugarcane ratoons with full
+trash for seeding crops without tillage. Compared to
+normal zero till drill, rotary disc drill causes minimal
+soil disturbance. However, it must be remembered that
+in the presence of loose residues, combination of rotary
+disc with coulter double disc completely avoids the
+raking problem of residues during seeding operations.
+Both these machines have problems like turbo happy
+seeder doesn’t work when residue is wet or completely
+loose and rotary disc drill has problem of frequent
+blunting of front powered discs. These problems must
+be addressed to make these machines more acceptable.
+Harvesting, threshing and storage
+When the moisture level of grain is 25% it is the proper
+time for manual harvesting. Generally wheat is manually
+harvested but for quick harvesting, combine harvester
+should be used to avoid losses in grain yield due to
+shattering and lodging. Wheat should be harvested 4-5
+days before it is dead ripe. In NWPZ, due to synchronized
+27
+Wheat Cultivation in India
+maturity of wheat,
+combine harvesting is
+done. Morning is the best
+time for harvesting. In
+case of manual harvesting,
+bundles are made and dried
+for 3-4 days and threshed
+by thresher. Before storage,
+grain should be dried by
+spreading on tarponline
+plastic sheets in bright
+sunlight to a moisture level
+below 12%. For storage,
+use bins and silos made
+of GI sheets. Now a days,
+aluminium bins, Pusa bins,
+silos and poly lined bags
+are available for storage.
+Farmers can store wheat grains in their traditional
+storage as well. To protect from storage insects, pests, it
+is necessary to fumigate with EDB 5 g/tons and keeping
+room sealed for 24 hours Farmers can also apply
+aluminium phosphide @ 3 g/ton.
+Costs and returns
+There is a wide variation in operational costs, gross
+returns, profit and also the cost of production in different
+states of India (Table 6). The difference in costs and other
+parameters might be due to several associated factors that
+vary across states. The gross return per hectare was the
+maximum in Haryana followed by Punjab, Rajasthan,
+Uttar Pradesh and Madhya Pradesh. The estimated
+average operation cost for the country was ` 25054/ha
+and net return was ` 33915/ha. The cost of production
+for one quintal wheat was ` 730.
+28
+31-2102
+gnirud
+aidnI
+ni
+taehw
+rof
+snruter
+dna
+stsoc
+esiw
+etatS
+.6
+elbaT
+)ltQ/`(
+noitcudorP
+fo
+tsoC
+)ah/`(
+tfiorP
+)ah/`(
+snruteR
+ssorG
+)ah/`(
+stsoC
+lanoitarepO
+etatS
+234
+04795
+66508
+62802
+anayraH
+534
+85143
+82354
+07111
+hsedarP
+ayhdaM
+263
+55575
+41657
+85081
+bajnuP
+727
+51043
+16816
+64872
+nahtsajaR
+335
+67562
+68874
+01312
+hsedarP
+rattU
+037
+51933
+96985
+45052
+aidnI
+Wheat Cultivation in India
+29
+noitavitluc
+taehw
+fo
+H 1 & W 4
+?od ot ton
+tahW
+?od
+ot yhW
+?od
+ot woH
+?od
+ot
+nehW
+?od
+ot
+tahW
+morf
+elpmas
+lios
+eht tcelloc
+t’noD
+lios tuoba
+noitamrofni
+evig lliw
+tI
+srenroc
+lla morf selpmas
+ekaT
+gnitsevrah
+retfa
+/ rebotcO
+gnitset
+lioS
+/ eudiser/
+tsopmoc
+eht
+fo paeh
+taht
+os dlefi
+ralucitrap
+eht
+fo ytilitref
+.llew xim
+dna dlefi fo elddim
+dna
+.porc
+fo
+etarucca
+eht
+teg
+ot porc
+gnidnats
+lios rep sa
+rezilitref
+ylppa
+nac eno
+morf elpmas
+lios mg 005
+warD
+.stluser
+.snoitadnemmocer
+/ tnemeriuqer
+lios ybraen
+ni detset ti teg
+dna
+ti
+.yrotarobal
+gnitset
+ereht
+,erutsiom
+lios evresnoc
+oT
+ni pleh lliw
+noitaraperp
+dlefi dooG
+deraperp
+llew eb dluohs
+dleiF
+dluohs
+noitaraperp
+dleiF
+noitaraperp
+dleiF
+yvaeh
+/peed
+eb ton
+dluohs
+mrofinu
+eb lliw
+noitagirrI
+.lortnoc
+deew
+sa rotavitluc
+dna worrah
+csid yb
+yb
+rebotcO
+morf
+strats
+eb ot
+si
+gniwos
+fI .noitavitluc
+eht
+ni retaw
+noitagirri
+fo
+gnivas dna
+dnaL .lios
+eht fo tnemeriuqer
+rep
+dewollof
+gnihguolp
+doog
+worrah
+neht
+,egallit
+orez
+yb enod
+.dlefi
+delevel
+rof desu
+eb nac relevel
+resal
+erutsiom
+rof gniknalp
+yb
+.dediova
+eb
+dluohs noitavitluc
+eb nac
+tI .gnilevel dnal
+tcefrep
+eb
+dluohs
+dlefi
+noitavresnoc
+fi ,ecruos
+ybraen morf degnarra
+resaL
+esu
+os delevel
+llew
+.egalliv
+eht ni elbaliava
+ton
+eht
+gnilevel
+rof relevel
+dnaL
+deb
+dediova
+,slios
+yvaeh
+nI
+fo
+gnivas dna
+retsaf
+eb lliw
+noitagirrI
+noitaraperp
+dlefi ruof
+eerhT
+.laicfieneb
+etiuq
+si hcihw
+dlefi
+noitamrof
+dolc
+ot eud
+gnitnalp
+.dlefi
+deb desiar
+eht
+ni retaw
+noitagirri
+dna enod
+eb dluohs snoitarepo
+tceffa
+yam
+selbbuts
+porc
+&
+.reknalp hguorht
+gnilevel
+od neht
+.noitanimreg
+Wheat Cultivation in India
+30
+.seudiser
+porc nrub
+ton oD
+dlefi ni seudiser
+porc gnipeek
+yB
+gnillird
+yb
+enod
+eb
+ot
+si gniwoS
+eht
+ni warts
+esool
+si ereht
+fI
+dohtem
+gniwoS
+seudiser
+porc
+eht gninrub
+yB
+eudiseR
+.dellortnoc
+eb nac
+sdeew
+dna
+deeS
+.rezilitref
+dna
+dees
+/llird
+csid
+yrator
+esu
+dlefi
+erehT .eid
+yam
+stesni laicfieneb
+erutsiom
+gnivresnoc
+ni spleh noitneter
+dekcehc
+eb
+dluohs
+sepip
+rezilitref
+si ereht
+fI
+.redees
+yppaH
+orez ni dlefi
+reporp
+ot deen
+on si
+.rettam
+cinagro
+lios sesaercni
+dna
+.noitarepo
+gnillird
+gnirud
+ylluferac
+retfa
+erutsiom
+tneicfifus
+.gnidees
+egallit
+htob
+esu
+gnitsevrah
+yddap
+taehw
+rof
+senihcam
+eht
+.gniwos
+sa hcuS
+.seiteirav
+dlo esu
+t’noD
+porc
+eht fo ytivitcudorp
+esaercni
+lliw
+tI
+/ dednemmocer
+fo
+noitceleS
+rebotcO
+nI
+noitceleS
+DH ,1 koL
+,8332
+PU ,343
+WBP
+rehgih
+hctef
+yam
+ytilauq doog
+dna
+eb
+dluohs
+seiteirav
+elbatius
+devorpmi
+fo
+WUH ,117
+HW
+,9232 DH
+,7862
+.tekram
+eht ni
+secirp
+eht
+htiw
+noissucsid
+hguorht
+enod
+.seiteirav
+yeht sa
+741
+HW ,262
+PU
+,432
+/ertnec
+hcraeser
+fo evitatneserper
+ot elbitpecsus
+emoceb
+evah
+/ tnemtraped
+erutlucirga
+etats
+.esaesid
+tsur
+wolley
+.cte
+sdneirf
+ton dluohs
+rezilitref dna
+deeS
+edam era
+stneirtun
+laitnesse
+llA
+surohpsohp
+fo
+lluf
+,negortin
+fo 3/1
+dna gniwos
+fo
+emit eht
+tA
+dna
+decnalaB
+ni ecalp
+emas
+eht ta decalp
+eb
+hguorht
+stnalp
+eht ot elbaliava
+eht
+ta deilppa
+eb
+yam
+hsatop
+dna
+.noitagirri
+tsrfi
+eht
+retfa
+fo
+esu
+detargetni
+noitanimreg
+tceffa
+lliw ti
+,lios
+eht
+tneirtun detargetni
+dna decnalab
+negortin
+fo
+tseR
+.gniwos
+fo
+emit
+eb
+yam
+stneirtunorciM
+K:P:N
+srezilitref
+lliw ytivitcudorp
+dna ylesrevda
+lliw
+porc
+ehT .noitacilppa
+tnemeganam
+dna
+tsrfi
+retfa
+deilppa
+eb
+yam
+tnemeriuqer
+rep
+sa deilppa
+oitar
+1:2:4
+ni
+eb dluohs
+srezilitref
+oS
+.ssel
+eb
+.ytivitcudorp
+rehgih
+htiw ,yhtlaeh
+eb
+.noitagirri
+dnoces
+.lios eht
+ni
+ycneicfied
+dna
+nwos fi dees
+naht
+repeed
+decalp
+tceffa
+yam tnemele
+eno fo ycneicfieD
+.llird
+rezilitref
+muc dees
+htiw
+.tnemele
+rehto fo ytilibaliava
+Wheat Cultivation in India
+31
+ni
+noitagirri
+yvaeh
+ylppa
+t’noD
+retteb
+,noitaraperp
+dlefi
+ni
+pleh
+lliw
+tI
+dna
+ni deraperp
+eb
+yam
+sdnuB
+ni
+noitagirri
+gniwos
+erp
+ehT
+noitagirrI
+ereht
+esiwrehto
+porc
+gnidnats
+repmub
+fo
+noitcudorp
+dna
+noitanimreg
+dluohs
+dlefi
+dna
+dlefi
+eht
+dnuora
+rep
+sa
+yb
+dewollof
+rebotcO
+tfieneb
+fo daetsni
+ssol
+eb yam
+fo esu
+suoiciduj
+eb
+dluohs
+erehT
+.porc
+taht
+os strap
+lauqe
+ni
+dedivid
+eb
+.ytilibaliava
+dna
+tnemeriuqer
+.gniggol
+retaw
+ot eud
+.retaw
+noitagirri
+ysae
+,mrofinu
+eb yam
+noitagirri
+.kciuq
+dna
+sedicibreh
+erom
+ro
+owt
+xim t’noD
+sdeew
+yb
+ssol
+cimonoce
+eb
+lliw
+erehT
+esu
+dna
+ylreporp
+yarpS
+.gniwos
+retfa
+syad
+53-03
+tA
+lortnoc
+deeW
+D-4,2
+.snoitadnemmocer
+tuohtiw
+dnoyeb
+seog
+noitalupop
+rieht
+fi
+fo
+sesod
+dednemmocer
+/pofanidolc
+htiw
+naruflusteM
+dna
+.level
+dlohserht
+rof
+lezon
+naf
+tafl
+esU
+.sedicibreh
+porpaxoneF
+.noitacilppa
+mrofinu
+dees
+taehw
+esu t’noD
+.sdees
+deew
+htiw
+detanimatnoc
+.sedicibreh
+esod
+rednu
+ton oD
+raey
+edicibreh
+emas
+esu t’noD
+.dlefi emas
+eht
+ni
+raey retfa
+era
+hcihw
+seiteirav
+esu t’noD
+seiteirav
+tnatsiser
+dna
+yhtlaeh
+fo esU
+morf
+dees
+yhtlaeh
+erucorP
+rebmevoN-
+rebotcO
+fo
+esU
+esiwrehto
+,dednemmocer
+ton
+.sesaesid
+morf
+porc
+tneverp
+secruos
+elbailer
+ecnatsiser
+esaesid
+fo regnad
+eb
+yam ereht
+seiteirav
+.daerps
+Wheat Cultivation in India
+32
+dees
+tuohtiw
+dees
+wos
+t’noD
+noitcetorp
+evig
+yam
+tnemtaert
+deeS
+enod
+eb
+dluohs
+tnemtaert deeS
+.gniwos
+fo
+emit
+eht
+tA
+tnemtaert
+deeS
+stums
+esiwrehto
+tnemtaert
+.sesaesid
+enrob
+dees
+dna
+lios
+ot
+lixaR
+.gniwos
+erofeb yad eno
+esuac
+yam
+)esool
+dna
+derevoc(
+lliw
+stnalp
+;retteb
+eb
+lliw
+noitanimreG
+@
+xevatiV
+ro dees
+gk/ mg0.1@
+.sessol
+yvaeh
+thgfi
+ot
+yticapac
+evah
+dna
+reihtlaeh
+eb
+xavatiV+marihT
+ro
+dees gk/mg0.2
+.sesaesid
+tsniaga
+dees
+rof desu
+eb yam )1:1(
+deeS
+.stums
+rof tnemtaert
+rof
+desu
+eb yam
+murd tnemtaert
+.ylno
+tnemtaert dees
+si ti
+fi
+tnemtaert
+etimret
+esu
+t’noD
+ot
+lios
+/dnas
+detaert
+tsep
+tsacdaorB
+ertiL
+3
+@ CE02
+sohpiryporolhc
+noitagirri
+tsrfi
+retfa
+syad
+4-3
+tnemtaerT
+etimret
+ylppa
+ton
+oD
+.deriuqer
+ton
+.egamad
+etimret
+diova
+rof
+desu
+eb lios
+gK 05 ni dexim
+,etimret
+tsniaga
+ni erutsiom
+tneicfifus
+fi
+,tnemtaert
+dluohs
+erehT .dlefi
+eratceh eno
+lanraK
+,dihpa
+.lios
+ni
+elbaliava
+ton
+dlefi
+eht
+ni erutsiom
+mumitpo eb
+dna
+tnub
+ot ni
+og yam
+lacimehc
+eht taht os
+wedlim
+yredwop
+.etimret
+lortnoc
+dna lios eht
+rof
+lacimehc
+eht
+tsacdaorb
+t’noD
+ni
+kcatta
+dihpa
+ot
+eud
+ssol
+si
+erehT
+ylppa ,dihpa
+lortnoc oT
+ecnaraeppa
+lausiv
+retfa
+ylnO
+lortnoc
+dihpA
+yam
+tI
+.dlefi
+elohw
+ni
+lortnoc
+dihpa
+porc
+taehw
+002
+rodfinoC(
+dirpolhcadimI
+fo
+sredrob
+eht
+ta
+dihpa
+fo
+ydal“
+ekil
+tsep
+yldneirf
+eht
+tceffa
+ehT
+.retaw
+L 53
+ni lm 51@ )LS
+dlefi
+eht
+taht
+tnatropmi
+si
+tI .”elteeb
+drib
+dnuora
+eb dluohs
+noitacilppa
+evitca
+niamer
+stcesni
+laicfieneb
+edisni
+sretem
+3-2 sredrob eht
+.dlefi
+eht
+edisni
+dlefi eht
+Wheat Cultivation in India
+33
+retsevrah
+enibmoc
+esu
+t’nseoD
+mumitpo
+ta
+retteb
+eb
+lliw
+ytilauq
+niarG
+nehw
+drah
+raeppa
+sniarg
+eht
+fI
+enod
+si
+gnitsevrah
+launaM
+gnitsevraH
+esiwrehto
+erom
+si
+erutsiom
+eht
+fi
+ssel
+eb
+yam
+erehT
+.gnitsevrah
+fo
+emit
+eht
+neht
+,hteet
+rednu
+desserp
+si erutsiom
+niarg
+eht
+nehw
+eht
+dna
+degamad
+eb lliw
+sniarg
+reporp
+rednu
+tsep
+ot
+eud
+egamad
+.tsevrah
+rof
+ydaer
+si
+porc
+enibmoc
+esU
+.tnecrep
+02
+detceffa
+eb
+lliw
+ytilauq
+niarg
+.retteb
+eb
+lliw
+noitanimreg
+dna
+egarots
+niarg
+eht nehw
+retsevrah
+.secirp
+rewol
+gnihctef
+tnecrep
+41
+woleb
+si
+erutsiom
+erutsiom
+hgih
+ta erots
+t’noD
+brosba
+lliw
+sniarg
+,nosaes
+yniar
+nI
+nepo
+yria
+ta
+eb
+dluohs
+egarotS
+21
+woleb
+eb dluohs
+erutsioM
+egarotS
+esol
+yam
+ti
+esiwrehto
+,noitidnoc
+yb
+degamad
+eb
+yam
+dna
+erutsiom
+yniar
+ni
+sedicitsep
+esU
+.ecaps
+.tnecrep
+egamad
+tsep
+egarots
+ro
+ytilibaiv
+.stsep
+egarots
+.nosaes
+.rucco
+yam
+Wheat Cultivation in India
+34
+

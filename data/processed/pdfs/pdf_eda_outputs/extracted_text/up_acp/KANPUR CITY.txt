@@ -1,0 +1,659 @@
+State: Uttar Pradesh
+Agriculture Contingency Plan for District: Kanpur Nagar
+1.0 District Agriculture profile
+1.1 Agro-Climatic/ Ecological Zone
+Agro-Ecological Sub Region(ICAR) Central Plain Zone
+Agro-Climatic Zone (Planning Commission) Upper Gangetic Plain Region
+Agro-Climatic Zone (NARP) UP-4 Central Plain Zone
+List all the districts falling the NARP Zone* (^ 50% area falling in the zone) Lakhimpur- Kheri, Sitapur, Hardoi, Farrukhabad,Kannauj Etawah,
+Kanpur, Kanpur Dehat, Unnao, Lucknow, Rae Bareilly, Fatehpur and
+Allahabad.
+Geographical coordinates of district headquarters Latitude Longitude Altitude (mt)
+26.28 N 80.20 E
+Name and address of the concerned ZRS/ZARS/RARS/RRS/RRTTS
+Mention the KVK located in the district with address CSA Kanpur
+Name and address of the nearest Agromet Field Unit(AMFU,IMD)for agro CSA Kanpur
+advisories in the Zone
+1.2 Rainfall Normal RF (mm) Normal Rainy Normal Onset N ormal Cessation
+Days (Number) (Specify week and month) (Specify week and month)
+SW monsoon (June-sep) 713.1 45 3nd week of June 4rd week of September
+Post monsoon (Oct-Dec) 38.1 10
+Winter (Jan-March) 37.1 10 - -
+Pre monsoon (Apr-May) 13.2 2 - -
+Annual 801.5 67 - -
+1.3 Land use pattern Geographical Cultivable Forest Land under Permanent Cultivable Land Barren and Current Other
+of the district area area area non- pastures wasteland under uncultivable fallows fallows
+(Latest agricultural Misc.tree land
+statistics) use crops and
+groves
+Area in (,000 301.3 234.8 5.6 42.4 3.7 8.9 3.1 14.8 25.0 8.7
+ha)
+1.4 Major Soils Area(‘000 ha) Percent(%) of total
+Deep, loamy soils and slightly eroded 91.0 30%
+Deep, loamy soils with silty soils 54.5 18%
+Deep, fine soils moderately saline and sodic 42.0 14%
+1.5 Agricultural land use Area(‘000 hac) Cropping intensity (%)
+Net sown area 188.9 113.3 %
+Area sown more than once 77.1
+Gross cropped area 266.0
+1.6 Irrigation Area(‘000 ha)
+Net irrigation area 151.3
+Gross irrigated area 177.2
+Rain fed area 37.7
+Sources of irrigation (Gross Irr. Number Area(’000 ha) Percentage of total irrigated area
+Area)
+Canals - 34.9 19.7
+Tanks - 0.02
+Open wells - 0.1 0.1
+Bore wells (Tube wells) - 141.9 80.0
+Lift irrigation schemes - NA
+Micro-irrigation - NA
+Other sources - 0.2 0.1
+Total Irrigated Area - 177.2
+Pump sets (2011-12) 42320
+No. of Tractors 6182
+Groundwater availability and use* No of blocks- (%)area Quality of water
+(Data source: State/ Central Ground Tehsils-
+water Department/ Board)
+Over exploited 0
+Critical 1
+Semi-critical 3
+Safe 0
+Waste water availability and use
+Ground water quality
+*over-exploited groundwater utilization> 100%; critical: 90-100%; semicritical:70-90%; safe:<70%
+2
+1.7 Area under major field crops & (As per latest figures 2011-12)
+1.7 Major field crops cultivated Area(‘000 ha)
+Kharif Rabi Summer Total
+Irrigated Rain fed Total Irrigated Rain fed Total
+01 Rice 33.4 0 33.4 - - - - 33.4
+02 Maize 0.2 20.9 21.1 - - - - 21.1
+03 Sorghum 0.1 12.5 12.6 - - - - 12.6
+04 Wheat - - - 102.8 0.2 103.0 - 103.0
+05 Gram - - - 1.0 15.6 16.6 - 16.6
+06 Rapeseed Mustard - - - 7.3 6.9 14.2 - 14.2
+Horticulture crops -Fruits Area (‘000 ha)
+Total Irrigated Rainfed
+Mango 0.1 0.1 -
+Guava 0.1 0.1 -
+Horticulture crops -Vegetables
+Potato 11.5 11.5 -
+Onion 0.4 0.4 -
+Pea 1.1 1.1 -
+Major Fodder crops Area(ha) Total
+Kharif 8976 8976
+Rabi 1974 1974
+Summer 362 362
+Total 11312 11312
+3
+1.8 Production and productivity of major crops (Average of last 5 years)
+1.8 Major field crops Area(‘000 ha)
+cultivated
+Kharif Rabi Summer Total Crop
+Production Productivity Production Productivity Production Productivity Production Productivity residue
+(‘000 t) (Kg/ha) (‘000t) (Kg/ha) (‘000 t) (Kg/ha) (‘000tT) (Kg/ha) as fodder
+(‘000
+tons)
+Rice 75.5 2286 - - - - 75.5 2286 NA
+Maize 29.3 1444 - - - - 29.3 1444 NA
+Juar 15.6 1285 - -+ - - 15.6 1285 NA
+Wheat - - 317.1 3107 - - 317.1 3107 NA
+Gram - - 21.2 1294 - - 21.2 1294 NA
+Rapeseed Mustard - - 14.8 1059 - - 14.8 1059 NA
+1.9 Livestock(year 2007) Male(000) Female(000) Total (000)
+Non descriptive Cattle (local low yielding) 78.931 83.336 162.267
+Improved cattle 0.018 0.024 0.042
+Crossbred Cattle 8.309 18.270 26.579
+Non descriptive Buffaloes (local low yielding) 22.998 73.932 96.930
+Descript Buffaloes 49.100 188.254 237.354
+Goat 84.078 158.325 242.403
+Sheep 6.959
+Other (Camel,Pig, Yak etc) 186.254
+Commerical dairy farms (number) 0.000
+4
+1.10 Sowing Pearl Maize Rice Urd Sorghum Pigeon Wheat Pea Gram Mustard
+window millet Pea
+for 5
+major
+field crops
+Kharif – 2nd week of 3rd week - 2nd week of First week First week - - - -
+Rainfed July to last of June to July to of July to of July to
+week of First week First week 2nd week Last week
+July of July of August of July of July
+Kharif - - - 3rd week 2nd week of First week - - - - -
+Irrigated of June to July to of July to
+Last week First week 2nd week
+of July of August of July
+Rabi –Rain Last week First week First week First week
+fed of Oct to of Oct to of Oct to of Sep to
+2nd week last week last week 2nd week
+of Nov of Oct of Oct of Oct
+Rabi - 2nd week - - -
+Irrigated of Nov to
+last week
+of Dec
+5
+1.11 What is the major contingency the district is prone to? Regular Occasional None
+Drought (cid:1)
+Flood (cid:1)
+Cyclone √
+Hail storm √
+Heat wave (cid:1)
+Cold wave (cid:1)
+Frost (cid:1)
+Sea water intrusion √
+Sheath Blight, Stemborrer , Pyrilla loos smut, Heliothis, Rust etc (cid:1)
+white grub.
+1.14 Include Digital maps of the district for Location map of district within State as Annexure I Enclosed: Yes
+Mean annual rainfall as Annexure 2 Enclosed: Yes
+Soil map as Annexure 3 Enclosed: Yes
+6
+Annexure I
+Location map of Kanpur Nagar district
+7
+Annexure 2
+Average Month-wise rainfall (mm) in Kanpur Nagar District
+8
+SOILS OF KANPUR NAGAR DISTRICT (U.P.)
+Alluvial plain (0-1% slope)
+1. Deep, loamy soils and slightly eroded .
+2. Deep, loamy soils and slightly eroded associated with silty soils .
+3. Deep, fine soils moderately saline and sodic associated with loamy soils, slightly eroded .
+4. Deep, fine soils and slightly eroded associated with loamy soils slightly saline and
+moderately sodic .
+5. Deep, fine soils and slightly eroded associated with loamy soils .
+6. Deep, silty soils with moderately salinity and sodicity associated with loamy soils with
+moderate salinity and sodicity and water logging .
+7. Deep, silty soils associated with loamy soils slightly eroded .
+8. Deep, loamy soils and slightly eroded associated with silty soils slightly saline/sodic and
+moderately sodic.
+9. Deep, silty soils and slightly eroded associated with fine soils .
+Active Flood Plain (1-3% slope)
+10. Deep, sandy soils with moderate flooding associated with stratified loamy soils and slight
+flooding .
+11. Deep, stratified loamy soils, with severe flooding associated with loamy soils with
+moderate flooding .
+Ravinous land (3-5% slope)
+12. Deep, silty soils and severely eroded associated with loamy soils severely eroded.
+13. Deep, loamy soils and severely eroded .
+14. Deep, loamy soils, very severely eroded associated with silty soils, very severely eroded
+Very gently sloping uplands with hummocks (1-3%slope)
+15. Deep, fine soils, slightly eroded associated with fine smectitic soils and slightly eroded.
+Ravinous Land (5-10% slope)
+16. Deep, fine smectitic soils and are moderately eroded associated with fine soils moderately
+eroded.
+9
+2.0 Strategies for weather related contingencies
+2.1 Drought
+2.1.1 Rain fed situation
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop / Cropping Change in crop / cropping Agronomic measures Remarks on
+drought (delayed situation system system including variety Implementation
+onset)
+Deep, loamy soils Sorghum: Composite- Varsha, No change Use medium maturing Linked with SDC/
+Delay by 2 weeks and slightly eroded, CSV-13, CSV-15,SPB-1388 and varieties, Thinning, SAUs
+(1st week of July) Deep loamy soils Interculture, Mulching
+Vijeta
+with silty soils,
+Hybrid- CSH-9, 16,14,18,13 and
+Deep, fine soils
+moderately saline CSH-23
+and sodic Pearl millet,- No change Use medium maturing Linked with SDC/
+Composite- ICMB-155, WCC- varieties, Thinning, SAUs
+75,ICTP-8203 and Raj-171 Interculture, Mulching
+Hybrid- Pusa-23 & 322 and
+ICMH-451
+Pigeon Pea – Narendra arhar-1, No Change Ridge Planting Linked with SDC/
+Narendra arhar-2, Azad, Thinning, Inter-culture, SAUs
+Urd- Uttara, Azad-2, Azad-3, No change Manual weeding, Line Linked with SDC/
+Pant-U-35, Pant U-40 sowing SAUs
+Maize Composite- Naveen, Azad No change Use medium maturing Linked with SDC/
+uttam, Pragati,Gaurav and KH- varieties, Thinning, SAUs
+510 Interculture, Mulching
+Hybride- Ganga-11, HQPM-5
+and Prakash, JH-3459
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping system Change in Agronomic measures Remarks on
+drought (delayed situation crop/cropping system Implementation
+onset)
+Sorghum Composite- Varsha, No change Use 10-15% more seed Linked with SDC/
+10
+Delay by 4 weeks Deep, loamy soils CSV-13, CSV-15,SPB-1388 and Use medium maturing SAUs
+(July 3rd week) and slightly eroded, Vijeta varieties, Inter-culture,
+Deep loamy soils Mulching
+Hybrid- CSH-9, 16,14,18,13 and
+with silty soils, Spray of 2% MOP
+CSH-23
+Deep, fine soils
+moderately saline Pearl millet: Composite- ICMB- No change Use 10-15% more seed Linked with SDC/
+and sodic 155, WCC-75,ICTP-8203 and Use medium maturing SAUs
+Raj-171
+varieties, Inter-culture,
+Mulching Spray of 2%
+Hybrid- Pusa-23 & 322 and
+MOP
+ICMH-451
+Pigeon Pea – Narendra arhar-1, No change Use 10-15% more seed Linked with SDC/
+Narendra arhar-2, Azad, Use medium maturing SAUs
+varieties, Inter-culture,
+Mulching Spray of 2%
+MOP
+Urd- Uttara, Azad-2, Azad-3, No change Use 10-15% more seed Linked with SDC/
+Pant-U-35, Pant U-40 Use medium maturing SAUs
+varieties, Inter-culture,
+Mulching Spray of 2%
+MOP
+Maize: Composite- Naveen, Replace by Pearl Use 10-15% more seed Linked with SDC/
+Azad uttam, Pragati,Gaurav and millet/Sorghum Use medium maturing SAUs
+varieties, Inter-culture,
+KH-510
+Mulching Spray of 2%
+Hybrid- Ganga-11, HQPM-5 and
+MOP
+Prakash, JH-3459
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+drought (delayed situation system system Implementation
+onset)
+Deep, loamy soils Sorghum: Composite- Varsha, Replace by Pearl millet/Urd Use 10-15% more seed Linked with SDC/
+Delay by 6 weeks and slightly eroded, CSV-13, CSV-15,SPB-1388 Use medium maturing SAUs
+(Aug. 1st week) Deep loamy soils varieties, Inter-culture,
+and Vijeta
+with silty soils, Mulching Spray of 2%
+Hybrid- CSH-9, 16,14,18,13
+Deep, fine soils MOP
+moderately saline and CSH-23
+and sodic Pearl millet: Composite- No change Use 10-15% more seed Linked with SDC/
+11
+ICMB-155, WCC-75,ICTP- Use medium maturing SAUs
+8203 and Raj-171 varieties, Inter-culture,
+Mulching Spray of 2%
+Hybrid- Pusa-23 & 322 and
+MOP
+ICMH-451
+Pigeon Pea – Narendra arhar-1, Replace with Pearl millet or Use 10-15% more seed Linked with SDC/
+Narendra arhar-2, Azad, Urd Use medium maturing SAUs
+varieties, Inter-culture,
+Mulching Spray of 2%
+MOP
+Urd- Uttara, Azad-2, Azad-3, No change Use 10-15% more seed Linked with SDC/
+Pant-U-35, Pant U-40 Use medium maturing SAUs
+varieties, Inter-culture,
+Mulching Spray of 2%
+MOP
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping system Change in crop/cropping Agronomic measures Remarks on
+drought (delayed situation system Implementation
+onset)
+Deep, loamy soils Pearl millet,- Fallow Moisture conservation -
+Delay by 8 weeks and slightly eroded, Composite- ICMB-155, WCC- and preparation for rabi
+( Aug. 3rd week) Deep loamy soils sowing
+75,ICTP-8203 and Raj-171
+with silty soils,
+Hybride- Pusa-23 & 322 and
+Deep, fine soils
+moderately saline ICMH-451
+and sodic Urd- Uttara, Azad-2, Azad-3, Fallow Moisture conservation -
+Pant-U-35, Pant U-40 and preparation for rabi
+sowing
+Condition Suggested Contingency measures
+Early season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (Normal situation system moisture conservation Implementation
+onset) measures
+Deep, loamy soils Sorghum :Composite- Varsha, • Life saving irrigation M ulching , Manual
+Normal onset and slightly eroded, CSV-13, CSV-15,SPB-1388 Re sowing if plant weeding
+followed by 15-20 Deep loamy soils population less than
+and Vijeta
+days dry spell after with silty soils, 70%
+Hybrid- CSH-9, 16,14,18,13
+sowing leading to Deep, fine soils
+12
+poor moderately saline and CSH-23
+germination/crop and sodic Pearl millet: Composite- • Life saving irrigation M ulching , Manual
+stand etc. ICMB-155, WCC-75,ICTP- Re sowing if plant weeding
+population less than
+8203 and Raj-171
+70%
+Hybrid- Pusa-23 & 322 and
+ICMH-451
+Pigeon Pea – Narendra arhar-1, • Life saving irrigation M ulching , Manual
+Narendra arhar-2, Azad, Re sowing if plant weeding
+population less than
+70%
+Urd- Uttara, Azad-2, Azad-3, • Life saving irrigation M ulching , Manual
+Pant-U-35, Pant U-40 Re sowing if plant weeding
+population less than
+70%
+Maize: Composite- Naveen, • Life saving irrigation M ulching , Manual
+Azad uttam, Pragati,Gaurav Re sowing if plant weeding
+population less than
+and KH-510
+70%
+Hybrid- Ganga-11, HQPM-5
+and Prakash, JH-3459
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (long dry situation system moisture conservation Implementation
+spell, consecutive 2 measures
+weeks rainless
+(>2.5 mm) period)
+Deep, loamy soils Sorghum :Composite- Varsha, Life saving irrigation if Spray of 2%MOP.
+At vegetative stage and slightly eroded, CSV-13, CSV-15,SPB-1388 available Live Mulching
+13
+Deep loamy soils and Vijeta
+with silty soils, Hybrid- CSH-9, 16,14,18,13
+Deep, fine soils
+and CSH-23
+moderately saline
+Pearl millet,- Life saving irrigation if Spray of 2%MOP.
+and sodic
+Composite- ICMB-155, available Live Mulching
+WCC-75,ICTP-8203 and Raj-
+171
+Hybrid- Pusa-23 & 322 and
+ICMH-451
+Pigeon Pea – Narendra arhar-1, Life saving irrigation if Spray of 2%MOP.
+Narendra arhar-2, Azad, available Mulching
+Urd- Uttara, Azad-2, Azad-3, Life saving irrigation if Spray of 2%MOP.
+Pant-U-35, Pant U-40 available Mulching
+Maize: Composite- Naveen, Life saving irrigation if Spray of 2%MOP.
+Azad uttam, Pragati,Gaurav available Live Mulching
+and KH-510
+Hybrid- Ganga-11, HQPM-5
+and Prakash, JH-3459
+Condition Suggested Contingency measures
+Mid season Major Farming Normal Crop/cropping Crop management Soil nutrient & Remarks on
+drought (long dry situation system moisture conservation Implementation
+spell) measures
+Deep, loamy soils Sorghum: Composite- Varsha, Life saving irrigation Spray 2% solution of
+At flowering/ and slightly eroded, CSV-13, CSV-15,SPB-1388 Urea and 2%MOP.
+fruiting stage Deep loamy soils Mulching
+and Vijeta
+with silty soils,
+Hybrid- CSH-9, 16,14,18,13
+Deep, fine soils
+moderately saline and CSH-23
+and sodic Pearl millet,- Life saving irrigation Spray 2% solution of
+Composite- ICMB-155, WCC- Urea and 2%MOP.
+Mulching
+75,ICTP-8203 and Raj-171
+Hybrid- Pusa-23 & 322 and
+ICMH-451
+Pigeon Pea – Narendra arhar-1, Life saving irrigation Spray 2%MOP.
+Narendra arhar-2, Azad, Mulching
+14
+Urd- Uttara, Azad-2, Azad-3, Life saving irrigation Spray 2%MOP.
+Pant-U-35, Pant U-40 Mulching
+Maize: Composite- Naveen, Life saving irrigation Spray 2% solution of
+Azad uttam, Pragati,Gaurav Urea and 2%MOP.
+Mulching
+and KH-510
+Hybrid- Ganga-11, HQPM-5
+and Prakash, JH-3459
+Condition Suggested Contingency measures
+Terminal drought Major Farming Normal Crop/cropping Crop management Rabi Crop planning Remarks on
+(Early withdrawal situation system Implementation
+of monsoon) Deep, loamy soils Sorghum: Composite- Varsha, If crop not reviving use the Prepare Field for rabi
+and slightly eroded, CSV-13, CSV-15,SPB-1388 crop as fodder. sowing
+Deep loamy soils
+and Vijeta
+with silty soils,
+Hybrid- CSH-9, 16,14,18,13
+Deep, fine soils
+moderately saline and CSH-23
+and sodic Pearl millet: Composite- If crop not reviving use the Prepare Field for rabi
+sandy soils and ICMB-155, WCC-75,ICTP- crop as fodder. sowing
+eroded
+8203 and Raj-171
+Hybrid- Pusa-23 & 322 and
+ICMH-451
+Pigeon Pea – Narendra arhar-1, Life saving irrigation Spray
+Narendra arhar-2, Azad, 2%MOP
+Urd- Uttara, Azad-2, Azad-3, If crop not reviving use the Prepare Field for rabi
+Pant-U-35, Pant U-40 crop as fodder. If 75% mature sowing
+than harvest.
+15
+2.1.2 Drought - Irrigated situation
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measures Remarks on
+situation system crop/cropping Implementation
+system
+Delayed release of Deep, fine soils Paddy: (Transplanted) Govind, No change • Direct seeded/ Drum seeded Linked with
+water in canals due moderately saline Narendra-118,97 , Ashwani, rice SDC/SAU’s
+to low rainfall and sodic, • Use early maturing varieties
+(Early) Saket-4, Ratna, Pant-
+Deep, loamy soils ie. Saket-4, Ratna, Pant-12,
+12, Narendra-80, 2026
+And Deep, loamy Narendra-80, 2026 NDR-
+soils associated with (Medium) Sarjoo-52, Pant-4, 118
+sandy soils and Narendra-359, 2026,2064 • Transplant 3-4 seed lings / hill
+eroded • Wet and dry irrigation,
+weed management
+Maize: Composite- Naveen, No change Use short duration varieties. Linked with
+Azad uttam, Pragati,Gaurav Irrigation at Critical stage SDC/SAU’s
+Ridge planting
+and KH-510
+Hybrid- Ganga-11, HQPM-5
+and Prakash, JH-3459
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measures Remarks on
+situation system crop/cropping Implementation
+system
+Limited release of Deep, fine soils Paddy: (Transplanted) Govind, No change • Direct seeded/ Drum Linked with
+water in canals due moderately saline Narendra-118,97 , Ashwani, seeded Paddy/ SRI SDC/SAU’s
+to low rainfall and sodic, • Use early maturing
+(Early) Saket-4, Ratna, Pant-
+Deep, loamy soils varieties ie. Saket-4, Ratna,
+12, Narendra-80, 2026
+And Deep, loamy Pant-12, Narendra-80,
+soils associated with (Medium) Sarjoo-52, Pant-4, 2026 NDR-118
+sandy soils and Narendra-359, 2026,2064 • Transplant 3-4 seed lings /
+eroded hill
+• Wet and dry irrigation,
+weed management
+• Ensure application of MOP
+Maize: Composite- Naveen, No change Use short duration varieties. Linked with
+16
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in Agronomic measures Remarks on
+situation system crop/cropping Implementation
+system
+Azad uttam, Pragati,Gaurav Irrigation at Critical stage SDC/SAU’s
+and KH-510 Ridge planting
+Weed management
+Hybrid- Ganga-11, HQPM-5
+Ensure application of MOP
+and Prakash, JH-3459
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Non release of Deep, fine soils Paddy: (Transplanted) Govind, Replace by sorghum/ Pearl • Light irrigation Linked with
+water in canals moderately saline Narendra-118,97 , Ashwani, millets/Pigeon Pea/Til at critical stage, SDC/SAU’s
+under delayed and sodic, • Ridge
+(Early) Saket-4, Ratna, Pant-
+onset of monsoon Deep, loamy soils planting/line
+12, Narendra-80, 2026
+in catchment And Deep, loamy sowing,
+soils associated with (Medium) Sarjoo-52, Pant-4, • 10-15%
+sandy soils and Narendra-359, 2026,2064 increase seed.
+eroded • Weed
+managment
+Maize: Composite- Naveen, Replace by sorghum/ Pearl • Light irrigation Linked with
+Azad uttam, Pragati,Gaurav millets/Pigeon Pea/Til at critical stage, SDC/SAU’s
+• Ridge
+and KH-510
+planting/line
+Hybrid- Ganga-11, HQPM-5
+sowing,
+and Prakash, JH-3459 • 10-15%
+increase seed.
+• Weed
+management
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Lack of inflows Deep, fine soils Not applicable
+into tanks due to moderately saline
+17
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+insufficient and sodic,
+/delayed onset of Deep, loamy soils
+monsoon And Deep, loamy
+soils associated with
+sandy soils and
+eroded
+Condition Suggested Contingency measures
+Major Farming Normal Crop/cropping Change in crop/cropping Agronomic measures Remarks on
+situation system system Implementation
+Insufficient Paddy: Replace by Sorghum/ Pearl • Light irrigation Linked with
+groundwater Deep, fine soils (Transplanted) Govind, millets/Pigeon Pea/Til at critical stage, SDC/SAU’s
+recharge due to moderately saline • Ridge
+Narendra-118,97 , Ashwani,
+low rainfall and sodic, planting/line
+(Early) Saket-4, Ratna, Pant-
+Deep, loamy soils sowing,
+And Deep, loamy 12, Narendra-80, 2026 • 10-15%
+soils associated with (Medium) Sarjoo-52, Pant-4, increase seed.
+sandy soils and Narendra-359, 2026,2064 • Weed
+eroded management
+Maize: Composite- Naveen, Replace by Sorghum/ Pearl • at critical stage, Linked with
+Azad uttam, Pragati,Gaurav millets/Pigeon Pea/Til • Ridge SDC/SAU’s
+planting/line
+and KH-510
+sowing,
+Hybrid- Ganga-11, HQPM-5
+• 10-15%
+and Prakash, JH-3459
+increase seed.
+• Weed
+management
+18
+2.2 Unusual rains (untimely, un seasonal etc) (for both Rain fed and irrigated situations)
+Condition Suggested contingency measure
+Continuous high Vegetative stage Flowering stage Crop maturity stage Post harvest
+rainfall in a short
+span leading to
+water logging
+Paddy Bunding around the field Bunding around the field Drain out excess water Shift to safer place
+Maize Drainage Drainage Shift to safer place
+Drainage
+Sorghum Drainage Drainage Shift to safer place
+Drainage
+Pearl millet Drainage Drainage Drainage Shift to safer place
+Pigeon pea Drainage Drainage Drainage Shift to safer place
+Urdbean Drainage Drainage Drainage Shift to safer place
+Heavy rainfall with high speed winds in a short span
+Paddy Bunding around the field Bunding around the field Drain out excess water Shift to safer place
+Maize Drainage Drainage Shift to safer place
+Drainage
+Sorghum Drainage Drainage Shift to safer place
+Drainage
+Pearl millet Drainage Drainage Drainage Shift to safer place
+Pigeon pea Drainage Drainage Drainage Shift to safer place
+Outbreak of pests and diseases due to un seasonal rains
+Paddy Spray of Chloropyriphos 2.5 lt./ Dusting of Methyl parathion @15 -
+hac kg/hac for Gandhi Bug and
+for termite and For stemborer Chlorothalonil @2ml/lt of water
+(Cartap @25 kg/ hac) for false smut. -
+Maize Spray of Chloropyriphos 2.5 lt./ Spray of Validamycin @2.7 ml/lt. -
+hac of water solution for banded leaf -
+19
+for termite and For stemborer and sheath blight.
+(Cartap @25 kg/ hac)
+Sorghum Spray of Chloropyriphos 2.5 lt./ Spray of Carbandazim (0.05%)+ -
+-
+hac dithane M 45 (0.2%) for early and
+for termite and For stemborer late leaf spots and rust.
+(Cartap @25 kg/ hac)
+Pearl millet Spray of Chloropyriphos @3.50 Spray of Mancozeb(0.2%) for - -
+lt./ hac rust.
+for early shoot borar
+Pigeon pea Spray of Chloropyriphos 2.5 lt./ Spray of Chloropyriphos 2.5 lt./ - -
+hac hac
+for termite Or Monocrtophos @1.25lt/hac for
+control podborar
+Urdbean Spray of Chloropyriphos 2.5 lt./ Spray of Dimethoate 1.00 lt./ hac - -
+hac Or imidachlorpide @250 ml/hac
+for termite for control of thrips/
+2.3 Floods : Not applicable
+Condition Suggested contingency measure
+Transient water logging/ partial inundation1 Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+Horticulture
+Field crops
+Continuous submergence
+for more than 2 days Not applicable
+Sea water intrusion
+20
+2.4 Extreme events: Heat wave / Cold wave/Frost/ Hailstorm /Cyclone: Occasional events
+Extreme event type Suggested contingency measure
+Seedling / nursery stage Vegetative stage Reproductive stage At harvest
+Heat Wave
+Rice Remove ponded water and apply irrigation at evening - - -
+Cold wave Not applicable
+2.5 Contingent strategies for Livestock, Poultry & Fisheries
+2.5.1 Livestock
+Suggested contingency measures
+Before the event During the event After the event
+Heat & Cold In villages which are chronically prone to Allow the animals preferably early in the Green and concentrates supplementation
+wave heat waves the following permanent morning or late in the evening for grazing should be provided to all the animals.
+measures are suggested during heat waves
+Allow the animals for grazing (normal
+i) Plantation of trees like Neem, Allow for grazing between 10AM to 3PM timings)
+Pipal, Subabul around the shed during cold waves
+Bleach (0.1%) drinking water / water
+ii) Spreading of husk/straw/coconut
+Feed green fodder/silage / concentrates during sources
+leaves on the roof of the shed
+day time and roughages / hay during night time
+Provide clean drinking water
+iii) Water sprinklers / foggers in the in case of heat waves
+animal shed
+Add 25-50 ml of edible oil in concentrates per
+iv) Application of white reflector paint
+kg and fed to the animal during cold waves
+on the roof to reduce thermal
+radiation effect Apply / sprinkle lime powder (5-10g per square
+Cold wave : Covering all the wire meshed feet) in the animal shed during cold waves to
+walls / open area with gunny bags/ neutralize ammonia accumulation
+polyethylene sheets with a mechanism for Put on the foggers / sprinklers during heat
+lifting during the day time and closing weaves and heaters during cold waves in case of
+21
+during night high productive animals
+In severe cases, vitamin ‘C’ (5-10ml per litre)
+and electrolytes (Electral powder @ 20g per
+litre) should be added in water during severe
+heat waves and provision of wholesome clean
+drinking water at least 3 times in a day
+Insurance Insurance policy for loss of production due Listing out the details of the dead animals and Submission for insurance claim and
+to heat wave or cold wave may be developed loss of production in high yielders availing insurance benefit
+Encouraging insurance of livestock Purchase of new productive animals
+2.5.2 Poultry
+Suggested contingency measures
+Before the eventa During the event After the event
+Heat wave
+Shelter/environment Provision of proper shelter with good In severe cases, foggers/water sprinklers/wetting Routine practices are followed
+management ventilation of hanged gunny bags should be arranged
+Don’t allow for scavenging during mid day
+Health and disease Deworming and vaccination against Supplementation of house hold grain Routine practices are followed
+management RD and fowl pox
+Provide cool and clean drinking water with
+electrolytes and vit. C (5-10 ml per litre)
+In hot summer, add anti-stress probiotics in
+drinking water or feed (Reestobal etc., 10-20ml
+per litre)
+Cold wave
+22
+Shelter/environment Provision of proper shelter Close all openings with polythene sheets Routine practices are followed
+management
+Arrangement for brooding In severe cases, arrange heaters
+Assure supply of continuous electricity Don’t allow for scavenging during early
+morning and late evening
+Health and disease Arrangement for protection from Supplementation of grains Routine practices are followed
+management chilled air
+Antibiotics (Ampicilline/ Ampiclox etc., 10g in
+one litre) in drinking water to protect birds
+from pneumonia
+23
