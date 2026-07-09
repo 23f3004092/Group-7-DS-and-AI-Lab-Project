@@ -109,12 +109,19 @@ Each dataset directly supports the objectives defined in Milestone 1. The **Rice
 ### 3. Dataset Description
 
 **3.1 Vision Dataset**
-* Number of images (per class, train/field)
-* Target variable(s) — disease classes
-* Feature description (image properties, resolution, channels)
-* Data format
-* Sample records (example images/labels)
-* Dataset schema
+| Attribute | Description |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Number of images** | Current EDA scan reports: Rice dataset — 120 images (Bacterial Leaf Blight: 40, Brown Spot: 40, Leaf Smut: 40); Wheat dataset — 14,154 images across 15 observed classes (`Aphid`, `Black Rust`, `Blast`, `Brown Rust`, `Common Root Rot`, `Fusarium Head Blight`, `Healthy`, `Leaf Blight`, `Mildew`, `Mite`, `Septoria`, `Smut`, `Stem Fly`, `Tan Spot`, `Yellow Rust`); PlantDoc benchmark — 2,567 images across train/test/valid splits. |
+| **Number of features** | Not applicable in the traditional tabular sense; this is an image dataset. The EDA metadata table tracks per-image properties (file path, dimensions, aspect ratio, and channel mode). |
+| **Target variable(s)** | Disease class label for each crop image (classification target). |
+| **Feature description** | Raw image features include pixel content, width, height, aspect ratio, and color mode. Image dimensions are non-uniform across classes/datasets. Channel modes are mostly RGB, with RGBA also observed in at least one wheat class (`Septoria`) during EDA. |
+| **Data format** | Source data format: image files (`.jpg`, `.jpeg`, `.png`) arranged in class/split directories. EDA representation: one row per image in a Pandas metadata table. |
+| **Dataset schema** | Fields used in `01_vision_eda.ipynb` scan: `crop`, `class_name`, `raw_class`, `file_path`, `width`, `height`, `aspect_ratio`, `mode`. |
+
+**Sample records (example images/labels):**
+
+![Rice_wheat_plantdoc_images](<./assets/milestone-2-assets/wheat_rice_sample.jpg>)
+
 
 **3.2 RAG/NLP PDF Corpus**
 
@@ -189,12 +196,27 @@ The datasets used in this project were obtained from publicly available and trus
 ### 5. Exploratory Data Analysis (EDA)
 
 **5.1 Vision Dataset EDA**
-* Summary statistics
-* Class distribution (per disease)
-* Missing/corrupt image analysis
-* Duplicate analysis
-* Outlier/quality analysis (blur, lighting)
-* Visualizations
+* **Summary statistics (from `notebooks/01_vision_eda.ipynb`):**
+  * Rice dataset scan collected **120** images.
+  * Wheat dataset scan collected **14,154** images.
+  * PlantDoc benchmark scan collected **2,567** images across train/test/valid splits.
+* **Class distribution (per disease):**
+  * Rice classes observed in the current EDA scan:
+    * Bacterial Leaf Blight: 40
+    * Brown Spot: 40
+    * Leaf Smut: 40
+  * Wheat classes observed in the current EDA scan:
+    * Aphid: 973, Black Rust: 646, Blast: 717, Brown Rust: 1341, Common Root Rot: 684, Fusarium Head Blight: 681, Healthy: 1070, Leaf Blight: 912, Mildew: 1151, Mite: 870, Septoria: 1214, Smut: 1380, Stem Fly: 304, Tan Spot: 840, Yellow Rust: 1371.
+* **Image properties and quality signals:**
+  * Image dimensions vary significantly across both Rice and Wheat classes (as reflected by per-class average width/height in the notebook outputs), indicating a need for resolution standardization before model training.
+  * Most images are RGB; one wheat class (`Septoria`) appears in RGBA mode in the EDA output, so channel normalization/conversion is required during preprocessing.
+  * PlantDoc samples show in-the-wild field variability (background clutter, non-uniform lighting, and framing differences), and are treated as a domain-gap benchmark relative to curated crop-leaf datasets.
+* **Missing/corrupt image analysis:** Current notebook implementation skips unreadable files during scanning (`try/except` around image open). A finalized corrupt-file inventory will be added after preprocessing logs are exported.
+* **Duplicate analysis:** Duplicate-image quantification is not finalized in this EDA notebook and will be added after hash/similarity checks in preprocessing.
+* **Visualizations (placeholders for report integration):**
+
+![Wheat class distribution and image resolution width vs height](<./assets/milestone-2-assets/wheat_dist_and_image_resolution.png>)
+![Rice class distribution and image resolution width vs height](<./assets/milestone-2-assets/rice_dist_and_image_resolution.png>)
 
 **5.2 RAG/NLP PDF Corpus EDA**
 * **Summary statistics:** 187 PDFs collected across 4 source folders (Other_docs, Schemes, PPQS_Advisories, UP_ACF_PDFs); per-folder doc count, total pages, and average word count documented in `pdf_inventory_clean.csv`.
@@ -223,12 +245,12 @@ The datasets used in this project were obtained from publicly available and trus
 
 * **Other Visualizations:**
 
-![Word count](<./assets/milestone-2-assets/word_count.png>)
+![Word count](<./assets/milestone-2-assets/word_count.png>) ![Docs per source](<./assets/milestone-2-assets/docs_per_source.png>)
 
 
 
 
-![Docs per source](<./assets/milestone-2-assets/docs_per_source.png>)
+
 
 
 
