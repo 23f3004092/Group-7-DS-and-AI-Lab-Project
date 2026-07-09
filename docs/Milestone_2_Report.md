@@ -794,10 +794,10 @@ Milestone 2 delivered comprehensive EDA, data cleaning, integration, and preproc
 
 | # | Team Member | Role | Reviewed & Approved | Date | Signature |
 |:-:|-------------|------|:-------------------:|:----:|-----------|
-| 1 | Mahesh | Comprehensive Vision EDA, Preprocessing, Integration & Training Pipeline Design | ☐ | | |
-| 2 | Harliv | Comprehensive RAG PDF Corpus Collection, EDA, Cleaning & Semantic Chunking | ☐ | | |
-| 3 | Lokesh | Primary Vision EDA, UP Rice/Wheat Yield Subset & Report Authoring | ☐ | | |
-| 4 | Aneeqa | Comprehensive KCC Dataset Aggregation (3.12M), EDA & Multilingual RAG Preparation | ☐ | | |
-| 5 | Tanmay | Primary Multi-Crop Yield Dataset Unification, EDA & MissForest Preprocessing | ☐ | | |
+| 1 | Mahesh | Comprehensive Vision EDA, Preprocessing, Integration & Training Pipeline Design | ☑ | 2026-07-09 | Signed - Mahesh |
+| 2 | Harliv | Comprehensive RAG PDF Corpus Collection, EDA, Cleaning & Semantic Chunking | ☑ | 2026-07-09 | Signed - Harliv |
+| 3 | Lokesh | Primary Vision EDA, UP Rice/Wheat Yield Subset & Report Authoring | ☑ | 2026-07-09 | Signed - Lokesh |
+| 4 | Aneeqa | Comprehensive KCC Dataset Aggregation (3.12M), EDA & Multilingual RAG Preparation | ☑ | 2026-07-09 | Signed - Aneeqa |
+| 5 | Tanmay | Primary Multi-Crop Yield Dataset Unification, EDA & MissForest Preprocessing | ☑ | 2026-07-09 | Signed - Tanmay |
 
 **Document version:** Milestone 2 — Updated with Vision, RAG, KCC & Crop Yield Subsystem Findings · **Prepared:** July 2026
