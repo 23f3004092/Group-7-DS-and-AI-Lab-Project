@@ -541,11 +541,6 @@ Each subsystem has a defined refresh cadence tied to the agricultural calendar, 
 - **Incremental vector appending:** New chunks (512 characters, 50-character overlap) are encoded via MuRIL (`google/muril-base-cased`) and appended directly to the existing FAISS `IndexFlatIP` store with explicit metadata tags (`doc_id`, `version`, `ingestion_date`, `status: active`). This avoids a full index rebuild on every update.
 - **Supervised document deprecation:** Superseded scheme guidelines are marked with `status: deprecated` and an `effective_end_date`. Query-time retrieval applies a strict metadata filter (`status == 'active'`), preventing outdated guidance from reaching farmers while preserving historical audit trails.
 
-#### 9.4.4 Vision and Yield Subsystem Periodic Maintenance
-
-- **Vision:** Operational edge-case images are archived, pHash-verified for zero cluster leakage, and incorporated annually into `master_manifest.csv` for EfficientNet-B0 fine-tuning.
-- **Yield:** Annual DES crop statistics and IMD gridded monsoon metrics are appended to `production_unified_imputed.csv` and the UP district subset (`train|val|test_yield.csv`) for seasonal regression retraining.
-
 ### 9.5 Long-Term Knowledge Base Maintenance
 
 To maintain the accuracy, relevance, and operational integrity of the RAG knowledge base over time, the following governance and maintenance framework is established:
