@@ -30,6 +30,7 @@ Appendices:
 - [Appendix D: Yield EDA Detail](#appendix-d-yield-eda-detail)
 - [Appendix E: Terminology Harmonization](#appendix-e-terminology-harmonization)
 - [Appendix F: Chunking Rationale and Pending Validation](#appendix-f-chunking-rationale-and-pending-validation)
+- [Appendix G: Deliverables and Reproducibility Artifacts](#appendix-g-deliverables-and-reproducibility-artifacts)
 
 ---
 
@@ -271,6 +272,8 @@ Full correlation matrices and regional breakdowns are in Appendix D.
 
 Saved artifacts: `master_manifest.csv`, `label_to_idx.json`, `final/train`, `final/val`, `final/test` (273 MB total).
 
+**Post-materialization integrity check.** MD5 checksums were computed on all 12,859 final images (0 missing, 0 unreadable). Dataset fingerprint: `f986164b2da47dd48970c135972e0bae`. The check surfaced 6 hash-collision groups (14 files, all `wheat`, predominantly `wheat__blast`), representing 8 redundant images. These were not duplicates in the source data — they converged to byte-identical outputs during the 256² letterbox + JPEG re-encode, which is a lossy normalizing transform. All affected files reside entirely within the training split (0 pairs spanning splits), so the zero-leakage guarantee is unaffected. They were retained as harmless redundancy (0.08% of the training set).
+
 ### 6.2 RAG PDF Preprocessing
 
 **Cleaning impact:**
@@ -344,6 +347,30 @@ Output: `production_unified.csv` and `production_unified_imputed.csv`.
 | Train | 1997-2018 | 3,256 | 81.5% |
 | Validation | 2019-2020 | 296 | 7.4% |
 | Holdout test | 2021-2023 | 444 | 11.1% |
+
+### 6.5 Vision Augmentation and Training Pipeline Design
+
+The materialized `final/` dataset stores exactly one deterministic 256×256 letterboxed RGB copy per image, preserving data integrity. Augmentation, normalization, and imbalance handling are defined here as pipeline design but run on-the-fly inside the data loader during training (Milestone 3), so no augmented images are persisted to disk.
+
+**Deterministic resolution and ImageNet normalization (all splits):**
+
+- **Train split:** random 224×224 crop from the 256×256 letterboxed frame.
+- **Validation / test splits:** deterministic 224×224 center crop.
+- **Standardization:** all tensors normalized using ImageNet mean (`[0.485, 0.456, 0.406]`) and std (`[0.229, 0.224, 0.225]`), matching the ImageNet-pretrained `EfficientNet-B0` backbone.
+
+**On-the-fly augmentation strategy (train split only):**
+
+- **Standard tier (all classes):** random horizontal/vertical flips, random rotation (±15–20°), and color jitter (brightness/contrast/saturation) to simulate field lighting and camera variance.
+- **Targeted rare and risk-class augmentation:**
+  - `rice__leaf_smut` (40 images / 24 train) and `wheat__stem_fly` (172 images / 138 train) receive aggressive multi-scale transforms to multiply effective sample variety.
+  - `rice__tungro` receives aggressive background-focused random cropping and jitter to disrupt the soil-background artifact identified in EDA.
+
+**Class imbalance and Tungro robustness strategy:**
+
+- **Imbalance handling:** a hybrid recipe combining `WeightedRandomSampler` (oversampling extreme minority classes per batch) with mild class-weighted CrossEntropy loss. Models are evaluated strictly on macro-F1 score and per-class recall.
+- **Tungro robustness diagnostic:** post-training Grad-CAM inspection on non-soil Tungro field images confirms whether the classifier attends to leaf lesions or background soil, triggering leaf segmentation masking if the background shortcut bias persists.
+
+This design is documented in `notebook_training_pipeline_design.md`. Execution (model training and evaluation) is Milestone 3 scope, consistent with Section 10.
 
 ---
 
@@ -461,10 +488,33 @@ All chunks conform to a unified schema enabling consistent filtering across both
 |---|---|---|---|
 | KCC UP 2020-2025 | 2026-07-06 | OGD resource ID: cef25fe2-9231-4128-8aec-2c948fedd43f | Not yet recorded |
 | PDF Corpus | 2026-07-10 | Pipeline version: milestone2_v3_harmonized | SHA-256 per document (integrity_manifest.csv) |
-| Vision datasets | 2026-07-8 | Kaggle dataset version at download | Not yet recorded |
+| Vision datasets (source) | 2026-07-8 | Kaggle versions pinned: `wheat-plant-diseases` v6, `rice-leaf-diseases` v1, `rice-leaf-disease-image` v1 (see 9.2.1) | Source checksums not yet recorded |
+| Vision cleaned datasets (derived) | 2026-07-10 | `wheat-cleaned-256` v1, `rice-s1-cleaned-256` v1, `rice-s2-cleaned-256` v1 (see 9.2.2) | Covered by final-dataset MD5 manifest |
+| Vision final materialized dataset | 2026-07-10 | `crop-disease-prepared-256` v1 (256² letterbox pipeline) | MD5 per image; dataset fingerprint `f986164b2da47dd48970c135972e0bae` (12,859 images, 0 missing/unreadable) |
 | Yield datasets | 2026-07-10 | Kaggle dataset version at download | Not yet recorded |
 
+#### 9.2.1 Source Dataset Versions (Vision)
 
+Kaggle datasets are mutable — the owner can publish new versions under the same slug. The exact version pulled for this milestone is therefore pinned below, so the pipeline can be reproduced against the same source bytes even if the upstream dataset is later revised.
+
+| Source Dataset (Kaggle slug) | Version Pulled | Role |
+|---|---|---|
+| `kushagra3204/wheat-plant-diseases` | v6 | Wheat disease training (14,154 raw images) |
+| `vbookshelf/rice-leaf-diseases` | v1 | Rice Set 1 — primary rice disease training (5,932 raw images) |
+| `nirmalsankalana/rice-leaf-disease-image` | v1 | Rice Set 2 — adds rice leaf smut class (120 raw images) |
+
+#### 9.2.2 Created Dataset Versions (Derived Artifacts)
+
+Each preprocessing stage is published as its own versioned dataset, so a given experiment can be traced back to the exact derived artifact it consumed. All four are at v1 for Milestone 2; any re-run of a preprocessing stage (for example, a change to the letterbox or deduplication logic) increments the corresponding version.
+
+| Created Dataset | Version | Produced By | Contents |
+|---|---|---|---|
+| `wheat-cleaned-256` | v1 | Wheat preprocessing (Notebook A) | 10,673 unique groups, 15 canonical classes, 256×256 letterboxed RGB |
+| `rice-s1-cleaned-256` | v1 | Rice Set 1 preprocessing (Notebook B) | 2,066 burst-thinned images, 4 classes, 256×256 letterboxed RGB |
+| `rice-s2-cleaned-256` | v1 | Rice Set 2 preprocessing (Notebook C) | 120 images, 3 classes, panoramic aspect-preserving letterbox to 256×256 |
+| `crop-disease-prepared-256` | v1 | Merge and split (Notebook D) | Final unified 12,859 images / 20 classes, group-aware 80/10/10 split (`final/train\|val\|test`), `master_manifest.csv`, `label_to_idx.json`; MD5 fingerprint `f986164b2da47dd48970c135972e0bae` |
+
+Lineage: `wheat-plant-diseases` v6 → `wheat-cleaned-256` v1, `rice-leaf-diseases` v1 → `rice-s1-cleaned-256` v1, and `rice-leaf-disease-image` v1 → `rice-s2-cleaned-256` v1; these three cleaned datasets are then merged and split into `crop-disease-prepared-256` v1, which is the sole artifact consumed by Milestone 3 training.
 
 ### 9.3 Privacy and Ethics
 
@@ -524,7 +574,7 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 | 2 language misdetections in PDF corpus | RAG | Accepted; both confirmed English on manual inspection |
 | KCC chunking hyperparameters not yet validated | RAG | Open; validation deferred to Milestone 3 |
 | PDF chunking not yet executed | RAG | Open; deferred to Milestone 3 |
-| Checksums not recorded for vision and yield datasets | Governance | Action item before final submission |
+| Checksums not recorded for source vision and yield datasets | Governance | Partially resolved; MD5 fingerprint now recorded for the final materialized vision dataset (`f986164b2da47dd48970c135972e0bae`), and source/derived vision dataset versions are pinned (Sections 9.2.1 and 9.2.2). Source-download checksums for vision and yield, and version pinning for the yield datasets, remain action items before final submission |
 | Yield model not trained; subsystem in design phase | Yield | Acknowledged; model training is Milestone 3 scope |
 
 ---
@@ -614,6 +664,43 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 
 ![Wheat distribution and resolution](./assets/milestone-2-assets/wheat_dist_and_image_resolution.png)
 
+### A.4 Rice Set 1 — Duplicate and Redundancy Detail
+
+| Metric | Value |
+|---|---|
+| Exact (byte-identical) duplicate files | 2,234 (forming 1,096 groups) |
+| Exact-dup groups spanning more than one class | 0 (labels are clean) |
+| Near-duplicate images (aHash, 8×8) | 4,914 (82.8%) |
+| Near-dup groups: within-class | 1,724 |
+| Near-dup groups: cross-class | 0 |
+| Near-dup images (pHash-DCT, stricter) | 4,700 (79.2%) |
+| Unique pHash clusters (group-aware split key) | 2,919 |
+
+The 0 cross-class duplicate groups confirm label integrity. The high within-class redundancy (Blast: 33.3% literal copies) means a naive random split would leak near-identical images across train/val/test, inflating metrics — hence the mandatory group-aware split on `dup_cluster`. Image geometry: the dominant size is 300×300 px (78.0% of images; 100% of Bacterial Blight, Blast, Brownspot), while Tungro is 0% at 300×300 px (median 331×331 px, aspect 1.33) — the dimension shortcut later removed by letterboxing. Color modes: RGB 5,776, RGBA 156 (mislabelled PNGs requiring a `convert("RGB")` guard).
+
+### A.5 Wheat — Image Characteristics, Brightness, and Sharpness
+
+**Dimensions and formats:**
+
+| Metric | Value |
+|---|---|
+| Corrupt/unreadable images | 0 |
+| Median size | 276 × 256 px |
+| Mean size | 716 × 674 px |
+| Size range | 44×31 px → 6,016×6,600 px |
+| Aspect ratio range | 0.09 → 18.23 |
+| Color modes | RGB (12,492), RGBA (1,613), P (47), CMYK (2) |
+| File formats | JPEG (9,076), PNG (5,027), WebP (37), GIF (10), MPO (4) |
+| Top resolution | 256×256 px (3,297 images) |
+
+The extreme size variance (median ~0.07 MP vs max ~40 MP) and heterogeneous aspect ratios mandate a consistent resize to a fixed input resolution, and the 5 file formats plus 4 color modes must all pass through a unified `PIL.open() → convert("RGB") → resize` pipeline.
+
+**Brightness (per class):** Mean brightness ranges from 85.6 (mildew — notably darker) to 138.1 (blast — brightest). Boxplots show wide within-class variance and heavy outliers, consistent with mixed image sources (web-scraped, lab, field). Mildew's systematically lower brightness is a potential confound.
+
+**Sharpness (Laplacian variance):** Sharpness varies 3–4 orders of magnitude within most classes (log-scale distribution), with the blurriest samples in brown_rust, leaf_blight, and black_rust (Laplacian variance < 5). A sharpness-threshold filter before training may improve label reliability for these classes.
+
+**Visual target heterogeneity:** The dataset mixes three fundamentally different visual target types — insect pests (aphid, mite, stem_fly), foliar diseases (rusts, septoria, blast, mildew, leaf_blight, tan_spot), and spike/head diseases (fusarium_head_blight, smut). The rust classes (black, brown, yellow) are expected to be the hardest confusions, as their pustules differ mainly in color and arrangement. Val/test sets are small (20 val, 50 test per class), so per-class metric estimates will carry high variance.
+
 ---
 
 ## Appendix B: RAG PDF EDA Detail
@@ -663,6 +750,15 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 | 2021 | 3 | | |
 
 ![Page and word count distributions across PDF corpus](./assets/milestone-2-assets/page_word_count_histo.png)
+
+### B.5 Sample Extracted Records
+
+Representative extracted text illustrating the scheme-guideline content in the corpus:
+
+- *Sample (Schemes):* "Interest Subvention is provided on short term crop loans and short term loans for allied activities including animal husbandry, dairy, fisheries, bee keeping etc."
+- *Sample (Schemes):* "Interest subvention and prompt repayment incentive benefits on short term crop loans and short term loans for allied activities will be available on an overall limit."
+
+Per-document metadata recorded for each record includes `source`, `filename`, `page_count`, `word_count`, `extraction_method`, `detected_language`, `detected_year`, and `garbage_char_ratio`.
 
 ---
 
@@ -716,6 +812,17 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 | Fruits | 100,707 |
 | Other retained | approximately 99 |
 
+### C.5 Raw Schema and Sample Record
+
+The raw dataset has 15 columns: `KCCCallID`, `CreatedOn`, `StateName`, `DistrictName`, `BlockName`, `Sector`, `Category`, `Crop`, `Season`, `QueryType`, `QueryText`, `KccAns`, `day`, `month`, `year`. `QueryText` (English/Romanized) and `KccAns` (predominantly Devanagari Hindi) are the core retrieval fields; `Season` is 100% null and is dropped.
+
+Representative retained (agronomic) Q&A pair — this Cereals/Paddy example is the kind of substantive content preserved after the agronomic filter:
+
+> *Query (Category: Cereals, Crop: Paddy):* "Dhaan ki fasal me top dressing ke samay kya prayog kare?"
+> *Answer:* "महोदय, धान में टॉप ड्रेसिंग के समय यूरिया 35 kg और जिंक सल्फेट 10 kg प्रति एकर की दर से नमी की अवस्था में प्रयोग करे।"
+
+(Scheme-oriented queries such as PM-KISAN application-status questions are present in the raw data but fall under the Government Schemes category that the agronomic filter excludes; scheme eligibility is instead served by the PDF corpus.)
+
 ---
 
 ## Appendix D: Yield EDA Detail
@@ -738,6 +845,32 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 | Heatwave_Days (above 38C in March) | Rabi Wheat | -0.24 | Heat stress during grain filling |
 
 ![Top crops by cumulative production](./assets/milestone-2-assets/top_crops_production.png)
+
+### D.3 Primary Multi-Crop 16-Attribute Schema (`production_unified.csv` and `production_unified_imputed.csv`)
+
+| Column Name | Data Type | Units / Range | Description |
+|---|---|---|---|
+| `state` | String | 35 States/UTs | Administrative state identifier |
+| `district` | String | Granular districts | Standardized administrative district name |
+| `year` | Integer | 1997 to 2024 | Agricultural calendar year |
+| `season` | Categorical | 6 seasons | Cropping season (`kharif`, `rabi`, `whole year`, `autumn`, `summer`, `winter`) |
+| `crop` | Categorical | 124 unique crops | Agricultural crop commodity (e.g., `sugarcane`, `rice`, `wheat`, `potato`) |
+| `area` | Float | Hectares (ha) | Gross cropped area sown |
+| `production` | Float | Tonnes | Total harvested output (coconut converted from pieces to tonnes) |
+| `yield` | Float | Tonnes/ha or kg/ha (target) | Calculated productivity target |
+| `annual_rainfall` | Float | Millimeters (mm) | Annual cumulative precipitation where available |
+| `fertilizer` / `pesticide` | Float | Tonnes / kg | Total chemical input usage where available |
+
+The complementary UP Rice and Wheat subset additionally tracks daily IMD weather shocks (`Precip_Seasonal_mm`, `Rain_Days_Extreme`, `Heatwave_Days`) and ICRISAT NPK fertilizer splits for state-level modeling.
+
+### D.4 Primary Dataset Seasonality Breakdown
+
+- `whole year`: highest total production volume and highest average yield per hectare across seasonal labels.
+- `kharif`: second-highest total production with strong record representation across cereal crops.
+- `rabi`: third-highest total production volume, driven predominantly by wheat and winter pulses.
+- `winter`, `summer`, and `autumn`: smaller but regionally vital seasonal cropping contributions.
+
+Numeric feature correlations were evaluated across `area`, `production`, `yield`, `annual_rainfall`, `fertilizer`, and `pesticide`; production shows high collinearity with sown area and fertilizer application across major cash crops.
 
 ---
 
@@ -778,3 +911,36 @@ Validation requires: assembling the vector index, creating a representative ques
 PDF chunking configuration has not yet been determined or run. The same evaluation procedure will be applied before PDF chunking is executed.
 
 Once validation is complete, this appendix will report: the chosen configuration, the evaluation results that justify it, and the reasoning for selecting it over alternatives that were tested.]
+
+---
+
+## Appendix G: Deliverables and Reproducibility Artifacts
+
+This appendix lists the notebooks and technical documentation produced in Milestone 2, complementing the artifact evidence in the Section 8 readiness matrix.
+
+**Planning and architecture (Lokesh):**
+- `docs/Milestone_2_Implementation_Plan.md` — architecture and implementation blueprint establishing the 3-stream data pipeline design (Vision, KCC/RAG, Yield), directory structure (`data/raw|processed|final`), sprint work breakdown, and leakage-verification protocols.
+
+**Vision EDA, preprocessing, and integration (Lokesh, Mahesh):**
+- `rice-leaf-disease-dataset-EDA.ipynb` and `Rice leaf disease dataset documentation.odt` — Rice Set 1 EDA (5,932 images).
+- `rice-leaf-disease-dataset-set-2-eda.ipynb` and `Rice_leaf_disease_dataset_set2_documentation.odt` — Rice Set 2 EDA (120 images).
+- `wheat-dataset-EDA.ipynb` and `Wheat_dataset_Documentation.odt` — Wheat EDA (14,154 images).
+- `docs/Milestone_2_work/wheat_preprocessing_documentation.md` — Wheat label canonicalization (45→15 classes) and duplicate cleaning (14,154 → 10,673 unique groups).
+- `docs/Milestone_2_work/rice_set1_preprocessing_documentation.md` — Rice Set 1 burst-capture thinning (5,932 → 2,066) and 256×256 letterbox shortcut removal.
+- `docs/Milestone_2_work/rice_set2_preprocessing_documentation.md` — Rice Set 2 panoramic aspect-preserving letterbox standardization.
+- `docs/Milestone_2_work/notebookD_merge_split_documentation.md` — unified integration and centralized group-aware stratified split (80/10/10 across 12,859 images / 20 classes, 0 leakage; `master_manifest.csv`, `label_to_idx.json`).
+- `docs/Milestone_2_work/notebook_training_pipeline_design.md` — training-time data loader design (224² crop, ImageNet normalization, rare-class augmentation, hybrid imbalance handling, Tungro Grad-CAM check).
+
+**RAG PDF corpus (Harliv):**
+- `docs/Milestone_2_work/rag_pdf_report.md` — PDF collection, cleaning, OCR fallback, deduplication, and semantic chunking report.
+- `pdf_inventory_clean.csv`, per-PDF extracted `.txt` files, `excluded_unreadable_docs.csv`, `excluded_near_duplicate_docs.csv`, `PDF_Corpus_EDA.ipynb`, `PDF_Chunking.ipynb`, `integrity_manifest.csv`.
+
+**KCC advisory dataset (Aneeqa):**
+- `docs/Milestone_2_work/KCC Data EDA.md` — KCC aggregation, profiling, multilingual alignment, deduplication, and chunking verification report.
+- `03_kcc_rag_eda.ipynb`, `kcc_cleaned_all_crops.csv`, `kcc_chunks_rag.jsonl`, `kcc_chunks_sample_1000.jsonl`, `metadata_schema.json`.
+
+**Yield datasets (Tanmay, Lokesh):**
+- `production_unified.csv` and `production_unified_imputed.csv` — full 440,962-record multi-crop production/yield dataset (1997–2024).
+- `notebooks/07_Yield_EDA+ preprocessing.ipynb` and `docs/Milestone_2_work/yield_report.md` — multi-source unioning, coconut unit conversion, EDA, and MissForest imputation.
+- `up_district_yield_apy_1997_2023.csv` — UP district yield subset enriched with IMD weather and ICRISAT NPK inputs.
+- `notebooks/05_yield_eda.ipynb`, `notebooks/06_yield_preprocessing.ipynb`, and `train/val/test_yield.csv` — UP subset EDA, preprocessing, and chronological out-of-time splits.
