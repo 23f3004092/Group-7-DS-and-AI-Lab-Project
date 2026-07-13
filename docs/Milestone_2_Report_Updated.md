@@ -402,10 +402,10 @@ The three vision datasets were merged into a unified 20-class pool via a shared 
 
 | Dataset | Download Date | Version Identifier | Integrity |
 |---|---|---|---|
-| KCC UP 2020-2025 | 2026-07-05 | OGD resource ID: cef25fe2-9231-4128-8aec-2c948fedd43f | Not yet recorded |
+| KCC UP 2020-2025 | 2026-07-06 | OGD resource ID: cef25fe2-9231-4128-8aec-2c948fedd43f | Not yet recorded |
 | PDF Corpus | 2026-07-10 | Pipeline version: milestone2_v3_harmonized | SHA-256 per document (integrity_manifest.csv) |
-| Vision datasets | Not yet recorded | Kaggle dataset version at download | Not yet recorded |
-| Yield datasets | Not yet recorded | Kaggle dataset version at download | Not yet recorded |
+| Vision datasets | 2026-07-8 | Kaggle dataset version at download | Not yet recorded |
+| Yield datasets | 2026-07-10 | Kaggle dataset version at download | Not yet recorded |
 
 Action item: Record download dates and dataset versions for vision, KCC, and yield datasets before final submission.
 
