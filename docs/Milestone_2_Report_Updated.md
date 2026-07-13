@@ -921,7 +921,7 @@ This appendix lists the notebooks and technical documentation produced in Milest
 **Planning and architecture (Lokesh):**
 - `docs/Milestone_2_Implementation_Plan.md` — architecture and implementation blueprint establishing the 3-stream data pipeline design (Vision, KCC/RAG, Yield), directory structure (`data/raw|processed|final`), sprint work breakdown, and leakage-verification protocols.
 
-**Vision EDA, preprocessing, and integration (Lokesh, Mahesh):**
+**Vision EDA, preprocessing, and integration (Mahesh):**
 - `rice-leaf-disease-dataset-EDA.ipynb` and `Rice leaf disease dataset documentation.odt` — Rice Set 1 EDA (5,932 images).
 - `rice-leaf-disease-dataset-set-2-eda.ipynb` and `Rice_leaf_disease_dataset_set2_documentation.odt` — Rice Set 2 EDA (120 images).
 - `wheat-dataset-EDA.ipynb` and `Wheat_dataset_Documentation.odt` — Wheat EDA (14,154 images).
