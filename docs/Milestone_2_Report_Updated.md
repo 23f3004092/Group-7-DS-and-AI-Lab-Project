@@ -524,7 +524,27 @@ The system is intended for research use. Any deployment would require clear disc
 
 ### 9.4 Dataset Update Strategy
 
-[PLACEHOLDER — This section will describe the planned strategy for keeping datasets current. Topics: frequency of KCC data refresh (OGD platform publishes annual updates; planned annual re-download and re-processing), process for updating the PDF corpus as new scheme guidelines or PPQS advisories are issued, and the process for re-embedding updated content without rebuilding the entire vector index. To be completed before final submission.]
+Each subsystem has a defined refresh cadence tied to the agricultural calendar, so that updates land between cropping cycles rather than mid-season.
+
+#### 9.4.1 KCC Farmer Advisory Data Refresh
+
+- **Refresh schedule:** Annual ingestion every April, timed between Rabi harvest and Kharif sowing, from the OGD Platform India (`data.gov.in`).
+- **Automated pipeline:** Newly ingested records pass through the same cleaning path as the Milestone 2 corpus — regex-based PII scrubbing (`[PHONE]`, `[EMAIL]`, `[ID]`), crop category filtering, and exact-pair Q&A deduplication against `kcc_cleaned_all_crops.csv`.
+
+#### 9.4.2 Authoritative PDF Policy and Advisory Corpus Refresh
+
+- **Seasonal review schedule:** Bi-annual review of PPQS chemical advisories and PM-KISAN / UP state scheme notifications, aligned with Kharif (May–June) and Rabi (October–November) sowing preparation.
+- **Audit protocol:** Automated text extraction (`pdfplumber` with OCR fallback), garbage character ratio verification (`< 0.15`), SHA-256 deduplication against existing records, and terminology alias harmonization (Appendix E).
+
+#### 9.4.3 Incremental RAG Re-Embedding and Zero-Rebuild Index Updating
+
+- **Incremental vector appending:** New chunks (512 characters, 50-character overlap) are encoded via MuRIL (`google/muril-base-cased`) and appended directly to the existing FAISS `IndexFlatIP` store with explicit metadata tags (`doc_id`, `version`, `ingestion_date`, `status: active`). This avoids a full index rebuild on every update.
+- **Supervised document deprecation:** Superseded scheme guidelines are marked with `status: deprecated` and an `effective_end_date`. Query-time retrieval applies a strict metadata filter (`status == 'active'`), preventing outdated guidance from reaching farmers while preserving historical audit trails.
+
+#### 9.4.4 Vision and Yield Subsystem Periodic Maintenance
+
+- **Vision:** Operational edge-case images are archived, pHash-verified for zero cluster leakage, and incorporated annually into `master_manifest.csv` for EfficientNet-B0 fine-tuning.
+- **Yield:** Annual DES crop statistics and IMD gridded monsoon metrics are appended to `production_unified_imputed.csv` and the UP district subset (`train|val|test_yield.csv`) for seasonal regression retraining.
 
 ### 9.5 Long-Term Knowledge Base Maintenance
 
