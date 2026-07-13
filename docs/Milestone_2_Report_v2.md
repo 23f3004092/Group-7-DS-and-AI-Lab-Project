@@ -109,9 +109,8 @@ PlantVillage was considered and rejected. It is the most commonly cited agricult
 
 Rejected alternatives: General-purpose web-scraped agricultural content was rejected because authorship is unverifiable and information may be inaccurate or outdated. Secondary summaries such as news coverage of schemes were rejected in favour of primary source documents. Documents from states other than UP were out of scope per Milestone 1.
 
-The MISS (Modified Interest Subvention Scheme) document has been verified. It is publicly available from Punjab National Bank at: https://pnb.bank.in/downloadprocess.aspx?fid=XadFAY8YbeAYSzh8cT4hcA==
 
-All other PDF sources are official government and institutional portals listed in Section 13.
+All the PDF sources are official government and institutional portals listed in Section 13.
 
 ### 3.3 RAG Subsystem — KCC Dataset
 
@@ -495,6 +494,7 @@ The system is intended for research use. Any deployment would require clear disc
 - NFSNM Guidelines: https://www.nfsm.gov.in/Guidelines/NFSNM%20GUIDELINES%20APPROVED%20FY%202025-2026.pdf
 - Paddy Blast IPM (PPQS): https://ppqs.gov.in/sites/default/files/pop_for_management_of_paddy_blast.pdf
 - Wheat Cultivation Guide (ICAR-IIWBR): https://iiwbr.org.in/wp-content/uploads/2023/08/EB-52-Wheat-Cultivation-in-India-Pocket-Guide.pdf
+- The MISS (Modified Interest Subvention Scheme): https://pnb.bank.in/downloadprocess.aspx?fid=XadFAY8YbeAYSzh8cT4hcA==
 - ICAR Indian Farming Magazine (Nov 2025): https://icar.org.in/sites/default/files/2025-10/Indian%20Farming%20November%202025.pdf
 - Rice-Based Cropping Systems (ICAR): https://icar.org.in/sites/default/files/inline-files/Rice-based-cropping-systems.pdf
 - PlantDoc: https://github.com/pratikkayal/PlantDoc-Dataset
