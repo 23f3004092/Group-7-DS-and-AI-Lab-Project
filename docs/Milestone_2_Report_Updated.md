@@ -355,7 +355,64 @@ The three vision datasets were merged into a unified 20-class pool via a shared 
 
 ### 7.2 RAG Corpus Integration
 
-[PLACEHOLDER — This section will describe how KCC Q&A chunks and PDF document chunks will be combined into a unified vector index. It will cover: the shared metadata schema and fields (such as source_type, crop, district, season, year, language, doc_category) that enable source-type filtering at query time; how the two knowledge sources serve complementary query intents (field-level farmer Q&A from KCC versus authoritative policy and advisory content from PDFs); and the planned vector database implementation. To be completed in Milestone 3.]
+The RAG subsystem integrates KCC Q&A records and PDF documents into a unified vector index using FAISS with MuRIL embeddings. This enables seamless retrieval across both sources while maintaining source-level filtering.
+
+### 7.2.1 Shared Metadata Schema
+
+All chunks conform to a unified schema enabling consistent filtering across both sources.
+
+| Field | Description | Source Mapping |
+|-------|-------------|----------------|
+| source_type | PDF or KCC | Explicitly assigned |
+| crop | Rice, wheat, etc. | PDF filename / KCC Crop column |
+| district | UP district | PDF title / KCC District column |
+| season | Rabi, Kharif, Zaid | KCC inferred from month / PDF content |
+| year | Publication or record year | PDF filename / KCC Year column |
+| language | English or Hindi | Automatically detected |
+| doc_category | PDF-specific classification | Mapped from source folder |
+| query_type | KCC-specific category | Mapped from agronomic filter |
+
+### 7.2.2 Complementary Knowledge Sources
+
+| Aspect | PDF Corpus | KCC Dataset |
+|--------|------------|-------------|
+| Content | Authoritative official documents | Real farmer-agronomist dialogues |
+| Strengths | Treatment protocols, policies, eligibility | Practical experiences, vernacular language |
+| Query Intent | Policy-oriented (schemes, subsidies) | Field-oriented (diseases, pests, fertilizers) |
+
+**Query Intent Routing:** Policy queries receive PDF weight 2.0, KCC weight 0.5. Field queries receive KCC weight 2.0, PDF weight 0.5. General queries receive equal weight 1.0 each.
+
+### 7.2.3 Integration Strategy
+
+| Step | Action | Description |
+|------|--------|-------------|
+| 1 | Prepare PDF Chunks | Extract text, apply terminology harmonization, chunk with 512/50 size/overlap, assign metadata |
+| 2 | Prepare KCC Chunks | Combine query-answer pairs, chunk if exceeding 512 chars, assign metadata |
+| 3 | Generate Embeddings | Generate MuRIL 768-dim embeddings for all chunks in batches, L2-normalize |
+| 4 | Build FAISS Index | Add embeddings to FAISS IndexFlatIP; store metadata in parallel list |
+| 5 | Build Reverse Indices | Create mappings: crop/district/season/source_type → chunk indices for filtering |
+| 6 | Query Retrieval | Encode query, apply filters via reverse indices, search FAISS, apply source weights, return top k |
+| 7 | Save Artifacts | Save FAISS index, metadata store, reverse indices, and manifest file |
+
+### 7.2.4 Quality Assurance
+
+| Metric | Target | Description |
+|--------|--------|-------------|
+| Recall@5 | >0.85 | Relevant chunks in top 5 |
+| MRR@5 | >0.80 | Rank of first relevant result |
+| Source Diversity | ≥40% each | Mixed-intent query balance |
+| Faithfulness | >0.90 | RAGAS faithfulness score |
+| Latency | <200ms | Complete retrieval pipeline |
+
+### 7.2.5 Integration Benefits
+
+| Benefit | Description |
+|---------|-------------|
+| Single Retrieval Call | One query searches both sources simultaneously |
+| Natural Mixing | Same query retrieves from both sources in one pass |
+| Flexible Filtering | Any combination of metadata fields can filter results |
+| Simplified Pipeline | One embedding model, one index, one retrieval method |
+| Balanced Retrieval | Intent-based source weighting ensures appropriate emphasis |
 
 ---
 
