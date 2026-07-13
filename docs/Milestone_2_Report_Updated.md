@@ -524,8 +524,7 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 | 2 language misdetections in PDF corpus | RAG | Accepted; both confirmed English on manual inspection |
 | KCC chunking hyperparameters not yet validated | RAG | Open; validation deferred to Milestone 3 |
 | PDF chunking not yet executed | RAG | Open; deferred to Milestone 3 |
-| RAG PDF and KCC coexistence design not yet detailed | RAG | Open; design and implementation in Milestone 3 |
-| Download dates and checksums not recorded for vision and yield datasets | Governance | Action item before final submission |
+| Checksums not recorded for vision and yield datasets | Governance | Action item before final submission |
 | Yield model not trained; subsystem in design phase | Yield | Acknowledged; model training is Milestone 3 scope |
 
 ---
