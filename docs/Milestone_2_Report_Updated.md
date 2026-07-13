@@ -464,7 +464,7 @@ All chunks conform to a unified schema enabling consistent filtering across both
 | Vision datasets | 2026-07-8 | Kaggle dataset version at download | Not yet recorded |
 | Yield datasets | 2026-07-10 | Kaggle dataset version at download | Not yet recorded |
 
-Action item: Record download dates and dataset versions for vision, KCC, and yield datasets before final submission.
+
 
 ### 9.3 Privacy and Ethics
 
@@ -478,7 +478,12 @@ The system is intended for research use. Any deployment would require clear disc
 
 ### 9.5 Long-Term Knowledge Base Maintenance
 
-[PLACEHOLDER — This section will describe the long-term maintenance plan for the RAG knowledge base. Topics: version management of the vector index, deprecation process for outdated scheme documents, governance for adding new document sources, and periodic re-evaluation of retrieval quality metrics. To be completed before final submission.]
+To maintain the accuracy, relevance, and operational integrity of the RAG knowledge base over time, the following governance and maintenance framework is established:
+
+1. **Vector Index Versioning & Audit Trails:** Every build of the vector database will carry an immutable version tag tied directly to the underlying source manifests (`integrity_manifest.csv` for PDFs and snapshot release hashes for KCC data). Any addition, removal, or re-chunking of documents requires incrementing the index schema version and recording a changelog.
+2. **Document Deprecation Protocol:** Agricultural schemes and guidelines frequently undergo revisions (e.g., revised PM-KISAN operational guidelines or updated PPQS crop advisories). Rather than hard-deleting historical documents, superseded documents will be retained in the archive but marked with `status: deprecated` and an `effective_end_date` metadata field. The RAG retrieval tool will apply a hard filter at query time (`status == 'active'`) so deprecated guidelines are excluded from active farmer advisories while preserving historical traceability.
+3. **Source Onboarding & Quality Governance:** New PDF advisories or scheme guidelines added to the corpus must pass the standardized automated ingestion pipeline: native text extraction via `pdfplumber` (with OCR fallback), garbage character ratio verification (`< 0.15`), SHA-256 deduplication against existing records, and terminology harmonization using the canonical alias dictionary (`Appendix E`).
+4. **Periodic Quality & Retrieval Re-evaluation:** Following any annual update cycle or major advisory ingestion, the retrieval pipeline will undergo regression testing against a curated benchmark dataset of farmer queries. Key retrieval metrics—specifically **Recall@5** and **RAGAS Faithfulness / Context Relevance**—will be evaluated to verify that index expansion has not introduced semantic drift or retrieval degradation.
 
 ---
 
