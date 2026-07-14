@@ -91,12 +91,12 @@ data/
 
 | Property | Value |
 |---|---|
-| **Purpose** | Agronomic knowledge base for RAG retrieval |
-| **Source** | [Kaggle — Farmers Call Query (KCC) Data Q&A](https://www.kaggle.com/datasets/daskoushik/farmers-call-query-data-qa) |
-| **Format** | CSV (`questions`, `answers` columns) |
-| **Total Size** | ~4.5 MB compressed (~178,939 Q&A records) |
-| **Filtering Applied** | Agronomic queries related to Rice/Wheat & crop protection |
-| **License** | CC0 1.0 |
+| **Purpose** | Agronomic knowledge base for RAG retrieval & Q&A pipeline |
+| **Source** | [Official Government Portal — data.gov.in API (cef25fe2-9231-4128-8aec-2c948fedd43f)](https://data.gov.in/resource/cef25fe2-9231-4128-8aec-2c948fedd43f) |
+| **Format** | `json` (JSONL + combined Parquet), `csv` (for EDA notebooks), `xml` |
+| **Total Records** | ~3,123,029 records across 2020–2025 (for Uttar Pradesh) |
+| **Filtering Applied** | StateName (`UTTAR PRADESH`), Year (`2020-2025`), optional Month (`1-12`) |
+| **Authentication** | Requires `DATA_GOV_KEY` set inside the `.env` file at project root |
 
 ---
 
@@ -111,27 +111,49 @@ data/
 
 ---
 
-## Quick Setup
+## Quick Setup & Example Usage
 
-### Automated Download Script
+### 1. API Keys Configuration
+Before downloading data, make sure your credentials are configured:
+- **KCC API (`data.gov.in`)**: Add your API key to the `.env` file located at the project root (`d:\Group-7-DS-and-AI-Lab-Project\.env`):
+  ```env
+  DATA_GOV_KEY=your_actual_data_gov_in_api_key
+  ```
+- **Vision / Kaggle Datasets**: Ensure your Kaggle API token is present at `~/.kaggle/kaggle.json`.
 
-We provide a script to download datasets via Kaggle API:
+---
+
+### 2. Automated Download Script (`scripts/download_data.py`)
+
+#### A. KCC Dataset (Official `data.gov.in` API)
+The script automatically handles pagination, rate-limiting, retries, and compiles raw files into notebook-ready formats (`CSV`, `JSONL`, `Parquet`).
 
 ```bash
-# Download Strategy A Core + KCC + Yield instructions
+# 1. Download all 6 years (2020–2025) as CSV for EDA Notebook (notebooks/03_kcc_rag_eda.ipynb)
+# Note: Omitting --kcc-months fetches all records across the year cleanly without looping over months.
+python scripts/download_data.py --kcc --kcc-state "UTTAR PRADESH" --kcc-year "2020-2025" --kcc-format csv
+
+# 2. Download a single year as JSONL + combined Parquet for RAG embedding
+python scripts/download_data.py --kcc --kcc-state "UTTAR PRADESH" --kcc-year 2025 --kcc-format json
+
+# 3. Download specific months only (e.g., January, June, December 2025)
+python scripts/download_data.py --kcc --kcc-state "UTTAR PRADESH" --kcc-year 2025 --kcc-months "1,6,12"
+```
+
+#### B. Vision & Combo Downloads (Kaggle)
+```bash
+# Download Strategy A Core (Rice + Wheat + PlantDoc + KCC + Yield instructions)
 python scripts/download_data.py --all
 
-# Download Strategy A vision datasets only (Rice + Wheat + PlantDoc)
+# Download Strategy A vision datasets only
 python scripts/download_data.py --rice --wheat --plantdoc
 
 # Download Strategy D expansion datasets (Rice Extra + PlantVillage)
 python scripts/download_data.py --expand
 
-# Download everything
+# Download everything (All Vision + KCC + Yield instructions)
 python scripts/download_data.py --everything
 ```
-
-> **Note:** Kaggle downloads require a valid API token placed at `~/.kaggle/kaggle.json`.
 
 ---
 

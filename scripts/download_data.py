@@ -23,56 +23,16 @@ Downloads and organises all raw datasets into data/raw/:
 
 Requirements:
   pip install kaggle requests tqdm pandas pyarrow
-  (pandas + pyarrow are only needed for the KCC download)
+  (pandas + pyarrow are optional, used for combining KCC records to Parquet)
 
 Kaggle datasets require a valid ~/.kaggle/kaggle.json API token.
 See: https://www.kaggle.com/docs/api
 
--------------------------------------------------------------------------
-KCC dataset — how to download (data.gov.in GET API)
--------------------------------------------------------------------------
-The KCC (Kisan Call Centre) query-answer transcripts are fetched directly
-from the official Open Government Data platform API, resource:
-  https://api.data.gov.in/resource/cef25fe2-9231-4128-8aec-2c948fedd43f
-
-1. Get an API key (one time):
-     - Register / log in at https://data.gov.in
-     - Go to "My Account" → "Generate API Key"
-   The sample key shown in the API docs returns at most 10 records —
-   you need your own key for a full download.
-
-2. Run the downloader, passing the API parameters as arguments:
-     python download_data.py --kcc --kcc-api-key YOUR_KEY
-     python download_data.py --kcc --kcc-api-key YOUR_KEY \
-            --kcc-state "UTTAR PRADESH" --kcc-year 2025 --kcc-months 1-12
-
-   Arguments (all optional except the key):
-     --kcc-api-key    your personal data.gov.in API key   (required)
-     --kcc-state      StateName filter (default: UTTAR PRADESH)
-     --kcc-year       year filter      (default: 2025)
-     --kcc-months     months to fetch: "1-12", "1,3,7", "6" (default: 1-12)
-     --kcc-page-size  records per API call (default: 5000)
-
-3. Output (under data/raw/kcc/):
-     - one JSONL file per month  → RAG-ready, one record per line,
-       Hindi text preserved (UTF-8)
-     - one combined Parquet file → for EDA with pandas
-   Months with no data on the server are skipped. The download is
-   resumable: rerunning skips months whose JSONL is already complete.
-
-Notes:
-  - data.gov.in blocks the default python-requests User-Agent, so the
-    script sends a browser-like one. It also retries transient 502s.
-  - Record fields: KCCCallID, CreatedOn, StateName, DistrictName,
-    BlockName, Sector, Category, Crop, Season, QueryType, QueryText,
-    KccAns, day, month, year.
--------------------------------------------------------------------------
-
 Usage:
-  python download_data.py --all --kcc-api-key KEY   # Strategy A + KCC + yield
-  python download_data.py --rice --wheat            # Vision only (Strategy A)
-  python download_data.py --expand                  # Strategy D extras
-  python download_data.py --kcc --kcc-api-key KEY   # KCC only
+  python scripts/download_data.py --all          # Strategy A + KCC + yield
+  python scripts/download_data.py --rice --wheat  # Vision only (Strategy A)
+  python scripts/download_data.py --expand        # Strategy D extras
+  python scripts/download_data.py --kcc           # KCC only
 """
 
 import argparse
@@ -94,7 +54,7 @@ if hasattr(sys.stdout, "reconfigure"):
 # Configuration
 # ---------------------------------------------------------------------------
 
-PROJECT_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 
 # --- Strategy A: Primary Rice & Wheat datasets ---
@@ -136,6 +96,37 @@ def ensure_dir(path: Path) -> Path:
     """Create directory if it doesn't exist."""
     path.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def get_api_key(cli_key: str = None) -> str:
+    """Get the data.gov.in API key from CLI argument, environment variable, or .env file at root."""
+    if cli_key:
+        return cli_key
+
+    # Check environment variables
+    for env_var in ["DATA_GOV_KEY", "KCC_API_KEY", "API_KEY"]:
+        val = os.environ.get(env_var)
+        if val:
+            return val.strip()
+
+    # Read from .env file at root
+    env_path = PROJECT_ROOT / ".env"
+    if env_path.exists():
+        try:
+            with env_path.open("r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith("#"):
+                        continue
+                    if "=" in line:
+                        key, val = line.split("=", 1)
+                        key = key.strip()
+                        val = val.strip().strip('"').strip("'")
+                        if key in ("DATA_GOV_KEY", "KCC_API_KEY", "API_KEY") and val:
+                            return val
+        except Exception as e:
+            print(f"⚠️  Could not read .env file at {env_path}: {e}")
+    return None
 
 
 def _is_already_downloaded(dest: Path) -> bool:
@@ -276,9 +267,11 @@ def download_plantdoc():
 
 
 def _parse_months(spec: str) -> list:
-    """Parse a months spec like "1-12", "1,3,7" or "6" into a sorted list."""
+    """Parse a months spec like "1-12", "1,3,7" or ""/"all" (for no month filter) into a list."""
+    if not spec or str(spec).strip().lower() in ("all", "none", "", "--"):
+        return [None]
     months = set()
-    for part in spec.split(","):
+    for part in str(spec).split(","):
         part = part.strip()
         if "-" in part:
             start, end = part.split("-", 1)
@@ -286,29 +279,50 @@ def _parse_months(spec: str) -> list:
         elif part:
             months.add(int(part))
     if not months or any(m < 1 or m > 12 for m in months):
-        raise ValueError(f"invalid months spec: {spec!r} (use e.g. '1-12' or '1,3,7')")
+        raise ValueError(f"invalid months spec: {spec!r} (use e.g. '1-12' or '' for all months)")
     return sorted(months)
 
 
-def _kcc_fetch_page(session, api_key, state, year, month, offset, limit) -> dict:
-    """Fetch one page of KCC results, retrying on transient failures."""
+def _parse_years(spec: str) -> list:
+    """Parse a years spec like "2020-2025", "2020,2023" or ""/"all" into a sorted list of strings."""
+    if not spec or str(spec).strip().lower() in ("all", "none", "", "--"):
+        return [None]
+    years = set()
+    for part in str(spec).split(","):
+        part = part.strip()
+        if "-" in part:
+            start, end = part.split("-", 1)
+            years.update(str(y) for y in range(int(start), int(end) + 1))
+        elif part:
+            years.add(str(int(part)))
+    return sorted(years)
+
+
+def _kcc_fetch_page(session, api_key, state, year, month, offset, limit, fmt="json") -> dict:
+    """Fetch one page of KCC results from data.gov.in API, retrying on transient failures."""
     params = {
         "api-key": api_key,
-        "format": "json",
+        "format": fmt,
         "offset": offset,
         "limit": limit,
-        "filters[StateName]": state,
-        "filters[year]": year,
-        "filters[month]": month,
     }
+    if state and state.upper() != "ALL" and state != "--":
+        params["filters[StateName]"] = state
+    if year:
+        params["filters[year]"] = str(year)
+    if month is not None:
+        params["filters[month]"] = str(month)
+
     last_err = None
     for attempt in range(1, KCC_MAX_RETRIES + 1):
         try:
             resp = session.get(KCC_BASE_URL, params=params, timeout=KCC_TIMEOUT_S)
             resp.raise_for_status()
+            if fmt != "json":
+                return resp.text
             payload = resp.json()
             if "records" not in payload or "total" not in payload:
-                raise ValueError(f"unexpected response shape: {list(payload)[:10]}")
+                raise ValueError(f"unexpected response shape: {list(payload)[:10] if isinstance(payload, dict) else payload[:100]}")
             return payload
         except (requests.RequestException, ValueError) as err:
             last_err = err
@@ -317,126 +331,159 @@ def _kcc_fetch_page(session, api_key, state, year, month, offset, limit) -> dict
                 print(f"    attempt {attempt} failed ({err}); retrying in {wait}s...")
                 time.sleep(wait)
     raise RuntimeError(
-        f"KCC month {month} offset {offset}: giving up after {KCC_MAX_RETRIES} attempts"
+        f"KCC API request failed (month={month}, offset={offset}): giving up after {KCC_MAX_RETRIES} attempts"
     ) from last_err
 
 
-def _kcc_download_month(session, api_key, state, year, month, page_size, dest) -> int:
-    """Download one month to JSONL. Returns the number of records on disk."""
-    state_slug = state.lower().replace(" ", "_")
-    out_path = dest / f"kcc_{state_slug}_{year}_month_{month:02d}.jsonl"
+def _kcc_download_batch(session, api_key, state, year, month, page_size, dest, fmt="json", start_offset=0, max_limit=None) -> int:
+    """Download KCC records for a year/month batch using pagination. Returns records saved."""
+    state_slug = (state or "all").lower().replace(" ", "_")
+    state_short = "up" if state_slug == "uttar_pradesh" else state_slug
+    month_suffix = f"_month_{month:02d}" if isinstance(month, int) else ""
 
-    first = _kcc_fetch_page(session, api_key, state, year, month, offset=0, limit=1)
+    if fmt not in ("json", "csv"):
+        # For non-tabular formats like xml, make a single API request with offset/limit
+        out_path = dest / f"kcc_{state_slug}_{year or 'all'}{month_suffix}.{fmt}"
+        print(f"  Fetching {out_path.name} ({fmt.upper()})...")
+        content = _kcc_fetch_page(session, api_key, state, year, month, offset=start_offset, limit=max_limit or page_size, fmt=fmt)
+        out_path.write_text(content, encoding="utf-8")
+        print(f"    Saved {out_path}")
+        return 1
+
+    # For json or csv, paginate reliably using json responses so all records are fetched cleanly without timing out
+    jsonl_path = dest / f"kcc_{state_slug}_{year or 'all'}{month_suffix}.jsonl"
+    csv_path = dest / (f"kcc_{state_short}_{year or 'all'}.csv" if not month_suffix else f"kcc_{state_slug}_{year or 'all'}{month_suffix}.csv")
+    out_path = csv_path if fmt == "csv" else jsonl_path
+
+    first = _kcc_fetch_page(session, api_key, state, year, month, offset=start_offset, limit=1, fmt="json")
     total = int(first["total"])
     if total == 0:
-        print(f"  Month {month:02d}: no data on server, skipping.")
+        print(f"  {out_path.name}: no data on server, skipping.")
         return 0
 
-    if out_path.exists():
-        with out_path.open("r", encoding="utf-8") as f:
-            existing = sum(1 for _ in f)
-        if existing == total:
-            print(f"  Month {month:02d}: already complete ({existing} records), skipping.")
-            return existing
-        print(f"  Month {month:02d}: found partial file ({existing}/{total}), re-downloading.")
+    if max_limit is not None:
+        total = min(total, max_limit)
 
-    print(f"  Month {month:02d}: downloading {total} records...")
-    tmp_path = out_path.with_suffix(".jsonl.part")
+    if out_path.exists():
+        if fmt == "csv":
+            with out_path.open("r", encoding="utf-8") as f:
+                existing = max(0, sum(1 for _ in f) - 1)
+        else:
+            with out_path.open("r", encoding="utf-8") as f:
+                existing = sum(1 for _ in f)
+        if existing == total:
+            print(f"  {out_path.name}: already complete ({existing:,} records), skipping.")
+            return existing
+        print(f"  {out_path.name}: found partial file ({existing:,}/{total:,}), re-downloading.")
+
+    print(f"  {out_path.name}: downloading {total:,} records (year={year or 'ALL'}, month={month or 'ALL'})...")
+    tmp_path = out_path.with_suffix(f".{fmt}.part")
     fetched = 0
+    header_written = False
+
     with tmp_path.open("w", encoding="utf-8") as f:
-        offset = 0
-        while offset < total:
+        offset = start_offset
+        while fetched < total:
+            batch_size = min(page_size, total - fetched)
             payload = _kcc_fetch_page(
-                session, api_key, state, year, month, offset=offset, limit=page_size
+                session, api_key, state, year, month, offset=offset, limit=batch_size, fmt="json"
             )
-            records = payload["records"]
+            records = payload.get("records", [])
             if not records:
                 break
-            for rec in records:
-                f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            if fmt == "csv":
+                import csv
+                if not header_written:
+                    writer = csv.DictWriter(f, fieldnames=records[0].keys())
+                    writer.writeheader()
+                    header_written = True
+                for rec in records:
+                    writer.writerow(rec)
+            else:
+                for rec in records:
+                    f.write(json.dumps(rec, ensure_ascii=False) + "\n")
             fetched += len(records)
             offset += len(records)
-            print(f"    {fetched}/{total} records")
+            print(f"    {fetched:,}/{total:,} records")
             time.sleep(KCC_REQUEST_DELAY_S)
 
     if fetched != total:
-        print(f"    ⚠️  expected {total} records but got {fetched} "
+        print(f"    ⚠️  expected {total:,} records but got {fetched:,} "
               "(server total may have shifted mid-download)")
     tmp_path.replace(out_path)
     return fetched
 
 
-def download_kcc(api_key, state, year, months_spec, page_size):
+def download_kcc(api_key=None, state="UTTAR PRADESH", year="2025", months_spec="",
+                 fmt="json", offset=0, limit=None, page_size=5000):
     """Download KCC transcripts from data.gov.in into data/raw/kcc/.
 
-    Writes one JSONL file per month (RAG-ready) plus a combined Parquet
-    file for EDA. Resumable: complete months are skipped on rerun.
+    Reads API key automatically from .env file at root if not supplied.
+    By default (months_spec=""), does NOT filter by month, fetching all records
+    for each year directly in paginated batches.
     """
     dest = ensure_dir(RAW_DIR / "kcc")
+    api_key = get_api_key(api_key)
 
     if not api_key:
         print(
-            "\n📋 KCC download needs a data.gov.in API key:\n"
-            "   1. Register / log in at https://data.gov.in\n"
-            "   2. Go to 'My Account' → 'Generate API Key'\n"
-            "   3. Rerun with: --kcc --kcc-api-key YOUR_KEY\n"
+            "\n❌ KCC download requires a data.gov.in API key.\n"
+            "   1. Make sure your .env file at the project root exists and contains:\n"
+            "      DATA_GOV_KEY=your_api_key_here\n"
+            "   2. Or pass your key via CLI:\n"
+            "      python scripts/download_data.py --kcc --kcc-api-key YOUR_KEY\n"
         )
         return False
 
     try:
         months = _parse_months(months_spec)
+        years = _parse_years(year)
     except ValueError as err:
         print(f"❌ {err}")
         return False
 
-    # data.gov.in rejects the default python-requests User-Agent
-    # (502s / timeouts), so present a browser-like one.
     session = requests.Session()
     session.headers["User-Agent"] = (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     )
 
-    print(f"📦 KCC transcripts | state={state} year={year} months={months} → {dest}")
+    print(f"📦 KCC transcripts | state={state} years={years} months={months_spec or 'ALL'} format={fmt} → {dest}")
     summary = {}
     failed = []
-    for month in months:
-        try:
-            summary[month] = _kcc_download_month(
-                session, api_key, state, year, month, page_size, dest
-            )
-        except RuntimeError as err:
-            print(f"  ❌ {err}")
-            failed.append(month)
+    for y in years:
+        for month in months:
+            key = f"{y}-{month:02d}" if isinstance(month, int) else f"{y or 'all'}"
+            try:
+                summary[key] = _kcc_download_batch(
+                    session, api_key, state, y, month, page_size, dest,
+                    fmt=fmt, start_offset=offset, max_limit=limit
+                )
+            except RuntimeError as err:
+                print(f"  ❌ {err}")
+                failed.append(key)
 
-    print("\n  Records per month:")
-    for month, n in summary.items():
-        print(f"    {year}-{month:02d}: {n}")
-    print(f"    TOTAL: {sum(summary.values())}")
+    print("\n  Records processed:")
+    for m, n in summary.items():
+        print(f"    Batch {m}: {n:,}" if isinstance(n, int) else f"    Batch {m}: {n}")
+    total_recs = sum(summary.values()) if all(isinstance(v, int) for v in summary.values()) else len(summary)
+    print(f"    TOTAL: {total_recs:,}")
 
-    # Combined Parquet for EDA (pandas + pyarrow only needed here).
-    state_slug = state.lower().replace(" ", "_")
-    month_files = [
-        dest / f"kcc_{state_slug}_{year}_month_{m:02d}.jsonl"
-        for m, n in summary.items() if n > 0
-    ]
-    if month_files:
+    # Optional Parquet conversion when downloading as JSONL
+    if fmt == "json":
+        state_slug = (state or "all").lower().replace(" ", "_")
         try:
             import pandas as pd
-
-            df = pd.concat(
-                [pd.read_json(p, lines=True) for p in month_files],
-                ignore_index=True,
-            )
-            parquet_path = dest / f"kcc_{state_slug}_{year}_full.parquet"
-            df.to_parquet(parquet_path, index=False)
-            print(f"  ✅ Combined Parquet: {parquet_path} "
-                  f"({len(df)} rows, {len(df.columns)} columns)")
+            jsonl_files = sorted(dest.glob(f"kcc_{state_slug}_*.jsonl"))
+            if jsonl_files:
+                df = pd.concat([pd.read_json(p, lines=True) for p in jsonl_files], ignore_index=True)
+                parquet_path = dest / f"kcc_{state_slug}_full.parquet"
+                df.to_parquet(parquet_path, index=False)
+                print(f"  ✅ Combined Parquet: {parquet_path} ({len(df):,} rows, {len(df.columns)} columns)")
         except ImportError:
-            print("  ⚠️  pandas/pyarrow not installed — skipped the combined "
-                  "Parquet (JSONL files are complete). Fix: pip install pandas pyarrow")
+            print("  ⚠️  pandas/pyarrow not installed — skipped Parquet conversion.")
 
     if failed:
-        print(f"  ⚠️  months failed after retries: {failed} — rerun to resume.")
+        print(f"  ⚠️  batches failed after retries: {failed} — rerun to resume.")
         return False
     return True
 
@@ -497,16 +544,11 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Examples:\n"
-            "  python download_data.py --all --kcc-api-key KEY   # Strategy A core + KCC + yield\n"
-            "  python download_data.py --rice --wheat            # Vision only (Strategy A)\n"
-            "  python download_data.py --expand                  # Add Strategy D extras\n"
-            "  python download_data.py --kcc --kcc-api-key KEY   # KCC only (all months, UP, 2025)\n"
-            "  python download_data.py --kcc --kcc-api-key KEY --kcc-state RAJASTHAN \\\n"
-            "         --kcc-year 2024 --kcc-months 1,6-9         # KCC with custom filters\n"
-            "  python download_data.py --everything --kcc-api-key KEY\n"
-            "\n"
-            "Get a data.gov.in API key: log in at https://data.gov.in →\n"
-            "'My Account' → 'Generate API Key'.\n"
+            "  python scripts/download_data.py --all            # Strategy A core + KCC + yield\n"
+            "  python scripts/download_data.py --rice --wheat    # Vision only (Strategy A)\n"
+            "  python scripts/download_data.py --expand          # Add Strategy D extras\n"
+            "  python scripts/download_data.py --kcc             # KCC only\n"
+            "  python scripts/download_data.py --everything      # All datasets including expansion\n"
         ),
     )
 
@@ -535,19 +577,25 @@ def main():
     # KCC API parameters (used with --kcc / --all / --everything)
     kcc_group = parser.add_argument_group(
         "KCC API options",
-        "Parameters for the data.gov.in KCC transcripts API. "
-        "An API key is required: https://data.gov.in → My Account → Generate API Key.",
+        "Parameters for the data.gov.in KCC transcripts API (resource: cef25fe2-9231-4128-8aec-2c948fedd43f). "
+        "The API key is automatically read from the .env file at root (`DATA_GOV_KEY`) or passed via --kcc-api-key.",
     )
     kcc_group.add_argument("--kcc-api-key", dest="kcc_api_key", default=None,
-                           help="Your personal data.gov.in API key (required for --kcc)")
+                           help="Your personal data.gov.in API key (defaults to DATA_GOV_KEY in .env)")
+    kcc_group.add_argument("--kcc-format", dest="kcc_format", default="json", choices=["json", "xml", "csv"],
+                           help="Output format: json, xml, csv (default: %(default)s)")
     kcc_group.add_argument("--kcc-state", dest="kcc_state", default="UTTAR PRADESH",
-                           help='StateName filter, e.g. "UTTAR PRADESH" (default: %(default)s)')
+                           help='StateName filter, e.g. "UTTAR PRADESH" or "" for all (default: %(default)s)')
     kcc_group.add_argument("--kcc-year", dest="kcc_year", default="2025",
-                           help="Year filter (default: %(default)s)")
-    kcc_group.add_argument("--kcc-months", dest="kcc_months", default="1-12",
-                           help='Months to fetch: "1-12", "1,3,7" or "6" (default: %(default)s)')
+                           help='Year filter or multi-year range, e.g. "2025" or "2020-2025" (default: %(default)s)')
+    kcc_group.add_argument("--kcc-months", dest="kcc_months", default="",
+                           help='Months filter: "" for all months (no month filter), or "1-12", "1,3" (default: %(default)r)')
+    kcc_group.add_argument("--kcc-offset", dest="kcc_offset", type=int, default=0,
+                           help="Number of records to skip for pagination (default: %(default)s)")
+    kcc_group.add_argument("--kcc-limit", dest="kcc_limit", type=int, default=None,
+                           help="Maximum total records to return across download (default: all available)")
     kcc_group.add_argument("--kcc-page-size", dest="kcc_page_size", type=int, default=5000,
-                           help="Records per API call (default: %(default)s)")
+                           help="Records per API call when paginating (default: %(default)s)")
 
     # Combo flags
     parser.add_argument("--all", action="store_true",
@@ -604,6 +652,9 @@ def main():
             state=args.kcc_state,
             year=args.kcc_year,
             months_spec=args.kcc_months,
+            fmt=args.kcc_format,
+            offset=args.kcc_offset,
+            limit=args.kcc_limit,
             page_size=args.kcc_page_size,
         )
         print()
