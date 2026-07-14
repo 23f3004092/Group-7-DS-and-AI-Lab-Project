@@ -101,7 +101,7 @@ Classes missing from a split: none ✅
 Train imbalance ratio: 5.6
 ```
 
-![chart](01_class_distribution_w.png)
+![chart](../figures/01_class_distribution_w.png)
 
 ***Figure — Class distribution per split (stacked bars).** Bar-height variation comes from the train segment; val (20) and test (50) are flat across classes.*
 
@@ -121,7 +121,7 @@ So the best-represented disease has ~5.6× more training images than the worst. 
 
 **What this step did.** It displayed four random images from each of the 15 classes as a visual sanity and quality audit — checking that labels look right, how varied each class is, what the backgrounds look like, and whether anything is odd (watermarks, composites, wrong scale).
 
-![chart](02_sample_grid_w.png)
+![chart](../figures/02_sample_grid_w.png)
 
 ***Figure — Four random samples per class (15 rows).** Note the mix of lab close-ups, whole-plant/head shots, and in-field photos, and the visual similarity of the three rusts.*
 
@@ -159,7 +159,7 @@ Formats: JPEG 9076 | PNG 5027 | WEBP 37 | GIF 10 | MPO 4
 Top resolutions: 256x256 → 3297 | 709x945 → 513 | ... | 6000x4000 → 289
 ```
 
-![chart](03_image_dimensions_w.png)
+![chart](../figures/03_image_dimensions_w.png)
 
 ***Figure — Distributions of width, height, aspect ratio, and file size.** All are heavily right-skewed: a small-image cluster plus a long tail of large originals.*
 
@@ -234,7 +234,7 @@ tan_spot              114.7  124.7   78.4       116.4
 yellow_rust          109.9  117.9   74.3       110.5
 ```
 
-![chart](04_color_brightness_w.png)
+![chart](../figures/04_color_brightness_w.png)
 
 ***Figure — Brightness by class (left) and mean R/G/B by class (right).** Mildew is darkest (black backgrounds); green dominates across classes.*
 
@@ -273,7 +273,7 @@ leaf_blight         3.99
 septoria            4.05
 ```
 
-![chart](05_sharpness_w.png)
+![chart](../figures/05_sharpness_w.png)
 
 ***Figure — Sharpness (Laplacian variance, log scale) per class.** Most images are sharp; each class has a low-end tail of blurry/near-blank outliers.*
 

@@ -65,23 +65,23 @@ Combine multiple Indian agriculture datasets into a unified production/yield dat
 ## Output Files
 - `production_unified.csv`
 - `production_unified_imputed.csv`
-- `images/yearly_trends.png`
-- `images/top_crops_production.png`
-- `images/season_summary.png`
-- `images/correlation_matrix.png`
+- `../figures/yearly_trends.png`
+- `../figures/top_crops_production.png`
+- `../figures/season_summary.png`
+- `../figures/correlation_matrix.png`
 
 ## Visual Results
 ### Total Production and average yield by state
-![Total Production and Average Yield by Year](../assets/milestone-2-assets/Avg_yield.png)
+![Total Production and Average Yield by Year](../figures/Avg_yield.png)
 
 ### Top crops by total production
-![Top 10 Crops by Total Production](../assets/milestone-2-assets/top_crops_production.png)
+![Top 10 Crops by Total Production](../figures/top_crops_production.png)
 
 ### Season-wise comparison
-![Season-wise Yield and Production](../assets/milestone-2-assets/season_summary.png)
+![Season-wise Yield and Production](../figures/season_summary.png)
 
 ### Numeric feature correlations
-![Correlation Matrix for Numeric Features](../assets/milestone-2-assets/correlation_matrix.png)
+![Correlation Matrix for Numeric Features](../figures/correlation_matrix.png)
 
 ## Notes
 - `crop_reco` remains a standalone reference table and is not merged directly into the time-series production dataset.

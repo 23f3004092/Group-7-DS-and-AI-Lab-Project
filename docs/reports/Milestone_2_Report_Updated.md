@@ -645,7 +645,7 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 | Tungro | 1,308 | 1,308 | 469 | 35.9% |
 | Total | 5,932 | 4,794 | 2,066 | 34.8% |
 
-![Rice distribution and resolution](./assets/milestone-2-assets/rice_dist_and_image_resolution.png)
+![Rice distribution and resolution](../../outputs/figures/rice_dist_and_image_resolution.png)
 
 ### A.2 Rice Set 2 — Duplicate Verification
 
@@ -677,7 +677,7 @@ To maintain the accuracy, relevance, and operational integrity of the RAG knowle
 | stem_fly | 234 | 20 | 50 | 304 | 1.0x (baseline) |
 | Total | 13,104 | 300 | 750 | 14,154 | |
 
-![Wheat distribution and resolution](./assets/milestone-2-assets/wheat_dist_and_image_resolution.png)
+![Wheat distribution and resolution](../../outputs/figures/wheat_dist_and_image_resolution.png)
 
 ### A.4 Rice Set 1 — Duplicate and Redundancy Detail
 
@@ -730,7 +730,7 @@ The extreme size variance (median ~0.07 MP vs max ~40 MP) and heterogeneous aspe
 | up_acp | 74 | 1,805 | 24.4 | 4,580 | 74 | 0 | 0 |
 | Total | 187 | 2,797 | | | 173 | 14 | 0 |
 
-![PDF documents per source and page/word count](./assets/milestone-2-assets/docspersource_pagewordcount.png)
+![PDF documents per source and page/word count](../../outputs/figures/docspersource_pagewordcount.png)
 
 ### B.2 Near-Duplicate Pairs Resolved
 
@@ -749,7 +749,7 @@ The extreme size variance (median ~0.07 MP vs max ~40 MP) and heterogeneous aspe
 | schemes | 0 | 0 | 11 | 0 |
 | up_acp | 0 | 72 | 0 | 0 |
 
-![Top word frequencies in agricultural PDF corpus](./assets/milestone-2-assets/word_frequency.png)
+![Top word frequencies in agricultural PDF corpus](../../outputs/figures/word_frequency.png)
 
 ### B.4 Detectable Year Distribution (184 clean documents)
 
@@ -764,7 +764,7 @@ The extreme size variance (median ~0.07 MP vs max ~40 MP) and heterogeneous aspe
 | 2020 | 6 | Other (implausible) | 5 |
 | 2021 | 3 | | |
 
-![Page and word count distributions across PDF corpus](./assets/milestone-2-assets/page_word_count_histo.png)
+![Page and word count distributions across PDF corpus](../../outputs/figures/page_word_count_histo.png)
 
 ### B.5 Sample Extracted Records
 
@@ -791,7 +791,7 @@ Per-document metadata recorded for each record includes `source`, `filename`, `p
 | 2025 | 319,632 |
 | Total | 3,123,029 |
 
-![KCC monthly query volume trend](./assets/milestone-2-assets/query_month_trend.png)
+![KCC monthly query volume trend](../../outputs/figures/query_month_trend.png)
 
 ### C.2 Top Crops by Query Volume (Pre-filter)
 
@@ -814,7 +814,7 @@ Per-document metadata recorded for each record includes `source`, `filename`, `p
 
 98.9% of complete Q&A records fit within 512 characters.
 
-![KCC query length and answer length boxplot](./assets/milestone-2-assets/query_length_ans_length_boxplot.png)
+![KCC query length and answer length boxplot](../../outputs/figures/query_length_ans_length_boxplot.png)
 
 ### C.4 Post-Filter Category Breakdown (1,701,442 records)
 
@@ -850,7 +850,7 @@ Representative retained (agronomic) Q&A pair — this Cereals/Paddy example is t
 | Eastern UP | approximately 70% | approximately 2,200 | approximately 2,800 |
 | Bundelkhand | 50.6% | 1,720 | 1,491 |
 
-![Yield numeric feature correlation matrix](./assets/milestone-2-assets/correlation_matrix.png)
+![Yield numeric feature correlation matrix](../../outputs/figures/correlation_matrix.png)
 
 ### D.2 Key Climate Correlations with Yield
 
@@ -859,7 +859,7 @@ Representative retained (agronomic) Q&A pair — this Cereals/Paddy example is t
 | Rain_Days_Extreme (above 64.5 mm/day) | Kharif Rice | -0.22 | Monsoon flooding causes crop lodging |
 | Heatwave_Days (above 38C in March) | Rabi Wheat | -0.24 | Heat stress during grain filling |
 
-![Top crops by cumulative production](./assets/milestone-2-assets/top_crops_production.png)
+![Top crops by cumulative production](../../outputs/figures/top_crops_production.png)
 
 ### D.3 Primary Multi-Crop 16-Attribute Schema (`production_unified.csv` and `production_unified_imputed.csv`)
 
@@ -934,28 +934,28 @@ Once validation is complete, this appendix will report: the chosen configuration
 This appendix lists the notebooks and technical documentation produced in Milestone 2, complementing the artifact evidence in the Section 8 readiness matrix.
 
 **Planning and architecture (Lokesh):**
-- `docs/Milestone_2_Implementation_Plan.md` — architecture and implementation blueprint establishing the 3-stream data pipeline design (Vision, KCC/RAG, Yield), directory structure (`data/raw|processed|final`), sprint work breakdown, and leakage-verification protocols.
+- `docs/internal/Milestone_2_Implementation_Plan.md` — architecture and implementation blueprint establishing the 3-stream data pipeline design (Vision, KCC/RAG, Yield), directory structure (`data/raw|processed|final`), sprint work breakdown, and leakage-verification protocols.
 
 **Vision EDA, preprocessing, and integration (Mahesh):**
 - `rice-leaf-disease-dataset-EDA.ipynb` and `Rice leaf disease dataset documentation.odt` — Rice Set 1 EDA (5,932 images).
 - `rice-leaf-disease-dataset-set-2-eda.ipynb` and `Rice_leaf_disease_dataset_set2_documentation.odt` — Rice Set 2 EDA (120 images).
 - `wheat-dataset-EDA.ipynb` and `Wheat_dataset_Documentation.odt` — Wheat EDA (14,154 images).
-- `docs/Milestone_2_work/wheat_preprocessing_documentation.md` — Wheat label canonicalization (45→15 classes) and duplicate cleaning (14,154 → 10,673 unique groups).
-- `docs/Milestone_2_work/rice_set1_preprocessing_documentation.md` — Rice Set 1 burst-capture thinning (5,932 → 2,066) and 256×256 letterbox shortcut removal.
-- `docs/Milestone_2_work/rice_set2_preprocessing_documentation.md` — Rice Set 2 panoramic aspect-preserving letterbox standardization.
-- `docs/Milestone_2_work/notebookD_merge_split_documentation.md` — unified integration and centralized group-aware stratified split (80/10/10 across 12,859 images / 20 classes, 0 leakage; `master_manifest.csv`, `label_to_idx.json`).
-- `docs/Milestone_2_work/notebook_training_pipeline_design.md` — training-time data loader design (224² crop, ImageNet normalization, rare-class augmentation, hybrid imbalance handling, Tungro Grad-CAM check).
+- `outputs/reports/wheat_preprocessing_documentation.md` — Wheat label canonicalization (45→15 classes) and duplicate cleaning (14,154 → 10,673 unique groups).
+- `outputs/reports/rice_set1_preprocessing_documentation.md` — Rice Set 1 burst-capture thinning (5,932 → 2,066) and 256×256 letterbox shortcut removal.
+- `outputs/reports/rice_set2_preprocessing_documentation.md` — Rice Set 2 panoramic aspect-preserving letterbox standardization.
+- `outputs/reports/notebookD_merge_split_documentation.md` — unified integration and centralized group-aware stratified split (80/10/10 across 12,859 images / 20 classes, 0 leakage; `master_manifest.csv`, `label_to_idx.json`).
+- `outputs/reports/notebook_training_pipeline_design.md` — training-time data loader design (224² crop, ImageNet normalization, rare-class augmentation, hybrid imbalance handling, Tungro Grad-CAM check).
 
 **RAG PDF corpus (Harliv):**
-- `docs/Milestone_2_work/rag_pdf_report.md` — PDF collection, cleaning, OCR fallback, deduplication, and semantic chunking report.
+- `outputs/reports/rag_pdf_report.md` — PDF collection, cleaning, OCR fallback, deduplication, and semantic chunking report.
 - `pdf_inventory_clean.csv`, per-PDF extracted `.txt` files, `excluded_unreadable_docs.csv`, `excluded_near_duplicate_docs.csv`, `PDF_Corpus_EDA.ipynb`, `PDF_Chunking.ipynb`, `integrity_manifest.csv`.
 
 **KCC advisory dataset (Aneeqa):**
-- `docs/Milestone_2_work/KCC Data EDA.md` — KCC aggregation, profiling, multilingual alignment, deduplication, and chunking verification report.
+- `outputs/reports/KCC Data EDA.md` — KCC aggregation, profiling, multilingual alignment, deduplication, and chunking verification report.
 - `03_kcc_rag_eda.ipynb`, `kcc_cleaned_all_crops.csv`, `kcc_chunks_rag.jsonl`, `kcc_chunks_sample_1000.jsonl`, `metadata_schema.json`.
 
 **Yield datasets (Tanmay, Lokesh):**
 - `production_unified.csv` and `production_unified_imputed.csv` — full 440,962-record multi-crop production/yield dataset (1997–2024).
-- `notebooks/07_Yield_EDA+ preprocessing.ipynb` and `docs/Milestone_2_work/yield_report.md` — multi-source unioning, coconut unit conversion, EDA, and MissForest imputation.
+- `notebooks/07_Yield_EDA+ preprocessing.ipynb` and `outputs/reports/yield_report.md` — multi-source unioning, coconut unit conversion, EDA, and MissForest imputation.
 - `up_district_yield_apy_1997_2023.csv` — UP district yield subset enriched with IMD weather and ICRISAT NPK inputs.
 - `notebooks/05_yield_eda.ipynb`, `notebooks/06_yield_preprocessing.ipynb`, and `train/val/test_yield.csv` — UP subset EDA, preprocessing, and chronological out-of-time splits.

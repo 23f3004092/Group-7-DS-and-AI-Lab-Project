@@ -91,37 +91,37 @@ Commit history analysis over the Milestone 2 period (verified via both commit lo
 ## Mahesh — Contributions
 - **Vision Subsystem Preprocessing & Pipeline Engineering**:
   - Developed end-to-end preprocessing pipelines and notebooks for the **Wheat Disease Dataset**, **Rice Leaf Disease Set 1**, and **Rice Leaf Disease Set 2** (`preprocessing-wheat-dataset.ipynb`, `preprocessing-rice-dataset-set-1-b.ipynb`, `preprocessing-rice-dataset-set-2-c.ipynb`).
-  - Authored comprehensive EDA and technical documentation for the vision datasets (`wheat_disease_dataset_EDA.md`, `Rice_leaf_disease_dataset_set2_documentation.md`, and `wheat_preprocessing_documentation.md`), detailing class distributions, resolution variations, and data augmentation strategies.
+  - Authored comprehensive EDA and technical documentation for the vision datasets (`outputs/reports/wheat_disease_dataset_EDA.md`, `outputs/reports/Rice_leaf_disease_dataset_set2_documentation.md`, and `outputs/reports/wheat_preprocessing_documentation.md`), detailing class distributions, resolution variations, and data augmentation strategies.
 - **KCC Data Ingestion Tooling**:
   - Built the automated data downloader script (`scripts/download_data.py`) supporting scalable streaming ingestion of Kisan Call Centre (KCC) records in JSONL and Parquet formats from data.gov.in.
 - **Visual Analytics & Dashboard Assets**:
-  - Created key dataset visualizations including sample grids, class distribution charts, and summary dashboards for Rice Set 2 (`rice_set2_class_distribution.png`, `rice_set2_dashboard.png`, `rice_set2_sample_grid.png`).
+  - Created key dataset visualizations including sample grids, class distribution charts, and summary dashboards for Rice Set 2 (`outputs/figures/rice_set2_class_distribution.png`, `outputs/figures/rice_set2_dashboard.png`, `outputs/figures/rice_set2_sample_grid.png`).
 
 ---
 
 ## Harliv — Contributions
 - **RAG / NLP PDF Corpus Architecture & EDA**:
   - Built and executed the complete PDF corpus EDA pipeline (`05499e3`) for the RAG system, extracting, cleaning, and cataloging text across agricultural schemes, pest/disease advisories, and Uttar Pradesh District Agricultural Contingency Plans (`up_acp`).
-  - Authored the detailed RAG PDF corpus technical report (`docs/Milestone_2_work/rag_pdf_report.md`) and curated the cleaned inventory (`pdf_inventory_clean.csv`).
+  - Authored the detailed RAG PDF corpus technical report (`outputs/reports/rag_pdf_report.md`) and curated the cleaned inventory (`pdf_inventory_clean.csv`).
 - **Semantic Chunking & Embedding Preparation**:
   - Implemented semantic chunking analysis (`b83b1c6`) and preprocessed domain documents for downstream multilingual vector representation (MuRIL/ChromaDB).
 - **Report Restructuring & Multi-Modal Visual Integration**:
-  - Structured the initial Milestone 2 report framework (`e36595b`, `bebbb33`) and integrated core visual EDA outputs across both Vision (`rice_dist_and_image_resolution.png`, `wheat_dist_and_image_resolution.png`) and KCC datasets (`docspersource_pagewordcount.png`, query/answer length distributions, monthly trends).
+  - Structured the initial Milestone 2 report framework (`e36595b`, `bebbb33`) and integrated core visual EDA outputs across both Vision (`outputs/figures/rice_dist_and_image_resolution.png`, `outputs/figures/wheat_dist_and_image_resolution.png`) and KCC datasets (`outputs/figures/docspersource_pagewordcount.png`, query/answer length distributions, monthly trends).
 
 ---
 
 ## Lokesh — Contributions
 - **Milestone 2 Architecture & Technical Sprint Planning**:
-  - Authored the comprehensive [Milestone 2 Implementation Plan](file:///d:/Group-7-DS-and-AI-Lab-Project/docs/Milestone_2_Implementation_Plan.md) (`docs/Milestone_2_Implementation_Plan.md`, 262 lines) at sprint initiation (`commit 61ab4b3`), architecting the data pipelines across all three subsystems (Vision, KCC/RAG, and Crop Yield).
+  - Authored the comprehensive [Milestone 2 Implementation Plan](file:///d:/Group-7-DS-and-AI-Lab-Project/docs/internal/Milestone_2_Implementation_Plan.md) (`docs/internal/Milestone_2_Implementation_Plan.md`, 262 lines) at sprint initiation (`commit 61ab4b3`), architecting the data pipelines across all three subsystems (Vision, KCC/RAG, and Crop Yield).
   - Established the 3-day sprint work breakdown across all five team members, defined the repository storage hierarchy (`data/raw/`, `data/processed/`, `data/final/`), resolved core design decisions upfront, and established the verification checklist for data leakage prevention.
 - **Crop Yield Subsystem Preparation, EDA & Preprocessing**:
-  - Conducted comprehensive domain research on Uttar Pradesh crop yield data (`UP Crop Yield Data Research.md`), built the yield EDA and preprocessing notebooks (`notebooks/05_yield_eda.ipynb`, `notebooks/06_yield_preprocessing.ipynb`), and generated structured train/validation/test datasets (`data/final/yield/`).
+  - Conducted comprehensive domain research on Uttar Pradesh crop yield data (`outputs/reports/UP Crop Yield Data Research.md`), built the yield EDA and preprocessing notebooks (`notebooks/05_yield_eda.ipynb`, `notebooks/06_yield_preprocessing.ipynb`), and generated structured train/validation/test datasets (`data/final/yield/`).
   - Developed Python automation scripts for yield data fetching, exploratory analysis, and preprocessing (`scripts/fetch_prepare_yield_data.py`, `scripts/run_yield_eda_analysis.py`, `scripts/run_yield_preprocessing.py`).
 - **Initial Vision EDA & Pipeline Consolidation**:
   - Developed the initial Rice & Wheat exploratory data analysis notebook (`notebooks/01_vision_eda.ipynb`) and configured project dependencies (`requirements.txt`, `data/README.md`).
-  - Consolidated and structured the Vision training pipeline design and merge specifications (`notebookD_merge_split_documentation.md`, `notebook_training_pipeline_design.md`).
+  - Consolidated and structured the Vision training pipeline design and merge specifications (`outputs/reports/notebookD_merge_split_documentation.md`, `outputs/reports/notebook_training_pipeline_design.md`).
 - **Milestone 2 Report Synthesis & Sign-Off Management**:
-  - Consolidated findings from all subsystems into the authoritative `docs/Milestone_2_Report.md`, standardizing technical sections, tables, and team sign-off verification.
+  - Consolidated findings from all subsystems into the authoritative `docs/reports/Milestone_2_Report.md`, standardizing technical sections, tables, and team sign-off verification.
 
 ---
 
@@ -129,7 +129,7 @@ Commit history analysis over the Milestone 2 period (verified via both commit lo
 - **Kisan Call Centre (KCC) Knowledge Base EDA**:
   - Developed the comprehensive KCC Exploratory Data Analysis notebook (`notebooks/03_kcc_rag_eda.ipynb`, 2,366 lines), analyzing query distributions, farmer query patterns, crop/topic clustering, and seasonal frequency across agricultural advisory records.
 - **RAG Knowledge Preparation & Documentation**:
-  - Authored structured technical documentation for KCC data analysis (`docs/Milestone_2_work/KCC Data EDA.md`), establishing the foundation for multilingual query-answer retrieval and deduplication.
+  - Authored structured technical documentation for KCC data analysis (`outputs/reports/KCC Data EDA.md`), establishing the foundation for multilingual query-answer retrieval and deduplication.
 
 ---
 
@@ -137,9 +137,9 @@ Commit history analysis over the Milestone 2 period (verified via both commit lo
 - **Unified Multi-Crop Yield EDA & Advanced Preprocessing**:
   - Developed the comprehensive multi-crop yield exploratory data analysis and preprocessing notebook (`notebooks/07_Yield_EDA+ preprocessing.ipynb`, 1,544 lines), implementing missing value treatment (MissForest) and feature engineering across historical yield records.
 - **Yield Visual Analytics & Correlation Studies**:
-  - Generated and integrated key statistical charts and analytical assets (`Avg_yield.png`, `correlation_matrix.png`, `season_summary.png`, `top_crops_production.png`, `yearly_trends.png`).
+  - Generated and integrated key statistical charts and analytical assets (`outputs/figures/Avg_yield.png`, `outputs/figures/correlation_matrix.png`, `outputs/figures/season_summary.png`, `outputs/figures/top_crops_production.png`, `outputs/figures/yearly_trends.png`).
 - **Yield Subsystem Documentation**:
-  - Authored detailed narrative summaries and technical reports for the crop yield prediction subsystem (`docs/yield_report.md`, `notebooks/yield_notebook_summary.md`).
+  - Authored detailed narrative summaries and technical reports for the crop yield prediction subsystem (`outputs/reports/yield_report.md`, `notebooks/yield_notebook_summary.md`).
 
 ---
 

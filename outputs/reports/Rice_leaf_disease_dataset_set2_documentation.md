@@ -59,7 +59,7 @@ ext
 .jpg    120
 ```
 
-![Class distribution chart](./rice_set2_class_distribution.png)
+![Class distribution chart](../figures/rice_set2_class_distribution.png)
 
 This is as balanced as a dataset gets: **exactly 40 images per class, a 1.00 : 1 imbalance ratio**, and a single file type (`.jpg`). Plain accuracy will be a meaningful metric with no need for class weighting or resampling.
 
@@ -71,7 +71,7 @@ A deeper point: unlike Set 1, this balance is **genuine, not manufactured**. Set
 
 ## 3. Sample image grid (one row per class)
 
-![Random samples per class](./rice_set2_sample_grid.png)
+![Random samples per class](../figures/rice_set2_sample_grid.png)
 
 **What each disease looks like, and how the framing compares across classes:**
 
@@ -228,7 +228,7 @@ Important reading note on the comparison block: the line **"aHash-8x8 (Cell 7): 
 
 ## 8. EDA summary dashboard + manifest export
 
-![EDA summary dashboard](./rice_set2_dashboard.png)
+![EDA summary dashboard](../figures/rice_set2_dashboard.png)
 
 *Cell output — manifest columns and export*
 

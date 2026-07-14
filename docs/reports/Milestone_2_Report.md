@@ -147,17 +147,17 @@ The vision pipeline draws on **three complementary datasets** covering rice and 
 
 **Dataset B — Rice Leaf Disease Dataset (Set 2)** (`vbookshelf/rice-leaf-diseases` small variant / `nirmalsankalana/rice-leaf-disease-image`)
 
-| Attribute | Description |
-|---|---|
-| **Total images** | 120 `.jpg` files |
-| **Number of classes** | 3 disease classes |
-| **Target variable** | Folder-level disease label |
-| **Classes** | Bacterial Leaf Blight (40), Brown Spot (40), Leaf Smut (40) |
-| **Pre-existing splits** | None — all images in a single partition |
+| Attribute               | Description                                                                           |
+| -------------------------| ---------------------------------------------------------------------------------------|
+| **Total images**        | 120 `.jpg` files                                                                      |
+| **Number of classes**   | 3 disease classes                                                                     |
+| **Target variable**     | Folder-level disease label                                                            |
+| **Classes**             | Bacterial Leaf Blight (40), Brown Spot (40), Leaf Smut (40)                           |
+| **Pre-existing splits** | None — all images in a single partition                                               |
 | **Dominant image size** | 3,081 × 897 px (70.8% of images) — panoramic leaf-strip format, aspect ratio ≈ 3.44:1 |
-| **Color mode** | RGB only (no RGBA, no corruption) |
-| **File format** | `.jpg` (genuine JPEG throughout) |
-| **Dataset schema** | Same schema as Set 1 (added during EDA) |
+| **Color mode**          | RGB only (no RGBA, no corruption)                                                     |
+| **File format**         | `.jpg` (genuine JPEG throughout)                                                      |
+| **Dataset schema**      | Same schema as Set 1 (added during EDA)                                               |
 
 **Dataset C — Wheat Plant Diseases Dataset** (`kushagra3204/wheat-plant-diseases`, Kaggle)
 
@@ -267,9 +267,9 @@ The datasets used in this project were obtained from publicly available and trus
 **5.1 Vision Dataset EDA**
 
 Full EDA notebooks are at:
-- [`rice-leaf-disease-dataset-EDA.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-EDA.ipynb) (Rice Set 1)
-- [`rice-leaf-disease-dataset-set-2-eda.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-set-2-eda.ipynb) (Rice Set 2)
-- [`wheat-dataset-EDA.ipynb`](../data/Vision_dataset/wheat-dataset-EDA.ipynb) (Wheat)
+- [`rice-leaf-disease-dataset-EDA.ipynb`](../../notebooks/rice-leaf-disease-dataset-EDA.ipynb) (Rice Set 1)
+- [`rice-leaf-disease-dataset-set-2-eda.ipynb`](../../notebooks/rice-leaf-disease-dataset-set-2-eda.ipynb) (Rice Set 2)
+- [`wheat-dataset-EDA.ipynb`](../../notebooks/wheat-dataset-EDA.ipynb) (Wheat)
 
 ---
 
@@ -427,7 +427,7 @@ Laplacian variance (sharpness) varies 3–4 orders of magnitude within most clas
 **5.2 RAG/NLP PDF Corpus EDA (Harliv's Work)**
 
 Comprehensive PDF Corpus EDA & Chunking Technical Report:
-- **RAG PDF Report:** [`docs/Milestone_2_work/rag_pdf_report.md`](../docs/Milestone_2_work/rag_pdf_report.md)
+- **RAG PDF Report:** [`outputs/reports/rag_pdf_report.md`](../../outputs/reports/rag_pdf_report.md)
 
 * **Summary statistics:** 187 PDFs collected across 4 authoritative government agricultural folders (`Other_docs`, `Schemes`, `PPQS_Advisories`, `UP_ACP`); per-folder document count, total pages, and average word count documented in `pdf_inventory_clean.csv`.
 
@@ -441,38 +441,38 @@ Comprehensive PDF Corpus EDA & Chunking Technical Report:
 * **Language:** Language detection (via `langdetect` with Devanagari-ratio fallback) confirmed the corpus is overwhelmingly English (168/170 documents); 2 documents flagged as Welsh/Catalan due to short/noisy header text were manually verified as clean English.
 * **Document length distribution:** Page count and word count distributions reveal heavy length variation — PPQS advisories average 4.9 pages (concise pest guidelines) while government schemes average 32.6 pages (>8,900 words), with the longest document spanning ~100 pages (>30,000 words). This variance directly justifies semantic chunking over document-level retrieval.
 
-![Page word count histo and docs per source](<./assets/milestone-2-assets/docspersource_pagewordcount.png>)
+![Page word count histo and docs per source](<../../outputs/figures/docspersource_pagewordcount.png>)
 
 * **Missing value & failure filtering:** Documents with failed/empty native text extraction were retried at 300 DPI OCR; 14 unreadable or corrupted files were excluded (`excluded_unreadable_docs.csv`).
 * **Duplicate analysis:** Exact byte duplicates removed via hash; 33 near-duplicate pairs (>0.90 similarity) resolved by retaining the more complete higher-word-count copy (`excluded_near_duplicate_docs.csv`), yielding a clean corpus of **170 documents**.
 * **Domain Vocabulary Analysis:** Frequency analysis of normalized tokens confirmed heavy agricultural domain concentration (`water`, `rice`, `crop`, `irrigation`, `soils`, `sowing`, `seed`, `drainage`, `fodder`, `management`), confirming excellent domain alignment with the advisory system.
 
-![Word frequency](<./assets/milestone-2-assets/word_frequency.png>)
+![Word frequency](<../../outputs/figures/word_frequency.png>)
 
 **5.3 KCC Advisory Dataset EDA (Aneeqa's Work)**
 
 Comprehensive KCC Data Exploration Technical Report:
-- **KCC EDA Report:** [`docs/Milestone_2_work/KCC Data EDA.md`](../docs/Milestone_2_work/KCC%20Data%20EDA.md)
+- **KCC EDA Report:** [`outputs/reports/KCC Data EDA.md`](../../outputs/reports/KCC%20Data%20EDA.md)
 
 * **Summary statistics:** Combined **3,123,029 records** spanning 6 annual CSVs (2020–2025, Uttar Pradesh). Yearly breakdown — 2020: 565,719 | 2021: 495,222 | 2022: 620,775 | 2023: 585,633 | 2024: 536,048 | 2025: 319,632 (~2.07 GB on disk / ~3.3 GB memory footprint).
 * **Crop & Category Distribution:** **318 unique crops** identified. Top crops: Others (34.74%), Wheat (16.40%), Paddy/Dhan (15.54%). **Rice & Wheat combined account for ~31.95% of all queries (997,806 records)**, directly validating our project's crop scope. Across **40 categories and 83 query types**, Weather (33.47%) and Government Schemes (25.63%) dominate farmer inquiries.
 * **Temporal & Seasonal Patterns:** Query volume peaked in 2022 (620,773). Q1 (Jan–Mar) dominates seasonal activity (33.16% of queries), with monthly highs in January and lows in May.
 
-![Query month trend](<./assets/milestone-2-assets/query_month_trend.png>)
+![Query month trend](<../../outputs/figures/query_month_trend.png>)
 
 * **Language Distribution (Critical RAG Insight):** Queries (`QueryText`) are **~99.98% English/Hinglish** (Romanized script), whereas expert answers (`KccAns`) are **~98.80% Hindi** (Devanagari script). This mandatory cross-lingual bridge dictates the use of a multilingual embedding model (`MuRIL`).
 * **Text Length Analysis:** Query text averages 54 characters (95th pct 85 chars); answers average 209 characters (95th pct 392 chars). Combined Q&A length averages 264 characters (95th pct 432 chars). Crucially, **98.9% of records fit within 512 characters**, confirming that 512-character chunking captures complete Q&A semantic units.
 * **Missingness & Deduplication Requirements:** `Season` is 100% null (dropped). While exact row duplicates are 0%, **68.72% of `QueryText` values are duplicates** (e.g., `"Farmer asked query on Weather"` appears 781,352 times) and **26.15% of full Q&A pairs are exact duplicates**. Deduplication is mandatory prior to vector embedding to prevent retrieval index skew.
 * **Visualizations:**
 
-![query_length_ans_length_boxplot](<./assets/milestone-2-assets/query_length_ans_length_boxplot.png>)
+![query_length_ans_length_boxplot](<../../outputs/figures/query_length_ans_length_boxplot.png>)
 
 
 **5.4 Yield Dataset EDA**
 
 Full executable EDA notebooks and documentation are available at:
-- **Primary Work (Multi-Crop Pan-India):** [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../notebooks/07_Yield_EDA+%20preprocessing.ipynb) & [`docs/Milestone_2_work/yield_report.md`](../docs/Milestone_2_work/yield_report.md)
-- **Complementary UP Subset:** [`notebooks/05_yield_eda.ipynb`](../notebooks/05_yield_eda.ipynb)
+- **Primary Work (Multi-Crop Pan-India):** [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../../notebooks/07_Yield_EDA+%20preprocessing.ipynb) & [`outputs/reports/yield_report.md`](../../outputs/reports/yield_report.md)
+- **Complementary UP Subset:** [`notebooks/05_yield_eda.ipynb`](../../notebooks/05_yield_eda.ipynb)
 
 #### 5.4.1 Primary Multi-Crop Dataset Profile (`440,962` Records)
 - **Geographic & Temporal Coverage:** Evaluated `440,962` historical district-level and state-level agricultural records spanning 1997–2024 across 35 States/Union Territories and 124 distinct crop commodities.
@@ -496,9 +496,9 @@ Full executable EDA notebooks and documentation are available at:
 **6.1 Vision Preprocessing across Source Datasets (Notebooks A, B, C)**
 
 Executable preprocessing notebooks and technical documentation:
-- **Wheat (Notebook A):** [`docs/Milestone_2_work/wheat_preprocessing_documentation.md`](../docs/Milestone_2_work/wheat_preprocessing_documentation.md)
-- **Rice Set 1 (Notebook B):** [`docs/Milestone_2_work/rice_set1_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set1_preprocessing_documentation.md)
-- **Rice Set 2 (Notebook C):** [`docs/Milestone_2_work/rice_set2_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set2_preprocessing_documentation.md)
+- **Wheat (Notebook A):** [`outputs/reports/wheat_preprocessing_documentation.md`](../../outputs/reports/wheat_preprocessing_documentation.md)
+- **Rice Set 1 (Notebook B):** [`outputs/reports/rice_set1_preprocessing_documentation.md`](../../outputs/reports/rice_set1_preprocessing_documentation.md)
+- **Rice Set 2 (Notebook C):** [`outputs/reports/rice_set2_preprocessing_documentation.md`](../../outputs/reports/rice_set2_preprocessing_documentation.md)
 
 #### 6.1.1 Label Canonicalization & Normalization
 - **Wheat Dataset:** Collapsed 45 raw folder labels (e.g., `Aphid`, `aphid_test`, `aphid_valid`) down to **15 canonical disease classes** (`wheat__*`) via programmatic suffix stripping (`_test`, `_valid`, `_val`, `_train`).
@@ -521,21 +521,21 @@ All three cleaned datasets exported manifests adhering to a uniform 6-column sch
 **6.2 RAG/NLP PDF Preprocessing & Chunking (Harliv's Work)**
 
 Detailed RAG PDF Preprocessing & Chunking Documentation:
-- **RAG PDF Report:** [`docs/Milestone_2_work/rag_pdf_report.md`](../docs/Milestone_2_work/rag_pdf_report.md)
+- **RAG PDF Report:** [`outputs/reports/rag_pdf_report.md`](../../outputs/reports/rag_pdf_report.md)
 
 * **Text extraction & cleaning:** Text extracted per PDF via `pdfplumber` (native) with `pytesseract` OCR fallback (English + Hindi) for scanned documents; garbage-character ratio computed to flag low-quality extractions for exclusion.
 * **Deduplication & filtering:** Exact byte duplicates removed via hash; 33 near-duplicate document pairs (>0.90 similarity) resolved by retaining the more complete copy, leaving 170 clean PDFs.
 * **Metadata extraction:** Standardized per-document metadata (`source`, `extraction_method`, `detected_language`, `detected_year`, `page_count`, `word_count`) recorded for every document.
 * **Tokenization & Semantic Chunking:** Sentence-aware chunking applied (target ~512 tokens, ~50-token overlap), with a hard-split fallback for any single sentence exceeding 512 tokens. On the clean 170-document corpus, this produced **1,451 chunks** (avg. 8.5 chunks/doc), with a median chunk size of 481 tokens (mean 433, std 108) and a max of 561 tokens. Output saved to `pdf_chunks.csv` / `pdf_chunks.jsonl`.
 
-![Chunking Plots](<./assets/milestone-2-assets/pdf_chunk.png>)
+![Chunking Plots](<../../outputs/figures/pdf_chunk.png>)
 
 * **Metadata Encoding:** Each chunk carries `chunk_id`, `source`, `filename`, `chunk_index`, `token_count`, `detected_language`, and `detected_year` — enabling retrieval-time filtering alongside vector search.
 
 **6.3 KCC Advisory Dataset Preprocessing (Aneeqa's Work)**
 
 Detailed KCC EDA & Pipeline Preparation Documentation:
-- **KCC EDA Report:** [`docs/Milestone_2_work/KCC Data EDA.md`](../docs/Milestone_2_work/KCC%20Data%20EDA.md)
+- **KCC EDA Report:** [`outputs/reports/KCC Data EDA.md`](../../outputs/reports/KCC%20Data%20EDA.md)
 
 * **Missing value treatment:** Dropped `Season` column (100% missing); dropped/imputed rows with missing `Crop`, `QueryType`, `Category`, `QueryText`, `KccAns` (all under 0.25% missingness each).
 * **Deduplication:** Given that **68.72% of `QueryText` values and 26.15% of full Q&A pairs are duplicates**, deduplication across Q&A pairs is mandatory prior to vector indexing to prevent index skew toward templated weather/scheme queries.
@@ -546,8 +546,8 @@ Detailed KCC EDA & Pipeline Preparation Documentation:
 **6.4 Yield Preprocessing & Feature Engineering**
 
 Full executable preprocessing pipelines and documentation:
-- **Primary Work (Multi-Crop Pan-India):** [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../notebooks/07_Yield_EDA+%20preprocessing.ipynb) & [`docs/Milestone_2_work/yield_report.md`](../docs/Milestone_2_work/yield_report.md)
-- **Complementary UP Subset:** [`notebooks/06_yield_preprocessing.ipynb`](../notebooks/06_yield_preprocessing.ipynb)
+- **Primary Work (Multi-Crop Pan-India):** [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../../notebooks/07_Yield_EDA+%20preprocessing.ipynb) & [`outputs/reports/yield_report.md`](../../outputs/reports/yield_report.md)
+- **Complementary UP Subset:** [`notebooks/06_yield_preprocessing.ipynb`](../../notebooks/06_yield_preprocessing.ipynb)
 
 #### 6.4.1 Primary Multi-Crop Preprocessing Pipeline (`440,962` Records)
 1. **Multi-Source Schema Harmonization:** Normalized disparate state and district agricultural sources into a standardized tabular schema: `crop`, `year`, `state`, `district`, `season`, `area`, `production`, `yield` along with auxiliary metadata (`annual_rainfall`, `fertilizer`, `pesticide`).
@@ -568,7 +568,7 @@ Full executable preprocessing pipelines and documentation:
 ### 7. Dataset Integration (if multiple datasets)
 
 Executable integration notebook and documentation:
-- **Notebook D (Merge + Split):** [`docs/Milestone_2_work/notebookD_merge_split_documentation.md`](../docs/Milestone_2_work/notebookD_merge_split_documentation.md)
+- **Notebook D (Merge + Split):** [`outputs/reports/notebookD_merge_split_documentation.md`](../../outputs/reports/notebookD_merge_split_documentation.md)
 
 The vision subsystem integrates three cleaned crop-disease datasets into a unified 20-class training pool, with PlantDoc reserved as a held-out field-robustness evaluation set.
 
@@ -591,7 +591,7 @@ The vision subsystem integrates three cleaned crop-disease datasets into a unifi
 ### 8. Data Augmentation & Training Pipeline Design
 
 Technical training pipeline design documentation:
-- **Notebook E (Training Pipeline Design):** [`docs/Milestone_2_work/notebook_training_pipeline_design.md`](../docs/Milestone_2_work/notebook_training_pipeline_design.md)
+- **Notebook E (Training Pipeline Design):** [`outputs/reports/notebook_training_pipeline_design.md`](../../outputs/reports/notebook_training_pipeline_design.md)
 
 To preserve data integrity, the materialized dataset (`final/`) stores one deterministic 256×256 letterboxed RGB copy per image. Augmentation, normalization, and imbalance handling run **on-the-fly inside the data loader during training (Milestone 3)**.
 
@@ -724,36 +724,36 @@ To prevent temporal autocorrelation leakage across agricultural cycles, the data
 ### 12. Deliverables Produced
 
 **System Architecture & Sprint Planning Deliverables (Lokesh's Work):**
-- [`docs/Milestone_2_Implementation_Plan.md`](../docs/Milestone_2_Implementation_Plan.md) — Comprehensive architecture and implementation blueprint establishing the 3-stream data pipeline design (Vision, KCC/RAG, Yield), upfront design decisions, directory structure (`data/raw|processed|final`), sprint work breakdown across all 5 teammates, and automated/manual leakage verification protocols.
+- [`docs/internal/Milestone_2_Implementation_Plan.md`](../internal/Milestone_2_Implementation_Plan.md) — Comprehensive architecture and implementation blueprint establishing the 3-stream data pipeline design (Vision, KCC/RAG, Yield), upfront design decisions, directory structure (`data/raw|processed|final`), sprint work breakdown across all 5 teammates, and automated/manual leakage verification protocols.
 
 **Vision datasets & pipeline deliverables:**
 - **EDA Notebooks & Narratives:**
-  - [`rice-leaf-disease-dataset-EDA.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-EDA.ipynb) & [`Rice leaf disease dataset documentation.odt`](../data/Vision_dataset/Rice%20leaf%20disease%20dataset%20documentation.odt) — Full EDA for Rice Set 1 (5,932 images).
-  - [`rice-leaf-disease-dataset-set-2-eda.ipynb`](../data/Vision_dataset/rice-leaf-disease-dataset-set-2-eda.ipynb) & [`Rice_leaf_disease_dataset_set2_documentation.odt`](../data/Vision_dataset/Rice_leaf_disease_dataset_set2_documentation.odt) — Full EDA for Rice Set 2 (120 images).
-  - [`wheat-dataset-EDA.ipynb`](../data/Vision_dataset/wheat-dataset-EDA.ipynb) & [`Wheat_dataset_Documentation.odt`](../data/Vision_dataset/Wheat_dataset_Documentation.odt) — Full EDA for Wheat Dataset (14,154 images).
+  - [`rice-leaf-disease-dataset-EDA.ipynb`](../../notebooks/rice-leaf-disease-dataset-EDA.ipynb) — Full EDA for Rice Set 1 (5,932 images).
+  - [`rice-leaf-disease-dataset-set-2-eda.ipynb`](../../notebooks/rice-leaf-disease-dataset-set-2-eda.ipynb) — Full EDA for Rice Set 2 (120 images).
+  - [`wheat-dataset-EDA.ipynb`](../../notebooks/wheat-dataset-EDA.ipynb) — Full EDA for Wheat Dataset (14,154 images).
 - **Executable Preprocessing & Dataset Integration Documentation (Mahesh's Work):**
-  - [`docs/Milestone_2_work/wheat_preprocessing_documentation.md`](../docs/Milestone_2_work/wheat_preprocessing_documentation.md) — Technical documentation of Wheat label canonicalization (45→15 classes) and duplicate cleaning (14,154 → 10,673 unique groups).
-  - [`docs/Milestone_2_work/rice_set1_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set1_preprocessing_documentation.md) — Documentation of Rice Set 1 burst-capture thinning (5,932 → 2,066 clean images) and 256×256 RGB letterbox shortcut removal.
-  - [`docs/Milestone_2_work/rice_set2_preprocessing_documentation.md`](../docs/Milestone_2_work/rice_set2_preprocessing_documentation.md) — Documentation of Rice Set 2 panoramic aspect-preserving letterbox standardization (120 images, 3 classes).
-  - [`docs/Milestone_2_work/notebookD_merge_split_documentation.md`](../docs/Milestone_2_work/notebookD_merge_split_documentation.md) — Unified integration & centralized group-aware stratified split (80/10/10 across **12,859 images and 20 classes**, 0 leakage, materialized to `final/train|val|test` + `master_manifest.csv` + `label_to_idx.json`).
-  - [`docs/Milestone_2_work/notebook_training_pipeline_design.md`](../docs/Milestone_2_work/notebook_training_pipeline_design.md) — Training-time data loader design: live random/center cropping to 224², ImageNet normalization, rare-class augmentation, hybrid imbalance handling, and Tungro Grad-CAM robustness check.
+  - [`outputs/reports/wheat_preprocessing_documentation.md`](../../outputs/reports/wheat_preprocessing_documentation.md) — Technical documentation of Wheat label canonicalization (45→15 classes) and duplicate cleaning (14,154 → 10,673 unique groups).
+  - [`outputs/reports/rice_set1_preprocessing_documentation.md`](../../outputs/reports/rice_set1_preprocessing_documentation.md) — Documentation of Rice Set 1 burst-capture thinning (5,932 → 2,066 clean images) and 256×256 RGB letterbox shortcut removal.
+  - [`outputs/reports/rice_set2_preprocessing_documentation.md`](../../outputs/reports/rice_set2_preprocessing_documentation.md) — Documentation of Rice Set 2 panoramic aspect-preserving letterbox standardization (120 images, 3 classes).
+  - [`outputs/reports/notebookD_merge_split_documentation.md`](../../outputs/reports/notebookD_merge_split_documentation.md) — Unified integration & centralized group-aware stratified split (80/10/10 across **12,859 images and 20 classes**, 0 leakage, materialized to `final/train|val|test` + `master_manifest.csv` + `label_to_idx.json`).
+  - [`outputs/reports/notebook_training_pipeline_design.md`](../../outputs/reports/notebook_training_pipeline_design.md) — Training-time data loader design: live random/center cropping to 224², ImageNet normalization, rare-class augmentation, hybrid imbalance handling, and Tungro Grad-CAM robustness check.
 
 **RAG/NLP corpus & PDF deliverables (Harliv's Work):**
-- [`docs/Milestone_2_work/rag_pdf_report.md`](../docs/Milestone_2_work/rag_pdf_report.md) — Comprehensive technical report on authoritative agricultural PDF collection (187 documents across 4 folders), cleaning, OCR fallback, deduplication (170 retained docs), and sentence-aware 512-token semantic chunking (**1,451 chunks**).
+- [`outputs/reports/rag_pdf_report.md`](../../outputs/reports/rag_pdf_report.md) — Comprehensive technical report on authoritative agricultural PDF collection (187 documents across 4 folders), cleaning, OCR fallback, deduplication (170 retained docs), and sentence-aware 512-token semantic chunking (**1,451 chunks**).
 - `pdf_inventory_clean.csv` (170 clean documents), extracted `.txt` files per PDF, `excluded_unreadable_docs.csv`, `excluded_near_duplicate_docs.csv`, `PDF_Corpus_EDA.ipynb`, `PDF_Chunking.ipynb`, `pdf_chunks.csv` / `pdf_chunks.jsonl` (1,451 chunks ready for Milestone 3 embedding).
 
 **KCC advisory dataset deliverables (Aneeqa's Work):**
-- [`docs/Milestone_2_work/KCC Data EDA.md`](../docs/Milestone_2_work/KCC%20Data%20EDA.md) — Comprehensive technical report on Kisan Call Center dataset aggregation (**3,123,029 records**, 2020–2025), crop/category profiling (Rice+Wheat = **31.95%**), multilingual query-answer alignment (**99.98% English queries -> 98.80% Hindi answers**), Q&A deduplication requirements (`68.72%` duplicate queries), and 512-character chunking verification (**98.9% compatibility**).
+- [`outputs/reports/KCC Data EDA.md`](../../outputs/reports/KCC%20Data%20EDA.md) — Comprehensive technical report on Kisan Call Center dataset aggregation (**3,123,029 records**, 2020–2025), crop/category profiling (Rice+Wheat = **31.95%**), multilingual query-answer alignment (**99.98% English queries -> 98.80% Hindi answers**), Q&A deduplication requirements (`68.72%` duplicate queries), and 512-character chunking verification (**98.9% compatibility**).
 - `kcc_combined_2020_2025.csv` (3.12M records across 15 attributes) & `03_kcc_rag_eda.ipynb`.
 
 **Yield dataset:**
 - **Primary Work (Pan-India Multi-Crop):**
   - `production_unified.csv` & `production_unified_imputed.csv` — Full 440,962-record multi-crop production and yield dataset (1997–2024 across 35 States/UTs and 124 crops).
-  - [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../notebooks/07_Yield_EDA+%20preprocessing.ipynb) — Full executable notebook performing multi-source schema unioning, coconut unit conversion, EDA correlation matrix, and `MissForest` imputation.
-  - [`docs/Milestone_2_work/yield_report.md`](../docs/Milestone_2_work/yield_report.md) — Comprehensive technical documentation of the multi-crop pipeline.
+  - [`notebooks/07_Yield_EDA+ preprocessing.ipynb`](../../notebooks/07_Yield_EDA+%20preprocessing.ipynb) — Full executable notebook performing multi-source schema unioning, coconut unit conversion, EDA correlation matrix, and `MissForest` imputation.
+  - [`outputs/reports/yield_report.md`](../../outputs/reports/yield_report.md) — Comprehensive technical documentation of the multi-crop pipeline.
 - **Complementary UP Rice & Wheat Subset:**
   - `up_district_yield_apy_1997_2023.csv` — Focused 15-attribute UP district yield dataset enriched with IMD daily weather and ICRISAT NPK inputs.
-  - [`notebooks/05_yield_eda.ipynb`](../notebooks/05_yield_eda.ipynb) & [`notebooks/06_yield_preprocessing.ipynb`](../notebooks/06_yield_preprocessing.ipynb) — Specialized UP notebooks evaluating district bifurcations, regional disparities, and out-of-time chronological splitting (`train/val/test_yield.csv`).
+  - [`notebooks/05_yield_eda.ipynb`](../../notebooks/05_yield_eda.ipynb) & [`notebooks/06_yield_preprocessing.ipynb`](../../notebooks/06_yield_preprocessing.ipynb) — Specialized UP notebooks evaluating district bifurcations, regional disparities, and out-of-time chronological splitting (`train/val/test_yield.csv`).
 
 ---
 
