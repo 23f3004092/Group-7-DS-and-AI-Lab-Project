@@ -7,6 +7,21 @@ Format: [Milestone/Version] — Date | What changed and why.
 
 ---
 
+## [Repository Governance & Realignment] — 2026-07-15
+
+**Document:** Repository Architecture & Governance Alignment  
+**Author:** Lokesh  
+**Purpose:** Records structural realignment of documentation, operational manuals, and grading logs across the repository to strictly satisfy academic software engineering standards and instructor feedback (`docs/instructor_feedback/on_repo_structure.md`).
+
+| # | Area / File | Key Technical Changes & Rationale |
+|---|-------------|-----------------------------------|
+| 1 | **Internal Path Standardisation**<br>(`Milestone_2_Report.md`, etc.) | • **Zero Broken Links:** Updated all relative image and report links across `Milestone_2_Report.md`, `Milestone_2_Report_Updated.md`, and internal recommendation documents to match the canonical `outputs/reports/`, `outputs/figures/`, and `docs/internal/` hierarchy. |
+| 2 | **Manuals Roadmap Specification**<br>(`docs/manuals/README.md`) | • **Directory Instantiation:** Created `docs/manuals/README.md` with strict academic specifications outlining where M2 data engineering manuals reside (`data/README.md`) and defining the technical roadmap for M3 (`model_training_manual.md`, `evaluation_manual.md`) and M4 (`user_manual.md`, `deployment_manual.md`). |
+| 3 | **Academic Grading Log Realignment**<br>(`docs/TEAM_CONTRIBUTIONS.md`) | • **Consolidated Work Logs:** Migrated and merged the complete individual work logs for both Milestone 1 and Milestone 2 into `docs/TEAM_CONTRIBUTIONS.md`, establishing a single, comprehensive academic assessment log across all five teammates. |
+| 4 | **Developer Guide Transformation**<br>(`CONTRIBUTING.md`) | • **Root Developer Guide:** Re-architected root `CONTRIBUTING.md` into an authoritative onboarding specification covering repository hierarchy, Python virtual environment setup, PII redaction standards (`remove_pii()`), `.gitignore` compliance, and Jupyter notebook output sanitization (`nbstripout`). |
+
+---
+
 ## [Milestone 2] — 2026-07-09
 
 **Document:** Milestone 2 – Comprehensive Exploratory Data Analysis (EDA) & Data Preprocessing  
