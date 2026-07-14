@@ -148,3 +148,6 @@ Commit history analysis over the Milestone 2 period (verified via both commit lo
 ## Lokesh — Contributions
 - **Repository Architecture & Governance Realignment**:
   - Led the structural standardisation of the repository (`docs/`, `outputs/`, `data/`), consolidated M1/M2 academic grading logs into `docs/TEAM_CONTRIBUTIONS.md`, re-architected `CONTRIBUTING.md` into an authoritative developer onboarding guide, and instantiated `docs/manuals/README.md`.
+- **Data Directory & Git Tracking Compliance (`on_repo_structure.md`)**:
+  - Executed the untracking (`git rm --cached`) of 6,159 previously committed large data files (`data/processed/`, `data/final/`, `data/Vision_dataset/`) to strictly satisfy instructor guidelines without deleting local disk assets.
+  - Expanded `.gitignore` rules to block all non-sample datasets and instantiated the `data/sample/` directory (`data/sample/README.md`) for storing lightweight verification subsets (`vision/`, `kcc/`, `yield/`).

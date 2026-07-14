@@ -2,10 +2,17 @@
 # AgriAssist — .gitignore
 # =============================================================================
 
-# ----------------------------- Raw Data --------------------------------------
-# Large datasets (PlantVillage ~3GB, KCC dump, etc.) must NOT be committed.
-# See data/README.md for download instructions.
+# ----------------------------- Data & Storage --------------------------------
+# Large datasets, processed CSVs, and image dumps must NOT be committed to Git.
+# Only data/sample/ and data/README.md are tracked (`docs/instructor_feedback/on_repo_structure.md`).
 data/raw/
+data/processed/
+data/final/
+data/Vision_dataset/
+
+# Ensure sample verification directory and dataset documentation stay tracked
+!data/sample/
+!data/README.md
 
 # ----------------------------- Python ----------------------------------------
 __pycache__/
