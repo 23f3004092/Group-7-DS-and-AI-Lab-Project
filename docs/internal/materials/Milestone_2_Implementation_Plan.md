@@ -122,7 +122,7 @@ data/
 **EDA Sections:**
 1. **Dataset overview** — Total records, columns, data types
 2. **State filtering preview** — Distribution of records by state (show UP proportion)
-3. **Crop distribution** — Crop-wise record counts (focus on Rice/Wheat)
+3. **Crop distribution** — Crop-wise record counts
 4. **Query category analysis** — Distribution of query types (pest, disease, scheme, market, etc.)
 5. **Temporal analysis** — Records by year/season to identify outdated data
 6. **Language analysis** — Detect Hindi/English/code-mixed entries; character set analysis
@@ -136,7 +136,7 @@ data/
 
 **Preprocessing Steps:**
 1. **State filter** — Keep only `State == "Uttar Pradesh"` records
-2. **Crop filter** — Keep only Rice and Wheat related queries
+2. **Crop filter** — no crop based filtering for rag
 3. **Category filter** — Exclude financial/subsidy/market entries (per Milestone 1 risk mitigation)
 4. **Temporal filter** — Remove records older than a relevance threshold (e.g., pre-2020)
 5. **Missing value treatment** — Handle nulls (drop or impute based on EDA findings)
