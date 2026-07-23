@@ -3,6 +3,29 @@
 
 ---
 
+## Table of Contents
+
+1. [Introduction](#1-introduction)
+2. [Overall System Architecture](#2-overall-system-architecture)
+3. [End-to-End Workflow](#3-end-to-end-workflow)
+4. [Model Architecture Selection](#4-model-architecture-selection)
+5. [Justification of Model Choices](#5-justification-of-model-choices)
+6. [Model Inputs and Outputs](#6-model-inputs-and-outputs)
+7. [Training Strategy](#7-training-strategy)
+8. [Model Pipeline](#8-model-pipeline)
+9. [Retrieval and Knowledge Components](#9-retrieval-and-knowledge-components)
+10. [Prompt Engineering](#10-prompt-engineering)
+11. [System Integration](#11-system-integration)
+12. [Computational Requirements](#12-computational-requirements)
+13. [Design Decisions and Trade-offs](#13-design-decisions-and-trade-offs)
+14. [Risks and Limitations](#14-risks-and-limitations)
+15. [Deliverables Produced](#15-deliverables-produced)
+16. [Summary and Next Steps](#16-summary-and-next-steps)
+
+Appendices: [Appendix A — Sequence Diagram (Critical Path)](#appendix-a--sequence-diagram-critical-path) | [Appendix B — Model Configuration Table](#appendix-b--model-configuration-table) | [Appendix C — Hyperparameter Summary Table](#appendix-c--hyperparameter-summary-table) | [Appendix D — API Specifications](#appendix-d--api-specifications) | [Appendix E — Prompt Template](#appendix-e--prompt-template) | [Appendix F — References to Selected Models](#appendix-f--references-to-selected-models) | [Appendix G — Assumptions Requiring Empirical Validation](#appendix-g--assumptions-requiring-empirical-validation) | [Appendix H — Change Log](#appendix-h--change-log)
+
+---
+
 ## 1. Introduction
 
 ### 1.1 Project Recap
@@ -61,6 +84,8 @@ validation before this design should be treated as final, along with how
 and when each will be tested.
 
 ---
+
+## 2. Overall System Architecture
 
 ### 2.1 High-Level Diagram
 
