@@ -96,12 +96,12 @@ and when each will be tested.
    [Java Backend Core — Spring Boot] ── AuthN/Z, orchestration,
                 │                        rate limiting, trace context
                 │
-      ┌─────────┼──────────────────────────────────────┐
+      ┌─────────┼────────────────────────────────────────┐
       │         │                                        │
       ▼         ▼                                        ▼
  [Redis      [Vector DB Cluster            [Python ML Mesh]
-  Cache]      (Qdrant) — Policy/KCC         ├─ ASR / TTS (Indic)
-              + Yield Cache namespaces       ├─ Vision Classifier (ViT/MobileViT)
+  Cache]      (Qdrant) — Policy/KCC           ├─ ASR / TTS (Indic)
+              + Yield Cache namespaces        ├─ Vision Classifier (ViT/MobileViT)
                                               ├─ MuRIL Embedder
                                               ├─ Intent/Entity Extractor
                                               ├─ Yield Prediction (GBT)
@@ -181,12 +181,12 @@ post-check → response (text, streamed; optionally spoken via TTS).
                ▼
    [Fast-path key: disease_label + intent_flags]
                │
-      ┌────────┴────────┐
+      ┌────────┴──────────┐
    cache HIT          cache MISS
       │                   │
       ▼                   ▼
  [Template          [Parallel Tool Fan-Out]
-  response]          ├─ Policy Vector DB (Qdrant)
+  response]           ├─ Policy Vector DB (Qdrant)
       │               ├─ Yield Cache DB → (miss) → GBT Yield Model
       │               ├─ Mandi/Weather Tool
       │               └─ Profitability Estimator
@@ -828,24 +828,24 @@ checks flagged in §14.
 
 ```
 Farmer      Backend      Redis      Vision      MuRIL     Vector DB    LLM        Mandi API   Guardrails
-  │            │           │          │           │           │         │            │            │
+  │            │           │           │           │           │         │            │            │
   │─POST /v2/diagnose──────►│          │           │           │         │            │            │
   │            │─embed cache check────►│           │           │         │            │            │
   │            │◄─MISS──────────────────│          │           │         │            │            │
   │            │─ClassifyImage──────────────────────►│         │         │            │            │
   │            │◄─{label, confidence}────────────────│         │         │            │            │
-  │            │─Embed(text)─────────────────────────────────►│         │            │            │
-  │            │◄─{vector}────────────────────────────────────│         │            │            │
-  │            │─VectorSearch (parallel)──────────────────────────────►│            │            │
-  │            │─GetMandiPrice (parallel)──────────────────────────────────────────►│            │
-  │            │◄─chunks────────────────────────────────────────────────│            │            │
+  │            │─Embed(text)──────────────────────────────────►│         │            │            │
+  │            │◄─{vector}─────────────────────────────────────│         │            │            │
+  │            │─VectorSearch (parallel)────────────────────────────────►│            │            │
+  │            │─GetMandiPrice (parallel)────────────────────────────────────────────►│            │
+  │            │◄─chunks────────────────────────────────────────────────│             │            │
   │            │◄─price/fallback──────────────────────────────────────────────────────│            │
-  │            │─GuardrailsPreFilter────────────────────────────────────────────────────────────►│
-  │            │◄─{ok, filteredChunks}───────────────────────────────────────────────────────────│
-  │            │─Synthesize(enrichedPrompt)────────────────────────────────────────►│            │
-  │            │◄─{advice_text}──────────────────────────────────────────────────────│            │
-  │            │─GuardrailsPostCheck────────────────────────────────────────────────────────────►│
-  │            │◄─{ok}────────────────────────────────────────────────────────────────────────────│
+  │            │─GuardrailsPreFilter──────────────────────────────────────────────────────────────►│
+  │            │◄─{ok, filteredChunks}─────────────────────────────────────────────────────────────│
+  │            │─Synthesize(enrichedPrompt)─────────────────────────────────────────►│             │
+  │            │◄─{advice_text}──────────────────────────────────────────────────────│             │
+  │            │─GuardrailsPostCheck──────────────────────────────────────────────────────────────►│
+  │            │◄─{ok}─────────────────────────────────────────────────────────────────────────────│
   │◄─200 OK {advice, label, sources}──│
 ```
 
@@ -943,4 +943,4 @@ All team members listed below have **reviewed and approved** this Milestone 3 do
 
 *By approving above, each member confirms they have read the complete document and approve it for submission.*
 
-**Document version:** Milestone 3 — v1 · **Prepared:** July 2026
+**Document version:** Milestone 3 — v11 · **Prepared:** 23 July 2026
