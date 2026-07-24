@@ -1,304 +1,386 @@
-# FarmerVision — AI/ML Architecture (Academic Setting: Network Latency ≈ Negligible)
+# FarmerVision — Consolidated LLM / AI / ML Architecture
 
-Assumption: farmers have good connectivity (broadband/campus wifi/5G with
-strong signal). Network RTT is no longer the constraint — everything below
-is now a **compute/serving-architecture problem**. This is the right
-framing for a thesis/academic system design where you control the deployment
-environment.
-
-## 0. What Actually Eats the Budget Now
-
-With network RTT reduced to ~5-15ms, a 200-300ms budget is entirely GPU
-compute time across: vision inference + embedding + vector search + LLM
-generation. The LLM is still the dominant cost by an order of magnitude.
-So the redesign target is: **can we get a 12B-class model's response
-generation down into a ~150-200ms slice of that budget, and if not, what
-model size/technique combination does get us there?**
+This is the single reference tying together every model and ML component
+discussed: what each one does, what it's built from, how it's served, and
+where it sits in the request flow. Setting: good connectivity (academic),
+target latency 200-300ms.
 
 ---
 
-## 1. Latency Budget (Academic, Ideal Network)
+## 1. Full Model Inventory
 
-```
-Total budget: 250ms (midpoint of 200-300ms)
-
-┌─────────────────────────────────────────────────────────┐
-│ Network (client → server, good connectivity)    ~10-15ms │
-├─────────────────────────────────────────────────────────┤
-│ Vision Classification (ViT-Small, TensorRT,      ~15-25ms│
-│  FP16, on A100/H100, batched)                            │
-├─────────────────────────────────────────────────────────┤
-│ Text Embedding (MuRIL, FP16, TensorRT)            ~5-10ms│
-├─────────────────────────────────────────────────────────┤
-│ Vector Search (HNSW, in-memory, top-5)            ~3-8ms │
-├─────────────────────────────────────────────────────────┤
-│ Parallel Tool Calls (mandi/weather/yield,         ~10-20ms│
-│  cached or fast in-region APIs, fired concurrently)       │
-├─────────────────────────────────────────────────────────┤
-│ Guardrails Pre-Filter (rule-based)                ~2-5ms │
-├─────────────────────────────────────────────────────────┤
-│ LLM Generation ── THE constraint             ~150-180ms  │
-├─────────────────────────────────────────────────────────┤
-│ Guardrails Post-Check (regex/classifier)          ~2-5ms │
-├─────────────────────────────────────────────────────────┤
-│ Network (response back)                          ~10-15ms│
-└─────────────────────────────────────────────────────────┘
-                                          Total: ~210-280ms
-```
-
-Everything except LLM generation is already cheap and parallelizable. The
-whole redesign question reduces to: **how do you get LLM generation down
-to ~150-180ms?**
+| # | Component | Purpose | Model | Size | Precision | Serving | Latency |
+|---|---|---|---|---|---|---|---|
+| 1 | Compound Intent/Entity Extractor | Detect all sub-intents + entities (crop, region, etc.) in ONE pass, before agent loop | DistilBERT-class, multi-label + NER head | ~66M | FP16 | ONNX Runtime | 10-15ms |
+| 2 | Vision Classifier | Crop disease identification from image | ViT-Small (or MobileViT-XXS if pushed further) | ~22M-86M | FP16/INT8 | TensorRT | 15-25ms |
+| 3 | Text Embedder | Embed farmer query + documents for semantic retrieval | MuRIL-base | ~236M | FP16 | TensorRT | 5-10ms |
+| 4 | Structured Feature Embedder | Embed agronomic features (crop, region, soil, season) for yield-cache lookup — **separate from #3, not MuRIL** | Small trained two-tower encoder | ~5-10M | FP16 | ONNX Runtime | 2-5ms |
+| 5 | Policy/KCC Vector DB | Retrieve relevant policy/incentive/advisory chunks | Qdrant, HNSW index | — | — | In-memory | 3-8ms |
+| 6 | Yield Cache Vector DB | Fast lookup for recurring (crop×region×season) yield answers — **separate collection from #5** | Qdrant, HNSW index | — | — | In-memory | 5-10ms (hit) |
+| 7 | Yield Prediction Tool | Compute yield for novel (crop×region×soil) combos — source of truth, not a retrieval shortcut | XGBoost/LightGBM (GBT) | — | — | Lightweight service | 10-15ms |
+| 8 | Profitability/Risk Estimator | Combine yield × price × cost × incentive into a net-return range | Rule-based/statistical composite (not a trained model initially) | — | — | Lightweight service | 5-10ms |
+| 9 | Mandi/Weather Tool | Live price + forecast lookup | External API + Redis cache | — | — | Cached | 5-10ms |
+| 10 | Guardrails Pre-Filter | Validate retrieved data (dosage ranges, stale-price flags) before synthesis | Rule-based + small classifier | — | INT8 | ONNX Runtime | 2-5ms |
+| 11 | **Main Synthesis LLM** | Generate the final farmer-facing advisory text | Gemma distilled to 2-4B, agri-domain fine-tuned | 2-4B | FP8 | vLLM, continuous batching, PagedAttention, guided decoding | 150-180ms |
+| 12 | Speculative Draft Model | Propose candidate tokens verified by #11 in one pass — speeds up #11 | Small draft model, same tokenizer family | 350-500M | FP8 | vLLM speculative decoding | (folded into #11's latency) |
+| 13 | Guardrails Post-Check | Hallucination/dosage/banned-term check on generated text | Rule-based regex + small classifier | — | INT8 | ONNX Runtime | 2-5ms |
+| 14 | Fast-Path Template Cache | Skip generation entirely for the most common (disease/intent) pairs | Exact-match Redis lookup, pre-approved templates | — | — | Redis | 5-10ms (hit) |
+| 15 | Speech-to-Text (ASR) | Transcribe farmer's spoken query, streaming | IndicWhisper / Bhashini ASR / IndicConformer (dialect-tuned) | ~250M-1.5B | FP16 | Faster-Whisper (CTranslate2) or Triton, **streaming mode** | duration-bound — see §5 |
+| 16 | Dialect Normalizer | Normalize regional dialect transcript → standard Hindi/English before downstream NLP | IndicTrans2 (or dialect-specific fine-tune) | ~1.2B (distilled variant preferred) | FP16 | CTranslate2 / ONNX | 20-40ms (short text) |
+| 17 | Text-to-Speech (TTS) | Convert final advisory text to spoken audio for low-literacy farmers | VITS/FastSpeech2-class, Indic multi-speaker | ~30-90M | FP16 | Streaming synthesis, chunked by sentence | see §5 |
 
 ---
 
-## 2. Making LLM Generation Fit ~150-180ms
+## 2. Consolidated Architecture Diagram
 
-A 12B dense model generating 150-250 tokens autoregressively will not fit
-this window even on an H100, even with vLLM batching — decode is
-inherently sequential per token. To hit the target, combine several
-real, published techniques rather than relying on one:
+```
+        [Farmer Query]
+   ┌───────────┼─────────────┐
+   │           │             │
+ typed       image      spoken (voice)
+ text       (photo)          │
+   │           │             ▼
+   │           │    ┌─────────────────────────────┐
+   │           │    │ #15 ASR (streaming) →       │
+   │           │    │ #16 Dialect Normalizer      │
+   │           │    │ (skipped for standard lang) │
+   │           │    │ → produces text, same as    │
+   │           │    │   if farmer had typed it    │
+   │           │    │ (full detail: §3)           │
+   │           │    └───────────┬─────────────────┘
+   │           │                │
+   └───────────┴────────────────┘
+               │
+               ▼
+     [Farmer Query: text + optional image]
+     ── from here on, voice/typed/image-only
+        inputs are indistinguishable — this
+        is the single entry point into the
+        core pipeline below ──
+                                            │
+                        ┌───────────────────┴───────────────────┐
+                        ▼                                       ▼
+        ┌────────────────────────────────┐      ┌─────────────────────────────────────┐
+        │  #2 Vision Classifier          │      │  #1 Compound Intent/Entity          │
+        │  (runs immediately if image    │      │     Extractor                       │
+        │   present — NOT gated behind   │      │  → flags: needs_policy, needs_yield,│
+        │   intent extraction, since its │      │    needs_price, needs_profitability,│
+        │   output is needed for the     │      │    is_compound; entities: crop,     │
+        │   fast-path cache key below)   │      │    region, etc.                     │
+        │  → disease_label, confidence   │      └───────────────────┬─────────────────┘
+        │              ~15-25ms          │                          │
+        └────────────────┬───────────────┘                          │
+                         └──────────────────┬───────────────────────┘
+                                            ▼
+                    ┌───────────────────────────────────────────┐
+                    │  Fast-Path Key Assembly:                  │
+                    │  (disease_label, intent_flags, lang)      │
+                    └───────────────────┬───────────────────────┘
+                                        │
+                     ┌──────────────────┴─────────────────────┐
+                     │                                        │
+              key found in                              key MISS —
+              #14 Template Cache                         novel/compound/
+                     │                                    no-image query
+                     ▼                                        ▼
+          ┌─────────────────────────┐         ┌─────────────────────────────────┐
+          │ #14 Fast-Path Template  │         │  Parallel Tool Fan-Out (all     │
+          │      Cache — HIT        │         │  flagged branches fire together,│
+          │  → skip everything below│         │  vision result reused from above│
+          │  ~5-10ms total (incl.   │         │  if it already ran — no re-run) │
+          │  vision + intent above) │         │                                 │
+          └─────────────────────────┘         │  #3 Text Embedder → #5 Policy DB│
+                                              │  #4 Feature Embedder → #6 Yield │
+                                              │      Cache DB (HIT→skip #7)     │
+                                              │      MISS → #7 Yield Prediction │
+                                              │      (can use disease_label as a│
+                                              │       feature input if relevant)│
+                                              │  #9 Mandi/Weather Tool          │
+                                              │  #8 Profitability Estimator     │
+                                              │      (waits on #7 + #9 outputs) │
+                                              └────────────────┬────────────────┘
+                                                               ▼
+                                              ┌───────────────────────────────────┐
+                                              │  #10 Guardrails Pre-Filter        │
+                                              │  (dosage bounds, stale-data flag) │
+                                              └────────────────┬──────────────────┘
+                                                               ▼
+                                              ┌────────────────────────────────────┐
+                                              │  #11 Main Synthesis LLM (2-4B)     │
+                                              │  + #12 Speculative Draft Model     │
+                                              │  + guided decoding (60-100 tokens) │
+                                              │  + cached system/guardrail prefix  │
+                                              │              ~150-180ms            │
+                                              └────────────────┬───────────────────┘
+                                                               ▼
+                                              ┌────────────────────────────────────┐
+                                              │  #13 Guardrails Post-Check         │
+                                              │  (hallucination/banned-term scan)  │
+                                              └────────────────┬───────────────────┘
+                                                               ▼
+                                                     [Response to Farmer]
 
-### a) Shrink the model
-- Distill Gemma 12B down to a **2-4B parameter** domain-specific model,
-  fine-tuned only on agri-advisory data (crop disease, dosage, mandi
-  Q&A). A well-distilled small model on a narrow domain retains most of
-  the accuracy that matters here — you don't need general-purpose
-  reasoning breadth for "how do I treat wheat rust."
-- At 2-4B params, FP16/FP8 on an H100 with vLLM's continuous batching
-  realistically hits **80-150 tokens/sec** per stream even under
-  moderate concurrent load — enough to generate a ~60-90 token response
-  (short, farmer-readable advisory, not an essay) inside ~150-180ms.
+              Total (cache hit, incl.   ~35-50ms   (vision/intent ~15-25ms
+              vision+intent+lookup):                + cache lookup ~5-10ms)
+              Total (cache miss,        ~230-310ms  (adds the ~15-25ms vision/
+              simple or compound):                   intent step ahead of the
+                                                       ~210-290ms)
 
-### b) Cap and shape the output
-- Constrain generation to **60-100 tokens** — a concise 3-4 sentence
-  advisory, not a long-form essay. This is also better UX for a mobile
-  farmer-facing app regardless of latency.
-- Use **structured/constrained decoding** (grammar-constrained or
-  JSON-schema-constrained generation via vLLM's guided decoding) so the
-  model doesn't wander into longer free-form text — this both shortens
-  output and removes the need for a separate guardrails post-parse step.
+              ── if input was voice:  ~150-400ms ASR finalization
+                 (+ ~20-40ms dialect normalization if triggered) from §3
+                 BEFORE the pipeline above begins. Output side: if voice
+                 reply requested, TTS (§3) streams alongside generation,
+                 not stacked after it.
+```
 
-### c) Speculative decoding
-- Pair the 2-4B model with a much smaller draft model (e.g., a
-  350M-500M draft) using **speculative decoding** — the draft model
-  proposes multiple tokens, the main model verifies them in a single
-  forward pass. This can realistically give a **1.5-2.5x speedup** on
-  decode-bound generation, which is exactly the bottleneck here.
-
-### d) Serving-level optimizations
-- **FP8 quantization** (H100 native support) — roughly 1.5-2x throughput
-  vs FP16 with minimal quality loss at this model size.
-- **Continuous batching + PagedAttention** (vLLM) — keeps GPU utilization
-  high under concurrent requests without the latency cliff of static
-  batching.
-- **Prefix/KV caching** — the system prompt, guardrail instructions, and
-  retrieved-context template are largely shared across requests; caching
-  this prefix avoids re-computing attention over it every time, which
-  matters a lot when the "enriched prompt" is long relative to the
-  60-100 token output.
-
-### e) Skip generation when possible (still valid even with good network)
-- Even in an ideal-network academic setup, an **exact-match/template
-  cache** for the most common (disease, intent) pairs is still valid and
-  still the cheapest way to guarantee <100ms for a meaningful fraction of
-  traffic. It's not a network workaround — it's a compute workaround,
-  and it's legitimate to include in a thesis as a "warm cache" tier.
+**Why ?** vision classification and intent extraction are both cheap, independent, Tier-1 operations —
+there's no reason to sequence one behind the other. Running them in
+parallel upfront means the fast-path cache (which was originally designed
+around `disease_label`, back in the very first fast-path architecture) is
+actually reachable, instead of silently becoming dead code once compound
+queries entered the picture.
 
 ---
 
-## 3. Revised Architecture Diagram
+## 3. Voice I/O Pipeline (Input & Output)
+
+This wraps *around* the core pipeline in §2 — it doesn't replace the
+text/vision entry point, it's an alternate front door for farmers who
+speak rather than type, and a parallel exit for farmers who can't (or
+prefer not to) read the response.
+
+**Important framing:** the 200-300ms target in §2 is for the core
+reasoning pipeline, measured from *transcript-ready* to *text-ready*.
+Voice adds its own latency envelope on both ends that is **bound by audio
+duration**, not just compute speed — you cannot transcribe a 6-second
+utterance in 50ms regardless of GPU. The honest metric for voice isn't
+"total ms," it's **added delay after the farmer stops speaking**, and
+that's what streaming is for.
 
 ```
-    [Mobile/Web Client] ─── good connectivity, ~10-15ms RTT
-            │
-            ▼
-    [API Gateway / FastAPI Router]
-            │
-            ├──► [Vision: ViT-Small, TensorRT FP16]──────┐
-            │                                    ~15-25ms │
-            ├──► [MuRIL Embed, TensorRT FP16]─────────────┤ fired
-            │                                     ~5-10ms │ in
-            ├──► [Vector DB Search: HNSW in-memory,────────┤ parallel
-            │     Qdrant/ChromaDB, top-5 chunks]            │
-            │                                      ~3-8ms   │
-            ├──► [Tool call: Mandi/Weather API]──────────────┤
-            │     (cached, in-region)              ~5-10ms  │
-            │                                                │
-            └──► [Tool call: Yield Prediction ML]─────────────┘
-                  (small regression/gradient-boosted
-                   model, not the main LLM — separate
-                   lightweight service)              ~10-15ms
-                        │
-                        ▼
-            [Guardrails Pre-Filter: rule-based]  ~2-5ms
-                        │
-                        ▼
-        ┌───────────────────────────────────────┐
-        │  Exact-match template cache lookup      │
-        │  (disease+intent) — HIT → skip below     │
-        └───────────────┬─────────────────────────┘
-                     MISS │
-                        ▼
-        ┌───────────────────────────────────────────────┐
-        │  Distilled Agri-LLM (2-4B), FP8, vLLM            │
-        │  + speculative decoding (350-500M draft model)   │
-        │  + guided/constrained decoding (60-100 tok cap)  │
-        │  + cached prefix (system+guardrail instructions) │
-        │                                    ~150-180ms    │
-        └───────────────┬─────────────────────────────────┘
-                        ▼
-            [Guardrails Post-Check: regex/classifier] ~2-5ms
-                        │
-                        ▼
-                [Response → Client]  ~10-15ms
-                        │
-              Total: ~210-280ms (cache miss)
-              Total: ~60-100ms  (cache hit, template path)
+ Farmer speaks (e.g., 4-6 sec utterance in a regional dialect)
+        │
+        ▼ (streaming, overlaps with speech — not sequential after)
+┌───────────────────────────────────────────────────────────────────┐
+│  #15 ASR (streaming) — IndicWhisper/Bhashini, dialect-tuned       │
+│  Partial transcripts emitted continuously as farmer talks.        │
+│  By the time farmer stops speaking, transcript is ~90% ready —    │
+│  only a short "finalization" tail remains.                        │
+│              Added delay after speech ends: ~150-400ms            │
+│              (model RTF-dependent, not the full utterance length) │
+└──────────────────────────────┬────────────────────────────────────┘
+                               ▼
+┌───────────────────────────────────────────────────────────────────┐
+│  #16 Dialect Normalizer (IndicTrans2)                             │
+│  Regional dialect transcript → standard Hindi/English             │
+│  Only runs if farmer's dialect isn't the model's native training  │
+│  distribution — SKIPPED for standard Hindi/English input          │ 
+│              ~20-40ms (short utterance-length text)               │
+└──────────────────────────────┬────────────────────────────────────┘
+                               ▼
+                  [Enters core pipeline from §2 as
+                   normal text input — same 200-300ms
+                   budget applies from here]
+                               │
+                               ▼
+                    [Response text generated]
+                               │
+                               ▼ (streaming — starts as soon as
+                               │  first sentence of #11's output
+                               │  is guardrail-checked, doesn't
+                               │  wait for the full response)
+┌──────────────────────────────────────────────────────────────────┐
+│  #17 TTS (streaming, chunked by sentence)                        │
+│  First audio chunk starts playing while later sentences are      │
+│  still being synthesized/generated                               │
+│              Time to first audio: ~150-250ms after first         │
+│              guardrail-passed sentence is available              │
+└──────────────────────────────────────────────────────────────────┘
+                               │
+                               ▼
+                    Farmer hears response begin
+                    (well before full response is ready)
 ```
+
+### Why streaming is not optional here, it's the actual design
+
+Without streaming, voice would be: *wait for farmer to finish speaking →
+wait for full transcription → wait for full 200-300ms pipeline → wait for
+full TTS synthesis of the entire response* — stacked sequentially, easily
+2-4+ seconds of dead silence before the farmer hears anything. That's a
+bad product experience regardless of how optimized any single component
+is. Streaming ASR and streaming TTS are what make voice *feel* responsive:
+the farmer starts hearing an answer almost as soon as they stop talking,
+even though the full response is still being generated underneath.
+
+### Where dialect handling fits
+
+Original design flagged dialect audio as a stretch goal specifically
+because dialect ASR is genuinely harder — standard Hindi ASR models
+degrade noticeably on regional dialects with non-standard vocabulary and
+pronunciation. Two honest options, not mutually exclusive:
+- **Fine-tune the ASR model (#15) directly on dialect data** if you have
+  it — better than a post-hoc normalization step, since errors introduced
+  at the ASR stage can't be fully recovered by translation afterward.
+- **Keep IndicTrans2 (#16) as a normalization layer** for dialects where
+  you don't yet have enough data to fine-tune ASR directly — treat it as
+  a stopgap, not the permanent solution, and plan to fold dialect-specific
+  ASR fine-tuning in once you have transcribed dialect data (which,
+  notably, your own usage logs will generate over time).
+
+### TTS voice/language selection
+
+Multi-speaker Indic TTS should select voice/language based on the
+farmer's detected input language (from #1's language flag) or explicit
+profile setting — not default to Hindi for all users, since your original
+diagram already scopes toward multi-state/multi-language support in the
+stretch goals.
+
+### ASR confidence check on key entities (before entering core pipeline)
+
+ASR errors on a crop name, district, or scheme reference don't just
+corrupt the transcript — they silently feed a **wrong entity** into #1's
+extraction, and downstream components (policy retrieval, yield lookup,
+profitability estimate) will confidently act on it. This is worse for
+compound queries (policy + profitability) than for a simple disease photo
+query, since a wrong crop/region name changes financial-adjacent advice,
+not just a disease label.
+
+```
+              Final transcript + per-token ASR confidence scores
+                               │
+                               ▼
+              ┌──────────────────────────────────────────┐
+              │  Check confidence on entity spans        │
+              │  extracted by #1 (crop, region,          │
+              │  scheme name) — NOT the whole utterance  │
+              └───────────────┬──────────────────────────┘
+                              │
+              ┌───────────────┴─────────────────┐
+              │                                 │
+      confidence ≥ threshold            confidence < threshold
+      (e.g., >0.85)                     on a key entity
+              │                                 │
+              ▼                                 ▼
+      Proceed directly into            Quick spoken confirmation:
+      core pipeline, no                "आपने गेहूं कहा, सही?"
+      added delay                      (short TTS prompt + short
+                                        ASR listen for yes/no/correction)
+                                                 │
+                                                 ▼
+                                        Added latency: ~1-2sec round trip,
+                                        but only triggered on low-confidence
+                                        key entities — not every query
+```
+
+This is a deliberate latency-vs-correctness tradeoff: it adds a visible
+delay, but only on the subset of queries where ASR is genuinely unsure
+about something that would otherwise silently corrupt a financial or
+agronomic recommendation. Cheaper than the alternative of confidently
+answering about the wrong crop.
+
+### Worked example — voice input with an already-uploaded photo
+
+Query (spoken, standard Hindi): *"मेरी गेहूं में ये बीमारी लगी है, क्या
+करूं और सरकारी योजना क्या मिलेगी"* ("my wheat has this disease, what do
+I do, and what govt scheme is available") — farmer also snapped a photo
+of the crop before speaking.
+
+```
+Farmer taps mic (photo already attached)
+        │
+        ▼ audio streams in real-time as farmer talks
+┌────────────────────────────────────────────────────────────┐
+│ #15 ASR (streaming) — partial transcripts build up         │
+│ continuously. #2 Vision Classifier runs IN PARALLEL        │
+│ on the attached photo — doesn't wait for voice to finish.  │
+└──────────────────────┬─────────────────────────────────────┘
+                       ▼ farmer stops talking → ~150-400ms finalization
+        Final transcript + entity confidence scores
+                       │
+                       ▼
+        All entity confidences ≥ threshold → no confirmation
+        needed → #16 Dialect Normalizer SKIPPED (standard Hindi)
+                       │
+                       ▼
+        Transcript enters core pipeline exactly like typed text.
+        #1 extracts: needs_policy=true, needs_yield=false,
+        is_compound=true, crop="wheat" (from transcript)
+        Vision result already available: disease_label="wheat rust"
+                       │
+                       ▼
+        Fast-path key MISS (compound: disease + policy) →
+        Parallel Tool Fan-Out: Policy Vector DB (wheat scheme
+        info) + Guardrails
+                       │
+                       ▼
+        #11 Synthesis LLM generates response, streamed
+                       │
+                       ▼
+        #17 TTS speaks response back — first audio chunk plays
+        before full text generation completes
+```
+
+Note the convergence point: **once ASR produces text, voice and typed
+input are indistinguishable to everything downstream** (§2's pipeline).
+Voice is only a different way of producing input and delivering output —
+it is not a separate reasoning path.
 
 ---
 
-## 4. Model Choice Summary Table
+## 4. Why This Model Mix, Not a Single Big Model
 
-| Component | Model | Precision | Serving | Latency |
-|---|---|---|---|---|
-| Vision | ViT-Small (or distilled MobileViT if pushing further) | FP16 | TensorRT | 15-25ms |
-| Embedding | MuRIL-base | FP16 | TensorRT | 5-10ms |
-| Retrieval | HNSW (Qdrant), in-memory | — | — | 3-8ms |
-| Generation | **Gemma distilled to 2-4B**, agri-domain fine-tuned | FP8 | vLLM, continuous batching, PagedAttention, guided decoding | 150-180ms |
-| Speculative draft | 350-500M draft model, same tokenizer family | FP8 | vLLM speculative decoding | (folded into above) |
+The system deliberately avoids routing everything through the 12B model.
+Three tiers, each sized to its job:
 
----
+- **Tier 1 — sub-20ms classifiers/embedders** (#1, #2, #3, #4, #10, #13):
+  small, task-specific, INT8/FP16, run on every request regardless of
+  path. These are cheap enough that "always run them" is the right
+  default rather than trying to skip them.
+- **Tier 2 — lookup/compute tools** (#5, #6, #7, #8, #9): no LLM
+  involved at all. Retrieval, cached API calls, and a GBT model. This is
+  where most of the actual "intelligence" about yield/price/policy lives
+  — not in the LLM's parametric knowledge.
+- **Tier 3 — generation** (#11, #12): the only place a large-ish
+  generative model runs, and only for turning already-retrieved,
+  already-validated facts into fluent farmer-readable language. It is
+  explicitly *not* the source of factual claims — guardrails treat any
+  ungrounded number it produces as a hallucination to strip (see #13).
 
-## 5. Why Not Just Keep Gemma 12B?
-
-Worth stating plainly in a thesis defense: 12B is defensible when latency
-isn't the constraint (batch/offline advisory generation, complex
-multi-turn reasoning). But under a hard 200-300ms real-time constraint,
-distillation to 2-4B with domain-specific fine-tuning is the standard,
-published approach (this mirrors how production systems like search
-autocomplete or coding-assist "fast" tiers work — small model for
-latency-critical path, large model reserved for cases that can tolerate
-seconds). This is a legitimate and well-supported design tradeoff to
-present, not a shortcut — cite it as such.
-
----
-
-## 6. Compound Query Handling — Upfront Decomposition (before ReAct loop)
-
-**Problem:** naive ReAct reasons turn-by-turn (think → act → observe, repeat).
-For a compound query like *"what are the incentives for growing X, what
-yield would I get, and would I be successful,"* this means 3-4 sequential
-LLM reasoning turns (~150-180ms each) before synthesis — 600ms+ of stacked
-agent overhead, blowing the latency budget on exactly the queries that
-matter most for a real farmer decision.
-
-**Fix:** a lightweight classifier runs *before* the agent loop, not as part
-of it. It doesn't reason — it just extracts intent flags and entities in a
-single fast forward pass (small model, not the 12B one), so every needed
-tool fires in **one parallel batch** instead of being discovered turn-by-turn.
-
-```
-Query → [Compound Intent/Entity Extractor]
-         DistilBERT-class model, ~10-15ms, multi-label classification
-         + NER for crop/region/quantity entities
-              │
-              ▼
-   { needs_policy: true, needs_yield: true, needs_price: true,
-     needs_profitability: true, crop: "X", region: <from farmer profile>,
-     is_compound: true }
-              │
-              ▼
-   Fan-out ALL flagged tools in parallel (Vector DB + Yield + Mandi + ─┐
-   Profitability Estimator) — same pattern as the simple-query path,   │
-   just with more branches active at once                             │
-              │                                                        │
-              ▼◄───────────────────────────────────────────────────────┘
-   ONE synthesis pass (~150-180ms), not four
-```
-
-This keeps compound queries inside the same ~250-300ms envelope as simple
-ones for the tool-execution side — the only cost that scales with query
-complexity is synthesis prompt length (longer context = marginally more
-prefill time, not more sequential turns).
+This separation is also the honest answer to "why not just make the LLM
+bigger/smarter" — bigger models help with reasoning over ambiguous or
+truly novel queries, but for a domain this structured (finite crops,
+finite districts, numeric yield/price data), routing facts through
+dedicated tools is both faster and more reliable than asking a generative
+model to recall or compute them.
 
 ---
 
-## 7. Yield Answer Cache — Vector-Indexed Fast Path (separate from the GBT tool)
+## 5. What's Still a Placeholder / Needs Real Design Work
 
-This is distinct from "replacing yield prediction with RAG," which we ruled
-out — the GBT/regression model stays the source of truth for computing a
-yield number. What this adds is a **cache layer in front of it**, so
-recurring (crop × region × season × soil-type) combinations don't re-run
-the model or the multi-tool fan-out at all.
+Being direct about what's sketched vs. what needs its own LLD:
 
-### Why vector, not exact-key hash
-Exact-match caching (like the fast-path template cache in §1) only hits
-when the *same* (crop, region) pair recurs verbatim. But real farmer
-queries vary in phrasing and slightly in inputs (soil type approximated
-differently, nearby villages, slightly different acreage) while describing
-essentially the same underlying agronomic conditions. A **vector-indexed
-cache over the structured input features** (not the raw text) catches
-these near-duplicates that an exact hash would miss.
-
-```
-[Compound Intent Extractor output: crop, region, soil_type, season, acreage]
-              │
-              ▼
-[Feature Encoder — small trained embedder over structured
- agronomic features (NOT MuRIL, NOT shared with policy/KCC index)]
-              │
-              ▼
-[Yield Cache Vector Namespace — separate Qdrant collection]
-   query: nearest neighbor within similarity threshold (e.g., cosine > 0.92)
-              │
-      ┌───────┴────────┐
-      │                 │
-   HIT (≥ threshold)   MISS / below threshold
-      │                 │
-   Return cached        Call GBT Yield Prediction tool (full compute)
-   yield answer +       │
-   "based on similar    Write result back into Yield Cache Vector
-   conditions in your   Namespace for future hits (with TTL — see below)
-   area" framing              │
-      │                       │
-      └───────────┬───────────┘
-                   ▼
-        Feed into synthesis (single pass)
-```
-
-### Guardrail on cache reuse
-Because yield estimates feed into financial-adjacent advice ("would I be
-successful"), a near-duplicate cache hit should be **labeled as
-approximate** in the response ("similar conditions" framing, not stated as
-this farmer's exact number) — and the similarity threshold should be
-conservative (high cosine cutoff) rather than loose, since a wrong cached
-yield is worse than a 150ms latency cost on a cache miss.
-
-### TTL and staleness
-Unlike the policy/KCC index (fairly static), yield conditions are
-season-dependent — rainfall, pest pressure, and soil moisture shift
-within a season. Cache entries should expire on a **seasonal TTL** (e.g.,
-30-45 days) rather than being treated as permanent, and should be
-invalidated early if a major weather event hits the region (tie this to
-your weather tool as an invalidation trigger, not just a timer).
-
-### Net effect on latency
-| Case | Path | Latency |
-|---|---|---|
-| Common (crop, region) combo, cache hit | Yield Cache Vector Namespace | ~5-10ms (replaces the GBT call entirely) |
-| Novel combo, cache miss | Full GBT Yield Prediction tool | ~10-15ms (as in §1, runs in parallel with other tools anyway) |
-| Compound query overall | Intent extraction + parallel fan-out + one synthesis | ~210-290ms regardless of which yield path is taken |
-
----
-
-## 8. Evaluation Note for Academic Writeup
-
-If this is going into a report, worth benchmarking and reporting:
-- p50/p95/p99 latency broken down per pipeline stage (as in the table above)
-- Accuracy delta between the 12B teacher and 2-4B distilled student on a
-  held-out agri-advisory eval set (this is your key tradeoff to quantify)
-- Throughput (requests/sec) at target latency under concurrent load —
-  this is where continuous batching numbers matter and make a good
-  graph/table
+- **#8 Profitability Estimator** is described as rule-based here
+  (yield × price − cost + incentive), but input-cost modeling
+  (seed/fertilizer/labor pricing per crop/region) isn't designed yet —
+  that's a real data-sourcing problem, not just an architecture one.
+- **#12 Speculative decoding** requires the draft and main model to
+  share a tokenizer and ideally come from the same model family
+  (distillation lineage) — this constrains which base model you pick
+  for #11 early on.
+- **Distillation methodology for #11** (12B teacher → 2-4B ) is
+  referenced but not yet specified — worth its own LLD covering
+  training data, distillation objective, and the accuracy-eval plan
+  mentioned earlier.
+- **Dialect-specific training data for #15/#16** doesn't exist yet — the
+  streaming ASR architecture in §3 is sound, but its real-world accuracy
+  on non-standard dialects depends entirely on data you haven't
+  collected. This was flagged as a stretch goal in your original
+  diagram for exactly this reason, and that's still the right call —
+  ship standard-language voice first, expand dialect coverage as usage
+  data accumulates.
+- **Confidence threshold for the ASR entity-confirmation step (§3)** is
+  stated as an example (0.85) but needs actual calibration against a
+  labeled dataset of transcription errors on entity spans specifically
+  — too low a threshold triggers annoying unnecessary confirmations, too
+  high lets bad entities silently through.
