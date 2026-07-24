@@ -751,16 +751,15 @@ on real hardware/traffic.*
 ## 15. Deliverables Produced
 
 ### 15.1 Documents
-- FarmerVision_HLD_v2.md — high-level architecture, bottleneck analysis
-- FarmerVision_LLD_CriticalPath.md — sequence diagram, API contracts,
-  cache/timeout config, guardrails logic, failure modes
-- FarmerVision_AIML_LowLatency_Architecture.md — real-world tiered
-  fast/slow-path design
-- FarmerVision_AIML_Academic_LowLatency.md — ideal-network compute
-  architecture, compound-query handling, yield cache design
-- FarmerVision_Consolidated_AIML_Architecture.md — master model
-  inventory and integrated diagram, including voice I/O
-- FarmerVision_Milestone3_Report.md — this report
+
+Supporting design documents are in [`docs/references/`](../references/):
+
+- [FarmerVision_HLD_v2-1.md](../references/FarmerVision_HLD_v2-1.md) — high-level architecture, bottleneck analysis
+- [FarmerVision_LLD_CriticalPath.md](../references/FarmerVision_LLD_CriticalPath.md) — sequence diagram, API contracts, cache/timeout config, guardrails logic, failure modes
+- [FarmerVision_AIML_LowLatency_Architecture-1.md](../references/FarmerVision_AIML_LowLatency_Architecture-1.md) — real-world tiered fast/slow-path design
+- [FarmerVision_AIML_Academic_LowLatency.md](../references/FarmerVision_AIML_Academic_LowLatency.md) — ideal-network compute architecture, compound-query handling, yield cache design
+- [FarmerVision_Consolidated_AIML_Architecture.md](../references/FarmerVision_Consolidated_AIML_Architecture.md) — master model inventory and integrated diagram, including voice I/O
+- [Milestone_3_Report.md](Milestone_3_Report.md) — this report
 
 ### 15.2 Proposed Repository Structure
 ```
@@ -944,3 +943,4 @@ All team members listed below have **reviewed and approved** this Milestone 3 do
 *By approving above, each member confirms they have read the complete document and approve it for submission.*
 
 **Document version:** Milestone 3 — v11 · **Prepared:** 23 July 2026
+
