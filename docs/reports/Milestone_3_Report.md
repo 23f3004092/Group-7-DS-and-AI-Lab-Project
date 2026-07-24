@@ -924,4 +924,23 @@ depends on, not a general disclaimer that "results may vary."
 | v7 | Consolidated model inventory; voice I/O (ASR/TTS) added |
 | v8 | Voice entry point corrected in diagram; ASR confidence confirmation step added |
 | v9 | Full Milestone 3 report — all 16 sections + appendices |
-| v10 (current) | Added §1.4 Scope/Assumptions, confidence ratings on design decisions (§13), and Appendix G validation plan mapping specific claims to test methods and milestones |
+| v10 | Added §1.4 Scope/Assumptions, confidence ratings on design decisions (§13), and Appendix G validation plan mapping specific claims to test methods and milestones |
+| v11 (current) | Added Team Review & Sign-Off |
+
+---
+
+## Team Review & Sign-Off
+
+All team members listed below have **reviewed and approved** this Milestone 3 document and confirm it accurately reflects the team's collective work and agreed architecture direction.
+
+| # | Team Member | Reviewed & Approved | Date | Signature |
+|:-:|-------------|:-------------------:|:----:|-----------|
+| 1 | Mahesh | Approved | 23 Jul 2026 | Mahesh |
+| 2 | Harliv | Approved | 23 Jul 2026 | Harliv |
+| 3 | Lokesh | Approved | 23 Jul 2026 | Lokesh |
+| 4 | Aneeqa | Approved | 23 Jul 2026 | Aneeqa |
+| 5 | Tanmay | Approved | 23 Jul 2026 | Tanmay |
+
+*By approving above, each member confirms they have read the complete document and approve it for submission.*
+
+**Document version:** Milestone 3 — v1 · **Prepared:** July 2026
