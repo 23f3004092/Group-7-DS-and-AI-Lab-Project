@@ -257,7 +257,7 @@ guardrails).
 | Text embedding (retrieval) | MuRIL-base | Pretrained → optionally fine-tuned | ~236M |
 | Structured feature embedding (yield cache) | Custom two-tower encoder | Custom, trained from scratch | ~5–10M |
 | Intent/Entity extraction | DistilBERT-class, multi-task head | Pretrained → fine-tuned | ~66M |
-| Yield prediction | XGBoost/LightGBM (GBT) | Custom, trained from scratch | N/A (tree ensemble) |
+| Yield prediction | Gradient Boosting methods | Custom, trained from scratch | N/A (tree ensemble) |
 | Profitability estimation | Rule-based composite | Custom (non-ML initially) | N/A |
 | Guardrails (pre/post) | Rule-based + small classifier | Hybrid | small |
 | Synthesis LLM | Gemma, distilled from 12B teacher to 2–4B student | Pretrained teacher → distilled custom student | 2–4B |
