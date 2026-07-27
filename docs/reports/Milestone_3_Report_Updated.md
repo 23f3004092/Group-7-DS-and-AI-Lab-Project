@@ -120,10 +120,6 @@ guardrails pre-filter → LLM synthesis → guardrails post-check → streamed r
 | ML serving | Simple batched LLM inference; ONNX Runtime for small models | Built, minus vLLM/TensorRT |
 | Vector DB | Qdrant (HNSW, cosine), **server mode** | Built, single node |
 
-> **Open item:** §13 and earlier drafts refer to Spring Boot for backend
-> orchestration while §2.3 and §15 specify Python/FastAPI. This report treats **Python/FastAPI** as the decision; the contradiction should be resolved
-> explicitly before resubmission.
-
 ---
 
 ## 3. End-to-End Workflow
