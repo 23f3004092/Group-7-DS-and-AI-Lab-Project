@@ -15,7 +15,7 @@
 6. [Model Inputs and Outputs](#6-model-inputs-and-outputs)
 7. [Training Strategy](#7-training-strategy)
 8. [Model Pipeline](#8-model-pipeline)
-9. [Retrieval and Knowledge Components](#9-retrieval-and-knowledge-components) *(built & measured)*
+9. [Retrieval and Knowledge Components](#9-retrieval-and-knowledge-components) 
 10. [Prompt Engineering](#10-prompt-engineering)
 11. [System Integration](#11-system-integration)
 12. [Computational Requirements](#12-computational-requirements)
