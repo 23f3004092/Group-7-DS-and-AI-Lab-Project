@@ -17,6 +17,7 @@ Downloads and organises all raw datasets into data/raw/:
 
   NLP / RAG:
     - KCC transcripts (data.gov.in API) → data/raw/kcc/
+    - UP advisory/scheme PDF corpus     → data/raw/pdfs/  (--pdfs, Drive zip id in .env)
 
   YIELD:
     - District-level yield data         → data/raw/yield/  (manual)
@@ -488,6 +489,124 @@ def download_kcc(api_key=None, state="UTTAR PRADESH", year="2025", months_spec="
     return True
 
 
+
+# ---------------------------------------------------------------------------
+# NLP / RAG — UP government advisory PDF corpus (Google Drive)
+# ---------------------------------------------------------------------------
+
+PDF_EXPECTED_FOLDERS = ["Other_docs", "PPQS_Advisories", "Schemes", "UP_ACP_PDFs"]
+
+
+def _env_lookup(keys):
+    """Read a value from environment variables or the .env file at project root."""
+    for k in keys:
+        val = os.environ.get(k)
+        if val:
+            return val.strip()
+    env_path = PROJECT_ROOT / ".env"
+    if env_path.exists():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                if k.strip() in keys and v.strip():
+                    return v.strip().strip('"').strip("'")
+    return None
+
+
+def download_pdfs(zip_id=None, folder_id=None):
+    """Download the RAG PDF corpus (187 UP advisory/scheme PDFs) into data/raw/pdfs/.
+
+    Preferred route: a single zip of the DS_AI_RAG_pdfs folder shared on Drive
+    (PDF_ZIP_DRIVE_ID in .env) — gdown folder downloads cap at ~50 files per
+    folder, and PPQS_Advisories alone has 90, so the zip route is reliable.
+    """
+    dest = ensure_dir(RAW_DIR / "pdfs")
+
+    def n_pdfs():
+        return sum(1 for _ in dest.glob("**/*.pdf"))
+
+    if all((dest / d).is_dir() for d in PDF_EXPECTED_FOLDERS) and n_pdfs() > 0:
+        print(f"⏭️  RAG PDFs already present at {dest} ({n_pdfs()} PDFs), skipping.")
+        return True
+
+    zip_id = zip_id or _env_lookup(["PDF_ZIP_DRIVE_ID"])
+    folder_id = folder_id or _env_lookup(["PDF_FOLDER_DRIVE_ID"])
+
+    if not zip_id and not folder_id:
+        print(
+            "\n📋 RAG PDF corpus — no Drive id configured. Two options:\n"
+            "   A) Automated (recommended):\n"
+            "      1. In Google Drive, zip the DS_AI_RAG_pdfs folder (contains\n"
+            f"         {', '.join(PDF_EXPECTED_FOLDERS)})\n"
+            "      2. Share the zip as 'Anyone with the link' and copy its file id\n"
+            "      3. Add to .env at project root:  PDF_ZIP_DRIVE_ID=<file-id>\n"
+            "      4. Re-run: python scripts/download_data.py --pdfs\n"
+            "   B) Manual: download/extract the four folders yourself into\n"
+            f"      {dest}\n"
+        )
+        return False
+
+    def _gdown():
+        # imported lazily: not needed when a downloaded zip is already on disk
+        try:
+            import gdown
+            return gdown
+        except ImportError:
+            print("❌ gdown not installed. Run: pip install gdown")
+            return None
+
+    if zip_id:
+        zip_path = dest / "rag_pdfs.zip"
+        if zip_path.exists() and zip_path.stat().st_size > 0:
+            print(f"⏭️  Reusing already-downloaded zip: {zip_path} "
+                  f"({zip_path.stat().st_size/1e6:.0f} MB)")
+        else:
+            gdown = _gdown()
+            if gdown is None:
+                return False
+            print(f"📦 RAG PDFs: downloading Drive zip → {zip_path}")
+            gdown.download(id=zip_id, output=str(zip_path), quiet=False)
+        if not zip_path.exists():
+            print("❌ zip download failed — check the id and link-sharing setting.")
+            return False
+        # Windows MAX_PATH (260 chars): several advisory filenames are ~150 chars,
+        # so extraction needs the \\?\ extended-length path prefix.
+        extract_root = str(dest.resolve())
+        if os.name == "nt" and not extract_root.startswith("\\\\?\\"):
+            extract_root = "\\\\?\\" + extract_root
+        with zipfile.ZipFile(zip_path) as zf:
+            zf.extractall(extract_root)
+        zip_path.unlink()
+    else:
+        gdown = _gdown()
+        if gdown is None:
+            return False
+        print("📦 RAG PDFs: downloading Drive folder via gdown "
+              "(⚠️ gdown caps ~50 files per folder — the zip route is more reliable)")
+        gdown.download_folder(id=folder_id, output=str(dest), quiet=False,
+                              use_cookies=False, remaining_ok=True)
+
+    # Flatten a single wrapper directory (e.g. DS_AI_RAG_pdfs/) if the archive had one
+    if not all((dest / d).is_dir() for d in PDF_EXPECTED_FOLDERS):
+        for sub in list(dest.iterdir()):
+            if sub.is_dir() and all((sub / d).is_dir() for d in PDF_EXPECTED_FOLDERS):
+                for item in list(sub.iterdir()):
+                    target = dest / item.name
+                    if not target.exists():
+                        item.rename(target)
+                sub.rmdir()
+                break
+
+    missing = [d for d in PDF_EXPECTED_FOLDERS if not (dest / d).is_dir()]
+    if missing or n_pdfs() == 0:
+        print(f"⚠️  Layout unexpected after download (missing: {missing}, PDFs: {n_pdfs()}).")
+        print(f"   Expected {dest}/<folder>/*.pdf for {PDF_EXPECTED_FOLDERS} — see data/README.md")
+        return False
+    print(f"✅ RAG PDF corpus ready: {n_pdfs()} PDFs → {dest}")
+    return True
+
+
 # ---------------------------------------------------------------------------
 # Yield
 # ---------------------------------------------------------------------------
@@ -571,6 +690,12 @@ def main():
     # NLP / Yield
     parser.add_argument("--kcc", action="store_true",
                         help="Download KCC transcripts from the data.gov.in API")
+    parser.add_argument("--pdfs", action="store_true",
+                        help="Download the RAG PDF corpus from Google Drive into data/raw/pdfs/")
+    parser.add_argument("--pdf-zip-id", dest="pdf_zip_id", default=None,
+                        help="Drive file id of the zipped PDF corpus (defaults to PDF_ZIP_DRIVE_ID in .env)")
+    parser.add_argument("--pdf-folder-id", dest="pdf_folder_id", default=None,
+                        help="Drive folder id of the PDF corpus (fallback; gdown caps ~50 files/folder)")
     parser.add_argument("--yield-data", action="store_true", dest="yield_data",
                         help="Show yield data download instructions")
 
@@ -608,7 +733,7 @@ def main():
     # If no flags, show help
     has_any = any([
         args.rice, args.wheat, args.plantdoc, args.expand, args.rice_extra,
-        args.plantvillage, args.kcc, args.yield_data, args.all, args.everything,
+        args.plantvillage, args.kcc, args.pdfs, args.yield_data, args.all, args.everything,
     ])
     if not has_any:
         parser.print_help()
@@ -657,6 +782,10 @@ def main():
             limit=args.kcc_limit,
             page_size=args.kcc_page_size,
         )
+        print()
+
+    if args.all or args.everything or args.pdfs:
+        results["RAG PDFs"] = download_pdfs(zip_id=args.pdf_zip_id, folder_id=args.pdf_folder_id)
         print()
 
     if args.all or args.everything or args.yield_data:

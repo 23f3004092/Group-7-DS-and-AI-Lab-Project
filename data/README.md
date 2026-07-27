@@ -162,3 +162,15 @@ python scripts/download_data.py --everything
 ```
 raw/ ──[EDA Notebooks]──> processed/ ──[Preprocessing Notebooks]──> final/
 ```
+
+---
+
+## RAG PDF Corpus (`data/raw/pdfs/`)
+
+187 UP government advisory/scheme PDFs across four source folders (`Other_docs`, `PPQS_Advisories`, `Schemes`, `UP_ACP_PDFs`), consumed by `notebooks/04_pdfs_rag_eda.ipynb`. Outputs mirror the KCC layout: intermediate artifacts in `data/processed/pdfs/`, the final chunk artifact `pdf_chunks_final.jsonl` in `data/final/pdfs/`.
+
+```bash
+python scripts/download_data.py --pdfs
+```
+
+Setup (one-time): zip the shared `DS_AI_RAG_pdfs` Drive folder, share the zip as "Anyone with the link", and put its file id in `.env` at the project root as `PDF_ZIP_DRIVE_ID=<file-id>` (a `PDF_FOLDER_DRIVE_ID` fallback exists, but gdown caps folder downloads at ~50 files per folder). Requires `pip install gdown`. Without an id, the script prints manual placement instructions.
