@@ -56,8 +56,6 @@ Milestone 4 trained the models. Milestone 5 measures them. Each module is evalua
 4. Analyse the errors and explain why they happen.
 5. Close the three items Milestone 4 recorded as not delivered.
 
-**Status of the three Milestone 4 gaps — all closed.** Guardrail labels were authored instead of borrowed from a news dataset, then tested against an adversarial set. The yield module was retrained with gradient boosting as Milestone 3 selected, with the `production` column removed from the features so the target leakage recorded in Milestone 4 §10.4 no longer applies. The distillation pipeline was run end to end and the resulting adapter is evaluated in §6.4.
-
 ---
 
 ## 2. Experimental Setup
@@ -84,9 +82,6 @@ Python 3.12, Torch 2.10.0+cu128, Qdrant v1.19.0. Libraries: `timm`, `transformer
 | Generation (evaluation) | Curated and real farmer questions | Held out | 48 curated, 77 real, 2 controls |
 | Yield | `production_unified_imputed.csv`, cleaned to 426,803 rows | Two-stage 15% hold-out | 308,364 / 54,418 / 64,021 |
 
-**Vision.** The published split leaked 15.3% of evaluation images into training scenes. A first repair removed the leak but concentrated repeated scenes in the evaluation set, raising the score by 3.7 points for the wrong reason. v3 is the only version that is both zero-contaminated and 100% effective, and every vision number here uses it.
-
-**Yield cleaning.** 440,962 raw rows reduced to 426,803: 17 exact duplicates, 9,830 physically impossible rows (`area ≤ 0`, negative production), and 4,312 extreme yield outliers above the 99th percentile within each crop type. A further 22,105 rows (5.13%) were flagged where the stored `yield` disagreed with production divided by area by more than 0.01; these were flagged, not dropped. Features are 6 categorical (`crop`, `state`, `district`, `season`, `data_source`, `crop_type`) and 5 numerical (`year`, `area`, `annual_rainfall`, `fertilizer`, `pesticide`). **`production` is not a feature**, which is what removes the Milestone 4 leakage.
 
 ### 2.3 Seeds and reproducibility
 
@@ -204,8 +199,6 @@ The test set was built before training, verified contamination-free, and evaluat
 | 20-way macro-F1 | 0.9042 | **0.8671** | [0.8396, 0.8905] | −0.037 |
 | rice-5 macro-F1 | 0.9828 | 0.8823 | [0.7915, 0.9523] | −0.100 |
 | Accuracy | 0.9143 | **0.8998** | — | −0.014 |
-
-**The primary metric generalised.** wheat-15 fell 0.016, well inside the interval, so selecting on validation did not overfit the validation split. **The rice-5 drop is one class, not a trend**: four of five rice classes score 0.97 or above on test, and the whole deficit is `rice__leaf_smut` at 0.4615 on 8 test images, too small a sample to carry a number.
 
 Sixteen of twenty classes exceed 0.80 and eleven exceed 0.94. The three below 0.65 are the same three the pre-training diagnostics predicted. Per-class results are in Appendix B.
 
