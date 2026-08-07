@@ -1,4 +1,4 @@
-# FarmerVision : Farmer Query Assistant
+# FarmerVision (formerly AgriAssist): Farmer Query Assistant
 
 **Course:** DS and AI Lab | **Group:** 7 | **Institution:** IIT Madras  
 **GitHub:** [Group-7-DS-and-AI-Lab-Project](https://github.com/<org>/Group-7-DS-and-AI-Lab-Project) | **Status:** In Progress — Milestones 1–5 complete, Milestone 6 (Deployment) upcoming
@@ -38,9 +38,11 @@ FarmerVision solves this by:
 
 ## Architecture
 
-![Architecture Diagram](docs/Architecture_Diagram.png)
 
-> _Finalized at Milestone 3. Per-component configurations as trained and evaluated are documented in the [Milestone 4](docs/reports/Milestone_4_Report.md) and [Milestone 5](docs/reports/Milestone_5_Report.md) reports._
+**Request workflow** — what happens per query, from input to streamed response (§3.1):
+
+![Request workflow](docs/architecture/request_flow_m3.svg)
+
 
 
 
