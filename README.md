@@ -1,4 +1,4 @@
-# FarmerVision (formerly AgriAssist): Farmer Query Assistant
+# FarmerVision : Farmer Query Assistant
 
 **Course:** DS and AI Lab | **Group:** 7 | **Institution:** IIT Madras  
 **GitHub:** [Group-7-DS-and-AI-Lab-Project](https://github.com/<org>/Group-7-DS-and-AI-Lab-Project) | **Status:** In Progress — Milestones 1–5 complete, Milestone 6 (Deployment) upcoming
