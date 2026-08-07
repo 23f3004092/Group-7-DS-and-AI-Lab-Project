@@ -41,7 +41,7 @@ FarmerVision solves this by:
 
 **Request workflow** — what happens per query, from input to streamed response (§3.1):
 
-![Request workflow](docs/architecture/request_flow_m3.svg)
+![Request workflow](docs/architecture/request_flow_m3.png)
 
 
 
