@@ -9,6 +9,9 @@ data/raw/
 data/processed/
 data/final/
 data/Vision_dataset/
+data/eval/
+
+outputs/Yeild_output_files/*
 
 # Ensure sample verification directory and dataset documentation stay tracked
 !data/sample/

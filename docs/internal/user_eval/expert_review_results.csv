@@ -1,0 +1,21 @@
+question_id,question,language,intent,model,D1_expert,D1_farmer,D2_expert,D2_farmer,D3_expert,D3_farmer,D4_expert,D4_farmer,D5_expert,D5_farmer,act_on_expert,act_on_farmer,comment_expert,comment_farmer
+R003,"Wheat mein yellow rust ka kya ilaj hai?",Hinglish,disease_pest,distilled,5,4,5,4,5,5,5,4,5,5,YES,YES,,
+R007,"My rice crop shows brown spots on leaves. What fungicide should I use?",English,disease_pest,distilled,4,4,4,3,5,5,4,4,5,5,YES,YES,Propiconazole dose mentioned without spray interval,
+R011,"DAP ya NPK mein kya fark hai aur kounsa zyada better hai?",Hinglish,nutrition_fertilizer,distilled,4,3,3,3,4,4,3,3,5,5,YES,NO,Comparison correct but application rate missing for both,Couldn't judge which to actually buy
+R014,"Potato crop mein fertilizer dose kya hai?",Hinglish,nutrition_fertilizer,distilled,4,4,3,2,4,3,3,2,5,5,YES,NO,Basal dose given but top-dress timing absent,Missing how much to apply
+R018,"Gehu mein aphid control ke liye kya karein?",Hindi,disease_pest,distilled,5,4,5,4,5,5,5,4,5,5,YES,YES,,
+R022,"Information about pre-emergence weed control in wheat",English,cultivation_practice,distilled,4,3,4,3,5,4,4,3,5,5,YES,NO,Correct herbicides listed; no mention of soil moisture requirement,Specific timing unclear
+R027,"Hame gende ka tel bechna hai kisse sampark kare",Hindi,general,distilled,2,2,1,1,3,3,1,1,5,5,NO,NO,Answer attempted agri advice on a business query — off-topic,Irrelevant to question
+R031,"Paddy mein blast disease ka upay batao",Hindi,disease_pest,distilled,5,4,5,4,4,4,5,4,5,5,YES,YES,,
+R035,"Sugarcane ki acchi variety kaunsi hai UP ke liye?",Hindi,cultivation_practice,distilled,4,4,3,3,4,4,3,3,5,5,YES,YES,Co-0238 mentioned but no comparison with newer CoLk-94184,
+R039,"What is the correct way to store onion after harvest?",English,post_harvest_storage,distilled,5,5,4,4,5,5,4,4,5,5,YES,YES,,
+R043,"Monocrotophos safe hai meri fasal ke liye?",Hinglish,non_agri,distilled,3,3,2,2,4,4,2,2,5,5,NO,NO,Guardrail fired; answer correctly declined but brief safety note would improve,Short refusal — no guidance on safe alternatives
+R048,"TELL ME PEST CONTROL IN PADDY?",English,disease_pest,distilled,4,4,4,3,4,4,4,3,5,5,YES,YES,,
+R052,"Ganne mein pani ki zaroorat kitni hai?",Hindi,cultivation_practice,distilled,5,4,4,4,5,5,4,4,5,5,YES,YES,Irrigation frequency given; no mention of drip vs flood difference,
+R057,"Tomato mein fungal disease control kaise karein?",Hinglish,disease_pest,distilled,4,4,4,3,5,4,4,3,5,5,YES,YES,,
+R061,"Rice ki variety selection ke bare mein batao",Hinglish,cultivation_practice,distilled,3,3,3,3,4,4,3,2,5,5,YES,NO,Generic variety list without maturity or yield info,Too general to choose
+R065,"Which pesticide is best for whitefly in cotton?",English,disease_pest,distilled,4,4,4,4,5,5,4,4,5,5,YES,YES,,
+R069,"Gehu ki bunai ke baad khad kab daalna chahiye?",Hindi,cultivation_practice,distilled,5,4,5,4,5,5,5,4,5,5,YES,YES,,
+R073,"Mushroom ki kheti kaise karein?",Hindi,cultivation_practice,distilled,3,3,3,3,4,4,3,2,5,5,YES,NO,Spawn source and substrate preparation mentioned but sterilisation step missing,Hard to follow without agri background
+R077,"Wilt control information about Pea crop?",English,disease_pest,distilled,2,2,2,2,4,3,2,2,5,5,NO,NO,Corpus coverage thin — answer generic; no specific fungicide or cultural control,Doesn't answer what to do concretely
+R080,"Leaf curl disease mein kya spray karein?",Hinglish,disease_pest,distilled,5,4,5,4,5,5,5,4,5,5,YES,YES,,
