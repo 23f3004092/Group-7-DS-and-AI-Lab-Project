@@ -123,13 +123,13 @@ Two evaluation-scale caveats, flagged up front rather than only in §14: the ret
 
 **Baselines and success criteria:**
 
-| Module | Baseline | Success criterion |
-|---|---|---|
-| Vision | Frozen backbone, linear probe | Beat probe by more than ±0.025 noise floor |
-| Intent/NER/guardrail | Randomly initialised heads | Acc>0.85, macro-F1>0.70, entity F1>0.90, guardrail F1>0.95 |
-| Retrieval | Automatic word-overlap scorer | Useful chunk in top 5 for most questions |
-| Generation | Base Gemma-3-4B, one worked example | At least as grounded, no invented numbers, correct language, refuses when it should |
-| Yield | MLP and untuned defaults | Highest R², lowest RMSE, deployable latency/size |
+| Module               | Baseline                            | Success criterion                                                                   |
+| ----------------------| -------------------------------------| -------------------------------------------------------------------------------------|
+| Vision               | Frozen backbone, linear probe       | Beat probe by more than ±0.025 noise floor                                          |
+| Intent/NER/guardrail | Randomly initialised heads          | Acc>0.85, macro-F1>0.70, entity F1>0.90, guardrail F1>0.95                          |
+| Retrieval            | Automatic word-overlap scorer       | Useful chunk in top 5 for most questions                                            |
+| Generation           | Base Gemma-3-4B, one worked example | At least as grounded, no invented numbers, correct language, refuses when it should |
+| Yield                | MLP and untuned defaults            | Highest R², lowest RMSE, deployable latency/size                                    |
 
 Cluster bootstrap over scene groups is used for vision (images share photographic scenes); 2,000-resample bootstrap for retrieval/generation; 3-fold CV only inside the yield hyperparameter search, not for final reporting. **Two numbers whose intervals overlap are treated as the same number** throughout.
 
@@ -316,6 +316,9 @@ Generation dominates end-to-end latency; everything else is single-digit millise
 ---
 
 ## 13. End-to-End Pipeline Evaluation
+
+> [!NOTE]
+> For the comprehensive E2E evaluation report, including deep-dive methodology, metric rationale, and architectural challenges, see the dedicated [E2E Evaluation Report](../../outputs/reports/e2e_evaluation_report.md). For all 83 executed scenario logs across every pathway, see the [Full E2E Evaluation Examples Document](../../outputs/reports/e2e_evaluation_examples.md).
 
 Prior milestones evaluated each of the five modules in isolation. This section evaluates the **assembled pipeline** — image → diagnosis → RAG → response, and question → retrieval → LLM → final answer — directly addressing the gap identified in review.
 
@@ -566,19 +569,20 @@ Better: 3 epochs −0.1050 · batch 8 −0.0828 · rank 64 −0.0531 · Adafacto
 
 ## Appendix E — Artifacts and Configuration
 
-| Artefact | Path / identifier | Size |
-|---|---|---|
-| Vision checkpoint | `runs/vits16_m1/ckpt/p3_full_best.pt` (epoch 16) | 21.67M params |
-| Intent/entity/guardrail model | `final/intent_entity_guardrail_model.pt` + label maps | 514 MB |
-| Retrieval index | `agri_knowledge` snapshot + `manifest.json` | 3.80 GB |
-| LoRA adapter | `best_adapter/` with tokenizer + chat template | 262.41 MB |
-| Yield models | `saved_models/lightgbm_*.txt`, `xgboost_*.json`, `catboost_*.cbm`, `pytorch_model.pth` | 1.06–62.3 MB |
-| E2E harness | `run_e2e_eval.py` | — |
-| E2E scenario logs | supplementary examples document (83 scenarios) | — |
+| Artefact                      | Path / identifier                                                                      | Size          |
+| -------------------------------| ----------------------------------------------------------------------------------------| ---------------|
+| Vision checkpoint             | `runs/vits16_m1/ckpt/p3_full_best.pt` (epoch 16)                                       | 21.67M params |
+| Intent/entity/guardrail model | `final/intent_entity_guardrail_model.pt` + label maps                                  | 514 MB        |
+| Retrieval index               | `agri_knowledge` snapshot + `manifest.json`                                            | 3.80 GB       |
+| LoRA adapter                  | `best_adapter/` with tokenizer + chat template                                         | 262.41 MB     |
+| Yield models                  | `saved_models/lightgbm_*.txt`, `xgboost_*.json`, `catboost_*.cbm`, `pytorch_model.pth` | 1.06–62.3 MB  |
+| E2E harness                   | `scripts/build_e2e_eval_dataset.py`, `scripts/run_e2e_eval.py`                         | —             |
+| E2E evaluation report         | `outputs/reports/e2e_evaluation_report.md`                                             | —             |
+| E2E scenario logs             | `outputs/reports/e2e_evaluation_examples.md`                                           | —             |
 
 **Serving configuration:** bge-m3 frozen at 1024 dimensions, no query/document prefix, top-k 5, confidence tiers abstain <0.56 / fallback 0.56–0.66 / grounded ≥0.66; distilled adapter on 4-bit base, greedy decoding; LightGBM tuned on original-scale target (Appendix D.4).
 
-**Notebooks:** `vit-train-01.ipynb` · `11_kcc_intent_entity_guardrail.ipynb` · `12_distillation_data_prep.ipynb` · `13_distill_training.ipynb` · `14_distillation_hpt.ipynb` · `14_distill_model_evals.ipynb` · `retrieval_evals.ipynb` · `10c_rag_baseline_vs_distilled_new.ipynb` · yield training/evaluation notebook · `run_e2e_eval.py`.
+**Notebooks:** `vit-train-01.ipynb` · `11_kcc_intent_entity_guardrail.ipynb` · `12_distillation_data_prep.ipynb` · `13_distill_training.ipynb` · `14_distillation_hpt.ipynb` · `14_distill_model_evals.ipynb` · `retrieval_evals.ipynb` · `10c_rag_baseline_vs_distilled_new.ipynb` · `notebooks/yield_training_evaluation.ipynb` · `scripts/build_e2e_eval_dataset.py` · `scripts/run_e2e_eval.py`.
 
 ---
 
