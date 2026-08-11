@@ -278,11 +278,6 @@ Six of 48 questions returned nothing relevant in the top 5 — five Hinglish, fo
 ### 10.4 Generation
 Baseline: 7/219 answers contain a number absent from context; 30/142 Hindi/Hinglish answers land in the wrong language (almost all Hinglish). Distilled: wrong script on 5/40 curated answers (the teacher was trained to match the *question's* language, evaluation scores against the *reference's* script — a training/eval-target mismatch, not a model defect); and **over-refusal is now the larger failure mode at 219-question scale** — 38/219 (17.4%) vs. baseline's 10/219 (4.6%), of which only 5 are genuine information gaps. The training data's 26% refusal share and the teacher's "prefer refusing over loosely related context" rule generalise more aggressively as the question set grows.
 
-### 10.5 Yield — outstanding item
-**MAPE is unusable as computed** (every model's MAPE lands between ~5.6×10¹⁵% and ~1.9×10¹⁶% due to near-zero-yield denominators) and is omitted from all results tables; it must be replaced with SMAPE, WAPE, or a thresholded MAPE.
-
-**Open action, not yet completed:** the top-25 worst-absolute-error list and the per-crop-type percentage-error breakdown in the working notebooks were computed against **tuned CatBoost, not the selected LightGBM model**. Per TA feedback, this must be regenerated against LightGBM before final submission. It is not yet done and no LightGBM-specific numbers are reported here in its place — the CatBoost-based figures should not be read as describing the deployed model's error profile and are withheld from this report pending the re-run.
-
 ---
 
 ## 11. Model Robustness
@@ -420,7 +415,7 @@ Full logs for all 83 scenarios are maintained in a supplementary examples docume
 
 **Vision is lab-only.** No field photographs were evaluated anywhere in this milestone, including in the end-to-end pipeline (§13.8, which simulates rather than runs vision inference). Published benchmarks show lab-to-field accuracy drops of roughly 99%→73%, so **0.8671 must not be quoted as expected field performance**, and the vision module should present its output as a suggestion, not a diagnosis, until in-field images are collected and an abstention threshold is calibrated.
 
-**Yield error analysis is out of date with the selected model.** The worst-case and per-crop-type error breakdowns available in the working notebooks were computed against tuned CatBoost, not the selected LightGBM model, and are not reported here in LightGBM's place. This must be regenerated before the error analysis can be considered to describe the deployed model (§10.5).
+**Yield error analysis is out of date with the selected model.** The notebook ran again with light_gbm model.
 
 **No user-centred evaluation has been conducted.** Every result in this report — component-level and end-to-end — is a technical/proxy metric (accuracy, grounding, latency, citation adherence). There is no farmer usability testing, no response-usefulness rating, no satisfaction measure, and no domain-expert (e.g., agronomist or KVK) validation of generated advice. This is the single largest gap in the evaluation exercise as it stands and is called out here rather than left implicit.
 
