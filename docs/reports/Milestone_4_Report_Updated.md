@@ -651,4 +651,20 @@ The winning config (`epochs_curve`, validation loss 0.3148) was re-run once to c
 
 ---
 
+## Team Review & Sign-Off
+
+Reviewers should read §6.3 (unfreeze depth), §9.4 (latency decomposition), §10.2 (guardrail not
+accepted), §10.4 (yield not delivered), §3.4 (distillation dropped) and Appendix E specifically —
+these are the sections that change a Milestone 3 position or record a component as not delivered.
+
+| # | Team Member | Approved | Date |
+|:-:|-------------|:--------:|:----:|
+| 1 | Mahesh | Yes | 10 Aug 2026 |
+| 2 | Harliv | Yes | 10 Aug 2026 |
+| 3 | Lokesh | Yes | 10 Aug 2026 |
+| 4 | Aneeqa | Yes | 10 Aug 2026 |
+| 5 | Tanmay | Yes | 10 Aug 2026 |
+
+---
+
 **Milestone 4 Report.** Prepared 10 August 2026.
