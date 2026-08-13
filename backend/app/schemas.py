@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field
+import json
+from pydantic import BaseModel, Field, model_validator
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
@@ -50,19 +51,37 @@ class LogResponseSchema(BaseModel):
     id: int
     timestamp: datetime
     pathway: str
-    input_text: Optional[str]
-    image_path: Optional[str]
-    intent: List[str]
-    detected_crop: Optional[str]
-    detected_disease: Optional[str]
-    predicted_yield: Optional[float]
-    retrieved_chunks: List[Dict[str, Any]]
-    synthesis_response: Optional[str]
-    latency_ms: int
-    is_blocked: bool
-    guardrail_reason: Optional[str]
-    feedback_score: Optional[int]
-    feedback_text: Optional[str]
+    input_text: Optional[str] = None
+    image_path: Optional[str] = None
+    intent: List[str] = []
+    detected_crop: Optional[str] = None
+    detected_disease: Optional[str] = None
+    predicted_yield: Optional[float] = None
+    retrieved_chunks: List[Dict[str, Any]] = []
+    synthesis_response: Optional[str] = None
+    latency_ms: int = 0
+    is_blocked: bool = False
+    guardrail_reason: Optional[str] = None
+    feedback_score: Optional[int] = None
+    feedback_text: Optional[str] = None
 
-    class Config:
-        from_attributes = True
+    @model_validator(mode='before')
+    @classmethod
+    def deserialize_json_fields(cls, values):
+        """Convert JSON-string columns from SQLite into Python lists/dicts."""
+        # Support both dict (from ORM to_dict) and ORM object
+        if hasattr(values, '__dict__'):
+            values = values.__dict__
+        if isinstance(values, dict):
+            for field in ('intent', 'retrieved_chunks'):
+                val = values.get(field)
+                if isinstance(val, str):
+                    try:
+                        values[field] = json.loads(val)
+                    except (json.JSONDecodeError, TypeError):
+                        values[field] = []
+                elif val is None:
+                    values[field] = []
+        return values
+
+    model_config = {'from_attributes': True}

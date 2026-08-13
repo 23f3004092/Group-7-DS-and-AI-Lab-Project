@@ -1,0 +1,87 @@
+{"_e":"root:init","_t":1786643046879,"format":"v0-jsonl","version":"57.0.14"}
+{"_e":"env:mode","_t":1786643046880,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786643046883,"mode":"development","files":[],"env":{}}
+{"_e":"root:init","_t":1786643088795,"format":"v0-jsonl","version":"57.0.14"}
+{"_e":"env:mode","_t":1786643088796,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786643088799,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786643089072,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786643089507,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786643089828,"plugins":[]}
+{"_e":"metro:instantiate","_t":1786643092697,"atlas":false,"workers":6,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1786643093165,"id":"1","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786643093166,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786643093173,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786643093881,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1786643093982,"id":"1","progress":0.04000000000000001,"total":9,"current":2}
+{"_e":"metro:bundling:progress","_t":1786643094087,"id":"1","progress":0.04000000000000001,"total":32,"current":4}
+{"_e":"metro:bundling:progress","_t":1786643094195,"id":"1","progress":0.056094182825484756,"total":38,"current":9}
+{"_e":"metro:bundling:progress","_t":1786643094299,"id":"1","progress":0.10600324499729585,"total":43,"current":14}
+{"_e":"metro:bundling:progress","_t":1786643094399,"id":"1","progress":0.1752298539751217,"total":43,"current":18}
+{"_e":"metro:bundling:progress","_t":1786643094499,"id":"1","progress":0.2732438016528925,"total":44,"current":23}
+{"_e":"metro:bundling:progress","_t":1786643094607,"id":"1","progress":0.39744801512287337,"total":46,"current":29}
+{"_e":"metro:bundling:progress","_t":1786643094706,"id":"1","progress":0.4929832503395202,"total":47,"current":33}
+{"_e":"metro:bundling:progress","_t":1786643094806,"id":"1","progress":0.5866908103214123,"total":47,"current":36}
+{"_e":"metro:bundling:progress","_t":1786643094928,"id":"1","progress":0.6782006920415224,"total":51,"current":42}
+{"_e":"metro:bundling:progress","_t":1786643095028,"id":"1","progress":0.744329104190696,"total":51,"current":44}
+{"_e":"metro:bundling:progress","_t":1786643095129,"id":"1","progress":0.7785467128027681,"total":51,"current":45}
+{"_e":"metro:bundling:progress","_t":1786643095231,"id":"1","progress":0.7785467128027681,"total":59,"current":51}
+{"_e":"metro:bundling:progress","_t":1786643095347,"id":"1","progress":0.8019603475161506,"total":67,"current":60}
+{"_e":"metro:bundling:progress","_t":1786643095457,"id":"1","progress":0.8019603475161506,"total":75,"current":67}
+{"_e":"metro:bundling:progress","_t":1786643095558,"id":"1","progress":0.8143961927424153,"total":82,"current":74}
+{"_e":"metro:bundling:progress","_t":1786643095658,"id":"1","progress":0.8143961927424153,"total":91,"current":81}
+{"_e":"metro:bundling:progress","_t":1786643095767,"id":"1","progress":0.8143961927424153,"total":99,"current":88}
+{"_e":"metro:bundling:progress","_t":1786643095867,"id":"1","progress":0.8143961927424153,"total":109,"current":95}
+{"_e":"metro:bundling:progress","_t":1786643095968,"id":"1","progress":0.8143961927424153,"total":110,"current":97}
+{"_e":"metro:bundling:progress","_t":1786643096068,"id":"1","progress":0.8143961927424153,"total":115,"current":103}
+{"_e":"metro:bundling:progress","_t":1786643096174,"id":"1","progress":0.8532749209997127,"total":118,"current":109}
+{"_e":"metro:bundling:progress","_t":1786643096274,"id":"1","progress":0.8532749209997127,"total":139,"current":115}
+{"_e":"metro:bundling:progress","_t":1786643096374,"id":"1","progress":0.8532749209997127,"total":151,"current":120}
+{"_e":"metro:bundling:progress","_t":1786643096474,"id":"1","progress":0.8532749209997127,"total":151,"current":127}
+{"_e":"metro:bundling:progress","_t":1786643096576,"id":"1","progress":0.8532749209997127,"total":161,"current":129}
+{"_e":"metro:bundling:progress","_t":1786643096680,"id":"1","progress":0.8532749209997127,"total":173,"current":137}
+{"_e":"metro:bundling:progress","_t":1786643096783,"id":"1","progress":0.8532749209997127,"total":176,"current":142}
+{"_e":"metro:bundling:progress","_t":1786643096886,"id":"1","progress":0.8532749209997127,"total":183,"current":151}
+{"_e":"metro:bundling:progress","_t":1786643096986,"id":"1","progress":0.8532749209997127,"total":191,"current":159}
+{"_e":"metro:bundling:progress","_t":1786643097086,"id":"1","progress":0.8532749209997127,"total":193,"current":163}
+{"_e":"metro:bundling:progress","_t":1786643097187,"id":"1","progress":0.8532749209997127,"total":195,"current":168}
+{"_e":"metro:bundling:progress","_t":1786643097288,"id":"1","progress":0.8532749209997127,"total":200,"current":177}
+{"_e":"metro:bundling:progress","_t":1786643097388,"id":"1","progress":0.8532749209997127,"total":209,"current":185}
+{"_e":"metro:bundling:progress","_t":1786643097488,"id":"1","progress":0.8532749209997127,"total":212,"current":193}
+{"_e":"metro:bundling:progress","_t":1786643097597,"id":"1","progress":0.8532749209997127,"total":228,"current":204}
+{"_e":"metro:bundling:progress","_t":1786643097699,"id":"1","progress":0.8532749209997127,"total":230,"current":211}
+{"_e":"metro:bundling:progress","_t":1786643097800,"id":"1","progress":0.8988024962050936,"total":231,"current":219}
+{"_e":"metro:bundling:progress","_t":1786643097900,"id":"1","progress":0.991360731620472,"total":231,"current":230}
+{"_e":"metro:bundling:progress","_t":1786643099565,"id":"1","progress":0.999,"total":231,"current":231}
+{"_e":"metro:bundling:progress","_t":1786643099667,"id":"1","progress":0.999,"total":235,"current":235}
+{"_e":"metro:bundling:done","_t":1786643099924,"id":"1","total":235,"ms":6758.158333}
+{"_e":"metro:client_log","_t":1786643100166,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786643100168,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786643100168,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:server_log","_t":1786643124016,"level":"error","data":["An unknown error occurred while installing React Native DevTools. Details:\n\n[58498:0813/231522.851008:FATAL:sandbox/linux/suid/client/setuid_sandbox_host.cc:166] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now. You need to make sure that /home/tanmay-sahu/.cache/dotslash/64/ed7915e5fef86802e862c274e17f780fa75388/React Native DevTools-linux-x64/chrome-sandbox is owned by root and has mode 4755.\n"]}
+{"_e":"root:init","_t":1786643916673,"format":"v0-jsonl","version":"57.0.14"}
+{"_e":"env:mode","_t":1786643916674,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786643916677,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786643920975,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786643921265,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786643921479,"plugins":[]}
+{"_e":"metro:server_log","_t":1786643922762,"level":"error","data":["An unknown error occurred while installing React Native DevTools. Details:\n\n[60729:0813/232841.472517:FATAL:sandbox/linux/suid/client/setuid_sandbox_host.cc:166] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now. You need to make sure that /home/tanmay-sahu/.cache/dotslash/64/ed7915e5fef86802e862c274e17f780fa75388/React Native DevTools-linux-x64/chrome-sandbox is owned by root and has mode 4755.\n"]}
+{"_e":"metro:instantiate","_t":1786643924103,"atlas":false,"workers":6,"host":"::","port":8082}
+{"_e":"root:init","_t":1786644193920,"format":"v0-jsonl","version":"57.0.14"}
+{"_e":"env:mode","_t":1786644193921,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1786644193924,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1786644196700,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1786644197074,"serverRoot":"../../..","projectRoot":"../../..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1786644197293,"plugins":[]}
+{"_e":"metro:server_log","_t":1786644198559,"level":"error","data":["An unknown error occurred while installing React Native DevTools. Details:\n\n[62455:0813/233317.226956:FATAL:sandbox/linux/suid/client/setuid_sandbox_host.cc:166] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now. You need to make sure that /home/tanmay-sahu/.cache/dotslash/64/ed7915e5fef86802e862c274e17f780fa75388/React Native DevTools-linux-x64/chrome-sandbox is owned by root and has mode 4755.\n"]}
+{"_e":"metro:instantiate","_t":1786644199860,"atlas":false,"workers":6,"host":"::","port":8082}
+{"_e":"metro:client_log","_t":1786644439722,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786644457142,"level":"warn","data":["An error occurred in the <div> component.\n\nConsider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.\n"]}
+{"_e":"metro:client_log","_t":1786644457144,"level":"warn","data":["An error occurred in the <div> component.\n\nConsider adding an error boundary to your tree to customize error handling behavior.\nVisit https://react.dev/link/error-boundaries to learn more about error boundaries.\n"]}
+{"_e":"metro:client_log","_t":1786644457196,"level":"error","data":["[TypeError: Cannot set properties of undefined (setting 'scrollView')]","\n\nCode: App.js\n\u001b[0m \u001b[90m 442 |\u001b[39m             \u001b[33m<\u001b[39m\u001b[33mScrollView\u001b[39m \n \u001b[90m 443 |\u001b[39m               contentContainerStyle\u001b[33m=\u001b[39m{{ padding\u001b[33m:\u001b[39m \u001b[35m15\u001b[39m }}\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 444 |\u001b[39m               ref\u001b[33m=\u001b[39m{ref \u001b[33m=>\u001b[39m { \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mscrollView \u001b[33m=\u001b[39m ref }}\n \u001b[90m     |\u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 445 |\u001b[39m               onContentSizeChange\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mscrollView\u001b[33m.\u001b[39mscrollToEnd({ animated\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })}\n \u001b[90m 446 |\u001b[39m             \u001b[33m>\u001b[39m\n \u001b[90m 447 |\u001b[39m               {chatMessages\u001b[33m.\u001b[39mmap((msg) \u001b[33m=>\u001b[39m (\u001b[0m\nCall Stack\n  ScrollView.props.ref (App.js:444:44)","\n\nCode: App.js\n\u001b[0m \u001b[90m 440 |\u001b[39m           \u001b[33m<\u001b[39m\u001b[33mView\u001b[39m style\u001b[33m=\u001b[39m{{ flex\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m }}\u001b[33m>\u001b[39m\n \u001b[90m 441 |\u001b[39m             {\u001b[90m/* Conversation Area */\u001b[39m}\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 442 |\u001b[39m             \u001b[33m<\u001b[39m\u001b[33mScrollView\u001b[39m \n \u001b[90m     |\u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 443 |\u001b[39m               contentContainerStyle\u001b[33m=\u001b[39m{{ padding\u001b[33m:\u001b[39m \u001b[35m15\u001b[39m }}\n \u001b[90m 444 |\u001b[39m               ref\u001b[33m=\u001b[39m{ref \u001b[33m=>\u001b[39m { \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mscrollView \u001b[33m=\u001b[39m ref }}\n \u001b[90m 445 |\u001b[39m               onContentSizeChange\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mscrollView\u001b[33m.\u001b[39mscrollToEnd({ animated\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })}\u001b[0m\nCall Stack\n  App (App.js:442:13)"]}
+{"_e":"metro:client_log","_t":1786644457216,"level":"error","data":["[TypeError: Cannot set properties of undefined (setting 'scrollView')]","\n\nCode: App.js\n\u001b[0m \u001b[90m 442 |\u001b[39m             \u001b[33m<\u001b[39m\u001b[33mScrollView\u001b[39m \n \u001b[90m 443 |\u001b[39m               contentContainerStyle\u001b[33m=\u001b[39m{{ padding\u001b[33m:\u001b[39m \u001b[35m15\u001b[39m }}\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 444 |\u001b[39m               ref\u001b[33m=\u001b[39m{ref \u001b[33m=>\u001b[39m { \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mscrollView \u001b[33m=\u001b[39m ref }}\n \u001b[90m     |\u001b[39m                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 445 |\u001b[39m               onContentSizeChange\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mscrollView\u001b[33m.\u001b[39mscrollToEnd({ animated\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })}\n \u001b[90m 446 |\u001b[39m             \u001b[33m>\u001b[39m\n \u001b[90m 447 |\u001b[39m               {chatMessages\u001b[33m.\u001b[39mmap((msg) \u001b[33m=>\u001b[39m (\u001b[0m\nCall Stack\n  ScrollView.props.ref (App.js:444:44)","\n    at div (<anonymous>)"]}
+{"_e":"metro:bundling:started","_t":1786644460793,"id":"6","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786644460794,"id":"6","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786644460818,"id":"6","total":1,"ms":24.568421}
+{"_e":"metro:client_log","_t":1786644461041,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786644461041,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1786644461042,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}

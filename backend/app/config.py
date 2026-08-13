@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     # Qdrant Vector DB Settings
     QDRANT_URL: str = os.environ.get("QDRANT_URL", "http://localhost:6333")
     COLLECTION_NAME: str = "agri_knowledge"
+    BGE_MODEL_ID: str = "BAAI/bge-m3"
     
     # RAG Tiers & Parameters
     TIER_GROUNDED: float = 0.66
