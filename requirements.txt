@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+requests
+qdrant-client
+sentence-transformers
+transformers
+torch
+Pillow
+lightgbm
+pandas
+sentencepiece
