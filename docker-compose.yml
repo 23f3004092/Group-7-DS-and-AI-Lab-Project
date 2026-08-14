@@ -19,8 +19,6 @@ services:
       - SKIP_GENERATOR=1
     ports:
       - "8000:8000"
-    # Run from project root so relative imports work correctly
-    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
 
 volumes:
   qdrant_storage:
