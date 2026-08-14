@@ -55,6 +55,16 @@ STATIC_FALLBACK = {
     "condition": "Sunny",
     "humidity": None,
     "wind_speed_kmh": None,
+    "wind_gusts_kmh": None,
+    "wind_direction_deg": None,
+    "wind_direction_label": None,
+    "pressure_hpa": None,
+    "dew_point_c": None,
+    "cloud_cover_pct": None,
+    "uv_index": None,
+    "wmo_code": None,
+    "sunrise": None,
+    "sunset": None,
     "precipitation_mm": 0.0,
     "rain_probability": None,
     "max_temp_c": None,
@@ -62,6 +72,16 @@ STATIC_FALLBACK = {
     "forecast": [],
     "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
 }
+
+WIND_DIRS = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+             "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+
+
+def _compass_label(deg: Optional[float]) -> Optional[str]:
+    """Degrees -> 16-point compass label (N, NNE, NE, ...)."""
+    if deg is None or deg < 0:
+        return None
+    return WIND_DIRS[int(round((float(deg) % 360) / 22.5)) % 16]
 
 
 def _condition_for_wmo(code: Optional[int]) -> tuple:
@@ -138,8 +158,15 @@ class WeatherService:
         params = {
             "latitude": lat,
             "longitude": lon,
-            "current": "temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m",
-            "daily": "temperature_2m_max,temperature_2m_min,precipitation_probability_max",
+            "current": (
+                "temperature_2m,relative_humidity_2m,apparent_temperature,"
+                "precipitation,weather_code,wind_speed_10m,wind_direction_10m,"
+                "wind_gusts_10m,surface_pressure,dew_point_2m,cloud_cover,uv_index"
+            ),
+            "daily": (
+                "temperature_2m_max,temperature_2m_min,precipitation_probability_max,"
+                "weather_code,sunrise,sunset"
+            ),
             "forecast_days": 3,
             "timezone": "auto",
         }
@@ -157,9 +184,11 @@ class WeatherService:
         label, icon = _condition_for_wmo(current.get("weather_code"))
         forecast = []
         dates = daily.get("time") or []
+        wmo_daily = daily.get("weather_code") or []
         for i, d in enumerate(dates[:3]):
             forecast.append({
                 "date": d,
+                "wmo_code": (wmo_daily or [None] * 3)[i],
                 "max_temp_c": (daily.get("temperature_2m_max") or [None] * 3)[i],
                 "min_temp_c": (daily.get("temperature_2m_min") or [None] * 3)[i],
                 "rain_probability": (daily.get("precipitation_probability_max") or [None] * 3)[i],
@@ -174,6 +203,16 @@ class WeatherService:
             "condition": f"{icon} {label}",
             "humidity": current.get("relative_humidity_2m"),
             "wind_speed_kmh": current.get("wind_speed_10m"),
+            "wind_gusts_kmh": current.get("wind_gusts_10m"),
+            "wind_direction_deg": current.get("wind_direction_10m"),
+            "wind_direction_label": _compass_label(current.get("wind_direction_10m")),
+            "pressure_hpa": current.get("surface_pressure"),
+            "dew_point_c": current.get("dew_point_2m"),
+            "cloud_cover_pct": current.get("cloud_cover"),
+            "uv_index": current.get("uv_index"),
+            "wmo_code": current.get("weather_code"),
+            "sunrise": (daily.get("sunrise") or [None])[0],
+            "sunset": (daily.get("sunset") or [None])[0],
             "precipitation_mm": current.get("precipitation"),
             "rain_probability": (daily.get("precipitation_probability_max") or [None])[0],
             "max_temp_c": (daily.get("temperature_2m_max") or [None])[0],
@@ -226,6 +265,16 @@ class WeatherService:
                     "condition": payload.get("condition"),
                     "humidity": payload.get("humidity"),
                     "wind_speed_kmh": payload.get("wind_speed"),
+                    "wind_gusts_kmh": None,
+                    "wind_direction_deg": None,
+                    "wind_direction_label": None,
+                    "pressure_hpa": None,
+                    "dew_point_c": None,
+                    "cloud_cover_pct": None,
+                    "uv_index": None,
+                    "wmo_code": None,
+                    "sunrise": None,
+                    "sunset": None,
                     "precipitation_mm": None,
                     "rain_probability": None,
                     "max_temp_c": None,
@@ -268,6 +317,16 @@ class WeatherService:
                 "condition": condition,
                 "humidity": humidity.get("morning"),
                 "wind_speed_kmh": None,
+                "wind_gusts_kmh": None,
+                "wind_direction_deg": None,
+                "wind_direction_label": None,
+                "pressure_hpa": None,
+                "dew_point_c": None,
+                "cloud_cover_pct": None,
+                "uv_index": None,
+                "wmo_code": None,
+                "sunrise": astron.get("sunrise"),
+                "sunset": astron.get("sunset"),
                 "precipitation_mm": current.get("rainfall"),
                 "rain_probability": None,
                 "max_temp_c": temps.get("max", {}).get("value"),

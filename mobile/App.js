@@ -22,6 +22,7 @@ import Storage from 'expo-sqlite/kv-store';
 import * as Location from 'expo-location';
 import Constants from 'expo-constants';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';
 import { useFonts } from 'expo-font';
 import {
   Inter_400Regular,
@@ -31,6 +32,14 @@ import {
   Inter_800ExtraBold,
 } from '@expo-google-fonts/inter';
 import { initI18n, setLanguage, SUPPORTED_LANGUAGES, LANG_NAMES } from './i18n';
+import {
+  AI_CONFIGURED,
+  AI_BASE_URL_VALUE,
+  ask as aiAsk,
+  diagnose as aiDiagnose,
+  checkHealth as aiCheckHealth,
+  normalizeSources,
+} from './aiClient';
 
 // Default API Server. In dev, point at the machine running the Expo/Metro bundler
 // (its LAN IP) so physical phones & emulators can reach the FastAPI backend.
@@ -303,7 +312,14 @@ function AppShell() {
   const fontScale = FONT_SCALES[fontSize] || 1;
 
   // Home Screen States
-  const [weather, setWeather] = useState({ temp: 31, condition: 'Sunny', location: 'Uttar Pradesh', rain: '850mm', humidity: null, forecast: [], source: 'static' });
+  const [weather, setWeather] = useState({
+    temp: 31, condition: 'Sunny', location: 'Uttar Pradesh', rain: '850mm', humidity: null,
+    forecast: [], source: 'static',
+    feelsLike: null, maxTemp: null, minTemp: null, rainProb: null,
+    windKmh: null, windGusts: null, windDirLabel: null, windDirDeg: null,
+    pressure: null, dewPoint: null, cloud: null, uvIndex: null, wmoCode: null,
+    sunrise: null, sunset: null, updatedAt: null
+  });
   const [mandiPrices, setMandiPrices] = useState([
     { crop: 'Wheat', tag: 'MSP', price: '₹2,275/qtl', change: '+₹15' },
     { crop: 'Paddy', tag: 'MSP', price: '₹2,183/qtl', change: '+₹10' },
@@ -313,6 +329,18 @@ function AppShell() {
   const [mandiSource, setMandiSource] = useState('static');
   const [refreshing, setRefreshing] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
+
+  // Poll mandi + weather every 5 minutes so prices & conditions stay fresh in the field
+  useEffect(() => {
+    const pollId = setInterval(() => setReloadKey(k => k + 1), 5 * 60 * 1000);
+    return () => clearInterval(pollId);
+  }, []);
+
+  // Probe the GCP AI service once at startup so Settings shows its real status
+  useEffect(() => {
+    if (AI_CONFIGURED) checkAiConnection();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Live weather from backend /api/weather/current (GPS coords preferred, else district city)
   useEffect(() => {
@@ -340,6 +368,22 @@ function AppShell() {
           humidity: data.humidity != null ? `${data.humidity}%` : null,
           forecast: data.forecast || [],
           source: data.source,
+          feelsLike: data.apparent_temperature_c != null ? Math.round(data.apparent_temperature_c) : null,
+          maxTemp: data.max_temp_c != null ? Math.round(data.max_temp_c) : null,
+          minTemp: data.min_temp_c != null ? Math.round(data.min_temp_c) : null,
+          rainProb: data.rain_probability != null ? Math.round(data.rain_probability) : null,
+          windKmh: data.wind_speed_kmh != null ? Math.round(data.wind_speed_kmh) : null,
+          windGusts: data.wind_gusts_kmh != null ? Math.round(data.wind_gusts_kmh) : null,
+          windDirLabel: data.wind_direction_label || null,
+          windDirDeg: data.wind_direction_deg != null ? Math.round(data.wind_direction_deg) : null,
+          pressure: data.pressure_hpa != null ? Math.round(data.pressure_hpa) : null,
+          dewPoint: data.dew_point_c != null ? Math.round(data.dew_point_c) : null,
+          cloud: data.cloud_cover_pct != null ? Math.round(data.cloud_cover_pct) : null,
+          uvIndex: data.uv_index != null ? Math.round(data.uv_index) : null,
+          wmoCode: data.wmo_code != null ? data.wmo_code : null,
+          sunrise: data.sunrise || null,
+          sunset: data.sunset || null,
+          updatedAt: data.updated_at || null,
         });
       } catch (e) {
         // Server unreachable -> keep the static default weather card
@@ -374,7 +418,7 @@ function AppShell() {
             ? `₹${Math.round(p.modal_price).toLocaleString('en-IN')}/qtl`
             : '—',
           change: p.change_per_quintal != null
-            ? `${p.change_per_quintal >= 0 ? '+' : ''}₹${Math.round(p.change_per_quintal)}`
+            ? `${p.change_per_quintal >= 0 ? '+' : '-'}₹${Math.round(Math.abs(p.change_per_quintal))}`
             : '—',
         }));
 
@@ -559,6 +603,9 @@ function AppShell() {
     toastTimerRef.current = setTimeout(() => setToast(null), 2200);
   };
 
+  // Full-screen weather detail view
+  const [weatherDetailOpen, setWeatherDetailOpen] = useState(false);
+
   // Chat/RAG States
   const [chatMessages, setChatMessages] = useState([
     { id: 1, text: 'Hello! I am your FarmerVision advisor. Ask me questions about crops, fertilizer dosage, disease remedies, or policy schemes.', isUser: false }
@@ -567,6 +614,31 @@ function AppShell() {
   const [isTyping, setIsTyping] = useState(false);
   const [selectedCitation, setSelectedCitation] = useState(null);
   const chatScrollRef = useRef(null);
+  // One GCP AI conversation session per app run (server remembers turn context)
+  const chatSessionRef = useRef(`fv-mobile-${Date.now()}`);
+
+  // AI service connection state (Settings card)
+  const [aiStatus, setAiStatus] = useState(null); // null | {ok, text}
+  const [aiChecking, setAiChecking] = useState(false);
+
+  const checkAiConnection = async () => {
+    if (!AI_CONFIGURED) {
+      setAiStatus({ ok: false, text: 'Not configured' });
+      return;
+    }
+    setAiChecking(true);
+    try {
+      const h = await aiCheckHealth();
+      setAiStatus({
+        ok: h.status === 'ok',
+        text: h.status === 'ok' ? `online (${h.points || 0} KB points, ${h.gpu_name || 'no GPU'})` : `offline: ${h.status}`,
+      });
+    } catch (e) {
+      setAiStatus({ ok: false, text: `unreachable: ${e.message}` });
+    } finally {
+      setAiChecking(false);
+    }
+  };
 
   // Leaf Scanner States
   const [selectedImage, setSelectedImage] = useState(null); // Simulated or base64
@@ -596,13 +668,50 @@ function AppShell() {
     if (!chatInput.trim()) return;
 
     const userText = chatInput;
-    const nextMsgId = chatMessages.length + 1;
+    const nextMsgId = Date.now();
 
     setChatMessages(prev => [...prev, { id: nextMsgId, text: userText, isUser: true }]);
     setChatInput('');
     setIsTyping(true);
 
     try {
+      // 1) GCP AI service — grounded RAG with guardrails + multi-turn (API_SPEC.md)
+      if (AI_CONFIGURED) {
+        try {
+          const liveData = {};
+          if (mandiSource === 'live' && mandiPrices.length) {
+            liveData.mandi_prices = mandiPrices
+              .map(p => `${p.crop}: ${p.price}`)
+              .join('; ');
+          }
+          if (weather.source === 'live' && weather.temp != null) {
+            liveData.weather = {
+              temp_c: weather.temp,
+              condition: weather.condition,
+              humidity: weather.humidity,
+              rain: weather.rain,
+            };
+          }
+          const data = await aiAsk(userText, {
+            sessionId: chatSessionRef.current,
+            liveData: Object.keys(liveData).length ? liveData : undefined,
+          });
+          const text = data.answer || data.message || 'No answer received from AI service.';
+          setChatMessages(prev => [...prev, {
+            id: Date.now(),
+            text,
+            isUser: false,
+            sources: normalizeSources(data.sources),
+            tier: data.tier,
+            score: data.top_score,
+          }]);
+          return;
+        } catch (aiErr) {
+          console.warn('AI service failed, falling back to local backend:', aiErr);
+        }
+      }
+
+      // 2) Fallback: local FastAPI backend proxy
       const res = await fetch(`${apiUrl}/api/query/text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -612,7 +721,7 @@ function AppShell() {
       if (res.ok) {
         const data = await res.json();
         setChatMessages(prev => [...prev, {
-          id: prev.length + 1,
+          id: Date.now(),
           text: data.answer,
           isUser: false,
           sources: data.sources,
@@ -622,14 +731,14 @@ function AppShell() {
       } else {
         const errData = await res.json();
         setChatMessages(prev => [...prev, {
-          id: prev.length + 1,
+          id: Date.now(),
           text: `Error: ${errData.detail || 'Server responded with error'}`,
           isUser: false
         }]);
       }
     } catch (e) {
       setChatMessages(prev => [...prev, {
-        id: prev.length + 1,
+        id: Date.now(),
         text: 'Network Connection Error. Please verify server URL in Settings.',
         isUser: false
       }]);
@@ -667,6 +776,31 @@ function AppShell() {
     });
 
     try {
+      // 1) GCP AI service — leaf diagnosis + grounded treatment (API_SPEC.md /diagnose)
+      if (AI_CONFIGURED) {
+        try {
+          const data = await aiDiagnose({
+            uri: selectedImage.uri,
+            name: selectedImage.name,
+            question: 'is ke liye kya karna chahiye',
+          });
+          const diag = data.diagnosis || {};
+          const label = diag.label || '';
+          setDiagnosisResult({
+            detected_crop: diag.crop || (label.split('__')[0] || 'unknown'),
+            detected_disease: label || 'unknown',
+            answer: data.answer || `Detected: ${(diag.disease || label).replace(/_/g, ' ')} (${Math.round((diag.confidence || 0) * 100)}% confidence)`,
+            confidence: diag.confidence,
+            sources: normalizeSources(data.sources),
+            tier: data.tier,
+          });
+          return;
+        } catch (aiErr) {
+          console.warn('AI diagnose failed, falling back to local backend:', aiErr);
+        }
+      }
+
+      // 2) Fallback: local FastAPI backend proxy
       const res = await fetch(`${apiUrl}/api/query/image`, {
         method: 'POST',
         body: formData,
@@ -765,6 +899,79 @@ function AppShell() {
     return t(`crops.${key}`, { defaultValue: key });
   };
 
+  // WMO weather code -> vector icon used on the weather card and detail view
+  const weatherIcon = (code) => {
+    if (code == null) return 'partly-sunny-outline';
+    if (code === 0) return 'sunny-outline';
+    if (code === 1 || code === 2) return 'partly-sunny-outline';
+    if (code === 3 || code === 45 || code === 48) return 'cloudy-outline';
+    if (code >= 51 && code <= 57) return 'rainy-outline';
+    if (code >= 61 && code <= 67) return 'rainy-outline';
+    if (code >= 71 && code <= 77) return 'snow-outline';
+    if (code >= 80 && code <= 82) return 'rainy-outline';
+    if (code === 85 || code === 86) return 'snow-outline';
+    if (code >= 95) return 'thunderstorm-outline';
+    return 'partly-sunny-outline';
+  };
+
+  // Render from the right icon family ('windy' lives in MaterialDesignIcons)
+  const renderIcon = (name, size, color, extra) =>
+    name === 'windy'
+      ? <MaterialCommunityIcons name="weather-windy" size={size} color={color} style={extra} />
+      : <Ionicons name={name} size={size} color={color} style={extra} />;
+
+  // Rule-based field advisory generated from live conditions (farmer + crop guidance)
+  const buildAdvisory = () => {
+    const tips = [];
+    const pct = (v) => (v != null ? Math.round(v) : null);
+    if (pct(weather.humidity) >= 70) {
+      tips.push({ icon: 'water-outline', key: 'advisoryHumidity', values: { humidity: pct(weather.humidity) } });
+    }
+    if (pct(weather.rainProb) >= 60) {
+      tips.push({ icon: 'umbrella-outline', key: 'advisoryRainChance', values: { prob: pct(weather.rainProb) } });
+    }
+    if (pct(weather.windKmh) >= 25) {
+      tips.push({ icon: 'windy', key: 'advisoryWind', values: { wind: pct(weather.windKmh) } });
+    }
+    if (pct(weather.uvIndex) >= 7) {
+      tips.push({ icon: 'sunny-outline', key: 'advisoryUv', values: { uv: pct(weather.uvIndex) } });
+    }
+    if (weather.temp >= 35) tips.push({ icon: 'thermometer-outline', key: 'advisoryHeat', values: { temp: weather.temp } });
+    if (weather.temp <= 10) tips.push({ icon: 'snow-outline', key: 'advisoryCold', values: { temp: weather.temp } });
+    if (pct(weather.dewPoint) >= 20) tips.push({ icon: 'water-outline', key: 'advisoryDew', values: { dew: pct(weather.dewPoint) } });
+    if (tips.length === 0) tips.push({ icon: 'leaf-outline', key: 'advisoryFine' });
+    return tips.slice(0, 5);
+  };
+
+  const stat = (labelKey, icon, valueRaw, unit) => (
+    <View style={[s.statItem, { backgroundColor: theme.surfaceAlt, borderColor: theme.border }]}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 6 }}>
+        {renderIcon(icon, 15, accent.softText, { marginRight: 6 })}
+        <Text style={[s.statLabel, { color: theme.textMuted }]}>{t(labelKey)}</Text>
+      </View>
+      <Text style={[s.statValue, { color: theme.text }]}>{valueRaw != null ? `${valueRaw}${unit || ''}` : '—'}</Text>
+    </View>
+  );
+
+  const fmtTime = (iso) => (iso ? String(iso).slice(11, 16) : '—');
+
+  const fmtDay = (dateStr) => {
+    if (!dateStr) return '—';
+    const d = new Date(String(dateStr) + 'T00:00:00');
+    return d.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric' }).replace(',', '');
+  };
+
+  const buildStatGrid = () => [
+    stat('humidityLabel', 'water-outline', weather.humidity, ''),
+    stat('rainfallLabel', 'umbrella-outline', weather.rain, ''),
+    stat('windLabel', 'windy', weather.windKmh, weather.windKmh != null ? ' km/h' : ''),
+    stat('windDirLabel', 'navigate-outline', weather.windDirLabel, weather.windKmh != null ? ` (${weather.windDirDeg}°)` : ''),
+    stat('uvLabel', 'sunny-outline', weather.uvIndex, weather.uvIndex != null ? '' : ''),
+    stat('pressureLabel', 'speedometer-outline', weather.pressure, weather.pressure != null ? ' hPa' : ''),
+    stat('dewPointLabel', 'thermometer-outline', weather.dewPoint, weather.dewPoint != null ? '°C' : ''),
+    stat('cloudLabel', 'cloud-outline', weather.cloud, weather.cloud != null ? '%' : ''),
+  ];
+
   const s = createStyles(theme, accent, fontScale, themeMode);
 
   // Wait for i18n + fonts (cross-platform). Non-Latin scripts still render via system fallback.
@@ -822,63 +1029,95 @@ function AppShell() {
             {/* Greeting */}
             <Text style={s.greeting}>{greeting()}</Text>
 
-            {/* Weather & Advisory widget */}
-            <LinearGradient
-              colors={theme.weatherGradient}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={[s.card, s.weatherCard]}
+            {/* Weather & Advisory widget (tap for full weather detail view) */}
+            <TouchableOpacity
+              activeOpacity={0.92}
+              onPress={() => setWeatherDetailOpen(true)}
             >
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <View style={{ flex: 1, paddingRight: 10 }}>
-                  <Text style={s.weatherTemp}>{weather.temp}°C</Text>
-                  <Text style={s.weatherDesc} numberOfLines={2}>{weather.condition} • {weather.location}</Text>
-                </View>
-                <View style={{ alignItems: 'flex-end' }}>
-                  {weather.source === 'live' && (
-                    <View style={[s.liveBadge, { backgroundColor: 'rgba(255,255,255,0.2)', marginLeft: 0, marginBottom: 6 }]}>
-                      <Text style={[s.liveBadgeText, { color: '#fff' }]}>● Live</Text>
-                    </View>
-                  )}
-                  <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
-                    <Ionicons name="water-outline" size={12} color="rgba(255,255,255,0.85)" />
-                    <Text style={[s.weatherLabel, { marginLeft: 4 }]}>Rainfall</Text>
+              <LinearGradient
+                colors={theme.weatherGradient}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={[s.card, s.weatherCard]}
+              >
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <View style={{ flex: 1, paddingRight: 10 }}>
+                    <Text style={s.weatherTemp}>{weather.temp}°C</Text>
+                    <Text style={s.weatherDesc} numberOfLines={2}>{weather.condition} • {weather.location}</Text>
                   </View>
-                  <Text style={s.weatherVal}>{weather.rain}</Text>
-                  {weather.humidity && (
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4 }}>
-                      <Ionicons name="water-outline" size={12} color="rgba(255,255,255,0.9)" />
-                      <Text style={[s.weatherLabel, { marginLeft: 4 }]}>{weather.humidity}</Text>
+                  <View style={{ alignItems: 'flex-end' }}>
+                    {weather.source === 'live' && (
+                      <View style={[s.liveBadge, { backgroundColor: 'rgba(255,255,255,0.2)', marginLeft: 0, marginBottom: 6 }]}>
+                        <Text style={[s.liveBadgeText, { color: '#fff' }]}>● Live</Text>
+                      </View>
+                    )}
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
+                      <Ionicons name="water-outline" size={12} color="rgba(255,255,255,0.85)" />
+                      <Text style={[s.weatherLabel, { marginLeft: 4 }]}>Rainfall</Text>
+                    </View>
+                    <Text style={s.weatherVal}>{weather.rain}</Text>
+                    {weather.humidity && (
+                      <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 4 }}>
+                        <Ionicons name="water-outline" size={12} color="rgba(255,255,255,0.9)" />
+                        <Text style={[s.weatherLabel, { marginLeft: 4 }]}>{weather.humidity}</Text>
+                      </View>
+                    )}
+                  </View>
+                </View>
+
+                {/* Live readout chips */}
+                <View style={s.weatherChipRow}>
+                  {weather.windKmh != null && (
+                    <View style={s.weatherChip}>
+                      <MaterialCommunityIcons name="weather-windy" size={13} color="#fff" style={{ marginRight: 4 }} />
+                      <Text style={s.weatherChipText}>{weather.windKmh} km/h</Text>
                     </View>
                   )}
-                </View>
-              </View>
-
-              {/* 3-day forecast strip */}
-              {weather.forecast?.length > 0 && (
-                <View style={s.weatherForecastRow}>
-                  {weather.forecast.map((f, i) => (
-                    <View key={i} style={s.weatherForecastChip}>
-                      <Text style={s.weatherForecastDay}>{String(f.date || '').slice(5)}</Text>
-                      <Text style={s.weatherForecastTemp}>
-                        ↑{f.max_temp_c != null ? Math.round(f.max_temp_c) : '—'}°
-                      </Text>
-                      <Text style={s.weatherForecastTemp}>
-                        ↓{f.min_temp_c != null ? Math.round(f.min_temp_c) : '—'}°
-                      </Text>
+                  {weather.rainProb != null && (
+                    <View style={s.weatherChip}>
+                      <Ionicons name="umbrella-outline" size={12} color="#fff" style={{ marginRight: 4 }} />
+                      <Text style={s.weatherChipText}>{weather.rainProb}% rain</Text>
                     </View>
-                  ))}
+                  )}
+                  {weather.dewPoint != null && (
+                    <View style={s.weatherChip}>
+                      <Ionicons name="thermometer-outline" size={12} color="#fff" style={{ marginRight: 4 }} />
+                      <Text style={s.weatherChipText}>Dew {weather.dewPoint}°C</Text>
+                    </View>
+                  )}
+                  <View style={[s.weatherChip, { marginLeft: 'auto' }]}>
+                    <Text style={s.weatherChipText}>Details</Text>
+                    <Ionicons name="chevron-forward" size={12} color="#fff" style={{ marginLeft: 3 }} />
+                  </View>
                 </View>
-              )}
-              <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.2)' }}>
-                <Ionicons name="leaf-outline" size={14} color="#fff" style={{ marginTop: 2, marginRight: 6 }} />
-                <Text style={s.advisoryBanner}>
-                  🌾 Advisory: Ideal conditions for Rabi crop fertilization. Monitor wheat leaves for rust flags.
-                </Text>
-              </View>
-            </LinearGradient>
 
-            {/* Mandi Prices (all crops, horizontally scrollable) */}
+                {/* 3-day forecast strip */}
+                {weather.forecast?.length > 0 && (
+                  <View style={s.weatherForecastRow}>
+                    {weather.forecast.map((f, i) => (
+                      <View key={i} style={s.weatherForecastChip}>
+                        <Text style={s.weatherForecastDay}>{fmtDay(f.date)}</Text>
+                        <Ionicons name={weatherIcon(f.wmo_code)} size={14} color="#fff" />
+                        <Text style={s.weatherForecastTemp}>
+                          ↑{f.max_temp_c != null ? Math.round(f.max_temp_c) : '—'}°
+                        </Text>
+                        <Text style={s.weatherForecastTemp}>
+                          ↓{f.min_temp_c != null ? Math.round(f.min_temp_c) : '—'}°
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
+                <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.2)' }}>
+                  <Ionicons name="leaf-outline" size={14} color="#fff" style={{ marginTop: 2, marginRight: 6 }} />
+                  <Text style={s.advisoryBanner}>
+                    🌾 Advisory: Ideal conditions for Rabi crop fertilization. Monitor wheat leaves for rust flags.
+                  </Text>
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            {/* Mandi Prices (responsive 3-column grid, page scrolls for more) */}
             <View style={s.sectionHeader}>
               <View style={[s.sectionAccent, { backgroundColor: accent.main }]} />
               <Text style={s.sectionTitle}>{t('mandi')}</Text>
@@ -905,41 +1144,52 @@ function AppShell() {
             </TouchableOpacity>
             <View style={[s.card, { paddingBottom: 12 }]}>
               {mandiPrices.length > 0 ? (
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={s.mandiScroller}
-                >
-                  {mandiPrices.map((item, idx) => (
-                    <View
-                      key={idx}
-                      style={[s.mandiCard, { backgroundColor: theme.surfaceAlt, borderColor: theme.border }]}
-                    >
-                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Text style={s.mandiCrop}>
-                          {t(`crops.${item.crop}`, { defaultValue: item.crop })}
-                          {item.tag ? ` (${item.tag})` : ''}
-                        </Text>
-                      </View>
-                      {item.market && (
-                        <Text style={[s.mandiMarket, { color: theme.textMuted }]} numberOfLines={1}>{item.market}</Text>
-                      )}
-                      <Text style={s.mandiPrice}>{item.price}</Text>
-                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        {item.change !== '—' && (
-                          <Ionicons
-                            name={item.change.startsWith('-') ? 'trending-down-outline' : 'trending-up-outline'}
-                            size={12}
-                            color={item.change.startsWith('-') ? theme.danger : theme.success}
-                          />
-                        )}
-                        <Text style={[s.mandiChange, { color: item.change === '—' ? theme.textMuted : (item.change.startsWith('-') ? theme.danger : theme.success) }]}>
-                          {item.change}
-                        </Text>
-                      </View>
+                <View>
+                  {/* 3x3 grid viewport: exactly 9 cards visible; internal scroll for the rest */}
+                  <ScrollView
+                    style={{ maxHeight: 3 * 108 + 2 * 10 }}
+                    showsVerticalScrollIndicator={false}
+                    nestedScrollEnabled
+                  >
+                    <View style={s.mandiGrid}>
+                      {mandiPrices.map((item, idx) => (
+                        <View
+                          key={idx}
+                          style={[s.mandiCard, { backgroundColor: theme.surfaceAlt, borderColor: theme.border }]}
+                        >
+                          <Text style={s.mandiCrop} numberOfLines={2}>
+                            {t(`crops.${item.crop}`, { defaultValue: item.crop })}
+                            {item.tag ? ` (${item.tag})` : ''}
+                          </Text>
+                          {item.market && (
+                            <Text style={[s.mandiMarket, { color: theme.textMuted }]} numberOfLines={1}>{item.market}</Text>
+                          )}
+                          <Text style={s.mandiPrice} numberOfLines={1}>{item.price}</Text>
+                          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 'auto' }}>
+                            {item.change !== '—' && (
+                              <Ionicons
+                                name={item.change.startsWith('-') ? 'trending-down-outline' : 'trending-up-outline'}
+                                size={12}
+                                color={item.change.startsWith('-') ? theme.danger : theme.success}
+                              />
+                            )}
+                            <Text style={[s.mandiChange, { color: item.change === '—' ? theme.textMuted : (item.change.startsWith('-') ? theme.danger : theme.success) }]}>
+                              {item.change}
+                            </Text>
+                          </View>
+                        </View>
+                      ))}
                     </View>
-                  ))}
-                </ScrollView>
+                  </ScrollView>
+                  {mandiPrices.length > 9 && (
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 8 }}>
+                      <Ionicons name="chevron-down" size={12} color={theme.textMuted} />
+                      <Text style={{ color: theme.textMuted, fontSize: 11 * fontScale, fontFamily: FONT.medium, marginLeft: 4 }}>
+                        {t('scrollForMore')} ({mandiPrices.length} crops)
+                      </Text>
+                    </View>
+                  )}
+                </View>
               ) : (
                 <Text style={{ color: theme.textMuted, fontSize: 13 * fontScale, fontFamily: FONT.medium }}>
                   {t('noPricesHint')}
@@ -1493,6 +1743,40 @@ function AppShell() {
               </Text>
             </View>
 
+            {/* AI Service (GCP) — endpoint & key come from mobile/.env (EXPO_PUBLIC_AI_API_URL / _API_KEY) */}
+            <View style={s.card}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
+                <Ionicons name="cloud-outline" size={16} color={accent.main} style={{ marginRight: 8 }} />
+                <Text style={[s.cardHeader, { borderBottomWidth: 0, marginBottom: 2, paddingBottom: 0 }]}>AI Service (GCP)</Text>
+                <View style={[s.aiStatusDot, { backgroundColor: !AI_CONFIGURED ? theme.placeholder : (aiStatus ? (aiStatus.ok ? '#22c55e' : '#ef4444') : '#f59e0b') }]} />
+              </View>
+              <Text style={{ fontSize: 12 * fontScale, color: theme.textMuted, fontFamily: FONT.medium }}>
+                Endpoint: {AI_BASE_URL_VALUE || 'not set — add EXPO_PUBLIC_AI_API_URL to mobile/.env'}
+              </Text>
+              <Text style={{ fontSize: 12 * fontScale, color: theme.textMuted, fontFamily: FONT.medium }}>
+                API key: {AI_CONFIGURED ? 'configured' : 'not set — add EXPO_PUBLIC_AI_API_KEY to mobile/.env'}
+              </Text>
+              {aiStatus && (
+                <Text style={{ fontSize: 12 * fontScale, color: aiStatus.ok ? '#22c55e' : theme.danger, fontFamily: FONT.medium, marginTop: 2 }}>
+                  {aiStatus.ok ? '● ' : '● '}{aiStatus.text}
+                </Text>
+              )}
+              <TouchableOpacity
+                style={[s.resetBtn, { borderColor: accent.main, marginTop: 8 }]}
+                onPress={checkAiConnection}
+                disabled={aiChecking}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  {aiChecking ? (
+                    <ActivityIndicator size="small" color={accent.main} style={{ marginRight: 8 }} />
+                  ) : (
+                    <Ionicons name="pulse-outline" size={17} color={accent.main} style={{ marginRight: 8 }} />
+                  )}
+                  <Text style={[s.resetBtnText, { color: accent.main }]}>Check connection</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
             {/* Model info */}
             <View style={s.card}>
               <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
@@ -1709,6 +1993,156 @@ function AppShell() {
               <Text style={{ color: '#fff', fontWeight: 'bold', fontFamily: FONT.bold }}>Close</Text>
             </TouchableOpacity>
           </View>
+        </View>
+      </Modal>
+
+      {/* Full-screen Weather Detail view */}
+      <Modal
+        visible={weatherDetailOpen}
+        animationType="slide"
+        onRequestClose={() => setWeatherDetailOpen(false)}
+      >
+        <View style={[s.container, { backgroundColor: theme.bg }]}>
+          <LinearGradient
+            colors={theme.weatherGradient}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={[s.weatherDetailHeader, { paddingTop: insets.top + 10 }]}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+              <TouchableOpacity
+                style={s.weatherBackBtn}
+                onPress={() => setWeatherDetailOpen(false)}
+                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              >
+                <Ionicons name="chevron-back" size={22} color="#fff" />
+              </TouchableOpacity>
+              <Text style={s.weatherDetailTitle}>{t('weatherTitle')}</Text>
+              <View style={{ width: 34 }} />
+            </View>
+
+            {/* Hero block */}
+            <View style={{ alignItems: 'center', paddingVertical: 18 }}>
+              <Ionicons name={weatherIcon(weather.wmoCode)} size={72} color="#fff" />
+              <Text style={s.weatherDetailTemp}>{weather.temp}°C</Text>
+              <Text style={s.weatherDetailCond}>{weather.condition}</Text>
+              <Text style={s.weatherDetailLoc}>{weather.location}</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10, gap: 8 }}>
+                {weather.feelsLike != null && (
+                  <View style={s.weatherDetailPill}>
+                    <Ionicons name="thermometer-outline" size={12} color="#fff" style={{ marginRight: 4 }} />
+                    <Text style={s.weatherDetailPillText}>{t('feelsLike')} {weather.feelsLike}°C</Text>
+                  </View>
+                )}
+                {weather.maxTemp != null && weather.minTemp != null && (
+                  <View style={s.weatherDetailPill}>
+                    <Text style={s.weatherDetailPillText}>↑{weather.maxTemp}° ↓{weather.minTemp}°</Text>
+                  </View>
+                )}
+              </View>
+            </View>
+          </LinearGradient>
+
+          <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 40 }} showsVerticalScrollIndicator={false}>
+            {/* Live status strip */}
+            <View style={[s.card, { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 12 }]}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={[s.liveBadge, { backgroundColor: accent.soft }]}>
+                  <Text style={[s.liveBadgeText, { color: accent.softText }]}>
+                    {weather.source === 'live' ? '● Live' : '● Static'}
+                  </Text>
+                </View>
+                <Text style={[s.weatherDetailUpdated, { color: theme.textMuted }]}>
+                  {t('weatherUpdated')} {fmtTime(weather.updatedAt)}
+                </Text>
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Ionicons name="refresh-outline" size={13} color={accent.softText} style={{ marginRight: 4 }} />
+                <Text style={{ color: accent.softText, fontSize: 11 * fontScale, fontFamily: FONT.semibold }}>5 min</Text>
+              </View>
+            </View>
+
+            {/* Stats grid */}
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10, marginTop: 4 }}>
+              <View style={s.sectionHeader}>
+                <View style={[s.sectionAccent, { backgroundColor: accent.main }]} />
+                <Text style={s.sectionTitle}>{t('weatherConditions')}</Text>
+              </View>
+            </View>
+            <View style={s.statGrid}>
+              {buildStatGrid().map((item, i) => (
+                <View key={i} style={{ width: '48%' }}>{item}</View>
+              ))}
+            </View>
+
+            {/* Sunrise / sunset */}
+            {(weather.sunrise || weather.sunset) && (
+              <View style={[s.card, { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 14 }]}>
+                <View style={{ alignItems: 'center' }}>
+                  <Ionicons name="sunny-outline" size={20} color={theme.warning} />
+                  <Text style={[s.statLabel, { color: theme.textMuted, marginTop: 4 }]}>{t('sunriseLabel')}</Text>
+                  <Text style={[s.statValue, { color: theme.text }]}>{fmtTime(weather.sunrise)}</Text>
+                </View>
+                <View style={{ width: 1, backgroundColor: theme.border }} />
+                <View style={{ alignItems: 'center' }}>
+                  <Ionicons name="moon-outline" size={20} color="#6366f1" />
+                  <Text style={[s.statLabel, { color: theme.textMuted, marginTop: 4 }]}>{t('sunsetLabel')}</Text>
+                  <Text style={[s.statValue, { color: theme.text }]}>{fmtTime(weather.sunset)}</Text>
+                </View>
+              </View>
+            )}
+
+            {/* 3-day forecast */}
+            {weather.forecast?.length > 0 && (
+              <View style={s.card}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                  <Ionicons name="calendar-outline" size={16} color={accent.main} style={{ marginRight: 8 }} />
+                  <Text style={[s.cardHeader, { borderBottomWidth: 0, marginBottom: 0, paddingBottom: 0 }]}>{t('forecastTitle')}</Text>
+                </View>
+                {weather.forecast.map((f, i) => (
+                  <View
+                    key={i}
+                    style={[s.forecastRow, i > 0 && { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: theme.border }]}
+                  >
+                    <Text style={[s.forecastDay, { color: theme.text }]}>
+                      {new Date(f.date + 'T00:00:00').toLocaleDateString(undefined, { weekday: 'short', day: 'numeric' })}
+                    </Text>
+                    <Ionicons name={weatherIcon(f.wmo_code)} size={18} color={accent.main} />
+                    <Text style={[s.forecastTemp, { color: theme.text }]}>
+                      ↑{f.max_temp_c != null ? Math.round(f.max_temp_c) : '—'}°  ↓{f.min_temp_c != null ? Math.round(f.min_temp_c) : '—'}°
+                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                      <Ionicons name="umbrella-outline" size={12} color="#3b82f6" style={{ marginRight: 4 }} />
+                      <Text style={{ color: theme.textMuted, fontSize: 12 * fontScale, fontFamily: FONT.medium }}>
+                        {f.rain_probability != null ? `${Math.round(f.rain_probability)}%` : '—'}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            )}
+
+            {/* Field advisory (farmer + crop guidance from live conditions) */}
+            <View style={s.card}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}>
+                <Ionicons name="leaf-outline" size={16} color={accent.main} style={{ marginRight: 8 }} />
+                <Text style={[s.cardHeader, { borderBottomWidth: 0, marginBottom: 0, paddingBottom: 0 }]}>{t('advisoryTitle')}</Text>
+              </View>
+              <Text style={[s.settingHint, { color: theme.textMuted, marginTop: 4 }]}>
+                {t('advisoryHint')}
+              </Text>
+              <View style={{ marginTop: 8, marginBottom: 4 }}>
+                {buildAdvisory().map((tip, i) => (
+                  <View key={i} style={[s.tipRow, i > 0 && { borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: theme.border }]}>
+                    <View style={[s.tipIcon, { backgroundColor: accent.soft }]}>
+                      {renderIcon(tip.icon, 15, accent.softText, undefined)}
+                    </View>
+                    <Text style={[s.tipText, { color: theme.text }]}>{t(tip.key, { ...tip.values })}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+          </ScrollView>
         </View>
       </Modal>
     </View>
@@ -1936,13 +2370,14 @@ const createStyles = (theme, accent, fontScale, themeMode) => {
       fontWeight: '600',
       fontFamily: FONT.semibold,
       color: theme.text,
-      fontSize: 14 * fs
+      fontSize: 12.5 * fs
     },
     mandiPrice: {
       fontWeight: 'bold',
       fontFamily: FONT.bold,
       color: theme.text,
-      fontSize: 14 * fs
+      fontSize: 13 * fs,
+      marginTop: 4
     },
     mandiChange: {
       fontSize: 11 * fs,
@@ -1966,15 +2401,17 @@ const createStyles = (theme, accent, fontScale, themeMode) => {
       fontFamily: FONT.bold,
       marginLeft: 4
     },
-    mandiScroller: {
-      paddingRight: 8
+    mandiGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 10,
     },
     mandiCard: {
-      width: 152,
+      width: '30%',
+      height: 108,
       borderRadius: 16,
       borderWidth: themeMode === 'highContrast' ? 2 : 1,
-      padding: 12,
-      marginRight: 10
+      padding: 10,
     },
     shortcutsGrid: {
       flexDirection: 'row',
@@ -2272,6 +2709,144 @@ const createStyles = (theme, accent, fontScale, themeMode) => {
       fontWeight: '600',
       fontFamily: FONT.semibold
     },
+    weatherChipRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      flexWrap: 'wrap',
+      gap: 8,
+      marginTop: 12
+    },
+    weatherChip: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'rgba(255,255,255,0.16)',
+      borderRadius: 14,
+      paddingVertical: 5,
+      paddingHorizontal: 10
+    },
+    weatherChipText: {
+      color: '#fff',
+      fontSize: 11 * fs,
+      fontWeight: '600',
+      fontFamily: FONT.semibold
+    },
+    weatherDetailHeader: {
+      paddingHorizontal: 18,
+      paddingBottom: 8
+    },
+    weatherBackBtn: {
+      width: 34,
+      height: 34,
+      borderRadius: 17,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(255,255,255,0.18)'
+    },
+    weatherDetailTitle: {
+      fontSize: 17 * fs,
+      fontWeight: '700',
+      fontFamily: FONT.bold,
+      color: '#fff',
+      letterSpacing: -0.3
+    },
+    weatherDetailTemp: {
+      fontSize: 52 * fs,
+      fontWeight: '800',
+      fontFamily: FONT.extrabold,
+      color: '#fff',
+      letterSpacing: -1
+    },
+    weatherDetailCond: {
+      color: '#fff',
+      fontSize: 15 * fs,
+      fontFamily: FONT.semibold,
+      marginTop: 4
+    },
+    weatherDetailLoc: {
+      color: 'rgba(255,255,255,0.85)',
+      fontSize: 13 * fs,
+      fontFamily: FONT.medium,
+      marginTop: 2
+    },
+    weatherDetailPill: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'rgba(255,255,255,0.16)',
+      borderRadius: 16,
+      paddingVertical: 6,
+      paddingHorizontal: 12
+    },
+    weatherDetailPillText: {
+      color: '#fff',
+      fontSize: 12 * fs,
+      fontWeight: '600',
+      fontFamily: FONT.semibold
+    },
+    weatherDetailUpdated: {
+      fontSize: 11 * fs,
+      fontFamily: FONT.medium,
+      marginLeft: 8
+    },
+    statGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 12
+    },
+    statItem: {
+      width: '100%',
+      borderRadius: 16,
+      borderWidth: themeMode === 'highContrast' ? 2 : 1,
+      padding: 12,
+      marginBottom: 12
+    },
+    statLabel: {
+      fontSize: 11 * fs,
+      fontWeight: '600',
+      fontFamily: FONT.semibold
+    },
+    statValue: {
+      fontSize: 17 * fs,
+      fontWeight: '700',
+      fontFamily: FONT.bold,
+      letterSpacing: -0.2
+    },
+    forecastRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingVertical: 12
+    },
+    forecastDay: {
+      fontSize: 13 * fs,
+      fontWeight: '600',
+      fontFamily: FONT.semibold,
+      width: '36%'
+    },
+    forecastTemp: {
+      fontSize: 13 * fs,
+      fontWeight: '600',
+      fontFamily: FONT.semibold
+    },
+    tipRow: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      paddingVertical: 10
+    },
+    tipIcon: {
+      width: 30,
+      height: 30,
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 10,
+      marginTop: 1
+    },
+    tipText: {
+      flex: 1,
+      fontSize: 13 * fs,
+      lineHeight: 19 * fs,
+      fontFamily: FONT.regular
+    },
     navBar: {
       height: 64,
       marginHorizontal: 14,
@@ -2407,6 +2982,12 @@ const createStyles = (theme, accent, fontScale, themeMode) => {
       padding: 13,
       alignItems: 'center',
       marginBottom: 30
+    },
+    aiStatusDot: {
+      width: 9,
+      height: 9,
+      borderRadius: 5,
+      marginLeft: 'auto'
     },
     resetBtnText: {
       fontWeight: '700',
