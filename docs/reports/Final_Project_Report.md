@@ -125,3 +125,18 @@ annotator. Maintenance and retraining pointers are in `docs/technical_doc.md` (�
 
 *Appendix A — Metric tables, per-class vision results, confusion matrices, and hyperparameter
 searches are in the respective Milestone-4/5 reports.*
+
+---
+
+## Team Review and Sign-Off
+
+
+| # | Team Member | Approved | Date |
+|:-:|-------------|:--------:|:----:|
+| 1 | Mahesh | Yes | 13 Aug 2026 |
+| 2 | Harliv | Yes | 13 Aug 2026 |
+| 3 | Lokesh | Yes | 13 Aug 2026 |
+| 4 | Aneeqa | Yes | 13 Aug 2026 |
+| 5 | Tanmay | Yes | 13 Aug 2026 |
+
+**Document:** FarmerVision — Milestone 5 Report · **Prepared:** 13 August 2026
