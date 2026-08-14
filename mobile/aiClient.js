@@ -8,10 +8,19 @@ const AI_API_KEY = process.env.EXPO_PUBLIC_AI_API_KEY || '';
 export const AI_CONFIGURED = Boolean(AI_BASE_URL && AI_API_KEY);
 export const AI_BASE_URL_VALUE = AI_BASE_URL;
 
+// Optional local proxy (the FastAPI backend's /ai routes). Set for web builds:
+// browsers block direct calls to the GCP deployment because it sends no CORS
+// headers, so web requests go through the local backend instead.
+let AI_PROXY_URL = '';
+
+export function setAiProxyUrl(url) {
+  AI_PROXY_URL = url ? url.replace(/\/+$/, '') : '';
+}
+
 async function request(path, { method = 'POST', body, headers = {}, formData } = {}) {
   const opts = {
     method,
-    headers: { 'X-API-Key': AI_API_KEY, ...headers },
+    headers: { ...(AI_PROXY_URL ? {} : { 'X-API-Key': AI_API_KEY }), ...headers },
   };
   if (formData) {
     opts.body = formData;
@@ -19,7 +28,8 @@ async function request(path, { method = 'POST', body, headers = {}, formData } =
     opts.headers['Content-Type'] = 'application/json';
     opts.body = JSON.stringify(body);
   }
-  const res = await fetch(`${AI_BASE_URL}${path}`, opts);
+  const base = AI_PROXY_URL || AI_BASE_URL;
+  const res = await fetch(`${base}${path}`, opts);
   if (!res.ok) {
     let detail = `HTTP ${res.status}`;
     try {

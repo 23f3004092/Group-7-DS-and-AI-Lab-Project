@@ -1565,3 +1565,86 @@
 {"_e":"metro:bundling:progress","_t":1786711457522,"id":"t","progress":0,"total":1,"current":0}
 {"_e":"metro:bundling:done","_t":1786711457566,"id":"t","total":1,"ms":698.75816}
 {"_e":"metro:client_log","_t":1786711458892,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:bundling:started","_t":1786713814266,"id":"v","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786713814266,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814271,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814393,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814451,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814551,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814651,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814753,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814853,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713814953,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786713815101,"id":"v","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786713815216,"id":"v","total":1,"ms":950.035528}
+{"_e":"metro:client_log","_t":1786713818199,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:bundling:started","_t":1786714178935,"id":"x","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786714178936,"id":"x","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786714178998,"id":"x","total":1,"ms":62.166232}
+{"_e":"metro:client_log","_t":1786714180107,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:bundling:started","_t":1786714281592,"id":"z","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786714281592,"id":"z","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786714281634,"id":"z","total":1,"ms":41.889048}
+{"_e":"metro:client_log","_t":1786714283321,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:bundling:started","_t":1786714802698,"id":"11","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786714802699,"id":"11","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786714802737,"id":"11","total":1,"ms":38.559578}
+{"_e":"metro:client_log","_t":1786714803104,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786714803107,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786714803116,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1786714803126,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:bundling:started","_t":1786714803157,"id":"12","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1786714803157,"id":"12","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786714803158,"id":"12","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786714803201,"id":"12","total":1,"ms":43.89498}
+{"_e":"metro:bundling:started","_t":1786715389522,"id":"1k","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786715389522,"id":"1k","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786715389566,"id":"1k","total":1,"ms":44.225376}
+{"_e":"metro:client_log","_t":1786715389968,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786715389969,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786715389980,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1786715389990,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:bundling:started","_t":1786715390026,"id":"1p","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1786715390027,"id":"1p","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786715390033,"id":"1p","total":1,"ms":5.997416}
+{"_e":"metro:bundling:started","_t":1786715587417,"id":"23","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786715587417,"id":"23","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786715587482,"id":"23","total":1,"ms":64.197795}
+{"_e":"metro:client_log","_t":1786715588199,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786715588199,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786715588220,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1786715588245,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:bundling:started","_t":1786715588396,"id":"28","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1786715588397,"id":"28","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786715588415,"id":"28","total":1,"ms":18.421519}
+{"_e":"metro:client_log","_t":1786715641556,"level":"warn","data":["AI classify failed, answering without suggestion:","[TypeError: Failed to fetch]"]}
+{"_e":"metro:client_log","_t":1786715641865,"level":"warn","data":["AI service failed, falling back to local backend:","[TypeError: Failed to fetch]"]}
+{"_e":"metro:client_log","_t":1786715692361,"level":"warn","data":["AI classify failed, answering without suggestion:","[TypeError: Failed to fetch]"]}
+{"_e":"metro:client_log","_t":1786715692737,"level":"warn","data":["AI service failed, falling back to local backend:","[TypeError: Failed to fetch]"]}
+{"_e":"metro:bundling:started","_t":1786716085795,"id":"2n","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786716085795,"id":"2n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786716085796,"id":"2n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786716085897,"id":"2n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786716087404,"id":"2n","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786716087498,"id":"2n","total":1,"ms":1702.311727}
+{"_e":"metro:client_log","_t":1786716088760,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:bundling:started","_t":1786716268680,"id":"2p","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786716268680,"id":"2p","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786716268742,"id":"2p","total":1,"ms":62.301324}
+{"_e":"metro:client_log","_t":1786716269508,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786716269508,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786716269531,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1786716269549,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:bundling:started","_t":1786716269621,"id":"2q","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1786716269621,"id":"2q","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786716269631,"id":"2q","total":1,"ms":10.15602}
+{"_e":"metro:bundling:failed","_t":1786724478876,"id":null,"message":"SyntaxError: /home/tanmay-sahu/Desktop/Rooted in Truth/mobile/App.js: Expected corresponding JSX closing tag for <KeyboardAvoidingView>. (2331:4)\n\n  2329 |         </View>\n  2330 |       </Modal>\n> 2331 |     </View>\n       |     ^\n  2332 |   );\n  2333 | }\n  2334 |","importStack":null,"filename":"App.js","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1786724478886,"level":"error","data":["[TransformError: SyntaxError: /home/tanmay-sahu/Desktop/Rooted in Truth/mobile/App.js: Expected corresponding JSX closing tag for <KeyboardAvoidingView>. (2331:4)\n\n  2329 |         </View>\n  2330 |       </Modal>\n> 2331 |     </View>\n       |     ^\n  2332 |   );\n  2333 | }\n  2334 |]"]}
+{"_e":"metro:bundling:failed","_t":1786724483991,"id":null,"message":"SyntaxError: /home/tanmay-sahu/Desktop/Rooted in Truth/mobile/App.js: Expected corresponding JSX closing tag for <KeyboardAvoidingView>. (2331:4)\n\n  2329 |         </View>\n  2330 |       </Modal>\n> 2331 |     </View>\n       |     ^\n  2332 |   );\n  2333 | }\n  2334 |","importStack":null,"filename":"App.js","targetModuleName":null,"originModulePath":null}
+{"_e":"metro:client_log","_t":1786724483995,"level":"error","data":["[TransformError: SyntaxError: /home/tanmay-sahu/Desktop/Rooted in Truth/mobile/App.js: Expected corresponding JSX closing tag for <KeyboardAvoidingView>. (2331:4)\n\n  2329 |         </View>\n  2330 |       </Modal>\n> 2331 |     </View>\n       |     ^\n  2332 |   );\n  2333 | }\n  2334 |]"]}
+{"_e":"metro:bundling:started","_t":1786724668992,"id":"3b","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786724668993,"id":"3b","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786724668995,"id":"3b","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1786724669627,"id":"3b","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786724669664,"id":"3b","total":1,"ms":671.829389}
+{"_e":"metro:client_log","_t":1786724671753,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}

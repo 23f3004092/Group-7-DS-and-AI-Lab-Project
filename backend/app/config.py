@@ -29,6 +29,11 @@ class Settings(BaseSettings):
     
     # Cloud AI Model Credentials
     GEMINI_API_KEY: str = os.environ.get("GEMINI_API_KEY", "")
+
+    # GCP-deployed FarmerVision AI service (RAG + vision, see API_SPEC.md).
+    # Used by the /ai proxy so browsers can reach it despite missing CORS headers.
+    AI_API_URL: str = Field("", validation_alias=AliasChoices("AI_API_URL"))
+    AI_API_KEY: str = Field("", validation_alias=AliasChoices("AI_API_KEY"))
     
     # Mandi (market prices) API — data.gov.in Agmarknet.
     # Accepts the key under either name (docs use MANDI_API_KEY; the project's

@@ -5,7 +5,7 @@ import os
 
 from .database import engine, Base
 from .config import settings
-from .routers import query, admin, mcp, mandi, weather
+from .routers import query, admin, mcp, mandi, weather, ai_proxy
 from .services.qdrant_service import qdrant_service
 from .services.yield_service import yield_service
 from .services.mandi_service import mandi_service
@@ -41,6 +41,7 @@ app.include_router(admin.router)
 app.include_router(mcp.router)
 app.include_router(mandi.router)
 app.include_router(weather.router)
+app.include_router(ai_proxy.router)
 
 @app.get("/health")
 def health_check():

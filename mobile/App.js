@@ -14,12 +14,14 @@ import {
   FlatList,
   Platform,
   RefreshControl,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import Storage from 'expo-sqlite/kv-store';
 import * as Location from 'expo-location';
+import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import MaterialCommunityIcons from '@react-native-vector-icons/material-design-icons';
@@ -36,9 +38,11 @@ import {
   AI_CONFIGURED,
   AI_BASE_URL_VALUE,
   ask as aiAsk,
+  classify as aiClassify,
   diagnose as aiDiagnose,
   checkHealth as aiCheckHealth,
   normalizeSources,
+  setAiProxyUrl,
 } from './aiClient';
 
 // Default API Server. In dev, point at the machine running the Expo/Metro bundler
@@ -342,100 +346,164 @@ function AppShell() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Web browsers block direct calls to the GCP AI service (no CORS headers on the
+  // deployment), so on web route AI traffic through the local backend's /ai proxy.
+  // Mobile keeps calling GCP directly.
+  useEffect(() => {
+    setAiProxyUrl(Platform.OS === 'web' ? `${apiUrl}/ai` : '');
+  }, [apiUrl]);
+
+  // --- Data helpers (shared by the poll effects and the chat live_data assembly) ---
+
+  const rowsFromMandiData = (data) => {
+    const rows = (data.prices || []).map(p => ({
+      crop: p.crop,
+      tag: p.variety === 'MSP Reference'
+        ? 'MSP'
+        : (p.variety && p.variety !== '—' ? p.variety : null),
+      market: p.market && p.market !== '—' ? p.market : null,
+      price: p.modal_price != null
+        ? `₹${Math.round(p.modal_price).toLocaleString('en-IN')}/qtl`
+        : '—',
+      change: p.change_per_quintal != null
+        ? `${p.change_per_quintal >= 0 ? '+' : '-'}₹${Math.round(Math.abs(p.change_per_quintal))}`
+        : '—',
+    }));
+    // One row per crop (first = latest price) so every available crop is shown
+    const seenCrops = new Set();
+    return rows.filter(r => {
+      const key = r.crop.toLowerCase();
+      if (seenCrops.has(key)) return false;
+      seenCrops.add(key);
+      return true;
+    });
+  };
+
+  // Fetch fresh mandi rows for the selected location; returns rows or null
+  const fetchMandiRows = async (apply = true) => {
+    if (!apiUrl || (!locationInfo.state && !locationInfo.district)) return null;
+    try {
+      const params = new URLSearchParams({
+        state: locationInfo.state || 'Uttar Pradesh',
+        district: locationInfo.district || '',
+      });
+      const res = await fetch(`${apiUrl}/api/mandi/prices?${params.toString()}`);
+      if (!res.ok) throw new Error('bad mandi response');
+      const data = await res.json();
+      if (!data.prices?.length) return null;
+      const rows = rowsFromMandiData(data);
+      if (apply) {
+        setMandiPrices(rows);
+        setMandiSource(data.source);
+      }
+      return rows;
+    } catch (e) {
+      // Server unreachable or rate-limited -> keep the static MSP fallback list
+      return null;
+    }
+  };
+
+  const weatherObjectFromApi = (data) => ({
+    temp: Math.round(data.temperature_c),
+    condition: data.condition || '—',
+    location: data.location || ([locationInfo.district, locationInfo.state].filter(Boolean).join(', ') || 'Uttar Pradesh'),
+    rain: data.precipitation_mm != null ? `${data.precipitation_mm} mm` : '—',
+    humidity: data.humidity != null ? `${data.humidity}%` : null,
+    forecast: data.forecast || [],
+    source: data.source,
+    feelsLike: data.apparent_temperature_c != null ? Math.round(data.apparent_temperature_c) : null,
+    maxTemp: data.max_temp_c != null ? Math.round(data.max_temp_c) : null,
+    minTemp: data.min_temp_c != null ? Math.round(data.min_temp_c) : null,
+    rainProb: data.rain_probability != null ? Math.round(data.rain_probability) : null,
+    windKmh: data.wind_speed_kmh != null ? Math.round(data.wind_speed_kmh) : null,
+    windGusts: data.wind_gusts_kmh != null ? Math.round(data.wind_gusts_kmh) : null,
+    windDirLabel: data.wind_direction_label || null,
+    windDirDeg: data.wind_direction_deg != null ? Math.round(data.wind_direction_deg) : null,
+    pressure: data.pressure_hpa != null ? Math.round(data.pressure_hpa) : null,
+    dewPoint: data.dew_point_c != null ? Math.round(data.dew_point_c) : null,
+    cloud: data.cloud_cover_pct != null ? Math.round(data.cloud_cover_pct) : null,
+    uvIndex: data.uv_index != null ? Math.round(data.uv_index) : null,
+    wmoCode: data.wmo_code != null ? data.wmo_code : null,
+    sunrise: data.sunrise || null,
+    sunset: data.sunset || null,
+    updatedAt: data.updated_at || null,
+  });
+
+  // Fetch fresh weather snapshot (GPS coords preferred, else district city); returns object or null
+  const fetchWeatherSnapshot = async (apply = true) => {
+    if (!apiUrl) return null;
+    try {
+      const params = new URLSearchParams();
+      if (locationInfo.lat != null && locationInfo.lon != null) {
+        params.set('lat', locationInfo.lat);
+        params.set('lon', locationInfo.lon);
+      } else if (locationInfo.district) {
+        params.set('city', locationInfo.district);
+      }
+      if (!params.toString()) return null;
+      const res = await fetch(`${apiUrl}/api/weather/current?${params.toString()}`);
+      if (!res.ok) throw new Error('bad weather response');
+      const data = await res.json();
+      if (data.temperature_c == null) return null;
+      const w = weatherObjectFromApi(data);
+      if (apply) setWeather(w);
+      return w;
+    } catch (e) {
+      // Server unreachable -> keep the static default weather card
+      return null;
+    }
+  };
+
+  // Assemble /query live_data from what /classify suggested. When the held
+  // snapshot isn't live yet, refresh it from the backend first.
+  const buildLiveData = async (suggestedExternal) => {
+    const liveData = {};
+    const want = (key) => !Array.isArray(suggestedExternal) || suggestedExternal.includes(key);
+
+    if (want('mandi_prices')) {
+      let rows = mandiSource === 'live' ? mandiPrices : null;
+      if (!rows) rows = await fetchMandiRows();
+      if (rows?.length) {
+        liveData.mandi_prices = rows.map(p => `${p.crop}: ${p.price}`).join('; ');
+      }
+    }
+    if (want('weather')) {
+      let w = weather.source === 'live' ? weather : null;
+      if (!w) w = await fetchWeatherSnapshot();
+      if (w && w.temp != null) {
+        liveData.weather = {
+          temp_c: w.temp,
+          condition: w.condition,
+          humidity_pct: w.humidity != null ? parseInt(w.humidity, 10) : null,
+          rain_mm: w.rain !== '—' && w.rain != null ? parseFloat(w.rain) : null,
+          wind_kmh: w.windKmh,
+          max_temp_c: w.maxTemp,
+          min_temp_c: w.minTemp,
+          forecast_3d: Array.isArray(w.forecast) && w.forecast.length ? w.forecast : undefined,
+        };
+      }
+    }
+    return Object.keys(liveData).length ? liveData : undefined;
+  };
+
   // Live weather from backend /api/weather/current (GPS coords preferred, else district city)
   useEffect(() => {
     if (!apiUrl) return;
     let cancelled = false;
     (async () => {
-      try {
-        const params = new URLSearchParams();
-        if (locationInfo.lat != null && locationInfo.lon != null) {
-          params.set('lat', locationInfo.lat);
-          params.set('lon', locationInfo.lon);
-        } else if (locationInfo.district) {
-          params.set('city', locationInfo.district);
-        }
-        if (!params.toString()) return;
-        const res = await fetch(`${apiUrl}/api/weather/current?${params.toString()}`);
-        if (!res.ok) throw new Error('bad weather response');
-        const data = await res.json();
-        if (cancelled || data.temperature_c == null) return;
-        setWeather({
-          temp: Math.round(data.temperature_c),
-          condition: data.condition || '—',
-          location: data.location || ([locationInfo.district, locationInfo.state].filter(Boolean).join(', ') || 'Uttar Pradesh'),
-          rain: data.precipitation_mm != null ? `${data.precipitation_mm} mm` : '—',
-          humidity: data.humidity != null ? `${data.humidity}%` : null,
-          forecast: data.forecast || [],
-          source: data.source,
-          feelsLike: data.apparent_temperature_c != null ? Math.round(data.apparent_temperature_c) : null,
-          maxTemp: data.max_temp_c != null ? Math.round(data.max_temp_c) : null,
-          minTemp: data.min_temp_c != null ? Math.round(data.min_temp_c) : null,
-          rainProb: data.rain_probability != null ? Math.round(data.rain_probability) : null,
-          windKmh: data.wind_speed_kmh != null ? Math.round(data.wind_speed_kmh) : null,
-          windGusts: data.wind_gusts_kmh != null ? Math.round(data.wind_gusts_kmh) : null,
-          windDirLabel: data.wind_direction_label || null,
-          windDirDeg: data.wind_direction_deg != null ? Math.round(data.wind_direction_deg) : null,
-          pressure: data.pressure_hpa != null ? Math.round(data.pressure_hpa) : null,
-          dewPoint: data.dew_point_c != null ? Math.round(data.dew_point_c) : null,
-          cloud: data.cloud_cover_pct != null ? Math.round(data.cloud_cover_pct) : null,
-          uvIndex: data.uv_index != null ? Math.round(data.uv_index) : null,
-          wmoCode: data.wmo_code != null ? data.wmo_code : null,
-          sunrise: data.sunrise || null,
-          sunset: data.sunset || null,
-          updatedAt: data.updated_at || null,
-        });
-      } catch (e) {
-        // Server unreachable -> keep the static default weather card
-      }
+      const w = await fetchWeatherSnapshot(!cancelled);
+      if (!cancelled && w) setWeather(w);
     })();
     return () => { cancelled = true; };
   }, [apiUrl, locationInfo, reloadKey]);
 
   // Live mandi prices from backend /api/mandi/prices (falls back to static MSP list)
   useEffect(() => {
-    // Until a location is set, show generic MSP reference (don't imply any district)
-    if (!apiUrl || (!locationInfo.state && !locationInfo.district)) return;
+    if (!apiUrl) return;
     let cancelled = false;
     (async () => {
-      try {
-        const params = new URLSearchParams({
-          state: locationInfo.state || 'Uttar Pradesh',
-          district: locationInfo.district || '',
-        });
-        const res = await fetch(`${apiUrl}/api/mandi/prices?${params.toString()}`);
-        if (!res.ok) throw new Error('bad mandi response');
-        const data = await res.json();
-        if (cancelled || !data.prices?.length) return;
-
-        const rows = data.prices.map(p => ({
-          crop: p.crop,
-          tag: p.variety === 'MSP Reference'
-            ? 'MSP'
-            : (p.variety && p.variety !== '—' ? p.variety : null),
-          market: p.market && p.market !== '—' ? p.market : null,
-          price: p.modal_price != null
-            ? `₹${Math.round(p.modal_price).toLocaleString('en-IN')}/qtl`
-            : '—',
-          change: p.change_per_quintal != null
-            ? `${p.change_per_quintal >= 0 ? '+' : '-'}₹${Math.round(Math.abs(p.change_per_quintal))}`
-            : '—',
-        }));
-
-        // One row per crop (first = latest price) so every available crop is shown
-        const seenCrops = new Set();
-        const deduped = rows.filter(r => {
-          const key = r.crop.toLowerCase();
-          if (seenCrops.has(key)) return false;
-          seenCrops.add(key);
-          return true;
-        });
-
-        setMandiPrices(deduped);
-        setMandiSource(data.source);
-      } catch (e) {
-        // Server unreachable or rate-limited -> keep the static MSP fallback list
-      }
+      const rows = await fetchMandiRows(!cancelled);
+      if (!cancelled && rows?.length) setMandiPrices(rows);
     })();
     return () => { cancelled = true; };
   }, [apiUrl, locationInfo, reloadKey]);
@@ -616,6 +684,58 @@ function AppShell() {
   const chatScrollRef = useRef(null);
   // One GCP AI conversation session per app run (server remembers turn context)
   const chatSessionRef = useRef(`fv-mobile-${Date.now()}`);
+  // Optional leaf photo attached to a chat turn (drives the multimodal /diagnose path)
+  const [chatImage, setChatImage] = useState(null); // { uri, name }
+
+  // Real device pickers (camera app / gallery app) via expo-image-picker.
+  // Shared by chat attach and the leaf scanner; caller supplies the image setter.
+  const captureFromCamera = async (setImage) => {
+    const perm = await ImagePicker.requestCameraPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert('Permission required', 'Allow camera access to take a leaf photo.');
+      return false;
+    }
+    const result = await ImagePicker.launchCameraAsync({ mediaTypes: ['images'], quality: 0.7 });
+    if (!result.canceled && result.assets?.length) {
+      const a = result.assets[0];
+      setImage({ uri: a.uri, name: a.fileName || `leaf_${Date.now()}.jpg` });
+      return true;
+    }
+    return false;
+  };
+
+  const pickFromLibrary = async (setImage) => {
+    const perm = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!perm.granted) {
+      Alert.alert('Permission required', 'Allow photo library access to choose a leaf photo.');
+      return false;
+    }
+    const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], quality: 0.7 });
+    if (!result.canceled && result.assets?.length) {
+      const a = result.assets[0];
+      setImage({ uri: a.uri, name: a.fileName || 'leaf.jpg' });
+      return true;
+    }
+    return false;
+  };
+
+  const chooseChatPhoto = () => pickFromLibrary(setChatImage);
+
+  const takeChatPhoto = () => captureFromCamera(setChatImage);
+
+  const pickChatImage = () => {
+    // react-native-web's Alert supports a single button, so open the library directly there
+    if (Platform.OS === 'web') { chooseChatPhoto(); return; }
+    Alert.alert(
+      'Attach leaf photo',
+      'Add a photo so the AI can diagnose the disease alongside your question.',
+      [
+        { text: 'Camera', onPress: takeChatPhoto },
+        { text: 'Photo Library', onPress: chooseChatPhoto },
+        { text: 'Cancel', style: 'cancel' },
+      ]
+    );
+  };
 
   // AI service connection state (Settings card)
   const [aiStatus, setAiStatus] = useState(null); // null | {ok, text}
@@ -665,37 +785,48 @@ function AppShell() {
   };
 
   const handleSendChat = async () => {
-    if (!chatInput.trim()) return;
+    if (!chatInput.trim() && !chatImage) return;
 
-    const userText = chatInput;
-    const nextMsgId = Date.now();
+    const userText = chatInput.trim();
+    const attachedImage = chatImage;
 
-    setChatMessages(prev => [...prev, { id: nextMsgId, text: userText, isUser: true }]);
+    setChatMessages(prev => [...prev, { id: Date.now(), text: userText, isUser: true, image: attachedImage || undefined }]);
     setChatInput('');
+    setChatImage(null);
     setIsTyping(true);
 
     try {
-      // 1) GCP AI service — grounded RAG with guardrails + multi-turn (API_SPEC.md)
+      // 1) GCP AI service — grounded RAG with guardrails + multi-turn (API_SPEC.md).
+      //    Text only -> /query; photo (± question) -> /diagnose (multimodal).
       if (AI_CONFIGURED) {
         try {
-          const liveData = {};
-          if (mandiSource === 'live' && mandiPrices.length) {
-            liveData.mandi_prices = mandiPrices
-              .map(p => `${p.crop}: ${p.price}`)
-              .join('; ');
+          let data;
+          if (attachedImage) {
+            data = await aiDiagnose({
+              uri: attachedImage.uri,
+              name: attachedImage.name,
+              question: userText || undefined,
+            });
+          } else {
+            // Classify intent + detect which external data (mandi / weather) the answer needs
+            let suggestedExternal = null;
+            let aiIntent;
+            try {
+              const cl = await aiClassify(userText);
+              if (cl && !cl.blocked) {
+                aiIntent = cl.retrieval_intent || undefined;
+                suggestedExternal = cl.suggested_external || [];
+              }
+            } catch (clErr) {
+              console.warn('AI classify failed, answering without suggestion:', clErr);
+            }
+            const liveData = await buildLiveData(suggestedExternal);
+            data = await aiAsk(userText, {
+              sessionId: chatSessionRef.current,
+              intent: aiIntent,
+              liveData,
+            });
           }
-          if (weather.source === 'live' && weather.temp != null) {
-            liveData.weather = {
-              temp_c: weather.temp,
-              condition: weather.condition,
-              humidity: weather.humidity,
-              rain: weather.rain,
-            };
-          }
-          const data = await aiAsk(userText, {
-            sessionId: chatSessionRef.current,
-            liveData: Object.keys(liveData).length ? liveData : undefined,
-          });
           const text = data.answer || data.message || 'No answer received from AI service.';
           setChatMessages(prev => [...prev, {
             id: Date.now(),
@@ -712,6 +843,37 @@ function AppShell() {
       }
 
       // 2) Fallback: local FastAPI backend proxy
+      if (attachedImage) {
+        const formData = new FormData();
+        formData.append('file', {
+          uri: attachedImage.uri,
+          name: attachedImage.name,
+          type: /\.png$/i.test(attachedImage.name) ? 'image/png' : 'image/jpeg',
+        });
+        const res = await fetch(`${apiUrl}/api/query/image`, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setChatMessages(prev => [...prev, {
+            id: Date.now(),
+            text: data.answer || 'Diagnosis received.',
+            isUser: false,
+            sources: data.sources,
+            tier: data.tier,
+          }]);
+        } else {
+          setChatMessages(prev => [...prev, {
+            id: Date.now(),
+            text: 'Diagnosis Failed: server returned an error.',
+            isUser: false,
+          }]);
+        }
+        return;
+      }
+
       const res = await fetch(`${apiUrl}/api/query/text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -747,20 +909,13 @@ function AppShell() {
     }
   };
 
-  // Simulated leaf photo loading to prevent file system errors in web environments
-  const selectMockImage = (type) => {
-    if (type === 'camera') {
-      setSelectedImage({
-        name: 'wheat_rust_infected.jpg',
-        uri: 'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400'
-      });
-    } else {
-      setSelectedImage({
-        name: 'rice_spot_blight.jpg',
-        uri: 'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=400'
-      });
-    }
-    setDiagnosisResult(null);
+  // Leaf photo pickers — open the device's camera / gallery app directly
+  const pickScannerPhotoFromCamera = () => {
+    captureFromCamera((img) => { setSelectedImage(img); setDiagnosisResult(null); });
+  };
+
+  const pickScannerPhotoFromLibrary = () => {
+    pickFromLibrary((img) => { setSelectedImage(img); setDiagnosisResult(null); });
   };
 
   const handleDiagnose = async () => {
@@ -984,7 +1139,10 @@ function AppShell() {
   }
 
   return (
-    <View style={[s.container, { backgroundColor: theme.bg }]}>
+    <KeyboardAvoidingView
+      style={[s.container, { backgroundColor: theme.bg }]}
+      behavior={Platform.OS === 'ios' ? 'padding' : Platform.OS === 'android' ? 'height' : undefined}
+    >
       <StatusBar style={theme.statusBar} />
 
       {/* Header bar (padded below the clock/battery status bar area) */}
@@ -1259,7 +1417,7 @@ function AppShell() {
               <View style={s.photoActionsRow}>
                 <TouchableOpacity
                   style={[s.photoBtn, { backgroundColor: theme.surfaceAlt, borderColor: theme.border, borderWidth: themeMode === 'highContrast' ? 2 : 1 }]}
-                  onPress={() => selectMockImage('camera')}
+                  onPress={pickScannerPhotoFromCamera}
                 >
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Ionicons name="camera-outline" size={15} color={accent.softText} style={{ marginRight: 6 }} />
@@ -1268,7 +1426,7 @@ function AppShell() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[s.photoBtn, { backgroundColor: theme.surfaceAlt, borderColor: theme.border, borderWidth: themeMode === 'highContrast' ? 2 : 1 }]}
-                  onPress={() => selectMockImage('gallery')}
+                  onPress={pickScannerPhotoFromLibrary}
                 >
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Ionicons name="images-outline" size={15} color={accent.softText} style={{ marginRight: 6 }} />
@@ -1371,9 +1529,18 @@ function AppShell() {
                         : [s.botBubble, { backgroundColor: theme.surface, borderColor: theme.border }],
                     ]}
                   >
-                    <Text style={[s.chatText, { color: msg.isUser ? '#fff' : theme.text }]}>
-                      {msg.text}
-                    </Text>
+                    {msg.image && (
+                      <Image
+                        source={{ uri: msg.image.uri }}
+                        style={[s.chatImageThumb, { backgroundColor: theme.surfaceAlt }]}
+                        resizeMode="cover"
+                      />
+                    )}
+                    {msg.text ? (
+                      <Text style={[s.chatText, { color: msg.isUser ? '#fff' : theme.text }]}>
+                        {msg.text}
+                      </Text>
+                    ) : null}
 
                     {/* Citation chips */}
                     {!msg.isUser && msg.sources?.length > 0 && (
@@ -1439,10 +1606,26 @@ function AppShell() {
             </View>
 
             {/* Chat Input panel */}
+            {chatImage && (
+              <View style={[s.chatAttachRow, { backgroundColor: theme.surfaceAlt, borderTopColor: theme.border }]}>
+                <Image source={{ uri: chatImage.uri }} style={s.chatAttachThumb} resizeMode="cover" />
+                <Text numberOfLines={1} style={[s.chatAttachName, { color: theme.textMuted }]}>{chatImage.name}</Text>
+                <TouchableOpacity onPress={() => setChatImage(null)} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+                  <Ionicons name="close-circle" size={20} color={theme.textMuted} />
+                </TouchableOpacity>
+              </View>
+            )}
             <View style={[s.inputBar, { backgroundColor: theme.surface, borderTopColor: theme.border }]}>
+              <TouchableOpacity
+                style={[s.attachBtn, { backgroundColor: chatImage ? accent.soft : 'transparent' }]}
+                onPress={pickChatImage}
+                hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              >
+                <Ionicons name="image-outline" size={21} color={chatImage ? accent.softText : theme.textMuted} />
+              </TouchableOpacity>
               <TextInput
                 style={[s.chatTextInput, { backgroundColor: theme.inputBg, color: theme.text }]}
-                placeholder="Ask about fertilizer, pesticides, crop diseases..."
+                placeholder={chatImage ? 'Ask about this leaf (optional)...' : "Ask about fertilizer, pesticides, crop diseases..."}
                 placeholderTextColor={theme.placeholder}
                 value={chatInput}
                 onChangeText={setChatInput}
@@ -2145,7 +2328,7 @@ function AppShell() {
           </ScrollView>
         </View>
       </Modal>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -2630,6 +2813,38 @@ const createStyles = (theme, accent, fontScale, themeMode) => {
       padding: 12,
       borderTopWidth: 1,
       alignItems: 'center'
+    },
+    attachBtn: {
+      width: 38,
+      height: 38,
+      borderRadius: 19,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 8
+    },
+    chatAttachRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderTopWidth: 1
+    },
+    chatAttachThumb: {
+      width: 44,
+      height: 44,
+      borderRadius: 8
+    },
+    chatAttachName: {
+      flex: 1,
+      fontSize: 12 * fs,
+      fontFamily: FONT.medium,
+      marginHorizontal: 10
+    },
+    chatImageThumb: {
+      width: 150,
+      height: 150,
+      borderRadius: 12,
+      marginBottom: 6
     },
     chatTextInput: {
       flex: 1,

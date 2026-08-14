@@ -31,7 +31,15 @@
       "expo-localization",
       "expo-font",
       "@react-native-vector-icons/ionicons",
-      "@react-native-vector-icons/material-design-icons"
+      "@react-native-vector-icons/material-design-icons",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow FarmerVision to access your photos to diagnose crop diseases.",
+          "cameraPermission": "Allow FarmerVision to use your camera to photograph crop diseases for diagnosis.",
+          "microphonePermission": false
+        }
+      ]
     ]
   }
 }
