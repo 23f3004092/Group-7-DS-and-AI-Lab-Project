@@ -89,5 +89,4 @@ estimating expected yield for your plot.
 |---|---|
 | `![Yield](images/yield.png)` | `![Settings](images/settings.png)` |
 
-> Add screenshots under `docs/images/` and update the links above. A short demo video (10–20 min)
-> can be linked from the root `README.md`.
+
