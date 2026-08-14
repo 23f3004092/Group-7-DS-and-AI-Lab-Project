@@ -28,7 +28,9 @@
           "locationWhenInUsePermission": "Allow FarmerVision to use your location to show mandi prices and advisory for your district."
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      "expo-font",
+      "@react-native-vector-icons/ionicons"
     ]
   }
 }
