@@ -79,15 +79,22 @@ estimating expected yield for your plot.
 
 ## Screenshots
 
-*(Placeholders — replace with actual app screenshots.)*
+<div align="center">
+  <img src="./images/home.png" style="height:500px; width:auto;" alt="Home">
+  <img src="./images/scanner.png" style="height:500px; width:auto;" alt="Leaf Scanner">
+  <img src="./images/chat.png" style="height:500px; width:auto;" alt="Advisor Chat">
+</div>
+<p align="center">
+  <b>Home</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Leaf Scanner</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Advisor Chat</b>
+</p>
 
-| Home | Leaf Scanner | Advisor Chat |
-|---|---|---|
-| `![Home](images/home.png)` | `![Leaf Scanner](images/scanner.png)` | `![Advisor Chat](images/chat.png)` |
+<br>
 
-| Yield | Settings |
-|---|---|
-| `![Yield](images/yield.png)` | `![Settings](images/settings.png)` |
+<div align="center">
+  <img src="./images/yield.png" style="height:500px; width:auto;" alt="Yield">
+  <img src="./images/settings.png" style="height:500px; width:auto;" alt="Settings">
+</div>
+<p align="center">
+  <b>Yield</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Settings</b>
+</p>
 
-> Add screenshots under `docs/images/` and update the links above. A short demo video (10–20 min)
-> can be linked from the root `README.md`.
