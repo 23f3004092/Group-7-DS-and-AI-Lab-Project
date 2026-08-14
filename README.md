@@ -38,13 +38,11 @@ FarmerVision solves this by:
 
 ## Architecture
 
+FarmerVision is a three-tier system — **clients** (mobile app + admin dashboard) → **FastAPI backend** → a **GPU-hosted model-inference core** backed by Qdrant, with live mandi/weather data from external APIs. The key design principle: **only the LLM uses the GPU; everything else runs on CPU.**
 
-**Request workflow** — what happens per query, from input to streamed response (§3.1):
+![FarmerVision system architecture](docs/architecture/architecture_m6.png)
 
-![Request workflow](docs/architecture/request_flow_m3.png)
-
-
-
+Per-query request flow: [`request_flow_m3.png`](docs/architecture/request_flow_m3.png) · more diagrams in [`docs/architecture/`](docs/architecture/).
 
 ---
 
@@ -141,10 +139,10 @@ FarmerVision is deployed as a **REST API + mobile app**:
 Group-7-DS-and-AI-Lab-Project/          (main branch — research + deployment)
 ├── README.md · LICENSE (MIT) · requirements.txt
 ├── docs/
-|    ├── technical_doc.md
-|    ├── user_guide.md
-|    ├── api_doc.md
-|    ├── licenses.md 
+|   ├── technical_doc.md
+|   ├── user_guide.md
+|   ├── api_doc.md
+|   ├── licenses.md 
 │   ├── overview.md
 │   ├── reports/               ← milestone reports + Final_Project_Report.md
 │   ├── architecture/          ← system diagrams
