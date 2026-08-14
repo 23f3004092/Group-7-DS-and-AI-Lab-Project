@@ -3,9 +3,7 @@
 **Course:** DS & AI Lab · **Group:** 7 · **Institution:** IIT Madras
 **Prepared:** 13 August 2026 · **Status:** Milestones 1–6 complete
 
-> Convert to PDF for submission. This report mirrors the milestone reports with added narrative;
-> deep results live in `docs/reports/Milestone_{1..5}_Report_Updated.md` and the Milestone-6 docs
-> under `docs/`.
+
 
 ---
 
