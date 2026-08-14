@@ -1,7 +1,7 @@
 # FarmerVision: Farmer Query Assistant
 
 **Course:** DS and AI Lab | **Group:** 7 | **Institution:** IIT Madras  
-**GitHub:** [Group-7-DS-and-AI-Lab-Project](https://github.com/<org>/Group-7-DS-and-AI-Lab-Project) | **Status:** Milestones 1–6 complete — deployed (REST API + mobile app) with full documentation
+**GitHub:** [Group-7-DS-and-AI-Lab-Project](https://github.com/23f3004092/Group-7-DS-and-AI-Lab-Project) | **Status:** Milestones 1–6 complete — deployed (REST API + mobile app) with full documentation
 
 ---
 
