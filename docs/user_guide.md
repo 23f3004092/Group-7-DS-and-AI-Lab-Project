@@ -79,22 +79,35 @@ estimating expected yield for your plot.
 
 ## Screenshots
 
-<div align="center">
-  <img src="./images/home.png" style="height:500px; width:auto;" alt="Home">
-  <img src="./images/scanner.png" style="height:500px; width:auto;" alt="Leaf Scanner">
-  <img src="./images/chat.png" style="height:500px; width:auto;" alt="Advisor Chat">
-</div>
-<p align="center">
-  <b>Home</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Leaf Scanner</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Advisor Chat</b>
-</p>
+<table align="center">
+  <tr>
+    <td align="center"><img src="./images/home.png" style="height:500px; width:auto;" alt="Home"></td>
+    <td style="width:40px;"></td>
+    <td align="center"><img src="./images/scanner.png" style="height:500px; width:auto;" alt="Leaf Scanner"></td>
+    <td style="width:40px;"></td>
+    <td align="center"><img src="./images/chat.png" style="height:500px; width:auto;" alt="Advisor Chat"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Home</b></td>
+    <td></td>
+    <td align="center"><b>Leaf Scanner</b></td>
+    <td></td>
+    <td align="center"><b>Advisor Chat</b></td>
+  </tr>
+</table>
 
-<br>
+<br><br>
 
-<div align="center">
-  <img src="./images/yield.png" style="height:500px; width:auto;" alt="Yield">
-  <img src="./images/settings.png" style="height:500px; width:auto;" alt="Settings">
-</div>
-<p align="center">
-  <b>Yield</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Settings</b>
-</p>
+<table align="center">
+  <tr>
+    <td align="center"><img src="./images/yield.png" style="height:500px; width:auto;" alt="Yield"></td>
+    <td style="width:60px;"></td>
+    <td align="center"><img src="./images/settings.png" style="height:500px; width:auto;" alt="Settings"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Yield</b></td>
+    <td></td>
+    <td align="center"><b>Settings</b></td>
+  </tr>
+</table>
 
