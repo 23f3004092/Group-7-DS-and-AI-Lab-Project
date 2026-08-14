@@ -1,5 +1,5 @@
 import json
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_validator, field_validator
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
@@ -14,6 +14,13 @@ class YieldQuery(BaseModel):
 class FeedbackSubmit(BaseModel):
     feedback_score: int = Field(..., description="1 for thumbs up, -1 for thumbs down")
     feedback_text: Optional[str] = Field(None, description="Optional text review")
+
+    @field_validator("feedback_score")
+    @classmethod
+    def validate_score(cls, v: int) -> int:
+        if v not in (1, -1):
+            raise ValueError("feedback_score must be 1 (thumbs up) or -1 (thumbs down)")
+        return v
 
 class ConfigUpdate(BaseModel):
     tier_grounded: Optional[float] = None

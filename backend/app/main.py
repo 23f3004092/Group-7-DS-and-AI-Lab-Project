@@ -5,9 +5,10 @@ import os
 
 from .database import engine, Base
 from .config import settings
-from .routers import query, admin, mcp
+from .routers import query, admin, mcp, mandi, weather
 from .services.qdrant_service import qdrant_service
 from .services.yield_service import yield_service
+from .services.mandi_service import mandi_service
 
 # Create SQLAlchemy Database tables
 Base.metadata.create_all(bind=engine)
@@ -38,6 +39,8 @@ app.mount("/uploads", StaticFiles(directory="backend/uploads"), name="uploads")
 app.include_router(query.router)
 app.include_router(admin.router)
 app.include_router(mcp.router)
+app.include_router(mandi.router)
+app.include_router(weather.router)
 
 @app.get("/health")
 def health_check():
@@ -48,7 +51,9 @@ def health_check():
         "sqlite_db": "OK",
         "vector_db": qdrant_status,
         "yield_model": "OK (LightGBM loaded)" if yield_service.initialized else "OK (Math-fallback active)",
-        "cloud_ai_models": "OK (Active)" if settings.GEMINI_API_KEY else "OK (Running with Mockups)"
+        "cloud_ai_models": "OK (Active)" if settings.GEMINI_API_KEY else "OK (Running with Mockups)",
+        "mandi_prices": "OK (Live)" if settings.MANDI_API_KEY else "OK (MSP Fallback)",
+        "weather": "OK (Live Open-Meteo)" if settings.WEATHER_PROVIDER != "indian" else ("OK (IMD)" if settings.WEATHER_API_KEY else "OK (Static)"),
     }
     
     # Check overall state

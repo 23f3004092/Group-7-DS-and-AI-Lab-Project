@@ -5,9 +5,15 @@
   "dependencies": {
     "@expo/metro-runtime": "~57.0.9",
     "expo": "~57.0.12",
+    "expo-linear-gradient": "~57.0.1",
+    "expo-localization": "~57.0.1",
+    "expo-location": "~57.0.9",
+    "expo-sqlite": "~57.0.1",
     "expo-status-bar": "~57.0.1",
+    "i18next": "^26.3.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-i18next": "^17.0.11",
     "react-native": "0.86.2",
     "react-native-web": "^0.21.2"
   },

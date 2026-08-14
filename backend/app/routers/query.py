@@ -3,14 +3,14 @@ import json
 import time
 import uuid
 import datetime
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Body
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from typing import Optional, List, Dict, Any
 
 from ..database import get_db
 from ..models import QueryLog, SystemConfig
-from ..schemas import TextQuery, YieldQuery, QueryResponse
+from ..schemas import TextQuery, YieldQuery, QueryResponse, FeedbackSubmit
 from ..services.cloud_models import CloudAIService
 from ..services.qdrant_service import qdrant_service
 from ..services.yield_service import yield_service
@@ -201,7 +201,7 @@ async def query_image(file: UploadFile = File(...), db: Session = Depends(get_db
     cfg = get_current_settings(db)
     
     # Save image
-    ext = os.path.splitext(file.filename)[1]
+    ext = os.path.splitext(file.filename or "")[1] or ".jpg"
     saved_name = f"{uuid.uuid4()}{ext}"
     saved_path = os.path.join(UPLOAD_DIR, saved_name)
     
@@ -212,7 +212,7 @@ async def query_image(file: UploadFile = File(...), db: Session = Depends(get_db
     web_image_path = f"/uploads/{saved_name}"
 
     # 1. Run Vision Classifier
-    result = await CloudAIService.run_vision_diagnosis(image_bytes, file.filename)
+    result = await CloudAIService.run_vision_diagnosis(image_bytes, file.filename or saved_name)
     
     if result.get("rejected", False):
         answer = "Image rejected — please submit a clear, close-up crop leaf photo."
@@ -319,6 +319,8 @@ async def query_yield(q: YieldQuery, db: Session = Depends(get_db)):
         "latency_ms": latency,
         "detected_crop": crop,
         "predicted_yield": total_yield,
+        "predicted_yield_t_ha": round(pred_t_ha, 2),
+        "total_yield_t": total_yield,
         "economics": economics
     }
 
@@ -334,7 +336,7 @@ async def query_multimodal(
     text = text.strip()
     
     # Save image
-    ext = os.path.splitext(file.filename)[1]
+    ext = os.path.splitext(file.filename or "")[1] or ".jpg"
     saved_name = f"{uuid.uuid4()}{ext}"
     saved_path = os.path.join(UPLOAD_DIR, saved_name)
     
@@ -361,7 +363,7 @@ async def query_multimodal(
         )
 
     # 2. Run Vision Classifier
-    result = await CloudAIService.run_vision_diagnosis(image_bytes, file.filename)
+    result = await CloudAIService.run_vision_diagnosis(image_bytes, file.filename or saved_name)
     
     if result.get("rejected", False):
         # Fallback: Treat as Pathway A text query
@@ -444,7 +446,7 @@ async def query_multimodal(
     )
 
 @router.post("/logs/{log_id}/feedback")
-def submit_feedback(log_id: int, fb: FeedbackSubmit, db: Session = Depends(get_db)):
+def submit_feedback(log_id: int, fb: FeedbackSubmit = Body(...), db: Session = Depends(get_db)):
     """Allow client to submit feedback (+1/-1 rating and comment) for a past query log."""
     log = db.query(QueryLog).filter(QueryLog.id == log_id).first()
     if not log:
