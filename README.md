@@ -64,14 +64,30 @@ FarmerVision solves this by:
 
 ## Installation
 
+```bash
+git clone https://github.com/23f3004092/Group-7-DS-and-AI-Lab-Project.git
+cd Group-7-DS-and-AI-Lab-Project
 
+# research / model code
+python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+Python 3.11 recommended. A GPU (≥16 GB) is needed only to **serve/train the LLM**; retrieval, vision, guardrail, and yield run on CPU. Full setup: [`docs/technical_doc.md`](docs/technical_doc.md) §1.
 
 ---
 
 ## Running
 
+**Live model-inference API** (deployed on a GCP GPU VM) — `POST /query`, `/classify`, `/vision`, `/diagnose` at `http://<host>:8000`. See [`docs/api_doc.md`](docs/api_doc.md); operations (start/stop, rebuild, expose) in `docs/internal/do_not_open/RUNBOOK_AND_API.md`.
 
-> _Running instructions will be finalized at Milestone 6._
+**Free demo (Colab GPU)** — open [`notebooks/19_farmervision_serve_colab.ipynb`](notebooks/19_farmervision_serve_colab.ipynb), select a T4 runtime, and Run all; it serves the full stack behind a public tunnel.
+
+**Product backend + mobile app** (on the `tanmay` branch):
+```bash
+pip install -r backend/requirements.txt && cp .env.example .env   # add API keys
+python run.py                                                     # backend on :8000
+cd mobile && npm install && npx expo start                       # Expo mobile app
+```
 
 ---
 
@@ -122,28 +138,28 @@ FarmerVision is deployed as a **REST API + mobile app**:
 ## Project Structure
 
 ```
-Group-7-DS-and-AI-Lab-Project/
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-├── requirements.txt
-├── .gitignore
-├── docs/                  ← reports, architecture diagrams, presentations
-├── data/                  ← sample data only; see data/README.md
-├── notebooks/             ← EDA, preprocessing, experiments
-├── src/                   ← reusable source code
-│   ├── data/
-│   ├── models/
-│   ├── inference/
-│   ├── retrieval/
-│   ├── agents/
-│   ├── evaluation/
-│   └── utils/
-├── app/                   ← Gradio deployment app
-├── configs/               ← model and training YAML configs
-├── models/                ← model cards; checkpoints on HuggingFace Hub
-├── outputs/               ← predictions, figures, logs
-└── tests/                 ← unit tests
+Group-7-DS-and-AI-Lab-Project/          (main branch — research + deployment)
+├── README.md · LICENSE (MIT) · requirements.txt
+├── docs/
+|    ├── technical_doc.md
+|    ├── user_guide.md
+|    ├── api_doc.md
+|    ├── licenses.md 
+│   ├── overview.md
+│   ├── reports/               ← milestone reports + Final_Project_Report.md
+│   ├── architecture/          ← system diagrams
+│   └── internal/do_not_open/  ← GCP deployment: requiredforgcp/ (FastAPI gateway + scripts),
+│                                 RUNBOOK_AND_API.md, API_SPEC.md, Deployment_Report_GCP.md
+├── notebooks/                 ← EDA, training, evaluation + 19_farmervision_serve_colab.ipynb
+├── scripts/                   ← utilities + run_e2e_eval.py / build_e2e_eval_dataset.py
+├── src/                       ← reusable source code (data, models, retrieval, evaluation, ...)
+├── data/                      ← sample data only; see data/README.md
+├── models/ · outputs/ · tests/ · configs/
+
+Product app (on the `tanmay` branch):
+├── backend/                   ← FastAPI product API (/api/query, /mandi, /weather, /admin, /mcp)
+├── mobile/                    ← Expo React Native app (Home, Leaf Scanner, Advisor Chat, Yield, Settings)
+└── admin/                     ← React/Vite admin dashboard
 ```
 
 ---
@@ -166,11 +182,11 @@ Group-7-DS-and-AI-Lab-Project/
 
 | Name | Role |
 |---|---|
-| [Mahesh Ishran] | CV model fine-tuning |
+| [Mahesh Ishran] | CV model fine-tuning and evaluations |
 | [Aneeqa] | Dataset preparation for RAG + Entity Intent model training |
-| [Lokesh] | Vision Dataset preparation + Yield prediction model |
-| [Harliv Singh] | RAG Vector db setup + Distillation  |
-| [Tanmay Sahu] | Gradio app + HuggingFace deployment + Yield prediction model  |
+| [Lokesh] | Vision Dataset preparation + Yield prediction model + End to End model evals |
+| [Harliv Singh] | RAG Vector db setup + Distillation + GCP model deployment   |
+| [Tanmay Sahu] | Mobile app + product backend (mandi/weather) + deployment + Yield prediction model |
 
 ---
 
@@ -225,4 +241,4 @@ Group-7-DS-and-AI-Lab-Project/
 
 ---
 
-*Last updated: August 2026 (post-Milestone 5) | Group 7 | DS and AI Lab | IIT Madras*
+*Last updated: August 2026 (post-Milestone 6 — deployed) | Group 7 | DS and AI Lab | IIT Madras*
