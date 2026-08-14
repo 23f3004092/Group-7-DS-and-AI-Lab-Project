@@ -1,0 +1,51 @@
+# Two containers on one VM:
+#   qdrant  -> the vector DB (CPU)
+#   gateway -> the FastAPI app: LLM on GPU, everything else on CPU
+# Start with:  docker compose --env-file runtime.env up -d --build
+# runtime.env is written by 04_vm_setup.sh and provides HF_TOKEN, API_KEY,
+# ARTIFACTS_DIR, GEN_MODEL_ID.
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.0          # pinned to your build version
+    container_name: fv-qdrant
+    restart: always
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    ports:
+      - "127.0.0.1:6333:6333"             # localhost only — never public
+
+  gateway:
+    build: .
+    container_name: fv-gateway
+    restart: always
+    depends_on:
+      - qdrant
+    env_file: runtime.env                  # HF_TOKEN, API_KEY into the container
+    environment:
+      QDRANT_URL: "http://qdrant:6333"
+      MANIFEST_PATH: "/artifacts/qdrant/manifest.json"
+      IEG_DIR: "/artifacts/ieg"
+      MERGED_MODEL_DIR: "/artifacts/generator/merged"   # adapter merged in -> fast inference
+      ADAPTER_DIR: "/artifacts/generator/best_adapter"  # fallback if no merged model
+      VISION_CKPT: "/artifacts/vision/p3_full_best.pt"
+      VISION_LABELS: "/artifacts/vision/label_to_idx.json"
+      # mandi/weather/yield are provided by the main app via /query live_data
+      # GEN_MODEL_ID + HF_TOKEN + API_KEY come from runtime.env
+    volumes:
+      - ${ARTIFACTS_DIR}:/artifacts:ro     # your models, read-only
+      - hf_cache:/root/.cache/huggingface  # cache Gemma so restarts don't re-download
+    ports:
+      - "127.0.0.1:8000:8000"             # localhost only — reach via SSH tunnel
+    # Give the container the GPU (works on the Deep Learning VM image).
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  qdrant_storage:
+  hf_cache:

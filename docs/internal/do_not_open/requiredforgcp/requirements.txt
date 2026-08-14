@@ -1,0 +1,27 @@
+# Gateway dependencies. Loose pins — bump if you hit a conflict.
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+requests>=2.31
+python-multipart>=0.0.9      # REQUIRED for /vision and /diagnose image uploads
+
+# vector DB + FAST cpu embeddings (BGE-M3 as optimized ONNX, no GPU needed)
+qdrant-client>=1.9
+fastembed>=0.3.6
+sentence-transformers>=3.0    # fallback encoder if fastembed lacks bge-m3 (exact-match path)
+
+# LLM (GPU): Gemma-3-4B 4-bit + your distilled LoRA adapter
+torch>=2.2
+transformers>=4.44
+peft>=0.11
+accelerate>=0.30
+bitsandbytes>=0.43
+sentencepiece>=0.2
+
+# vision (ViT-S/16 on CPU)
+timm>=1.0
+torchvision>=0.17    # vision image transforms
+pillow>=10.0         # vision image decode
+numpy>=1.26
+# NOTE: yield (LightGBM) is handled by the main app now, so lightgbm/pandas are
+# no longer gateway dependencies.

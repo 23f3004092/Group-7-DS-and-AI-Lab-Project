@@ -1,7 +1,7 @@
 # FarmerVision: Farmer Query Assistant
 
 **Course:** DS and AI Lab | **Group:** 7 | **Institution:** IIT Madras  
-**GitHub:** [Group-7-DS-and-AI-Lab-Project](https://github.com/<org>/Group-7-DS-and-AI-Lab-Project) | **Status:** In Progress — Milestones 1–5 complete, Milestone 6 (Deployment) upcoming
+**GitHub:** [Group-7-DS-and-AI-Lab-Project](https://github.com/<org>/Group-7-DS-and-AI-Lab-Project) | **Status:** Milestones 1–6 complete — deployed (REST API + mobile app) with full documentation
 
 ---
 
@@ -97,11 +97,25 @@ Milestone 4 trained each module; Milestone 5 evaluated all five on held-out data
 
 ---
 
-## Demo
+## Deployment & Demo
 
-> _Screenshots and demo link to be added at Milestone 6._
+FarmerVision is deployed as a **REST API + mobile app**:
 
-🔗 **Live Demo:** [HuggingFace Spaces](#) _(available after Milestone 6)_
+- **Model-inference API** (RAG + vision + generation) — distilled models served on a **GCP GPU VM** (FastAPI, `:8000`): `POST /query`, `/classify`, `/vision`, `/diagnose`. Reference: [`docs/api_doc.md`](docs/api_doc.md).
+- **Product backend + mobile app** — FastAPI (`/api/*`) + Expo React Native app (Home · Leaf Scanner · Advisor Chat · Yield · Settings) + admin dashboard (`backend/`, `mobile/`, `admin/` — `tanmay` branch).
+- **Free demo fallback** — [`notebooks/19_farmervision_serve_colab.ipynb`](notebooks/19_farmervision_serve_colab.ipynb) runs the whole stack on a Colab GPU behind a public tunnel.
+
+🔗 **Live API:** `http://<host>:8000` (URL + API key on request) · **Demo video:** _(add link)_ · **Screenshots:** `docs/user_guide.md`
+
+### Milestone-6 Documentation (`docs/`)
+
+| Doc | Purpose |
+|---|---|
+| [overview.md](docs/overview.md) | problem, architecture diagram, deployed components |
+| [technical_doc.md](docs/technical_doc.md) | setup, data pipeline, models, training/eval, inference, deployment, reproducibility |
+| [user_guide.md](docs/user_guide.md) | end-user (farmer) guide + troubleshooting |
+| [api_doc.md](docs/api_doc.md) | REST API reference (product backend + model-inference API) |
+| [licenses.md](docs/licenses.md) | code, dataset, and model licenses + citations |
 
 ---
 
@@ -143,7 +157,7 @@ Group-7-DS-and-AI-Lab-Project/
 | M3 | Model Architecture & End-to-End Setup | July 23 | ✅ Done |
 | M4 | Model Training | July 30 | ✅ Done ([report](docs/reports/Milestone_4_Report.md)) |
 | M5 | Evaluation & Analysis | Aug 6 | ✅ Done ([report](docs/reports/Milestone_5_Report.md)) |
-| M6 | Deployment & Documentation | Aug 13 | ⏳ Upcoming |
+| M6 | Deployment & Documentation | Aug 13 | ✅ Done ([docs](docs/overview.md)) |
 | Final | Project Presentation | Aug 20+ | ⏳ Upcoming |
 
 ---
