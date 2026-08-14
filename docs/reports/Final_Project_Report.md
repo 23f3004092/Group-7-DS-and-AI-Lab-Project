@@ -139,4 +139,4 @@ searches are in the respective Milestone-4/5 reports.*
 | 4 | Aneeqa | Yes | 13 Aug 2026 |
 | 5 | Tanmay | Yes | 13 Aug 2026 |
 
-**Document:** FarmerVision — Milestone 5 Report · **Prepared:** 13 August 2026
+**Document:** FarmerVision — Milestone 6 Report · **Prepared:** 13 August 2026
