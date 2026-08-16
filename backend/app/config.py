@@ -56,6 +56,19 @@ class Settings(BaseSettings):
     WEATHER_CACHE_TTL: int = int(os.environ.get("WEATHER_CACHE_TTL", "1800"))  # 30 min
     # 'open_meteo' (default, keyless, live) or 'indian' (indianapi.in/IMD, needs key)
     WEATHER_PROVIDER: str = os.environ.get("WEATHER_PROVIDER", "open_meteo")
+
+    # CACP (Commission for Agricultural Costs and Prices) live data
+    CACP_MSP_URL: str = os.environ.get(
+        "CACP_MSP_URL", "https://cacp.da.gov.in/json.json"
+    )
+    # DES (Directorate of Economics & Statistics) consolidated cost-of-cultivation
+    # workbook (crop x state, official source used by CACP). Site can be slow/down;
+    # point COST_DATA_URL at a mirror if needed.
+    COST_DATA_URL: str = os.environ.get(
+        "COST_DATA_URL",
+        "https://desagri.gov.in/wp-content/uploads/2023/06/CS-Consolidated-Crop-year-wise-2021-22-4.xlsx"
+    )
+    CACP_CACHE_TTL: int = int(os.environ.get("CACP_CACHE_TTL", "86400"))  # 24h (MSP updates yearly)
     
     # Execution Flags
     SKIP_GENERATOR: bool = bool(os.environ.get("SKIP_GENERATOR", ""))

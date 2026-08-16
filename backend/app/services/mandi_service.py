@@ -2,8 +2,9 @@
 
 Fetches variety-wise daily market prices, normalizes our crop names to the
 Agmarknet commodity vocabulary, and caches results to respect the API rate
-limit (100 requests/day per key). If the live API is unreachable or the key
-is missing, it falls back to static MSP reference prices.
+limit (100 requests/day per key). Only real market data is returned; when the
+live API is unreachable or the key is missing, an empty price list is returned
+instead of fabricated MSP numbers.
 """
 import time
 import httpx
@@ -23,18 +24,10 @@ CROP_ALIASES = {
     "sarson": "Mustard",
 }
 
-# Static MSP reference (INR per quintal) used when the live API is down
-MSP_FALLBACK = [
-    {"crop": "Wheat", "crop_hi": "Gehun", "price_per_quintal": 2275.0},
-    {"crop": "Paddy", "crop_hi": "Dhan", "price_per_quintal": 2183.0},
-    {"crop": "Maize", "crop_hi": "Makka", "price_per_quintal": 2090.0},
-    {"crop": "Mustard", "crop_hi": "Sarson", "price_per_quintal": 5650.0},
-]
-
 # Preferred display order for the main crops
 CROP_ORDER = {"Wheat": 0, "Paddy": 1, "Maize": 2, "Mustard": 3}
 
-# Headline crops always surfaced on the home screen (missing ones get MSP reference rows)
+# Headline crops always fetched for the home screen
 MAIN_CROPS = ["Wheat", "Paddy", "Maize", "Mustard"]
 
 # All-India State & UT pick-list (Agmarknet / data.gov.in naming). District lists
@@ -320,12 +313,12 @@ class MandiService:
                         "state": state,
                         "district": district,
                         "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
-                        "prices": self._blend(prices, commodity, market),
+                        "prices": prices,
                     }
                 else:
                     data = await self._fetch_composite(state, district, market)
             except Exception as e:
-                print(f"Mandi API fetch failed: {e}. Using MSP fallback.")
+                print(f"Mandi API fetch failed: {e}.")
 
         if not data:
             data = {
@@ -333,7 +326,7 @@ class MandiService:
                 "state": state,
                 "district": district,
                 "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
-                "prices": self._msp_fallback(commodity, market),
+                "prices": [],
             }
 
         self._set_cached(key, data)
@@ -380,11 +373,10 @@ class MandiService:
         return records
 
     async def _fetch_composite(self, state: str, district: str, market: Optional[str]) -> Optional[Dict[str, Any]]:
-        """Fetch all main crops + the general latest batch, then aggregate and blend.
+        """Fetch all main crops + the general latest batch, then aggregate.
 
         Rate-limit or per-crop failures are tolerated: failed crops are simply
-        missing from the aggregation and get MSP-reference rows from the blend.
-        Only a total failure (every request) returns None.
+        missing from the response. Only a total failure (every request) returns None.
         """
         records = []
         successes = 0
@@ -408,7 +400,7 @@ class MandiService:
             "state": state,
             "district": district,
             "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
-            "prices": self._blend(prices, None, market),
+            "prices": prices,
         }
 
     def _aggregate(self, records: List[Dict[str, Any]], commodity: Optional[str], market: Optional[str]) -> List[Dict[str, Any]]:
@@ -463,48 +455,6 @@ class MandiService:
         # Sort: requested/main crops first (by CROP_ORDER), then alphabetically
         prices.sort(key=lambda p: (CROP_ORDER.get(p["crop"], 99), p["crop"], p["market"]))
         return prices
-
-    def _blend(self, prices: List[Dict[str, Any]], commodity: Optional[str], market: Optional[str]) -> List[Dict[str, Any]]:
-        """Prioritize main crops; fill any missing headline crop with its MSP reference price."""
-        if commodity or market:
-            return prices
-
-        available = {p["crop"] for p in prices}
-        main = [p for p in prices if p["crop"] in MAIN_CROPS]
-
-        for crop in MAIN_CROPS:
-            if crop not in available:
-                msp = next((i for i in MSP_FALLBACK if i["crop"] == crop), None)
-                main.append({
-                    "crop": crop,
-                    "variety": "MSP Reference",
-                    "market": market or "—",
-                    "min_price": None,
-                    "max_price": None,
-                    "modal_price": msp["price_per_quintal"] if msp else None,
-                    "change_per_quintal": None,
-                    "arrival_date": None,
-                })
-
-        others = [p for p in prices if p["crop"] not in MAIN_CROPS]
-        return main + others
-
-    def _msp_fallback(self, commodity: Optional[str], market: Optional[str]) -> List[Dict[str, Any]]:
-        rows = []
-        for item in MSP_FALLBACK:
-            if commodity and item["crop"].lower() != commodity.lower():
-                continue
-            rows.append({
-                "crop": item["crop"],
-                "variety": "MSP Reference",
-                "market": market or "—",
-                "min_price": None,
-                "max_price": None,
-                "modal_price": item["price_per_quintal"],
-                "change_per_quintal": None,
-                "arrival_date": None,
-            })
-        return rows
 
 
     def list_districts(self, state: Optional[str] = None) -> List[str]:

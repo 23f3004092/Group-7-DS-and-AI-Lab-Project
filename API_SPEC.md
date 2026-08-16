@@ -1,12 +1,9 @@
-# FarmerVision API — Integration Guide
+# FarmerVision — Vision API (Leaf-Disease) Spec
 
-A REST API for an agricultural assistant for farmers in Uttar Pradesh, India. It answers
-crop/pest/fertiliser/scheme questions (English · Hindi · Hinglish) grounded in a knowledge
-base with citations, classifies leaf-disease photos, holds multi-turn conversations, and can
-weave in live data (mandi prices / weather / yield) that **your** app provides.
+Everything for the **image** side of the API: classify a leaf photo, or classify **and** get grounded
+treatment advice. Two endpoints: `POST /vision` and `POST /diagnose`.
 
-> You don't need to know anything about where this runs. You need exactly two things from
-> whoever deployed it: the **Base URL** and the **API key**.
+> Base URL and API key are provided separately. Below they are `<BASE_URL>` and `<API_KEY>`.
 
 ---
 
@@ -14,312 +11,245 @@ weave in live data (mandi prices / weather / yield) that **your** app provides.
 
 | | |
 |---|---|
-| **Base URL** | `http://<HOST>:8000`  ← get from the deployer |
-| **API key** | a secret string ← get from the deployer |
-| **Auth** | every `POST` needs header `X-API-Key: <API key>` (`GET /health` needs none) |
-| **Body** | JSON (`Content-Type: application/json`) except `/vision` & `/diagnose` which use `multipart/form-data` |
-| **CORS/TLS** | plain HTTP; call it server-side (don't embed the key in a browser app) |
+| **Base URL** | `<BASE_URL>` (e.g. `http://HOST:8000`) |
+| **Auth** | header `X-API-Key: <API_KEY>` on every request |
+| **Content type** | `multipart/form-data` (these two endpoints upload a file — **not** JSON) |
+| **Image field name** | `file` |
+| **Accepted formats** | JPG / PNG (anything PIL can open; RGB) |
+| **Model** | ViT-S/16 (timm `vit_small_patch16_224`), 20 classes, runs on **CPU** (the GPU is reserved for the text LLM) |
+| **Speed** | `/vision` ≈ **fast** (image only, no LLM). `/diagnose` ≈ **~10–13 s** (adds retrieval + LLM) |
 
-Set these once for the examples below:
+The model is **lab-trained** — every response carries a "treat as a suggestion, confirm with a local
+expert" note. Surface that in the UI. There is **no hard reject**: every image gets a label +
+confidence, so use `confidence` (and `top_k`) to decide how much to trust it.
+
+---
+
+## 2. `POST /vision` — classify only
+
+Returns the predicted crop + disease and confidence. No knowledge-base lookup, no LLM. Use this when
+you only need the label (e.g. to show a diagnosis card, or to drive your own follow-up).
+
+### Request
+`multipart/form-data` with a single field `file` = the image.
+
 ```bash
-BASE=http://<HOST>:8000
-KEY=<your-api-key>
+curl -s -X POST <BASE_URL>/vision \
+  -H "X-API-Key: <API_KEY>" \
+  -F "file=@leaf.jpg"
 ```
 
----
-
-## 2. Endpoints at a glance
-
-| Method | Path | Purpose |
-|---|---|---|
-| GET | `/health` | liveness + what's loaded (no key) |
-| POST | `/classify` | intent + guardrail + which external data a query needs |
-| POST | `/query` | **main endpoint** — grounded, cited answer; supports multi-turn + live data |
-| POST | `/vision` | leaf photo → disease label + confidence |
-| POST | `/diagnose` | leaf photo (+ optional question) → disease + grounded treatment |
-
-Typical flow: *(optional)* `/classify` to see if the question needs mandi/weather/yield → fetch
-those yourself → `/query` with them in `live_data`. For plain Q&A, just call `/query`.
-
----
-
-## 3. `GET /health`
-No auth, no body.
-```json
-{"status":"ok","gpu":true,"gpu_name":"NVIDIA L4","collection":"agri_knowledge",
- "points":723439,"modules":{"retrieval":true,"generation":true,"ieg_model":false,"vision":true},
- "note":"mandi/weather/yield are provided by the caller via live_data","errors":[]}
-```
-`status:"ok"` means it's ready. `ieg_model:false` is normal (guardrail runs on rules + keywords).
-
----
-
-## 4. `POST /classify`
-Tells you the intent, whether it's blocked, and which external data the query is asking for —
-so you know what (if anything) to fetch before `/query`.
-
-**Request**
-```json
-{"query": "aaj mandi me gehu ka bhav kya hai"}
-```
-
-**Response**
-```json
-{"intent":"cultivation_practice","retrieval_intent":"general","blocked":false,
- "block_reason":null,"entities":{},"guardrail_backend":"rules-only",
- "suggested_external":["mandi_prices"]}
-```
-| field | meaning |
-|---|---|
-| `intent` | fine-grained intent (see §8) |
-| `retrieval_intent` | `policy` / `field_practice` / `general` — pass this as `intent` to `/query` if you like |
-| `blocked` | `true` if the guardrail would refuse this query |
-| `suggested_external` | which live data to fetch: any of `mandi_prices`, `weather`, `yield` |
-
----
-
-## 5. `POST /query` — the main endpoint
-
-**Request body**
-
-| field | type | required | meaning |
-|---|---|---|---|
-| `query` | string | ✅ | the farmer's question (English / Hindi / Hinglish) |
-| `intent` | string | | `policy` \| `field_practice` \| `general` — biases retrieval (omit → auto) |
-| `top_k` | int | | number of context chunks (default 5) |
-| `filters` | object | | narrow the search — see §8 |
-| `live_data` | object | | facts you fetched (mandi/weather/yield) to inject — see §7 |
-| `skip_retrieval` | bool | | `true` → answer from `live_data` only, skip the knowledge base |
-| `session_id` | string | | multi-turn: server remembers this conversation — see §6 |
-| `history` | array | | multi-turn: you send prior turns — see §6 |
-
-**Response (answered)**
+### Response `200`
 ```json
 {
-  "tier": "grounded",
-  "blocked": false,
-  "answer": "Spray Mancozeb 75 WP at 400 g/acre in 200 L water. [1] ...\nSources: [1], [2]",
-  "sources": [
-    {"n":1,"score":0.71,"source_type":"kcc",
-     "citation":{"corpus":"kcc","crop":"wheat","district":"Varanasi","season":"Rabi","query_type":"Plant Protection","year":2023}},
-    {"n":2,"score":0.66,"source_type":"pdf",
-     "citation":{"corpus":"pdf","file":"advisory.pdf","pages":[12,13],"doc_category":"crop_advisory","year":2022}}
+  "label": "wheat__yellow_rust",
+  "crop": "wheat",
+  "disease": "yellow rust",
+  "confidence": 0.94,
+  "top_k": [
+    { "label": "wheat__yellow_rust", "prob": 0.94 },
+    { "label": "wheat__brown_rust",  "prob": 0.03 },
+    { "label": "wheat__septoria",    "prob": 0.01 },
+    { "label": "wheat__healthy",     "prob": 0.01 },
+    { "label": "wheat__leaf_blight", "prob": 0.005 }
   ],
-  "live_data_used": [],
-  "top_score": 0.71,
-  "intent": "field_practice",
-  "lang": "hinglish",
-  "guardrail_backend": "rules-only",
-  "gen_ms": 11840, "out_tokens": 96, "latency_ms": 12010,
-  "session_id": null,
-  "history": [{"role":"user","content":"..."},{"role":"assistant","content":"..."}],
-  "suggested_external": []
+  "note": "Lab-trained model; treat as a suggestion, confirm with a local expert."
 }
 ```
 
-**Response (guardrail blocked)** — off-topic or restricted queries:
-```json
-{"tier":"blocked","blocked":true,"block_reason":"non_agricultural",
- "answer":"I can only help with farming and agriculture questions.","sources":[], ...}
-```
+| field | type | meaning |
+|---|---|---|
+| `label` | string | full class, format `crop__disease` (see §4) |
+| `crop` | string | crop part of the label (e.g. `wheat`, `rice`) |
+| `disease` | string | disease part, spaces instead of underscores (e.g. `yellow rust`, `healthy`) |
+| `confidence` | float 0–1 | softmax probability of the top class |
+| `top_k` | array | top **5** predictions, each `{label, prob}`, highest first — use to show alternatives / detect uncertainty |
+| `note` | string | fixed safety disclaimer — always show it |
 
-**Response (nothing relevant, no live data)** — the assistant abstains; `message` is localized to the query language:
-```json
-{"tier":"abstain_out_of_scope","blocked":false,"answer":null,
- "message":"This is outside the agricultural knowledge base ...","sources":[], ...}
-```
-
-**How to read a response**
-- If `answer` is non-null → show it. It already ends with a `Sources: [n]` line.
-- If `answer` is null → show `message` (it's the localized "can't help / rephrase" text).
-- `tier`: `grounded` (confident) · `fallback_with_disclaimer` (answer + a KVK-verify note appended) · `abstain_out_of_scope` (no answer) · `blocked` (refused) · `skipped` (you set `skip_retrieval`).
-- `lang`: the language the answer is written in (`en` / `hi` / `hinglish`) — matches the query.
-- `sources`: what the answer is grounded in; `citation` differs for `pdf` vs `kcc` (see §9).
+**Reading confidence:** high (`≥ ~0.8`) → show the label plainly. Middle (`~0.5–0.8`) → show it but
+also surface `top_k[1]` as "could also be…". Low (`< ~0.5`) or top two probs close together → tell the
+user the photo is unclear and to retake (better lighting, single leaf, fill the frame).
 
 ---
 
-## 6. Multi-turn conversations
+## 3. `POST /diagnose` — classify **+** grounded treatment
 
-Pick **one** of two modes:
+Runs vision, then retrieves matching Kisan-Call-Centre / advisory records for that disease and has the
+LLM write **cited treatment advice**. Use this for the one-tap "what's wrong and what do I do" flow.
 
-### Mode A — `session_id` (server remembers) — easiest
-Send the same `session_id` string for every message in a conversation. The gateway keeps the
-last few turns in memory and resolves follow-ups automatically.
+### Request
+`multipart/form-data`:
+
+| field | required | meaning |
+|---|---|---|
+| `file` | ✅ | the leaf image |
+| `question` | optional | a text question to steer the advice, e.g. `"is ke liye kya spray karun"`. If omitted, the server auto-builds a treatment query from the detected disease. |
+
 ```bash
-# turn 1
-curl -s -X POST $BASE/query -H "X-API-Key: $KEY" -H "Content-Type: application/json" \
-  -d '{"query":"wheat me yellow rust ki dawa batao","session_id":"user42-chat","intent":"field_practice"}'
-# turn 2 — "its dose?" resolves against turn 1
-curl -s -X POST $BASE/query -H "X-API-Key: $KEY" -H "Content-Type: application/json" \
-  -d '{"query":"iski dose kitni honi chahiye","session_id":"user42-chat","intent":"field_practice"}'
+curl -s -X POST <BASE_URL>/diagnose \
+  -H "X-API-Key: <API_KEY>" \
+  -F "file=@leaf.jpg" \
+  -F "question=is ke liye kya spray karun aur kitni dose"
 ```
-Use a unique `session_id` per user/conversation (e.g. `user42-chat`). Server memory is
-in-process and resets if the service restarts — for durable history use Mode B.
 
-### Mode B — `history` (you keep it) — stateless, durable
-Send the prior turns yourself; the response returns the updated `history` to store and resend.
+### Response `200` (treatment found)
 ```json
-{"query":"iski dose kitni honi chahiye","intent":"field_practice",
- "history":[
-   {"role":"user","content":"wheat me yellow rust ki dawa batao"},
-   {"role":"assistant","content":"Spray Mancozeb 75 WP ... Sources: [1]"}
- ]}
-```
-Take `response.history` from each call and send it back on the next. Keep it to the last ~4 turns.
-
-Either way, follow-ups like *"iski dose?"*, *"aur kitna?"*, *"wahi"* are understood, and retrieval
-is contextualized with the recent turns.
-
----
-
-## 7. Injecting live data (mandi prices / weather / yield)
-
-The API does **not** fetch these — your app does, then passes them in `live_data`. The model treats
-them as authoritative and uses the exact values.
-```json
-{"query":"gehu abhi bech du ya rukun?",
- "live_data":{
-   "mandi_prices":"Wheat @ Varanasi mandi: Rs 2480/quintal (2026-08-14)",
-   "weather":{"rain_next_3d":"none","temp_c":[28,33]},
-   "yield":"2.6 t/ha estimated"
- }}
-```
-- Keys are free-form; recognised ones get nice labels: `mandi_prices`, `market`, `weather`, `forecast`, `yield`, `yield_prediction`.
-- Values may be strings or nested JSON.
-- For a pure weather/price question that needs no knowledge-base lookup, add `"skip_retrieval": true`.
-- `response.suggested_external` tells you what the query *looked like* it wanted, in case you forgot to send it.
-
----
-
-## 8. `POST /vision` and `POST /diagnose`
-
-Both take an image as `multipart/form-data`.
-
-### `/vision` — classify only
-```bash
-curl -s -X POST $BASE/vision -H "X-API-Key: $KEY" -F "file=@leaf.jpg"
-```
-```json
-{"label":"wheat__yellow_rust","crop":"wheat","disease":"yellow rust","confidence":0.94,
- "top_k":[{"label":"wheat__yellow_rust","prob":0.94},{"label":"wheat__brown_rust","prob":0.03}],
- "note":"Lab-trained model; treat as a suggestion, confirm with a local expert."}
+{
+  "diagnosis": {
+    "label": "wheat__yellow_rust",
+    "crop": "wheat",
+    "disease": "yellow rust",
+    "confidence": 0.94,
+    "top_k": [ { "label": "wheat__yellow_rust", "prob": 0.94 }, "..." ],
+    "note": "Lab-trained model; treat as a suggestion, confirm with a local expert."
+  },
+  "tier": "grounded",
+  "answer": "Likely wheat yellow rust. Spray Mancozeb 75 WP at 400 g/acre in 200 L water ... Sources: [1], [2]",
+  "sources": [
+    { "n": 1, "score": 0.68, "source_type": "pdf",
+      "citation": { "corpus": "pdf", "file": "advisory.pdf", "pages": [12, 13],
+                    "doc_category": "crop_advisory", "year": 2022 } },
+    { "n": 2, "score": 0.66, "source_type": "kcc",
+      "citation": { "corpus": "kcc", "record": "KCC Q&A", "crop": "wheat",
+                    "district": "jhansi", "season": "Rabi", "query_type": "Plant Protection", "year": 2023 } }
+  ],
+  "gen_ms": 12000,
+  "out_tokens": 88,
+  "latency_ms": 12500
+}
 ```
 
-### `/diagnose` — classify + grounded treatment
-```bash
-curl -s -X POST $BASE/diagnose -H "X-API-Key: $KEY" \
-  -F "file=@leaf.jpg" -F "question=is ke liye kya spray karun"
-```
-```json
-{"diagnosis":{"label":"wheat__yellow_rust","crop":"wheat","disease":"yellow rust","confidence":0.94,...},
- "tier":"grounded","answer":"Likely wheat yellow rust. Spray ... Sources: [1]",
- "sources":[{"n":1,"score":0.68,"source_type":"pdf","citation":{...}}],
- "gen_ms":12000,"out_tokens":88,"latency_ms":12500}
-```
-`question` is an optional form field. Accepted image types: JPG / PNG.
-
----
-
-## 9. Value reference
-
-**`intent`** (on `/query`):
-
-| value | best for |
+| field | meaning |
 |---|---|
-| `policy` | schemes, subsidies, eligibility, government guidelines |
-| `field_practice` | how-to, dosage, disease/pest, cultivation |
-| `general` | anything else / unsure (default) |
+| `diagnosis` | the **full `/vision` result** (label, crop, disease, confidence, top_k, note) |
+| `tier` | quality of the treatment answer: `grounded` (confident) or `fallback_with_disclaimer` (weaker match; a "verify with KVK" note is appended to `answer`) |
+| `answer` | the cited treatment text to show. Ends with a `Sources: [n]` line. |
+| `sources` | records the advice is grounded in — show as source chips. Each: `n`, `score` (0–1), `source_type` (`pdf`\|`kcc`), and a `citation` (shape differs per corpus — see §5). |
+| `gen_ms` / `out_tokens` / `latency_ms` | generation time, tokens produced, total round-trip ms |
 
-**`filters`** (object on `/query`, all optional):
-
-| key | allowed values |
-|---|---|
-| `source_type` | `pdf` \| `kcc` |
-| `doc_category` | `scheme_eligibility` \| `crop_advisory` \| `contingency_plan` \| `policy_guideline` (pdf) |
-| `query_type` | KCC category, e.g. `Plant Protection` (kcc) |
-| `crop` | e.g. `rice`, `wheat` |
-| `district` | UP district, e.g. `Varanasi` |
-| `season` | `Rabi` \| `Kharif` \| `Zaid` (kcc) |
-| `language` | `en` \| `hi` \| `mixed` |
-| `year_from` | integer |
-| `only_tables` | `true` (dosage/scheme tables only, pdf) |
-
-**`tier`** (response): `grounded` · `fallback_with_disclaimer` · `abstain_out_of_scope` · `blocked` · `skipped`.
-
-**IEG `intent`** (from `/classify`): `cultivation_practice`, `disease_pest`, `nutrition_fertilizer`, `post_harvest_storage`, `specialty_other`, `general`, `non_agri`.
-
-**`suggested_external`** / live-data keys: `mandi_prices`, `weather`, `yield`.
-
-**Vision `label`** — 20 classes, formatted `crop__disease`:
-`rice__blast`, `rice__bacterial_blight`, `rice__brown_spot`, `rice__tungro`, `rice__leaf_smut`,
-`wheat__healthy`, `wheat__yellow_rust`, `wheat__brown_rust`, `wheat__black_rust`, `wheat__blast`,
-`wheat__septoria`, `wheat__mildew`, `wheat__aphid`, `wheat__mite`, `wheat__stem_fly`,
-`wheat__smut`, `wheat__tan_spot`, `wheat__leaf_blight`, `wheat__common_root_rot`, `wheat__fusarium_head_blight`.
-
-**`citation`** object inside `sources` (varies by corpus):
-- pdf → `{"corpus":"pdf","file":..., "pages":[start,end], "section":..., "doc_category":..., "district":..., "year":...}`
-- kcc → `{"corpus":"kcc","record":"KCC Q&A","crop":..., "district":..., "season":..., "query_type":..., "year":...}`
+### Response `200` (no treatment found in the knowledge base)
+The photo was still classified, but retrieval found nothing usable → `answer` is `null`, `message`
+explains it:
+```json
+{
+  "diagnosis": { "label": "rice__tungro", "crop": "rice", "disease": "tungro", "confidence": 0.81, "...": "..." },
+  "tier": "abstain_out_of_scope",
+  "answer": null,
+  "message": "Diagnosis done, but no matching treatment found in the knowledge base.",
+  "sources": [],
+  "latency_ms": 900
+}
+```
+**Client rule:** if `answer` is non-null → show it. If `answer` is null → show `diagnosis` + the
+`message`, and optionally let the user ask a follow-up on `/query`.
 
 ---
 
-## 10. Errors
+## 4. Class labels (20)
+
+Format is `crop__disease` (double underscore between crop and disease; single underscores inside a
+multi-word disease). `disease` in the response has underscores replaced with spaces.
+
+**Rice (5):** `rice__blast`, `rice__bacterial_blight`, `rice__brown_spot`, `rice__tungro`, `rice__leaf_smut`
+
+**Wheat (15):** `wheat__healthy`, `wheat__yellow_rust`, `wheat__brown_rust`, `wheat__black_rust`,
+`wheat__blast`, `wheat__septoria`, `wheat__mildew`, `wheat__aphid`, `wheat__mite`, `wheat__stem_fly`,
+`wheat__smut`, `wheat__tan_spot`, `wheat__leaf_blight`, `wheat__common_root_rot`, `wheat__fusarium_head_blight`
+
+> Note `wheat__healthy` is a valid label — a healthy wheat leaf returns that, not an error.
+
+---
+
+## 5. `citation` object (inside `sources`, `/diagnose` only)
+
+Two shapes depending on the source corpus:
+- **pdf** → `{ "corpus":"pdf", "file":..., "pages":[start,end], "section":..., "doc_category":..., "district":..., "year":... }`
+- **kcc** → `{ "corpus":"kcc", "record":"KCC Q&A", "crop":..., "district":..., "season":..., "query_type":..., "year":... }`
+
+---
+
+## 6. Errors
 
 | HTTP | body | cause |
 |---|---|---|
-| 401 | `{"detail":"bad or missing X-API-Key"}` | wrong/absent API key |
-| 400 | `{"detail":"empty query"}` / `{"detail":"empty image"}` | missing input |
-| 501 | `{"detail":"vision model not deployed"}` | vision not available on this instance |
-| 500 | `{"detail":"..."}` | server error — retry; tell the deployer if it persists |
+| 400 | `{"detail":"empty image"}` | no file, or an empty/0-byte upload |
+| 401 | `{"detail":"bad or missing X-API-Key"}` | wrong/absent key |
+| 501 | `{"detail":"vision model not deployed"}` | this instance was started without the vision model (check `GET /health` → `modules.vision`) |
+| 500 | `{"detail":"..."}` | server error (e.g. a corrupt/undecodable image) — retry with a valid JPG/PNG |
 
-The first `/query` after the service (re)starts is slower (~10–15 s) while the model warms up;
-subsequent calls are quick.
+Check availability first if unsure: `GET /health` returns `"modules": { ... "vision": true }` when the
+image endpoints are live (no key needed for `/health`).
 
 ---
 
-## 11. Client code snippets
+## 7. Image guidance (pass this to users)
+
+- One **leaf**, filling most of the frame, in focus, even daylight.
+- Avoid heavy shadows, multiple overlapping leaves, or a tiny leaf in a big scene.
+- JPG or PNG; a few hundred KB to a few MB is plenty (it's resized to 256→224 px internally).
+- The model only knows **rice and wheat** leaf diseases (§4) — other crops will still return a label,
+  but it won't be meaningful (use `confidence`/`top_k` to catch this).
+
+---
+
+## 8. Client code
 
 **Python**
 ```python
 import requests
-BASE = "http://<HOST>:8000"
-KEY  = "<your-api-key>"
+BASE = "<BASE_URL>"; KEY = "<API_KEY>"
 
-def ask(query, session_id=None, live_data=None, intent="field_practice"):
-    body = {"query": query, "intent": intent}
-    if session_id: body["session_id"] = session_id
-    if live_data:  body["live_data"]  = live_data
-    r = requests.post(f"{BASE}/query", headers={"X-API-Key": KEY}, json=body, timeout=60)
-    r.raise_for_status()
-    d = r.json()
-    return d.get("answer") or d.get("message"), d["tier"]
-
-print(ask("wheat me yellow rust ki dawa", session_id="u1"))
-print(ask("iski dose kitni",              session_id="u1"))   # follow-up, remembered
-
-# classify a photo:
+# classify only
 with open("leaf.jpg", "rb") as f:
-    v = requests.post(f"{BASE}/vision", headers={"X-API-Key": KEY}, files={"file": f}).json()
+    v = requests.post(f"{BASE}/vision", headers={"X-API-Key": KEY},
+                      files={"file": f}, timeout=60).json()
 print(v["crop"], v["disease"], v["confidence"])
+
+# classify + treatment
+with open("leaf.jpg", "rb") as f:
+    d = requests.post(f"{BASE}/diagnose", headers={"X-API-Key": KEY},
+                      files={"file": f},
+                      data={"question": "is ke liye kya spray karun"}, timeout=90).json()
+print(d["diagnosis"]["disease"], "->", d["answer"] or d["message"])
 ```
 
-**JavaScript (Node / server-side)**
-```js
-const BASE = "http://<HOST>:8000", KEY = "<your-api-key>";
+**JavaScript / TypeScript (browser File)**
+```ts
+const BASE = "<BASE_URL>", KEY = "<API_KEY>";
 
-async function ask(query, sessionId) {
-  const res = await fetch(`${BASE}/query`, {
-    method: "POST",
-    headers: { "X-API-Key": KEY, "Content-Type": "application/json" },
-    body: JSON.stringify({ query, intent: "field_practice", session_id: sessionId }),
-  });
-  const d = await res.json();
-  return { answer: d.answer ?? d.message, tier: d.tier };
+async function vision(file: File) {
+  const fd = new FormData();
+  fd.append("file", file);
+  const r = await fetch(`${BASE}/vision`, { method: "POST", headers: { "X-API-Key": KEY }, body: fd });
+  return r.json();   // { label, crop, disease, confidence, top_k, note }
 }
 
-console.log(await ask("wheat me yellow rust ki dawa", "u1"));
-console.log(await ask("iski dose kitni", "u1"));   // follow-up
+async function diagnose(file: File, question?: string) {
+  const fd = new FormData();
+  fd.append("file", file);
+  if (question) fd.append("question", question);
+  const r = await fetch(`${BASE}/diagnose`, { method: "POST", headers: { "X-API-Key": KEY }, body: fd });
+  return r.json();   // { diagnosis, tier, answer, sources, ... }
+}
+```
+
+**React Native / Expo** — build the FormData from the picker asset:
+```ts
+const fd = new FormData();
+fd.append("file", { uri: asset.uri, name: "leaf.jpg", type: "image/jpeg" } as any);
+// then fetch(`${BASE}/diagnose`, { method:"POST", headers:{ "X-API-Key": KEY }, body: fd })
 ```
 
 ---
 
-*Questions about the API contract → this doc. To get the Base URL and API key, ask the deployer.*
+## 9. `/vision` vs `/diagnose` — which to call
+
+| Use case | Call |
+|---|---|
+| Just show "what disease is this?" | `/vision` (fast) |
+| One-tap "diagnose + tell me the treatment" | `/diagnose` |
+| Diagnose, then let the user ask free-form follow-ups | `/vision` for the label, then `/query` with the disease + their question (and multi-turn `history`) |
+
+---
+
+*Contract questions → this doc. Base URL + API key shared separately.*

@@ -13,8 +13,9 @@ async def get_mandi_prices(
 ):
     """Return the latest mandi prices for the farmer's location, optionally filtered by crop or market.
 
-    Location is client-driven (GPS or manual selection). Falls back to static MSP
-    reference prices when the live data.gov.in API is unavailable.
+    Location is client-driven (GPS or manual selection). Only real market data is
+    returned; an empty price list is returned when the live data.gov.in API is
+    unavailable.
     """
     return await mandi_service.get_prices(crop=crop, state=state, district=district, market=market)
 

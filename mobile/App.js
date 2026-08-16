@@ -39,6 +39,7 @@ import { loadSettings, saveSettings } from './src/storage';
 import {
   fetchMandiRows,
   fetchWeatherSnapshot,
+  fetchYieldFact,
 } from './src/services';
 import Header from './src/components/Header';
 import NavBar from './src/components/NavBar';
@@ -150,12 +151,7 @@ function AppShell() {
     pressure: null, dewPoint: null, cloud: null, uvIndex: null, wmoCode: null,
     sunrise: null, sunset: null, updatedAt: null
   });
-  const [mandiPrices, setMandiPrices] = useState([
-    { crop: 'Wheat', tag: 'MSP', price: '₹2,275/qtl', change: '+₹15' },
-    { crop: 'Paddy', tag: 'MSP', price: '₹2,183/qtl', change: '+₹10' },
-    { crop: 'Maize', tag: 'MSP', price: '₹2,090/qtl', change: '-₹5' },
-    { crop: 'Mustard', tag: 'MSP', price: '₹5,650/qtl', change: '+₹40' }
-  ]);
+  const [mandiPrices, setMandiPrices] = useState([]);
   const [mandiSource, setMandiSource] = useState('static');
   const [refreshing, setRefreshing] = useState(false);
   const [reloadKey, setReloadKey] = useState(0);
@@ -183,7 +179,7 @@ function AppShell() {
 
   // Assemble /query live_data from what /classify suggested. When the held
   // snapshot isn't live yet, refresh it from the backend first.
-  const buildLiveData = async (suggestedExternal) => {
+  const buildLiveData = async (userText, suggestedExternal) => {
     const liveData = {};
     const want = (key) => !Array.isArray(suggestedExternal) || suggestedExternal.includes(key);
 
@@ -212,6 +208,10 @@ function AppShell() {
           forecast_3d: Array.isArray(w.forecast) && w.forecast.length ? w.forecast : undefined,
         };
       }
+    }
+    if (want('yield')) {
+      const fact = await fetchYieldFact(userText, apiUrl, locationInfo);
+      if (fact) liveData.yield = fact;
     }
     return Object.keys(liveData).length ? liveData : undefined;
   };
@@ -553,7 +553,7 @@ function AppShell() {
             } catch (clErr) {
               console.warn('AI classify failed, answering without suggestion:', clErr);
             }
-            const liveData = await buildLiveData(suggestedExternal);
+            const liveData = await buildLiveData(userText, suggestedExternal);
             data = await aiAsk(userText, {
               sessionId: chatSessionRef.current,
               intent: aiIntent,
@@ -610,7 +610,13 @@ function AppShell() {
       const res = await fetch(`${apiUrl}/api/query/text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: userText })
+        body: JSON.stringify({
+          text: userText,
+          state: locationInfo.state || undefined,
+          district: locationInfo.district || undefined,
+          lat: locationInfo.lat || undefined,
+          lon: locationInfo.lon || undefined,
+        })
       });
 
       if (res.ok) {

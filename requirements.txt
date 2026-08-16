@@ -8,4 +8,6 @@ torch
 Pillow
 lightgbm
 pandas
+scikit-learn
+openpyxl
 sentencepiece

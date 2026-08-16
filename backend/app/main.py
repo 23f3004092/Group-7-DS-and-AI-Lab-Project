@@ -53,7 +53,7 @@ def health_check():
         "vector_db": qdrant_status,
         "yield_model": "OK (LightGBM loaded)" if yield_service.initialized else "OK (Math-fallback active)",
         "cloud_ai_models": "OK (Active)" if settings.GEMINI_API_KEY else "OK (Running with Mockups)",
-        "mandi_prices": "OK (Live)" if settings.MANDI_API_KEY else "OK (MSP Fallback)",
+        "mandi_prices": "OK (Live)" if settings.MANDI_API_KEY else "OK (Unavailable)",
         "weather": "OK (Live Open-Meteo)" if settings.WEATHER_PROVIDER != "indian" else ("OK (IMD)" if settings.WEATHER_API_KEY else "OK (Static)"),
     }
     

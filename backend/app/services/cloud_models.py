@@ -243,27 +243,38 @@ class CloudAIService:
         }
 
     @classmethod
-    async def synthesize_response(cls, query: str, context_chunks: List[Dict[str, Any]]) -> str:
-        """Synthesize advice using retrieved context chunks and the LLM."""
+    async def synthesize_response(cls, query: str, context_chunks: List[Dict[str, Any]],
+                                  live_data: Optional[Dict[str, Any]] = None) -> str:
+        """Synthesize advice using retrieved context chunks, optional live data, and the LLM."""
         
         ctx_str = "\n\n".join(
             f"[{i+1}] (Source: {c.get('source_type', 'agri_docs')}, Crop: {c.get('crop', 'General')})\n{c.get('text', '')}"
             for i, c in enumerate(context_chunks)
         )
         
+        live_str = ""
+        if live_data:
+            live_str = "\n\n".join(
+                f"- {k.replace('_', ' ').title()}: {v}"
+                for k, v in live_data.items() if v
+            )
+        
         system_prompt = (
             "You are FarmerVision, a knowledgeable and compassionate agricultural advisor for Indian farmers, "
             "specializing in Uttar Pradesh. Provide practical, step-by-step advice based ONLY on the provided Context. "
             "Do not invent facts, pesticide names, or dosage levels that are not in the Context. "
             "You MUST cite your sources as [1], [2], etc., at the end of every sentence that uses facts from the context. "
-            "Provide the answer in Hindi or English depending on the language of the farmer's question. "
-            "Always include a short advisory warning if chemicals/pesticides are suggested (e.g. 'Use gloves, wash hands'). "
-            "Keep the response concise, structured, and under 150 words."
+            "Use the provided Live Data facts verbatim (they are authoritative, fetched from live APIs) when they are "
+            "relevant to the farmer's question, e.g. when advising whether to sell produce, cite the mandi price, "
+            "weather forecast, and yield estimate. Provide the answer in Hindi or English depending on the language "
+            "of the farmer's question. Always include a short advisory warning if chemicals/pesticides are suggested "
+            "(e.g. 'Use gloves, wash hands'). Keep the response concise, structured, and under 150 words."
         )
         
         prompt = (
             f"Context:\n{ctx_str}\n\n"
-            f"Farmer's Query: {query}\n\n"
+            + (f"Live Data (authoritative facts):\n{live_str}\n\n" if live_str else "")
+            + f"Farmer's Query: {query}\n\n"
             f"Advisory Response:"
         )
 
@@ -278,30 +289,73 @@ class CloudAIService:
         # Mock Advisory Synthesis
         # Create a helpful response incorporating elements from the mock context
         is_hindi = any(char in query for char in ["क", "ह", "ा", "ी", "ो", "म", "न"])
-        
-        if is_hindi:
-            if "rust" in query.lower() or "पीला" in query:
-                return (
-                    "गेहूं में पीला रतुआ (Yellow Rust) के नियंत्रण के लिए:\n"
-                    "1. प्रभावित क्षेत्रों में नीम के तेल का छिड़काव करें [1]।\n"
-                    "2. संक्रमण अधिक होने पर प्रोपिकोनाजोल 25% EC (Propiconazole) दवा का 200 मिली प्रति एकड़ की दर से 200 लीटर पानी में मिलाकर छिड़काव करें [2]।\n"
-                    "⚠ सावधानी: रासायनिक छिड़काव करते समय मास्क और दस्ताने पहनें और हवा के रुख के विपरीत न छिड़कें।"
+
+        def _mock_decision_answer() -> Optional[str]:
+            """Sell-vs-keep answer built from live mandi/weather/yield facts."""
+            if not live_data:
+                return None
+            mandi = live_data.get("mandi_prices")
+            weather = live_data.get("weather")
+            yld = live_data.get("yield")
+            if is_hindi:
+                parts = [
+                    "किसान भाई, आज के लाइव आंकड़ों के आधार पर:",
+                ]
+                if mandi:
+                    parts.append(f"• मंडी/भाव: {mandi}")
+                if yld:
+                    parts.append(f"• अनुमानित पैदावार: {yld}")
+                if weather:
+                    parts.append(f"• मौसम: {weather}")
+                parts.append(
+                    "सुझाव: अगर आने वाले दिनों में बारिश की संभावना है तो फसल की गुणवत्ता "
+                    "खराब हो सकती है — बेहतर भाव मिलने पर उपज बेचना उचित रहेगा। "
+                    "अगर दाम कम है और मौसम साफ है, तो कुछ दिन रोक कर देख सकते हैं। "
+                    "अंतिम निर्णय नज़दीकी मंडी और KVK अधिकारी से पुष्टि करके लें [1]।"
                 )
-            elif "spot" in query.lower() or "धब्बा" in query or "धान" in query:
-                return (
-                    "धान में भूरा धब्बा (Brown Spot) रोग के प्रबंधन के लिए:\n"
-                    "1. संतुलित मात्रा में नाइट्रोजन उर्वरक का उपयोग करें और पोटाश डालें [1]।\n"
-                    "2. रासायनिक उपचार के लिए हेक्साकोनाजोल 5% EC (Hexaconazole) @ 2 मिली प्रति लीटर पानी का छिड़काव करें [2]।\n"
-                    "⚠ चेतावनी: कीटनाशक छिड़काव के बाद हाथ साबुन से धोएं और फसल कटाई से 15 दिन पहले छिड़काव बंद करें।"
-                )
-            else:
-                return (
-                    "किसान भाई, आपकी समस्या के समाधान के लिए उपलब्ध जानकारी के अनुसार:\n"
-                    "1. फसल में नमी बनाए रखें और अधिक सिंचाई से बचें [1]।\n"
-                    "2. संतुलित एनपीके (NPK) खाद डालें जिससे पौधों की रोग प्रतिरोधक क्षमता बढ़े [2]।\n"
-                    "अधिक जानकारी के लिए कृपया अपने नजदीकी कृषि विज्ञान केंद्र (KVK) के वैज्ञानिक से संपर्क करें।"
-                )
-        else:
+                return "\n".join(parts)
+            parts = ["Based on today's live data:"]
+            if mandi:
+                parts.append(f"• Mandi price: {mandi}")
+            if yld:
+                parts.append(f"• Est. yield: {yld}")
+            if weather:
+                parts.append(f"• Weather: {weather}")
+            parts.append(
+                "Suggestion: with rain expected, stored/standing crop quality can drop — "
+                "selling when the mandi rate is at or above the MSP is the safer choice. "
+                "If the rate is low and skies are clear, holding a few days may pay. "
+                "Please confirm with your local mandi and KVK officer before deciding [1]."
+            )
+            return "\n".join(parts)
+
+        decision = _mock_decision_answer()
+        if decision:
+            return decision
+
+        def _mock_answer() -> str:
+            if is_hindi:
+                if "rust" in query.lower() or "पीला" in query:
+                    return (
+                        "गेहूं में पीला रतुआ (Yellow Rust) के नियंत्रण के लिए:\n"
+                        "1. प्रभावित क्षेत्रों में नीम के तेल का छिड़काव करें [1]।\n"
+                        "2. संक्रमण अधिक होने पर प्रोपिकोनाजोल 25% EC (Propiconazole) दवा का 200 मिली प्रति एकड़ की दर से 200 लीटर पानी में मिलाकर छिड़काव करें [2]।\n"
+                        "⚠ सावधानी: रासायनिक छिड़काव करते समय मास्क और दस्ताने पहनें और हवा के रुख के विपरीत न छिड़कें।"
+                    )
+                elif "spot" in query.lower() or "धब्बा" in query or "धान" in query:
+                    return (
+                        "धान में भूरा धब्बा (Brown Spot) रोग के प्रबंधन के लिए:\n"
+                        "1. संतुलित मात्रा में नाइट्रोजन उर्वरक का उपयोग करें और पोटाश डालें [1]।\n"
+                        "2. रासायनिक उपचार के लिए हेक्साकोनाजोल 5% EC (Hexaconazole) @ 2 मिली प्रति लीटर पानी का छिड़काव करें [2]।\n"
+                        "⚠ चेतावनी: कीटनाशक छिड़काव के बाद हाथ साबुन से धोएं और फसल कटाई से 15 दिन पहले छिड़काव बंद करें।"
+                    )
+                else:
+                    return (
+                        "किसान भाई, आपकी समस्या के समाधान के लिए उपलब्ध जानकारी के अनुसार:\n"
+                        "1. फसल में नमी बनाए रखें और अधिक सिंचाई से बचें [1]।\n"
+                        "2. संतुलित एनपीके (NPK) खाद डालें जिससे पौधों की रोग प्रतिरोधक क्षमता बढ़े [2]।\n"
+                        "अधिक जानकारी के लिए कृपया अपने नजदीकी कृषि विज्ञान केंद्र (KVK) के वैज्ञानिक से संपर्क करें।"
+                    )
             # English Response
             if "rust" in query.lower() or "yellow" in query:
                 return (
@@ -324,3 +378,12 @@ class CloudAIService:
                     "2. Apply balanced fertilizers based on soil testing reports [2].\n"
                     "For precise local guidance, please verify with your regional KVK officer."
                 )
+
+        mock = _mock_answer()
+        if live_data:
+            facts_block = "\n".join(
+                f"- {k.replace('_', ' ').title()}: {v}"
+                for k, v in live_data.items() if v
+            )
+            mock = f"{mock}\n\n**Live Data (today):**\n{facts_block}"
+        return mock

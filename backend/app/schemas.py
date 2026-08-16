@@ -5,11 +5,17 @@ from datetime import datetime
 
 class TextQuery(BaseModel):
     text: str = Field(..., description="Query text from farmer")
+    state: Optional[str] = Field(None, description="Farmer's state (drives mandi/live data)")
+    district: Optional[str] = Field(None, description="Farmer's district (drives mandi/weather/live data)")
+    lat: Optional[float] = Field(None, description="Latitude for live weather")
+    lon: Optional[float] = Field(None, description="Longitude for live weather")
 
 class YieldQuery(BaseModel):
     crop: str = Field(..., description="Crop name (e.g. wheat, rice)")
     district: str = Field(..., description="District in Uttar Pradesh")
     area_ha: float = Field(..., description="Acreage/area in hectares")
+    lat: Optional[float] = Field(None, description="Latitude for live weather (falls back to district geocode)")
+    lon: Optional[float] = Field(None, description="Longitude for live weather (falls back to district geocode)")
 
 class FeedbackSubmit(BaseModel):
     feedback_score: int = Field(..., description="1 for thumbs up, -1 for thumbs down")
@@ -53,6 +59,7 @@ class QueryResponse(BaseModel):
     detected_crop: Optional[str] = None
     detected_disease: Optional[str] = None
     predicted_yield: Optional[float] = None
+    live_data: Optional[Dict[str, Any]] = None
 
 class LogResponseSchema(BaseModel):
     id: int

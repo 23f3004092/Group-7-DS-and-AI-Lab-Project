@@ -1,7 +1,9 @@
 import os
 import json
+import re
 import time
 import uuid
+import asyncio
 import datetime
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Body
 from fastapi.responses import JSONResponse
@@ -14,6 +16,9 @@ from ..schemas import TextQuery, YieldQuery, QueryResponse, FeedbackSubmit
 from ..services.cloud_models import CloudAIService
 from ..services.qdrant_service import qdrant_service
 from ..services.yield_service import yield_service
+from ..services.weather_service import weather_service
+from ..services.mandi_service import mandi_service, CROP_ALIASES
+from ..services.cost_service import cost_service
 from ..config import settings
 
 router = APIRouter(prefix="/api/query", tags=["Advisory Query Pipelines"])
@@ -46,7 +51,127 @@ def get_current_settings(db: Session) -> Dict[str, Any]:
             configs[key] = getattr(settings, cfg_name, None)
     return configs
 
-def get_qdrant_status() -> Dict[str, Any]:
+LIVE_DATA_TRIGGERS = {
+    "mandi_prices": [
+        r"\bmandi\w*", r"\bbhav\b", r"\bbhaav\b", r"\brate\b", r"\bprice\w*",
+        r"\bsell\w*", r"\bbech\w*", r"\bsale\b", r"\bbazar\b", r"\bmarket\b",
+        r"भाव", r"मंडी", r"रेट", r"दाम", r"कीमत", r"बेच", r"बाज़ार", r"बाजार",
+    ],
+    "weather": [
+        r"\bweather\b", r"\bmausam\b", r"\btemperature\b", r"\brainy?\b",
+        r"\bforecast\b", r"\bupcoming days\b", r"\bsunny\b", r"\bhows?\b",
+        r"गर्मी", r"मौसम", r"बारिश", r"तापमान", r"बरसात", r"पानी",
+    ],
+    "yield": [
+        r"\byield\b", r"\bproduce\b", r"\bupaj\b", r"\bproduction\b",
+        r"\bquintal\w*", r"\buple\b", r"\bproduce\b",
+        r"उपज", r"पैदावार", r"उत्पादन", r"क्विंटल", r"फ़सल",
+    ],
+}
+
+def detect_live_data_needs(text: str) -> List[str]:
+    """Bilingual (English/Hindi/Hinglish) rule-based detector for live-data needs."""
+    t = text.lower()
+    needs = []
+    for key, patterns in LIVE_DATA_TRIGGERS.items():
+        if any(re.search(p, t) for p in patterns):
+            needs.append(key)
+    return needs
+
+def _format_mandi_fact(crop: str, mandi: Dict[str, Any], msp: Optional[float]) -> Optional[str]:
+    """Format 'Wheat MSP: Rs 2275/quintal, today's price: Rs 2450/quintal (2026-08-16)'."""
+    commodity = CROP_ALIASES.get(crop, crop.title())
+    row = None
+    for p in mandi.get("prices", []):
+        if p.get("crop", "").lower() == commodity.lower() and p.get("modal_price") is not None:
+            row = p
+            break
+    msp_val = msp if msp is not None else 0
+    today = row["modal_price"] if row else None
+    date = (row.get("arrival_date") or mandi.get("fetched_at", ""))[:10]
+
+    def _fmt(v: float) -> str:
+        return f"{v:g}" if v == int(v) else f"{v:.2f}"
+
+    label = crop.title()
+    if msp_val > 0:
+        fact = f"{label} MSP: Rs {_fmt(msp_val)}/quintal"
+        if today is not None:
+            fact += f", today's price: Rs {_fmt(today)}/quintal ({date})"
+    elif today is not None:
+        fact = f"{label} mandi price today: Rs {_fmt(today)}/quintal ({date})"
+    else:
+        return None
+    return fact
+
+def _format_weather_fact(weather: Dict[str, Any]) -> Optional[str]:
+    """Format 'little rainfall next 3 days, temperature 28-33C'."""
+    forecast = weather.get("forecast") or []
+    rainy = 0
+    for f in forecast[:3]:
+        prob = f.get("rain_probability")
+        if prob is not None and float(prob) > 50:
+            rainy += 1
+    if rainy == 0:
+        rain_txt = "no rainfall next 3 days"
+    elif rainy <= 1:
+        rain_txt = "little rainfall next 3 days"
+    else:
+        rain_txt = f"rain likely on {rainy} of next 3 days"
+    lo, hi = weather.get("min_temp_c"), weather.get("max_temp_c")
+    temp_txt = f"temperature {lo:.0f}-{hi:.0f}C" if lo is not None and hi is not None else ""
+    if temp_txt:
+        return f"{rain_txt}, {temp_txt}"
+    return rain_txt
+
+def _format_yield_fact(crop: str, pred_t_ha: float) -> str:
+    """Format 'Estimated yield: 42 quintal/acre' (1 t/ha = 10 qtl/2.47 acre)."""
+    qtl_per_acre = pred_t_ha * 10 / 2.47105
+    return f"Estimated {crop} yield: {qtl_per_acre:.1f} quintal/acre"
+
+async def build_live_data_facts(
+    needs: List[str], crop: Optional[str], state: Optional[str],
+    district: Optional[str], lat: Optional[float], lon: Optional[float],
+) -> Dict[str, str]:
+    """Fetch and format live mandi/weather/yield facts for the advisory answer."""
+    state = (state or settings.MANDI_STATE).strip()
+    district = (district or settings.MANDI_DISTRICT).strip()
+    facts: Dict[str, str] = {}
+    weather = None
+
+    wants_weather = "weather" in needs
+    wants_mandi = "mandi_prices" in needs and crop is not None
+    wants_yield = "yield" in needs and crop is not None
+
+    tasks = []
+    if wants_weather:
+        tasks.append(weather_service.get_current(lat=lat, lon=lon, city=district or None))
+    if wants_mandi:
+        tasks.append(mandi_service.get_prices(crop=crop, state=state, district=district))
+        tasks.append(cost_service.get_msp(crop))
+    if wants_yield:
+        tasks.append(cost_service.get_cost_per_ha(crop, state=state))
+
+    results = list(await asyncio.gather(*tasks)) if tasks else []
+
+    idx = 0
+    if wants_weather:
+        weather = results[idx]
+        facts["weather"] = _format_weather_fact(weather)
+        idx += 1
+    if wants_mandi:
+        facts["mandi_prices"] = _format_mandi_fact(crop, results[idx], results[idx + 1])
+        idx += 2
+    if wants_yield:
+        annual_rainfall = None
+        if weather is not None:
+            annual_rainfall = weather.get("precipitation_mm")
+            if annual_rainfall is None and weather.get("rain_probability") is not None:
+                annual_rainfall = weather["rain_probability"] * 0.1
+        pred_t_ha, _ = yield_service.predict(crop, district, 1.0, annual_rainfall=annual_rainfall)
+        facts["yield"] = _format_yield_fact(crop, pred_t_ha)
+
+    return facts
     """Helper to check vector DB connection status and count."""
     if qdrant_service.initialized and qdrant_service.client:
         try:
@@ -150,10 +275,20 @@ async def query_text(q: TextQuery, db: Session = Depends(get_db)):
             top_score=0.0, answer=answer, latency_ms=latency
         )
         
-    # 2. Identify crop entities mentioned
+    # 2. Identify crop entities mentioned (English + Hinglish/Hindi aliases)
     detected_crop = None
-    for crop in ["wheat", "rice", "paddy", "maize", "mustard", "sugarcane", "potato", "mango"]:
-        if crop in text.lower():
+    CROP_ALIAS_MAP = {
+        "wheat": ["wheat", "gehu", "गेहूं", "गेहूँ"],
+        "rice": ["rice", "paddy", "dhan", "चावल", "धान"],
+        "maize": ["maize", "makka", "makkai", "मक्का"],
+        "mustard": ["mustard", "sarson", "सरसों"],
+        "sugarcane": ["sugarcane", "ganna", "गन्ना"],
+        "potato": ["potato", "aloo", "आलू"],
+        "mango": ["mango", "aam", "आम"],
+    }
+    text_lower = text.lower()
+    for crop, aliases in CROP_ALIAS_MAP.items():
+        if any(alias in text_lower for alias in aliases):
             detected_crop = crop
             break
 
@@ -170,12 +305,20 @@ async def query_text(q: TextQuery, db: Session = Depends(get_db)):
         "source_type": hit["source_type"]
     } for idx, hit in enumerate(hits[:5])]
 
-    # 4. Synthesize answer
-    if tier == "abstain":
+    # 4. Detect live-data needs (mandi / weather / yield) and fetch facts
+    live_data = {}
+    needs = detect_live_data_needs(text)
+    if needs:
+        live_data = await build_live_data_facts(
+            needs, detected_crop, q.state, q.district, q.lat, q.lon
+        )
+
+    # 5. Synthesize answer (live-data questions are answered even when RAG abstains)
+    if tier == "abstain" and not live_data:
         answer = caveat
     else:
-        answer = await CloudAIService.synthesize_response(text, hits[:5])
-        if caveat:
+        answer = await CloudAIService.synthesize_response(text, hits[:5], live_data=live_data or None)
+        if caveat and not live_data:
             answer = f"{answer}\n\n⚠ {caveat}"
 
     latency = int((time.time() - t0) * 1000)
@@ -191,7 +334,8 @@ async def query_text(q: TextQuery, db: Session = Depends(get_db)):
     return QueryResponse(
         pathway="A", intent=intents, blocked=False, tier=tier,
         top_score=round(top_score, 4), answer=answer, sources=sources,
-        latency_ms=latency, detected_crop=detected_crop
+        latency_ms=latency, detected_crop=detected_crop,
+        live_data=live_data or None
     )
 
 @router.post("/image", response_model=QueryResponse)
@@ -277,25 +421,59 @@ async def query_image(file: UploadFile = File(...), db: Session = Depends(get_db
 
 @router.post("/yield")
 async def query_yield(q: YieldQuery, db: Session = Depends(get_db)):
-    """Pathway C — Crop Yield & Profitability estimation using LightGBM and price/cost multipliers."""
+    """Pathway C — Crop Yield & Profitability estimation using the trained model,
+    live weather (rainfall) and live mandi prices."""
     t0 = time.time()
     
     crop = q.crop.lower().strip()
     district = q.district.lower().strip()
     area = q.area_ha
     
-    # 1. Run LightGBM yield prediction
-    pred_t_ha, total_yield = yield_service.predict(crop, district, area)
+    # 1. Fetch live weather, mandi prices and CACP cost data in parallel
+    weather, mandi, cacp_msp, cost_per_ha = await asyncio.gather(
+        weather_service.get_current(lat=q.lat, lon=q.lon, city=district),
+        mandi_service.get_prices(crop=crop, state="Uttar Pradesh", district=district),
+        cost_service.get_msp(crop),
+        cost_service.get_cost_per_ha(crop, state="Uttar Pradesh"),
+    )
     
-    # 2. Run economic profitability calculator
-    economics = yield_service.estimate_profitability(crop, total_yield, area)
+    # 2. Feed live rainfall into the yield model (current precipitation, else rain probability)
+    annual_rainfall = weather.get("precipitation_mm")
+    if annual_rainfall is None and weather.get("rain_probability") is not None:
+        annual_rainfall = weather["rain_probability"] * 0.1
+    pred_t_ha, total_yield = yield_service.predict(crop, district, area, annual_rainfall=annual_rainfall)
     
+    # 3. Price: live mandi > CACP MSP > static constants
+    live_price = None
+    price_source = None
+    if mandi.get("source") == "live":
+        commodity = CROP_ALIASES.get(crop, crop.title())
+        for p in mandi.get("prices", []):
+            if p.get("crop", "").lower() == commodity.lower() and p.get("modal_price") is not None:
+                live_price = p["modal_price"]
+                price_source = "mandi"
+                break
+    if live_price is None and cacp_msp is not None:
+        live_price = cacp_msp
+        price_source = "cacp_msp"
+    economics = yield_service.estimate_profitability(
+        crop, total_yield, area,
+        market_price_per_quintal=live_price, cost_per_ha=cost_per_ha,
+        price_source=price_source,
+    )
+    
+    price_label = {
+        "mandi": f"Mandi ₹{economics['price_per_quintal']}",
+        "cacp_msp": f"CACP MSP ₹{economics['price_per_quintal']}",
+        "msp": f"MSP ₹{economics['price_per_quintal']}",
+    }.get(economics["price_source"], f"MSP ₹{economics['price_per_quintal']}")
+    cost_label = f"CACP (₹{economics['cost_per_ha']}/ha)" if economics["cost_source"] == "cacp" else "Estimate"
     answer = (
         f"Expected yield for {crop.title()} on {area} ha in {district.title()}: "
         f"~{pred_t_ha:.2f} t/ha ({total_yield:.2f} tonnes total).\n\n"
-        f"**Economic Projections:**\n"
+        f"**Economic Projections ({price_label}/quintal, cost: {cost_label}):**\n"
         f"- Est. Cultivation Cost: ₹{economics['total_cost']:,}\n"
-        f"- Est. Gross Revenue (MSP): ₹{economics['total_revenue']:,}\n"
+        f"- Est. Gross Revenue: ₹{economics['total_revenue']:,}\n"
         f"- Projected Net Income: ₹{economics['net_profit']:,}\n"
         f"- Return on Investment: {economics['roi_percent']}%"
     )
@@ -321,7 +499,9 @@ async def query_yield(q: YieldQuery, db: Session = Depends(get_db)):
         "predicted_yield": total_yield,
         "predicted_yield_t_ha": round(pred_t_ha, 2),
         "total_yield_t": total_yield,
-        "economics": economics
+        "economics": economics,
+        "weather": weather,
+        "mandi": mandi
     }
 
 @router.post("/multimodal", response_model=QueryResponse)

@@ -41,7 +41,7 @@ export async function fetchMandiRows(apiUrl, locationInfo) {
     if (!data.prices?.length) return null;
     return { rows: rowsFromMandiData(data), source: data.source };
   } catch (e) {
-    // Server unreachable or rate-limited -> keep the static MSP fallback list
+    // Server unreachable or rate-limited -> no live prices are shown
     return null;
   }
 }
@@ -95,5 +95,51 @@ export async function fetchWeatherSnapshot(apiUrl, locationInfo) {
   } catch (e) {
     // Server unreachable -> keep the static default weather card
     return null;
+  }
+}
+
+// Yield estimate fact string for the AI chat's live_data. Detects the crop
+// (EN/Hinglish/Hindi) and area (hectares/acres) from the farmer's message, then
+// asks the local backend for a model-based prediction.
+const CROP_ALIASES = {
+  wheat: ['wheat', 'gehu', 'गेहूं', 'गेहूँ'],
+  rice: ['rice', 'paddy', 'dhan', 'धान', 'चावल'],
+  maize: ['maize', 'makka', 'मक्का'],
+  mustard: ['mustard', 'sarson', 'सरसों'],
+  sugarcane: ['sugarcane', 'ganna', 'गन्ना'],
+  potato: ['potato', 'aloo', 'आलू'],
+};
+
+export async function fetchYieldFact(userText, apiUrl, locationInfo) {
+  if (!apiUrl || !userText) return undefined;
+  const text = userText.toLowerCase();
+  let crop;
+  for (const [slug, words] of Object.entries(CROP_ALIASES)) {
+    if (words.some(w => text.includes(w))) { crop = slug; break; }
+  }
+  const district = (locationInfo?.district || '').toLowerCase();
+  if (!crop || !district) return undefined;
+  const m = text.match(/(\d+(?:\.\d+)?)\s*(hectare|hectares|ha|acre|acres|एकड़)/i);
+  let areaHa = 1;
+  if (m) {
+    const value = parseFloat(m[1]);
+    const unit = (m[2] || '').toLowerCase();
+    areaHa = (unit.startsWith('acre') || unit === 'एकड़') ? value * 0.404686 : value;
+  }
+  try {
+    const res = await fetch(`${apiUrl}/api/query/yield`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ crop, district, area_ha: areaHa }),
+    });
+    if (!res.ok) return undefined;
+    const data = await res.json();
+    const tHa = data.predicted_yield_t_ha;
+    if (tHa == null) return undefined;
+    const qPerAcre = tHa * 10 / 2.47105;
+    const areaTxt = m ? ` (${areaHa} ha farm)` : '';
+    return `Estimated ${crop} yield: ${qPerAcre.toFixed(1)} quintal/acre, ${tHa.toFixed(2)} t/ha${areaTxt}`;
+  } catch (e) {
+    return undefined;
   }
 }
