@@ -30,6 +30,7 @@ import {
   checkHealth as aiCheckHealth,
   normalizeSources,
   setAiProxyUrl,
+  appendImage,
 } from './aiClient';
 
 // Shared modules: theme system, app config, persistence, display helpers, data services
@@ -578,15 +579,10 @@ function AppShell() {
       // 2) Fallback: local FastAPI backend proxy
       if (attachedImage) {
         const formData = new FormData();
-        formData.append('file', {
-          uri: attachedImage.uri,
-          name: attachedImage.name,
-          type: /\.png$/i.test(attachedImage.name) ? 'image/png' : 'image/jpeg',
-        });
+        await appendImage(formData, { uri: attachedImage.uri, name: attachedImage.name });
         const res = await fetch(`${apiUrl}/api/query/image`, {
           method: 'POST',
           body: formData,
-          headers: { 'Content-Type': 'multipart/form-data' },
         });
         if (res.ok) {
           const data = await res.json();
@@ -661,13 +657,9 @@ function AppShell() {
     if (!selectedImage) return;
     setUploading(true);
 
-    // Prepare FormData
+    // Prepare FormData (Note: multipart = do NOT set Content-Type manually; fetch adds the boundary)
     const formData = new FormData();
-    formData.append('file', {
-      uri: selectedImage.uri,
-      name: selectedImage.name,
-      type: 'image/jpeg'
-    });
+    await appendImage(formData, { uri: selectedImage.uri, name: selectedImage.name, type: 'image/jpeg' });
 
     try {
       // 1) GCP AI service — leaf diagnosis + grounded treatment (API_SPEC.md /diagnose)
@@ -698,9 +690,6 @@ function AppShell() {
       const res = await fetch(`${apiUrl}/api/query/image`, {
         method: 'POST',
         body: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
       });
 
       if (res.ok) {

@@ -63,10 +63,23 @@ export async function ask(query, { intent, sessionId, liveData, topK } = {}) {
   return request('/query', { body });
 }
 
+// Adds an image to a multipart FormData in a platform-safe way.
+// React Native needs the {uri, name, type} object; on web/browsers a plain
+// object would serialize as "[object Object]", so a real File/Blob is appended.
+export async function appendImage(formData, { uri, name = 'leaf.jpg', type } = {}) {
+  const mime = type || imageMime(name);
+  if (typeof window !== 'undefined' && typeof window.document !== 'undefined') {
+    const blob = await (await fetch(uri)).blob();
+    formData.append('file', blob, name);
+  } else {
+    formData.append('file', { uri, name, type: mime });
+  }
+}
+
 // POST /diagnose — leaf photo (+ optional question) -> disease + grounded treatment
 export async function diagnose({ uri, name = 'leaf.jpg', question } = {}) {
   const formData = new FormData();
-  formData.append('file', { uri, name, type: imageMime(name) });
+  await appendImage(formData, { uri, name });
   if (question) formData.append('question', question);
   return request('/diagnose', { formData });
 }
@@ -74,7 +87,7 @@ export async function diagnose({ uri, name = 'leaf.jpg', question } = {}) {
 // POST /vision — leaf photo -> disease label + confidence only
 export async function vision({ uri, name = 'leaf.jpg' } = {}) {
   const formData = new FormData();
-  formData.append('file', { uri, name, type: imageMime(name) });
+  await appendImage(formData, { uri, name });
   return request('/vision', { formData });
 }
 

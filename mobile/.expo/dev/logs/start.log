@@ -1966,3 +1966,28 @@
 {"_e":"metro:bundling:progress","_t":1786896543499,"id":"2y","progress":0,"total":1,"current":0}
 {"_e":"metro:bundling:done","_t":1786896543622,"id":"2y","total":1,"ms":747.146886}
 {"_e":"metro:client_log","_t":1786896544947,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:bundling:started","_t":1786897436287,"id":"30","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786897436287,"id":"30","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786897436333,"id":"30","total":1,"ms":46.287138}
+{"_e":"metro:client_log","_t":1786897436707,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786897436707,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786897436715,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1786897436721,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:bundling:started","_t":1786897436749,"id":"35","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1786897436749,"id":"35","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786897436753,"id":"35","total":1,"ms":4.35437}
+{"_e":"metro:client_log","_t":1786897443360,"level":"warn","data":["Image: style.resizeMode is deprecated. Please use props.resizeMode."]}
+{"_e":"metro:client_log","_t":1786897444264,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:bundling:started","_t":1786897831256,"id":"3k","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1786897831259,"id":"3k","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786897831359,"id":"3k","total":1,"ms":102.642288}
+{"_e":"metro:client_log","_t":1786897831894,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1786897831894,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1786897831902,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1786897831910,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:bundling:started","_t":1786897832000,"id":"3l","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1786897832000,"id":"3l","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1786897832013,"id":"3l","total":1,"ms":12.93333}
+{"_e":"metro:client_log","_t":1786897840523,"level":"warn","data":["Image: style.resizeMode is deprecated. Please use props.resizeMode."]}
+{"_e":"metro:client_log","_t":1786897841733,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:client_log","_t":1786899126290,"level":"warn","data":["AI diagnose failed, falling back to local backend:","[Error: AI service unreachable: ]"]}
