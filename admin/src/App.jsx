@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-// Setup API Host. In dev, points to localhost:8000. In production/same-host, points to empty.
-const API_BASE = 'http://localhost:8000';
+// Setup API Host. Set VITE_API_BASE in admin/.env or Vercel project env vars
+// (e.g. https://farmervision-api.onrender.com). Defaults to localhost:8000 for dev.
+const API_BASE = (import.meta.env.VITE_API_BASE || 'http://localhost:8000').replace(/\/+$/, '');
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');

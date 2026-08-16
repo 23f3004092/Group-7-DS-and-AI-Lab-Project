@@ -1,11 +1,16 @@
 import Constants from 'expo-constants';
 
-// Default API Server. In dev, point at the machine running the Expo/Metro bundler
-// (its LAN IP) so physical phones & emulators can reach the FastAPI backend.
-// Falls back to localhost when no dev server host is available (e.g. a built app).
+// Default API Server.
+// 1) EXPO_PUBLIC_API_URL (set in mobile/.env or EAS secrets) overrides everything —
+//    this is the deployed backend URL baked into the APK.
+// 2) In dev, auto-detect the machine running the Expo/Metro bundler (its LAN IP)
+//    so physical phones & emulators can reach the FastAPI backend.
+// 3) Falls back to localhost when no dev server host is available.
 const FALLBACK_API_URL = 'http://127.0.0.1:8000';
 
 function resolveDefaultApiUrl() {
+  const explicit = (process.env.EXPO_PUBLIC_API_URL || '').trim().replace(/\/+$/, '');
+  if (explicit) return explicit;
   try {
     const hostUri = Constants.expoConfig?.hostUri || Constants.expoGoConfig?.debuggerHost || '';
     const host = (hostUri || '').split(':')[0];
