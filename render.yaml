@@ -1,0 +1,31 @@
+# Render Blueprint for the FarmerVision FastAPI backend.
+# Deploy: push this repo to GitHub, then in Render: New -> Blueprint -> pick the repo.
+# Or manually: New -> Web Service with the settings mirrored below.
+services:
+  - type: web
+    name: farmervision-backend
+    runtime: python
+    plan: free
+    rootDir: .
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: SKIP_GENERATOR
+        value: "1"
+      - key: MOCK_MODELS
+        value: "true"
+      - key: AI_API_URL
+        value: "http://34.93.236.19:8000"
+      # Fill these in Render -> Environment (secrets, not committed):
+      - key: MANDI_API_KEY
+        sync: false
+      - key: WEATHER_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: AI_API_KEY
+        sync: false
