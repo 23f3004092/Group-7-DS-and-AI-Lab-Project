@@ -10,7 +10,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.farmervision.com"
+        "EXPO_PUBLIC_API_URL": "https://farmervision-backend.onrender.com"
       }
     },
     "production": {
