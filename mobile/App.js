@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import {
   Text,
   View,
-  ActivityIndicator,
   Alert,
+  Animated,
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -49,6 +49,7 @@ import LocationModal from './src/components/LocationModal';
 import LanguageModal from './src/components/LanguageModal';
 import WeatherDetailModal from './src/components/WeatherDetailModal';
 import HomeScreen from './src/screens/HomeScreen';
+import SplashScreen from './src/screens/SplashScreen';
 import ScannerScreen from './src/screens/ScannerScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import YieldScreen from './src/screens/YieldScreen';
@@ -77,6 +78,35 @@ function AppShell() {
     Inter_700Bold,
     Inter_800ExtraBold,
   });
+
+  // Landing/splash gating: hold the branded splash at least SPLASH_MIN_MS, fade it
+  // out once i18n + fonts are ready, then fade the main app in.
+  const SPLASH_MIN_MS = 2000;
+  const bootStartRef = useRef(Date.now());
+  const [splashVisible, setSplashVisible] = useState(true);
+  const splashOpacity = useRef(new Animated.Value(1)).current;
+  const appOpacity = useRef(new Animated.Value(0)).current;
+  const bootReady = i18nReady && fontsLoaded;
+
+  useEffect(() => {
+    if (!bootReady || !splashVisible) return;
+    const elapsed = Date.now() - bootStartRef.current;
+    const delay = Math.max(0, SPLASH_MIN_MS - elapsed);
+    const timeout = setTimeout(() => {
+      Animated.timing(splashOpacity, { toValue: 0, duration: 450, useNativeDriver: true }).start(() => {
+        setSplashVisible(false);
+        Animated.timing(appOpacity, { toValue: 1, duration: 400, useNativeDriver: true }).start();
+      });
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [bootReady, splashVisible, splashOpacity, appOpacity]);
+
+  // Fade tab screens in on every navigation
+  const tabOpacity = useRef(new Animated.Value(1)).current;
+  useEffect(() => {
+    tabOpacity.setValue(0);
+    Animated.timing(tabOpacity, { toValue: 1, duration: 260, useNativeDriver: true }).start();
+  }, [activeTab, tabOpacity]);
 
   // Personalization state
   const [themeMode, setThemeMode] = useState(DEFAULT_SETTINGS.theme);
@@ -772,20 +802,25 @@ function AppShell() {
 
   const s = createStyles(theme, accent, fontScale, themeMode);
 
-  // Wait for i18n + fonts (cross-platform). Non-Latin scripts still render via system fallback.
-  if (!i18nReady || !fontsLoaded) {
+  // Branded landing screen while the app boots, then fade it out
+  if (splashVisible) {
     return (
-      <View style={[s.container, { alignItems: 'center', justifyContent: 'center' }]}>
-        <ActivityIndicator size="large" color={accent.main} />
-      </View>
+      <SplashScreen
+        t={t}
+        theme={theme}
+        fontScale={fontScale}
+        opacity={splashOpacity}
+        ready={bootReady}
+      />
     );
   }
 
   return (
-    <KeyboardAvoidingView
-      style={[s.container, { backgroundColor: theme.bg }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : Platform.OS === 'android' ? 'height' : undefined}
-    >
+    <Animated.View style={{ flex: 1, opacity: appOpacity }}>
+      <KeyboardAvoidingView
+        style={[s.container, { backgroundColor: theme.bg }]}
+        behavior={Platform.OS === 'ios' ? 'padding' : Platform.OS === 'android' ? 'height' : undefined}
+      >
       <StatusBar style={theme.statusBar} />
 
       {/* App header (language pill + title) */}
@@ -799,7 +834,7 @@ function AppShell() {
       />
 
       {/* Main Tab Screens */}
-      <View style={s.contentContainer}>
+      <Animated.View style={[s.contentContainer, { opacity: tabOpacity }]}>
         {activeTab === 'home' && (
           <HomeScreen
             weather={weather}
@@ -895,7 +930,7 @@ function AppShell() {
             fontScale={fontScale}
           />
         )}
-      </View>
+      </Animated.View>
 
       {/* Floating bottom navigation bar (lifted above the home-indicator/gesture bar) */}
       <NavBar
@@ -975,5 +1010,6 @@ function AppShell() {
         insets={insets}
       />
     </KeyboardAvoidingView>
+    </Animated.View>
   );
 }

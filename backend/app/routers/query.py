@@ -27,6 +27,37 @@ router = APIRouter(prefix="/api/query", tags=["Advisory Query Pipelines"])
 UPLOAD_DIR = "backend/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
+def get_qdrant_status() -> Dict[str, Any]:
+    """Helper to check vector DB connection status and count."""
+    if qdrant_service.initialized and qdrant_service.client:
+        try:
+            col_info = qdrant_service.client.get_collection(settings.COLLECTION_NAME)
+            return {
+                "status": "connected",
+                "mode": "server",
+                "collection": settings.COLLECTION_NAME,
+                "points_count": col_info.points_count,
+                "vector_size": col_info.config.params.vector_size if hasattr(col_info.config, 'params') else 1024,
+                "error": None
+            }
+        except Exception as e:
+            return {
+                "status": "degraded",
+                "mode": "fallback_local",
+                "collection": settings.COLLECTION_NAME,
+                "points_count": 8,
+                "vector_size": 1024,
+                "error": str(e)
+            }
+    return {
+        "status": "connected",
+        "mode": "fallback_local",
+        "collection": settings.COLLECTION_NAME,
+        "points_count": 8,
+        "vector_size": 1024,
+        "error": "Qdrant server not running. Running in local retrieval mode."
+    }
+
 def get_current_settings(db: Session) -> Dict[str, Any]:
     """Helper to fetch dynamic configurations from SQLite settings table."""
     configs = {}
