@@ -85,7 +85,8 @@ def detect_language(text: str) -> str:
 
 
 def _row(sid, pathway, query, lang, crop, intent, block,
-         vis_cls="", vis_tier="", y_crop="", y_dist="", y_area="", notes=""):
+         vis_cls="", vis_tier="", y_crop="", y_dist="", y_area="",
+         image_path="", notes=""):
     return {
         "scenario_id":    sid,
         "pathway":        pathway,
@@ -99,8 +100,10 @@ def _row(sid, pathway, query, lang, crop, intent, block,
         "yield_crop":     y_crop,
         "yield_district": y_dist,
         "yield_area_ha":  y_area,
+        "image_path":     image_path,
         "notes":          notes,
     }
+
 
 
 def load_translator():
@@ -249,9 +252,10 @@ def make_guardrail_rows() -> pd.DataFrame:
 
 
 # ── Pathway B — vision scenarios ──────────────────────────────────────────────
-# Classes and expected tiers from M4 Appendix C.
-# Actual ViT inference + image loading happens on Kaggle.
+# We download the ViT test-split dataset from kagglehub and pick one real image
+# per class so Pathway B runs actual model inference, not a placeholder.
 
+# Classes we want to exercise, with their expected retrieval tier and M5 test F1
 VISION_SCENARIOS = [
     ("wheat__yellow_rust",     "high",     "F1=0.989"),
     ("wheat__brown_rust",      "high",     "F1=0.950"),
@@ -263,17 +267,86 @@ VISION_SCENARIOS = [
     ("rice__bacterial_blight", "high",     "F1=0.991"),
 ]
 
+
+def download_vit_dataset() -> Path:
+    """Download the ViT test-split dataset from kagglehub and return the test dir."""
+    try:
+        import kagglehub
+    except ImportError:
+        print("  kagglehub not installed — pip install kagglehub")
+        return None
+
+    print("  Downloading ViT dataset from kagglehub ...")
+    dataset_path = Path(kagglehub.dataset_download("iitm21f1003346/vits16-crop-disease"))
+    print(f"  Dataset downloaded to: {dataset_path}")
+
+    # The dataset has a test/ folder with one subfolder per class
+    # Try a few common layouts
+    for candidate in ["test", "Test", "test_images"]:
+        test_dir = dataset_path / candidate
+        if test_dir.exists():
+            print(f"  Found test dir: {test_dir}")
+            return test_dir
+
+    # Fallback: look for any subfolder that contains class subfolders
+    for sub in sorted(dataset_path.iterdir()):
+        if sub.is_dir() and any(c.is_dir() for c in sub.iterdir()):
+            print(f"  Using subfolder as test dir: {sub}")
+            return sub
+
+    print(f"  WARNING: could not find test/ subfolder in {dataset_path}")
+    return dataset_path  # return root and let make_vision_rows handle it
+
+
 def make_vision_rows() -> pd.DataFrame:
+    """Build Pathway B rows using real images from the kagglehub test split."""
+    test_dir = download_vit_dataset()
     rows = []
+
     for i, (cls, tier, note) in enumerate(VISION_SCENARIOS, 1):
         crop = "rice" if cls.startswith("rice__") else "wheat"
+        img_path = ""
+
+        if test_dir is not None:
+            # The class folder may be named exactly as the class label,
+            # e.g. test/wheat__yellow_rust/ or test/Yellow_rust/
+            # Try exact match first, then case-insensitive scan
+            class_dir = test_dir / cls
+            if not class_dir.exists():
+                # scan for a folder whose name matches after lowercasing
+                for d in test_dir.iterdir():
+                    if d.is_dir() and d.name.lower().replace(" ", "_") == cls.lower():
+                        class_dir = d
+                        break
+
+            if class_dir.exists():
+                # grab the first image in the folder (sorted for reproducibility)
+                imgs = sorted(class_dir.glob("*.jpg")) + \
+                       sorted(class_dir.glob("*.jpeg")) + \
+                       sorted(class_dir.glob("*.png"))
+                if imgs:
+                    img_path = str(imgs[0])
+                    print(f"  B_{i:03d} {cls}: using {imgs[0].name}")
+                else:
+                    print(f"  WARNING: no images found in {class_dir}")
+            else:
+                print(f"  WARNING: class folder not found for {cls} in {test_dir}")
+
+        # Build a natural language query from the class label
+        disease_name = cls.replace("__", " ").replace("_", " ")
+        query = f"{disease_name} disease treatment and management for Indian farmers"
+
         rows.append(_row(
             sid=f"B_{i:03d}", pathway="B",
-            query=f"[ViT prediction placeholder: {cls}]",
-            lang="N/A", crop=crop, intent="disease_pest", block=0,
-            vis_cls=cls, vis_tier=tier, notes=note,
+            query=query, lang="N/A",
+            crop=crop, intent="disease_pest", block=0,
+            vis_cls=cls, vis_tier=tier,
+            image_path=img_path,
+            notes=note + ("|real_image" if img_path else "|no_image_found"),
         ))
+
     return pd.DataFrame(rows)
+
 
 
 # ── Pathway C — yield scenarios ───────────────────────────────────────────────

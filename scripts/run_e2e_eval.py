@@ -226,7 +226,12 @@ def load_vit():
     model_dir = next(path.rglob("predict.py")).parent
     sys.path.insert(0, str(model_dir))
     from predict import CropDiseaseModel
-    model = CropDiseaseModel(device=DEVICE)
+    
+    # explicitly find and pass the checkpoint
+    ckpt_path = model_dir / "weights" / "p3_full_best.pt"
+    print(f"  Using checkpoint: {ckpt_path}")
+    
+    model = CropDiseaseModel(ckpt=ckpt_path, device=DEVICE)
     print(f"  ViT loaded. Classes: {model.classes[:4]} …")
     return model
 
@@ -479,15 +484,19 @@ def eval_B(row, vit_model, retriever, embedder, gen_tok, gen_mdl):
     # 1. ViT inference
     t_vit = time.time()
     if image_col and Path(image_col).exists():
+        # real image from kagglehub test split
         result = vit_model.predict(image_col)
+        print(f"(real img) ", end="", flush=True)
     else:
-        # Simulate
+        # no image path in CSV — simulate with the expected class label
         result = {
             "label": vis_cls, "confidence": 0.85,
             "top3": [(vis_cls, 0.85)], "rejected": False, "ood_score": 0.20,
             "_simulated": True,
         }
+        print(f"(simulated) ", end="", flush=True)
     vit_ms = round((time.time() - t_vit) * 1000)
+
 
     label    = result["label"]
     conf     = result["confidence"]
