@@ -53,8 +53,15 @@ IN_SCOPE_INTENTS = {
     "Crop Husbandry",
 }
 
-RANDOM_SEED = 42
+RANDOM_SEED = 1   # eval split seed — deliberately different from IEG training seed (42)
 random.seed(RANDOM_SEED)
+
+# IEG training used N=30,000 sampled with random_state=42 (notebook cell 6).
+# We remove those rows from the eval pool before drawing E2E scenarios,
+# preventing any overlap between the IEG training corpus and the evaluation set.
+IEG_TRAIN_N    = 30_000
+IEG_TRAIN_SEED = 42
+EVAL_TEST_SIZE = 0.05   # 5 % of the remaining rows used as E2E pool
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -398,8 +405,38 @@ def main():
     df_kcc = pd.read_csv(KCC_CSV, encoding="utf-8", low_memory=False)
     print(f"  {len(df_kcc):,} rows loaded")
 
+    # ── Step A: remove IEG training rows ─────────────────────────────────────
+    # Load the 30,000 row indices used by the IEG notebook (cell 6, random_state=42)
+    # and drop them so the E2E eval pool has zero overlap with IEG training data.
+    IEG_IDX_JSON = ROOT / "data" / "processed" / "kcc" / "ieg_train_indices.json"
+    if not IEG_IDX_JSON.exists():
+        raise FileNotFoundError(
+            f"Required file not found: {IEG_IDX_JSON}\n"
+            "Run the IEG notebook (cell 6) and save the training indices first."
+        )
+    import json as _json
+    with open(IEG_IDX_JSON) as _f:
+        ieg_idx = pd.Index(_json.load(_f))
+    df_kcc_eval_pool = df_kcc.drop(index=ieg_idx).reset_index(drop=True)
+    print(f"  Removed {len(ieg_idx):,} IEG training rows → {len(df_kcc_eval_pool):,} rows remain in eval pool")
+
+    # ── Step B: stratified 5 % sample as the E2E scenario pool ───────────────
+    from sklearn.model_selection import train_test_split
+    qtype_col = "QueryType"
+    df_stratify_base = df_kcc_eval_pool.dropna(subset=[qtype_col]).reset_index(drop=True)
+    _, df_e2e_pool = train_test_split(
+        df_stratify_base,
+        test_size=EVAL_TEST_SIZE,
+        random_state=RANDOM_SEED,
+        stratify=df_stratify_base[qtype_col],
+    )
+    df_e2e_pool = df_e2e_pool.reset_index(drop=True)
+    print(f"  E2E eval pool: {len(df_e2e_pool):,} rows "
+          f"(stratified {int(EVAL_TEST_SIZE*100)}%, seed={RANDOM_SEED})")
+
+
     print("\n[1/6] Sampling Pathway A text queries …")
-    df_a = sample_pathway_a(df_kcc, tok=tok, mdl=mdl)
+    df_a = sample_pathway_a(df_e2e_pool, tok=tok, mdl=mdl)
     print(f"  {len(df_a)} Pathway A rows")
 
     print("\n[2/6] Building guardrail inputs …")

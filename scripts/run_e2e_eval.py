@@ -254,12 +254,15 @@ def load_generator():
         bnb_4bit_compute_dtype=torch.float16,
     )
     tok = AutoTokenizer.from_pretrained("google/gemma-3-4b-it")
-    mdl = AutoModelForCausalLM.from_pretrained(
+    base_mdl = AutoModelForCausalLM.from_pretrained(
         "google/gemma-3-4b-it",
         quantization_config=bnb_config,
         device_map="cuda",
         attn_implementation="sdpa",
     )
+    from peft import PeftModel
+    adapter_path = ROOT / "outputs" / "generation" / "best_adapter"
+    mdl = PeftModel.from_pretrained(base_mdl, str(adapter_path))
     mdl.eval()
     print("  Generator loaded")
     return tok, mdl
