@@ -202,3 +202,11 @@
 {"_e":"metro:instantiate","_t":1786726313598,"atlas":false,"workers":6,"host":null,"port":null}
 {"_e":"metro:bundling:started","_t":1786726314203,"id":"1","platform":"web","environment":null,"entry":"index.js"}
 {"_e":"metro:bundling:done","_t":1786726321126,"id":"1","total":429,"ms":6922.751151}
+{"_e":"root:init","_t":1786990929793,"format":"v0-jsonl","version":"57.0.14"}
+{"_e":"env:mode","_t":1786990930013,"nodeEnv":"production","babelEnv":"production","mode":"production"}
+{"_e":"env:load","_t":1786990930019,"mode":"production","files":["../../../.env"],"env":{"EXPO_PUBLIC_AI_API_KEY":"1f4k0l9ayGEey9es5_-jNILS7aFYtSGEg-GIuu5FNJA","EXPO_PUBLIC_AI_API_URL":"https://farmervision-backend.onrender.com","EXPO_PUBLIC_API_URL":"https://farmervision-backend.onrender.com"}}
+{"_e":"devserver:start","_t":1786990930232,"mode":"production","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../../../app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":true}
+{"_e":"metro:config","_t":1786990930637,"serverRoot":"../../..","projectRoot":"../../..","exporting":true,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"metro:instantiate","_t":1786990930792,"atlas":false,"workers":6,"host":null,"port":null}
+{"_e":"metro:bundling:started","_t":1786990931091,"id":"1","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:done","_t":1786990952545,"id":"1","total":749,"ms":21453.394882}

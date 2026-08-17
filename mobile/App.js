@@ -199,11 +199,11 @@ function AppShell() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Web browsers block direct calls to the GCP AI service (no CORS headers on the
-  // deployment), so on web route AI traffic through the local backend's /ai proxy.
-  // Mobile keeps calling GCP directly.
+  // Browsers block direct calls to the GCP AI service (no CORS headers on the
+  // deployment), and Android release builds block its plain-HTTP endpoint, so
+  // route AI traffic through the backend's /ai proxy on every platform.
   useEffect(() => {
-    setAiProxyUrl(Platform.OS === 'web' ? `${apiUrl}/ai` : '');
+    setAiProxyUrl(`${apiUrl}/ai`);
   }, [apiUrl]);
 
   // --- Data helpers (shared by the poll effects and the chat live_data assembly) ---

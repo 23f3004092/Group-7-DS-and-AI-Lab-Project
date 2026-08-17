@@ -59,3 +59,9 @@ async def proxy_diagnose(
     data = {"question": question} if question else None
     files = {"file": (file.filename or "leaf.jpg", await file.read(), file.content_type or "image/jpeg")}
     return await _forward("POST", "/diagnose", data=data, files=files)
+
+
+@router.post("/vision")
+async def proxy_vision(file: UploadFile = File(...)):
+    files = {"file": (file.filename or "leaf.jpg", await file.read(), file.content_type or "image/jpeg")}
+    return await _forward("POST", "/vision", files=files)
