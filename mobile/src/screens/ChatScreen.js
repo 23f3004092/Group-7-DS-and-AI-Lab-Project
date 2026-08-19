@@ -76,7 +76,7 @@ export default function ChatScreen({
                     >
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Ionicons name="document-text-outline" size={11} color={accent.softText} style={{ marginRight: 4 }} />
-                        <Text style={[s.citationText, { color: theme.textMuted }]}>[{src.rank}] {src.source_type || 'docs'}</Text>
+                        <Text numberOfLines={1} style={[s.citationText, { color: theme.textMuted }]}>[{src.rank}] {src.name || src.source_type || 'docs'}</Text>
                       </View>
                     </TouchableOpacity>
                   ))}

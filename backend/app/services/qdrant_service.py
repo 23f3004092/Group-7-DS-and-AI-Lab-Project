@@ -1,6 +1,6 @@
 import time
 import random
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from ..config import settings
 
 # Sample mock documents based on real FarmerVision agricultural corpus (representing Policy & KCC logs)
@@ -243,6 +243,42 @@ class QdrantService:
         top_score = hits[0]["score"]
         tier = "grounded" if top_score >= t_grounded else "fallback" if top_score >= t_fallback else "abstain"
         return hits, tier, top_score
+
+    def get_source(self, source_id: str) -> Optional[Dict[str, Any]]:
+        """Fetch a single chunk's full text + metadata by id (for the citation detail page)."""
+        if not source_id:
+            return None
+
+        # 1) Local mock corpus lookup
+        for doc in MOCK_DOCS:
+            if str(doc["id"]) == str(source_id):
+                return {**doc, "full_text": doc["text"]}
+
+        # 2) Qdrant lookup by point id
+        if self.initialized and self.client:
+            try:
+                from qdrant_client.http import models as qm
+                points = self.client.retrieve(
+                    collection_name=settings.COLLECTION_NAME,
+                    ids=[source_id],
+                    with_payload=True,
+                )
+                if points and points[0].payload:
+                    p = points[0].payload
+                    return {
+                        "id": source_id,
+                        "text": p.get("text", ""),
+                        "full_text": p.get("text", ""),
+                        "crop": p.get("crop"),
+                        "source_type": p.get("source_type"),
+                        "page": p.get("page"),
+                        "year": p.get("year"),
+                        "district": p.get("district"),
+                    }
+            except Exception as e:
+                print(f"Qdrant source lookup failed ({e}).")
+
+        return None
 
 # Singleton instance
 qdrant_service = QdrantService()

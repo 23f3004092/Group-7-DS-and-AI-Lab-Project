@@ -23,6 +23,19 @@ from ..config import settings
 
 router = APIRouter(prefix="/api/query", tags=["Advisory Query Pipelines"])
 
+
+@router.get("/source/{source_id}")
+async def get_source_detail(source_id: str):
+    """Return the full text + metadata of a single RAG chunk by id.
+
+    The chat source chips only carry a 150-char preview; the citation page calls
+    this endpoint to display the complete advisory content.
+    """
+    source = qdrant_service.get_source(source_id)
+    if not source:
+        raise HTTPException(status_code=404, detail="Source not found")
+    return source
+
 # Create upload directory
 UPLOAD_DIR = "backend/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -329,9 +342,11 @@ async def query_text(q: TextQuery, db: Session = Depends(get_db)):
     
     # Format sources list
     sources = [{
+        "id": hit["id"],
         "rank": idx + 1,
         "score": round(hit["score"], 3),
         "text": hit["text"][:150] + "...",
+        "full_text": hit["text"],
         "crop": hit["crop"],
         "source_type": hit["source_type"]
     } for idx, hit in enumerate(hits[:5])]
@@ -414,9 +429,11 @@ async def query_image(file: UploadFile = File(...), db: Session = Depends(get_db
     caveat = get_caveat_text(tier)
     
     sources = [{
+        "id": hit["id"],
         "rank": idx + 1,
         "score": round(hit["score"], 3),
         "text": hit["text"][:150] + "...",
+        "full_text": hit["text"],
         "crop": hit["crop"],
         "source_type": hit["source_type"]
     } for idx, hit in enumerate(hits[:5])]
@@ -648,9 +665,11 @@ async def query_multimodal(
         )
         
         sources = [{
+            "id": hit["id"],
             "rank": idx + 1,
             "score": round(hit["score"], 3),
             "text": hit["text"][:150] + "...",
+            "full_text": hit["text"],
             "crop": hit["crop"],
             "source_type": hit["source_type"]
         } for idx, hit in enumerate(hits[:5])]
@@ -677,12 +696,14 @@ async def query_multimodal(
     caveat = get_caveat_text(tier)
     
     sources = [{
-        "rank": idx + 1,
-        "score": round(hit["score"], 3),
-        "text": hit["text"][:150] + "...",
-        "crop": hit["crop"],
-        "source_type": hit["source_type"]
-    } for idx, hit in enumerate(hits[:5])]
+            "id": hit["id"],
+            "rank": idx + 1,
+            "score": round(hit["score"], 3),
+            "text": hit["text"][:150] + "...",
+            "full_text": hit["text"],
+            "crop": hit["crop"],
+            "source_type": hit["source_type"]
+        } for idx, hit in enumerate(hits[:5])]
 
     # 5. Generate
     if tier == "abstain":

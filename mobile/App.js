@@ -41,6 +41,7 @@ import { loadSettings, saveSettings } from './src/storage';
 import {
   fetchMandiRows,
   fetchWeatherSnapshot,
+  fetchWeatherAdvisory,
   fetchYieldFact,
   locationFromQuery,
 } from './src/services';
@@ -184,6 +185,7 @@ function AppShell() {
     pressure: null, dewPoint: null, cloud: null, uvIndex: null, wmoCode: null,
     sunrise: null, sunset: null, updatedAt: null
   });
+  const [weatherAdvisory, setWeatherAdvisory] = useState(null);
   const [mandiPrices, setMandiPrices] = useState([]);
   const [mandiSource, setMandiSource] = useState('static');
   const [refreshing, setRefreshing] = useState(false);
@@ -267,6 +269,19 @@ function AppShell() {
     })();
     return () => { cancelled = true; };
   }, [apiUrl, locationInfo, reloadKey]);
+
+  // LLM field advisory from backend /api/weather/advisory (replaces the hardcoded card banner)
+  useEffect(() => {
+    if (!apiUrl) return;
+    let cancelled = false;
+    (async () => {
+      const adv = await fetchWeatherAdvisory(apiUrl, locationInfo, {
+        lang: (i18n.language || 'en').slice(0, 2),
+      });
+      if (!cancelled && adv) setWeatherAdvisory(adv);
+    })();
+    return () => { cancelled = true; };
+  }, [apiUrl, locationInfo, reloadKey, i18n.language]);
 
   // Live mandi prices from backend /api/mandi/prices (falls back to static MSP list)
   useEffect(() => {
@@ -868,6 +883,7 @@ function AppShell() {
         {activeTab === 'home' && (
           <HomeScreen
             weather={weather}
+            weatherAdvisory={weatherAdvisory}
             mandiPrices={mandiPrices}
             mandiSource={mandiSource}
             locationInfo={locationInfo}
@@ -980,18 +996,18 @@ function AppShell() {
         </View>
       )}
 
-      {/* RAG Source Citation Inspector modal (bottom sheet) */}
-      {selectedCitation && (
-        <CitationSheet
-          citation={selectedCitation}
-          onClose={() => setSelectedCitation(null)}
-          s={s}
-          theme={theme}
-          accent={accent}
-          fontScale={fontScale}
-          insets={insets}
-        />
-      )}
+      {/* RAG Source Citation page (full-screen) */}
+      <CitationSheet
+        visible={!!selectedCitation}
+        citation={selectedCitation}
+        apiUrl={apiUrl}
+        onClose={() => setSelectedCitation(null)}
+        s={s}
+        theme={theme}
+        accent={accent}
+        fontScale={fontScale}
+        insets={insets}
+      />
 
       {/* Location picker modal (State -> District drill-down) */}
       <LocationModal

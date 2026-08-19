@@ -8,6 +8,7 @@ import { greeting, weatherIcon, fmtDay } from '../helpers';
 
 export default function HomeScreen({
   weather,
+  weatherAdvisory,
   mandiPrices,
   mandiSource,
   locationInfo,
@@ -120,8 +121,8 @@ export default function HomeScreen({
           )}
           <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.2)' }}>
             <Ionicons name="leaf-outline" size={14} color="#fff" style={{ marginTop: 2, marginRight: 6 }} />
-            <Text style={s.advisoryBanner}>
-              🌾 Advisory: Ideal conditions for Rabi crop fertilization. Monitor wheat leaves for rust flags.
+            <Text style={s.advisoryBanner} numberOfLines={3}>
+              🌾 {weatherAdvisory?.advisory || 'Advisory: Ideal conditions for Rabi crop fertilization. Monitor wheat leaves for rust flags.'}
             </Text>
           </View>
         </LinearGradient>

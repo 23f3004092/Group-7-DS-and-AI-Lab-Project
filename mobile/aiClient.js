@@ -98,19 +98,27 @@ export function normalizeSources(sources) {
   return sources.map((src) => {
     const c = src.citation || {};
     let text = '';
+    let name = '';
     if (c.corpus === 'pdf') {
+      const file = (c.file || '').replace(/\.pdf$/i, '');
       text = [c.file, c.pages ? `pp. ${c.pages.join('-')}` : null, c.section, c.doc_category, c.district, c.year]
         .filter(Boolean).join(', ');
+      name = file || src.summary || src.source_type;
     } else if (c.corpus === 'kcc') {
       text = [c.query_type, c.crop, c.district, c.season, c.year].filter(Boolean).join(', ');
+      name = c.query_type || c.record || src.source_type;
     } else {
       text = src.summary || src.text || '';
+      name = src.summary || src.source_type;
     }
     return {
+      id: src.id,
       rank: src.n != null ? src.n : src.rank,
       score: src.score,
       source_type: src.source_type,
-      text,
+      name,
+      text: src.full_text || text,
+      citation: c,
     };
   });
 }

@@ -257,6 +257,31 @@ export async function fetchWeatherSnapshot(apiUrl, locationInfo) {
   }
 }
 
+// Fetch an LLM-generated field advisory for the weather card (falls back server-side
+// to rule-based text). Returns { advisory, source } or null when the backend is down.
+export async function fetchWeatherAdvisory(apiUrl, locationInfo, options = {}) {
+  if (!apiUrl) return null;
+  try {
+    const params = new URLSearchParams();
+    if (locationInfo.lat != null && locationInfo.lon != null) {
+      params.set('lat', locationInfo.lat);
+      params.set('lon', locationInfo.lon);
+    } else if (locationInfo.district) {
+      params.set('city', locationInfo.district);
+    }
+    if (!params.toString()) return null;
+    if (options.crop) params.set('crop', options.crop);
+    if (options.lang) params.set('lang', options.lang);
+    const res = await fetch(`${apiUrl}/api/weather/advisory?${params.toString()}`);
+    if (!res.ok) throw new Error('bad advisory response');
+    const data = await res.json();
+    if (!data.advisory) return null;
+    return { advisory: data.advisory, source: data.source };
+  } catch (e) {
+    return null;
+  }
+}
+
 // Yield estimate fact string for the AI chat's live_data. Detects the crop
 // (EN/Hinglish/Hindi) and area (hectares/acres) from the farmer's message, then
 // asks the local backend for a model-based prediction.
