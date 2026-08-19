@@ -4,6 +4,7 @@ by CACP). Both follow the mandi/weather pattern: live fetch with cache + static
 fallback constants when the source is unreachable."""
 import io
 import time
+import asyncio
 from typing import Dict, Optional, Any, List, Tuple
 import httpx
 from ..config import settings
@@ -102,10 +103,33 @@ class CostService:
         cached = self._get_cached("msp|records")
         if cached is not None:
             return cached
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            resp = await client.get(settings.CACP_MSP_URL)
-            resp.raise_for_status()
-            records = resp.json()
+
+        # cacp.da.gov.in sits behind Google's frontend and intermittently 403s
+        # non-browser or rapid requests. Send a browser-like UA and retry the
+        # transient 403/429/5xx errors before giving up.
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+            ),
+            "Accept": "application/json",
+        }
+        async with httpx.AsyncClient(timeout=30.0, headers=headers, follow_redirects=True) as client:
+            for attempt in range(3):
+                try:
+                    resp = await client.get(settings.CACP_MSP_URL)
+                    if resp.status_code in (403, 429) or resp.status_code >= 500:
+                        if attempt < 2:
+                            await asyncio.sleep(1.5 * (attempt + 1))
+                            continue
+                        resp.raise_for_status()
+                    resp.raise_for_status()
+                    records = resp.json()
+                    break
+                except (httpx.TransportError, httpx.HTTPStatusError) as e:
+                    if attempt >= 2:
+                        raise
+                    await asyncio.sleep(1.5 * (attempt + 1))
         self._set_cached("msp|records", records)
         return records
 

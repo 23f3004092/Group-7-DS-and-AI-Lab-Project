@@ -2531,3 +2531,17 @@
 {"_e":"metro:bundling:progress","_t":1787158214193,"id":"2n","progress":0,"total":1,"current":0}
 {"_e":"metro:bundling:done","_t":1787158214197,"id":"2n","total":1,"ms":3.833901}
 {"_e":"metro:client_log","_t":1787158307389,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:bundling:started","_t":1787158818696,"id":"2w","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1787158818696,"id":"2w","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1787158818752,"id":"2w","total":1,"ms":56.4747}
+{"_e":"metro:client_log","_t":1787158819065,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1787158819066,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1787158819066,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1787158819074,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1787158819109,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:bundling:started","_t":1787158819138,"id":"33","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1787158819138,"id":"33","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1787158819142,"id":"33","total":1,"ms":4.58474}
+{"_e":"metro:client_log","_t":1787158838816,"level":"warn","data":["AI classify failed, answering without suggestion:","[Error: AI service unreachable: ]"]}
+{"_e":"metro:client_log","_t":1787158849520,"level":"warn","data":["AI service failed, falling back to local backend:","[Error: AI service unreachable: ]"]}
+{"_e":"metro:client_log","_t":1787159254783,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
