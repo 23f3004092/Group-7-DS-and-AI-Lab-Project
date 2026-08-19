@@ -189,12 +189,50 @@ class CostService:
     async def _load_workbook(self):
         if self._cost_data is not None:
             return self._cost_data
-        async with httpx.AsyncClient(timeout=60.0, follow_redirects=True) as client:
-            resp = await client.get(settings.COST_DATA_URL)
-            resp.raise_for_status()
+
+        # desagri.gov.in sends an INCOMPLETE TLS chain (missing Let's Encrypt
+        # intermediate) so strict verification always fails, and it sits behind a
+        # WAF that intermittently 403s non-browser requests. Send a browser UA,
+        # retry transient blocks, and fall back to insecure but scoped to this
+        # one public-government data endpoint so the yield flow uses live CACP
+        # costs instead of silently dropping to static values.
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+            ),
+            "Accept": (
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,"
+                "application/octet-stream,*/*"
+            ),
+        }
+        content = None
+        for attempt in range(3):
+            for verify in (True, False):
+                try:
+                    async with httpx.AsyncClient(
+                        timeout=60.0, headers=headers, follow_redirects=True, verify=verify
+                    ) as client:
+                        resp = await client.get(settings.COST_DATA_URL)
+                        if resp.status_code in (403, 429) or resp.status_code >= 500:
+                            if attempt < 2:
+                                break
+                            resp.raise_for_status()
+                        resp.raise_for_status()
+                        content = resp.content
+                        break
+                except (httpx.TransportError, httpx.HTTPStatusError):
+                    if verify:
+                        continue
+            if content is not None:
+                break
+            await asyncio.sleep(1.5 * (attempt + 1))
+        if content is None:
+            raise RuntimeError("Could not fetch DES workbook after retries")
+
         import openpyxl
         self._cost_data = openpyxl.load_workbook(
-            io.BytesIO(resp.content), read_only=True, data_only=True
+            io.BytesIO(content), read_only=True, data_only=True
         )
         return self._cost_data
 

@@ -2545,3 +2545,15 @@
 {"_e":"metro:client_log","_t":1787158838816,"level":"warn","data":["AI classify failed, answering without suggestion:","[Error: AI service unreachable: ]"]}
 {"_e":"metro:client_log","_t":1787158849520,"level":"warn","data":["AI service failed, falling back to local backend:","[Error: AI service unreachable: ]"]}
 {"_e":"metro:client_log","_t":1787159254783,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
+{"_e":"metro:bundling:started","_t":1787159624365,"id":"3c","platform":"web","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1787159624365,"id":"3c","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1787159624422,"id":"3c","total":1,"ms":57.063526}
+{"_e":"metro:client_log","_t":1787159624630,"level":"info","data":["%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools","font-weight:bold"]}
+{"_e":"metro:client_log","_t":1787159624631,"level":"warn","data":["\"shadow*\" style props are deprecated. Use \"boxShadow\"."]}
+{"_e":"metro:client_log","_t":1787159624631,"level":"log","data":["Running application \"main\" with appParams:\n","{\"hydrate\": undefined, \"rootTag\": \"#root\"}","\nDevelopment-level warnings: ON.\nPerformance optimizations: OFF."]}
+{"_e":"metro:client_log","_t":1787159624632,"level":"warn","data":["react-i18next:: useTranslation: You will need to pass in an i18next instance by using initReactI18next or by passing it via props or context. In monorepo setups, make sure there is only one instance of react-i18next.","{\"code\": \"NO_I18NEXT_INSTANCE\"}"]}
+{"_e":"metro:client_log","_t":1787159624666,"level":"warn","data":["Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation. To resolve this, add `RCTAnimation` module to this app, or remove `useNativeDriver`. Make sure to run `bundle exec pod install` first. Read more about autolinking: https://github.com/react-native-community/cli/blob/master/docs/autolinking.md"]}
+{"_e":"metro:bundling:started","_t":1787159624684,"id":"3f","platform":"web","environment":null,"entry":"node_modules/expo-sqlite/web/worker.ts"}
+{"_e":"metro:bundling:progress","_t":1787159624684,"id":"3f","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1787159624689,"id":"3f","total":1,"ms":5.402892}
+{"_e":"metro:client_log","_t":1787159645927,"level":"warn","data":["props.pointerEvents is deprecated. Use style.pointerEvents"]}
