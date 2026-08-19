@@ -27,6 +27,7 @@ import {
   ask as aiAsk,
   classify as aiClassify,
   diagnose as aiDiagnose,
+  vision as aiVision,
   checkHealth as aiCheckHealth,
   normalizeSources,
   setAiProxyUrl,
@@ -41,6 +42,7 @@ import {
   fetchMandiRows,
   fetchWeatherSnapshot,
   fetchYieldFact,
+  locationFromQuery,
 } from './src/services';
 import Header from './src/components/Header';
 import NavBar from './src/components/NavBar';
@@ -214,10 +216,17 @@ function AppShell() {
     const liveData = {};
     const want = (key) => !Array.isArray(suggestedExternal) || suggestedExternal.includes(key);
 
+    // Fetch data for the place mentioned in the question (e.g. "weather in
+    // chennai") when one is detected; otherwise use the farmer's saved location.
+    const target = locationFromQuery(userText);
+    const loc = target
+      ? { state: target.state, district: target.district, city: target.name, lat: null, lon: null }
+      : locationInfo;
+
     if (want('mandi_prices')) {
-      let rows = mandiSource === 'live' ? mandiPrices : null;
+      let rows = (!target && mandiSource === 'live') ? mandiPrices : null;
       if (!rows) {
-        const result = await fetchMandiRows(apiUrl, locationInfo);
+        const result = await fetchMandiRows(apiUrl, loc);
         if (result) rows = result.rows;
       }
       if (rows?.length) {
@@ -225,10 +234,11 @@ function AppShell() {
       }
     }
     if (want('weather')) {
-      let w = weather.source === 'live' ? weather : null;
-      if (!w) w = await fetchWeatherSnapshot(apiUrl, locationInfo);
+      let w = (!target && weather.source === 'live') ? weather : null;
+      if (!w) w = await fetchWeatherSnapshot(apiUrl, loc);
       if (w && w.temp != null) {
         liveData.weather = {
+          location: w.location || (target ? `${target.name}, ${target.state}` : undefined),
           temp_c: w.temp,
           condition: w.condition,
           humidity_pct: w.humidity != null ? parseInt(w.humidity, 10) : null,
@@ -566,11 +576,30 @@ function AppShell() {
         try {
           let data;
           if (attachedImage) {
-            data = await aiDiagnose({
-              uri: attachedImage.uri,
-              name: attachedImage.name,
-              question: userText || undefined,
-            });
+            // Photo attached to chat -> VIT FIRST (classify), THEN the LLM
+            // agent synthesizes the advisory from the diagnosis + question.
+            try {
+              const v = await aiVision({ uri: attachedImage.uri, name: attachedImage.name });
+              const label = v.label || '';
+              const crop = v.crop || (label.split('__')[0] || 'Unknown');
+              const disease = (v.disease || label).replace('__', ' ').replace(/_/g, ' ');
+              const diagLine = label
+                ? `Diagnosed: ${crop} - ${disease} (${Math.round((v.confidence || 0) * 100)}% confidence)`
+                : '';
+              const query = [label.replace(/__/g, ' ').replace(/_/g, ' '), userText].filter(Boolean).join('. ');
+              data = await aiAsk(query, {
+                sessionId: chatSessionRef.current,
+                intent: 'disease_pest',
+              });
+              if (diagLine) data._diag = diagLine;
+            } catch (imErr) {
+              console.warn('AI vision+synthesis failed, falling back to /diagnose:', imErr);
+              data = await aiDiagnose({
+                uri: attachedImage.uri,
+                name: attachedImage.name,
+                question: userText || undefined,
+              });
+            }
           } else {
             // Classify intent + detect which external data (mandi / weather) the answer needs
             let suggestedExternal = null;
@@ -591,7 +620,7 @@ function AppShell() {
               liveData,
             });
           }
-          const text = data.answer || data.message || 'No answer received from AI service.';
+          const text = [data._diag, (data.answer || data.message || 'No answer received from AI service.')].filter(Boolean).join('\n\n');
           setChatMessages(prev => [...prev, {
             id: Date.now(),
             text,
@@ -633,15 +662,20 @@ function AppShell() {
         return;
       }
 
+      const chatTarget = locationFromQuery(userText);
+      const chatLoc = chatTarget
+        ? { state: chatTarget.state, district: chatTarget.district, lat: null, lon: null }
+        : locationInfo;
+
       const res = await fetch(`${apiUrl}/api/query/text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           text: userText,
-          state: locationInfo.state || undefined,
-          district: locationInfo.district || undefined,
-          lat: locationInfo.lat || undefined,
-          lon: locationInfo.lon || undefined,
+          state: chatLoc.state || undefined,
+          district: chatLoc.district || undefined,
+          lat: chatLoc.lat || undefined,
+          lon: chatLoc.lon || undefined,
         })
       });
 
@@ -687,37 +721,34 @@ function AppShell() {
     if (!selectedImage) return;
     setUploading(true);
 
-    // Prepare FormData (Note: multipart = do NOT set Content-Type manually; fetch adds the boundary)
-    const formData = new FormData();
-    await appendImage(formData, { uri: selectedImage.uri, name: selectedImage.name, type: 'image/jpeg' });
-
     try {
-      // 1) GCP AI service — leaf diagnosis + grounded treatment (API_SPEC.md /diagnose)
+      // 1) Leaf Scanner = VIT ONLY (vision classification, NO LLM synthesis).
+      //    Route through the backend's /ai proxy so browsers/Android release
+      //    builds can reach the GCP ViT service.
       if (AI_CONFIGURED) {
         try {
-          const data = await aiDiagnose({
-            uri: selectedImage.uri,
-            name: selectedImage.name,
-            question: 'is ke liye kya karna chahiye',
-          });
-          const diag = data.diagnosis || {};
-          const label = diag.label || '';
+          const v = await aiVision({ uri: selectedImage.uri, name: selectedImage.name });
+          const label = v.label || '';
+          const crop = v.crop || (label.split('__')[0] || 'unknown');
+          const disease = (v.disease || label).replace('__', ' ').replace(/_/g, ' ');
           setDiagnosisResult({
-            detected_crop: diag.crop || (label.split('__')[0] || 'unknown'),
+            detected_crop: crop,
             detected_disease: label || 'unknown',
-            answer: data.answer || `Detected: ${(diag.disease || label).replace(/_/g, ' ')} (${Math.round((diag.confidence || 0) * 100)}% confidence)`,
-            confidence: diag.confidence,
-            sources: normalizeSources(data.sources),
-            tier: data.tier,
+            confidence: v.confidence,
+            answer: `Diagnosed: ${crop.toUpperCase()} - ${disease.toUpperCase()} (${Math.round((v.confidence || 0) * 100)}% confidence)`,
+            sources: [],
+            tier: 'vision',
           });
           return;
         } catch (aiErr) {
-          console.warn('AI diagnose failed, falling back to local backend:', aiErr);
+          console.warn('AI vision failed, falling back to local classification:', aiErr);
         }
       }
 
-      // 2) Fallback: local FastAPI backend proxy
-      const res = await fetch(`${apiUrl}/api/query/image`, {
+      // 2) Fallback: local ViT-only endpoint (also no synthesis)
+      const formData = new FormData();
+      await appendImage(formData, { uri: selectedImage.uri, name: selectedImage.name, type: 'image/jpeg' });
+      const res = await fetch(`${apiUrl}/api/query/vision`, {
         method: 'POST',
         body: formData,
       });
@@ -729,19 +760,18 @@ function AppShell() {
         Alert.alert('Diagnosis Failed', 'Server returned error classification.');
       }
     } catch (e) {
-      // Offline fallback simulator if server cannot be reached
+      // Offline fallback simulator if server cannot be reached (classification only)
       setTimeout(() => {
-        const mockResponse = {
-          detected_crop: selectedImage.name.includes('wheat') ? 'wheat' : 'rice',
-          detected_disease: selectedImage.name.includes('wheat') ? 'wheat__yellow_rust' : 'rice__brown_spot',
-          answer: selectedImage.name.includes('wheat')
-            ? "Your wheat crop is diagnosed with Yellow Rust (Pila Ratua). Spray Propiconazole 25% EC @ 200ml/acre in 200L water."
-            : "Your rice crop has Brown Spot (Bhura Dhabba). Apply Hexaconazole 5% EC @ 2ml/L of water.",
-          sources: [
-            { rank: 1, score: 0.88, source_type: 'pdf_policy', text: 'Apply propiconazole for wheat rust' }
-          ]
-        };
-        setDiagnosisResult(mockResponse);
+        const crop = selectedImage.name.includes('wheat') ? 'wheat' : 'rice';
+        const disease = selectedImage.name.includes('wheat') ? 'wheat__yellow_rust' : 'rice__brown_spot';
+        setDiagnosisResult({
+          detected_crop: crop,
+          detected_disease: disease,
+          confidence: 0.895,
+          answer: `Diagnosed: ${crop.toUpperCase()} - ${(disease.split('__')[1] || disease).replace(/_/g, ' ').toUpperCase()} (90% confidence)`,
+          sources: [],
+          tier: 'vision',
+        });
         showToast('Running offline mock diagnosis');
       }, 1500);
     } finally {

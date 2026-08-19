@@ -426,13 +426,15 @@ async def query_image(file: UploadFile = File(...), db: Session = Depends(get_db
         answer = f"Diagnosed Crop/Disease: {crop.title()} - {disease.title()} (Conf: {confidence:.1%})\n\n{caveat}"
     else:
         answer = await CloudAIService.synthesize_response(query, hits[:5])
-        # Inject details from classifier if not in context
-        organic = result.get("organic_treatment", "")
-        chemical = result.get("chemical_treatment", "")
-        
-        treatment_section = f"\n\n**Organic Remedy:** {organic}\n**Chemical Remedy:** {chemical}"
-        answer = f"Diagnosed Crop/Disease: {crop.title()} - {disease.title()} (Confidence: {confidence:.1%})\n\n{answer}{treatment_section}"
-        
+        # Inject details from classifier if not in context (only when available)
+        organic = result.get("organic_treatment", "") or ""
+        chemical = result.get("chemical_treatment", "") or ""
+
+        header = f"Diagnosed Crop/Disease: {crop.title()} - {disease.title()} (Confidence: {confidence:.1%})\n\n{answer}"
+        if organic or chemical:
+            header += f"\n\n**Organic Remedy:** {organic}\n**Chemical Remedy:** {chemical}"
+        answer = header
+
         if caveat:
             answer = f"{answer}\n\n⚠ {caveat}"
 
@@ -447,6 +449,60 @@ async def query_image(file: UploadFile = File(...), db: Session = Depends(get_db
     return QueryResponse(
         pathway="B", intent=["disease_pest"], blocked=False, tier=tier,
         top_score=round(top_score, 4), answer=answer, sources=sources,
+        latency_ms=latency, detected_crop=crop, detected_disease=label
+    )
+
+@router.post("/vision", response_model=QueryResponse)
+async def query_vision(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    """VIT-only classification for the Leaf Scanner — no LLM synthesis.
+
+    The photo goes to the ViT (/vision) and the result is returned as-is;
+    treatment/advisory text is intentionally NOT generated here. Chat uses
+    /image or the gateway /diagnose for synthesis + VIT.
+    """
+    t0 = time.time()
+
+    ext = os.path.splitext(file.filename or "")[1] or ".jpg"
+    saved_name = f"{uuid.uuid4()}{ext}"
+    saved_path = os.path.join(UPLOAD_DIR, saved_name)
+
+    image_bytes = await file.read()
+    with open(saved_path, "wb") as f:
+        f.write(image_bytes)
+
+    web_image_path = f"/uploads/{saved_name}"
+
+    # 1. Run the ViT classifier (real model via gateway /vision, mock offline)
+    result = await CloudAIService.run_vision_diagnosis(image_bytes, file.filename or saved_name)
+    latency = int((time.time() - t0) * 1000)
+
+    if result.get("rejected", False):
+        answer = "Image rejected — please submit a clear, close-up crop leaf photo."
+        record_telemetry_log(
+            db, pathway="B", latency_ms=latency, image_path=web_image_path,
+            synthesis_response=answer, guardrail_reason="Image rejected (OOD)"
+        )
+        return QueryResponse(
+            pathway="B", intent=["disease_pest"], blocked=False, tier="rejected",
+            top_score=0.0, answer=answer, latency_ms=latency
+        )
+
+    label = result["label"]
+    confidence = result["confidence"]
+    crop = label.split("__")[0] if "__" in label else "crop"
+    disease = label.split("__")[1].replace("_", " ") if "__" in label else "disease"
+
+    answer = f"Diagnosed Crop/Disease: {crop.title()} - {disease.title()} (Confidence: {confidence:.1%})"
+
+    record_telemetry_log(
+        db, pathway="B", latency_ms=latency, image_path=web_image_path,
+        intent=["disease_pest"], detected_crop=crop, detected_disease=label,
+        synthesis_response=answer
+    )
+
+    return QueryResponse(
+        pathway="B", intent=["disease_pest"], blocked=False, tier="vision",
+        top_score=round(confidence, 4), answer=answer,
         latency_ms=latency, detected_crop=crop, detected_disease=label
     )
 
@@ -633,12 +689,14 @@ async def query_multimodal(
         answer = f"Diagnosed Crop/Disease: {crop.title()} - {disease.title()} (Conf: {confidence:.1%})\n\n{caveat}"
     else:
         answer = await CloudAIService.synthesize_response(combined_query, hits[:5])
-        organic = result.get("organic_treatment", "")
-        chemical = result.get("chemical_treatment", "")
-        
-        treatment_section = f"\n\n**Organic Remedy:** {organic}\n**Chemical Remedy:** {chemical}"
-        answer = f"Diagnosed Crop/Disease: {crop.title()} - {disease.title()} (Confidence: {confidence:.1%})\n\n{answer}{treatment_section}"
-        
+        organic = result.get("organic_treatment", "") or ""
+        chemical = result.get("chemical_treatment", "") or ""
+
+        header = f"Diagnosed Crop/Disease: {crop.title()} - {disease.title()} (Confidence: {confidence:.1%})\n\n{answer}"
+        if organic or chemical:
+            header += f"\n\n**Organic Remedy:** {organic}\n**Chemical Remedy:** {chemical}"
+        answer = header
+
         if caveat:
             answer = f"{answer}\n\n⚠ {caveat}"
 

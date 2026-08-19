@@ -154,40 +154,50 @@ class CloudAIService:
 
     @classmethod
     async def run_vision_diagnosis(cls, image_bytes: bytes, filename: str) -> Dict[str, Any]:
-        """Pathway B/AB: Classify disease from leaf photo."""
-        
-        if settings.GEMINI_API_KEY and not settings.MOCK_MODELS:
+        """Pathway B/AB: Classify disease from leaf photo.
+
+        The photo MUST go through the deployed ViT first (gateway /vision,
+        ViT-S/16 per API_SPEC.md). The local mock is only an offline fallback
+        when the gateway is unreachable.
+        """
+        # 1. Real ViT via the GCP gateway /vision
+        if settings.AI_API_URL:
             try:
-                prompt = (
-                    "Analyze this leaf image. Output a JSON object containing:\n"
-                    "- 'rejected': boolean (true if image is not a close-up of a crop/plant leaf, or too blurry to diagnose).\n"
-                    "- 'label': string (matching one of: rice__leaf_smut, rice__brown_spot, rice__bacterial_leaf_blight, wheat__yellow_rust, wheat__brown_rust, healthy, or similar disease names).\n"
-                    "- 'confidence': float (between 0.0 and 1.0).\n"
-                    "- 'description': brief description of the crop condition shown.\n"
-                    "- 'organic_treatment': brief organic remedy.\n"
-                    "- 'chemical_treatment': brief chemical remedy.\n"
-                    "- 'ood_score': float indicating out-of-distribution (high score means it is not a plant leaf, or not wheat/rice/maize)."
-                )
-                
-                resp = await cls.call_gemini_api(prompt=prompt, image_data=image_bytes)
-                clean_resp = re.sub(r"```json\s*|\s*```", "", resp).strip()
-                data = json.loads(clean_resp)
+                url = f"{settings.AI_API_URL.rstrip('/')}/vision"
+                headers = {}
+                if settings.AI_API_KEY:
+                    headers["X-API-Key"] = settings.AI_API_KEY
+                async with httpx.AsyncClient(timeout=60.0) as client:
+                    resp = await client.post(
+                        url,
+                        headers=headers,
+                        files={"file": (filename or "leaf.jpg", image_bytes, "image/jpeg")},
+                    )
+                if resp.status_code != 200:
+                    raise Exception(f"ViT gateway /vision -> HTTP {resp.status_code}: {resp.text[:200]}")
+                data = resp.json()
+                label = data.get("label") or "healthy"
+                confidence = float(data.get("confidence") or 0.0)
+                top_k = data.get("top_k") or []
+                top3 = [(t.get("label"), float(t.get("prob", 0))) for t in top_k[:3]]
+                if not top3:
+                    top3 = [(label, confidence)]
                 return {
-                    "rejected": data.get("rejected", False),
-                    "label": data.get("label", "healthy"),
-                    "confidence": data.get("confidence", 0.9),
-                    "description": data.get("description", "Analyzed via cloud vision API."),
-                    "organic_treatment": data.get("organic_treatment", "Apply neem oil spray."),
-                    "chemical_treatment": data.get("chemical_treatment", "Apply recommended fungicide."),
-                    "ood_score": data.get("ood_score", 0.1),
-                    "top3": [(data.get("label", "healthy"), data.get("confidence", 0.9))]
+                    "rejected": False,
+                    "label": label,
+                    "confidence": confidence,
+                    "description": f"ViT predicted '{label}' (confidence {confidence:.1%}).",
+                    "organic_treatment": "",
+                    "chemical_treatment": "",
+                    "ood_score": round(max(0.0, 1.0 - confidence), 3),
+                    "top3": top3,
                 }
             except Exception as e:
-                # Fallback to mock on API error
-                pass
+                # Gateway unreachable -> fall through to the local mock
+                print(f"ViT gateway call failed ({e}); using mock diagnosis.")
 
-        # Robust Mock Diagnosis
-        # Choose a class based on filename keywords or cycle through standard classes
+        # 2. Robust Mock Diagnosis (offline fallback) — choose a class based on
+        # filename keywords or cycle through standard classes
         fname = filename.lower()
         label = "healthy"
         description = "The leaf looks healthy with no major lesions."
