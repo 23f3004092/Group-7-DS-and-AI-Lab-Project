@@ -43,24 +43,49 @@ async function request(path, { method = 'POST', body, headers = {}, formData } =
   return res.json();
 }
 
+// Render's free tier sleeps after ~15 min of idle, so the first request of a
+// session can fail while the instance cold-boots. Retry transient failures
+// (network errors / 5xx / 429) with a short backoff so the first diagnose or
+// chat message self-heals once the service is warm again. 4xx responses are
+// real errors (e.g. bad key / validation) and are not retried.
+export async function withAiRetry(fn, { attempts = 3, baseDelay = 5000 } = {}) {
+  let lastErr;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastErr = err;
+      const status = err && err.status;
+      const retriable = status === undefined || status === 0 || status >= 500 || status === 429;
+      if (!retriable || i === attempts - 1) throw err;
+      await new Promise((resolve) => setTimeout(resolve, baseDelay * (i + 1)));
+    }
+  }
+  throw lastErr;
+}
+
 // GET /health — liveness + what's loaded (no key needed by the API)
 export async function checkHealth() {
-  return request('/health', { method: 'GET' });
+  return withAiRetry(() => request('/health', { method: 'GET' }), { attempts: 2, baseDelay: 3000 });
 }
 
 // POST /classify — intent, guardrail, and which external data the query needs
 export async function classify(query) {
-  return request('/classify', { body: { query } });
+  return withAiRetry(() => request('/classify', { body: { query } }), { attempts: 2, baseDelay: 3000 });
 }
 
 // POST /query — main grounded, cited answer endpoint (multi-turn + live_data)
+// include_content=true makes the AI service return the actual chunk text in
+// each source, so the citation page can show the advisory content (not just
+// file/page/crop metadata).
 export async function ask(query, { intent, sessionId, liveData, topK } = {}) {
   const body = { query };
   if (intent) body.intent = intent;
   if (sessionId) body.session_id = sessionId;
   if (liveData) body.live_data = liveData;
   if (topK) body.top_k = topK;
-  return request('/query', { body });
+  body.include_content = true;
+  return withAiRetry(() => request('/query', { body }), { attempts: 4, baseDelay: 5000 });
 }
 
 // Adds an image to a multipart FormData in a platform-safe way.
@@ -81,14 +106,14 @@ export async function diagnose({ uri, name = 'leaf.jpg', question } = {}) {
   const formData = new FormData();
   await appendImage(formData, { uri, name });
   if (question) formData.append('question', question);
-  return request('/diagnose', { formData });
+  return withAiRetry(() => request('/diagnose', { formData }), { attempts: 3, baseDelay: 5000 });
 }
 
 // POST /vision — leaf photo -> disease label + confidence only
 export async function vision({ uri, name = 'leaf.jpg' } = {}) {
   const formData = new FormData();
   await appendImage(formData, { uri, name });
-  return request('/vision', { formData });
+  return withAiRetry(() => request('/vision', { formData }), { attempts: 4, baseDelay: 5000 });
 }
 
 // Maps API sources ({n, score, source_type, citation}) to the shape the chat UI
@@ -113,11 +138,15 @@ export function normalizeSources(sources) {
     }
     return {
       id: src.id,
+      // GCP returns the chunk text under `content` (only when /query was sent
+      // with include_content=true); carry it as full_text so the citation page
+      // can show the advisory without a second fetch.
+      full_text: src.full_text || src.content || '',
       rank: src.n != null ? src.n : src.rank,
       score: src.score,
       source_type: src.source_type,
       name,
-      text: src.full_text || text,
+      text: src.full_text || src.content || text,
       citation: c,
     };
   });
