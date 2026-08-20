@@ -538,9 +538,15 @@ function AppShell() {
     setAiChecking(true);
     try {
       const h = await aiCheckHealth();
+      // GCP /health needs no key, so "online" alone does NOT mean the vision
+      // path works. The /ai proxy reports its own readiness in h.proxy; surface
+      // it when the vision key is missing on the backend.
+      const visionCapable = h && h.proxy ? h.proxy.vision_capable : null;
       setAiStatus({
         ok: h.status === 'ok',
-        text: h.status === 'ok' ? `online (${h.points || 0} KB points, ${h.gpu_name || 'no GPU'})` : `offline: ${h.status}`,
+        text: h.status === 'ok'
+          ? `online (${h.points || 0} KB points, ${h.gpu_name || 'no GPU'})${visionCapable === false ? ' — vision key missing on backend' : ''}`
+          : `offline: ${h.status}`,
       });
     } catch (e) {
       setAiStatus({ ok: false, text: `unreachable: ${e.message}` });
@@ -757,6 +763,7 @@ function AppShell() {
           return;
         } catch (aiErr) {
           console.warn('AI vision failed, falling back to local classification:', aiErr);
+          showToast('AI vision unreachable — showing local result');
         }
       }
 

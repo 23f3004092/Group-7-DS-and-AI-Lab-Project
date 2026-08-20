@@ -20,12 +20,17 @@ services:
         value: "true"
       - key: AI_API_URL
         value: "http://34.93.236.19:8000"
+      # REQUIRED for the /ai/vision + /ai/query proxy (photo -> GCP). GCP's
+      # /health needs no key, so without this the app shows "online" while
+      # every vision/diagnose call silently falls back to the local classifier.
+      # Set it manually in Render -> Environment with the value used on the
+      # GCP instance (match backend/.env AI_API_KEY).
+      - key: AI_API_KEY
+        sync: false
       # Fill these in Render -> Environment (secrets, not committed):
       - key: MANDI_API_KEY
         sync: false
       - key: WEATHER_API_KEY
         sync: false
       - key: GEMINI_API_KEY
-        sync: false
-      - key: AI_API_KEY
         sync: false

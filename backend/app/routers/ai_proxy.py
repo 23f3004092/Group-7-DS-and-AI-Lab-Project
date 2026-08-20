@@ -38,7 +38,18 @@ async def _forward(method: str, path: str, **kwargs):
 
 @router.get("/health")
 async def proxy_health():
-    return await _forward("GET", "/health")
+    # NOTE: GCP's /health needs no API key, so a bare forward returns "ok" even
+    # when the proxy is missing the key that /vision and /query require. Attach
+    # the proxy's own readiness so clients can tell "reachable" apart from
+    # "can actually run authenticated vision/query requests".
+    data = await _forward("GET", "/health")
+    if isinstance(data, dict):
+        data["proxy"] = {
+            "ai_url_configured": bool(AI_BASE),
+            "ai_key_configured": bool(AI_KEY),
+            "vision_capable": bool(AI_BASE and AI_KEY),
+        }
+    return data
 
 
 @router.post("/classify")
