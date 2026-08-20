@@ -1,0 +1,25 @@
+
+
+# --- copied from .gitignore (keep these or secrets/large dirs would be uploaded) ---
+/venv
+/Milestone_3_Report_Updated.md
+/mobile/node_modules
+/admin/node_modules
+.env
+/mobile/.expo
+
+# --- extra: monorepo siblings & artifacts NOT needed to build the mobile app ---
+/backend
+/admin
+/scripts
+/sample_app.py
+/run.py
+/FARMERVISION.md
+/API_SPEC.md
+/requirements.txt
+/Dockerfile
+/docker-compose.yml
+/render.yaml
+/Gemini_Generated_Image_83kap383kap383ka.png
+/Gemini_Generated_Image_m9eyu1m9eyu1m9ey.png
+/mobile/dist
