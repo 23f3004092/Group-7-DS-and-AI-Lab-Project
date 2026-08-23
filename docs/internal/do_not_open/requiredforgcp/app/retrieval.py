@@ -126,3 +126,4 @@ def search_agri_knowledge(query, top_k=None, intent="general", source_type=None,
             else "abstain_out_of_scope")
     return {"query": query, "intent": intent, "tier": tier,
             "top_score": round(best_raw, 4), "results": hits}
+

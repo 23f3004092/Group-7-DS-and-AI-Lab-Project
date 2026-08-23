@@ -13,6 +13,8 @@ sudo chown -R "$USER" "$ART"
 echo ">> Pulling artifacts from $BUCKET (VM's service account has access)"
 gcloud storage cp --recursive "$BUCKET"/* "$ART"/
 
+test -f "$ART/qdrant/manifest.json" || { echo "ERROR: qdrant/manifest.json missing from $BUCKET"; exit 1; }
+
 # Runtime env used by docker-compose for BOTH variable interpolation and the
 # gateway container's environment (secrets + paths).
 cat > runtime.env <<EOF
