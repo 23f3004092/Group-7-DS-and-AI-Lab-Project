@@ -11,15 +11,21 @@ Endpoints (every POST needs header  X-API-Key: <your API_KEY>):
   POST /diagnose   -> photo: classify -> retrieve -> grounded advice (image upload)
   POST /vision     -> photo: leaf-disease classification only (image upload)
 """
+import json
+import time
 from contextlib import asynccontextmanager
 from typing import Optional
 
 import torch
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from . import config as C
 from . import retrieval, generation, ieg, pipeline
+from .log import get as _get_log
+
+log = _get_log("main")
 
 # optional module
 try:
@@ -52,6 +58,20 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="FarmerVision Gateway", version="1.2", lifespan=lifespan)
 
+# CORS: let browser apps (admin dashboard / web clients) call the API. The X-API-Key
+# header is the real access control — keep it secret; prefer calling it server-side.
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"],
+                   allow_headers=["*"], expose_headers=["*"])
+
+
+@app.middleware("http")
+async def _log_requests(request, call_next):
+    t0 = time.time()
+    resp = await call_next(request)
+    log.info("%s %s -> %s (%d ms)", request.method, request.url.path,
+             resp.status_code, round((time.time() - t0) * 1000))
+    return resp
+
 
 def require_key(x_api_key: Optional[str]):
     if not C.API_KEY:
@@ -71,9 +91,8 @@ class QueryIn(BaseModel):
     live_data: Optional[dict] = None
     # Skip the vector search entirely (e.g. a pure weather/mandi question).
     skip_retrieval: Optional[bool] = False
-    # Multi-turn: either pass prior turns yourself (client-managed) ...
-    history: Optional[list] = None          # [{"role":"user"/"assistant","content":"..."}, ...]
-    # ... OR pass a session_id and let the gateway remember the conversation.
+    history: Optional[list] = None
+    include_content: Optional[bool] = False
     session_id: Optional[str] = None
 
 
@@ -126,7 +145,8 @@ def query(body: QueryIn, x_api_key: Optional[str] = Header(default=None)):
     result = pipeline.answer_query(
         body.query, intent=body.intent, top_k=body.top_k, filters=body.filters,
         live_data=body.live_data, skip_retrieval=bool(body.skip_retrieval),
-        history=body.history, session_id=body.session_id,
+        history=body.history, include_content=bool(body.include_content),
+        session_id=body.session_id,
     )
     # tell the caller what external data this query looked like it wanted, so they
     # can notice if they forgot to fetch/inject something.
@@ -136,6 +156,8 @@ def query(body: QueryIn, x_api_key: Optional[str] = Header(default=None)):
 
 @app.post("/diagnose")
 async def diagnose(file: UploadFile = File(...), question: Optional[str] = Form(default=None),
+                   session_id: Optional[str] = Form(default=None),
+                   history: Optional[str] = Form(default=None),
                    x_api_key: Optional[str] = Header(default=None)):
     require_key(x_api_key)
     if not (vision and vision._model is not None):                            # noqa: SLF001
@@ -143,7 +165,16 @@ async def diagnose(file: UploadFile = File(...), question: Optional[str] = Form(
     image_bytes = await file.read()
     if not image_bytes:
         raise HTTPException(status_code=400, detail="empty image")
-    return pipeline.diagnose_image(image_bytes, question=question)
+    parsed_history = None
+    if history:
+        try:
+            parsed_history = json.loads(history)
+        except (TypeError, ValueError, json.JSONDecodeError):
+            raise HTTPException(status_code=400, detail="history must be a JSON array")
+        if not isinstance(parsed_history, list):
+            raise HTTPException(status_code=400, detail="history must be a JSON array")
+    return pipeline.diagnose_image(image_bytes, question=question,
+                                   session_id=session_id, history=parsed_history)
 
 
 @app.post("/vision")

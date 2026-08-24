@@ -3,13 +3,18 @@
 Everything needed to run FarmerVision on one GCP GPU VM. **Read
 `../GCP_DEPLOYMENT_PLAN.md` first** — it explains each step in plain language.
 
+This folder is a deployment template, not a bundle of model artifacts. Copy
+`.env.example` to `.env`, fill in the values, and keep `.env` private. The
+deployment scripts copy that file to the VM automatically; it is deliberately
+not included in the handoff.
+
 ## Run order
 
 | # | On your PC | On the VM |
 |---|---|---|
 | 0 | `cp .env.example .env` and fill it in | |
 | 1 | `bash 01_gcloud_setup.sh` (then request GPU quota + set a budget in the console) | |
-| 2 | `bash 02_upload_artifacts.sh` | |
+| 2 | `bash 02_upload_artifacts.sh` (only if uploading from local files) | |
 | 3 | `bash 03_create_vm.sh` | |
 | 4 | | `cd ~/farmervision && bash 04_vm_setup.sh` |
 | 5 | test: SSH tunnel, then POST `/query` | |

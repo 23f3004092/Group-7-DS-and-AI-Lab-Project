@@ -22,6 +22,8 @@ set +a
 : "${ZONE:?set ZONE in .env}"
 : "${VM_NAME:?set VM_NAME in .env}"
 : "${BUCKET:?set BUCKET in .env}"
+: "${HF_TOKEN:?set HF_TOKEN in .env}"
+: "${API_KEY:?set API_KEY in .env}"
 
 # Region is the zone without its trailing letter (us-central1-a -> us-central1)
 export REGION="${ZONE%-*}"

@@ -66,10 +66,10 @@ print("  ✓ Kaggle authenticated")
 
 # --- cell 2: settings (edit these) -----------------------------------------
 # EDIT THESE to match your setup:
-PROJECT  = "project-7f232935-b8f7-4aad-881"                       # your GCP project ID
-BUCKET   = "gs://farmervision-prod-artifacts"        # GCS bucket name (must match .env BUCKET)
+PROJECT  = "your-gcp-project-id"                       # your GCP project ID
+BUCKET   = "gs://your-globally-unique-bucket-name"    # must match .env BUCKET
 REGION   = "us-central1"                             # GCS region (e.g. us-central1, asia-south1)
-HF_TOKEN = "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"                      # Hugging Face token (for gated Gemma)
+HF_TOKEN = "hf_replace_with_your_huggingface_token"   # gated Gemma token
 
 # ===== DRIVE SHAREABLE LINKS =====
 # Get these from your OTHER Google account (where RAG artifacts are stored).
@@ -77,9 +77,9 @@ HF_TOKEN = "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"                      # Huggin
 # Replace the fake links below with your actual shareable links.
 #
 # RAG Snapshot folder link: the folder containing manifest.json and snapshot files
-DRIVE_RAG_FOLDER_LINK = "https://drive.google.com/drive/folders/1ZHUf7cljr3rR95i5O90dL1D73YrPR6co?usp=drive_link"
+DRIVE_RAG_FOLDER_LINK = "https://drive.google.com/drive/folders/YOUR-RAG-FOLDER-ID"
 # LoRA Adapter folder link: the folder containing adapter_config.json, adapter_model.bin, etc.
-DRIVE_ADAPTER_FOLDER_LINK = "https://drive.google.com/drive/folders/1nAbR9-hyba_vUhPE68Idet-oEK4cNA1W?usp=drive_link"
+DRIVE_ADAPTER_FOLDER_LINK = "https://drive.google.com/drive/folders/YOUR-ADAPTER-FOLDER-ID"
 
 print("=== Account & link verification ===")
 print(f"GCP Project: {PROJECT}")
@@ -160,6 +160,8 @@ try:
     if result == 0:
         rag_dir = Path("/content/rag_download")
         files = list(rag_dir.rglob("*"))
+        if not (rag_dir / "manifest.json").is_file():
+            raise FileNotFoundError("RAG folder must contain manifest.json at its top level")
         print(f"✓ Downloaded {len(files)} files from RAG folder")
         print(f"  Contents:")
         for f in sorted(list(rag_dir.glob("*")))[:10]:  # show first 10
@@ -221,6 +223,8 @@ try:
     
     adapter_path = Path(ADAPTER_DOWNLOAD)
     adapter_files = list(adapter_path.rglob("*"))
+    if not (adapter_path / "adapter_config.json").is_file():
+        raise FileNotFoundError("Adapter folder must contain adapter_config.json at its top level")
     print(f"✓ Downloaded adapter ({len(adapter_files)} files)")
     print(f"  Contents: {', '.join([f.name for f in list(adapter_path.glob('*'))[:5]])}")
     

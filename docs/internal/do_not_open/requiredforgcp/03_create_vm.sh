@@ -49,6 +49,7 @@ done
 echo ">> Copying deploy files to the VM (~/farmervision)"
 gcloud compute ssh "$VM_NAME" --zone="$ZONE" --command="mkdir -p ~/farmervision"
 gcloud compute scp --recurse "$DEPLOY_DIR"/* "$VM_NAME":~/farmervision/ --zone="$ZONE"
+gcloud compute scp "$SCRIPT_DIR/.env" "$VM_NAME":~/farmervision/.env --zone="$ZONE"
 
 cat <<MSG
 
