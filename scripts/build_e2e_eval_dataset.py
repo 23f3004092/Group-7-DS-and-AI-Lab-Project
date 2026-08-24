@@ -37,7 +37,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ROOT = Path(__file__).resolve().parent.parent
-KCC_CSV = ROOT / "data" / "processed" / "kcc" / "kcc_cleaned_all_crops.csv"
+KCC_CSV = ROOT / "data" / "processed" / "kcc" / "kcc_eval_1.csv"
 OUT_DIR = ROOT / "data" / "eval"
 OUT_CSV = OUT_DIR / "e2e_scenarios.csv"
 
@@ -56,12 +56,9 @@ IN_SCOPE_INTENTS = {
 RANDOM_SEED = 1   # eval split seed — deliberately different from IEG training seed (42)
 random.seed(RANDOM_SEED)
 
-# IEG training used N=30,000 sampled with random_state=42 (notebook cell 6).
-# We remove those rows from the eval pool before drawing E2E scenarios,
-# preventing any overlap between the IEG training corpus and the evaluation set.
-IEG_TRAIN_N    = 30_000
-IEG_TRAIN_SEED = 42
-EVAL_TEST_SIZE = 0.05   # 5 % of the remaining rows used as E2E pool
+# Since prepare_e2e_datasets.py pre-separated kcc_eval_1.csv, this entire file is safe to use.
+EVAL_TEST_SIZE = 1.0  # Use all available rows as the pool
+
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -105,40 +102,13 @@ def _row(sid, pathway, query, lang, crop, intent, block,
     }
 
 
-
 def load_translator():
-    from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
-    import torch
-    print("  Loading gemma-3-4b-it for Hinglish translation ...")
-    bnb_config = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_quant_type="nf4",
-    )
-    tok = AutoTokenizer.from_pretrained("google/gemma-3-4b-it")
-    mdl = AutoModelForCausalLM.from_pretrained(
-        "google/gemma-3-4b-it",
-        quantization_config=bnb_config,
-        device_map="cuda",
-    )
-    mdl.eval()
-    return tok, mdl
-
+    # Translation logic is now handled in prepare_e2e_datasets.py using Qwen.
+    return None, None
 
 def translate_to_hinglish(text: str, tok, mdl) -> str:
-    import torch
-    prompt = (
-        "Translate the following agricultural question into Hinglish "
-        "(Hindi written in English letters, naturally mixed with English terms). "
-        "Return ONLY the translated Hinglish question, nothing else.\n\n"
-        f"English: {text}\n"
-        "Hinglish:"
-    )
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    inputs = tok(prompt, return_tensors="pt", truncation=True, max_length=512).to(device)
-    with torch.no_grad():
-        out = mdl.generate(**inputs, max_new_tokens=64, temperature=0.3, do_sample=True, top_p=0.9, pad_token_id=tok.eos_token_id)
-    return tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip()
-
+    # Not used anymore
+    return text
 
 # ── Pathway A — sample from KCC ───────────────────────────────────────────────
 
@@ -207,9 +177,7 @@ def sample_pathway_a(df: pd.DataFrame, tok=None, mdl=None) -> pd.DataFrame:
     # Hindi: use KccAns (Devanagari) as the query
     # KccAns is the expert answer in Hindi — using it as an input tests cross-lingual retrieval
     if ans_col:
-        hindi_subset = filtered[filtered[ans_col].apply(
-            lambda x: sum(1 for c in str(x) if "\u0900" <= c <= "\u097F") / max(len(str(x)), 1) > 0.3
-        )]
+        hindi_subset = filtered[filtered["language"] == "Devanagari Hindi"]
         n_hindi = min(10, len(hindi_subset))
         if n_hindi > 0:
             sampled = hindi_subset.sample(n=n_hindi, random_state=RANDOM_SEED)
@@ -479,33 +447,14 @@ def main():
     print(f"  {len(df_kcc):,} rows loaded")
 
     # ── Step A: remove IEG training rows ─────────────────────────────────────
-    # Load the 30,000 row indices used by the IEG notebook (cell 6, random_state=42)
-    # and drop them so the E2E eval pool has zero overlap with IEG training data.
-    IEG_IDX_JSON = ROOT / "data" / "processed" / "kcc" / "ieg_train_indices.json"
-    if not IEG_IDX_JSON.exists():
-        raise FileNotFoundError(
-            f"Required file not found: {IEG_IDX_JSON}\n"
-            "Run the IEG notebook (cell 6) and save the training indices first."
-        )
-    import json as _json
-    with open(IEG_IDX_JSON) as _f:
-        ieg_idx = pd.Index(_json.load(_f))
-    df_kcc_eval_pool = df_kcc.drop(index=ieg_idx).reset_index(drop=True)
-    print(f"  Removed {len(ieg_idx):,} IEG training rows → {len(df_kcc_eval_pool):,} rows remain in eval pool")
+    # kcc_eval_1.csv is already pre-split in prepare_e2e_datasets.py to have zero overlap.
+    df_kcc_eval_pool = df_kcc.copy()
+    print(f"  Using pre-split eval pool: {len(df_kcc_eval_pool):,} rows")
 
     # ── Step B: stratified 5 % sample as the E2E scenario pool ───────────────
-    from sklearn.model_selection import train_test_split
-    qtype_col = "QueryType"
-    df_stratify_base = df_kcc_eval_pool.dropna(subset=[qtype_col]).reset_index(drop=True)
-    _, df_e2e_pool = train_test_split(
-        df_stratify_base,
-        test_size=EVAL_TEST_SIZE,
-        random_state=RANDOM_SEED,
-        stratify=df_stratify_base[qtype_col],
-    )
-    df_e2e_pool = df_e2e_pool.reset_index(drop=True)
-    print(f"  E2E eval pool: {len(df_e2e_pool):,} rows "
-          f"(stratified {int(EVAL_TEST_SIZE*100)}%, seed={RANDOM_SEED})")
+    # Since we are already working with a small eval pool, we just use the whole pool.
+    df_e2e_pool = df_kcc_eval_pool.copy()
+    print(f"  E2E eval pool: {len(df_e2e_pool):,} rows")
 
 
     print("\n[1/6] Sampling Pathway A text queries …")

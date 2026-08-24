@@ -12,6 +12,8 @@ data/Vision_dataset/
 data/eval/
 
 outputs/Yeild_output_files/*
+outputs/generation/best_adapter
+outputs/ieg_model/
 
 # Ensure sample verification directory and dataset documentation stay tracked
 !data/sample/

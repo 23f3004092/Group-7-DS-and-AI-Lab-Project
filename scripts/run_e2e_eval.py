@@ -266,7 +266,34 @@ def load_generator():
         attn_implementation="sdpa",
     )
     from peft import PeftModel
+    import os
+    import gdown
+    import shutil
+    import inspect
+
     adapter_path = ROOT / "outputs" / "generation" / "best_adapter"
+    if not (adapter_path / "adapter_model.safetensors").exists():
+        print(f"  Downloading distilled adapter to {adapter_path} …")
+        adapter_path.mkdir(parents=True, exist_ok=True)
+        fid = "1nAbR9-hyba_vUhPE68Idet-oEK4cNA1W"
+        _sig = inspect.signature(gdown.download_folder)
+        _kwargs = dict(id=fid, output=str(adapter_path), quiet=False, use_cookies=False)
+        if "remaining_ok" in _sig.parameters:
+            _kwargs["remaining_ok"] = True
+        try:
+            gdown.download_folder(**_kwargs)
+            hit = None
+            for root, dirs, files in os.walk(str(adapter_path)):
+                if "adapter_model.safetensors" in files:
+                    hit = os.path.join(root, "adapter_model.safetensors")
+                    break
+            if hit and os.path.dirname(hit) != str(adapter_path):
+                src = os.path.dirname(hit)
+                for f in os.listdir(src):
+                    shutil.move(os.path.join(src, f), os.path.join(str(adapter_path), f))
+        except Exception as e:
+            print(f"  [folder] download failed: {type(e).__name__}: {str(e)[:160]}")
+
     mdl = PeftModel.from_pretrained(base_mdl, str(adapter_path))
     mdl.eval()
     print("  Generator loaded")
@@ -422,6 +449,26 @@ def eval_A(row, ieg_model, ieg_tok, id2intent, ner_labels,
             "numeric_grounded_ok": None,
             "latency_ms":          round((time.time() - t0) * 1000),
             "answer":              "[BLOCKED by guardrail]",
+        }
+
+    # Intercept Temporal/Admin intents
+    if any(i in ["weather", "market", "policy"] for i in intent):
+        return {
+            "guardrail_fired":     False,
+            "guardrail_correct":   guard_correct,
+            "intent":              ",".join(intent),
+            "model_flag":          int(m_flag),
+            "rule_flag":           int(r_flag),
+            "tier":                "temporal_bypass",
+            "top_score":           None,
+            "citation_ok":         None,
+            "lang_match_ok":       None,
+            "numeric_grounded_ok": None,
+            "latency_ms":          round((time.time() - t0) * 1000),
+            "ieg_ms":              ieg_ms,
+            "retrieval_ms":        0,
+            "gen_ms":              0,
+            "answer":              "[Temporal/Out-of-Scope Bypass] This query relates to weather, market, or policy which is not stored in the knowledge base.",
         }
 
     # Retrieve
@@ -615,6 +662,26 @@ def eval_AB(row, ieg_model, ieg_tok, id2intent, ner_labels,
             "tier":                "blocked",
             "latency_ms":          round((time.time() - t0) * 1000),
             "answer":              "[BLOCKED by guardrail]",
+        }
+
+    # Intercept Temporal/Admin intents
+    if any(i in ["weather", "market", "policy"] for i in intent):
+        return {
+            "vit_label":           label,
+            "vit_rejected":        False,
+            "guardrail_fired":     False,
+            "intent":              ",".join(intent),
+            "tier":                "temporal_bypass",
+            "top_score":           None,
+            "citation_ok":         None,
+            "numeric_grounded_ok": None,
+            "completeness_ok":     None,
+            "latency_ms":          round((time.time() - t0) * 1000),
+            "vit_ms":              vit_ms,
+            "ieg_ms":              ieg_ms,
+            "retrieval_ms":        0,
+            "gen_ms":              0,
+            "answer":              "[Temporal/Out-of-Scope Bypass] This query relates to weather, market, or policy which is not stored in the knowledge base.",
         }
 
     # 3. Retrieve
