@@ -101,19 +101,67 @@ export async function appendImage(formData, { uri, name = 'leaf.jpg', type } = {
   }
 }
 
+// Multipart file upload that does NOT go through RN's fetch/FormData stack.
+// React Native release builds (New Architecture) can fail FormData file uploads
+// on-device before any bytes reach the network; expo-file-system's native
+// uploader (OkHttp direct) avoids that path entirely. Web keeps fetch+FormData.
+async function uploadFile(base, path, { uri, name = 'leaf.jpg', mimeType, fields, headers = {} } = {}) {
+  if (typeof window !== 'undefined' && typeof window.document !== 'undefined') {
+    const formData = new FormData();
+    await appendImage(formData, { uri, name });
+    for (const [k, v] of Object.entries(fields || {})) formData.append(k, v);
+    return request(path, { formData });
+  }
+  // Lazy require: keeps the native module out of web bundles' runtime path.
+  const { File, UploadType } = require('expo-file-system');
+  const res = await new File(uri).upload(`${base}${path}`, {
+    uploadType: UploadType.MULTIPART,
+    fieldName: 'file',
+    mimeType: mimeType || imageMime(name),
+    headers,
+    parameters: fields,
+  });
+  let data = null;
+  try { data = JSON.parse(res.body); } catch (e) { /* non-JSON body */ }
+  if (res.status < 200 || res.status >= 300) {
+    const err = new Error((data && data.detail) || `HTTP ${res.status}`);
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+}
+
+function aiUploadHeaders() {
+  return AI_PROXY_URL ? {} : { 'X-API-Key': AI_API_KEY };
+}
+
 // POST /diagnose — leaf photo (+ optional question) -> disease + grounded treatment
 export async function diagnose({ uri, name = 'leaf.jpg', question } = {}) {
-  const formData = new FormData();
-  await appendImage(formData, { uri, name });
-  if (question) formData.append('question', question);
-  return withAiRetry(() => request('/diagnose', { formData }), { attempts: 3, baseDelay: 5000 });
+  return withAiRetry(() => uploadFile(AI_PROXY_URL || AI_BASE_URL, '/diagnose', {
+    uri,
+    name,
+    fields: question ? { question } : undefined,
+    headers: aiUploadHeaders(),
+  }), { attempts: 3, baseDelay: 5000 });
 }
 
 // POST /vision — leaf photo -> disease label + confidence only
 export async function vision({ uri, name = 'leaf.jpg' } = {}) {
-  const formData = new FormData();
-  await appendImage(formData, { uri, name });
-  return withAiRetry(() => request('/vision', { formData }), { attempts: 4, baseDelay: 5000 });
+  return withAiRetry(() => uploadFile(AI_PROXY_URL || AI_BASE_URL, '/vision', {
+    uri,
+    name,
+    headers: aiUploadHeaders(),
+  }), { attempts: 4, baseDelay: 5000 });
+}
+
+// POST /api/query/vision — local backend's ViT-only fallback endpoint.
+export async function backendVision(apiUrl, { uri, name = 'leaf.jpg' } = {}) {
+  return uploadFile(apiUrl, '/api/query/vision', { uri, name });
+}
+
+// POST /api/query/image — local backend's chat-photo diagnosis fallback.
+export async function backendImage(apiUrl, { uri, name = 'leaf.jpg' } = {}) {
+  return uploadFile(apiUrl, '/api/query/image', { uri, name });
 }
 
 // Maps API sources ({n, score, source_type, citation}) to the shape the chat UI

@@ -31,7 +31,8 @@ import {
   checkHealth as aiCheckHealth,
   normalizeSources,
   setAiProxyUrl,
-  appendImage,
+  backendVision,
+  backendImage,
 } from './aiClient';
 
 // Shared modules: theme system, app config, persistence, display helpers, data services
@@ -658,28 +659,14 @@ function AppShell() {
 
       // 2) Fallback: local FastAPI backend proxy
       if (attachedImage) {
-        const formData = new FormData();
-        await appendImage(formData, { uri: attachedImage.uri, name: attachedImage.name });
-        const res = await fetch(`${apiUrl}/api/query/image`, {
-          method: 'POST',
-          body: formData,
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setChatMessages(prev => [...prev, {
-            id: Date.now(),
-            text: data.answer || 'Diagnosis received.',
-            isUser: false,
-            sources: data.sources,
-            tier: data.tier,
-          }]);
-        } else {
-          setChatMessages(prev => [...prev, {
-            id: Date.now(),
-            text: 'Diagnosis Failed: server returned an error.',
-            isUser: false,
-          }]);
-        }
+        const data = await backendImage(apiUrl, { uri: attachedImage.uri, name: attachedImage.name });
+        setChatMessages(prev => [...prev, {
+          id: Date.now(),
+          text: data.answer || 'Diagnosis received.',
+          isUser: false,
+          sources: data.sources,
+          tier: data.tier,
+        }]);
         return;
       }
 
@@ -763,24 +750,13 @@ function AppShell() {
           return;
         } catch (aiErr) {
           console.warn('AI vision failed, falling back to local classification:', aiErr);
-          showToast('AI vision unreachable — showing local result');
+          showToast(`AI vision failed: ${aiErr?.message || aiErr} — showing local result`);
         }
       }
 
       // 2) Fallback: local ViT-only endpoint (also no synthesis)
-      const formData = new FormData();
-      await appendImage(formData, { uri: selectedImage.uri, name: selectedImage.name, type: 'image/jpeg' });
-      const res = await fetch(`${apiUrl}/api/query/vision`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setDiagnosisResult(data);
-      } else {
-        Alert.alert('Diagnosis Failed', 'Server returned error classification.');
-      }
+      const data = await backendVision(apiUrl, { uri: selectedImage.uri, name: selectedImage.name });
+      setDiagnosisResult(data);
     } catch (e) {
       // Offline fallback simulator if server cannot be reached (classification only)
       setTimeout(() => {
