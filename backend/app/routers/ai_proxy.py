@@ -5,6 +5,7 @@ block direct calls from the Expo web app. This router forwards /ai/* requests
 to the GCP service with the API key attached server-side; the local backend
 already sends the CORS headers that make browser calls work.
 """
+import json
 import httpx
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
@@ -79,8 +80,7 @@ async def proxy_query(payload: dict):
         await upstream.aclose()
         await client.aclose()
         try:
-            import json as _json
-            detail = _json.loads(body).get("detail", body)
+            detail = json.loads(body).get("detail", body)
         except Exception:
             detail = body
         raise HTTPException(status_code=upstream.status_code, detail=detail)
@@ -100,7 +100,7 @@ async def proxy_query(payload: dict):
     await upstream.aclose()
     await client.aclose()
     try:
-        return data.json()
+        return json.loads(data)
     except ValueError:
         raise HTTPException(status_code=502, detail="AI service returned a non-JSON response")
 
