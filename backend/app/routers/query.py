@@ -5,6 +5,7 @@ import time
 import uuid
 import asyncio
 import datetime
+import unicodedata
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Body
 from fastapi.responses import JSONResponse, StreamingResponse
 from sqlalchemy.orm import Session
@@ -104,30 +105,40 @@ CROP_ALIAS_MAP = {
     "potato": ["potato", "aloo", "आलू"],
     "mango": ["mango", "aam", "आम"],
 }
-
-LIVE_DATA_TRIGGERS = {    "mandi_prices": [
+LIVE_DATA_TRIGGERS = {
+    "mandi_prices": [
         r"\bmandi\w*", r"\bbhav\b", r"\bbhaav\b", r"\brate\b", r"\bprice\w*",
         r"\bsell\w*", r"\bbech\w*", r"\bsale\b", r"\bbazar\b", r"\bmarket\b",
-        r"भाव", r"मंडी", r"रेट", r"दाम", r"कीमत", r"बेच", r"बाज़ार", r"बाजार",
+        r"\bभाव\b", r"\bमंडी\b", r"\bरेट\b", r"\bदाम\b", r"\bकीमत\b", r"\bबेच\b",
+        r"\bबाज़ार\b", r"\bबाजार\b",
     ],
     "weather": [
         r"\bweather\b", r"\bmausam\b", r"\btemperature\b", r"\brainy?\b",
-        r"\bforecast\b", r"\bupcoming days\b", r"\bsunny\b", r"\bhows?\b",
-        r"गर्मी", r"मौसम", r"बारिश", r"तापमान", r"बरसात", r"पानी",
+        r"\bforecast\b", r"\bupcoming days\b", r"\bsunny\b",
+        r"\bbarish\b", r"\bbaarish\b", r"\bbarsaat\w*", r"\bpani\b", r"\bgarmi\b",
+        r"\bगर्मी\b", r"\bमौसम\b", r"\bबारिश\b", r"\bतापमान\b", r"\bबरसात\b", r"\bपानी\b",
+        r"\bबादल\b", r"\bधूप\b",
     ],
     "yield": [
-        r"\byield\b", r"\bproduce\b", r"\bupaj\b", r"\bproduction\b",
-        r"\bquintal\w*", r"\buple\b", r"\bproduce\b",
-        r"उपज", r"पैदावार", r"उत्पादन", r"क्विंटल", r"फ़सल",
+        r"\byield\b", r"\bproduction\b", r"\bupaj\b",
+        r"\bquintal\w*", r"\buple\b",
+        r"\bउपज\b", r"\bपैदावार\b", r"\bउत्पादन\b", r"\bक्विंटल\b",
     ],
 }
 
 def detect_live_data_needs(text: str) -> List[str]:
-    """Bilingual (English/Hindi/Hinglish) rule-based detector for live-data needs."""
-    t = text.lower()
+    """Bilingual (English/Hindi/Hinglish) rule-based detector for live-data needs.
+
+    Text and patterns are NFD-normalized so precomposed vs decomposed nukta
+    forms (फ़/ज़/ड़...) always match each other.
+    """
+    def _nfd(s: str) -> str:
+        return unicodedata.normalize("NFD", s)
+
+    t = _nfd(text.lower())
     needs = []
     for key, patterns in LIVE_DATA_TRIGGERS.items():
-        if any(re.search(p, t) for p in patterns):
+        if any(re.search(_nfd(p), t) for p in patterns):
             needs.append(key)
     return needs
 
@@ -135,13 +146,13 @@ def _format_mandi_fact(crop: str, mandi: Dict[str, Any], msp: Optional[float]) -
     """Format 'Wheat MSP: Rs 2275/quintal, today's price: Rs 2450/quintal (2026-08-16)'."""
     commodity = CROP_ALIASES.get(crop, crop.title())
     row = None
-    for p in mandi.get("prices", []):
+    for p in (mandi.get("prices") or []) if isinstance(mandi, dict) else []:
         if p.get("crop", "").lower() == commodity.lower() and p.get("modal_price") is not None:
             row = p
             break
     msp_val = msp if msp is not None else 0
     today = row["modal_price"] if row else None
-    date = (row.get("arrival_date") or mandi.get("fetched_at", ""))[:10]
+    date = ((row.get("arrival_date") if row else None) or mandi.get("fetched_at", ""))[:10]
 
     def _fmt(v: float) -> str:
         return f"{v:g}" if v == int(v) else f"{v:.2f}"
