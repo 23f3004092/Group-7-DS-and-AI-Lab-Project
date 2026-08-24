@@ -13,6 +13,46 @@ from ..config import settings
 
 OPEN_METEO_FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 OPEN_METEO_GEO_URL = "https://geocoding-api.open-meteo.com/v1/search"
+WTTR_URL = "https://wttr.in/{query}?format=j1"
+NOMINATIM_REVERSE_URL = "https://nominatim.openstreetmap.org/reverse"
+NOMINATIM_SEARCH_URL = "https://nominatim.openstreetmap.org/search"
+MET_NO_URL = "https://api.met.no/weatherapi/locationforecast/2.0/compact"
+
+_OSM_UA = {"User-Agent": "FarmerVision/1.0 (agricultural advisory app)"}
+
+
+def _condition_for_symbol(code: Optional[str]) -> tuple:
+    """met.no symbol_code -> (label, icon)."""
+    c = (code or "").lower()
+    for suffix in ("_day", "_night", "_polartwilight"):
+        c = c.replace(suffix, "")
+    if "thunder" in c:
+        return ("Thunderstorm", "⛈")
+    if "heavyrain" in c:
+        return ("Heavy rain", "🌧")
+    if "rain" in c or "sleet" in c or "drizzle" in c or "showers" in c:
+        return ("Light rain" if c.startswith("light") else "Rain", "🌧")
+    if "snow" in c:
+        return ("Snow", "🌨")
+    if "fog" in c:
+        return ("Fog", "🌫")
+    if "overcast" in c:
+        return ("Overcast", "☁️")
+    if "cloudy" in c or "partlycloudy" in c:
+        return ("Partly cloudy", "⛅")
+    if "clearsky" in c or "fair" in c:
+        return ("Clear sky", "☀️")
+    return ("Weather data", "🌡")
+
+
+def _symbol_rain_chance(code: Optional[str]) -> int:
+    """Heuristic rain probability (%) from a met.no symbol_code."""
+    c = (code or "").lower()
+    if any(w in c for w in ("rain", "sleet", "snow", "thunder", "drizzle")):
+        return 85
+    if any(w in c for w in ("cloudy", "overcast", "fog")):
+        return 30
+    return 10
 
 # WMO weather codes -> (condition label)
 WMO_CODES = {
@@ -133,7 +173,21 @@ class WeatherService:
             else:
                 data = await self._fetch_open_meteo(lat, lon, city)
         except Exception as e:
-            print(f"Weather fetch failed: {e}. Using static fallback.")
+            print(f"Weather fetch failed ({settings.WEATHER_PROVIDER}): {e}. Trying fallback providers.")
+
+        # Fallback chain — Open-Meteo rate-limits (429) shared datacenter egress
+        # IPs (seen on Render free tier), so degrade through met.no then wttr.in
+        # before giving up and serving static data.
+        if not data:
+            try:
+                data = await self._fetch_met_no(lat, lon, city)
+            except Exception as e:
+                print(f"met.no fallback failed: {e}.")
+        if not data:
+            try:
+                data = await self._fetch_wttr(lat, lon, city)
+            except Exception as e:
+                print(f"wttr.in fallback failed: {e}. Using static fallback.")
 
         if not data:
             data = dict(STATIC_FALLBACK)
@@ -220,6 +274,225 @@ class WeatherService:
             "forecast": forecast,
             "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
         }
+
+    # --- met.no Locationforecast (primary fallback; keyless, coords-native) ---
+
+    async def _fetch_met_no(
+        self, lat: Optional[float], lon: Optional[float], city: Optional[str]
+    ) -> Optional[Dict[str, Any]]:
+        """Fallback provider: Norwegian met.no Locationforecast 2.0 compact.
+
+        Reliable and keyless (User-Agent required). Accepts raw GPS
+        coordinates, so it works even when wttr.in's place-name lookups fail.
+        """
+        if lat is None or lon is None:
+            place = await self._search_place(city or "")
+            if place is None:
+                return None
+            lat, lon, resolved_name = place
+        else:
+            resolved_name = f"{lat:.2f}, {lon:.2f}"
+
+        async with httpx.AsyncClient(timeout=20.0, headers=_OSM_UA) as client:
+            resp = await client.get(MET_NO_URL, params={"lat": lat, "lon": lon})
+            resp.raise_for_status()
+            payload = resp.json()
+
+        series = ((payload.get("properties") or {}).get("timeseries")) or []
+        if not series:
+            return None
+
+        def details(entry: Dict[str, Any]) -> Dict[str, Any]:
+            return (((entry.get("data") or {}).get("instant") or {}).get("details")) or {}
+
+        def symbol_of(entry: Dict[str, Any]) -> Optional[str]:
+            data = entry.get("data") or {}
+            for h in ("next_1_hours", "next_6_hours"):
+                sym = ((data.get(h) or {}).get("summary") or {}).get("symbol_code")
+                if sym:
+                    return sym
+            return None
+
+        def precip_of(entry: Dict[str, Any]) -> Optional[float]:
+            data = entry.get("data") or {}
+            for h in ("next_1_hours", "next_6_hours"):
+                amt = ((data.get(h) or {}).get("details") or {}).get("precipitation_amount")
+                if amt is not None:
+                    return float(amt)
+            return None
+
+        current_entry = series[0]
+        cur = details(current_entry)
+        cur_sym = symbol_of(current_entry)
+        label, icon = _condition_for_symbol(cur_sym)
+
+        # Group the next 3 days: max/min temp + max symbol rain chance per day.
+        by_day: Dict[str, Dict[str, Any]] = {}
+        for entry in series:
+            day = str(entry.get("time", ""))[:10]
+            if not day or (by_day and len(by_day) >= 3 and day not in by_day):
+                continue
+            d = details(entry)
+            t = d.get("air_temperature")
+            bucket = by_day.setdefault(day, {"max": None, "min": None, "chance": 0, "precip": 0.0})
+            if isinstance(t, (int, float)):
+                bucket["max"] = t if bucket["max"] is None else max(bucket["max"], t)
+                bucket["min"] = t if bucket["min"] is None else min(bucket["min"], t)
+            bucket["chance"] = max(bucket["chance"], _symbol_rain_chance(symbol_of(entry)))
+            p = precip_of(entry)
+            if p:
+                bucket["precip"] += p
+
+        forecast = [{
+            "date": day,
+            "wmo_code": None,
+            "max_temp_c": b["max"],
+            "min_temp_c": b["min"],
+            "rain_probability": b["chance"] or None,
+        } for day, b in sorted(by_day.items())[:3]]
+
+        wind_deg = cur.get("wind_from_direction")
+        wind_kmh = cur.get("wind_speed")
+        if isinstance(wind_kmh, (int, float)):
+            wind_kmh = round(wind_kmh * 3.6, 1)
+
+        first = forecast[0] if forecast else {}
+        return {
+            "source": "live",
+            "provider": "met_no",
+            "location": resolved_name,
+            "temperature_c": cur.get("air_temperature"),
+            "apparent_temperature_c": None,
+            "condition": f"{icon} {label}",
+            "humidity": cur.get("relative_humidity"),
+            "wind_speed_kmh": wind_kmh,
+            "wind_gusts_kmh": None,
+            "wind_direction_deg": wind_deg,
+            "wind_direction_label": _compass_label(wind_deg),
+            "pressure_hpa": cur.get("air_pressure_at_sea_level"),
+            "dew_point_c": cur.get("dew_point_temperature"),
+            "cloud_cover_pct": cur.get("cloud_area_fraction"),
+            "uv_index": None,
+            "wmo_code": None,
+            "sunrise": None,
+            "sunset": None,
+            "precipitation_mm": precip_of(current_entry),
+            "rain_probability": first.get("rain_probability"),
+            "max_temp_c": first.get("max_temp_c"),
+            "min_temp_c": first.get("min_temp_c"),
+            "forecast": forecast,
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        }
+
+    async def _search_place(self, name: str) -> Optional[tuple]:
+        """City/district name -> (lat, lon, display name) via OSM Nominatim."""
+        params = {"q": name.strip(), "format": "json", "limit": 1, "countrycodes": "in"}
+        async with httpx.AsyncClient(timeout=15.0, headers=_OSM_UA) as client:
+            resp = await client.get(NOMINATIM_SEARCH_URL, params=params)
+            resp.raise_for_status()
+            results = resp.json() or []
+        if not results:
+            return None
+        first = results[0]
+        display = first.get("display_name") or name
+        return float(first["lat"]), float(first["lon"]), ", ".join(display.split(", ")[:3])
+
+    # --- wttr.in (secondary keyless provider) ---
+
+    async def _fetch_wttr(
+        self, lat: Optional[float], lon: Optional[float], city: Optional[str]
+    ) -> Optional[Dict[str, Any]]:
+        """Fallback provider: wttr.in JSON API (keyless, 3-day forecast).
+
+        Used when Open-Meteo is unreachable/rate-limited from the server's IP.
+        wttr.in only resolves place names reliably, so GPS coordinates are
+        reverse-geocoded to a city via Nominatim first.
+        """
+        if lat is not None and lon is not None:
+            city = await self._reverse_geocode(lat, lon) or city
+            if not city:
+                return None
+            query = (city or "").strip()
+            resolved_name = f"{lat:.2f}, {lon:.2f}"
+        else:
+            query = (city or "").strip()
+            if not query:
+                return None
+            resolved_name = query.title()
+
+        async with httpx.AsyncClient(timeout=20.0, follow_redirects=True) as client:
+            resp = await client.get(WTTR_URL.format(query=query), headers={"User-Agent": "curl/8.0.1"})
+            resp.raise_for_status()
+            payload = resp.json()
+
+        current = (payload.get("current_condition") or [None])[0]
+        if not current or current.get("temp_C") is None:
+            return None
+
+        def _desc(cc: Dict[str, Any]) -> str:
+            d = (cc.get("weatherDesc") or [{}])[0].get("value")
+            return d or "Weather data"
+
+        days = payload.get("weather") or []
+        forecast = []
+        for d in days[:3]:
+            hourly = d.get("hourly") or []
+            chances = [int(h.get("chanceofrain") or 0) for h in hourly]
+            forecast.append({
+                "date": d.get("date"),
+                "wmo_code": None,
+                "max_temp_c": float(d["maxtempC"]) if d.get("maxtempC") not in (None, "") else None,
+                "min_temp_c": float(d["mintempC"]) if d.get("mintempC") not in (None, "") else None,
+                "rain_probability": max(chances) if chances else None,
+            })
+
+        wind_deg = float(current["winddirDegree"]) if current.get("winddirDegree") not in (None, "") else None
+
+        return {
+            "source": "live",
+            "provider": "wttr",
+            "location": resolved_name,
+            "temperature_c": float(current["temp_C"]),
+            "apparent_temperature_c": float(current["FeelsLikeC"]) if current.get("FeelsLikeC") not in (None, "") else None,
+            "condition": _desc(current),
+            "humidity": int(current["humidity"]) if current.get("humidity") not in (None, "") else None,
+            "wind_speed_kmh": float(current["windspeedKmph"]) if current.get("windspeedKmph") not in (None, "") else None,
+            "wind_gusts_kmh": None,
+            "wind_direction_deg": wind_deg,
+            "wind_direction_label": _compass_label(wind_deg),
+            "pressure_hpa": float(current["pressure"]) if current.get("pressure") not in (None, "") else None,
+            "dew_point_c": None,
+            "cloud_cover_pct": int(current["cloudcover"]) if current.get("cloudcover") not in (None, "") else None,
+            "uv_index": None,
+            "wmo_code": None,
+            "sunrise": (days[0].get("astronomy") or [{}])[0].get("sunrise") if days else None,
+            "sunset": (days[0].get("astronomy") or [{}])[0].get("sunset") if days else None,
+            "precipitation_mm": float(current["precipMM"]) if current.get("precipMM") not in (None, "") else None,
+            "rain_probability": forecast[0]["rain_probability"] if forecast else None,
+            "max_temp_c": forecast[0]["max_temp_c"] if forecast else None,
+            "min_temp_c": forecast[0]["min_temp_c"] if forecast else None,
+            "forecast": forecast,
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        }
+
+    async def _reverse_geocode(self, lat: float, lon: float) -> Optional[str]:
+        """GPS coords -> nearest place name via OSM Nominatim (keyless)."""
+        params = {
+            "lat": lat,
+            "lon": lon,
+            "format": "json",
+            "zoom": 10,  # city/district level
+        }
+        headers = {"User-Agent": "FarmerVision/1.0 (agricultural advisory app)"}
+        async with httpx.AsyncClient(timeout=15.0, headers=headers) as client:
+            resp = await client.get(NOMINATIM_REVERSE_URL, params=params)
+            resp.raise_for_status()
+            data = resp.json() or {}
+        address = data.get("address") or {}
+        for key in ("city", "town", "village", "municipality", "state_district", "county"):
+            if address.get(key):
+                return address[key]
+        return None
 
     async def _geocode(self, city: str) -> Optional[tuple]:
         """City/district name -> (lat, lon, display name) via Open-Meteo geocoding."""
