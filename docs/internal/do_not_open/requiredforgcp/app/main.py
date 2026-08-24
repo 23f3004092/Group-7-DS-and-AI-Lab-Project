@@ -20,6 +20,7 @@ import torch
 from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from starlette.responses import StreamingResponse
 
 from . import config as C
 from . import retrieval, generation, ieg, pipeline
@@ -52,6 +53,8 @@ async def lifespan(app: FastAPI):
     if C.HAS_VISION and vision is not None:
         _try("vision", vision.load)
     _try("generation", generation.load)
+    if generation._model is not None:                                      # noqa: SLF001
+        _try("generation_warmup", generation.warmup)
     STATE["ready"] = True
     yield
 
@@ -94,6 +97,8 @@ class QueryIn(BaseModel):
     history: Optional[list] = None
     include_content: Optional[bool] = False
     session_id: Optional[str] = None
+    # Opt-in SSE over this same /query endpoint. Existing callers remain JSON.
+    stream: Optional[bool] = False
 
 
 class ClassifyIn(BaseModel):
@@ -120,6 +125,9 @@ def health():
             "ieg_model": ieg.MODEL_OK,
             "vision": bool(vision and vision._model is not None),             # noqa: SLF001
         },
+        "retrieval_backend": retrieval._backend,                            # noqa: SLF001
+        "generation_dtype": (str(next(generation._model.parameters()).dtype)
+                             if generation._model is not None else None),     # noqa: SLF001
         "note": "mandi/weather/yield are provided by the caller via live_data",
         "errors": STATE["errors"],
     }
@@ -142,12 +150,34 @@ def query(body: QueryIn, x_api_key: Optional[str] = Header(default=None)):
     require_key(x_api_key)
     if not body.query or not body.query.strip():
         raise HTTPException(status_code=400, detail="empty query")
-    result = pipeline.answer_query(
-        body.query, intent=body.intent, top_k=body.top_k, filters=body.filters,
-        live_data=body.live_data, skip_retrieval=bool(body.skip_retrieval),
-        history=body.history, include_content=bool(body.include_content),
-        session_id=body.session_id,
-    )
+    args = dict(intent=body.intent, top_k=body.top_k, filters=body.filters,
+                live_data=body.live_data,
+                skip_retrieval=bool(body.skip_retrieval), history=body.history,
+                include_content=bool(body.include_content),
+                session_id=body.session_id)
+
+    if body.stream:
+        def events():
+            try:
+                for event in pipeline.answer_query_stream(body.query, **args):
+                    if event.get("type") == "final":
+                        event["data"]["suggested_external"] = ieg.external_hints(body.query)
+                    event_name = event.get("type", "message")
+                    payload = json.dumps(event, ensure_ascii=False)
+                    yield f"event: {event_name}\ndata: {payload}\n\n"
+            except GeneratorExit:
+                return
+            except Exception as e:
+                log.exception("streaming query failed")
+                payload = json.dumps({"type": "error", "error": str(e)},
+                                     ensure_ascii=False)
+                yield f"event: error\ndata: {payload}\n\n"
+
+        return StreamingResponse(
+            events(), media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+    result = pipeline.answer_query(body.query, **args)
     # tell the caller what external data this query looked like it wanted, so they
     # can notice if they forgot to fetch/inject something.
     result["suggested_external"] = ieg.external_hints(body.query)
@@ -156,8 +186,6 @@ def query(body: QueryIn, x_api_key: Optional[str] = Header(default=None)):
 
 @app.post("/diagnose")
 async def diagnose(file: UploadFile = File(...), question: Optional[str] = Form(default=None),
-                   session_id: Optional[str] = Form(default=None),
-                   history: Optional[str] = Form(default=None),
                    x_api_key: Optional[str] = Header(default=None)):
     require_key(x_api_key)
     if not (vision and vision._model is not None):                            # noqa: SLF001
@@ -165,16 +193,7 @@ async def diagnose(file: UploadFile = File(...), question: Optional[str] = Form(
     image_bytes = await file.read()
     if not image_bytes:
         raise HTTPException(status_code=400, detail="empty image")
-    parsed_history = None
-    if history:
-        try:
-            parsed_history = json.loads(history)
-        except (TypeError, ValueError, json.JSONDecodeError):
-            raise HTTPException(status_code=400, detail="history must be a JSON array")
-        if not isinstance(parsed_history, list):
-            raise HTTPException(status_code=400, detail="history must be a JSON array")
-    return pipeline.diagnose_image(image_bytes, question=question,
-                                   session_id=session_id, history=parsed_history)
+    return pipeline.diagnose_image(image_bytes, question=question)
 
 
 @app.post("/vision")
@@ -186,3 +205,4 @@ async def vision_only(file: UploadFile = File(...), x_api_key: Optional[str] = H
     if not image_bytes:
         raise HTTPException(status_code=400, detail="empty image")
     return vision.predict(image_bytes)
+
