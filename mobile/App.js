@@ -25,6 +25,7 @@ import {
   AI_CONFIGURED,
   AI_BASE_URL_VALUE,
   ask as aiAsk,
+  askStream as aiAskStream,
   classify as aiClassify,
   diagnose as aiDiagnose,
   vision as aiVision,
@@ -38,6 +39,10 @@ import {
 // Shared modules: theme system, app config, persistence, display helpers, data services
 import { FONT, ACCENTS, BASE_THEMES, FONT_SCALES, createStyles } from './src/theme';
 import { DEFAULT_API_URL, DEFAULT_SETTINGS } from './src/config';
+
+// Placeholder id for the in-progress streamed assistant bubble. Replaced by
+// the final message (with sources/tier) once the SSE `final` event arrives.
+const STREAMING_MSG_ID = 'streaming-assistant-msg';
 import { loadSettings, saveSettings } from './src/storage';
 import {
   fetchMandiRows,
@@ -636,21 +641,50 @@ function AppShell() {
               console.warn('AI classify failed, answering without suggestion:', clErr);
             }
             const liveData = await buildLiveData(userText, suggestedExternal);
-            data = await aiAsk(userText, {
+            const askOpts = {
               sessionId: chatSessionRef.current,
               intent: aiIntent,
               liveData,
-            });
+            };
+            // Stream the answer token-by-token; fall back to a buffered ask
+            // when the platform or service can't stream (err.noStream etc.).
+            let streamRes = null;
+            try {
+              streamRes = await aiAskStream(userText, {
+                ...askOpts,
+                onStatus: () => {},
+                onDelta: (full) => {
+                  setIsTyping(false);
+                  setChatMessages(prev => {
+                    if (prev.some(m => m.id === STREAMING_MSG_ID)) {
+                      return prev.map(m => (m.id === STREAMING_MSG_ID ? { ...m, text: full } : m));
+                    }
+                    return [...prev, { id: STREAMING_MSG_ID, text: full, isUser: false }];
+                  });
+                },
+              });
+            } catch (stErr) {
+              console.warn('AI streaming failed, falling back to buffered ask:', stErr);
+              setChatMessages(prev => prev.filter(m => m.id !== STREAMING_MSG_ID));
+            }
+            data = streamRes
+              ? { ...(streamRes.final && streamRes.final.data ? streamRes.final.data : {}), answer: (streamRes.final && streamRes.final.data && streamRes.final.data.answer) || streamRes.text }
+              : await aiAsk(userText, askOpts);
           }
           const text = [data._diag, (data.answer || data.message || 'No answer received from AI service.')].filter(Boolean).join('\n\n');
-          setChatMessages(prev => [...prev, {
+          const finalMsg = {
             id: Date.now(),
             text,
             isUser: false,
             sources: normalizeSources(data.sources),
             tier: data.tier,
             score: data.top_score,
-          }]);
+          };
+          setChatMessages(prev => (
+            prev.some(m => m.id === STREAMING_MSG_ID)
+              ? prev.map(m => (m.id === STREAMING_MSG_ID ? finalMsg : m))
+              : [...prev, finalMsg]
+          ));
           return;
         } catch (aiErr) {
           console.warn('AI service failed, falling back to local backend:', aiErr);

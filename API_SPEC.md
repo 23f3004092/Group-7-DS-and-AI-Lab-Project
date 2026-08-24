@@ -143,6 +143,50 @@ supports caller-injected mandi, weather, and yield data and multi-turn conversat
 | `history` | array or null | No | null | Client-managed prior messages. |
 | `include_content` | boolean | No | `false` | Include the actual retrieved chunk text in each returned source. |
 | `session_id` | string or null | No | null | Conversation identifier for server-managed history. |
+| `stream` | boolean | No | `false` | Stream the answer as Server-Sent Events (see below). |
+
+#### Streaming responses (`"stream": true`)
+
+Send `"stream": true` together with `Accept: text/event-stream`. The response is
+`Content-Type: text/event-stream` and emits three event types in order:
+
+1. `status` — pipeline progress: `{"stage": "classifying"}`, `{"stage": "retrieving"}`,
+   then `{"stage": "generating", "tier": ..., "top_score": ...}`.
+2. `delta` — one JSON object per token chunk: `{"type": "delta", "text": "..."}`.
+   Append each `text` to the growing answer.
+3. `final` — the complete buffered response as a single event:
+   `{"type": "final", "data": { ...same shape as the non-streaming response... }}`.
+
+```bash
+curl -N -X POST "$BASE_URL/query" \
+  -H "X-API-Key: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: text/event-stream" \
+  -d '{
+    "query": "Wheat mein yellow rust ka treatment kya hai?",
+    "intent": "field_practice",
+    "stream": true
+  }'
+```
+
+Example wire format:
+
+```
+event: status
+data: {"type": "status", "stage": "classifying"}
+
+event: delta
+data: {"type": "delta", "text": "Yellow "}
+
+event: delta
+data: {"type": "delta", "text": "rust "}
+
+event: final
+data: {"type": "final", "data": {"tier": "grounded", "answer": "...", "sources": [], "...": "..."}}
+```
+
+Clients that cannot consume streaming bodies should omit `stream`; the same
+request then returns the regular buffered JSON response.
 
 #### Basic request
 

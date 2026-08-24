@@ -2,6 +2,8 @@
 // Endpoint contract: API_SPEC.md at repo root (Base URL + X-API-Key).
 // Base URL and API key are read from .env (EXPO_PUBLIC_AI_API_URL / EXPO_PUBLIC_AI_API_KEY).
 
+import { fetch as expoFetch } from 'expo/fetch';
+
 const AI_BASE_URL = (process.env.EXPO_PUBLIC_AI_API_URL || '').replace(/\/+$/, '');
 const AI_API_KEY = process.env.EXPO_PUBLIC_AI_API_KEY || '';
 
@@ -86,6 +88,129 @@ export async function ask(query, { intent, sessionId, liveData, topK } = {}) {
   if (topK) body.top_k = topK;
   body.include_content = true;
   return withAiRetry(() => request('/query', { body }), { attempts: 4, baseDelay: 5000 });
+}
+
+function decodeChunk(bytes, isLast) {
+  if (typeof TextDecoder !== 'undefined') {
+    return new TextDecoder().decode(bytes, { stream: !isLast });
+  }
+  // Fallback without TextDecoder — plain bytes (non-ASCII may garble).
+  let out = '';
+  for (let i = 0; i < bytes.length; i++) out += String.fromCharCode(bytes[i]);
+  return out;
+}
+
+// Parses one SSE block ("event: x\ndata: {...}") into { event, data }.
+function parseSseBlock(block) {
+  let event = 'message';
+  const dataLines = [];
+  for (const line of block.split('\n')) {
+    if (line.startsWith('event:')) event = line.slice(6).trim();
+    else if (line.startsWith('data:')) dataLines.push(line.slice(5).replace(/^ /, ''));
+  }
+  return { event, data: dataLines.join('\n') };
+}
+
+// POST /query with stream:true — consumes the SSE event protocol from
+// API_SPEC.md: `status` (classifying/retrieving/generating) -> `delta`*
+// (answer text chunks) -> `final` (full response payload incl. sources).
+//
+// Callbacks:
+//   onStatus(msg) — progress stages; msg.stage tells which pipeline step runs.
+//   onDelta(fullTextSoFar) — called after every token chunk with the
+//     accumulated answer text so far.
+//
+// Resolves with { final, text }: `final` is the `final` event payload (its
+// .data holds the complete QueryResponse), `text` is the concatenated deltas.
+// Throws err.noStream === true when the runtime/platform cannot stream the
+// response body — callers should then retry with the buffered ask().
+export async function askStream(query, { intent, sessionId, liveData, topK, onStatus, onDelta } = {}) {
+  const base = AI_PROXY_URL || AI_BASE_URL;
+  const headers = {};
+  if (!AI_PROXY_URL && AI_API_KEY) headers['X-API-Key'] = AI_API_KEY;
+  headers['Content-Type'] = 'application/json';
+  headers['Accept'] = 'text/event-stream';
+
+  const body = { query, stream: true };
+  if (intent) body.intent = intent;
+  if (sessionId) body.session_id = sessionId;
+  if (liveData) body.live_data = liveData;
+  if (topK) body.top_k = topK;
+  body.include_content = true;
+
+  let res;
+  try {
+    res = await expoFetch(`${base}/query`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body),
+    });
+  } catch (e) {
+    const err = new Error(`AI service unreachable: ${e.message || e}`);
+    err.noStream = true;
+    throw err;
+  }
+
+  if (!res.ok) {
+    let detail = `HTTP ${res.status}`;
+    try {
+      const j = await res.json();
+      if (j && j.detail) detail = j.detail;
+    } catch (e) { /* non-JSON error body */ }
+    throw new Error(detail);
+  }
+
+  const ctype = res.headers.get('content-type') || '';
+  if (!ctype.includes('text/event-stream')) {
+    // Server answered with a regular buffered JSON body — degrade gracefully.
+    const json = await res.json();
+    return { final: json ? { type: 'final', data: json } : null, text: (json && json.answer) || '' };
+  }
+  if (!res.body || typeof res.body.getReader !== 'function') {
+    const err = new Error('Streaming response bodies are not supported here');
+    err.noStream = true;
+    throw err;
+  }
+
+  const reader = res.body.getReader();
+  const decoder = typeof TextDecoder !== 'undefined' ? new TextDecoder() : null;
+
+  let buf = '';
+  let text = '';
+  let finalMsg = null;
+
+  const handleBlock = (rawBlock) => {
+    const block = rawBlock.replace(/\r/g, '');
+    if (!block.trim()) return;
+    const { event, data } = parseSseBlock(block);
+    let msg = null;
+    try { msg = JSON.parse(data); } catch (e) { return; }
+    const kind = event !== 'message' ? event : msg.type;
+    if (kind === 'delta') {
+      if (msg.text) {
+        text += msg.text;
+        if (onDelta) onDelta(text);
+      }
+    } else if (kind === 'status') {
+      if (onStatus) onStatus(msg);
+    } else if (kind === 'final') {
+      finalMsg = msg;
+    }
+  };
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += decoder ? decoder.decode(value, { stream: true }) : decodeChunk(value, false);
+    let sep;
+    while ((sep = buf.indexOf('\n\n')) !== -1) {
+      handleBlock(buf.slice(0, sep));
+      buf = buf.slice(sep + 2);
+    }
+  }
+  if (buf.trim()) handleBlock(buf);
+
+  return { final: finalMsg, text };
 }
 
 // Adds an image to a multipart FormData in a platform-safe way.

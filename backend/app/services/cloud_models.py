@@ -93,6 +93,65 @@ class CloudAIService:
             except (KeyError, IndexError) as e:
                 raise Exception(f"Failed to parse Gemini response: {e}. Raw response: {res_json}")
 
+    @staticmethod
+    async def call_gemini_api_stream(prompt: str, system_instruction: str = None, image_data: bytes = None, mime_type: str = "image/jpeg"):
+        """Stream Gemini tokens via streamGenerateContent (SSE). Yields text deltas."""
+        if not settings.GEMINI_API_KEY:
+            raise ValueError("GEMINI_API_KEY is not configured.")
+
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key={settings.GEMINI_API_KEY}"
+
+        contents_parts = []
+        if image_data:
+            base64_image = base64.b64encode(image_data).decode("utf-8")
+            contents_parts.append({
+                "inlineData": {
+                    "mimeType": mime_type,
+                    "data": base64_image
+                }
+            })
+
+        contents_parts.append({"text": prompt})
+
+        payload = {
+            "contents": [{"parts": contents_parts}]
+        }
+
+        if system_instruction:
+            payload["systemInstruction"] = {
+                "parts": [{"text": system_instruction}]
+            }
+
+        if "json" in prompt.lower():
+            payload["generationConfig"] = {
+                "responseMimeType": "application/json"
+            }
+
+        async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=10.0)) as client:
+            async with client.stream("POST", url, json=payload) as response:
+                if response.status_code != 200:
+                    body = (await response.aread()).decode("utf-8", errors="replace")
+                    raise Exception(f"Gemini API returned error code {response.status_code}: {body[:500]}")
+                async for line in response.aiter_lines():
+                    line = line.strip()
+                    if not line.startswith("data:"):
+                        continue
+                    chunk = line[len("data:"):].strip()
+                    if not chunk or chunk == "[DONE]":
+                        continue
+                    try:
+                        obj = json.loads(chunk)
+                    except json.JSONDecodeError:
+                        continue
+                    try:
+                        parts = obj["candidates"][0]["content"]["parts"]
+                    except (KeyError, IndexError):
+                        continue
+                    for part in parts:
+                        text_delta = part.get("text")
+                        if text_delta:
+                            yield text_delta
+
     @classmethod
     async def run_intent_entity_guardrails(cls, text: str) -> Tuple[List[str], bool, Optional[str]]:
         """Pathway A/AB: intent classification, entity recognition, and guardrail verification."""
@@ -253,22 +312,21 @@ class CloudAIService:
         }
 
     @classmethod
-    async def synthesize_response(cls, query: str, context_chunks: List[Dict[str, Any]],
-                                  live_data: Optional[Dict[str, Any]] = None) -> str:
-        """Synthesize advice using retrieved context chunks, optional live data, and the LLM."""
-        
+    def _build_synthesis_prompts(cls, query: str, context_chunks: List[Dict[str, Any]],
+                                 live_data: Optional[Dict[str, Any]] = None) -> Tuple[str, str]:
+        """Build (system_prompt, user_prompt) for the advisory synthesis."""
         ctx_str = "\n\n".join(
             f"[{i+1}] (Source: {c.get('source_type', 'agri_docs')}, Crop: {c.get('crop', 'General')})\n{c.get('text', '')}"
             for i, c in enumerate(context_chunks)
         )
-        
+
         live_str = ""
         if live_data:
             live_str = "\n\n".join(
                 f"- {k.replace('_', ' ').title()}: {v}"
                 for k, v in live_data.items() if v
             )
-        
+
         system_prompt = (
             "You are FarmerVision, a knowledgeable and compassionate agricultural advisor for Indian farmers, "
             "specializing in Uttar Pradesh. Provide practical, step-by-step advice based ONLY on the provided Context. "
@@ -280,13 +338,20 @@ class CloudAIService:
             "of the farmer's question. Always include a short advisory warning if chemicals/pesticides are suggested "
             "(e.g. 'Use gloves, wash hands'). Keep the response concise, structured, and under 150 words."
         )
-        
+
         prompt = (
             f"Context:\n{ctx_str}\n\n"
             + (f"Live Data (authoritative facts):\n{live_str}\n\n" if live_str else "")
             + f"Farmer's Query: {query}\n\n"
             f"Advisory Response:"
         )
+        return system_prompt, prompt
+
+    @classmethod
+    async def synthesize_response(cls, query: str, context_chunks: List[Dict[str, Any]],
+                                  live_data: Optional[Dict[str, Any]] = None) -> str:
+        """Synthesize advice using retrieved context chunks, optional live data, and the LLM."""
+        system_prompt, prompt = cls._build_synthesis_prompts(query, context_chunks, live_data)
 
         if settings.GEMINI_API_KEY and not settings.MOCK_MODELS:
             try:
@@ -296,8 +361,37 @@ class CloudAIService:
                 # Fallback to mock on API error
                 pass
 
-        # Mock Advisory Synthesis
-        # Create a helpful response incorporating elements from the mock context
+        return cls._mock_synthesis(query, live_data)
+
+    @classmethod
+    async def synthesize_response_stream(cls, query: str, context_chunks: List[Dict[str, Any]],
+                                         live_data: Optional[Dict[str, Any]] = None):
+        """Async generator yielding answer text deltas for SSE streaming clients.
+
+        Streams from Gemini when configured; otherwise falls back to the mock
+        advisory emitted word-by-word so client UX is identical.
+        """
+        system_prompt, prompt = cls._build_synthesis_prompts(query, context_chunks, live_data)
+
+        produced = False
+        if settings.GEMINI_API_KEY and not settings.MOCK_MODELS:
+            try:
+                async for delta in cls.call_gemini_api_stream(prompt=prompt, system_instruction=system_prompt):
+                    produced = True
+                    yield delta
+                return
+            except Exception:
+                if produced:
+                    return
+                # Stream never started -> fall through to mock below
+
+        mock_text = cls._mock_synthesis(query, live_data)
+        for word in re.findall(r"\S+\s*|\s+", mock_text):
+            yield word
+
+    @staticmethod
+    def _mock_synthesis(query: str, live_data: Optional[Dict[str, Any]] = None) -> str:
+        """Mock Advisory Synthesis — helpful response incorporating live-data facts."""
         is_hindi = any(char in query for char in ["क", "ह", "ा", "ी", "ो", "म", "न"])
 
         def _mock_decision_answer() -> Optional[str]:

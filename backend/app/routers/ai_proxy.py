@@ -7,6 +7,8 @@ already sends the CORS headers that make browser calls work.
 """
 import httpx
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
+from fastapi.responses import StreamingResponse
+from starlette.background import BackgroundTask
 from ..config import settings
 
 router = APIRouter(prefix="/ai", tags=["AI Proxy"])
@@ -59,7 +61,48 @@ async def proxy_classify(payload: dict):
 
 @router.post("/query")
 async def proxy_query(payload: dict):
-    return await _forward("POST", "/query", json=payload)
+    """Forward /query to the GCP gateway. When the upstream answers with an SSE
+    stream (client sent `stream: true`), pipe the event bytes through as they
+    arrive instead of buffering the whole response."""
+    if not AI_BASE:
+        raise HTTPException(status_code=503, detail="AI proxy not configured (set AI_API_URL in .env)")
+    headers = {"X-API-Key": AI_KEY} if AI_KEY else {}
+    client = httpx.AsyncClient(timeout=TIMEOUT)
+    try:
+        req = client.build_request("POST", f"{AI_BASE}/query", json=payload, headers=headers)
+        upstream = await client.send(req, stream=True)
+    except httpx.RequestError as exc:
+        await client.aclose()
+        raise HTTPException(status_code=502, detail=f"AI service unreachable: {exc}")
+    if upstream.status_code >= 400:
+        body = (await upstream.aread()).decode("utf-8", errors="replace")
+        await upstream.aclose()
+        await client.aclose()
+        try:
+            import json as _json
+            detail = _json.loads(body).get("detail", body)
+        except Exception:
+            detail = body
+        raise HTTPException(status_code=upstream.status_code, detail=detail)
+
+    if "text/event-stream" in upstream.headers.get("content-type", ""):
+        async def _finish():
+            await upstream.aclose()
+            await client.aclose()
+        return StreamingResponse(
+            upstream.aiter_raw(),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+            background=BackgroundTask(_finish),
+        )
+
+    data = await upstream.aread()
+    await upstream.aclose()
+    await client.aclose()
+    try:
+        return data.json()
+    except ValueError:
+        raise HTTPException(status_code=502, detail="AI service returned a non-JSON response")
 
 
 @router.post("/diagnose")

@@ -6,7 +6,7 @@ import uuid
 import asyncio
 import datetime
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Body
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 from sqlalchemy.orm import Session
 from typing import Optional, List, Dict, Any
 
@@ -95,8 +95,17 @@ def get_current_settings(db: Session) -> Dict[str, Any]:
             configs[key] = getattr(settings, cfg_name, None)
     return configs
 
-LIVE_DATA_TRIGGERS = {
-    "mandi_prices": [
+CROP_ALIAS_MAP = {
+    "wheat": ["wheat", "gehu", "गेहूं", "गेहूँ"],
+    "rice": ["rice", "paddy", "dhan", "चावल", "धान"],
+    "maize": ["maize", "makka", "makkai", "मक्का"],
+    "mustard": ["mustard", "sarson", "सरसों"],
+    "sugarcane": ["sugarcane", "ganna", "गन्ना"],
+    "potato": ["potato", "aloo", "आलू"],
+    "mango": ["mango", "aam", "आम"],
+}
+
+LIVE_DATA_TRIGGERS = {    "mandi_prices": [
         r"\bmandi\w*", r"\bbhav\b", r"\bbhaav\b", r"\brate\b", r"\bprice\w*",
         r"\bsell\w*", r"\bbech\w*", r"\bsale\b", r"\bbazar\b", r"\bmarket\b",
         r"भाव", r"मंडी", r"रेट", r"दाम", r"कीमत", r"बेच", r"बाज़ार", r"बाजार",
@@ -321,15 +330,6 @@ async def query_text(q: TextQuery, db: Session = Depends(get_db)):
         
     # 2. Identify crop entities mentioned (English + Hinglish/Hindi aliases)
     detected_crop = None
-    CROP_ALIAS_MAP = {
-        "wheat": ["wheat", "gehu", "गेहूं", "गेहूँ"],
-        "rice": ["rice", "paddy", "dhan", "चावल", "धान"],
-        "maize": ["maize", "makka", "makkai", "मक्का"],
-        "mustard": ["mustard", "sarson", "सरसों"],
-        "sugarcane": ["sugarcane", "ganna", "गन्ना"],
-        "potato": ["potato", "aloo", "आलू"],
-        "mango": ["mango", "aam", "आम"],
-    }
     text_lower = text.lower()
     for crop, aliases in CROP_ALIAS_MAP.items():
         if any(alias in text_lower for alias in aliases):
@@ -382,6 +382,111 @@ async def query_text(q: TextQuery, db: Session = Depends(get_db)):
         top_score=round(top_score, 4), answer=answer, sources=sources,
         latency_ms=latency, detected_crop=detected_crop,
         live_data=live_data or None
+    )
+
+@router.post("/text_stream")
+async def query_text_stream(q: TextQuery, db: Session = Depends(get_db)):
+    """Pathway A with Server-Sent Events — same pipeline as /text but streams the
+    synthesis token-by-token. Event protocol matches the GCP gateway (API_SPEC.md):
+    `status` (classifying/retrieving/generating) -> `delta`* -> `final`."""
+    t0 = time.time()
+    text = q.text.strip()
+    if not text:
+        raise HTTPException(status_code=400, detail="Query text cannot be empty.")
+
+    def _sse(event: str, payload: Dict[str, Any]) -> str:
+        return f"event: {event}\ndata: {json.dumps(payload, ensure_ascii=False)}\n\n"
+
+    async def event_gen():
+        cfg = get_current_settings(db)
+
+        yield _sse("status", {"type": "status", "stage": "classifying"})
+        intents, blocked, block_reason = await CloudAIService.run_intent_entity_guardrails(text)
+
+        if blocked:
+            answer = "This query cannot be answered safely. Please contact a KVK officer."
+            latency = int((time.time() - t0) * 1000)
+            log_id = record_telemetry_log(
+                db, pathway="A", latency_ms=latency, input_text=text,
+                intent=intents, is_blocked=True, guardrail_reason=block_reason,
+                synthesis_response=answer
+            )
+            yield _sse("final", {"type": "final", "data": {
+                "pathway": "A", "intent": intents, "blocked": True, "tier": "blocked",
+                "top_score": 0.0, "answer": answer, "sources": [],
+                "latency_ms": latency, "log_id": log_id,
+            }})
+            return
+
+        # Crop entity detection (shared alias map)
+        detected_crop = None
+        text_lower = text.lower()
+        for crop, aliases in CROP_ALIAS_MAP.items():
+            if any(alias in text_lower for alias in aliases):
+                detected_crop = crop
+                break
+
+        yield _sse("status", {"type": "status", "stage": "retrieving"})
+        hits, tier, top_score = qdrant_service.retrieve(text, intents=intents, current_settings=cfg)
+        caveat = get_caveat_text(tier)
+
+        sources = [{
+            "id": hit["id"],
+            "rank": idx + 1,
+            "score": round(hit["score"], 3),
+            "text": hit["text"][:150] + "...",
+            "full_text": hit["text"],
+            "crop": hit["crop"],
+            "source_type": hit["source_type"]
+        } for idx, hit in enumerate(hits[:5])]
+
+        # Live-data facts (mandi / weather / yield)
+        needs = detect_live_data_needs(text)
+        live_data = {}
+        if needs:
+            live_data = await build_live_data_facts(
+                needs, detected_crop, q.state, q.district, q.lat, q.lon
+            )
+
+        yield _sse("status", {"type": "status", "stage": "generating",
+                              "tier": tier, "top_score": round(top_score, 4)})
+
+        deltas: List[str] = []
+        if tier == "abstain" and not live_data:
+            answer = caveat
+            yield _sse("delta", {"type": "delta", "text": answer})
+        else:
+            async for delta in CloudAIService.synthesize_response_stream(
+                text, hits[:5], live_data=live_data or None
+            ):
+                if not delta:
+                    continue
+                deltas.append(delta)
+                yield _sse("delta", {"type": "delta", "text": delta})
+            answer = "".join(deltas)
+            if caveat and not live_data:
+                answer = f"{answer}\n\n⚠ {caveat}"
+                yield _sse("delta", {"type": "delta", "text": f"\n\n⚠ {caveat}"})
+
+        latency = int((time.time() - t0) * 1000)
+        log_id = record_telemetry_log(
+            db, pathway="A", latency_ms=latency, input_text=text,
+            intent=intents, detected_crop=detected_crop,
+            retrieved_chunks=hits[:5], synthesis_response=answer,
+            is_blocked=False
+        )
+
+        yield _sse("final", {"type": "final", "data": {
+            "pathway": "A", "intent": intents, "blocked": False, "tier": tier,
+            "top_score": round(top_score, 4), "answer": answer, "sources": sources,
+            "latency_ms": latency, "detected_crop": detected_crop,
+            "live_data": live_data or None, "log_id": log_id,
+        }})
+
+    return StreamingResponse(
+        event_gen(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
 
 @router.post("/image", response_model=QueryResponse)
