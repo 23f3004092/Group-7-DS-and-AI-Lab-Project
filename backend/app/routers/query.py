@@ -142,31 +142,70 @@ def detect_live_data_needs(text: str) -> List[str]:
             needs.append(key)
     return needs
 
-def _format_mandi_fact(crop: str, mandi: Dict[str, Any], msp: Optional[float]) -> Optional[str]:
-    """Format 'Wheat MSP: Rs 2275/quintal, today's price: Rs 2450/quintal (2026-08-16)'."""
-    commodity = CROP_ALIASES.get(crop, crop.title())
-    row = None
-    for p in (mandi.get("prices") or []) if isinstance(mandi, dict) else []:
-        if p.get("crop", "").lower() == commodity.lower() and p.get("modal_price") is not None:
-            row = p
-            break
-    msp_val = msp if msp is not None else 0
-    today = row["modal_price"] if row else None
-    date = ((row.get("arrival_date") if row else None) or mandi.get("fetched_at", ""))[:10]
+def detect_crop_entity(text: str) -> Optional[str]:
+    """Word-boundary crop detection (English + Hinglish/Hindi aliases).
+
+    Uses regex boundaries so substrings like 'rice' inside 'prices' do not
+    produce a false crop match.
+    """
+    text_lower = text.lower()
+    for crop, aliases in CROP_ALIAS_MAP.items():
+        if any(re.search(rf"\b{re.escape(alias)}\b", text_lower) for alias in aliases):
+            return crop
+    return None
+
+def _format_mandi_fact(crop: Optional[str], mandi: Dict[str, Any], msp: Optional[float]) -> Optional[str]:
+    """Format 'Wheat MSP: Rs 2275/quintal, today's price: Rs 2450/quintal (2026-08-16)'.
+
+    When no crop is named, summarize the top available commodities instead."""
+    if not isinstance(mandi, dict):
+        return None
+    prices = mandi.get("prices") or []
+    date = (mandi.get("fetched_at") or "")[:10]
 
     def _fmt(v: float) -> str:
         return f"{v:g}" if v == int(v) else f"{v:.2f}"
 
-    label = crop.title()
-    if msp_val > 0:
-        fact = f"{label} MSP: Rs {_fmt(msp_val)}/quintal"
-        if today is not None:
-            fact += f", today's price: Rs {_fmt(today)}/quintal ({date})"
-    elif today is not None:
-        fact = f"{label} mandi price today: Rs {_fmt(today)}/quintal ({date})"
-    else:
-        return None
-    return fact
+    if crop:
+        commodity = CROP_ALIASES.get(crop, crop.title())
+        row = None
+        for p in prices:
+            if p.get("crop", "").lower() == commodity.lower() and p.get("modal_price") is not None:
+                row = p
+                break
+        msp_val = msp if msp is not None else 0
+        today = row["modal_price"] if row else None
+        date = ((row.get("arrival_date") if row else None) or date)[:10]
+        label = commodity.title()
+        if msp_val > 0:
+            fact = f"{label} MSP: Rs {_fmt(msp_val)}/quintal"
+            if today is not None:
+                fact += f", today's price: Rs {_fmt(today)}/quintal ({date})"
+        elif today is not None:
+            fact = f"{label} mandi price today: Rs {_fmt(today)}/quintal ({date})"
+        else:
+            return None
+        return fact
+
+    # No specific crop -> list up to 3 distinct commodities that have a live modal price.
+    parts = []
+    seen_crops = set()
+    for p in prices:
+        name = p.get("crop")
+        if not name or p.get("modal_price") is None:
+            continue
+        key = name.lower()
+        if key in seen_crops:
+            continue
+        seen_crops.add(key)
+        market = p.get("market")
+        loc = f" ({market})" if market else ""
+        parts.append(f"{name}{loc}: Rs {_fmt(p['modal_price'])}/quintal")
+        if len(parts) >= 3:
+            break
+    if parts:
+        return f"Mandi prices ({mandi.get('district', '')}, {date}): " + ", ".join(parts)
+    return None
 
 def _format_weather_fact(weather: Dict[str, Any]) -> Optional[str]:
     """Format 'little rainfall next 3 days, temperature 28-33C'."""
@@ -204,7 +243,7 @@ async def build_live_data_facts(
     weather = None
 
     wants_weather = "weather" in needs
-    wants_mandi = "mandi_prices" in needs and crop is not None
+    wants_mandi = "mandi_prices" in needs
     wants_yield = "yield" in needs and crop is not None
 
     tasks = []
@@ -212,7 +251,9 @@ async def build_live_data_facts(
         tasks.append(weather_service.get_current(lat=lat, lon=lon, city=district or None))
     if wants_mandi:
         tasks.append(mandi_service.get_prices(crop=crop, state=state, district=district))
-        tasks.append(cost_service.get_msp(crop))
+        # Keep result indices aligned: msp slot resolves to None when no crop
+        # is named (generic "what are the mandi prices" queries).
+        tasks.append(cost_service.get_msp(crop) if crop else asyncio.sleep(0, result=None))
     if wants_yield:
         tasks.append(cost_service.get_cost_per_ha(crop, state=state))
 
@@ -340,12 +381,7 @@ async def query_text(q: TextQuery, db: Session = Depends(get_db)):
         )
         
     # 2. Identify crop entities mentioned (English + Hinglish/Hindi aliases)
-    detected_crop = None
-    text_lower = text.lower()
-    for crop, aliases in CROP_ALIAS_MAP.items():
-        if any(alias in text_lower for alias in aliases):
-            detected_crop = crop
-            break
+    detected_crop = detect_crop_entity(text)
 
     # 3. Retrieve documents from Vector DB
     hits, tier, top_score = qdrant_service.retrieve(text, intents=intents, current_settings=cfg)
@@ -430,12 +466,7 @@ async def query_text_stream(q: TextQuery, db: Session = Depends(get_db)):
             return
 
         # Crop entity detection (shared alias map)
-        detected_crop = None
-        text_lower = text.lower()
-        for crop, aliases in CROP_ALIAS_MAP.items():
-            if any(alias in text_lower for alias in aliases):
-                detected_crop = crop
-                break
+        detected_crop = detect_crop_entity(text)
 
         yield _sse("status", {"type": "status", "stage": "retrieving"})
         hits, tier, top_score = qdrant_service.retrieve(text, intents=intents, current_settings=cfg)
