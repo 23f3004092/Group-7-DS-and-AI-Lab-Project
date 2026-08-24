@@ -1,57 +1,50 @@
-"""Retrieval = query embedding (BGE-M3 on CPU via FastEmbed) + Qdrant search.
+"""Retrieval = query embedding (BGE-M3 on GPU) + Qdrant HNSW search.
 
 This is a faithful port of `search_agri_knowledge` from notebook
 08b_rag_vector_db_bge_m3.ipynb. Differences on purpose:
-  * FastEmbed (optimized ONNX, CPU) replaces sentence-transformers for the query
-    encoder — much faster on CPU, same BGE-M3 weights. This is the fix for the
-    ~7.5 s embedding bottleneck measured in Milestone-5 §13.5.
+  * SentenceTransformers runs the exact BGE-M3 query encoder on CUDA. FastEmbed
+    does not support BAAI/bge-m3 and silently falling back to CPU added seconds
+    to every request.
   * The tier thresholds / fusion weights / prefixes are read from manifest.json,
     so they stay identical to the built index.
 """
 from typing import Optional
 
+import torch
 from qdrant_client import QdrantClient
 from qdrant_client.models import Filter, FieldCondition, MatchValue, Range
 
 from . import config as C
 
 _qdrant: Optional[QdrantClient] = None
-_embedder = None            # FastEmbed TextEmbedding (fast CPU path)
-_st = None                  # sentence-transformers fallback (exact-match path)
+_st = None                  # exact BGE-M3 encoder used to build the index
 _backend = None
 
 
 def load():
-    """Load the embedder + Qdrant client once, at startup.
-
-    Prefer FastEmbed (optimized ONNX, fast on CPU). If this fastembed build does
-    not ship bge-m3, fall back to sentence-transformers on CPU — heavier but the
-    exact encoder used to build the index and calibrate the tiers.
-    """
-    global _qdrant, _embedder, _st, _backend
+    """Load exact-match BGE-M3 on CUDA and connect to Qdrant."""
+    global _qdrant, _st, _backend
+    if not torch.cuda.is_available():
+        raise RuntimeError("No GPU visible for BGE-M3 query embedding.")
     _qdrant = QdrantClient(url=C.QDRANT_URL, timeout=120)
-    try:
-        from fastembed import TextEmbedding
-        _embedder = TextEmbedding(model_name=C.EMBED_MODEL)
-        _backend = "fastembed"
-    except Exception as e:
-        print(f"[retrieval] fastembed unavailable for {C.EMBED_MODEL} ({e}); "
-              "using sentence-transformers on CPU.")
-        from sentence_transformers import SentenceTransformer
-        _st = SentenceTransformer(C.EMBED_MODEL, device="cpu")
-        _st.max_seq_length = C.MAX_SEQ_LENGTH
-        _backend = "sentence-transformers"
+    from sentence_transformers import SentenceTransformer
+    # Keep the encoder in float32 to preserve the calibrated similarity scores.
+    # Only its device changes; model, prefixes and normalization remain identical.
+    _st = SentenceTransformer(C.EMBED_MODEL, device="cuda")
+    _st.max_seq_length = C.MAX_SEQ_LENGTH
+    _backend = "sentence-transformers-cuda-fp32"
     _ = embed_query("warmup")     # avoid a slow first request
+    torch.cuda.synchronize()
     print(f"[retrieval] embedder backend = {_backend}")
     return _qdrant
 
 
+@torch.inference_mode()
 def embed_query(text: str):
     """Encode one query to a 1024-dim vector. bge-m3 uses NO prefix (manifest)."""
     t = C.QUERY_PREFIX + text
-    if _backend == "fastembed":
-        return next(iter(_embedder.embed([t]))).tolist()
-    return _st.encode(t, normalize_embeddings=True).tolist()
+    return _st.encode(t, normalize_embeddings=True,
+                      convert_to_numpy=True, show_progress_bar=False).tolist()
 
 
 # --- canonicalizers -------------------------------------------------------
@@ -126,4 +119,5 @@ def search_agri_knowledge(query, top_k=None, intent="general", source_type=None,
             else "abstain_out_of_scope")
     return {"query": query, "intent": intent, "tier": tier,
             "top_score": round(best_raw, 4), "results": hits}
+
 
