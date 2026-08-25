@@ -33,6 +33,8 @@ import re
 import sys
 import time
 import warnings
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Optional
 
@@ -54,8 +56,21 @@ QDRANT_URL      = os.environ.get("QDRANT_URL", "http://localhost:6333")
 COLLECTION_NAME = "agri_knowledge"
 BGE_MODEL_ID    = "BAAI/bge-m3"
 TOP_K           = 10
+TOP_K_BASE      = 10  # Base value for dynamic scaling
 TIER_GROUNDED   = 0.66
 TIER_FALLBACK   = 0.56
+MIN_CHUNK_SCORE = 0.50  # Filter out low-scoring chunks
+MIN_CHUNK_CHARS = 50    # Minimum chunk length to avoid OCR noise
+MAX_PER_SOURCE  = 3     # Cap chunks from same source for diversity
+
+# Intent to source routing map for payload filtering
+INTENT_SOURCE_MAP = {
+    "disease_pest":         ["ppqs_advisories", "kcc"],
+    "cultivation_practice": ["up_acp", "kcc"],
+    "nutrition_fertilizer": ["ppqs_advisories", "kcc"],
+    "yield_estimation":     ["kcc"],
+    "general":              None,   # no filter → search all
+}
 
 # IEG config — from real label_maps.json
 IEG_MODEL_ID   = "distilbert-base-multilingual-cased"
@@ -82,6 +97,7 @@ UP_DEFAULTS      = {
 }
 
 SKIP_GENERATOR = bool(os.environ.get("SKIP_GENERATOR", ""))
+USE_RERANKER = bool(os.environ.get("USE_RERANKER", ""))  # Optional cross-encoder reranking
 
 # ── IEG model (exact architecture from notebook) ──────────────────────────────
 
@@ -126,6 +142,7 @@ _state: dict = {
     "gen_tok":    None, "gen_mdl":    None,
     "yield_mdl":  None,
     "vit":        None,
+    "reranker":   None,
 }
 STATUS: dict = {}
 
@@ -164,6 +181,16 @@ def _load_retriever():
     client.get_collection(COLLECTION_NAME)
     _state["retriever"] = client
     _state["embedder"]  = SentenceTransformer(BGE_MODEL_ID, device="cpu")
+    
+    # Optional: Load cross-encoder reranker
+    if USE_RERANKER:
+        from sentence_transformers import CrossEncoder
+        _state["reranker"] = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+        STATUS["reranker"] = "OK"
+        print("  Cross-encoder reranker loaded")
+    else:
+        STATUS["reranker"] = "disabled"
+    
     STATUS["retriever"] = "OK"
     print(f"Qdrant OK ({QDRANT_URL}), bge-m3 loaded")
 
@@ -256,34 +283,110 @@ def _ieg_run(text: str):
 
 
 def _retrieve(query: str, intents: list = None):
+    from qdrant_client.models import Filter, FieldCondition, MatchAny
+    
     client, emb = _state["retriever"], _state["embedder"]
     if client is None:
         return [], "retrieval_unavailable", 0.0
     
+    # Dynamic TOP_K scaling with intent count
+    active_top_k = max(TOP_K_BASE, len(intents) * 5) if intents and len(intents) > 2 else TOP_K
+    
+    # Intent → Source routing: build payload filter
+    query_filter = None
+    if intents and len(intents) > 0:
+        sources = set()
+        for intent in intents:
+            srcs = INTENT_SOURCE_MAP.get(intent)
+            if srcs:
+                sources.update(srcs)
+        if sources:
+            query_filter = Filter(must=[
+                FieldCondition(key="source", match=MatchAny(any=list(sources)))
+            ])
+    
     if not intents or len(intents) <= 1:
         q_vec = emb.encode(query, normalize_embeddings=True).tolist()
-        hits  = client.query_points(collection_name=COLLECTION_NAME,
-                                    query=q_vec, limit=TOP_K, with_payload=True).points
+        hits  = client.query_points(
+            collection_name=COLLECTION_NAME,
+            query=q_vec,
+            query_filter=query_filter,
+            limit=active_top_k,
+            with_payload=True
+        ).points
     else:
-        # Multi-Query Retrieval
+        # Multi-Query Retrieval with BATCHED embedding
+        limit_per_intent = max(2, active_top_k // len(intents))
+        
+        # Batched encoding: encode all sub-queries at once
+        sub_queries = [f"{intent.replace('_', ' ')}: {query}" for intent in intents]
+        vecs = emb.encode(sub_queries, batch_size=len(sub_queries), normalize_embeddings=True)
+        
+        # Parallel Qdrant queries using ThreadPoolExecutor
+        def _search(vec):
+            return client.query_points(
+                collection_name=COLLECTION_NAME,
+                query=vec.tolist(),
+                query_filter=query_filter,
+                limit=limit_per_intent,
+                with_payload=True
+            ).points
+        
+        with ThreadPoolExecutor(max_workers=len(vecs)) as pool:
+            results = list(pool.map(_search, vecs))
+        
         hits = []
-        limit_per_intent = max(2, TOP_K // len(intents))
-        for intent in intents:
-            sub_query = f"{intent.replace('_', ' ')}: {query}"
-            q_vec = emb.encode(sub_query, normalize_embeddings=True).tolist()
-            sub_hits = client.query_points(collection_name=COLLECTION_NAME, query=q_vec, limit=limit_per_intent, with_payload=True).points
+        for sub_hits in results:
             hits.extend(sub_hits)
             
+        # Deduplicate and sort
         seen = set()
         unique_hits = []
         for h in hits:
             if h.id not in seen:
                 seen.add(h.id)
                 unique_hits.append(h)
-        hits = sorted(unique_hits, key=lambda x: x.score, reverse=True)[:TOP_K]
+        hits = sorted(unique_hits, key=lambda x: x.score, reverse=True)[:active_top_k]
 
     if not hits:
         return [], "abstain", 0.0
+    
+    # Per-chunk score floor: filter out low-scoring chunks
+    hits = [h for h in hits if h.score >= MIN_CHUNK_SCORE]
+    if not hits:
+        return [], "abstain", 0.0
+    
+    # Minimum chunk length filter: remove OCR noise and empty chunks
+    hits = [h for h in hits if len(h.payload.get("text", "")) >= MIN_CHUNK_CHARS]
+    if not hits:
+        return [], "abstain", 0.0
+    
+    # Source diversity cap: limit chunks from same source
+    source_counts = Counter()
+    filtered_hits = []
+    for h in sorted(hits, key=lambda x: x.score, reverse=True):
+        src = h.payload.get("source", "unknown")
+        if source_counts[src] < MAX_PER_SOURCE:
+            filtered_hits.append(h)
+            source_counts[src] += 1
+    hits = filtered_hits[:active_top_k]
+    
+    if not hits:
+        return [], "abstain", 0.0
+    
+    # Cross-encoder reranking (optional)
+    reranker = _state.get("reranker")
+    if reranker and hits:
+        pairs = [(query, h.payload.get("text", "")) for h in hits]
+        scores = reranker.predict(pairs)
+        # Reorder by cross-encoder scores
+        hits = [h for _, h in sorted(zip(scores, hits), key=lambda x: -x[0])]
+        # Optionally filter out very low cross-encoder scores
+        hits = [h for h, s in zip(hits, sorted(scores, reverse=True)) if s > 0.0]
+    
+    if not hits:
+        return [], "abstain", 0.0
+    
     score = hits[0].score
     tier  = ("grounded" if score >= TIER_GROUNDED
              else "fallback" if score >= TIER_FALLBACK else "abstain")
@@ -496,7 +599,7 @@ async def query_multimodal(text: str = Form(...), file: UploadFile = File(...)):
     """Pathway AB — text + image -> combined retrieval -> generation."""
     t0 = time.time()
     
-    # 1. Run ViT
+    # 1. Prepare inputs
     vit = _state["vit"]
     if vit is None:
         raise HTTPException(503, "ViT model not loaded")
@@ -504,7 +607,15 @@ async def query_multimodal(text: str = Form(...), file: UploadFile = File(...)):
     from PIL import Image
     img_bytes = await file.read()
     pil_img   = Image.open(io.BytesIO(img_bytes)).convert("RGB")
-    result    = vit.predict(pil_img)
+    text = text.strip()
+    
+    # 2. Run ViT and IEG in parallel
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        vit_future = pool.submit(vit.predict, pil_img)
+        ieg_future = pool.submit(_ieg_run, text)
+        
+        result = vit_future.result()
+        intents, blocked = ieg_future.result()
 
     if result["rejected"] or result["label"] is None:
         return JSONResponse({
@@ -519,9 +630,6 @@ async def query_multimodal(text: str = Form(...), file: UploadFile = File(...)):
     conf  = result["confidence"]
     top3  = result["top3"]
     
-    # 2. Run IEG on text
-    text = text.strip()
-    intents, blocked = _ieg_run(text)
     if blocked:
         return JSONResponse({
             "pathway":    "AB",
@@ -561,7 +669,7 @@ async def query_multimodal(text: str = Form(...), file: UploadFile = File(...)):
         "top3":       top3,
         "ood_score":  result["ood_score"],
         "tier":       tier,
-        "top_score":  round(score, 4),
+        "top_score":  round(top_score, 4),
         "answer":     answer,
         "sources":    sources,
         "latency_ms": round((time.time() - t0) * 1000),

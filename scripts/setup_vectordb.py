@@ -14,24 +14,139 @@ import requests
 import gdown
 from pathlib import Path
 
+# Force UTF-8 output so ✓ / ❌ / ⚠️ characters don't crash on Windows cp1252
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
+
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
 
-WORK_ROOT = os.path.join(os.path.expanduser("~"), "qdrant_rag_setup")
-ART_DIR = os.path.join(WORK_ROOT, "rag_production_bge_m3")
+# Auto-detect Kaggle kernel environment
+# On Kaggle: KAGGLE_KERNEL_RUN_TYPE is set, and /kaggle/working exists.
+ON_KAGGLE = os.path.isdir("/kaggle/working") or bool(os.environ.get("KAGGLE_KERNEL_RUN_TYPE"))
+
+if ON_KAGGLE:
+    WORK_ROOT      = "/kaggle/working/qdrant_setup"
+    QDRANT_BIN     = os.path.join(WORK_ROOT, "qdrant")          # Linux binary (no .exe)
+else:
+    WORK_ROOT      = os.path.join(os.path.expanduser("~"), "qdrant_rag_setup")
+    QDRANT_BIN     = os.path.join(WORK_ROOT, "qdrant.exe")      # Windows binary
+
+ART_DIR        = os.path.join(WORK_ROOT, "rag_production_bge_m3")
 QDRANT_STORAGE = os.path.join(WORK_ROOT, "qdrant_storage")
-QDRANT_BIN = os.path.join(WORK_ROOT, "qdrant.exe")
-QDRANT_URL = "http://localhost:6333"
+QDRANT_URL     = "http://localhost:6333"
 COLLECTION_NAME = "agri_knowledge"
 
-# Google Drive IDs
+# Kaggle dataset slug that contains the new RAG artifacts
+KAGGLE_DATASET       = "lokeshvns/up-agri-kcc-rag-artifacts"
+# Dataset slug basename used by Kaggle when it mounts datasets as /kaggle/input/<slug-name>/
+KAGGLE_INPUT_NAME    = KAGGLE_DATASET.split("/")[-1]           # "up-agri-kcc-rag-artifacts"
+KAGGLE_INPUT_ROOT    = os.path.join("/kaggle/input", KAGGLE_INPUT_NAME)
+
+# Relative paths inside the Kaggle dataset
+KAGGLE_SNAPSHOT_REL  = os.path.join("rag_out", "agri_knowledge.snapshot")
+KAGGLE_MANIFEST_REL  = os.path.join("rag_out", "manifest.json")
+KAGGLE_QDRANT_REL    = "qdrant"   # Linux binary shipped inside the dataset
+
+# Google Drive IDs (fallback)
 SNAPSHOT_ID = "1FhTHMfyOzLGfOq6VLh_V6tnTNGe-ro1N"
 MANIFEST_ID = "1JnbcSbVzqcOEeZLU_-kuNb5uB6ZzTePL"
 
 # ============================================================================
 # STEP 1: DOWNLOAD FILES
 # ============================================================================
+
+def _try_kaggle_input(dest_dir):
+    """Priority-0 source: read snapshot/manifest directly from the Kaggle
+    input dataset mount (/kaggle/input/<dataset>/...).
+
+    This is the fastest path when the dataset is attached as a Kaggle input
+    because the files are already on-disk — zero network traffic required.
+    Returns (snapshot_path, manifest_path) or (None, None).
+    """
+    if not os.path.isdir("/kaggle/input"):
+        return None, None
+
+    import glob
+    snapshot_candidates = glob.glob("/kaggle/input/**/agri_knowledge.snapshot", recursive=True)
+    
+    if not snapshot_candidates:
+        print("  Kaggle input mounted at /kaggle/input but snapshot not found.")
+        return None, None
+
+    src_snap = snapshot_candidates[0]
+    snap_dir = os.path.dirname(src_snap)
+    src_mani = os.path.join(snap_dir, "manifest.json")
+
+    os.makedirs(dest_dir, exist_ok=True)
+    dst_snap = os.path.join(dest_dir, "agri_knowledge.snapshot")
+    dst_mani = os.path.join(dest_dir, "manifest.json")
+
+    # Snapshot: copy only if not already present (idempotent)
+    if not (os.path.exists(dst_snap) and os.path.getsize(dst_snap) > 1_000_000_000):
+        print(f"  Copying snapshot from Kaggle input ({os.path.getsize(src_snap)/1e9:.2f} GB) ...")
+        shutil.copy2(src_snap, dst_snap)
+        print(f"  ✓ Snapshot ready at {dst_snap}")
+    else:
+        print(f"  Snapshot already present: {os.path.getsize(dst_snap)/1e9:.2f} GB")
+
+    if os.path.exists(src_mani) and not os.path.exists(dst_mani):
+        shutil.copy2(src_mani, dst_mani)
+        print(f"  ✓ Manifest copied")
+
+    return dst_snap, dst_mani
+
+
+def _try_kagglehub(dest_dir):
+    """Try to download snapshot + manifest from Kaggle Hub.
+
+    Returns (snapshot_path, manifest_path) on success, or (None, None) on failure.
+    """
+    try:
+        import kagglehub  # optional dependency
+    except ImportError:
+        print("  kagglehub not installed — skipping Kaggle source.")
+        print("  Install with: pip install kagglehub")
+        return None, None
+
+    try:
+        print(f"  Downloading from Kaggle: {KAGGLE_DATASET} ...")
+        dataset_root = kagglehub.dataset_download(KAGGLE_DATASET)
+        print(f"  Kaggle dataset root: {dataset_root}")
+
+        src_snap = os.path.join(dataset_root, KAGGLE_SNAPSHOT_REL)
+        src_mani = os.path.join(dataset_root, KAGGLE_MANIFEST_REL)
+
+        if not os.path.exists(src_snap):
+            print(f"  WARNING: snapshot not found at expected path: {src_snap}")
+            return None, None
+
+        # Copy into our ART_DIR so the rest of the script stays path-agnostic
+        os.makedirs(dest_dir, exist_ok=True)
+        dst_snap = os.path.join(dest_dir, "agri_knowledge.snapshot")
+        dst_mani = os.path.join(dest_dir, "manifest.json")
+
+        if not (os.path.exists(dst_snap) and os.path.getsize(dst_snap) > 1_000_000_000):
+            print(f"  Copying snapshot ({os.path.getsize(src_snap)/1e9:.2f} GB) ...")
+            shutil.copy2(src_snap, dst_snap)
+            print(f"  ✓ Snapshot copied to {dst_snap}")
+        else:
+            print(f"  Snapshot already present: {os.path.getsize(dst_snap)/1e9:.2f} GB")
+
+        if os.path.exists(src_mani) and not os.path.exists(dst_mani):
+            shutil.copy2(src_mani, dst_mani)
+            print(f"  ✓ Manifest copied to {dst_mani}")
+
+        return dst_snap, dst_mani
+
+    except Exception as e:
+        print(f"  Kaggle download failed: {e}")
+        return None, None
+
 
 def download_with_retry(file_id, output, max_retries=5, delay=60):
     """Download with retry on quota errors"""
@@ -62,17 +177,41 @@ def download_with_retry(file_id, output, max_retries=5, delay=60):
     return False
 
 def download_files():
-    """Download manifest and snapshot from Google Drive"""
+    """Download manifest and snapshot.
+
+    Source priority:
+      1. Kaggle Hub  (kagglehub.dataset_download — fast, no quota limits)
+      2. Google Drive (gdown fallback — requires SNAPSHOT_ID / MANIFEST_ID)
+    """
     print("\n" + "=" * 70)
     print("STEP 1: DOWNLOADING FILES")
     print("=" * 70)
     
     os.makedirs(ART_DIR, exist_ok=True)
     print(f"\nOutput directory: {ART_DIR}")
+
+    snapshot_path = os.path.join(ART_DIR, "agri_knowledge.snapshot")
+    manifest_path = os.path.join(ART_DIR, "manifest.json")
+
+    # ---- Source 0: Kaggle input mount (already on-disk, zero download) ---
+    print("\n[Source 0/3] Kaggle input dataset mount ...")
+    snap, mani = _try_kaggle_input(ART_DIR)
+    if snap and os.path.exists(snap) and os.path.getsize(snap) > 1_000_000_000:
+        print(f"\n✓ Kaggle input OK — snapshot: {os.path.getsize(snap)/1e9:.2f} GB")
+        return snap, mani or manifest_path
+
+    # ---- Source 1: Kaggle Hub (download via API) -------------------------
+    print("\n[Source 1/3] Kaggle Hub download ...")
+    snap, mani = _try_kagglehub(ART_DIR)
+    if snap and os.path.exists(snap) and os.path.getsize(snap) > 1_000_000_000:
+        print(f"\n✓ Kaggle Hub OK — snapshot: {os.path.getsize(snap)/1e9:.2f} GB")
+        return snap, mani or manifest_path
+
+    # ---- Source 2: Google Drive fallback --------------------------------
+    print("\n[Source 2/3] Google Drive fallback ...")
     
     # Download manifest
     print("\n1. Downloading manifest...")
-    manifest_path = os.path.join(ART_DIR, "manifest.json")
     if not os.path.exists(manifest_path):
         try:
             gdown.download(id=MANIFEST_ID, output=manifest_path, quiet=False)
@@ -83,7 +222,6 @@ def download_files():
     
     # Download snapshot
     print("\n2. Downloading snapshot (3.8 GB)...")
-    snapshot_path = os.path.join(ART_DIR, "agri_knowledge.snapshot")
     
     if os.path.exists(snapshot_path) and os.path.getsize(snapshot_path) > 1_000_000_000:
         print(f"  Snapshot already exists: {os.path.getsize(snapshot_path)/1e9:.2f} GB")
@@ -92,12 +230,14 @@ def download_files():
         if not success:
             print("\n❌ Failed to download snapshot.")
             print("\nPlease try one of these options:")
-            print("1. Copy the file to your own Google Drive and update the file ID")
-            print("2. Run the download again later when quota resets")
-            print("3. Download manually from: https://drive.google.com/file/d/1FhTHMfyOzLGfOq6VLh_V6tnTNGe-ro1N/view")
+            print("1. Install kagglehub and configure Kaggle API credentials")
+            print("2. Copy the file to your own Google Drive and update the file ID")
+            print("3. Run the download again later when quota resets")
+            print(f"4. Download manually from: https://drive.google.com/file/d/{SNAPSHOT_ID}/view")
             sys.exit(1)
     
     return snapshot_path, manifest_path
+
 
 # ============================================================================
 # STEP 2: EXTRACT AND VERIFY
@@ -180,20 +320,93 @@ def download_qdrant():
         print(f"  Error downloading Qdrant: {e}")
         return False
 
+def _ensure_qdrant_bin_linux():
+    """On Kaggle/Linux: copy the qdrant binary from the input dataset
+    (read-only) into WORK_ROOT (writable), then make it executable.
+    Falls back to downloading from GitHub if the dataset binary is missing.
+    """
+    import platform, tarfile
+    if os.path.exists(QDRANT_BIN):
+        os.chmod(QDRANT_BIN, 0o755)   # ensure +x even across session restores
+        return True
+
+    # Try the binary shipped inside the Kaggle input dataset first
+    import glob
+    qdrant_candidates = [p for p in glob.glob("/kaggle/input/**/qdrant", recursive=True) if os.path.isfile(p)]
+    if qdrant_candidates:
+        src_bin = qdrant_candidates[0]
+        os.makedirs(WORK_ROOT, exist_ok=True)
+        shutil.copy2(src_bin, QDRANT_BIN)
+        os.chmod(QDRANT_BIN, 0o755)
+        try:
+            result = subprocess.run([QDRANT_BIN, "--version"], capture_output=True, timeout=10)
+            if result.returncode == 0:
+                print(f"  ✓ Qdrant binary from dataset: {result.stdout.decode().strip()}")
+                return True
+            print(f"  Dataset binary failed ({result.stderr.decode()[:200]}), will download.")
+        except Exception as e:
+            print(f"  Dataset binary failed ({e}), will download.")
+        if os.path.exists(QDRANT_BIN):
+            os.remove(QDRANT_BIN)
+
+    # Download the musl static binary from GitHub
+    print("  Downloading Qdrant Linux (musl) binary from GitHub ...")
+    rel = requests.get(
+        "https://api.github.com/repos/qdrant/qdrant/releases/latest", timeout=30
+    ).json()
+    asset = None
+    for suffix in ("x86_64-unknown-linux-musl.tar.gz", "x86_64-unknown-linux-gnu.tar.gz"):
+        asset = next((a for a in rel["assets"] if a["name"].endswith(suffix)), None)
+        if asset:
+            break
+    if asset is None:
+        print("  Could not find Linux x86_64 Qdrant asset on GitHub.")
+        return False
+    tar_path = QDRANT_BIN + ".tar.gz"
+    os.makedirs(WORK_ROOT, exist_ok=True)
+    with open(tar_path, "wb") as f:
+        f.write(requests.get(asset["browser_download_url"], timeout=600).content)
+    import tarfile as _tarfile
+    with _tarfile.open(tar_path) as t:
+        try:
+            t.extractall(WORK_ROOT, filter="data")
+        except TypeError:
+            t.extractall(WORK_ROOT)
+    os.remove(tar_path)
+    extracted = os.path.join(WORK_ROOT, "qdrant")
+    if extracted != QDRANT_BIN:
+        shutil.move(extracted, QDRANT_BIN)
+    os.chmod(QDRANT_BIN, 0o755)
+    result = subprocess.run([QDRANT_BIN, "--version"], capture_output=True, timeout=10)
+    if result.returncode != 0:
+        print(f"  Downloaded binary failed: {result.stderr.decode()[:300]}")
+        return False
+    print(f"  ✓ Qdrant from GitHub: {result.stdout.decode().strip()}")
+    return True
+
+
 def start_qdrant():
-    """Start Qdrant server"""
+    """Start Qdrant server (Windows or Linux/Kaggle)."""
+    import platform
     print("\n" + "=" * 70)
     print("STEP 2: STARTING QDRANT")
     print("=" * 70)
+    print(f"  Environment: {'Kaggle / Linux' if ON_KAGGLE else 'Local / Windows'}")
     
     if qdrant_alive():
         print("✓ Qdrant already running on :6333")
         return True
-    
-    if not os.path.exists(QDRANT_BIN):
-        if not download_qdrant():
+
+    os.makedirs(WORK_ROOT, exist_ok=True)
+
+    if platform.system() == "Linux":
+        if not _ensure_qdrant_bin_linux():
             return False
-    
+    else:
+        if not os.path.exists(QDRANT_BIN):
+            if not download_qdrant():
+                return False
+
     os.makedirs(QDRANT_STORAGE, exist_ok=True)
     
     # Check if port is in use
@@ -216,10 +429,12 @@ def start_qdrant():
                QDRANT__TELEMETRY_DISABLED="true")
     
     try:
-        subprocess.Popen([QDRANT_BIN], env=env, cwd=WORK_ROOT,
-                        stdout=open(log_path, "w"), 
-                        stderr=subprocess.STDOUT,
-                        creationflags=subprocess.CREATE_NO_WINDOW)
+        subprocess.Popen(
+            [QDRANT_BIN], env=env, cwd=WORK_ROOT,
+            stdout=open(log_path, "w"),
+            stderr=subprocess.STDOUT,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),  # no-op on Linux
+        )
         
         print("  Waiting for Qdrant to be ready...")
         for i in range(120):

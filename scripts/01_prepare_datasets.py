@@ -319,26 +319,83 @@ def main():
     print("\n--- Building RAG chunks (kcc_chunks_rag.jsonl) ---")
     rag_base = filtered_df.drop(eval_used_indices, errors='ignore')
     rag_base = rag_base[~rag_base['intent_label'].isin(['weather', 'market', 'policy'])]
-    
+
+    def _detect_language(text, sample_chars=1000):
+        """Same logic as detect_language() in build_rag_artifacts.py.
+        KCC chunks are English question + Devanagari answer -> 'mixed'.
+        Returns: 'en' | 'hi' | 'mixed'
+        """
+        import re as _re
+        s = text[:sample_chars]
+        dev = len(_re.findall(r'[\u0900-\u097F]', s))
+        lat = len(_re.findall(r'[a-zA-Z]', s))
+        total = max(dev + lat, 1)
+        if dev / total > 0.15 and lat / total > 0.15:
+            return "mixed"
+        return "hi" if dev / total > 0.3 else "en"
+
+    def _season_from_month(month):
+        """Map calendar month -> agronomic season (Kharif / Rabi / Zaid)."""
+        if month in (6, 7, 8, 9, 10):
+            return "Kharif"
+        elif month in (11, 12, 1, 2, 3):
+            return "Rabi"
+        elif month in (4, 5):
+            return "Zaid"
+        return "unknown"
+
     rag_records = []
     for _, row in rag_base.iterrows():
+        q = str(row['QueryText']).strip()
+        a = str(row['KccAns']).strip()
+        text = f"Question: {q}\nAnswer: {a}"
+
+        # Year / month from CreatedOn (best-effort)
+        year_val, month_val, season_val = None, None, "unknown"
+        if 'CreatedOn' in row and pd.notna(row['CreatedOn']):
+            try:
+                dt = pd.to_datetime(row['CreatedOn'], errors='coerce')
+                if pd.notna(dt):
+                    year_val  = int(dt.year)
+                    month_val = int(dt.month)
+                    season_val = _season_from_month(month_val)
+            except Exception:
+                pass
+
+        crop_val     = str(row.get('Crop', '') or '').strip() or None
+        district_val = str(row.get('DistrictName', '') or '').strip() or None
+        block_val    = str(row.get('Block', '') or '').strip() or "unknown"
+        qtype_val    = str(row.get('QueryType', '') or '').strip() or None
+        cat_val      = str(row.get('Category', '') or '').strip() or None
+
         rag_records.append({
-            "id": str(row.name),
-            "question": str(row['QueryText']),
-            "answer": str(row['KccAns']),
+            "text": text,
             "metadata": {
-                "crop": row['Crop'],
-                "category": row['Category'],
-                "district": row['DistrictName']
-            }
+                "crop":       crop_val,
+                "district":   district_val,
+                "block":      block_val,
+                "season":     season_val,
+                "query_type": qtype_val,
+                "category":   cat_val,
+                "year":       year_val,
+                "month":      month_val,
+                "language":   _detect_language(text),
+            },
+            "chunk_number":  1,
+            "total_chunks":  1,
         })
-        
+
     with open(OUT_RAG, 'w', encoding='utf-8') as f:
         for record in rag_records:
             f.write(json.dumps(record, ensure_ascii=False) + '\n')
-            
+
     print(f"Saved {OUT_RAG} with {len(rag_records):,} chunks.")
+    print("  Sample record:")
+    if rag_records:
+        import sys
+        sys.stdout.buffer.write((json.dumps(rag_records[0], indent=4, ensure_ascii=False) + '\n').encode('utf-8', errors='replace'))
     print("\nDone with Part 1: Preprocessing and Splitting.")
+
 
 if __name__ == "__main__":
     main()

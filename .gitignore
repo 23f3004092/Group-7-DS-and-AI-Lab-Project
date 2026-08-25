@@ -14,6 +14,8 @@ data/eval/
 outputs/Yeild_output_files/*
 outputs/generation/best_adapter
 outputs/ieg_model/
+outputs/ieg_final/
+outputs/ieg*/
 
 # Ensure sample verification directory and dataset documentation stay tracked
 !data/sample/

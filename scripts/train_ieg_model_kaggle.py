@@ -1,4 +1,3 @@
-# %%writefile train_ieg_model.py
 import json
 import re
 import random
@@ -44,9 +43,10 @@ DEVICE     = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 # Training hyperparameters
 MAX_LEN         = 48
-BATCH_SIZE      = 256
+BATCH_SIZE      = 128
 EPOCHS          = 10         # early stopping will likely fire before this
-LR              = 3e-5 
+LR              = 3e-5       # head learning rate
+BACKBONE_LR     = 1e-5       # backbone LR (LLRD: lower to prevent forgetting)
 WEIGHT_DECAY    = 0.01
 LABEL_SMOOTHING = 0.05      # slight smoothing on intent loss
 WARMUP_RATIO    = 0.15      # 10 % of total steps for linear warmup
@@ -932,8 +932,27 @@ def train():
     _print_metrics(baseline_metrics)
     print()
 
-    # ── Optimizer + Scheduler ────────────────────────────────────────────────
-    optimizer    = AdamW(model.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
+    # ── Optimizer + Scheduler (LLRD) ────────────────────────────────────────
+    # Backbone trains at BACKBONE_LR (1e-5) to preserve cross-lingual pretraining.
+    # Classification heads train at LR (3e-5) for faster task adaptation.
+    no_decay = ["bias", "LayerNorm.weight"]
+    backbone_params = list(model.backbone.named_parameters())
+    head_params     = (
+        list(model.intent_head.named_parameters()) +
+        list(model.ner_head.named_parameters()) +
+        list(model.guardrail_head.named_parameters())
+    )
+    optimizer = AdamW([
+        {"params": [p for n, p in backbone_params if not any(nd in n for nd in no_decay)],
+         "lr": BACKBONE_LR, "weight_decay": WEIGHT_DECAY},
+        {"params": [p for n, p in backbone_params if     any(nd in n for nd in no_decay)],
+         "lr": BACKBONE_LR, "weight_decay": 0.0},
+        {"params": [p for n, p in head_params     if not any(nd in n for nd in no_decay)],
+         "lr": LR,          "weight_decay": WEIGHT_DECAY},
+        {"params": [p for n, p in head_params     if     any(nd in n for nd in no_decay)],
+         "lr": LR,          "weight_decay": 0.0},
+    ])
+    print(f"Optimizer: LLRD — backbone_lr={BACKBONE_LR}, head_lr={LR}")
     total_steps  = len(train_loader) * EPOCHS
     warmup_steps = int(WARMUP_RATIO * total_steps)
     scheduler    = get_linear_schedule_with_warmup(

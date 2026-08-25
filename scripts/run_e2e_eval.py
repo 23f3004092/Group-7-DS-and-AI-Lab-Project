@@ -27,6 +27,8 @@ import re
 import sys
 import time
 import warnings
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import numpy as np
@@ -36,6 +38,19 @@ import torch.nn as nn
 
 warnings.filterwarnings("ignore")
 
+# Lazy CrossEncoder import (only loaded when needed)
+_reranker = None
+RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+RERANK_TOP_N   = 5   # keep top-N after reranking
+
+def _get_reranker():
+    """Lazy-load the cross-encoder reranker (downloaded once, cached in _reranker)."""
+    global _reranker
+    if _reranker is None:
+        from sentence_transformers import CrossEncoder
+        _reranker = CrossEncoder(RERANKER_MODEL)
+    return _reranker
+
 ROOT = Path(__file__).resolve().parent.parent
 SCENARIOS_CSV = ROOT / "data" / "eval" / "e2e_scenarios.csv"
 RESULTS_CSV   = ROOT / "data" / "eval" / "e2e_results.csv"
@@ -44,13 +59,53 @@ SUMMARY_JSON  = ROOT / "data" / "eval" / "e2e_summary.json"
 QDRANT_URL      = os.environ.get("QDRANT_URL", "http://localhost:6333")
 COLLECTION_NAME = "agri_knowledge"
 BGE_MODEL_ID    = "BAAI/bge-m3"
-IEG_MODEL_ID    = "distilbert-base-multilingual-cased"
+IEG_MODEL_ID    = "l3cube-pune/hing-mbert-mixed"
 MAX_LEN         = 64
 TOP_K           = 10
+TOP_K_BASE      = 10  # Base value for dynamic scaling
 TIER_GROUNDED   = 0.66
 TIER_FALLBACK   = 0.56
+MIN_CHUNK_SCORE = 0.50  # Filter out low-scoring chunks
+MIN_CHUNK_CHARS = 50    # Minimum chunk length to avoid OCR noise
+MAX_PER_SOURCE  = 3     # Cap chunks from same source for diversity
 # Force smaller models to CPU to prevent VRAM overflow and WDDM RAM spilling
 DEVICE          = "cpu"
+
+# Intent to source routing map for payload filtering
+# Note: KCC chunks use "kcc_qa" as their source, not "kcc"
+INTENT_SOURCE_MAP = {
+    "disease_pest":         ["ppqs_advisories", "kcc_qa"],
+    "cultivation_practice": ["up_acp", "kcc_qa"],
+    "nutrition_fertilizer": ["ppqs_advisories", "kcc_qa"],
+    "yield_estimation":     ["kcc_qa"],
+    "post_harvest_storage": ["kcc_qa"],
+    "specialty_other":      ["kcc_qa"],
+    "general":              None,   # no filter → search all
+}
+
+# Reverse mapping from IEG intent back to raw KCC query_type.
+# This prevents us from searching 716k KCC chunks when we only care about a specific intent.
+INTENT_QTYPE_MAP = {
+    "disease_pest": [
+        "Plant Protection", "Weed Management", "Insect Management", "Pathogenic Disease Management"
+    ],
+    "nutrition_fertilizer": [
+        "Nutrient Management", "Fertilizer Use and Availability", 
+        "Nutrient Deficiency/Excessiveness Management", "Bio-Pesticides and Bio-Fertilizers"
+    ],
+    "cultivation_practice": [
+        "Cultural Practices", "Varieties", "Varietal Selection", "Seeds and Planting Material",
+        "Seeds", "Seed Sowing And Treatment", "Field Preparation", "Water Management",
+        "Water Management, Micro Irrigation", "Irrigation Management", "Soil Testing",
+        "Abiotic Stress Management"
+    ],
+    "post_harvest_storage": [
+        "Post Harvest Preservation", "Storage", "Cold Storage"
+    ],
+    "specialty_other": [
+        "Organic Farming", "Floriculture", "Beekeeping"
+    ]
+}
 
 print(f"Device: {DEVICE}")
 
@@ -167,31 +222,28 @@ def check_completeness(answer: str, topics: list, gen_tok, gen_mdl) -> bool:
 # ── Component loaders ─────────────────────────────────────────────────────────
 
 def load_ieg():
-    """Load IEG model from Kaggle dataset (auto-downloads if needed)."""
-    import kagglehub
+    """Load experimental IEG model from Kaggle kernel output."""
     from transformers import AutoTokenizer
-    print("  Downloading IEG checkpoint via kagglehub …")
-    path = Path(kagglehub.dataset_download("aneeqasiddiqui377/v4-output"))
-    print(f"  IEG dataset at: {path}")
-
-    # Find checkpoint and label maps
-    ckpt_candidates = list(path.rglob("*.pt"))
-    label_candidates = list(path.rglob("label_maps.json"))
-
-    # Prefer the M5 fine-tuned checkpoint if available
-    ckpt = None
-    for c in ckpt_candidates:
-        if "ieg_adamw" in c.name:
-            ckpt = c
-            break
-    if ckpt is None and ckpt_candidates:
-        ckpt = ckpt_candidates[0]
-
-    label_maps_path = label_candidates[0] if label_candidates else None
-    print(f"  Checkpoint: {ckpt}")
-    print(f"  Label maps: {label_maps_path}")
-
-    if label_maps_path and label_maps_path.exists():
+    print("  Loading experimental IEG checkpoint from outputs/ieg_final…")
+    
+    dataset_path = ROOT / "outputs" / "ieg_final_latest" / "outputs" / "ieg_model"
+    if not dataset_path.exists():
+        dataset_path = ROOT / "outputs" / "ieg_final_latest"
+        
+    print(f"  IEG dataset at: {dataset_path}")
+    
+    ckpt_candidates = list(dataset_path.rglob("*.pt"))
+    label_candidates = list(dataset_path.rglob("label_maps.json"))
+    
+    if not ckpt_candidates:
+        raise FileNotFoundError(f"No .pt checkpoint found in {dataset_path}")
+    
+    ckpt = ckpt_candidates[0]
+    print(f"  Using checkpoint: {ckpt}")
+    
+    if label_candidates:
+        label_maps_path = label_candidates[0]
+        print(f"  Using label maps: {label_maps_path}")
         with open(label_maps_path) as f:
             label_maps = json.load(f)
     else:
@@ -206,7 +258,6 @@ def load_ieg():
 
     model = IEGModel(n_intents=len(intent_classes), n_ner=len(ner_labels))
     state = torch.load(ckpt, map_location=DEVICE, weights_only=False)
-    # State dict may be bare or wrapped
     sd = state.get("model_state_dict", state.get("state_dict", state))
     model.load_state_dict(sd)
     model.to(DEVICE).eval()
@@ -314,18 +365,39 @@ def load_yield_model():
 
 # ── Inference helpers ─────────────────────────────────────────────────────────
 
+MAX_QUERY_CHARS = 200   # compress queries longer than this before IEG
+
+def compress_query(text: str) -> str:
+    """Truncate long conversational prompts to first sentence / first 200 chars.
+    Distribution shift fix: long first_user_prompts bury the intent signal.
+    """
+    if len(text) <= MAX_QUERY_CHARS:
+        return text
+    # Try to cut at first sentence boundary
+    for sep in ("?", ".", "!", "|"):
+        idx = text.find(sep)
+        if 30 < idx <= MAX_QUERY_CHARS:
+            return text[:idx + 1].strip()
+    return text[:MAX_QUERY_CHARS].strip()
+
+
 def ieg_run(model, tok, id2intent, ner_labels, text: str):
-    enc = tok(text, truncation=True, max_length=MAX_LEN,
+    compressed = compress_query(text)   # ← query compression
+    enc = tok(compressed, truncation=True, max_length=MAX_LEN,
                padding="max_length", return_tensors="pt")
-    enc = {k: v.to(DEVICE) for k, v in enc.items()}
+    # DistilBERT doesn't use token_type_ids
+    enc = {k: v.to(DEVICE) for k, v in enc.items() if k in ("input_ids", "attention_mask")}
     with torch.no_grad():
         il, nl, gl = model(input_ids=enc["input_ids"], attention_mask=enc["attention_mask"])
-    
-    probs = torch.sigmoid(il[0])
-    intents = [id2intent[i] for i, p in enumerate(probs) if p > 0.3]
-    if not intents:
-        intents = [id2intent[il.argmax(-1).item()]]
-        
+
+    # Fix 2 (Option B): Use Softmax — consistent with CrossEntropyLoss training
+    probs = torch.softmax(il[0], dim=-1).cpu()
+    # Top-3 soft routing: always include top-3 + any above relative threshold (15% of total mass)
+    top3_idx   = probs.topk(min(3, len(probs))).indices.tolist()
+    thresh_idx = [i for i, p in enumerate(probs) if p > 0.15]
+    intent_idx = list(dict.fromkeys(top3_idx + thresh_idx))  # top3 first, deduped
+    intents    = [id2intent[i] for i in intent_idx]
+
     m_flag  = int(gl.argmax(-1).item()) == 1
     r_flag  = rule_flag(text)
     blocked = m_flag or r_flag
@@ -333,19 +405,85 @@ def ieg_run(model, tok, id2intent, ner_labels, text: str):
 
 
 def retrieve(client, embedder, query: str, intents: list = None):
+    from qdrant_client.models import Filter, FieldCondition, MatchAny, MatchValue
+    
+    # Dynamic TOP_K scaling with intent count
+    active_top_k = max(TOP_K_BASE, len(intents) * 5) if intents and len(intents) > 2 else TOP_K
+    
+    # Intent → Source routing: build payload filter
+    query_filter = None
+    if intents and len(intents) > 0:
+        sources = set()
+        qtypes = set()
+        allow_all_kcc = False
+        
+        for intent in intents:
+            srcs = INTENT_SOURCE_MAP.get(intent)
+            if srcs:
+                sources.update(srcs)
+                if "kcc_qa" in srcs:
+                    if intent in INTENT_QTYPE_MAP:
+                        qtypes.update(INTENT_QTYPE_MAP[intent])
+                    else:
+                        allow_all_kcc = True
+                        
+        if sources:
+            should_clauses = []
+            
+            non_kcc = [s for s in sources if s != "kcc_qa"]
+            if non_kcc:
+                should_clauses.append(
+                    Filter(must=[FieldCondition(key="source", match=MatchAny(any=non_kcc))])
+                )
+                
+            if "kcc_qa" in sources:
+                if allow_all_kcc or not qtypes:
+                    should_clauses.append(
+                        Filter(must=[FieldCondition(key="source", match=MatchValue(value="kcc_qa"))])
+                    )
+                else:
+                    should_clauses.append(
+                        Filter(must=[
+                            FieldCondition(key="source", match=MatchValue(value="kcc_qa")),
+                            FieldCondition(key="query_type", match=MatchAny(any=list(qtypes)))
+                        ])
+                    )
+            
+            if should_clauses:
+                query_filter = Filter(should=should_clauses)
+    
     if not intents or len(intents) <= 1:
         q_vec = embedder.encode(query, normalize_embeddings=True).tolist()
-        hits  = client.query_points(collection_name=COLLECTION_NAME,
-                                    query=q_vec,
-                                    limit=TOP_K, with_payload=True).points
+        hits  = client.query_points(
+            collection_name=COLLECTION_NAME,
+            query=q_vec,
+            query_filter=query_filter,
+            limit=active_top_k,
+            with_payload=True
+        ).points
     else:
-        # Multi-Query Retrieval: parallel searches for compound intents
+        # Multi-Query Retrieval: BATCHED embedding + parallel searches
+        limit_per_intent = max(2, active_top_k // len(intents))
+        
+        # Batched encoding: encode all sub-queries at once
+        sub_queries = [f"{intent.replace('_', ' ')}: {query}" for intent in intents]
+        vecs = embedder.encode(sub_queries, batch_size=len(sub_queries), normalize_embeddings=True)
+        
+        # Parallel Qdrant queries using ThreadPoolExecutor
+        def _search(vec):
+            return client.query_points(
+                collection_name=COLLECTION_NAME,
+                query=vec.tolist(),
+                query_filter=query_filter,
+                limit=limit_per_intent,
+                with_payload=True
+            ).points
+        
+        with ThreadPoolExecutor(max_workers=len(vecs)) as pool:
+            results = list(pool.map(_search, vecs))
+        
         hits = []
-        limit_per_intent = max(2, TOP_K // len(intents))
-        for intent in intents:
-            sub_query = f"{intent.replace('_', ' ')}: {query}"
-            q_vec = embedder.encode(sub_query, normalize_embeddings=True).tolist()
-            sub_hits = client.query_points(collection_name=COLLECTION_NAME, query=q_vec, limit=limit_per_intent, with_payload=True).points
+        for sub_hits in results:
             hits.extend(sub_hits)
             
         # Deduplicate and sort
@@ -355,10 +493,45 @@ def retrieve(client, embedder, query: str, intents: list = None):
             if h.id not in seen:
                 seen.add(h.id)
                 unique_hits.append(h)
-        hits = sorted(unique_hits, key=lambda x: x.score, reverse=True)[:TOP_K]
+        hits = sorted(unique_hits, key=lambda x: x.score, reverse=True)[:active_top_k]
 
     if not hits:
         return [], "abstain", 0.0
+    
+    # Per-chunk score floor: filter out low-scoring chunks
+    hits = [h for h in hits if h.score >= MIN_CHUNK_SCORE]
+    if not hits:
+        return [], "abstain", 0.0
+    
+    # Minimum chunk length filter: remove OCR noise and empty chunks
+    hits = [h for h in hits if len(h.payload.get("text", "")) >= MIN_CHUNK_CHARS]
+    if not hits:
+        return [], "abstain", 0.0
+    
+    # Source diversity cap: limit chunks from same source
+    source_counts = Counter()
+    filtered_hits = []
+    for h in sorted(hits, key=lambda x: x.score, reverse=True):
+        src = h.payload.get("source", "unknown")
+        if source_counts[src] < MAX_PER_SOURCE:
+            filtered_hits.append(h)
+            source_counts[src] += 1
+    hits = filtered_hits[:active_top_k]
+    
+    if not hits:
+        return [], "abstain", 0.0
+
+    # ── Cross-encoder reranking ────────────────────────────────────────────
+    if len(hits) > 1:
+        try:
+            reranker = _get_reranker()
+            pairs    = [(query, h.payload.get("text", "")[:512]) for h in hits]
+            scores   = reranker.predict(pairs)
+            hits     = [h for _, h in sorted(zip(scores, hits), key=lambda x: x[0], reverse=True)]
+            hits     = hits[:RERANK_TOP_N]
+        except Exception as e:
+            pass  # reranker optional — fall back to vector score order
+
     top = hits[0].score
     tier = "grounded" if top >= TIER_GROUNDED else ("fallback" if top >= TIER_FALLBACK else "abstain")
     return hits, tier, top
@@ -452,7 +625,7 @@ def eval_A(row, ieg_model, ieg_tok, id2intent, ner_labels,
         }
 
     # Intercept Temporal/Admin intents
-    if any(i in ["weather", "market", "policy"] for i in intent):
+    if intent[0] in ["weather", "market", "policy"]:
         return {
             "guardrail_fired":     False,
             "guardrail_correct":   guard_correct,
@@ -626,17 +799,32 @@ def eval_AB(row, ieg_model, ieg_tok, id2intent, ner_labels,
     image_col = str(row.get("image_path", ""))
     t0 = time.time()
 
-    # 1. ViT inference
-    t_vit = time.time()
-    if image_col and Path(image_col).exists():
-        result = vit_model.predict(image_col)
-    else:
-        result = {
-            "label": vis_cls, "confidence": 0.85,
-            "top3": [(vis_cls, 0.85)], "rejected": False, "ood_score": 0.20,
-            "_simulated": True,
-        }
-    vit_ms = round((time.time() - t_vit) * 1000)
+    # Run ViT inference and IEG inference in PARALLEL
+    def _run_vit():
+        t_vit = time.time()
+        if image_col and Path(image_col).exists():
+            result = vit_model.predict(image_col)
+        else:
+            result = {
+                "label": vis_cls, "confidence": 0.85,
+                "top3": [(vis_cls, 0.85)], "rejected": False, "ood_score": 0.20,
+                "_simulated": True,
+            }
+        vit_ms = round((time.time() - t_vit) * 1000)
+        return result, vit_ms
+    
+    def _run_ieg():
+        t_ieg = time.time()
+        intent, blocked, m_flag, r_flag = ieg_run(ieg_model, ieg_tok, id2intent, ner_labels, text)
+        ieg_ms = round((time.time() - t_ieg) * 1000)
+        return intent, blocked, m_flag, r_flag, ieg_ms
+    
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        vit_future = pool.submit(_run_vit)
+        ieg_future = pool.submit(_run_ieg)
+        
+        result, vit_ms = vit_future.result()
+        intent, blocked, m_flag, r_flag, ieg_ms = ieg_future.result()
     
     label = result["label"]
     if result["rejected"] or label is None:
@@ -648,11 +836,6 @@ def eval_AB(row, ieg_model, ieg_tok, id2intent, ner_labels,
             "answer":              "[Image rejected]",
         }
 
-    # 2. IEG on text
-    t_ieg = time.time()
-    intent, blocked, m_flag, r_flag = ieg_run(ieg_model, ieg_tok, id2intent, ner_labels, text)
-    ieg_ms = round((time.time() - t_ieg) * 1000)
-    
     if blocked:
         return {
             "vit_label":           label,
@@ -731,6 +914,8 @@ def parse_args():
                    help="Skip generator (fast mode — checks guardrail, retrieval, ViT only)")
     p.add_argument("--scenarios", default=str(SCENARIOS_CSV),
                    help="Path to scenarios CSV")
+    p.add_argument("--limit", type=int, default=None,
+                   help="Limit evaluation to first N rows (for quick testing)")
     return p.parse_args()
 
 
@@ -742,8 +927,34 @@ def main():
     print("=" * 60)
 
     df = pd.read_csv(args.scenarios)
-    if args.pathway != "all":
+    if "multi_turn_json" in df.columns:
+        df["fup"] = df["multi_turn_json"].apply(
+            lambda x: next((t["content"] for t in (json.loads(x) if isinstance(x,str) else x) if t["role"]=="user"), "")
+            if pd.notna(x) else ""
+        )
+    
+    # Standardize columns
+    if "query" not in df.columns:
+        df["query"] = df.get("fup", df.get("QueryText", ""))
+    if "language" not in df.columns:
+        df["language"] = "English"
+    if "expected_block" not in df.columns:
+        # Default to 1 (blocked) for non_agri, else 0
+        if "intent_label" in df.columns:
+            df["expected_block"] = (df["intent_label"] == "non_agri").astype(int)
+        elif "guardrail" in df.columns:
+            df["expected_block"] = df["guardrail"].astype(int)
+        else:
+            df["expected_block"] = 0
+    if "scenario_id" not in df.columns:
+        df["scenario_id"] = [f"SCEN-{i:03d}" for i in range(len(df))]
+    if "pathway" not in df.columns:
+        df["pathway"] = "A"
+
+    if args.pathway != "all" and "pathway" in df.columns:
         df = df[df["pathway"] == args.pathway].copy()
+    if args.limit:
+        df = df.head(args.limit)
     print(f"\nScenarios: {len(df)}")
 
     # ── Load components ─────────────────────────────────────────────────────
@@ -804,17 +1015,18 @@ def main():
     print("--- Running scenarios ---")
     results = []
     for i, row in df.iterrows():
-        sid     = row["scenario_id"]
-        pathway = row["pathway"]
+        sid     = row.get("scenario_id", f"SCEN-{i:03d}")
+        pathway = row.get("pathway", "A")
         print(f"  [{i+1:02d}/{len(df)}] {sid} … ", end="", flush=True)
 
+        query_text = row.get("query", row.get("fup", row.get("QueryText", "")))
         base = {
             "scenario_id":    sid,
             "pathway":        pathway,
-            "query":          str(row["query"])[:80],
-            "language":       row["language"],
-            "crop":           row["crop"],
-            "expected_block": row["expected_block"],
+            "query":          str(query_text)[:80],
+            "language":       row.get("language", "English"),
+            "crop":           row.get("crop", "unknown"),
+            "expected_block": row.get("expected_block", row.get("intent_label", "")),
             "notes":          row.get("notes", ""),
         }
 
