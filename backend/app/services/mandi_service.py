@@ -9,6 +9,7 @@ punctuation-tolerant matcher. Only real market data is returned; when the
 live API is unreachable or the key is missing, an empty price list is returned
 instead of fabricated MSP numbers.
 """
+import asyncio
 import time
 import httpx
 from typing import List, Optional, Dict, Any
@@ -362,7 +363,9 @@ class MandiService:
     def _get_cached(self, key: str) -> Optional[Dict[str, Any]]:
         entry = self._cache.get(key)
         if entry:
-            ttl = self._fallback_ttl if entry[1].get("source") == "fallback" else self._cache_ttl
+            # Only full live boards earn the 6h cache; partial/fallback data
+            # retries after 5 min so a rate-limited minute doesn't stick.
+            ttl = self._cache_ttl if entry[1].get("source") == "live" else self._fallback_ttl
             if time.time() - entry[0] < ttl:
                 return entry[1]
         return None
@@ -403,9 +406,19 @@ class MandiService:
             try:
                 if commodity:
                     records: List[Dict[str, Any]] = []
+                    # One name of the family may legitimately have zero rows
+                    # (e.g. bare "Paddy" in western UP) — that must not abort
+                    # the remaining names.
                     for name in COMMODITY_FAMILY.get(commodity, [commodity]):
-                        payload = await self._fetch_live(state, name)
-                        records.extend(payload["records"])
+                        try:
+                            payload = await self._fetch_live(state, name)
+                            records.extend(payload["records"])
+                        except Exception as e:
+                            print(f"Mandi API fetch failed ({name}): {e}")
+                    if not records:
+                        raise ValueError(
+                            f"No mandi records for {state}/{district} ({commodity})."
+                        )
                     prices = self._aggregate(records, None, market, district)
                     data = {
                         "source": "live",
@@ -450,7 +463,7 @@ class MandiService:
             params["filters[Commodity]"] = commodity
 
         async with httpx.AsyncClient(
-            timeout=30.0,
+            timeout=12.0,
             headers={"User-Agent": "curl/8.0.1"},
             follow_redirects=True,
         ) as client:
@@ -492,28 +505,35 @@ class MandiService:
         missing from the response. Only a total failure (every request) returns None.
         """
         records = []
-        successes = 0
+        names: List[Optional[str]] = []
         for crop in MAIN_CROPS:
-            got = False
-            for name in COMMODITY_FAMILY.get(crop, [crop]):
-                recs = await self._fetch_records(state, name)
-                if recs:
-                    got = True
-                    records.extend(recs)
-            if got:
+            names.extend(COMMODITY_FAMILY.get(crop, [crop]))
+        names.append(None)  # general latest batch
+
+        # Fire every upstream call in parallel: NIC latency stacks badly when
+        # sequential (6 x 30s worst case), and one slow commodity must not
+        # starve the rest of the board.
+        results = await asyncio.gather(
+            *(
+                self._fetch_records(state, n, limit=(1000 if n is None else 500))
+                for n in names
+            ),
+            return_exceptions=True,
+        )
+        successes = 0
+        for res in results:
+            if isinstance(res, list):
+                records.extend(res)
                 successes += 1
-
-        general = await self._fetch_records(state, None, limit=1000)
-        if general:
-            successes += 1
-            records.extend(general)
-
         if successes == 0:
             return None
 
         prices = self._aggregate(records, None, market, district)
+        # A thin result (rate-limit hit mid-board) must not pin garbage in the
+        # 6h live cache — degrade to "partial" so it retries after 5 min.
+        source = "live" if successes >= 3 else "partial"
         return {
-            "source": "live",
+            "source": source,
             "state": state,
             "district": district,
             "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
