@@ -5,6 +5,7 @@ import {
   View,
   Alert,
   Animated,
+  AppState,
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
@@ -13,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import * as Location from 'expo-location';
 import * as ImagePicker from 'expo-image-picker';
 import { useFonts } from 'expo-font';
+import * as Updates from 'expo-updates';
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -289,9 +291,11 @@ function AppShell() {
     return () => { cancelled = true; };
   }, [apiUrl, locationInfo, reloadKey, i18n.language]);
 
-  // Live mandi prices from backend /api/mandi/prices (falls back to static MSP list)
+  // Live mandi prices from backend /api/mandi/prices (falls back to static MSP list).
+  // Only fetch once BOTH state and district are selected — a state alone is
+  // not a complete location.
   useEffect(() => {
-    if (!apiUrl) return;
+    if (!apiUrl || !locationInfo.state || !locationInfo.district) return;
     let cancelled = false;
     (async () => {
       const result = await fetchMandiRows(apiUrl, locationInfo);
@@ -465,6 +469,36 @@ function AppShell() {
     clearTimeout(toastTimerRef.current);
     toastTimerRef.current = setTimeout(() => setToast(null), 2200);
   };
+
+  // Auto-update via EAS Update: check on launch and whenever the app returns
+  // to the foreground. New JS updates are downloaded silently and applied
+  // immediately with reloadAsync instead of waiting for the next cold start.
+  const lastUpdateCheckRef = useRef(0);
+  useEffect(() => {
+    if (__DEV__ || !Updates.isEnabled) return;
+
+    const checkForUpdate = async () => {
+      // Throttle to one check per 5 minutes; the updates server rate-limits
+      if (Date.now() - lastUpdateCheckRef.current < 5 * 60 * 1000) return;
+      lastUpdateCheckRef.current = Date.now();
+      try {
+        const result = await Updates.checkForUpdateAsync();
+        if (!result.isAvailable) return;
+        await Updates.fetchUpdateAsync();
+        showToast('Updating app…');
+        await Updates.reloadAsync();
+      } catch (e) {
+        // Offline or rate-limited -> keep running the current version silently
+      }
+    };
+
+    checkForUpdate();
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') checkForUpdate();
+    });
+    return () => sub.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Full-screen weather detail view
   const [weatherDetailOpen, setWeatherDetailOpen] = useState(false);

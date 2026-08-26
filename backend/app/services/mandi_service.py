@@ -21,6 +21,7 @@ CROP_ALIASES = {
     "rice": "Paddy",
     "paddy": "Paddy",
     "dhan": "Paddy",
+    "chawal": "Paddy",
     "maize": "Maize",
     "makka": "Maize",
     "mustard": "Mustard",
@@ -116,6 +117,14 @@ DISTRICT_ALIASES: Dict[str, List[str]] = {
 
 # Headline crops always fetched for the home screen
 MAIN_CROPS = ["Wheat", "Paddy", "Maize", "Mustard"]
+
+# Some crops are split across several Agmarknet commodity names by region
+# ("Paddy" in eastern UP, "Rice"/"Paddy(Common)" in the west), so these are
+# fetched under every known name and merged; otherwise whole districts would
+# silently lose the crop.
+COMMODITY_FAMILY: Dict[str, List[str]] = {
+    "Paddy": ["Paddy", "Rice"],
+}
 
 # All-India State & UT pick-list (Agmarknet / data.gov.in naming). District lists
 # cover every state/UT so a farmer in any state — or one selling in a neighbouring
@@ -393,8 +402,11 @@ class MandiService:
         if settings.MANDI_API_KEY:
             try:
                 if commodity:
-                    payload = await self._fetch_live(state, commodity)
-                    prices = self._aggregate(payload["records"], commodity, market, district)
+                    records: List[Dict[str, Any]] = []
+                    for name in COMMODITY_FAMILY.get(commodity, [commodity]):
+                        payload = await self._fetch_live(state, name)
+                        records.extend(payload["records"])
+                    prices = self._aggregate(records, None, market, district)
                     data = {
                         "source": "live",
                         "state": state,
@@ -482,10 +494,14 @@ class MandiService:
         records = []
         successes = 0
         for crop in MAIN_CROPS:
-            recs = await self._fetch_records(state, crop)
-            if recs:
+            got = False
+            for name in COMMODITY_FAMILY.get(crop, [crop]):
+                recs = await self._fetch_records(state, name)
+                if recs:
+                    got = True
+                    records.extend(recs)
+            if got:
                 successes += 1
-                records.extend(recs)
 
         general = await self._fetch_records(state, None, limit=1000)
         if general:

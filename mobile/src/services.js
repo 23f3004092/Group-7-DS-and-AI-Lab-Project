@@ -186,13 +186,14 @@ export function rowsFromMandiData(data) {
   });
 }
 
-// Fetch fresh mandi rows for the selected location; returns rows or null
+// Fetch fresh mandi rows for the selected location; returns rows or null.
+// Requires BOTH state and district — never guess a half-set location.
 export async function fetchMandiRows(apiUrl, locationInfo) {
-  if (!apiUrl || (!locationInfo.state && !locationInfo.district)) return null;
+  if (!apiUrl || !locationInfo.state || !locationInfo.district) return null;
   try {
     const params = new URLSearchParams({
-      state: locationInfo.state || 'Uttar Pradesh',
-      district: locationInfo.district || '',
+      state: locationInfo.state,
+      district: locationInfo.district,
     });
     const res = await fetch(`${apiUrl}/api/mandi/prices?${params.toString()}`);
     if (!res.ok) throw new Error('bad mandi response');
