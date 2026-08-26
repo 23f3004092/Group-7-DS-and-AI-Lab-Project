@@ -2,7 +2,10 @@
 
 Fetches variety-wise daily market prices, normalizes our crop names to the
 Agmarknet commodity vocabulary, and caches results to respect the API rate
-limit (100 requests/day per key). Only real market data is returned; when the
+limit (100 requests/day per key). Queries are state-wide (optionally
+commodity-filtered) because Agmarknet's District spellings diverge from
+official names; district narrowing happens locally via DISTRICT_ALIASES and a
+punctuation-tolerant matcher. Only real market data is returned; when the
 live API is unreachable or the key is missing, an empty price list is returned
 instead of fabricated MSP numbers.
 """
@@ -26,6 +29,90 @@ CROP_ALIASES = {
 
 # Preferred display order for the main crops
 CROP_ORDER = {"Wheat": 0, "Paddy": 1, "Maize": 2, "Mustard": 3}
+
+# UI State name -> Agmarknet State spelling (verified against live API).
+STATE_ALIASES: Dict[str, str] = {
+    "Chhattisgarh": "Chattisgarh",
+    "Delhi": "NCT of Delhi",
+    "Puducherry": "Pondicherry",
+    "Andaman and Nicobar Islands": "Andaman and Nicobar",
+    # NOTE: Ladakh and DNH-DD have zero records under every spelling — this
+    # dataset simply predates/omits them; they fall back to empty prices.
+}
+
+
+def _api_state(state: str) -> str:
+    """Translate an official state name to the Agmarknet spelling."""
+    for ui_name, api_name in STATE_ALIASES.items():
+        if ui_name.lower() == state.lower():
+            return api_name
+    return state
+
+
+# UI district name -> Agmarknet District spellings. Agmarknet maintains its own
+# (often dated) vocabulary, so official district names frequently never match
+# verbatim ("Budaun" vs "Badaun", "Kutch" vs "Kachchh"). Values are verified
+# against live API responses; extend this map as new mismatches surface.
+DISTRICT_ALIASES: Dict[str, List[str]] = {
+    # Uttar Pradesh
+    "Ambedkar Nagar": ["Ambedkarnagar"],
+    "Bhadohi": ["Sant Ravidas Nagar (Bhadohi)"],
+    "Budaun": ["Badaun"],
+    "Bulandshahr": ["Bulandshahar"],
+    "Chitrakoot": ["Chitrakut"],
+    "Farrukhabad": ["Farukhabad"],
+    "Gautam Buddha Nagar": ["Gautam Budh Nagar"],
+    "Hapur": ["Ghaziabad"],  # Hapur APMC markets are still filed under Ghaziabad
+    "Jalaun": ["Jalaun (Orai)"],
+    "Kannauj": ["Kannuj"],
+    "Kanpur Nagar": ["Kanpur"],
+    "Lakhimpur Kheri": ["Lakhimpur", "Khiri (Lakhimpur)"],
+    "Mau": ["Mau(Maunathbhanjan)"],
+    "Pilibhit": ["Pillibhit"],
+    "Raebareli": ["Raebarelli"],
+    "Siddharthnagar": ["Siddharth Nagar"],
+    # Maharashtra
+    "Ahmednagar": ["Ahilyanagar"],
+    "Amravati": ["Amarawati"],
+    "Aurangabad": ["Chattrapati Sambhajinagar"],
+    "Chhatrapati Sambhajinagar": ["Chattrapati Sambhajinagar"],
+    "Gondia": ["Gondiya"],
+    "Mumbai City": ["Mumbai"],
+    "Mumbai Suburban": ["Mumbai"],
+    "Osmanabad": ["Dharashiv"],
+    # Karnataka
+    "Ballari": ["Bellary"],
+    "Bengaluru Urban": ["Bengaluru"],
+    "Davanagere": ["Davangere"],
+    # Gujarat
+    "Banaskantha": ["Banaskanth"],
+    "Dang": ["The Dangs"],
+    "Devbhoomi Dwarka": ["Devbhumi Dwarka"],
+    "Junagadh": ["Junagarh"],
+    "Kutch": ["Kachchh"],
+    "Panchmahal": ["Panchmahals"],
+    "Vadodara": ["Vadodara(Baroda)"],
+    # Punjab
+    "Bathinda": ["Bhatinda"],
+    "Fatehgarh Sahib": ["Fatehgarh"],
+    "Firozpur": ["Ferozpur"],
+    "Rupnagar": ["Ropar (Rupnagar)"],
+    "SBS Nagar": ["Nawanshahr"],
+    "Tarn Taran": ["Tarntaran"],
+    # West Bengal
+    "Cooch Behar": ["Coochbehar"],
+    "Paschim Medinipur": ["Medinipur(W)"],
+    "Purba Medinipur": ["Medinipur(E)"],
+    "Purulia": ["Puruliya"],
+    "South 24 Parganas": ["Sounth 24 Parganas"],
+    # Bihar
+    "East Champaran": ["East Champaran/ Motihari", "Purbi Champaran"],
+    "Pashchim Champaran": ["Paschim Champaran", "West Champaran"],
+    "Saran": ["Chhapra"],
+    # Assam / Haryana
+    "Kamrup Metropolitan": ["Kamrup Metro"],
+    "Nuh": ["Mewat"],
+}
 
 # Headline crops always fetched for the home screen
 MAIN_CROPS = ["Wheat", "Paddy", "Maize", "Mustard"]
@@ -306,8 +393,8 @@ class MandiService:
         if settings.MANDI_API_KEY:
             try:
                 if commodity:
-                    payload = await self._fetch_live(state, district, commodity)
-                    prices = self._aggregate(payload["records"], commodity, market)
+                    payload = await self._fetch_live(state, commodity)
+                    prices = self._aggregate(payload["records"], commodity, market, district)
                     data = {
                         "source": "live",
                         "state": state,
@@ -332,13 +419,19 @@ class MandiService:
         self._set_cached(key, data)
         return data
 
-    async def _fetch_live(self, state: str, district: str, commodity: Optional[str]) -> Dict[str, Any]:
+    async def _fetch_live(self, state: str, commodity: Optional[str], limit: int = 500) -> Dict[str, Any]:
+        """Fetch latest records for a state (optionally one commodity).
+
+        District is deliberately NOT sent as an API filter: Agmarknet's District
+        vocabulary diverges from official names, so server-side filtering would
+        silently drop whole districts. We fetch state-wide and filter locally
+        against DISTRICT_ALIASES instead — same request count, no lost data.
+        """
         params = {
             "api-key": settings.MANDI_API_KEY,
             "format": "json",
-            "limit": 500,
-            "filters[State]": state,
-            "filters[District]": district,
+            "limit": limit,
+            "filters[State]": _api_state(state),
             "sort[Arrival_Date]": "desc",
         }
         if commodity:
@@ -354,17 +447,23 @@ class MandiService:
             data = resp.json()
             records = data.get("records", [])
             if not records:
-                raise ValueError(f"No mandi records for {state}/{district}.")
+                raise ValueError(f"No mandi records for {state}.")
             return {"records": records}
 
-    async def _fetch_records(self, state: str, district: str, commodity: Optional[str]) -> Optional[List[Dict[str, Any]]]:
-        """Per-commodity live fetch with its own cache slot (reused across composite calls)."""
-        rkey = f"rec|{state}|{district}|{commodity or '*'}"
+    async def _fetch_records(
+        self, state: str, commodity: Optional[str], limit: int = 500
+    ) -> Optional[List[Dict[str, Any]]]:
+        """Per-commodity live fetch with its own cache slot.
+
+        The cache key excludes district because fetches are state-wide; every
+        district query in the same state reuses one payload (saves rate limit).
+        """
+        rkey = f"rec|{state}|{commodity or '*'}"
         entry = self._cache.get(rkey)
         if entry and time.time() - entry[0] < self._cache_ttl:
             return entry[1]
         try:
-            payload = await self._fetch_live(state, district, commodity)
+            payload = await self._fetch_live(state, commodity, limit=limit)
         except Exception as e:
             print(f"Mandi API fetch failed ({commodity or 'general'}): {e}")
             return None
@@ -372,7 +471,9 @@ class MandiService:
         self._cache[rkey] = (time.time(), records)
         return records
 
-    async def _fetch_composite(self, state: str, district: str, market: Optional[str]) -> Optional[Dict[str, Any]]:
+    async def _fetch_composite(
+        self, state: str, district: str, market: Optional[str]
+    ) -> Optional[Dict[str, Any]]:
         """Fetch all main crops + the general latest batch, then aggregate.
 
         Rate-limit or per-crop failures are tolerated: failed crops are simply
@@ -381,12 +482,12 @@ class MandiService:
         records = []
         successes = 0
         for crop in MAIN_CROPS:
-            recs = await self._fetch_records(state, district, crop)
+            recs = await self._fetch_records(state, crop)
             if recs:
                 successes += 1
                 records.extend(recs)
 
-        general = await self._fetch_records(state, district, None)
+        general = await self._fetch_records(state, None, limit=1000)
         if general:
             successes += 1
             records.extend(general)
@@ -394,7 +495,7 @@ class MandiService:
         if successes == 0:
             return None
 
-        prices = self._aggregate(records, None, market)
+        prices = self._aggregate(records, None, market, district)
         return {
             "source": "live",
             "state": state,
@@ -403,8 +504,39 @@ class MandiService:
             "prices": prices,
         }
 
-    def _aggregate(self, records: List[Dict[str, Any]], commodity: Optional[str], market: Optional[str]) -> List[Dict[str, Any]]:
+    @staticmethod
+    def _normalize(name: str) -> str:
+        """Lowercase alphanumeric form, so 'Vadodara(Baroda)' style variants can still match."""
+        return "".join(ch for ch in (name or "").lower() if ch.isalnum())
+
+    def _district_matcher(self, district: str):
+        """Build a predicate matching Agmarknet District values for a UI district name.
+
+        Matches the exact name, any DISTRICT_ALIASES spelling, or any of those
+        after punctuation/space normalization.
+        """
+        base = district.strip().lower()
+        variants = {base}
+        for ui_name, aliases in DISTRICT_ALIASES.items():
+            if ui_name.lower() == base:
+                variants.update(a.strip().lower() for a in aliases)
+        normalized = {self._normalize(v) for v in variants}
+
+        def match(record_value: str) -> bool:
+            rv = (record_value or "").strip().lower()
+            return rv in variants or self._normalize(rv) in normalized
+
+        return match
+
+    def _aggregate(
+        self,
+        records: List[Dict[str, Any]],
+        commodity: Optional[str],
+        market: Optional[str],
+        district: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
         """Group raw records by (commodity, variety, market), keep latest, compute daily change."""
+        match_district = self._district_matcher(district) if district else (lambda _: True)
         groups: Dict[str, Dict[str, Any]] = {}
 
         for r in records:
@@ -412,6 +544,8 @@ class MandiService:
             if market and market.strip().lower() not in mkt.lower():
                 continue
             if not mkt:
+                continue
+            if not match_district(r.get("District")):
                 continue
 
             commodity_name = (r.get("Commodity") or "").strip()

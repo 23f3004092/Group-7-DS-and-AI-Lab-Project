@@ -3,4 +3,4 @@
 /mobile/node_modules
 /admin/node_modules
 .env
-./mobile/.expo
+/mobile/.expo
