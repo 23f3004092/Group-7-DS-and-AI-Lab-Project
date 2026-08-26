@@ -247,18 +247,22 @@ def _call_judge(judge_url: str, topics: list, answer: str) -> bool:
         return str(d.get("verdict", "no")).strip().lower() == "yes"
     except Exception as e:
         print(f"  [judge] request failed ({e}); falling back to local model")
-        return False
+        return None
 
-
-def check_completeness(answer: str, topics: list, gen_tok=None, gen_mdl=None, judge_url: str = None) -> bool:
+def check_completeness(answer: str, topics: list, gen_tok=None, gen_mdl=None, judge_url: str = None, judge_tok=None, judge_mdl=None) -> bool:
     if judge_url:
-        return _call_judge(judge_url, topics, answer)
+        res = _call_judge(judge_url, topics, answer)
+        if res is not None:
+            return res
 
     if not topics:
         return True
     
-    # Fallback: local gemma self-judge (kept for backward compatibility)
-    if gen_tok is None or gen_mdl is None:
+    # Use dedicated local judge if available, otherwise fallback to generator
+    eval_tok = judge_tok if judge_tok is not None else gen_tok
+    eval_mdl = judge_mdl if judge_mdl is not None else gen_mdl
+
+    if eval_tok is None or eval_mdl is None:
         return False
     
     readable_topics = [t.replace("_", " ").title() for t in topics]
@@ -274,10 +278,10 @@ def check_completeness(answer: str, topics: list, gen_tok=None, gen_mdl=None, ju
         f"Answer: {answer}\n"
         "Decision:"
     )
-    inputs = gen_tok(prompt, return_tensors="pt").to(DEVICE)
+    inputs = eval_tok(prompt, return_tensors="pt").to(eval_mdl.device)
     with torch.inference_mode():
-        out = gen_mdl.generate(**inputs, max_new_tokens=5, temperature=0.1, do_sample=False)
-    res = gen_tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True).lower()
+        out = eval_mdl.generate(**inputs, max_new_tokens=5, temperature=0.1, do_sample=False)
+    res = eval_tok.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True).lower()
     return "yes" in res
 
 
@@ -440,6 +444,32 @@ def load_generator():
     mdl = PeftModel.from_pretrained(base_mdl, str(adapter_path))
     mdl.eval()
     print("  Generator loaded")
+    return tok, mdl
+
+
+def load_local_judge(model_id: str):
+    """Load a dedicated local judge model in 4-bit, explicitly on cuda:1."""
+    from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+    import torch
+    
+    print(f"  Loading local judge {model_id} (4-bit) on cuda:1 …")
+    device = "cuda:1" if torch.cuda.device_count() > 1 else "cuda:0"
+    
+    bnb_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.float16,
+    )
+    
+    tok = AutoTokenizer.from_pretrained(model_id)
+    mdl = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        quantization_config=bnb_config,
+        device_map={"": device},
+        torch_dtype=torch.float16,
+    )
+    mdl.eval()
+    print("  Local judge loaded")
     return tok, mdl
 
 
@@ -713,7 +743,7 @@ def generate(gen_tok, gen_mdl, query: str, hits: list) -> str:
         f"Farmer's question: {query}\n\nAnswer:"
     )
     inputs = gen_tok(prompt, return_tensors="pt",
-                     truncation=True, max_length=2048).to(DEVICE)
+                     truncation=True, max_length=2048).to(gen_mdl.device)
     with torch.inference_mode():
         out = gen_mdl.generate(
             **inputs, max_new_tokens=150,
@@ -755,7 +785,7 @@ def yield_predict(booster, crop: str, district: str, area_ha: float) -> float:
 # ── Pathway evaluators ────────────────────────────────────────────────────────
 
 def eval_A(row, ieg_model, ieg_tok, id2intent, ner_labels,
-           retriever, embedder, gen_tok, gen_mdl):
+           retriever, embedder, gen_tok, gen_mdl, judge_tok=None, judge_mdl=None):
     query        = str(row["query"])
     lang         = str(row["language"])
     expect_block = int(row["expected_block"])
@@ -838,7 +868,7 @@ def eval_A(row, ieg_model, ieg_tok, id2intent, ner_labels,
         answer = generate(gen_tok, gen_mdl, query, hits)
         gen_ms = round((time.time() - t_gen) * 1000)
         if len(intent) > 1 or row["pathway"] == "A_Multi":
-            completeness_ok = check_completeness(answer, intent, gen_tok, gen_mdl, JUDGE_URL)
+            completeness_ok = check_completeness(answer, intent, gen_tok, gen_mdl, JUDGE_URL, judge_tok, judge_mdl)
 
     chunks = [h.payload.get("text", "") for h in hits]
     return {
@@ -966,7 +996,7 @@ def eval_C(row, booster):
 
 
 def eval_AB(row, ieg_model, ieg_tok, id2intent, ner_labels,
-            vit_model, retriever, embedder, gen_tok, gen_mdl):
+            vit_model, retriever, embedder, gen_tok, gen_mdl, judge_tok=None, judge_mdl=None):
     text = str(row["query"])
     vis_cls = str(row["vision_class"])
     image_col = str(row.get("image_path", ""))
@@ -1063,7 +1093,7 @@ def eval_AB(row, ieg_model, ieg_tok, id2intent, ner_labels,
         t_gen = time.time()
         answer = generate(gen_tok, gen_mdl, combined_query, hits)
         gen_ms = round((time.time() - t_gen) * 1000)
-        completeness_ok = check_completeness(answer, intent + [disease_name], gen_tok, gen_mdl, JUDGE_URL)
+        completeness_ok = check_completeness(answer, intent + [disease_name], gen_tok, gen_mdl, JUDGE_URL, judge_tok, judge_mdl)
 
     chunks = [h.payload.get("text", "") for h in hits]
     return {
@@ -1112,6 +1142,10 @@ def parse_args():
                    help="External judge endpoint (e.g. Qwen3-8B on vLLM) for "
                         "completeness/citation evaluation. POSTs {'topics':[], 'answer':str} "
                         "expects {'verdict':'yes'|'no', 'score':float}.")
+    p.add_argument("--local-judge", action="store_true",
+                   help="Load a dedicated judge model locally on cuda:1")
+    p.add_argument("--local-judge-id", type=str, default="Qwen/Qwen2.5-7B-Instruct",
+                   help="HF model ID for the dedicated local judge (used with --local-judge)")
     return p.parse_args()
 
 
@@ -1255,6 +1289,16 @@ def main():
     else:
         STATUS["generator"] = "skipped"
 
+    judge_tok = judge_mdl = None
+    if getattr(args, "local_judge", False):
+        print("[Local Judge]")
+        try:
+            judge_tok, judge_mdl = load_local_judge(args.local_judge_id)
+            STATUS["local_judge"] = "OK"
+        except Exception as e:
+            print(f"  ERROR: {e}")
+            STATUS["local_judge"] = str(e)
+
     print("[Yield LightGBM]")
     try:
         yield_booster = load_yield_model()
@@ -1284,6 +1328,7 @@ def main():
             "expected_block":   row.get("expected_block", row.get("intent_label", "")),
             "gold_intent_label": row.get("intent_label", ""),   # kept for post-hoc per-intent analysis
             "notes":            row.get("notes", ""),
+            "answer":           "[ERROR]",
         }
 
         try:
@@ -1291,7 +1336,7 @@ def main():
                 if ieg_model is None or retriever is None:
                     raise RuntimeError("IEG or retriever not available")
                 r = eval_A(row, ieg_model, ieg_tok, id2intent, ner_labels,
-                           retriever, embedder, gen_tok, gen_mdl)
+                           retriever, embedder, gen_tok, gen_mdl, judge_tok, judge_mdl)
             elif pathway == "B":
                 if vit_model is None or retriever is None:
                     raise RuntimeError("ViT or retriever not available")
@@ -1300,7 +1345,7 @@ def main():
                 if vit_model is None or ieg_model is None or retriever is None:
                     raise RuntimeError("ViT, IEG, or retriever not available")
                 r = eval_AB(row, ieg_model, ieg_tok, id2intent, ner_labels,
-                            vit_model, retriever, embedder, gen_tok, gen_mdl)
+                            vit_model, retriever, embedder, gen_tok, gen_mdl, judge_tok, judge_mdl)
             elif pathway == "C":
                 if yield_booster is None:
                     raise RuntimeError("Yield model not available")

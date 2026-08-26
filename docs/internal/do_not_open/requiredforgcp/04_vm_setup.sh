@@ -43,7 +43,7 @@ echo ">> Waiting for Qdrant to be ready"
 until curl -sf localhost:6333/healthz >/dev/null 2>&1; do sleep 2; done
 
 echo ">> Restoring the vector DB snapshot (skips if already restored)"
-python3 -m pip install -q --user requests >/dev/null 2>&1 || true
+sudo apt-get update && sudo apt-get install -y python3-requests
 python3 restore_qdrant.py --artifacts "$ART/qdrant" --qdrant-url http://localhost:6333
 
 echo ">> Building + starting the gateway (first build downloads Gemma, ~10-15 min)"

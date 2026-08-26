@@ -429,12 +429,18 @@ def start_qdrant():
                QDRANT__TELEMETRY_DISABLED="true")
     
     try:
-        subprocess.Popen(
-            [QDRANT_BIN], env=env, cwd=WORK_ROOT,
-            stdout=open(log_path, "w"),
-            stderr=subprocess.STDOUT,
-            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),  # no-op on Linux
-        )
+        kwargs = {
+            "env": env,
+            "cwd": WORK_ROOT,
+            "stdout": open(log_path, "w"),
+            "stderr": subprocess.STDOUT,
+        }
+        if platform.system() == "Linux":
+            kwargs["preexec_fn"] = os.setpgrp
+        else:
+            kwargs["creationflags"] = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+            
+        subprocess.Popen([QDRANT_BIN], **kwargs)
         
         print("  Waiting for Qdrant to be ready...")
         for i in range(120):
@@ -604,8 +610,13 @@ def main():
     print(f"📍 Dashboard: {QDRANT_URL}/dashboard")
     print(f"📍 Collection: {COLLECTION_NAME}")
     print(f"📍 Storage: {QDRANT_STORAGE}")
-    print("\nTo stop Qdrant: taskkill /F /IM qdrant.exe")
-    print("To restart: cd ~/qdrant_rag_setup && .\\qdrant.exe")
+    
+    if ON_KAGGLE:
+        print("\nTo stop Qdrant: pkill qdrant")
+        print(f"To restart: nohup {QDRANT_BIN} > {WORK_ROOT}/qdrant.log 2>&1 &")
+    else:
+        print("\nTo stop Qdrant: taskkill /F /IM qdrant.exe")
+        print("To restart: cd ~/qdrant_rag_setup && .\\qdrant.exe")
 
 if __name__ == "__main__":
     try:
