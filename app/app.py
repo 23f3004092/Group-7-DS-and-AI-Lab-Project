@@ -273,10 +273,12 @@ def _ieg_run(text: str):
     with torch.no_grad():
         il, _, gl = m(input_ids=enc["input_ids"], attention_mask=enc["attention_mask"])
     
-    probs = torch.sigmoid(il[0])
-    intents = [id2i[i] for i, p in enumerate(probs) if p > 0.3]
-    if not intents:
-        intents = [id2i[il.argmax(-1).item()]]
+    # Softmax routing — matches CrossEntropyLoss training and run_e2e_eval.ieg_run()
+    probs = torch.softmax(il[0], dim=-1)
+    top3_idx   = probs.topk(min(3, len(probs))).indices.tolist()
+    thresh_idx = [i for i, p in enumerate(probs) if p > 0.15]
+    intent_idx = list(dict.fromkeys(top3_idx + thresh_idx))  # top3 first, deduped
+    intents    = [id2i[i] for i in intent_idx]
         
     blocked = bool(gl.argmax(-1).item() == 1) or _rule_flag(text)
     return intents, blocked

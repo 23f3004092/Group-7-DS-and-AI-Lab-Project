@@ -68,8 +68,15 @@ def answer_query(query, intent=None, top_k=None, filters=None, live_data=None,
     if skip_retrieval:
         r = {"tier": "skipped", "results": [], "top_score": 0.0}
     else:
-        r = retrieval.search_agri_knowledge(_contextualize(history, query),
-                                            top_k=top_k, intent=retr_intent, **filters)
+        # NEW: pass IEG top-1 confidence + multi-intent list so retrieval can
+        # loosen qtype filters on low-confidence queries (CONF_GATE_LOOSEN)
+        # and run multi-query retrieval across all detected intents.
+        r = retrieval.search_agri_knowledge(
+            _contextualize(history, query),
+            top_k=top_k, intent=retr_intent,
+            top_confidence=g.get("top_confidence"),
+            intents=g.get("intents"),
+            **filters)
     has_context = bool(r["results"]) and r["tier"] not in ("abstain_out_of_scope", "error")
 
     hints = ieg.external_hints(query)
@@ -115,7 +122,11 @@ def answer_query(query, intent=None, top_k=None, filters=None, live_data=None,
     return {"tier": r["tier"], "blocked": False, "answer": answer, "grounded": bool(ctx),
             "sources": sources,
             "live_data_used": sorted(use_live.keys()) if use_live else [],
-            "top_score": r["top_score"], "intent": retr_intent, "lang": gen["lang"],
+            "top_score": r["top_score"], "intent": retr_intent,
+            # NEW diagnostic fields (clients may ignore):
+            "filters_loosened": r.get("filters_loosened", False),
+            "retrieval_ms": r.get("retrieval_ms"),
+            "lang": gen["lang"],
             "guardrail_backend": g["guardrail_backend"], "gen_ms": gen["gen_ms"],
             "out_tokens": gen["out_tokens"], "session_id": session_id,
             "history": new_history, "latency_ms": _ms(t0)}
@@ -149,8 +160,13 @@ def answer_query_stream(query, intent=None, top_k=None, filters=None, live_data=
     if skip_retrieval:
         r = {"tier": "skipped", "results": [], "top_score": 0.0}
     else:
-        r = retrieval.search_agri_knowledge(_contextualize(history, query),
-                                            top_k=top_k, intent=retr_intent, **filters)
+        # NEW: same confidence/intents wiring as the non-streaming path.
+        r = retrieval.search_agri_knowledge(
+            _contextualize(history, query),
+            top_k=top_k, intent=retr_intent,
+            top_confidence=g.get("top_confidence"),
+            intents=g.get("intents"),
+            **filters)
     has_context = bool(r["results"]) and r["tier"] not in ("abstain_out_of_scope", "error")
     hints = ieg.external_hints(query)
     use_live = live_data if (live_data and hints) else None
@@ -198,6 +214,9 @@ def answer_query_stream(query, intent=None, top_k=None, filters=None, live_data=
                   "grounded": bool(ctx), "sources": sources,
                   "live_data_used": sorted(use_live.keys()) if use_live else [],
                   "top_score": r["top_score"], "intent": retr_intent,
+                  # NEW diagnostic fields (clients may ignore):
+                  "filters_loosened": r.get("filters_loosened", False),
+                  "retrieval_ms": r.get("retrieval_ms"),
                   "lang": gen["lang"], "guardrail_backend": g["guardrail_backend"],
                   "gen_ms": gen["gen_ms"], "out_tokens": gen["out_tokens"],
                   "session_id": session_id, "history": new_history,

@@ -13,6 +13,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ ./app/
 
+# Yield LightGBM model baked INTO the image (not via /artifacts mount, which
+# is read-only and can shadow image paths). Staged from
+# outputs/output_files/kaggle/working/saved_models/ by scripts/stage_models_gcp.py.
+COPY artifacts/yield/ /app/models/yield/
+ENV YIELD_MODEL_PATH=/app/models/yield/lightgbm_tuned.txt
+
 ENV PYTHONUNBUFFERED=1 \
     HF_HOME=/root/.cache/huggingface \
     TOKENIZERS_PARALLELISM=false

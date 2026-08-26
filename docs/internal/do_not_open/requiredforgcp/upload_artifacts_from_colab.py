@@ -276,16 +276,16 @@ print(f"✓ Merged model uploaded to {BUCKET}/generator/merged/")
 # No multi-account switching needed here — uses the Kaggle login from cell 1b.
 #
 # Datasets:
-#   - IEG: "aneeqasiddiqui377/v4-output" (intent/entity/guardrail model)
+#   - IEG: "lokeshtiwariiitm/ieg-model" (intent/entity/guardrail model)
 #   - Vision: "iitm21f1003346/vits16-crop-disease" (ViT leaf disease classifier)
 from pathlib import Path
 
 print("Downloading IEG + Vision models from Kaggle...")
 print("(First time may take a few minutes; Kaggle caches downloads.)\n")
 
-# IEG: dataset "aneeqasiddiqui377/v4-output"; prefer the ieg_adamw checkpoint.
+# IEG: dataset "lokeshtiwariiitm/ieg-model"; prefer the adamw checkpoint.
 print("Downloading IEG dataset from Kaggle...")
-ieg_dir = Path(kagglehub.dataset_download("aneeqasiddiqui377/v4-output"))
+ieg_dir = Path(kagglehub.dataset_download("lokeshtiwariiitm/ieg-model"))
 _pts    = list(ieg_dir.rglob("*.pt"))
 ieg_ckpt   = next((p for p in _pts if "ieg_adamw" in p.name), _pts[0] if _pts else None)
 ieg_labels = next(iter(ieg_dir.rglob("label_maps.json")), None)

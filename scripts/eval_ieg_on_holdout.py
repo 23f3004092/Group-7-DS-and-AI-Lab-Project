@@ -11,8 +11,17 @@ Key considerations:
   - Eval CSV has 9 intent classes (100 each = 900 rows), perfectly balanced.
   - Model was trained on 10 classes (adds non_agri). non_agri is NOT in eval set.
   - Guardrail label: none of the eval rows are expected to be blocked (all real KCC).
-  - Metrics reported per-class and macro-averaged; also per-language breakdown.
-  - Weighted F1 used for the "overall" headline number (comparable across distributions).
+   - Metrics reported per-class and macro-averaged; also per-language breakdown.
+   - Weighted F1 used for the "overall" headline number (comparable across distributions).
+
+Confusion / soft-routing analysis (for offline confusion-prior routing expansion):
+   - Raw + row-normalized confusion matrices per checkpoint × input column.
+   - Ranked confusion pairs (true → predicted) above a rate floor.
+   - Soft-routing survival stats mirroring production ieg_run() in run_e2e_eval.py:
+     does the TRUE class survive the top-3 + softmax>0.15 routing set?
+   - Top-1 confidence calibration buckets (accuracy per confidence decile) to pick
+     a confidence-gate threshold for loosening retrieval filters.
+   - Ready-to-merge INTENT_QTYPE_MAP expansion snippet (intent -> confused intents).
 """
 
 import json
@@ -48,7 +57,7 @@ CHECKPOINTS = {
     },
     "experimental": {
         "source":      "local",
-        "ieg_out_dir": ROOT / "outputs" / "ieg_model",
+        "ieg_out_dir": ROOT / "outputs" / "ieg_final_latest" / "outputs" / "ieg_model",
         "ckpt_name":   "ieg_adamw",
         "description": "Experimental (hing-mbert, 10 classes, new guardrail aug)",
     },
@@ -56,6 +65,14 @@ CHECKPOINTS = {
 
 MAX_LEN = 64   # safe upper bound; tokenizer always truncates
 DEVICE  = "cpu"
+
+# ── Confusion-matrix / soft-routing analysis config ───────────────────────────
+# These mirror production routing in run_e2e_eval.py::ieg_run()
+SOFTMAX_ROUTING_THRESH = 0.15   # any intent with softmax prob > this joins the routing set
+TOP_K_ROUTING          = 3      # top-k intents always included in routing set
+CONFUSION_MIN_RATE     = 0.05   # min row-normalized confusion rate to recommend a pair
+CONFUSION_MIN_COUNT    = 5      # min absolute count to recommend a pair (noise floor)
+CONFUSION_OUT = ROOT / "data" / "eval" / "ieg_confusion_matrix.json"
 
 def detect_model_name(ckpt_path: Path) -> str:
     """
@@ -162,8 +179,9 @@ def load_ieg_from_cfg(cfg: dict):
 
 
 # ── Single inference ─────────────────────────────────────────────────────────
-def predict_intent(model, tok, id2intent, text: str, threshold: float = 0.3):
-    """Returns top predicted intent (argmax), all intents above threshold, and guardrail flag."""
+def predict_intent(model, tok, id2intent, text: str, threshold: float = 0.15):
+    """Returns top predicted intent (argmax), all intents above softmax threshold, and guardrail flag.
+    Uses SOFTMAX + 0.15 to mirror production routing (CrossEntropyLoss training)."""
     enc = tok(
         str(text), truncation=True, max_length=MAX_LEN,
         padding="max_length", return_tensors="pt"
@@ -172,12 +190,12 @@ def predict_intent(model, tok, id2intent, text: str, threshold: float = 0.3):
     with torch.no_grad():
         il, nl, gl = model(input_ids=enc["input_ids"], attention_mask=enc["attention_mask"])
 
-    probs      = torch.sigmoid(il[0]).cpu().numpy()
-    top_intent = id2intent[int(np.argmax(probs))]
-    multi_intents = [id2intent[i] for i, p in enumerate(probs) if p > threshold]
+    probs_sm   = torch.softmax(il[0], dim=-1).cpu().numpy()
+    top_intent = id2intent[int(np.argmax(probs_sm))]
+    multi_intents = [id2intent[i] for i, p in enumerate(probs_sm) if p > threshold]
     guardrail  = int(gl.argmax(-1).item()) == 1
 
-    return top_intent, multi_intents, guardrail, probs
+    return top_intent, multi_intents, guardrail, probs_sm, probs_sm
 
 
 # ── Extract first user prompt from multi_turn_json ───────────────────────────
@@ -192,6 +210,163 @@ def get_first_user_prompt(cell) -> str:
     return ""
 
 
+# ── Confusion-matrix + soft-routing analysis ─────────────────────────────────
+def analyze_confusion_and_routing(true_labels, preds, probs_mx, id2intent):
+    """
+    Builds everything needed for offline confusion-prior routing expansion:
+      1. Raw + row-normalized confusion matrices.
+      2. Ranked confusion pairs (true -> predicted).
+      3. Soft-routing survival stats mirroring ieg_run() in run_e2e_eval.py:
+         does the TRUE class survive the softmax top-3 + >0.15 routing set?
+      4. Top-1 confidence calibration buckets (for confidence-gated filter loosening).
+      5. Ready-to-merge expansion recommendations (intent -> confusions).
+
+    probs_mx: (N, n_model_classes) SOFTMAX probabilities.
+    """
+    model_classes = list(id2intent.values())
+    classes       = sorted(set(true_labels) | set(preds))
+    correct       = np.array([t == p for t, p in zip(true_labels, preds)])
+
+    # ── 1. Confusion matrices ────────────────────────────────────────────────
+    cm = confusion_matrix(true_labels, preds, labels=classes)
+    row_sums = cm.sum(axis=1, keepdims=True)
+    cm_norm = np.divide(cm, row_sums,
+                        out=np.zeros_like(cm, dtype=float), where=row_sums > 0)
+
+    # ── 2. Ranked confusion pairs ────────────────────────────────────────────
+    pairs = []
+    for i, t in enumerate(classes):
+        for j, p in enumerate(classes):
+            if i != j and cm[i, j] > 0:
+                pairs.append({
+                    "true": t, "pred": p,
+                    "count": int(cm[i, j]),
+                    "rate": round(float(cm_norm[i, j]), 4),
+                })
+    pairs.sort(key=lambda d: (-d["count"], d["true"], d["pred"]))
+    top_pairs = [p for p in pairs if p["rate"] >= CONFUSION_MIN_RATE][:25]
+
+    # ── 3. Soft-routing survival stats (mirrors production ieg_run) ──────────
+    n_cls = probs_mx.shape[1]
+    k     = min(TOP_K_ROUTING, n_cls)
+    order     = np.argsort(-probs_mx, axis=1)
+    top1_conf = probs_mx.max(axis=1)
+    entropy   = -np.sum(np.where(probs_mx > 0, probs_mx * np.log(probs_mx + 1e-12), 0.0), axis=1)
+
+    intent2id_local = {c: i for i, c in enumerate(model_classes)}
+    true_ids = np.array([intent2id_local.get(t, -1) for t in true_labels])
+    has_true = true_ids >= 0   # rows whose true class exists in the model's output space
+
+    rank_of_true = np.full(len(true_labels), -1)
+    for r in np.where(has_true)[0]:
+        pos = np.where(order[r] == true_ids[r])[0]
+        if len(pos):
+            rank_of_true[r] = int(pos[0])
+
+    in_topk   = np.where(has_true, rank_of_true < k, False)
+    in_thresh = np.array([
+        bool(has_true[r] and probs_mx[r, true_ids[r]] > SOFTMAX_ROUTING_THRESH)
+        for r in range(len(true_labels))
+    ])
+
+    def _bucket(mask):
+        sel  = mask[has_true]
+        base = int(has_true.sum())
+        return {
+            "count": int(sel.sum()),
+            "pct":   round(float(sel.mean()) * 100, 2) if base else 0.0,
+        }
+
+    routing = {
+        "softmax": True,
+        "top_k": k,
+        "threshold": SOFTMAX_ROUTING_THRESH,
+        "rows_with_true_in_model": int(has_true.sum()),
+        "argmax_hit":          _bucket(correct),
+        "true_in_topk":        _bucket(in_topk),
+        "true_in_threshold":   _bucket(in_thresh),
+        "true_in_union":       _bucket(in_topk | in_thresh),
+        "mean_top1_conf_correct": round(float(top1_conf[correct].mean()), 4) if correct.any() else None,
+        "mean_top1_conf_wrong":   round(float(top1_conf[~correct].mean()), 4) if (~correct).any() else None,
+        "mean_entropy_correct":   round(float(entropy[correct].mean()), 4) if correct.any() else None,
+        "mean_entropy_wrong":     round(float(entropy[~correct].mean()), 4) if (~correct).any() else None,
+    }
+
+    # ── 4. Confidence calibration (accuracy per top-1 confidence decile) ─────
+    calibration = []
+    bins = np.linspace(0.0, 1.0001, 11)
+    for lo, hi in zip(bins[:-1], bins[1:]):
+        m = (top1_conf >= lo) & (top1_conf < hi)
+        if m.sum():
+            calibration.append({
+                "range": f"{lo:.1f}-{hi:.1f}",
+                "n":     int(m.sum()),
+                "acc":   round(float(correct[m].mean()), 4),
+            })
+
+    # ── 5. Expansion recommendations (ready-to-merge into INTENT_QTYPE_MAP) ──
+    recs = {}
+    for p_ in pairs:
+        if (p_["rate"] >= CONFUSION_MIN_RATE
+                and p_["count"] >= CONFUSION_MIN_COUNT
+                and p_["pred"] in model_classes):
+            recs.setdefault(p_["true"], []).append(
+                {"intent": p_["pred"], "rate": p_["rate"], "count": p_["count"]})
+    rec_snippet = {t: sorted(r["intent"] for r in v) for t, v in sorted(recs.items())}
+
+    return {
+        "classes": classes,
+        "confusion_matrix": cm.tolist(),
+        "confusion_matrix_row_norm": [[round(float(x), 4) for x in row] for row in cm_norm],
+        "confusion_pairs_all": pairs[:50],
+        "confusion_pairs_reported": top_pairs,
+        "routing_stats": routing,
+        "confidence_calibration": calibration,
+        "expansion_recommendations": recs,
+        "expansion_snippet": rec_snippet,
+    }
+
+
+def print_analysis(res: dict, source_name: str):
+    """Human-readable dump of the confusion/routing analysis."""
+    classes = res["classes"]
+    cmn     = res["confusion_matrix_row_norm"]
+
+    print(f"\n  --- Confusion matrix (row-normalized, rows=true cols=pred) [{source_name}] ---")
+    short = {c: c[:10] for c in classes}
+    hdr = "true \\ pred".ljust(14) + "".join(short[c].ljust(11) for c in classes)
+    print(hdr)
+    for i, t in enumerate(classes):
+        row = short[t].ljust(14) + "".join(f"{cmn[i][j]:<11.3f}" for j in range(len(classes)))
+        print(row)
+
+    if res["confusion_pairs_reported"]:
+        print(f"\n  Top confusion pairs (rate >= {CONFUSION_MIN_RATE:.2f}):")
+        for p_ in res["confusion_pairs_reported"][:15]:
+            print(f"    {p_['true']:<28} -> {p_['pred']:<28} "
+                  f"count={p_['count']:>3}  rate={p_['rate']*100:5.1f}%")
+
+    r = res["routing_stats"]
+    print(f"\n  Soft-routing survival (softmax top-{r['top_k']} + prob>{r['threshold']}):")
+    print(f"    argmax hit              : {r['argmax_hit']['pct']:5.1f}%")
+    print(f"    true in top-{r['top_k']}            : {r['true_in_topk']['pct']:5.1f}%")
+    print(f"    true in >{r['threshold']} set      : {r['true_in_threshold']['pct']:5.1f}%")
+    print(f"    true in UNION (routed)  : {r['true_in_union']['pct']:5.1f}%")
+    if r["mean_top1_conf_correct"] is not None:
+        print(f"    mean top-1 conf  correct/wrong : {r['mean_top1_conf_correct']:.3f} / {r['mean_top1_conf_wrong']:.3f}")
+        print(f"    mean entropy     correct/wrong : {r['mean_entropy_correct']:.3f} / {r['mean_entropy_wrong']:.3f}")
+
+    if res["confidence_calibration"]:
+        print("\n  Confidence calibration (accuracy per top-1 conf bucket):")
+        for b in res["confidence_calibration"]:
+            bar = "#" * int(b["acc"] * 40)
+            print(f"    {b['range']:<9} n={b['n']:>4}  acc={b['acc']:.3f}  {bar}")
+
+    if res["expansion_snippet"]:
+        print(f"\n  Suggested INTENT_QTYPE_MAP expansion (rate>={CONFUSION_MIN_RATE:.2f}, count>={CONFUSION_MIN_COUNT}):")
+        print("    EXPANSION_PRIORS = " + json.dumps(res["expansion_snippet"], indent=8))
+
+
 # ── Evaluate one batch of texts ───────────────────────────────────────────────
 def evaluate_texts(model, tok, id2intent, intent2id, texts, true_labels, source_name: str):
     """
@@ -203,10 +378,12 @@ def evaluate_texts(model, tok, id2intent, intent2id, texts, true_labels, source_
     """
     preds = []
     guardrails = []
+    sm_probs = []
     for text in texts:
-        top, _, gr, _ = predict_intent(model, tok, id2intent, text)
+        top, _, gr, _, sm = predict_intent(model, tok, id2intent, text)
         preds.append(top)
         guardrails.append(gr)
+        sm_probs.append(sm)
 
     # Classes present in eval set
     eval_classes   = sorted(set(true_labels))
@@ -252,6 +429,10 @@ def evaluate_texts(model, tok, id2intent, intent2id, texts, true_labels, source_
         marker = " ← NOT IN MODEL" if cls in unseen_in_model else ""
         print(f"    {cls:<30} P={cls_metrics.get('precision',0):.3f}  R={cls_metrics.get('recall',0):.3f}  F1={cls_metrics.get('f1-score',0):.3f}  n={cls_metrics.get('support',0)}{marker}")
 
+    # ── Confusion / soft-routing analysis (softmax, mirrors production) ──
+    analysis = analyze_confusion_and_routing(true_labels, preds, np.vstack(sm_probs), id2intent)
+    print_analysis(analysis, source_name)
+
     return {
         "source": source_name,
         "n": len(texts),
@@ -272,6 +453,7 @@ def evaluate_texts(model, tok, id2intent, intent2id, texts, true_labels, source_
         },
         "predictions": preds,
         "true_labels": list(true_labels),
+        "analysis": analysis,
     }
 
 
@@ -366,6 +548,27 @@ def main():
     with open(RESULTS_OUT, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
+    # ── Dedicated confusion-matrix / routing-priors artifact ──────────
+    conf_report = {}
+    for key, res in all_results.items():
+        if "error" in res:
+            continue
+        for input_col in ["QueryText", "first_user_prompt"]:
+            analysis = res[input_col]["overall"].get("analysis")
+            if analysis:
+                conf_report[f"{key}/{input_col}"] = analysis
+
+    with open(CONFUSION_OUT, "w", encoding="utf-8") as f:
+        json.dump({
+            "config": {
+                "softmax_routing_thresh": SOFTMAX_ROUTING_THRESH,
+                "top_k_routing": TOP_K_ROUTING,
+                "confusion_min_rate": CONFUSION_MIN_RATE,
+                "confusion_min_count": CONFUSION_MIN_COUNT,
+            },
+            "models": conf_report,
+        }, f, indent=2, ensure_ascii=False)
+
     # ── Final comparison table ─────────────────────────────────────────────
     print("\n" + "=" * 70)
     print("FINAL COMPARISON TABLE")
@@ -385,7 +588,23 @@ def main():
         print()
 
     print(f"\nResults saved -> {RESULTS_OUT}")
+    print(f"Confusion/routing priors -> {CONFUSION_OUT}")
     print("=" * 70)
+
+    # ── Merged expansion snippet (first_user_prompt = production distribution) ──
+    merged = {}
+    for key in ["experimental", "deployed"]:
+        res = all_results.get(key, {})
+        if "error" in res:
+            continue
+        snippet = res["first_user_prompt"]["overall"].get("analysis", {}).get("expansion_snippet", {})
+        for true_intent, confusions in snippet.items():
+            merged.setdefault(true_intent, set()).update(confusions)
+
+    if merged:
+        print("\nMERGED EXPANSION PRIORS (from first_user_prompt evals — merge into INTENT_QTYPE_MAP):")
+        print(json.dumps({t: sorted(c) for t, c in sorted(merged.items())}, indent=2))
+
     print()
     print("NOTE: 'deployed' model has 7 intent classes (old schema — no market/policy/weather/other).")
     print("      Eval CSV has 9 classes. Deployed model CANNOT predict market/policy/weather/other.")

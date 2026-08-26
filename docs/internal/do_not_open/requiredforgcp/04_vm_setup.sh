@@ -22,6 +22,17 @@ HF_TOKEN=${HF_TOKEN}
 API_KEY=${API_KEY}
 ARTIFACTS_DIR=${ART}
 GEN_MODEL_ID=google/gemma-3-4b-it
+LOG_LEVEL=${LOG_LEVEL:-INFO}
+
+# --- retrieval A/B knobs (migrated from run_e2e_eval.py; defaults shown).
+# Uncomment + change to tune without rebuilding the image, then restart:
+#   docker compose --env-file runtime.env up -d gateway
+#CONF_GATE_LOOSEN=0.60
+#MIN_CHUNK_SCORE=0.50
+#MIN_CHUNK_CHARS=50
+#MAX_PER_SOURCE=3
+#TOP_K_BASE=10
+#RERANK_TOP_N=5
 EOF
 echo ">> wrote runtime.env"
 

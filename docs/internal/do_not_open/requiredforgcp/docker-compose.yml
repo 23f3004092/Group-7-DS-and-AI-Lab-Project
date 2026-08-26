@@ -30,6 +30,16 @@ services:
       ADAPTER_DIR: "/artifacts/generator/best_adapter"  # fallback if no merged model
       VISION_CKPT: "/artifacts/vision/p3_full_best.pt"
       VISION_LABELS: "/artifacts/vision/label_to_idx.json"
+      # Yield LightGBM — baked into the image at build time (see Dockerfile);
+      # override here only if you prefer the /artifacts mount instead:
+      YIELD_MODEL_PATH: "/app/models/yield/lightgbm_tuned.txt"
+      # --- migrated from run_e2e_eval.py (A/B-tunable via runtime.env) ---
+      CONF_GATE_LOOSEN: "${CONF_GATE_LOOSEN:-0.60}"   # qtype filter loosens below this IEG top-1 conf
+      MIN_CHUNK_SCORE: "${MIN_CHUNK_SCORE:-0.50}"
+      MIN_CHUNK_CHARS: "${MIN_CHUNK_CHARS:-50}"
+      MAX_PER_SOURCE: "${MAX_PER_SOURCE:-3}"
+      TOP_K_BASE: "${TOP_K_BASE:-10}"
+      RERANK_TOP_N: "${RERANK_TOP_N:-5}"
       # mandi/weather/yield are provided by the main app via /query live_data
       # GEN_MODEL_ID + HF_TOKEN + API_KEY come from runtime.env
     volumes:

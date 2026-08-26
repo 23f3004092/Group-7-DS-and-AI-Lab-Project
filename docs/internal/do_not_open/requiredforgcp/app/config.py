@@ -36,6 +36,22 @@ TIER_GROUNDED   = MANIFEST["tiers"]["grounded"]            # 0.638
 FUSION_WEIGHTS  = MANIFEST["fusion_weights"]               # per-intent pdf/kcc weights
 TOP_K_DEFAULT   = MANIFEST.get("top_k_default", 5)
 
+# --- experimental improvements (backported from run_e2e_eval.py) ------------
+# Confidence-gated filter loosening: below this top-1 softmax confidence,
+# the KCC query_type sub-filter is DROPPED (source-level filters kept).
+# Rationale: holdout calibration shows top-1 accuracy collapses below ~0.6 conf,
+# so a strict qtype filter there mostly excludes the right chunks. The reranker
+# recovers precision, it cannot recover filtered-out chunks.
+# Tunable via env var for production A/B testing (0.0 = never loosen, 1.0 = always loosen)
+CONF_GATE_LOOSEN = float(os.environ.get("CONF_GATE_LOOSEN", "0.60"))
+
+# Retrieval filtering thresholds (from run_e2e_eval.py lines 68-70)
+MIN_CHUNK_SCORE = float(os.environ.get("MIN_CHUNK_SCORE", "0.50"))  # Filter out low-scoring chunks
+MIN_CHUNK_CHARS = int(os.environ.get("MIN_CHUNK_CHARS", "50"))      # Minimum chunk length to avoid OCR noise
+MAX_PER_SOURCE  = int(os.environ.get("MAX_PER_SOURCE", "3"))        # Cap chunks from same source for diversity
+TOP_K_BASE      = int(os.environ.get("TOP_K_BASE", "10"))           # Base value for dynamic TOP_K scaling
+RERANK_TOP_N    = int(os.environ.get("RERANK_TOP_N", "5"))          # Keep top-N after cross-encoder reranking
+
 # Which optional modules are present on disk
 HAS_IEG    = os.path.isdir(IEG_DIR) and os.path.isfile(os.path.join(IEG_DIR, "intent_entity_guardrail_model.pt"))
 HAS_VISION = os.path.isfile(VISION_CKPT) and os.path.isfile(VISION_LABELS)

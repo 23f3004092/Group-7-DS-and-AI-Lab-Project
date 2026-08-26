@@ -16,6 +16,10 @@ outputs/generation/best_adapter
 outputs/ieg_model/
 outputs/ieg_final/
 outputs/ieg*/
+outputs/output_files/*
+outputs/yield_kernel_output/
+docs/internal/do_not_open/requiredforgcp/artifacts/
+storage/
 
 # Ensure sample verification directory and dataset documentation stay tracked
 !data/sample/
@@ -36,7 +40,7 @@ build/
 venv/
 env/
 ENV/
-
+download_k*
 # ----------------------------- Jupyter / IPython -----------------------------
 .ipynb_checkpoints/
 *.ipynb_metadata/

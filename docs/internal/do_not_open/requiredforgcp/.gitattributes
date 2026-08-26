@@ -1,0 +1,8 @@
+# Force LF for everything that runs in bash or lands inside the container —
+# CRLF breaks bash heredocs (writes \r into runtime.env values) and Docker builds.
+*.sh   text eol=lf
+*.py   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.env  text eol=lf
+Dockerfile text eol=lf

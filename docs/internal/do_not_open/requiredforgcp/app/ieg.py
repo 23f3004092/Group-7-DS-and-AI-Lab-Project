@@ -26,9 +26,13 @@ _ner_labels = []
 _max_len = 64
 MODEL_OK = False
 
-# Matches run_e2e_eval.ieg_run: intent head is read multi-label via a sigmoid gate
-# so compound queries ("price AND disease") surface every intent above threshold.
-INTENT_THRESHOLD = 0.30
+# Query compression threshold (from run_e2e_eval.py line 379)
+# Distribution shift fix: long multi-turn prompts bury the intent signal
+MAX_QUERY_CHARS = 200
+
+# Intent routing threshold (from run_e2e_eval.py line 408)
+# Experimental uses softmax + top-3 + 15% threshold (more intents = better multi-query retrieval)
+INTENT_THRESHOLD_SOFTMAX = 0.15  # for softmax-based routing
 
 # fine intent -> retrieval fusion intent (policy / field_practice / general).
 # Unknown intents fall back to 'general' (and C.FUSION_WEIGHTS.get also falls back
@@ -254,11 +258,32 @@ def _decode_entities(text, ner_ids, offsets):
     return ents
 
 
-def _model_infer(text: str):
-    """Run the 3 heads. Returns (primary_intent, intents_list, entities, off_domain)."""
-    import torch
+def _compress_query(text: str) -> str:
+    """Truncate long conversational prompts to first sentence / first 200 chars.
+    Distribution shift fix (from run_e2e_eval.py lines 381-392): long first_user_prompts
+    bury the intent signal, especially in multi-turn conversations.
+    """
+    if len(text) <= MAX_QUERY_CHARS:
+        return text
+    # Try to cut at first sentence boundary
+    for sep in ("?", ".", "!", "|"):
+        idx = text.find(sep)
+        if 30 < idx <= MAX_QUERY_CHARS:
+            return text[:idx + 1].strip()
+    return text[:MAX_QUERY_CHARS].strip()
 
-    enc = _tok(text, truncation=True, max_length=_max_len, padding="max_length",
+
+def _model_infer(text: str):
+    """Run the 3 heads. Returns (primary_intent, intents_list, entities, off_domain, top_confidence).
+    
+    UPDATED: Uses softmax + top-3 routing (from run_e2e_eval.py lines 404-416) instead of sigmoid.
+    """
+    import torch
+    
+    # NEW: Query compression before inference
+    compressed = _compress_query(text)
+
+    enc = _tok(compressed, truncation=True, max_length=_max_len, padding="max_length",
                return_offsets_mapping=True, return_tensors="pt")
     off = enc.pop("offset_mapping", None)              # only a fast tokenizer returns this
     enc.pop("token_type_ids", None)                    # DistilBERT doesn't use them
@@ -266,36 +291,50 @@ def _model_infer(text: str):
         intent_logits, ner_logits, guard_logits = _model(
             input_ids=enc["input_ids"], attention_mask=enc["attention_mask"])
 
-    # intent: primary = argmax (the trained softmax objective); list = e2e sigmoid gate
-    primary = _id2intent.get(int(intent_logits[0].argmax(-1).item()), "general")
-    probs = torch.sigmoid(intent_logits[0])
-    intents = [_id2intent[i] for i, p in enumerate(probs.tolist())
-               if p > INTENT_THRESHOLD and i in _id2intent]
+    # NEW: Use softmax (consistent with CrossEntropyLoss training) instead of sigmoid
+    # Top-3 + threshold routing: always include top-3 + any above 15% threshold
+    probs = torch.softmax(intent_logits[0], dim=-1)
+    top3_idx   = probs.topk(min(3, len(probs))).indices.tolist()
+    thresh_idx = [i for i, p in enumerate(probs.tolist()) if p > INTENT_THRESHOLD_SOFTMAX]
+    intent_idx = list(dict.fromkeys(top3_idx + thresh_idx))  # dedupe, top3 first
+    intents    = [_id2intent[i] for i in intent_idx if i in _id2intent]
     if not intents:
-        intents = [primary]
+        intents = ["general"]
+    primary = intents[0]
 
     off_domain = int(guard_logits[0].argmax(-1).item()) == 1   # class 1 = off-domain
+    
+    # NEW: Return top confidence for confidence-gated filtering
+    top_conf = float(probs.max().item())
+    
     # entities are a bonus: only if the tokenizer gave char offsets (fast tokenizer)
     entities = {}
     if off is not None:
         ner_ids = ner_logits[0].argmax(-1).tolist()
         entities = _decode_entities(text, ner_ids, off[0].tolist())
-    return primary, intents, entities, off_domain
+    
+    return primary, intents, entities, off_domain, top_conf
 
 
 def classify(text: str) -> dict:
-    """Returns intent + entities + guardrail decision. Guardrail = model OR rules."""
+    """Returns intent + entities + guardrail decision. Guardrail = model OR rules.
+    
+    NEW: also returns top_confidence (top-1 softmax) for the retrieval-side
+    confidence-gated filter loosening (see config.CONF_GATE_LOOSEN).
+    """
     blocked, reason = rule_block(text)          # rules always run
+    top_confidence = None                       # None when model isn't loaded
 
     if MODEL_OK:
         try:
-            intent, intents, entities, off_domain = _model_infer(text)
+            intent, intents, entities, off_domain, top_confidence = _model_infer(text)
             if off_domain and not blocked and not is_greeting(text):
                 blocked, reason = True, "off_domain_model"
         except Exception as e:                  # a bad request never kills the path
             print(f"[ieg] inference failed ({e}); using keyword intent for this query.")
             intent = _keyword_intent(text)
             intents, entities = [intent], {}
+            top_confidence = None
     else:
         intent = _keyword_intent(text)
         intents, entities = [intent], {}
@@ -308,4 +347,7 @@ def classify(text: str) -> dict:
         "block_reason": reason,
         "entities": entities,
         "guardrail_backend": "model+rules" if MODEL_OK else "rules-only",
+        # NEW fields (backward compatible — old clients ignore them):
+        "top_confidence": round(top_confidence, 4) if top_confidence is not None else None,
+        "loosen_threshold": C.CONF_GATE_LOOSEN,   # active threshold (debugging/A-B analysis)
     }
